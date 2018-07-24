@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -53,19 +55,26 @@ public class Main2Activity extends AppCompatActivity {
                 img1.setColorFilter(0xff0000ff);
             }
         });
+
+        // List view
+
+        String[] mainWords = new MainActivity().myWords();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_view, mainWords);
+        ListView listView1 = findViewById(R.id.listView1);
+        listView1.setAdapter(adapter);
     }
 
     // Catch When the Activity is destroyed in case this shouldn't happen
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Toast.makeText(this, "Activity stopped", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Activity 2 stopped", Toast.LENGTH_SHORT).show();
     }
 
     // Catch when config changes(rotate), goes with <activity android:configChanges="orientation|screenSize" /> in AndroidManifest.xml
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        Toast.makeText(this, "Config Changed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Activity 2 Config Changed", Toast.LENGTH_SHORT).show();
     }
 }

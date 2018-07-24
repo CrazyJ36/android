@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent" >
+<HorizontalScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="270dp">
 
-    <HorizontalScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="270dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/bottomSheetImg1Desc"
+            android:src="@mipmap/battery_icon_round" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/bottomSheetImg1Desc"
-                android:src="@drawable/nature1"
-                android:layout_gravity="start"/>
+        <ImageView
+            android:layout_width="270dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/bottomSheetImg2Desc"
+            android:src="@mipmap/brush_icon_round" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/bottomSheetImg2Desc"
-                android:src="@drawable/nature2"
-                android:layout_gravity="end"/>
+        <ImageView
+            android:layout_width="270dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/bottomSheetImg3Desc"
+            android:src="@mipmap/build_icon_round" />
 
-        </LinearLayout>
+    </LinearLayout>
 
-    </HorizontalScrollView>
-</android.support.design.widget.CoordinatorLayout>
+</HorizontalScrollView>

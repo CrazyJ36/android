@@ -16,7 +16,7 @@
     <!-- Activity 1 Buttons, Field Names -->
     <string name="activityBtnTxt">Next</string>
     <string name="dialogBtnTxt">Dialog</string>
-    <string name="toastBtnTxt">Long</string>
+    <string name="toastBtnTxt">Tap/Long</string>
     <string name="audioBtnTxt">Play</string>
     <string name="songInfoTxt">Not Playing</string>
     <string name="mediaPlayerReleaseTxt">Media Player Done</string>
@@ -38,11 +38,11 @@
     <string name="randomBtnTxt">Random</string>
     <string name="snackbarBtnTxt">SnackBar</string>
     <string name="bottomSheetBtnTxt">Bottom Sheet</string>
-    <string name="bottomSheetImg1Desc">Leafs</string>
-    <string name="bottomSheetImg2Desc">A Natural Landscape</string>
+    <string name="bottomSheetImg1Desc">Battery Icon</string>
+    <string name="bottomSheetImg2Desc">Brush Icon</string>
+    <string name="bottomSheetImg3Desc">Build Icon</string>
     <!-- Activity 2 Button, Field Names -->
-    <string name="act2Text">Second Activity</string>
-    <string name="act2AndroidImgDesc">A picture of Android</string>
+    <string name="act2AndroidImgDesc">A Picture icon</string>
     <!-- Toolbar Titles -->
     <string name="toolbarMenuDesc">App Options</string>
     <string name="toolbarAboutBtn">About App</string>

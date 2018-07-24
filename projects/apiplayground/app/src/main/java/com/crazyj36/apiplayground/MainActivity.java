@@ -1,6 +1,7 @@
 package com.crazyj36.apiplayground;
 
 import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -31,9 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 import java.lang.String;
-
 import java.util.Random;
-
 import static android.view.Gravity.END;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -105,14 +104,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.toastButton).setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Toast.makeText(MainActivity.this, "Button 2 Long Clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Button Long Clicked", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
         findViewById(R.id.toastButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Button 2 Clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
             }
         });
         //Audio Button
@@ -167,12 +166,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
                 EditText input = findViewById(R.id.urlField);
                 String url = input.getText().toString();
-                Intent webPage = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                if (Patterns.WEB_URL.matcher(url).matches()) {
-                    Toast.makeText(MainActivity.this, "Launching " + url + " in browser", Toast.LENGTH_SHORT).show();
-                    startActivity(webPage);
+                if (Patterns.DOMAIN_NAME.matcher(url).matches() || Patterns.WEB_URL.matcher(url).matches()) {
+                    try {
+                        Intent webPage = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        startActivity(webPage);
+                        Toast.makeText(MainActivity.this, "Launching " + url + " in browser", Toast.LENGTH_SHORT).show();
+                    } catch (ActivityNotFoundException activityNotFound) {
+                        Toast.makeText(MainActivity.this, "You must type \"http://\",\nor no internet browser installed", Toast.LENGTH_LONG).show();
+                    }
                 } else {
-                    Toast.makeText(MainActivity.this, "Must be typed as \"http://www.website.com\"", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Must be typed as \"http://www.website.com\"", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -237,10 +240,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String[] word = {"one", "two", "three", "four", "five"};
+                String[] useWords = myWords();
                 Random random = new Random();
-                int index = random.nextInt(word.length);
-                Toast.makeText(MainActivity.this, word[index], Toast.LENGTH_SHORT).show();
+                int index = random.nextInt(useWords.length);
+                Toast.makeText(MainActivity.this, useWords[index], Toast.LENGTH_SHORT).show();
             }
         });
         // SnackBar Button
@@ -272,6 +275,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             }
         });
+
+        // Bottom Sheet Button
+        findViewById(R.id.bottomSheetBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(MainActivity.this);
+                bottomSheetDialog.setContentView(R.layout.bottom_sheet);
+                bottomSheetDialog.show();
+            }
+        });
+
         // Grid Buttons
         // Methods are outside of onCreate()
         // Implemented from MainActivity
@@ -284,18 +298,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button grid4 = findViewById(R.id.grid4);
         grid4.setOnClickListener(this);
 
-        // Bottom Sheet Button
-        findViewById(R.id.bottomSheetBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(MainActivity.this);
-                bottomSheetDialog.setContentView(R.layout.bottom_sheet);
-                bottomSheetDialog.show();
-            }
-        });
     }
 
-    public void tstMsg(String num) {
+    public void gridTstMsg(String num) {
         String pt1 = "Grid ";
         String pt3 = " Clicked";
         Toast.makeText(this, pt1 + num + pt3, Toast.LENGTH_SHORT).show();
@@ -303,17 +308,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.grid1:
-                tstMsg("1");
+            case (R.id.grid1):
+                gridTstMsg("1");
                 break;
             case R.id.grid2:
-                tstMsg("2");
+                gridTstMsg("2");
                 break;
             case R.id.grid3:
-                tstMsg("3");
+                gridTstMsg("3");
                 break;
             case R.id.grid4:
-                tstMsg("4");
+                gridTstMsg("4");
                 break;
         }
 
@@ -323,16 +328,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Toast.makeText(this, "Activity Stopped", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Activity 1 Stopped", Toast.LENGTH_SHORT).show();
     }
 
     // Catch when config changes(rotate), goes with <activity android:configChanges="orientation|screenSize" /> in AndroidManifest.xml
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        Toast.makeText(this, "Config Changed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Activity 1 Config Changed", Toast.LENGTH_SHORT).show();
     }
-
+    // Dev info Dialog
     public void aboutAppDialog() {
         final AlertDialog aboutDialog = new Builder(MainActivity.this).create();
         aboutDialog.setTitle("About Developer");
@@ -340,4 +345,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         aboutDialog.setMessage("CrazyJ36\n2018");
         aboutDialog.show();
     }
+    // A re-usable array
+    public final String[] myWords() {
+        return new String[]{"one", "two", "three", "four", "five", "six"};
+    }
+
 }
