@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">If Else</string>
+    <string name="info">The button checks whether or not there is text entered in the text field.\n
+    Try it with text and without text.</string>
+</resources>
