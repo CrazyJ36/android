@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.crazyj36.myapp;
+package com.crazyj36.lgapp;
 
 public final class R {
     public static final class attr {

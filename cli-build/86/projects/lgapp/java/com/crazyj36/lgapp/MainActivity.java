@@ -1,4 +1,4 @@
-package com.crazyj36.myapp;
+package com.crazyj36.lgapp;
 
 import android.app.Activity;
 import android.os.Bundle;
