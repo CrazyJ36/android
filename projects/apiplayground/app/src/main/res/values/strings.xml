@@ -38,9 +38,10 @@
     <string name="randomBtnTxt">Random</string>
     <string name="snackbarBtnTxt">SnackBar</string>
     <string name="bottomSheetBtnTxt">Bottom Sheet</string>
-    <string name="bottomSheetImg1Desc">Battery Icon</string>
-    <string name="bottomSheetImg2Desc">Brush Icon</string>
-    <string name="bottomSheetImg3Desc">Build Icon</string>
+    <string name="batteryIcon">Battery Icon</string>
+    <string name="brushIcon">Brush Icon</string>
+    <string name="buildIcon">Build Icon</string>
+    <string name="bottomSheetImg1Desc">A natural landscape</string>
     <!-- Activity 2 Button, Field Names -->
     <string name="act2AndroidImgDesc">A Picture icon</string>
     <!-- Toolbar Titles -->

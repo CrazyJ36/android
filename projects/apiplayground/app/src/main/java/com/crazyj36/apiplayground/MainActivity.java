@@ -195,6 +195,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+
         //Switch
         final Switch switch1 = findViewById(R.id.switch1);
         switch1.setChecked(false);
@@ -215,6 +216,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        // Check Switch Button
         findViewById(R.id.chkSwitchBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
