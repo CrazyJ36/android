@@ -18,6 +18,13 @@
         android:layout_height="48dp"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/videoiconone"/>
+    
+    <Button
+        android:id="@+id/act2PicBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/act2Btn1Txt"
+        android:textAllCaps="false"/>
 
     <ListView
         android:id="@+id/listView1"

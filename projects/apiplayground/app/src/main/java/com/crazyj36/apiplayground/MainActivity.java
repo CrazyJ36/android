@@ -349,7 +349,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     // A re-usable array
     public final String[] myWords() {
-        return new String[]{"one", "two", "three", "four", "five", "six"};
+        return new String[]{"one", "two", "three", "four", "five", "six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen"};
     }
 
 }

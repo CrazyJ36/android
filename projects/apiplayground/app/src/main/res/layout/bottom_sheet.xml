@@ -5,10 +5,29 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:contentDescription="@string/bottomSheetImg1Desc"
-        android:src="@drawable/nature" />
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:contentDescription="@string/bottomSheetImg1Desc"
+            android:src="@mipmap/battery_icon_round" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:contentDescription="@string/bottomSheetImg2Desc"
+            android:src="@mipmap/brush_icon_round"/>
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:contentDescription="@string/bottomSheetImg3Desc"
+            android:src="@mipmap/build_icon_round"/>
+
+    </LinearLayout>
 
 </HorizontalScrollView>

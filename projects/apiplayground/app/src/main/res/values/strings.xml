@@ -41,9 +41,13 @@
     <string name="batteryIcon">Battery Icon</string>
     <string name="brushIcon">Brush Icon</string>
     <string name="buildIcon">Build Icon</string>
-    <string name="bottomSheetImg1Desc">A natural landscape</string>
+    <string name="bottomSheetImg1Desc">An Icon representing A battery(round)</string>
+    <string name="bottomSheetImg2Desc">A Brush icon(round)</string>
+    <string name="bottomSheetImg3Desc">An Icon representing the building of something(round)</string>
     <!-- Activity 2 Button, Field Names -->
     <string name="act2AndroidImgDesc">A Picture icon</string>
+    <string name="act2Btn1Txt">Picture</string>
+    <string name="act2PicDialog">A Nature Landscape In A dialog pop-up</string>
     <!-- Toolbar Titles -->
     <string name="toolbarMenuDesc">App Options</string>
     <string name="toolbarAboutBtn">About App</string>

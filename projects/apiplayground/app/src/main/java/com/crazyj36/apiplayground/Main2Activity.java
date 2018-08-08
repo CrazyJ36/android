@@ -1,11 +1,15 @@
 package com.crazyj36.apiplayground;
 
 import android.content.res.Configuration;
-
+import android.graphics.drawable.Drawable;
+import android.graphics.Color;
+import android.media.Image;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -22,6 +26,7 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
         // Toolbar
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setActionBar(toolbar);
@@ -46,22 +51,49 @@ public class Main2Activity extends AppCompatActivity {
                 menu.show();
             }
         });
+
         // Image Color Button
-        final ImageView imgBtn = findViewById(R.id.act2VideoIcon);
+        ImageView imgBtn = findViewById(R.id.act2VideoIcon);
+        final boolean[] isColored = {true};
         imgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ImageView img1 = findViewById(R.id.act2VideoIcon);
-                img1.setColorFilter(0xff0000ff);
+                if (isColored[0]) {
+                    img1.setColorFilter(0xff0000ff);
+                    isColored[0] = false;
+                } else {
+                    img1.setColorFilter(null);
+                    isColored[0] = true;
+                }
+            }
+        });
+
+        // Picture Popup Button
+        findViewById(R.id.act2PicBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final AlertDialog.Builder picDialog = new AlertDialog.Builder(Main2Activity.this);
+                picDialog.setTitle("A Nature Picture");
+                picDialog.setView(R.layout.picpopup);
+                picDialog.setCancelable(true);
+                picDialog.create();
+                picDialog.show();
             }
         });
 
         // List view
-
-        String[] mainWords = new MainActivity().myWords();
+        final String[] mainWords = new MainActivity().myWords();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_view, mainWords);
         ListView listView1 = findViewById(R.id.listView1);
         listView1.setAdapter(adapter);
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String listClickText = mainWords[i] + " Selected! " + "List index " + l;
+                Toast.makeText(Main2Activity.this, listClickText, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     // Catch When the Activity is destroyed in case this shouldn't happen
