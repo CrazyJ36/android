@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest 
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.crazyj36.statustimer" >
+    package="com.crazyj36.javaandroid" >
     <uses-sdk android:targetSdkVersion="28"/>
-    <application android:label="Status Timer">
+    <application android:label="Java Android">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
