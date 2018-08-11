@@ -13,8 +13,11 @@ public final class R {
     public static final class id {
         public static final int button=0x7f030002;
         public static final int button2=0x7f030003;
+        public static final int button3=0x7f030006;
+        public static final int editText=0x7f030005;
         public static final int textView=0x7f030000;
         public static final int textView1=0x7f030001;
+        public static final int textView2=0x7f030004;
     }
     public static final class layout {
         public static final int activity_main=0x7f020000;
