@@ -23,7 +23,7 @@
         android:id="@+id/act2PicBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/act2Btn1Txt"
+        android:text="@string/act2PicBtnTxt"
         android:textAllCaps="false"/>
 
     <ListView

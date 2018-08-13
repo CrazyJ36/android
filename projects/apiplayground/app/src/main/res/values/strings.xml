@@ -46,7 +46,7 @@
     <string name="bottomSheetImg3Desc">An Icon representing the building of something(round)</string>
     <!-- Activity 2 Button, Field Names -->
     <string name="act2AndroidImgDesc">A Picture icon</string>
-    <string name="act2Btn1Txt">Picture</string>
+    <string name="act2PicBtnTxt">Picture</string>
     <string name="act2PicDialog">A Nature Landscape In A dialog pop-up</string>
     <!-- Toolbar Titles -->
     <string name="toolbarMenuDesc">App Options</string>

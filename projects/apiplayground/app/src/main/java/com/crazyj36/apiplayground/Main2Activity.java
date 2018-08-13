@@ -1,9 +1,6 @@
 package com.crazyj36.apiplayground;
 
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
-import android.graphics.Color;
-import android.media.Image;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -96,7 +93,7 @@ public class Main2Activity extends AppCompatActivity {
         });
     }
 
-    // Catch When the Activity is destroyed in case this shouldn't happen
+    // Catch When the Activity is destroyed. This should only happen if back button pressed.
     @Override
     protected void onDestroy() {
         super.onDestroy();
