@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import java.util.Date;
 
 public class MainActivity extends Activity {
   @Override
@@ -15,50 +16,59 @@ public class MainActivity extends Activity {
     super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_main);
 
-      final TextView textView = findViewById(R.id.textView);
-      final TextView textView1 = findViewById(R.id.textView1);
-
-	// Concatenate two strings, initialize main textview for buttons output)
-      String text1 = "Hello";
-      String text2 = "World";
-      textView.setText(text1 + " " + text2);
-
-        // adb Logging examples:
-        /* example code:
-           .java: Log.v("MYLOG", "string")
-           $ use adb logcat MYLOG *:s
-           MYLOG being the first 'TAG' parameter that logcat outputs
-        */
-
+      // Log app start in logcat (run logcat-this)
       String startMsg = "App Started";
       Log.i("JAVAANDROIDLOG",startMsg);
 
-      Button button = findViewById(R.id.button);
-      button.setText("Log");
-      button.setOnClickListener(new View.OnClickListener() {
+      // Concatenate two strings, initialize main textview for buttons output)
+      final TextView tvSet = findViewById(R.id.tvSet);
+      String txt1 = "Hello";
+      String txt2 = "World";
+      tvSet.setText(txt1 + " " + txt2 + "!");
+
+        // Logging: adb Logging examples:
+        /* example code:
+           .java: Log.v("MYLOG", "string")
+           use:
+           $ adb logcat MYLOG *:s
+           MYLOG being the first 'TAG' parameter that logcat outputs
+        */
+      Button btnLog = findViewById(R.id.btnLog);
+      btnLog.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
           Log.i("JAVAANDROIDLOG", "Log Button clicked");
           }
       });
 
-      Button button2 = findViewById(R.id.button2);
-      button2.setText("display");
-      button2.setOnClickListener(new View.OnClickListener() {
+
+      //Example catch-all method from Exceptiona api. this does not throw any
+      try {
+        final String date = new Date().toString();
+      }
+      catch (Exception e) {
+        Log.v("MYLOG", "Date init Error: " + e);
+      }
+
+      // Java package Date()
+      final TextView tvDate = findViewById(R.id.tvDate);
+      final String date = new Date().toString();
+      Button btnDate = findViewById(R.id.btnDate);
+      btnDate.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-          textView1.setText("TextView Shown");
-
+          tvDate.setText(date);
         }
       });
 
-      final EditText editText = findViewById(R.id.editText);
-      final TextView textView2 = findViewById(R.id.textView2);
-      Button button3 = findViewById(R.id.button3);
-      button3.setOnClickListener(new View.OnClickListener() {
+      // set textview to what was entered in textview
+      final EditText etPrint = findViewById(R.id.etPrint);
+      final TextView tvPrint = findViewById(R.id.tvPrint);
+      Button btnPrint = findViewById(R.id.btnPrint);
+      btnPrint.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-              textView2.setText(editText.getText());
+              tvPrint.setText(etPrint.getText());
           }
       });
 

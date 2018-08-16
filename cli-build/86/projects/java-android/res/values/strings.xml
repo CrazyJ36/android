@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <string name="tvDateTxt">Tap Date</string>
+    <string name="btnLogTxt">Push to log</string>
+    <string name="btnDateTxt">Date</string>
+    <string name="tvPrintTxt">Type in the field below, then tap Show Text</string>
+    <string name="etPrintHint">Type here...</string>
+    <string name="btnPrintTxt">Show Text</string>
+</resources>
