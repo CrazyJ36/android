@@ -15,7 +15,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import android.graphics.Bitmap;
 
 // Load code into view(Last Step)
 public class MainActivity extends Activity {
@@ -47,17 +46,12 @@ public class MainActivity extends Activity {
             }
         });
 
-// Size Icon for different displays
-
 // Set item info: label, package name, icon
         for (ResolveInfo ri : availableActivities) {
             AppDetail app = new AppDetail();
             app.label = ri.loadLabel(manager);
             app.name = ri.activityInfo.packageName;
-
-//            app.icon = ri.activityInfo.loadIcon(manager);
-            Bitmap
-
+            app.icon = ri.activityInfo.loadIcon(manager);
             apps.add(app);
         }
     }
@@ -94,7 +88,6 @@ public class MainActivity extends Activity {
 
 // Set launch package name on list item click
     //private void addClickListener() {
-        
     //}
 }
 
