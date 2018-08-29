@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import java.util.Date;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
   @Override
@@ -69,7 +70,8 @@ public class MainActivity extends Activity {
           @Override
           public void onClick(View view) {
               tvPrint.setText(etPrint.getText());
-          }
+              Toast.makeText(MainActivity.this, "hi", Toast.LENGTH_SHORT).show();
+	  }
       });
 
     }
