@@ -201,6 +201,20 @@
                     android:text="@string/bottomSheetBtnTxt"
                     android:textAllCaps="false" />
 
+                <Button
+                    android:id="@+id/vibBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vibBtnTxt"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/batBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/batBtnTxt"
+                    android:textAllCaps="false" />
+
             </LinearLayout>
         </ScrollView>
 

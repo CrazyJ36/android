@@ -44,10 +44,14 @@
     <string name="bottomSheetImg1Desc">An Icon representing A battery(round)</string>
     <string name="bottomSheetImg2Desc">A Brush icon(round)</string>
     <string name="bottomSheetImg3Desc">An Icon representing the building of something(round)</string>
+    <string name="vibBtnTxt">Vibrate</string>
+    <string name="batBtnTxt">Battery</string>
+
     <!-- Activity 2 Button, Field Names -->
     <string name="act2AndroidImgDesc">A Picture icon</string>
     <string name="act2PicBtnTxt">Picture</string>
     <string name="act2PicDialog">A Nature Landscape In A dialog pop-up</string>
+
     <!-- Toolbar Titles -->
     <string name="toolbarMenuDesc">App Options</string>
     <string name="toolbarAboutBtn">About App</string>
@@ -56,5 +60,7 @@
     <string name="toolbarSub2">Checks 2</string>
     <string name="toolbarAboutActivity">About This Screen</string>
     <string name="toolbarExitBtn">Exit</string>
+    <!-- App Widget Strings -->
+    <string name="widgetText">C is a fast programming language.</string>
 
 </resources>

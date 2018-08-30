@@ -87,7 +87,7 @@ public class Main2Activity extends AppCompatActivity {
         listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String listClickText = mainWords[i] + " Selected! " + "List index " + l;
+                String listClickText = mainWords[i] + " selected, " + "List index " + l;
                 Toast.makeText(Main2Activity.this, listClickText, Toast.LENGTH_SHORT).show();
             }
         });

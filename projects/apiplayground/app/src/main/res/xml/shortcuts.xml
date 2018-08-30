@@ -8,8 +8,8 @@
         android:shortcutDisabledMessage="@string/disabledLabel1Shortcut">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="crazyj36.com.myapplication"
-            android:targetClass="crazyj36.com.myapplication.MainActivity" />
+            android:targetPackage="com.crazyj36.apiplayground"
+            android:targetClass="com.crazyj36.apiplayground.MainActivity" />
         <categories android:name="android.shortcut.Activities"/>
     </shortcut>
     <shortcut
@@ -21,8 +21,8 @@
         android:shortcutDisabledMessage="@string/disabledLabel2Shortcut">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="crazyj36.com.myapplication"
-            android:targetClass="crazyj36.com.myapplication.Main2Activity" />
+            android:targetPackage="com.crazyj36.apiplayground"
+            android:targetClass="com.crazyj36.apiplayground.Main2Activity" />
         <categories android:name="android.shortcut.Activities"/>
     </shortcut>
 </shortcuts>

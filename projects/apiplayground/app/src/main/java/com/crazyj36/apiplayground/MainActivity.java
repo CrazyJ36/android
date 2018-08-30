@@ -1,5 +1,8 @@
 package com.crazyj36.apiplayground;
-
+/* Ideas
+   1 function that starts a dialog or toast.
+   print all buttons/functions results in that
+ */
 import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
@@ -8,7 +11,9 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.BatteryManager;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -32,6 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 import java.lang.String;
+import java.util.Objects;
 import java.util.Random;
 import static android.view.Gravity.END;
 
@@ -285,6 +291,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(MainActivity.this);
                 bottomSheetDialog.setContentView(R.layout.bottom_sheet);
                 bottomSheetDialog.show();
+            }
+        });
+
+        // Vibrate Btn
+        findViewById(R.id.vibBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Objects.requireNonNull(MainActivity.this.getSystemService(Vibrator.class)).hasVibrator()) {
+                    try {
+                        Objects.requireNonNull(MainActivity.this.getSystemService(Vibrator.class)).vibrate(500);
+                    } catch (NullPointerException nullPointerException) {
+                        Toast.makeText(MainActivity.this, "Null Pointer Exception Raised", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "No Vibrator Hardware in Device", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // Battery Check
+        findViewById(R.id.batBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog batDialog = new AlertDialog.Builder(MainActivity.this).setCancelable(false).create();
+                BatteryManager batManager = Objects.requireNonNull(MainActivity.this.getSystemService(BatteryManager.class));
+                int batLevel = batManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
+                String batCharging;
+                if (batManager.isCharging()) {
+                    batCharging = "Charging";
+                } else {
+                    batCharging = "Discharging";
+                }
+                batDialog.setMessage("Battery Percentage: " + batLevel + "\n" + batCharging);
+                batDialog.setTitle("Battery");
+                batDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface batDialog, int i) {
+                        Toast.makeText(MainActivity.this, "Bat Dialog OK Btn Returned: " + i, Toast.LENGTH_SHORT).show();
+                        batDialog.dismiss();
+                    }
+                });
+                batDialog.show();
             }
         });
 
