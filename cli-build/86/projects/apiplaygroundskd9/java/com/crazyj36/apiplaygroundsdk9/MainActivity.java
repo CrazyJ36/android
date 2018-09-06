@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
+import android.os.Build;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
@@ -14,6 +16,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        int sdk = android.os.Build.VERSION.SDK_INT;
+        TextView tv1 = findViewById(R.id.tv1);
+        tv1.setText("SDK Version: " + sdk);
 
         Button button = findViewById(R.id.btn1);
         button.setOnClickListener(new OnClickListener() {
@@ -37,7 +43,6 @@ public class MainActivity extends Activity {
                 });
             }
         });
-
 
     }
 }
