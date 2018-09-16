@@ -1,0 +1,75 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:1:1-23:12
+INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:1:1-23:12
+INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:1:1-23:12
+INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:1:1-23:12
+INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:1:1-23:12
+INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:1:1-23:12
+INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:1:1-23:12
+	package
+		ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:2:5-36
+		INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:1:1-23:12
+		INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:1:1-23:12
+		INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:1:11-69
+application
+ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:4:5-22:19
+	android:label
+		ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:6:9-41
+	android:allowBackup
+		ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:5:9-36
+	android:theme
+		ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:7:9-66
+activity#com.crazyj36.launcher.AppsListActivity
+ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:8:9-20:20
+	android:label
+		ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:10:13-37
+	android:excludeFromRecents
+		ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:11:13-46
+	android:name
+		ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:9:13-45
+intent-filter#action:name:android.intent.action.MAIN+action:name:android.intent.action.VIEW+category:name:android.intent.category.DEFAULT+category:name:android.intent.category.HOME+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:12:13-18:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:13:17-69
+	android:name
+		ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:13:25-66
+action#android.intent.action.VIEW
+ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:14:17-69
+	android:name
+		ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:14:25-66
+category#android.intent.category.HOME
+ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:15:17-73
+	android:name
+		ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:15:27-70
+category#android.intent.category.DEFAULT
+ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:16:17-76
+	android:name
+		ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:16:27-73
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:17:17-77
+	android:name
+		ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml:17:27-74
+uses-sdk
+INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\CrazyJ36\Development\android\projects\Launcher\app\src\main\AndroidManifest.xml

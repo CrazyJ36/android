@@ -26,15 +26,13 @@
         android:id="@+id/btnLog"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/btnLogTxt"
-        android:textAllCaps="false" />
+        android:text="@string/btnLogTxt" />
 
     <Button
         android:id="@+id/btnDate"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/btnDateTxt"
-        android:textAllCaps="false" />
+        android:text="@string/btnDateTxt" />
 
     <TextView
         android:id="@+id/tvDate"
@@ -59,8 +57,7 @@
         android:id="@+id/btnPrint"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/btnPrintTxt"
-        android:textAllCaps="false" />
+        android:text="@string/btnPrintTxt" />
 
 
 </LinearLayout>

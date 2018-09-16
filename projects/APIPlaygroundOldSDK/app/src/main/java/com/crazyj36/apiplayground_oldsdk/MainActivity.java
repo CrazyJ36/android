@@ -1,5 +1,6 @@
 package com.crazyj36.apiplayground_oldsdk;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -11,9 +12,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.TextView;
 import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends Activity {
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +25,7 @@ public class MainActivity extends Activity {
         int sdk = android.os.Build.VERSION.SDK_INT;
 
         TextView tv1 = findViewById(R.id.tv1);
-        tv1.setText(getString(R.string.tv1Txt) + sdk);
+        tv1.setText(String.format(Locale.US, "%s%d", getString(R.string.tv1Txt), sdk));
 
         Button button = findViewById(R.id.btn1);
         button.setOnClickListener(new OnClickListener() {
@@ -57,7 +60,7 @@ public class MainActivity extends Activity {
         String txt2 = "World";
         tvSet.setText(txt1 + " " + txt2 + "!");
 
-        // Logging: adb Logging examples:
+                // Logging: adb Logging examples:
         /* example code:
            .java: Log.v("MYLOG", "string")
            use:
@@ -72,7 +75,7 @@ public class MainActivity extends Activity {
             }
         });
 
-
+        /*
         //Example catch-all method from Exceptiona api. this does not throw any
         try {
             final String date = new Date().toString();
@@ -80,6 +83,7 @@ public class MainActivity extends Activity {
         catch (Exception e) {
             Log.v("MYLOG", "Date init Error: " + e);
         }
+        */
 
         // Java package Date()
         final TextView tvDate = findViewById(R.id.tvDate);

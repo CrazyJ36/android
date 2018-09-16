@@ -7,7 +7,7 @@
     <string name="btnLogTxt">Push to log</string>
     <string name="btnDateTxt">Date</string>
     <string name="tvPrintTxt">Type in the field below, then tap Show Text</string>
-    <string name="etPrintHint">Type here...</string>
+    <string name="etPrintHint">Type here…</string>
     <string name="btnPrintTxt">Show Text</string>
     <!--Dialog-->
     <string name="dialogTv1Txt">Before getting started with C programming, lets get familiarized with the language first.
