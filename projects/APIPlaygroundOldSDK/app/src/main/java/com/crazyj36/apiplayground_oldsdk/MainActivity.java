@@ -1,6 +1,5 @@
 package com.crazyj36.apiplayground_oldsdk;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -11,22 +10,21 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.TextView;
+
 import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends Activity {
-
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        int sdk = android.os.Build.VERSION.SDK_INT;
-
+        // Device SDK Version view
         TextView tv1 = findViewById(R.id.tv1);
-        tv1.setText(String.format(Locale.US, "%s%d", getString(R.string.tv1Txt), sdk));
+        tv1.setText(String.format(Locale.US, "%s %d", getString(R.string.tv1Txt), android.os.Build.VERSION.SDK_INT));
 
+        // Dialog with layout example
         Button button = findViewById(R.id.btn1);
         button.setOnClickListener(new OnClickListener() {
             @Override
@@ -50,23 +48,15 @@ public class MainActivity extends Activity {
             }
         });
 
-        // Log app start in logcat (run logcat-this)
-        String startMsg = "App Started";
-        Log.i("JAVAANDROIDLOG",startMsg);
-
-        // Concatenate two strings, initialize main textview for buttons output)
+        // Concatenate two strings, c-like
         final TextView tvSet = findViewById(R.id.tvSet);
         String txt1 = "Hello";
         String txt2 = "World";
-        tvSet.setText(txt1 + " " + txt2 + "!");
+        tvSet.setText(String.format(Locale.US, "%s %s!", txt1, txt2));
 
-                // Logging: adb Logging examples:
-        /* example code:
-           .java: Log.v("MYLOG", "string")
-           use:
-           $ adb logcat MYLOG *:s
-           MYLOG being the first 'TAG' parameter that logcat outputs
-        */
+        // Logs
+        String startMsg = "App Started";
+        Log.i("JAVAANDROIDLOG", startMsg);
         Button btnLog = findViewById(R.id.btnLog);
         btnLog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,16 +64,6 @@ public class MainActivity extends Activity {
                 Log.i("JAVAANDROIDLOG", "Log Button clicked");
             }
         });
-
-        /*
-        //Example catch-all method from Exceptiona api. this does not throw any
-        try {
-            final String date = new Date().toString();
-        }
-        catch (Exception e) {
-            Log.v("MYLOG", "Date init Error: " + e);
-        }
-        */
 
         // Java package Date()
         final TextView tvDate = findViewById(R.id.tvDate);
@@ -96,7 +76,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        // set textview to what was entered in textview
+        // set textview to what was entered in editText
         final EditText etPrint = findViewById(R.id.etPrint);
         final TextView tvPrint = findViewById(R.id.tvPrint);
         Button btnPrint = findViewById(R.id.btnPrint);
@@ -106,7 +86,6 @@ public class MainActivity extends Activity {
                 tvPrint.setText(etPrint.getText());
             }
         });
-
 
     }
 }
