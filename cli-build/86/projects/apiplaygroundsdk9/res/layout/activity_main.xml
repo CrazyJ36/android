@@ -17,7 +17,8 @@
         android:layout_height="30dp"
         android:layout_gravity="bottom"
         android:background="@drawable/custom_button"
-        android:text="@string/btn1Txt" />
+        android:text="@string/btn1Txt"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/tvSet"
