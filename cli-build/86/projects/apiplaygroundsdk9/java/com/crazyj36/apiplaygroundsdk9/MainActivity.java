@@ -10,9 +10,14 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.TextView;
+import android.os.Vibrator;
 
+import java.util.Objects;
 import java.util.Date;
 import java.util.Locale;
+import java.io.InputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 public class MainActivity extends Activity {
     @Override
@@ -20,13 +25,42 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Vibrate
+        if ( Objects.requireNonNull(getSystemService(Vibrator.class).hasVibrator()) ) {
+          try {
+            Objects.requireNonNull(getSystemService(Vibrator.class)).vibrate(500);
+          } catch (NullPointerException nullPointerException) {
+              Toast.makeText(MainActivity.this, nullPointerException.getMessage(), Toast.LENGTH_LONG);
+          }
+        } else {
+            Toast.makeText(MainActivity.this, "No Vibrator in device?", Toast.LENGTH_SHORT);
+        }
+
         // Device SDK Version view
-        TextView tv1 = findViewById(R.id.tv1);
-        tv1.setText(String.format(Locale.US, "%s %d", getString(R.string.tv1Txt), android.os.Build.VERSION.SDK_INT));
+        TextView tvSdk = findViewById(R.id.tvSdk);
+        tvSdk.setText(String.format(Locale.US, "%s %d", getString(R.string.tvSdkTxt), android.os.Build.VERSION.SDK_INT));
+
+        // Read Textfile from res/raw
+        TextView tvFile = findViewById(R.id.tvFile);
+        InputStream inputStream = getResources().openRawResource(R.raw.file);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        byte arrayBuff[] = new byte[64];
+        int len;
+        try {
+          while( (len = inputStream.read(arrayBuff)) != -1) {
+            outputStream.write(arrayBuff, 0, len);
+          }
+          inputStream.close();
+          outputStream.close();
+        } catch (IOException ioException) {
+            Toast.makeText(MainActivity.this, "IOException", Toast.LENGTH_SHORT);
+        }
+        String fileText = outputStream.toString();
+        tvFile.setText(fileText);
 
         // Dialog with layout example
-        Button button = findViewById(R.id.btn1);
-        button.setOnClickListener(new OnClickListener() {
+        Button btnCustom = findViewById(R.id.btnCustom);
+        btnCustom.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Dialog dialog = new Dialog(MainActivity.this);

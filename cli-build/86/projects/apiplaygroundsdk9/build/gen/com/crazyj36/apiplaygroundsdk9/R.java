@@ -14,42 +14,46 @@ public final class R {
         public static final int custom_button=0x7f020000;
     }
     public static final class id {
-        public static final int btn1=0x7f050001;
-        public static final int btnDate=0x7f050004;
-        public static final int btnLog=0x7f050003;
-        public static final int btnPrint=0x7f050008;
-        public static final int dialogBtn1=0x7f050009;
-        public static final int dialogBtn2=0x7f05000c;
-        public static final int dialogTv1=0x7f05000a;
-        public static final int dialogTv2=0x7f05000b;
-        public static final int etPrint=0x7f050007;
-        public static final int tv1=0x7f050000;
-        public static final int tvDate=0x7f050005;
-        public static final int tvPrint=0x7f050006;
-        public static final int tvSet=0x7f050002;
+        public static final int btnCustom=0x7f060002;
+        public static final int btnDate=0x7f060005;
+        public static final int btnLog=0x7f060004;
+        public static final int btnPrint=0x7f060009;
+        public static final int dialogBtn1=0x7f06000a;
+        public static final int dialogBtn2=0x7f06000d;
+        public static final int dialogTv1=0x7f06000b;
+        public static final int dialogTv2=0x7f06000c;
+        public static final int etPrint=0x7f060008;
+        public static final int tvDate=0x7f060006;
+        public static final int tvFile=0x7f060001;
+        public static final int tvPrint=0x7f060007;
+        public static final int tvSdk=0x7f060000;
+        public static final int tvSet=0x7f060003;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int dialog_layout=0x7f030001;
     }
+    public static final class raw {
+        public static final int file=0x7f040000;
+    }
     public static final class string {
-        public static final int app_name=0x7f040000;
+        public static final int app_name=0x7f050000;
         /** Activity Main
          */
-        public static final int btn1Txt=0x7f040001;
-        public static final int btnDateTxt=0x7f040005;
-        public static final int btnLogTxt=0x7f040004;
-        public static final int btnPrintTxt=0x7f040008;
-        public static final int dialogBtn1Txt=0x7f04000b;
-        public static final int dialogBtn2Txt=0x7f04000c;
-        public static final int dialogTitle=0x7f04000d;
+        public static final int btnCustomTxt=0x7f050001;
+        public static final int btnDateTxt=0x7f050005;
+        public static final int btnLogTxt=0x7f050004;
+        public static final int btnPrintTxt=0x7f050008;
+        public static final int dialogBtn1Txt=0x7f05000b;
+        public static final int dialogBtn2Txt=0x7f05000c;
+        public static final int dialogTitle=0x7f05000d;
         /** Dialog
          */
-        public static final int dialogTv1Txt=0x7f040009;
-        public static final int dialogTv2Txt=0x7f04000a;
-        public static final int etPrintHint=0x7f040007;
-        public static final int tv1Txt=0x7f040002;
-        public static final int tvDateTxt=0x7f040003;
-        public static final int tvPrintTxt=0x7f040006;
+        public static final int dialogTv1Txt=0x7f050009;
+        public static final int dialogTv2Txt=0x7f05000a;
+        public static final int etPrintHint=0x7f050007;
+        public static final int tvDateTxt=0x7f050003;
+        public static final int tvPrintTxt=0x7f050006;
+        public static final int tvSdkTxt=0x7f050002;
     }
 }

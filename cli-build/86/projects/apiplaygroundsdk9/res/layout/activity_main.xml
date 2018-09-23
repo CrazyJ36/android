@@ -5,19 +5,24 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tv1"
+        android:id="@+id/tvSdk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center" />
 
+     <TextView
+        android:id="@+id/tvFile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <!-- Custom Shape Example -->
     <Button
-        android:id="@+id/btn1"
+        android:id="@+id/btnCustom"
         android:layout_width="50dp"
         android:layout_height="30dp"
         android:layout_gravity="bottom"
         android:background="@drawable/custom_button"
-        android:text="@string/btn1Txt"
+        android:text="@string/btnCustomTxt"
         android:textColor="#FFFFFF" />
 
     <TextView
