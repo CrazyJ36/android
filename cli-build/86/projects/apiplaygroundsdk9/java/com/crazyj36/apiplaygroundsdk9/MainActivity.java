@@ -3,6 +3,7 @@ package com.crazyj36.apiplaygroundsdk9;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -10,30 +11,34 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.TextView;
-import android.os.Vibrator;
 
-import java.util.Objects;
 import java.util.Date;
 import java.util.Locale;
 import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+/* Ideas:
+   Flashing Text
+   Text Maniupulation
+   change theme
+
+*/
 public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Vibrate
-        if ( Objects.requireNonNull(getSystemService(Vibrator.class).hasVibrator()) ) {
-          try {
-            Objects.requireNonNull(getSystemService(Vibrator.class)).vibrate(500);
-          } catch (NullPointerException nullPointerException) {
-              Toast.makeText(MainActivity.this, nullPointerException.getMessage(), Toast.LENGTH_LONG);
-          }
-        } else {
-            Toast.makeText(MainActivity.this, "No Vibrator in device?", Toast.LENGTH_SHORT);
+        Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        try {
+            if (vib != null) {
+                vib.vibrate(500);
+            }
+        } catch (NullPointerException nullPointerExcption) {
+            Toast.makeText(this, "Vibrate: " + nullPointerExcption.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        } finally {
+            Toast.makeText(this, "Load Vibrator.class Successful, Hardware Found. Done.", Toast.LENGTH_SHORT).show();
         }
 
         // Device SDK Version view
@@ -47,13 +52,13 @@ public class MainActivity extends Activity {
         byte arrayBuff[] = new byte[64];
         int len;
         try {
-          while( (len = inputStream.read(arrayBuff)) != -1) {
-            outputStream.write(arrayBuff, 0, len);
-          }
-          inputStream.close();
-          outputStream.close();
+            while ((len = inputStream.read(arrayBuff)) != -1) {
+                outputStream.write(arrayBuff, 0, len);
+            }
+            inputStream.close();
+            outputStream.close();
         } catch (IOException ioException) {
-            Toast.makeText(MainActivity.this, "IOException", Toast.LENGTH_SHORT);
+            Toast.makeText(MainActivity.this, "IOException", Toast.LENGTH_SHORT).show();
         }
         String fileText = outputStream.toString();
         tvFile.setText(fileText);
@@ -121,5 +126,40 @@ public class MainActivity extends Activity {
             }
         });
 
+        // From Here some function results will be put into a custom listview
+        // Put results here from return value
+        final String[] results = {
+                "",
+                "1 + 2 = " + intCast(),
+                "String is from package: " + packageNameOfString(),
+
+        };
+        results[0] = String.valueOf(results.length);
+        int z = 0;
+        StringBuffer text = new StringBuffer();
+        try {
+            while (z < results.length) {
+                text.append(results[z]);
+                text.append("\n");
+                z++;
+            }
+        } catch (NullPointerException ConcatNullPointer) {
+            Toast.makeText(this, "My string concatenation caused NullPointerException", Toast.LENGTH_SHORT).show();
+        }
+        String buffOut = String.valueOf(text);
+        TextView resultsTextView = findViewById(R.id.resultsTextView);
+        resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+        resultsTextView.setText(buffOut);
+
     }
+
+    public String intCast() {
+        int mint = 1 + 2;
+        return String.valueOf(mint);
+    }
+
+    public String packageNameOfString() {
+        return String.class.getCanonicalName();
+    }
+
 }

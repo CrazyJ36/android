@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top|center" />
 
-     <TextView
+    <TextView
         android:id="@+id/tvFile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -67,5 +67,9 @@
         android:layout_height="wrap_content"
         android:text="@string/btnPrintTxt" />
 
+    <TextView
+        android:id="@+id/resultsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

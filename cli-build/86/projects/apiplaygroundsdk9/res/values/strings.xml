@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">API Playground - Old SDK</string>
-    <!--Activity Main-->
+    <string name="app_name">API Playground SDK 9</string>
     <string name="btnCustomTxt">Dialog</string>
     <string name="tvSdkTxt">SDK Version: </string>
     <string name="tvDateTxt">Tap Date</string>
