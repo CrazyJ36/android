@@ -18,11 +18,12 @@ public final class R {
         public static final int btnDate=0x7f060005;
         public static final int btnLog=0x7f060004;
         public static final int btnPrint=0x7f060009;
-        public static final int dialogBtn1=0x7f06000a;
-        public static final int dialogBtn2=0x7f06000d;
-        public static final int dialogTv1=0x7f06000b;
-        public static final int dialogTv2=0x7f06000c;
+        public static final int dialogBtn1=0x7f06000b;
+        public static final int dialogBtn2=0x7f06000e;
+        public static final int dialogTv1=0x7f06000c;
+        public static final int dialogTv2=0x7f06000d;
         public static final int etPrint=0x7f060008;
+        public static final int resultsTextView=0x7f06000a;
         public static final int tvDate=0x7f060006;
         public static final int tvFile=0x7f060001;
         public static final int tvPrint=0x7f060007;
@@ -38,8 +39,6 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f050000;
-        /** Activity Main
-         */
         public static final int btnCustomTxt=0x7f050001;
         public static final int btnDateTxt=0x7f050005;
         public static final int btnLogTxt=0x7f050004;
