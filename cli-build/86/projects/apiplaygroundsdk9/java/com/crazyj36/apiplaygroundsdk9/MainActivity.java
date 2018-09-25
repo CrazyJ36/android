@@ -148,6 +148,7 @@ public class MainActivity extends Activity {
         }
         String buffOut = String.valueOf(text);
         TextView resultsTextView = findViewById(R.id.resultsTextView);
+        resultsTextView.setTextColor(getResources().getColor(android.R.color.black));
         resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
         resultsTextView.setText(buffOut);
 
