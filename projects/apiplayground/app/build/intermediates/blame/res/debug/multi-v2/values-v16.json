@@ -4,7 +4,17 @@
             "outputFile": "C:\\Users\\CrazyJ36\\Development\\android\\projects\\apiplayground\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\CrazyJ36\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0-rc02.aar\\366546f418f724655cf4220cdf9fed0d\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\CrazyJ36\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-28.0.0.aar\\1b7bd70a2ae9b837cbd2e5e9f0c5d868\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\CrazyJ36\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\974e80665576d6ecee8bf9bc3a7b2819\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -20,16 +30,6 @@
                         "endLines": "6",
                         "endColumns": "12",
                         "endOffsets": "289"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\CrazyJ36\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-28.0.0-rc02.aar\\4a7450d57470855e2dd36a8ca2a1e7e2\\res\\values-v16\\values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
                     }
                 }
             ]
