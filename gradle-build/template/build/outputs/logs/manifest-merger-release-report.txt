@@ -1,0 +1,51 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml:2:5-13:14
+INJECTED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml:2:5-13:14
+INJECTED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml:2:5-13:14
+INJECTED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml:2:5-13:14
+INJECTED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml:2:5-13:14
+	package
+		ADDED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml:3:9-40
+	android:versionName
+		INJECTED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml
+		ADDED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml:2:5-13:14
+		INJECTED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml
+		ADDED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml:2:5-13:14
+		INJECTED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml:2:15-73
+application
+ADDED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml:5:5-12:19
+	android:label
+		ADDED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml:5:18-42
+activity#com.crazyj36.template.MainActivity
+ADDED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml:6:2-11:13
+	android:name
+		ADDED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml:6:12-40
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml:7:6-10:22
+action#android.intent.action.MAIN
+ADDED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml:8:3-54
+	android:name
+		ADDED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml:8:11-52
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml:9:3-62
+	android:name
+		ADDED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml:9:13-60
+uses-sdk
+INJECTED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml
+INJECTED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml
+INJECTED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml
+INJECTED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml
+		ADDED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml
+		ADDED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\thomas\development\android\gradle-build\template\src\main\AndroidManifest.xml

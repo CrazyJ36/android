@@ -1,0 +1,4 @@
+Refer to template project in android/vscode-win
+-Download sdk-tools from developer.android.com
+-install build-tools and platform with sdkmanager.bat
+-make build.gradle in project root
