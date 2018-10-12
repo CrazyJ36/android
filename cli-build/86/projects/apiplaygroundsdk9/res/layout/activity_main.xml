@@ -15,15 +15,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <!-- Custom Shape Example -->
     <Button
         android:id="@+id/btnCustom"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_gravity="bottom"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
         android:background="@drawable/custom_button"
         android:text="@string/btnCustomTxt"
         android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/btnDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnDialogTxt" />
 
     <TextView
         android:id="@+id/tvSet"

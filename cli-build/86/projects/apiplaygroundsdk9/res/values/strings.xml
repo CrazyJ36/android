@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">API Playground SDK 9</string>
-    <string name="btnCustomTxt">Dialog</string>
+    <string name="btnCustomTxt">Button</string>
+    <string name="btnDialogTxt">Dialog</string>
     <string name="tvSdkTxt">SDK Version: </string>
     <string name="tvDateTxt">Tap Date</string>
     <string name="btnLogTxt">Log</string>

@@ -2,8 +2,11 @@ package com.crazyj36.apiplaygroundsdk9;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.os.VibrationEffect;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,25 +23,28 @@ import java.io.IOException;
 
 /* Ideas:
    Flashing Text
-   Text Maniupulation
+   Text Manipulation
    change theme
 
 */
+
 public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        final String logChannel = "APIPLAYGROUNDLOG";
+
         setContentView(R.layout.activity_main);
 
         Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         try {
             if (vib != null) {
-                vib.vibrate(500);
+                //vib.vibrate(500);  // .vibrate(long) is deprecated
+                vib.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
             }
-        } catch (NullPointerException nullPointerExcption) {
-            Toast.makeText(this, "Vibrate: " + nullPointerExcption.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-        } finally {
-            Toast.makeText(this, "Load Vibrator.class Successful, Hardware Found. Done.", Toast.LENGTH_SHORT).show();
+        } catch (NullPointerException nullPointerException) {
+            Toast.makeText(this, "Vibrate: " + nullPointerException.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
         }
 
         // Device SDK Version view
@@ -87,6 +93,20 @@ public class MainActivity extends Activity {
             }
         });
 
+        // Normal Dialog Builder Example
+        Button btnDialog = findViewById(R.id.btnDialog);
+        btnDialog.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+                alertDialog.create();
+                alertDialog.setTitle("A Dialog Title");
+		alertDialog.setMessage("A Message");
+                alertDialog.setCancelable(true);
+                alertDialog.show();
+           }
+        });
+
         // Concatenate two strings, c-like
         final TextView tvSet = findViewById(R.id.tvSet);
         String txt1 = "Hello";
@@ -95,22 +115,22 @@ public class MainActivity extends Activity {
 
         // Logs
         String startMsg = "App Started";
-        Log.i("JAVAANDROIDLOG", startMsg);
+        Log.i(logChannel, startMsg);
         Button btnLog = findViewById(R.id.btnLog);
         btnLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("JAVAANDROIDLOG", "Log Button clicked");
+                Log.i(logChannel, "Log Button clicked");
             }
         });
 
         // Java package Date()
         final TextView tvDate = findViewById(R.id.tvDate);
-        final String date = new Date().toString();
         Button btnDate = findViewById(R.id.btnDate);
         btnDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String date = new Date().toString();
                 tvDate.setText(date);
             }
         });
@@ -148,8 +168,8 @@ public class MainActivity extends Activity {
         }
         String buffOut = String.valueOf(text);
         TextView resultsTextView = findViewById(R.id.resultsTextView);
-        resultsTextView.setTextColor(getResources().getColor(android.R.color.black));
-        resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+        resultsTextView.setTextColor(getResources().getColor(android.R.color.black, null)); // Resources.Theme=null
+        resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray, null));
         resultsTextView.setText(buffOut);
 
     }
