@@ -3,7 +3,6 @@ package com.crazyj36.template;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.
 
 public class MainActivity extends Activity {
     @Override
@@ -13,6 +12,7 @@ public class MainActivity extends Activity {
 
         TextView text = (TextView) findViewById(R.id.textView);
         text.setText("Template App");
+
         
     }
 }
