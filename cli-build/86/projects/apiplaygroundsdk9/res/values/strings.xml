@@ -3,6 +3,11 @@
     <string name="btnCustomTxt">Button</string>
     <string name="btnDialogTxt">Dialog</string>
     <string name="tvSdkTxt">SDK Version: </string>
+    <string name="tvScrollTextTxt">Programs: Find size of int, float, double and char. Demonstrate the working of keyword long. Swap two numbers. 
+Check whether A number is even or odd. Check whether A character is vowel or consonant. Find the largest number among three numbers. 
+Find all roots of A quadratic equation. Check leap year. Check whether A number is positive or negative. Check whether A character is an alphabet or not.
+Calculate the sum of natural numbers. Find factorial of A number. Generate multiplication table. Display fibonacci sequence. Find GCD of two numbers.
+Find LCM of two numbers.</string>
     <string name="tvDateTxt">Tap Date</string>
     <string name="btnLogTxt">Log</string>
     <string name="btnDateTxt">Date</string>

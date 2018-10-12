@@ -15,6 +15,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <ScrollView
+        android:layout_height="100dp"
+        android:layout_width="match_parent" >
+        <TextView
+            android:id="@+id/tvScrollText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:text="@string/tvScrollTextTxt" />
+    </ScrollView>
+
     <Button
         android:id="@+id/btnCustom"
         android:layout_width="70dp"

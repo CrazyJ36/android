@@ -1,1 +1,1 @@
-This is content from file.txt in res/raw of pre-app build.
+This is content from file.txt in res/raw of pre-app build. It serves no informatal purpose.
