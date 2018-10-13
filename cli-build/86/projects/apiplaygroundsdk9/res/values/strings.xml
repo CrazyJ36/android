@@ -3,11 +3,16 @@
     <string name="btnCustomTxt">Button</string>
     <string name="btnDialogTxt">Dialog</string>
     <string name="tvSdkTxt">SDK Version: </string>
-    <string name="tvScrollTextTxt">Programs: Find size of int, float, double and char. Demonstrate the working of keyword long. Swap two numbers. 
+    <string name="normalDialogTxt">Programs: Find size of int, float, double and char. Demonstrate the working of keyword long. Swap two numbers. 
 Check whether A number is even or odd. Check whether A character is vowel or consonant. Find the largest number among three numbers. 
 Find all roots of A quadratic equation. Check leap year. Check whether A number is positive or negative. Check whether A character is an alphabet or not.
 Calculate the sum of natural numbers. Find factorial of A number. Generate multiplication table. Display fibonacci sequence. Find GCD of two numbers.
-Find LCM of two numbers.</string>
+Find LCM of two numbers. Display characters from a to z using a loop. Count number of digits in an integer. Reverse A number. Calculate the power of A number.
+Check whether A number is Palindrome or not. Check whether A number is prime or not. Display prime numbers between two intervals. Check Armstrong Number 
+between two intervals. Display factors of A number. Create A pyramid structure. Calculator using switch/case. Display Prime numbers between intervals
+using funcion. Check prime or Armstron number using user-defined function. Check whether A number can be expressed as sum of two prime numbers.
+Find the sum of natural numbers using recursion. Find factorial of A number using recursion. Find G.C.D. using recursion. Convert Binary number 
+to decimal and vice-versa. Convert Octal to decimal and vice-versa. Convert Binary to octal and vice-versa. Reverse sentence using recursion.</string>
     <string name="tvDateTxt">Tap Date</string>
     <string name="btnLogTxt">Log</string>
     <string name="btnDateTxt">Date</string>

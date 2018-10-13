@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.os.Bundle;
+
 import android.os.Vibrator;
 import android.os.VibrationEffect;
 import android.util.Log;
@@ -39,12 +40,16 @@ public class MainActivity extends Activity {
 
         Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         try {
-            if (vib != null) {
+            if (vib != null && android.os.Build.VERSION.SDK_INT > 25) {
                 //vib.vibrate(500);  // .vibrate(long) is deprecated
                 vib.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else if (vib != null && android.os.Build.VERSION.SDK_INT < 26) {
+                vib.vibrate(500);
             }
         } catch (NullPointerException nullPointerException) {
-            Toast.makeText(this, "Vibrate: " + nullPointerException.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Vibrate: " + nullPointerException.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        } finally {
+                Toast.makeText(this, "vibrate test done", Toast.LENGTH_SHORT).show();
         }
 
         // Device SDK Version view
@@ -101,7 +106,7 @@ public class MainActivity extends Activity {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
                 alertDialog.create();
                 alertDialog.setTitle("A Dialog Title");
-		alertDialog.setMessage("A Message");
+		alertDialog.setMessage(R.string.normalDialogTxt);
                 alertDialog.setCancelable(true);
                 alertDialog.show();
            }
@@ -168,8 +173,13 @@ public class MainActivity extends Activity {
         }
         String buffOut = String.valueOf(text);
         TextView resultsTextView = findViewById(R.id.resultsTextView);
-        resultsTextView.setTextColor(getResources().getColor(android.R.color.black, null)); // Resources.Theme=null
-        resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray, null));
+        if (android.os.Build.VERSION.SDK_INT > 22) {
+            resultsTextView.setTextColor(getResources().getColor(android.R.color.black, null)); // Resources.Theme=null
+            resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray, null));
+        } else {
+            resultsTextView.setTextColor(getResources().getColor(android.R.color.black));
+            resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+        }
         resultsTextView.setText(buffOut);
 
     }
