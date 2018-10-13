@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">Launcher</string>
-    <string name="iconDesc">Current App Icon</string>
-    !--Dialog--
-    <string name="diagUninstallBtnTxt">Uninstall</string>
-</resources>

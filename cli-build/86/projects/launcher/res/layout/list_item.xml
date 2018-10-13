@@ -8,22 +8,16 @@
         android:id="@+id/item_app_icon"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_marginLeft="4dp"
         android:contentDescription="@string/iconDesc"/>
 
     <TextView
         android:id="@+id/item_app_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_toRightOf="@id/item_app_icon"/>
-
-    <TextView
-        android:id="@+id/item_app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:layout_marginStart="16dp"
-        android:layout_toRightOf="@id/item_app_icon"
-        android:layout_below="@id/item_app_label"/>
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@id/item_app_icon"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/item_app_icon" />
 
 </RelativeLayout>

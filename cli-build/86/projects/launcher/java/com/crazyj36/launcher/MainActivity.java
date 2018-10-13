@@ -1,10 +1,16 @@
 package com.crazyj36.launcher;
+// import android necessities
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+// import widgets
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -12,52 +18,56 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+// import java tools
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-// Load code into view(Last Step)
+// start app class
 public class MainActivity extends Activity {
+
+    // create app on screen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // run app in stages, to make it easier on main thread
         loadApps();
         loadListView();
-        //addClickListener();
+        addClickListener();
     }
 
-// Get apps activities, Put activities into array
+    // initialize specific android packages
     private PackageManager manager;
     private ArrayList<AppDetail> apps;
 
+    // This Section will load apps to memory
     private void loadApps() {
         manager = getPackageManager();
         apps = new ArrayList<>();
-        Intent i = new Intent(Intent.ACTION_MAIN, null); // in these two lines, all intents with
-        i.addCategory(Intent.CATEGORY_LAUNCHER); //> action_main and category_launcher are gathered to i
-
+        Intent i = new Intent(Intent.ACTION_MAIN, null);
+        i.addCategory(Intent.CATEGORY_LAUNCHER);
         ArrayList<ResolveInfo> availableActivities = (ArrayList<ResolveInfo>) manager.queryIntentActivities(i, 0);
 
-// sort availableActivities labels
+        // Sort apps by name
         Collections.sort(availableActivities, new Comparator<ResolveInfo>() {
-            public int compare(ResolveInfo str1, ResolveInfo str2) {
-                return str1.loadLabel(manager).toString().compareToIgnoreCase(str2.loadLabel(manager).toString());
+            public int compare(ResolveInfo emp1, ResolveInfo emp2) {
+                return emp1.loadLabel(manager).toString().compareToIgnoreCase(emp2.loadLabel(manager).toString());
             }
         });
 
-// Set item info: label, package name, icon
-        for (ResolveInfo ri : availableActivities) {
+        for(ResolveInfo ri:availableActivities) {
             AppDetail app = new AppDetail();
             app.label = ri.loadLabel(manager);
             app.name = ri.activityInfo.packageName;
-            app.icon = ri.activityInfo.loadIcon(manager);
+            app.icon =  ri.activityInfo.loadIcon(manager);
             apps.add(app);
         }
     }
-
-// put array into list view
+    // This section puts into apps to a list view
     private ListView list;
+
     private void loadListView() {
         list = findViewById(R.id.apps_list);
         final ArrayAdapter<AppDetail> adapter = new ArrayAdapter<AppDetail>(this, R.layout.list_item, apps) {
@@ -70,12 +80,15 @@ public class MainActivity extends Activity {
                 appIcon.setImageDrawable(apps.get(position).icon);
                 TextView appLabel = convertView.findViewById(R.id.item_app_label);
                 appLabel.setText(apps.get(position).label);
-                TextView appName = convertView.findViewById(R.id.item_app_name);
-                appName.setText(apps.get(position).name);
                 return convertView;
             }
         };
         list.setAdapter(adapter);
+    }
+
+
+    // do stuff with the apps
+    private void addClickListener() {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
@@ -83,11 +96,27 @@ public class MainActivity extends Activity {
                 MainActivity.this.startActivity(i);
             }
         });
-
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l) {
+                Dialog pkgDiag = new Dialog(MainActivity.this);
+                pkgDiag.setContentView(R.layout.dialog);
+                pkgDiag.setTitle(apps.get(i).name);
+                pkgDiag.show();
+                pkgDiag.findViewById(R.id.pkgUninstallBtn).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Uri uri = Uri.parse("package:" + apps.get(i).name.toString());
+                        Intent uninstall = new Intent(Intent.ACTION_DELETE, uri);
+                        startActivity(uninstall);
+                    }
+                });
+                return false;
+            }
+        });
     }
 
-// Set launch package name on list item click
-    //private void addClickListener() {
-    //}
+
+    // done
 }
 

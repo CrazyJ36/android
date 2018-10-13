@@ -2,13 +2,12 @@
     package="com.crazyj36.launcher">
 
     <application
+        android:allowBackup="false"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Wallpaper.NoTitleBar">
-
-        <uses-sdk targetSdkVersion="28" />
-
         <activity
             android:name=".MainActivity"
+            android:label="Launcher"
             android:excludeFromRecents="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
