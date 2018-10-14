@@ -1,0 +1,99 @@
+--------- beginning of main
+10-14 15:12:02.104 20602 20631 D ConnectivityManager: getMobileDataEnabled()+ subId=1
+10-14 15:12:02.105 20602 20631 D ConnectivityManager: getMobileDataEnabled()- subId=1 retVal=true
+10-14 15:12:02.107 20602 20631 D ConnectivityManager: getMobileDataEnabled()+ subId=1
+10-14 15:12:02.108 20602 20631 D ConnectivityManager: getMobileDataEnabled()- subId=1 retVal=true
+10-14 15:12:05.012  2699  2927 I beammeto: [INFO ] [    2927] 15:12:05.012: cm.uceadapter: virtual void UceAdapter::onTimer(time_t, void*, const SAL::aString&)(): name:UCE_RETRY_PUBLISH_INITIAL, UCE state:128
+10-14 15:12:05.012  2699  2927 I beammeto: [INFO ] [    2927] 15:12:05.012: cm.uceadapter: virtual void UceAdapter::onTimer(time_t, void*, const SAL::aString&)(): Retrying publish(0 vs 129618)
+10-14 15:12:05.013  2358  4144 I QImsService: ImsConfigImpl : getProvisionedValue item=17
+10-14 15:12:05.014  2358  4144 I QImsService: ImsSenderRxr : [1422]> REQUEST_GET_IMS_CONFIG [SUB0]
+10-14 15:12:05.014  2358  4144 I QImsService: ImsSenderRxr : REQUEST_GET_IMS_CONFIG request to ImsRadio: token -1422 item:30 boolValue:false intValue:0 strValue:null errorCause:0
+10-14 15:12:05.021  2358  2425 I QImsService: ImsRadioResponse : Get config response received.
+10-14 15:12:05.021  2358  2425 I QImsService: ImsSenderRxr : [1422]< REQUEST_GET_IMS_CONFIG 0[SUB0]
+10-14 15:12:05.021  2358  2611 I QImsService: ImsConfigImplHandler : Message received: what = 1
+10-14 15:12:05.021  2358  2611 I QImsService: ImsConfigImpl : Notifyall
+10-14 15:12:05.021  2358  4144 D QImsService: ImsConfigImpl : sendRequest: request.arg2=0, count=1
+10-14 15:12:05.047  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.047: cm.uceadapter: virtual int64_t UceAdapter::getMyselfCaps()(): 0xc900 => 0x8800
+10-14 15:12:05.047  2699  2927 I beammeto: [INFO ] [    2927] 15:12:05.047: cm.uceadapter: virtual SAL::aString UceAdapter::publishCaps(bool, bool)(): debounce is false -> just publish
+10-14 15:12:05.047  2699  2927 I beammeto: [INFO ] [    2927] 15:12:05.047: cm.uceadapter: SAL::aString UceAdapter::publishCapsInternal(bool)(): isPublishTriggered:0, isNextPublishPlatformTriggered:0
+10-14 15:12:05.048  2358  4144 I QImsService: ImsConfigImpl : getProvisionedValue item=17
+10-14 15:12:05.049  2358  4144 I QImsService: ImsSenderRxr : [1423]> REQUEST_GET_IMS_CONFIG [SUB0]
+10-14 15:12:05.049  2358  4144 I QImsService: ImsSenderRxr : REQUEST_GET_IMS_CONFIG request to ImsRadio: token -1423 item:30 boolValue:false intValue:0 strValue:null errorCause:0
+10-14 15:12:05.053  2358  2425 I QImsService: ImsRadioResponse : Get config response received.
+10-14 15:12:05.053  2358  2425 I QImsService: ImsSenderRxr : [1423]< REQUEST_GET_IMS_CONFIG 0[SUB0]
+10-14 15:12:05.053  2358  2611 I QImsService: ImsConfigImplHandler : Message received: what = 1
+10-14 15:12:05.053  2358  2611 I QImsService: ImsConfigImpl : Notifyall
+10-14 15:12:05.053  2358  4144 D QImsService: ImsConfigImpl : sendRequest: request.arg2=0, count=1
+10-14 15:12:05.079  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.079: cm.uceadapter: virtual int64_t UceAdapter::getMyselfCaps()(): 0xc900 => 0x8800
+10-14 15:12:05.079  2699  2927 I beammeto: [INFO ] [    2927] 15:12:05.079: cm.uceadapter: SAL::aString UceAdapter::publishCapsInternal(bool)(): uri:tel:+181****2752, caps:8800, userData:577, UCE state:128
+10-14 15:12:05.079  2699  2927 I beammeto: [INFO ] [    2927] 15:12:05.079: cm.uceadapter: void UceAdapter::RequestIdLookup::saveUserData(UceAdapter::RequestIdLookup::RequestType, int, const SIP::SipUri&)(): type:3, userData:577, uri:'tel:+181****2752' (101 total)
+10-14 15:12:05.080  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.079: sal.timer.manager: TimerManager::removeTimer
+10-14 15:12:05.080  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.080: sal.timer.manager: TimerManager::removeTimer, acquiring lock
+10-14 15:12:05.080  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.080: sal.timer.manager: TimerManager::removeTimer
+10-14 15:12:05.080  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.080: sal.timer.manager: TimerManager::removeTimer, acquiring lock
+10-14 15:12:05.080  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.080: sal.timer.manager: setTimer(now + 900000ms, handler:0xb2256090 ( null), arg:0x0) into thread 00000b6f
+10-14 15:12:05.080  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.080: sal.timer.manager: Time Manager interrupt
+10-14 15:12:05.080  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.080: sal.timer.manager: Worker Thread available 0xb2211ba8
+10-14 15:12:05.080  2699  2927 E beammeto: [ERROR] [    2927] 15:12:05.080: cm.uceadapter: SAL::aString UceAdapter::publishCapsInternal(bool)(): publishQcCaps failed with ''
+10-14 15:12:05.080  2699  2927 E beammeto: [ERROR] [    2927] 15:12:05.080: cm.uceadapter: void UceAdapter::publishFailed(int)(): failed with code:0, pending publish '577' => '', UCE state:128
+10-14 15:12:05.080  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.080: sal.timer.manager: TimerManager::removeTimer
+10-14 15:12:05.080  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.080: sal.timer.manager: TimerManager::removeTimer, acquiring lock
+10-14 15:12:05.080  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.080: sal.timer.manager: Calling TimerManager::interrupt
+10-14 15:12:05.080  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.080: sal.timer.manager: Time Manager interrupt
+10-14 15:12:05.080  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.080: sal.timer.manager: Worker Thread available 0xb2211ba8
+10-14 15:12:05.081  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.081: sal.timer.manager: removeTimer(): TimerManager handler:0xb2256090 ( ) canceled
+10-14 15:12:05.081  2699  2927 I beammeto: [INFO ] [    2927] 15:12:05.081: cm.uceadapter: void UceAdapter::publishFailed(int)(): Publish not succeeded yet, retry quickly
+10-14 15:12:05.081  2699  2927 I beammeto: [INFO ] [    2927] 15:12:05.081: cm.timer: set(): UCE_RETRY_PUBLISH_INITIAL, delay:300000
+10-14 15:12:05.081  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.081: sal.timer.manager: setTimer(now + 300000ms, handler:0xb2256090 ( null), arg:0x0) into thread 00000b6f
+10-14 15:12:05.081  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.081: sal.timer.manager: Time Manager interrupt
+10-14 15:12:05.081  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.081: sal.timer.manager: Worker Thread available 0xb2211ba8
+10-14 15:12:05.081  2699  2927 I beammeto: [INFO ] [    2927] 15:12:05.081: cm.timer: set(): Set next UCE_RETRY_PUBLISH_INITIAL 300000 => 300000
+10-14 15:12:05.081  2699  2927 I beammeto: [INFO ] [    2927] 15:12:05.081: sal.timer.event: onTimer for handler:0xb2256090 ( UCE_RETRY_PUBLISH_INITIAL) blocked timer thread for 69ms
+10-14 15:12:05.081  2699  2927 D beammeto: [DEBUG] [    2927] 15:12:05.081: sal.timer.manager: TimerThread(): First event is in 300000ms, tree size:1
+10-14 15:12:05.119 20602 20631 D ConnectivityManager: getMobileDataEnabled()+ subId=1
+10-14 15:12:05.120 20602 20631 D ConnectivityManager: getMobileDataEnabled()- subId=1 retVal=true
+10-14 15:12:05.122 20602 20631 D ConnectivityManager: getMobileDataEnabled()+ subId=1
+10-14 15:12:05.123 20602 20631 D ConnectivityManager: getMobileDataEnabled()- subId=1 retVal=true
+--------- beginning of system
+10-14 15:12:06.124  1471  2962 I ActivityManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.apiplaygroundsdk9/.MainActivity bnds=[429,151][567,338]} from uid 10057
+10-14 15:12:06.125   837   929 I ThermalEngine: Thermal-Server: Thermal received msg from  override
+10-14 15:12:06.125   528 26503 I Thermal-Lib: Thermal-Lib-Client: Client request sent
+10-14 15:12:06.164  1471  4704 I ActivityManager: Start proc 26505:com.crazyj36.apiplaygroundsdk9/u0a205 for activity com.crazyj36.apiplaygroundsdk9/.MainActivity
+10-14 15:12:06.287 26505 26505 D AndroidRuntime: Shutting down VM
+--------- beginning of crash
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: FATAL EXCEPTION: main
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: Process: com.crazyj36.apiplaygroundsdk9, PID: 26505
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: java.lang.RuntimeException: Unable to start activity ComponentInfo{com.crazyj36.apiplaygroundsdk9/com.crazyj36.apiplaygroundsdk9.MainActivity}: java.lang.ArrayIndexOutOfBoundsException: length=2; index=2
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2895)
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2974)
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: 	at android.app.ActivityThread.-wrap11(Unknown Source:0)
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1666)
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:105)
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:164)
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6695)
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: 	at com.android.internal.os.Zygote$MethodAndArgsCaller.run(Zygote.java:240)
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:772)
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: Caused by: java.lang.ArrayIndexOutOfBoundsException: length=2; index=2
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: 	at com.crazyj36.apiplaygroundsdk9.MainActivity.onCreate(MainActivity.java:85)
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: 	at android.app.Activity.performCreate(Activity.java:6989)
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1235)
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2848)
+10-14 15:12:06.288 26505 26505 E AndroidRuntime: 	... 9 more
+10-14 15:12:06.290  1471  2845 W ActivityManager:   Force finishing activity com.crazyj36.apiplaygroundsdk9/.MainActivity
+10-14 15:12:06.297  1471  1529 I ActivityManager: Showing crash dialog for package com.crazyj36.apiplaygroundsdk9 u0
+10-14 15:12:06.333  1471  6401 I OpenGLRenderer: Initialized EGL, version 1.4
+10-14 15:12:06.333  1471  6401 D OpenGLRenderer: Swap behavior 2
+10-14 15:12:06.342  1471  6401 W Adreno-EGL: <qeglDrvAPI_eglGetConfigAttrib:612>: EGL_BAD_ATTRIBUTE
+10-14 15:12:06.795  1471  1528 W ActivityManager: Activity pause timeout for ActivityRecord{a75eb98 u0 com.crazyj36.apiplaygroundsdk9/.MainActivity t218 f}
+10-14 15:12:06.813  1471  1528 I ActivityManager: moveHomeStack, setupComplete:true
+10-14 15:12:06.858 13891 14383 W Adreno-EGL: <qeglDrvAPI_eglGetConfigAttrib:612>: EGL_BAD_ATTRIBUTE
+10-14 15:12:06.872   561   726 I SFPerfTracer:      triggers: (rate: 0:0) (1501226 sw vsyncs) (0 skipped) (38:1092149 vsyncs) (40:2713190)
+10-14 15:12:06.875 26402 26675 W Adreno-EGL: <qeglDrvAPI_eglGetConfigAttrib:612>: EGL_BAD_ATTRIBUTE
+10-14 15:12:07.424 26402 26675 W OpenGLRenderer: Incorrectly called buildLayer on View: ShortcutAndWidgetContainer, destroying layer...
+10-14 15:12:07.489  1471  2845 W ActivityManager:   Force finishing activity com.crazyj36.apiplaygroundsdk9/.MainActivity
+10-14 15:12:07.490  1471  2845 I ActivityManager: Killing 26505:com.crazyj36.apiplaygroundsdk9/u0a205 (adj 200): crash
+10-14 15:12:07.490   561   561 D SurfaceFlinger: Backpressure trigger, skipping transaction & refresh!
+10-14 15:12:07.694  1471  1834 W AppOps  : Finishing op nesting under-run: uid 1000 pkg android code 24 time=0 duration=0 nesting=0
+10-14 15:12:07.697   561   561 I SFPerfTracer:      triggers: (rate: 272:55657) (compose: 0:1312) (post: 0:2814) (render: 0:5292) (14:520137 frames) (15:606357)
+10-14 15:12:07.698   561   561 D SFPerfTracer:        layers: (8:13) (StatusBar#0 (0xb163e000): 0:87142) (com.android.systemui.ImageWallpaper#0 (0xb159c000): 0:931) (DimLayerController/Stack=0#0 (0xb15f8000): 8:3184) (animation background stackId=1#0 (0xb15b2000): 0:335)* (Sprite#0 (0xb15e3000): 0:17)* (animation background stackId=0#0 (0xb15af000): 0:3)* (NavigationBar#0 (0xb15d1000): 0:3013) (#0 (0xb15cd000): 0:3) (#1 (0xb15e1000): 0:4) (com.motorola.launcher3/com.android.launcher3.CustomizationPanelLauncher#0 (0xb15b4000): 0:17)* (com.motorola.launcher3/com.android.launcher3.CustomizationPanelLauncher#1 (0xb15c1000): 1:70) (Splash Screen com.crazyj36.apiplaygroundsdk9#0 (0xb1628000): 0:25)- (Application Error: com.crazyj36.apiplaygroundsdk9#0 (0xb15d7000): 11:24) 

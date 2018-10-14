@@ -15,29 +15,41 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.TextView;
+import android.widget.ListView;
+import android.widget.ArrayAdapter;
+import android.content.pm.PackageManager;
+import android.content.ContextWrapper;
+import android.app.Activity;
+import android.Manifest;
 
 import java.util.Date;
 import java.util.Locale;
 import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.File;
 
 /* Ideas:
    Flashing Text
    Text Manipulation
-   change theme
-
 */
 
 public class MainActivity extends Activity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        final String logChannel = "APIPLAYGROUNDLOG";
-
         setContentView(R.layout.activity_main);
 
+        // Request permission on start if needed
+        if ( ContextWrapper.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ) {
+            Activity.requestPermission(MainActivity.this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 1 );
+        }
+
+        // Name of app-wide log tag
+        final String logChannel = "APIPLAYGROUNDLOG";
+
+        // Vibrate on Successfull start
         Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         try {
             if (vib != null && android.os.Build.VERSION.SDK_INT > 25) {
@@ -73,6 +85,18 @@ public class MainActivity extends Activity {
         }
         String fileText = outputStream.toString();
         tvFile.setText(fileText);
+
+        // Listview with my_docs
+        File dir = new File("/sdcard/files");
+        File[] fileList = dir.listFiles();
+        String[] names = {"a", "b", "c"};
+        for (int i = 0; i < fileList.length; i++) {
+            names[i] = fileList[i].getName();
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
+        ListView listView = findViewById(R.id.docList);
+        listView.setAdapter(adapter);
 
         // Dialog with layout example
         Button btnCustom = findViewById(R.id.btnCustom);
@@ -183,6 +207,7 @@ public class MainActivity extends Activity {
         resultsTextView.setText(buffOut);
 
     }
+
 
     public String intCast() {
         int mint = 1 + 2;
