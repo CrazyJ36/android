@@ -1,12 +1,11 @@
 package com.crazyj36.apiplaygroundsdk9;
 
-import android.Manifest;
 import android.app.Activity;
+import android.Manifest;
 import android.app.Dialog;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.os.Vibrator;
 import android.os.VibrationEffect;
 import android.util.Log;
@@ -40,8 +39,7 @@ public class MainActivity extends Activity {
 
          // Request permission on start if needed
         if (android.os.Build.VERSION.SDK_INT > 22) {
-            //Activity activity = new Activity();
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+            requestPermissions(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
         }
 
         // Name of app-wide log tag
