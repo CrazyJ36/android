@@ -1,11 +1,12 @@
 package com.crazyj36.apiplaygroundsdk9;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.os.Bundle;
-
+import android.support.v4.app.ActivityCompat;
 import android.os.Vibrator;
 import android.os.VibrationEffect;
 import android.util.Log;
@@ -17,10 +18,6 @@ import android.widget.Toast;
 import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
-import android.content.pm.PackageManager;
-import android.content.ContextWrapper;
-import android.app.Activity;
-import android.Manifest;
 
 import java.util.Date;
 import java.util.Locale;
@@ -41,9 +38,10 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Request permission on start if needed
-        if ( ContextWrapper.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ) {
-            Activity.requestPermission(MainActivity.this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 1 );
+         // Request permission on start if needed
+        if (android.os.Build.VERSION.SDK_INT > 22) {
+            //Activity activity = new Activity();
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }
 
         // Name of app-wide log tag
@@ -89,7 +87,7 @@ public class MainActivity extends Activity {
         // Listview with my_docs
         File dir = new File("/sdcard/files");
         File[] fileList = dir.listFiles();
-        String[] names = {"a", "b", "c"};
+        String[] names = {"a", "b", "c", "d"};
         for (int i = 0; i < fileList.length; i++) {
             names[i] = fileList[i].getName();
         }
