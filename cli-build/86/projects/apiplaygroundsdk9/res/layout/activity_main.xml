@@ -24,7 +24,7 @@
 
     <Button
         android:id="@+id/btnCustom"
-        android:layout_width="60dp"
+        android:layout_width="70dp"
         android:layout_height="30dp"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="4dp"
@@ -84,7 +84,7 @@
 
     <TextView
         android:id="@+id/resultsTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <ListView

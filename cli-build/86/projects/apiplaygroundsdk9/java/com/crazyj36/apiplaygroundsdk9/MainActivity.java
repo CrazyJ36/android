@@ -8,10 +8,13 @@ import android.app.AlertDialog.Builder;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.os.VibrationEffect;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.view.View.OnClickListener;
+import android.content.pm.PackageManager;
+import android.content.Context;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.TextView;
@@ -20,6 +23,7 @@ import android.widget.ArrayAdapter;
 
 import java.util.Date;
 import java.util.Locale;
+
 import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -37,15 +41,39 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-         // Request permission on start if needed
-        if (android.os.Build.VERSION.SDK_INT > 22) {
-            requestPermissions(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+	    // permission and file
+	    String[] permission = new String[] {Manifest.permission.READ_EXTERNAL_STORAGE};
+
+        if ((android.os.Build.VERSION.SDK_INT > 22) && (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
+            requestPermissions(permission, 0);
+            Toast.makeText(MainActivity.this, "Please restart app", Toast.LENGTH_LONG).show();
+            finish();
+        }
+
+        String storage = Environment.getExternalStorageDirectory().toString() + "/test";
+	    String filesTest = "Your files from " + storage + "/tests are in a list below";
+        File dir = new File(storage); // check to make sure is folder not file, app will crash
+        File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
+        if (dir.exists()) {
+            if (fileList.length == 0) {
+                filesTest = ("No files in " + storage + ".");
+            }
+            String[] names = new String[fileList.length];
+            for (int i = 0; i < fileList.length; i++) {
+                names[i] = fileList[i].getName();
+            }
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
+            ListView listView = findViewById(R.id.docList);
+            listView.setAdapter(adapter);
+        } else {
+            filesTest = ("No " + storage + " directory.");
         }
 
         // Name of app-wide log tag
         final String logChannel = "APIPLAYGROUNDLOG";
 
         // Vibrate on Successfull start
+        String vibrateTest = null;
         Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         try {
             if (vib != null && android.os.Build.VERSION.SDK_INT > 25) {
@@ -57,7 +85,7 @@ public class MainActivity extends Activity {
         } catch (NullPointerException nullPointerException) {
                 Toast.makeText(this, "Vibrate: " + nullPointerException.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
         } finally {
-                Toast.makeText(this, "vibrate test done", Toast.LENGTH_SHORT).show();
+                vibrateTest = "Vibrator access tests done";
         }
 
         // Device SDK Version view
@@ -81,18 +109,6 @@ public class MainActivity extends Activity {
         }
         String fileText = outputStream.toString();
         tvFile.setText(fileText);
-
-        // Listview with my_docs
-        File dir = new File("/sdcard/files");
-        File[] fileList = dir.listFiles();
-        String[] names = {"a", "b", "c", "d"};
-        for (int i = 0; i < fileList.length; i++) {
-            names[i] = fileList[i].getName();
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
-        ListView listView = findViewById(R.id.docList);
-        listView.setAdapter(adapter);
 
         // Dialog with layout example
         Button btnCustom = findViewById(R.id.btnCustom);
@@ -173,11 +189,13 @@ public class MainActivity extends Activity {
 
         // From Here some function results will be put into a custom listview
         // Put results here from return value
+
         final String[] results = {
                 "",
                 "1 + 2 = " + intCast(),
                 "String is from package: " + packageNameOfString(),
-
+                vibrateTest,
+                filesTest,
         };
         results[0] = String.valueOf(results.length);
         int z = 0;
@@ -201,9 +219,7 @@ public class MainActivity extends Activity {
             resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
         }
         resultsTextView.setText(buffOut);
-
     }
-
 
     public String intCast() {
         int mint = 1 + 2;

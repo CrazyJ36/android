@@ -1,1 +1,1 @@
-This is res/file.txt.
+This is res/file.txt. It is built in to this app.
