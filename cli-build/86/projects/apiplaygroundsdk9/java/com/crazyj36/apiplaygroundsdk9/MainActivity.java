@@ -42,31 +42,32 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
 	    // permission and file
-	    String[] permission = new String[] {Manifest.permission.READ_EXTERNAL_STORAGE};
-
         if ((android.os.Build.VERSION.SDK_INT > 22) && (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
-            requestPermissions(permission, 0);
-            Toast.makeText(MainActivity.this, "Please restart app", Toast.LENGTH_LONG).show();
-            finish();
+            requestPermissions(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
         }
-
+        // get files
+        String filesTest = "";
         String storage = Environment.getExternalStorageDirectory().toString() + "/test";
-	    String filesTest = "Your files from " + storage + "/tests are in a list below";
-        File dir = new File(storage); // check to make sure is folder not file, app will crash
-        File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
-        if (dir.exists()) {
-            if (fileList.length == 0) {
-                filesTest = ("No files in " + storage + ".");
-            }
-            String[] names = new String[fileList.length];
-            for (int i = 0; i < fileList.length; i++) {
-                names[i] = fileList[i].getName();
-            }
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
-            ListView listView = findViewById(R.id.docList);
-            listView.setAdapter(adapter);
+	    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+	        filesTest = "Your files from " + storage + " are in a list below";
+	        File dir = new File(storage); // check to make sure is folder not file, app will crash
+	        File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
+	        if (dir.exists()) {
+	            if (fileList.length == 0) {
+	                filesTest = ("No files in " + storage + ".");
+	            }
+	            String[] names = new String[fileList.length];
+	            for (int i = 0; i < fileList.length; i++) {
+	                names[i] = fileList[i].getName();
+	            }
+	            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
+	            ListView listView = findViewById(R.id.docList);
+	            listView.setAdapter(adapter);
+	        } else {
+	            filesTest = ("No " + storage + " directory.");
+	        }
         } else {
-            filesTest = ("No " + storage + " directory.");
+            filesTest = "Grant storage permission, then restart app.";
         }
 
         // Name of app-wide log tag
@@ -75,17 +76,19 @@ public class MainActivity extends Activity {
         // Vibrate on Successfull start
         String vibrateTest = null;
         Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        VibrationEffect vibEffect = VibrationEffect.createOneShot(200, 50);
         try {
-            if (vib != null && android.os.Build.VERSION.SDK_INT > 25) {
+            if ( !(vib.hasAmplitudeControl()) ) {
+            vibrateTest = "Device has no amplitude control, can't change strength.";
+            }
+            if (vib != null && vib.hasVibrator() && android.os.Build.VERSION.SDK_INT >= 26) {
                 //vib.vibrate(500);  // .vibrate(long) is deprecated
-                vib.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
-            } else if (vib != null && android.os.Build.VERSION.SDK_INT < 26) {
-                vib.vibrate(500);
+                vib.vibrate(vibEffect); // amplitude is int 1-255 or VibrationEffect.DEFAULT_AMPLITUDE
+            } else if (vib != null && vib.hasVibrator() && android.os.Build.VERSION.SDK_INT < 26) {
+                vib.vibrate(200);
             }
         } catch (NullPointerException nullPointerException) {
-                Toast.makeText(this, "Vibrate: " + nullPointerException.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-        } finally {
-                vibrateTest = "Vibrator access tests done";
+                vibrateTest = "Vibrate error: " + nullPointerException.getLocalizedMessage();
         }
 
         // Device SDK Version view

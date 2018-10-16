@@ -89,8 +89,9 @@
 
     <ListView
         android:id="@+id/docList"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
+        android:layout_width="248dp"
+        android:layout_height="160dp"
+        android:nestedScrollingEnabled="true" />
 
   </LinearLayout>
 
