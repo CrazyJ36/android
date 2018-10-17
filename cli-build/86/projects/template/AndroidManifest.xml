@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.crazyj36.template">
-    <uses-sdk android:minSdkVersion="5" />
-    <application android:label="Template">
-	<activity android:name=".MainActivity">
-	    <intent-filter>
-		<action android:name="android.intent.action.MAIN"/>
-		<category android:name="android.intent.category.LAUNCHER"/>
-	    </intent-filter>
-	</activity>
+<manifest 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.crazyj36.template">
+
+    <uses-sdk
+		android:minSdkVersion="5" />
+
+    <application
+        android:label="Template"
+        android:theme="@android:style/Theme.DeviceDefault" >
+
+		<activity
+ 			android:name=".MainActivity">
+
+		    <intent-filter>
+  				<action android:name="android.intent.action.MAIN"/>
+				<category android:name="android.intent.category.LAUNCHER"/>
+	    	</intent-filter>
+
+		</activity>
+
     </application>
-  </manifest>
+
+</manifest>

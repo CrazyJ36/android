@@ -1,18 +1,23 @@
 package com.crazyj36.apiplaygroundsdk9;
 
-import android.Manifest;
 import android.app.Activity;
+import android.Manifest;
 import android.app.Dialog;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
+import android.os.Build;
 import android.os.Vibrator;
 import android.os.VibrationEffect;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.view.MotionEvent;
+import android.view.DragEvent;
 import android.widget.Button;
 import android.view.View.OnClickListener;
+import android.content.pm.PackageManager;
+import android.content.Context;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.TextView;
@@ -21,6 +26,7 @@ import android.widget.ArrayAdapter;
 
 import java.util.Date;
 import java.util.Locale;
+
 import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -32,34 +38,51 @@ import java.io.File;
 */
 
 public class MainActivity extends Activity {
+    String filesTest = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-         // Request permission on start if needed
-        if (android.os.Build.VERSION.SDK_INT > 22) {
-            //Activity activity = new Activity();
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+	    // storage permission and files
+        if ((android.os.Build.VERSION.SDK_INT > 22) && (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
+            requestPermissions(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+        }
+        if (Build.VERSION.SDK_INT < 23) {
+            filesTask();
+        } else {
+	        if (Build.VERSION.SDK_INT >= 23 && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+		        filesTask();
+	        } else {
+	            filesTest = "Grant storage permission, then restart app.";
+	        }
         }
 
         // Name of app-wide log tag
         final String logChannel = "APIPLAYGROUNDLOG";
 
         // Vibrate on Successfull start
+        String vibrateTest = "";
         Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         try {
-            if (vib != null && android.os.Build.VERSION.SDK_INT > 25) {
-                //vib.vibrate(500);  // .vibrate(long) is deprecated
-                vib.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
-            } else if (vib != null && android.os.Build.VERSION.SDK_INT < 26) {
-                vib.vibrate(500);
+            if (Build.VERSION.SDK_INT < 11 && vib != null) {
+				vib.vibrate(400);
+                vibrateTest = "Vibrated for 400ms. Can't check for vibrate hardware. Though this is not null.";
+            } else if (Build.VERSION.SDK_INT >= 26 && vib != null && vib.hasVibrator()) {
+ 		        vib.vibrate(VibrationEffect.createOneShot(400, VibrationEffect.DEFAULT_AMPLITUDE));
+				vibrateTest = "Hasvibrator. Vibrated for 400ms, at default amplitude using class VibrationEffect.";
+            } else if (Build.VERSION.SDK_INT >= 26 && vib != null && vib.hasVibrator() && vib.hasAmplitudeControl()) {
+				vib.vibrate(VibrationEffect.createOneShot(400, 10));
+                vibrateTest = "Has vibrator. Vibrated for 400ms at %15 available amplitude using class Vibrator.";
+            } else if (Build.VERSION.SDK_INT < 26 && Build.VERSION.SDK_INT >= 11 && vib != null && vib.hasVibrator()) {
+                vib.vibrate(400);
+				vibrateTest = "Has vibrator. Vibrated for 400ms at default amplitude using class Vibrator.";
+            } else if (Build.VERSION.SDK_INT >= 11 && !(vib.hasVibrator())) { // Checks NullPointerException next in catch.
+				vibrateTest = "Vibrate: Hardware has no motor.";
             }
         } catch (NullPointerException nullPointerException) {
-                Toast.makeText(this, "Vibrate: " + nullPointerException.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-        } finally {
-                Toast.makeText(this, "vibrate test done", Toast.LENGTH_SHORT).show();
+                vibrateTest = "Vibrate 'null' error: " + nullPointerException.getLocalizedMessage();
         }
 
         // Device SDK Version view
@@ -83,18 +106,6 @@ public class MainActivity extends Activity {
         }
         String fileText = outputStream.toString();
         tvFile.setText(fileText);
-
-        // Listview with my_docs
-        File dir = new File("/sdcard/files");
-        File[] fileList = dir.listFiles();
-        String[] names = {"a", "b", "c", "d"};
-        for (int i = 0; i < fileList.length; i++) {
-            names[i] = fileList[i].getName();
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
-        ListView listView = findViewById(R.id.docList);
-        listView.setAdapter(adapter);
 
         // Dialog with layout example
         Button btnCustom = findViewById(R.id.btnCustom);
@@ -128,7 +139,7 @@ public class MainActivity extends Activity {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
                 alertDialog.create();
                 alertDialog.setTitle("A Dialog Title");
-		alertDialog.setMessage(R.string.normalDialogTxt);
+        		alertDialog.setMessage(R.string.normalDialogTxt);
                 alertDialog.setCancelable(true);
                 alertDialog.show();
            }
@@ -136,9 +147,9 @@ public class MainActivity extends Activity {
 
         // Concatenate two strings, c-like
         final TextView tvSet = findViewById(R.id.tvSet);
-        String txt1 = "Hello";
-        String txt2 = "World";
-        tvSet.setText(String.format(Locale.US, "%s %s!", txt1, txt2));
+        String txt1 = "One";
+        String txt2 = "Two";
+        tvSet.setText(String.format(Locale.US, "%s %s printed!", txt1, txt2));
 
         // Logs
         String startMsg = "App Started";
@@ -175,11 +186,13 @@ public class MainActivity extends Activity {
 
         // From Here some function results will be put into a custom listview
         // Put results here from return value
+
         final String[] results = {
                 "",
                 "1 + 2 = " + intCast(),
                 "String is from package: " + packageNameOfString(),
-
+                vibrateTest,
+                filesTest,
         };
         results[0] = String.valueOf(results.length);
         int z = 0;
@@ -203,9 +216,7 @@ public class MainActivity extends Activity {
             resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
         }
         resultsTextView.setText(buffOut);
-
     }
-
 
     public String intCast() {
         int mint = 1 + 2;
@@ -214,6 +225,50 @@ public class MainActivity extends Activity {
 
     public String packageNameOfString() {
         return String.class.getCanonicalName();
+    }
+
+    public void filesTask() {
+		ListView listView = findViewById(R.id.fileList);
+	    String storage = Environment.getExternalStorageDirectory().toString() + "/test";
+        filesTest = "Files from: " + storage + " are below.";
+        File dir = new File(storage); // check to make sure test is folder, not file, app will crash
+        File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
+        if (dir.exists()) {
+            if (fileList.length == 0) {
+                filesTest = ("No files in " + storage + ".");
+            }
+            String[] names = new String[fileList.length];
+            for (int i = 0; i < fileList.length; i++) {
+                names[i] = fileList[i].getName();
+            }
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, names);
+            listView.setAdapter(adapter);
+        } else {
+            filesTest = ("No " + storage + " directory.");
+        }
+
+        // Disable TouchEvent on ScrollView(which is current parent view) on ACTION_DOWN (tap down).
+        if (Build.VERSION.SDK_INT < 21) {
+	        listView.setOnTouchListener(new View.OnTouchListener() {
+	            @Override
+	            public boolean onTouch(View v, MotionEvent event) {
+                    int action = event.getAction();
+                    switch (action) {
+                        case MotionEvent.ACTION_DOWN:
+							// Disallow ScrollView to intercept touch events.
+	                		v.getParent().requestDisallowInterceptTouchEvent(true);
+  							break;
+     					case MotionEvent.ACTION_UP:
+							v.getParent().requestDisallowInterceptTouchEvent(false);
+							break;
+				    }
+	                // Handle ListView touch events.
+    				v.onTouchEvent(event);
+					return true;
+                }
+			});
+		}
+
     }
 
 }
