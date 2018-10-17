@@ -19,7 +19,6 @@ to decimal and vice-versa. Convert Octal to decimal and vice-versa. Convert Bina
     <string name="tvPrintTxt">Type in the field below, then tap Show Text</string>
     <string name="etPrintHint">Type here…</string>
     <string name="btnPrintTxt">Show Text</string>
-    <!--Dialog-->
     <string name="dialogTv1Txt">Before getting started with C programming, lets get familiarized with the language first.
 C is a general-purpose programming language used for wide range of applications from Operating systems like Windows and iOS to software that is used for creating 3D movies.
 C programming is highly efficient. That’s the main reason why it’s very popular despite being more than 40 years old.

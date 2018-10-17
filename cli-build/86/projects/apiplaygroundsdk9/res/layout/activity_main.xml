@@ -50,6 +50,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btnLogTxt" />
+    
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvDateTxt" />
 
     <Button
         android:id="@+id/btnDate"
@@ -58,29 +64,29 @@
         android:text="@string/btnDateTxt" />
 
     <TextView
-        android:id="@+id/tvDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tvDateTxt" />
-
-    <TextView
         android:id="@+id/tvPrint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
         android:text="@string/tvPrintTxt" />
 
-    <EditText
-        android:id="@+id/etPrint"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/etPrintHint"
-        android:inputType="text" />
-
-    <Button
-        android:id="@+id/btnPrint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnPrintTxt" />
+        android:orientation="horizontal" >
+        <EditText
+	        android:id="@+id/etPrint"
+			android:layout_width="0dp"         
+	        android:layout_height="wrap_content"
+            android:layout_weight="1"
+	        android:hint="@string/etPrintHint"
+	        android:inputType="text" />
+        <Button
+	        android:id="@+id/btnPrint"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+	        android:text="@string/btnPrintTxt" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/resultsTextView"
@@ -88,9 +94,9 @@
         android:layout_height="wrap_content" />
 
     <ListView
-        android:id="@+id/docList"
-        android:layout_width="168dp"
-        android:layout_height="96dp"
+        android:id="@+id/fileList"
+        android:layout_width="wrap_content"
+        android:layout_height="124dp"
         android:nestedScrollingEnabled="true" />
 
   </LinearLayout>

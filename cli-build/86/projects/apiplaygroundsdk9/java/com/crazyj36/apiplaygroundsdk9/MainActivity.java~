@@ -27,6 +27,7 @@ import android.widget.ArrayAdapter;
 import java.util.Date;
 import java.util.Locale;
 
+import java.lang.NoSuchMethodError;
 import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -38,26 +39,35 @@ import java.io.File;
 */
 
 public class MainActivity extends Activity {
-    String filesTest = "";
+
+    private String filesTest = "";
+    private String storage = Environment.getExternalStorageDirectory().toString() + "/test";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-	    // storage permission and files
+	    // storage permission
         if ((android.os.Build.VERSION.SDK_INT > 22) && (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
             requestPermissions(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
         }
-        if (Build.VERSION.SDK_INT < 23) {
-            filesTask();
-        } else {
-	        if (Build.VERSION.SDK_INT >= 23 && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-		        filesTask();
-	        } else {
-	            filesTest = "Grant storage permission, then restart app.";
-	        }
-        }
+
+        Button filesDialogBtn = findViewById(R.id.filesDialogBtn);
+        filesDialogBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+		        if (Build.VERSION.SDK_INT < 23) {
+		            filesTask();
+		        } else {
+			        if (Build.VERSION.SDK_INT >= 23 && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+				        filesTask();
+			        } else {
+			            filesTest = "Grant storage permission, then restart app.";
+			        }
+		        }
+			}
+        });
 
         // Name of app-wide log tag
         final String logChannel = "APIPLAYGROUNDLOG";
@@ -139,7 +149,7 @@ public class MainActivity extends Activity {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
                 alertDialog.create();
                 alertDialog.setTitle("A Dialog Title");
-        		alertDialog.setMessage(R.string.normalDialogTxt);
+		alertDialog.setMessage(R.string.normalDialogTxt);
                 alertDialog.setCancelable(true);
                 alertDialog.show();
            }
@@ -228,7 +238,15 @@ public class MainActivity extends Activity {
     }
 
     public void filesTask() {
-	    String storage = Environment.getExternalStorageDirectory().toString() + "/test";
+        Dialog filesDialog = new Dialog(com.crazyj36.apiplaygroundsdk9.MainActivity.this);
+        filesDialog.setTitle("Files");
+        filesDialog.show();
+        try {
+            filesDialog.setContentView(R.layout.file_dialog);
+        } catch (Exception eSetContent) {
+            Toast.makeText(MainActivity.this, "esetcontent" + eSetContent.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+        }
+
         filesTest = "Your files from " + storage + " are in a list below";
         File dir = new File(storage); // check to make sure test is folder, not file, app will crash
         File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
@@ -240,9 +258,13 @@ public class MainActivity extends Activity {
             for (int i = 0; i < fileList.length; i++) {
                 names[i] = fileList[i].getName();
             }
-			ListView listView = findViewById(R.id.fileList);
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, names);
-            listView.setAdapter(adapter);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
+            ListView listView = findViewById(R.id.docList);
+            try {
+				listView.setAdapter(adapter);
+            } catch (Exception eListAdapter) {
+                Toast.makeText(MainActivity.this, "failed listadapter" + eListAdapter.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
         } else {
             filesTest = ("No " + storage + " directory.");
         }
