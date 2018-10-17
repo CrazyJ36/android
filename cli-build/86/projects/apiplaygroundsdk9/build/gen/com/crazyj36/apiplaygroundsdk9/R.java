@@ -14,13 +14,14 @@ public final class R {
         public static final int custom_button=0x7f020000;
     }
     public static final class id {
-        public static final int btnCustom=0x7f060002;
+        public static final int btnCustom=0x7f060003;
         public static final int btnDate=0x7f060007;
-        public static final int btnDialog=0x7f060003;
+        public static final int btnDialog=0x7f060004;
         public static final int btnLog=0x7f060005;
         public static final int btnPrint=0x7f06000a;
-        public static final int dialogBtn1=0x7f06000d;
-        public static final int dialogBtn2=0x7f060010;
+        public static final int dialog1TextLayout=0x7f06000d;
+        public static final int dialogBtn1=0x7f060010;
+        public static final int dialogBtn2=0x7f060011;
         public static final int dialogTv1=0x7f06000e;
         public static final int dialogTv2=0x7f06000f;
         public static final int etPrint=0x7f060009;
@@ -30,7 +31,7 @@ public final class R {
         public static final int tvFile=0x7f060001;
         public static final int tvPrint=0x7f060008;
         public static final int tvSdk=0x7f060000;
-        public static final int tvSet=0x7f060004;
+        public static final int tvSet=0x7f060002;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

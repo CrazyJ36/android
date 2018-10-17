@@ -19,13 +19,16 @@ to decimal and vice-versa. Convert Octal to decimal and vice-versa. Convert Bina
     <string name="tvPrintTxt">Type in the field below, then tap Show Text</string>
     <string name="etPrintHint">Type here…</string>
     <string name="btnPrintTxt">Show Text</string>
-    <string name="dialogTv1Txt">Before getting started with C programming, lets get familiarized with the language first.
-C is a general-purpose programming language used for wide range of applications from Operating systems like Windows and iOS to software that is used for creating 3D movies.
-C programming is highly efficient. That’s the main reason why it’s very popular despite being more than 40 years old.
-Standard C programs are portable. The source code written in one system works in another operating system without any change.
-As mentioned, it’s a good language to start learning programming. If you know C programming, you will not just understand how your program works, but will also be able to create a mental picture on how a computer works.</string>
-    <string name="dialogTv2Txt">\n\nIf you know C, you will not only know how your program works but, you will be able to create a mental model on how a computer works (including memory management and allocation). You will learn to appreciate the freedom that C provides unlike Python and Java.
-Understanding C allows you to write programs that you never thought were possible before (or at the very least, you will have a broader understanding of computer architecture and programming as a whole).</string>
+    <string name="dialogTv1Txt">Before getting started with C programming, lets get familiarized with the language first. C is a general-purpose 
+programming language used for wide range of applications from Operating systems like Windows and iOS to software that is used for creating 3D movies.
+C programming is highly efficient. That’s the main reason why it’s very popular despite being more than 40 years old. Standard C programs are portable. 
+The source code written in one system works in another operating system without any change. As mentioned, it’s a good language to start learning 
+programming. If you know C programming, you will not just understand how your program works, but will also be able to create a mental picture 
+on how a computer works.</string>
+    <string name="dialogTv2Txt">\nIf you know C, you will not only know how your program works but, you will be able to create a mental model 
+on how a computer works (including memory management and allocation). You will learn to appreciate the freedom that C provides unlike Python and Java.
+Understanding C allows you to write programs that you never thought were possible before (or at the very least, you will have a broader understanding 
+of computer architecture and programming as a whole).</string>
     <string name="dialogBtn1Txt">Toast</string>
     <string name="dialogBtn2Txt">Close</string>
     <string name="dialogTitle">Info Dialog</string>

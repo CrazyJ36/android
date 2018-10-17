@@ -63,26 +63,26 @@ public class MainActivity extends Activity {
         final String logChannel = "APIPLAYGROUNDLOG";
 
         // Vibrate on Successfull start
-        String vibrateTest = null;
+        String vibrateTest = "";
         Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         try {
-			if (Build.VERSION.SDK_INT <= 11 && vib !=null) {
-				vib.vibrate(200);
-                vibrateTest = "vibrate for 200ms, have not checked for vibrator";
-            } else if (vib != null && vib.hasVibrator() && android.os.Build.VERSION.SDK_INT >= 26) {
- 		        vib.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
-				vibrateTest = "vibrated for 200ms at default amplitude using class VibrationEffect.";
-            } else if (vib !=null && vib.hasVibrator() && Build.VERSION.SDK_INT >= 26 && vib.hasAmplitudeControl()) {
-				vib.vibrate(VibrationEffect.createOneShot(200, 40));
-                vibrateTest = "vibrated for 40ms at 40 amplitude";
-            } else if (vib != null && vib.hasVibrator() && android.os.Build.VERSION.SDK_INT < 26) {
-                vib.vibrate(200);
-				vibrateTest = "vibrated for 200ms at normal amplitude using class Vibrator.";
-            } else {
-				vibrateTest = "either no vibrator class a in framework, no vibrator, or sdk is older than oreo";
-			}
+            if (Build.VERSION.SDK_INT < 11 && vib != null) {
+				vib.vibrate(400);
+                vibrateTest = "Vibrated for 400ms. Can't check for vibrate hardware. Though this is not null.";
+            } else if (Build.VERSION.SDK_INT >= 26 && vib != null && vib.hasVibrator()) {
+ 		        vib.vibrate(VibrationEffect.createOneShot(400, VibrationEffect.DEFAULT_AMPLITUDE));
+				vibrateTest = "Hasvibrator. Vibrated for 400ms, at default amplitude using class VibrationEffect.";
+            } else if (Build.VERSION.SDK_INT >= 26 && vib != null && vib.hasVibrator() && vib.hasAmplitudeControl()) {
+				vib.vibrate(VibrationEffect.createOneShot(400, 10));
+                vibrateTest = "Has vibrator. Vibrated for 400ms at %15 available amplitude using class Vibrator.";
+            } else if (Build.VERSION.SDK_INT < 26 && Build.VERSION.SDK_INT >= 11 && vib != null && vib.hasVibrator()) {
+                vib.vibrate(400);
+				vibrateTest = "Has vibrator. Vibrated for 400ms at default amplitude using class Vibrator.";
+            } else if (Build.VERSION.SDK_INT >= 11 && !(vib.hasVibrator())) { // Checks NullPointerException next in catch.
+				vibrateTest = "Vibrate: Hardware has no motor.";
+            }
         } catch (NullPointerException nullPointerException) {
-                vibrateTest = "Vibrate error: " + nullPointerException.getLocalizedMessage();
+                vibrateTest = "Vibrate 'null' error: " + nullPointerException.getLocalizedMessage();
         }
 
         // Device SDK Version view
@@ -147,9 +147,9 @@ public class MainActivity extends Activity {
 
         // Concatenate two strings, c-like
         final TextView tvSet = findViewById(R.id.tvSet);
-        String txt1 = "Hello";
-        String txt2 = "World";
-        tvSet.setText(String.format(Locale.US, "%s %s!", txt1, txt2));
+        String txt1 = "One";
+        String txt2 = "Two";
+        tvSet.setText(String.format(Locale.US, "%s %s printed!", txt1, txt2));
 
         // Logs
         String startMsg = "App Started";
@@ -228,8 +228,9 @@ public class MainActivity extends Activity {
     }
 
     public void filesTask() {
+		ListView listView = findViewById(R.id.fileList);
 	    String storage = Environment.getExternalStorageDirectory().toString() + "/test";
-        filesTest = "Your files from " + storage + " are in a list below";
+        filesTest = "Files from: " + storage + " are below.";
         File dir = new File(storage); // check to make sure test is folder, not file, app will crash
         File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
         if (dir.exists()) {
@@ -240,12 +241,33 @@ public class MainActivity extends Activity {
             for (int i = 0; i < fileList.length; i++) {
                 names[i] = fileList[i].getName();
             }
-			ListView listView = findViewById(R.id.fileList);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, names);
             listView.setAdapter(adapter);
         } else {
             filesTest = ("No " + storage + " directory.");
         }
+
+        // Disable TouchEvent on ScrollView(which is current parent view) on ACTION_DOWN (tap down).
+        if (Build.VERSION.SDK_INT < 21) {
+	        listView.setOnTouchListener(new View.OnTouchListener() {
+	            @Override
+	            public boolean onTouch(View v, MotionEvent event) {
+                    int action = event.getAction();
+                    switch (action) {
+                        case MotionEvent.ACTION_DOWN:
+							// Disallow ScrollView to intercept touch events.
+	                		v.getParent().requestDisallowInterceptTouchEvent(true);
+  							break;
+     					case MotionEvent.ACTION_UP:
+							v.getParent().requestDisallowInterceptTouchEvent(false);
+							break;
+				    }
+	                // Handle ListView touch events.
+    				v.onTouchEvent(event);
+					return true;
+                }
+			});
+		}
 
     }
 
