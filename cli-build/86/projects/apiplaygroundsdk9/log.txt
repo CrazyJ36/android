@@ -1,0 +1,258 @@
+--------- beginning of /dev/log/system
+W/ActivityManager(  303): Activity destroy timeout for HistoryRecord{40553ca8 com.crazyj36.apiplaygroundsdk9/.MainActivity}
+--------- beginning of /dev/log/main
+V/SoundPool-JNI(  303): android_media_SoundPool_play
+V/SoundPool(  303): play sampleID=1, leftVolume=0.152522, rightVolume=0.152522, priority=0, loop=0, rate=1.000000
+V/SoundPool(  303): mState = 0 mChannelID=62, mNumChannels=2, mPos = 20736, mPriority=-1, mLoop=0
+V/SoundPool(  303): mState = 0 mChannelID=226, mNumChannels=1, mPos = 9600, mPriority=-1, mLoop=0
+V/SoundPool(  303): mState = 0 mChannelID=0, mNumChannels=1, mPos = 0, mPriority=-1, mLoop=0
+V/SoundPool(  303): mState = 0 mChannelID=0, mNumChannels=1, mPos = 0, mPriority=-1, mLoop=0
+V/SoundPool(  303): Allocated active channel
+V/SoundPool(  303): play channel 0x3506dc state = 0
+V/SoundPool(  303): SoundChannel::play 0x3506dc: sampleID=1, channelID=227, leftVolume=0.152522, rightVolume=0.152522, priority=0, loop=0, rate=1.000000
+D/AudioTrack(  303): Request AudioFlinger to create track
+D/AudioFlinger(  178): createTrack() lSessionId: 237
+D/AudioFlinger(  178): Track constructor name 4101, calling thread 303
+V/SoundPool(  303): setVolume 0x8881d0
+D/AudioTrack(  303): start 0x8881d0
+D/AudioFlinger(  178): start(4101), calling thread 303 session 237
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::startOutput(android::audio_io_handle_t, android::AudioSystem::stream_type, int) start 228
+V/AudioPolicyManager(  178): startOutput() output 1, stream 1
+V/AudioPolicyManagerBase(  178): changeRefCount() stream 1, count 1
+E/AudioPolicyManager(  178): [EW0804]virtual uint32_t android::AudioPolicyManager::getDeviceForStrategy(android::AudioPolicyManagerBase::routing_strategy, bool) start 234
+V/AudioPolicyManager(  178): getDeviceForStrategy() from cache strategy 0, device 2
+E/AudioPolicyManager(  178): [EW0804]virtual uint32_t android::AudioPolicyManager::getDeviceForStrategy(android::AudioPolicyManagerBase::routing_strategy, bool) end 234
+V/AudioPolicyManagerBase(  178): getNewDevice() selected device 2
+E/AudioPolicyManager(  178): [EW0804]void android::AudioPolicyManager::setOutputDevice(android::audio_io_handle_t, uint32_t, bool, int) start 456
+V/AudioPolicyManager(  178): setOutputDevice() output 1 device 2 delayMs 0
+E/AudioPolicyManager(  178): EASTAR 0 prevDevice =0x2 device = 0x2 force = 0
+E/AudioPolicyManager(  178): [EW0804]void android::AudioPolicyManager::setOutputDevice(android::audio_io_handle_t, uint32_t, bool, int) end 456
+V/AudioPolicyManager(  178): setOutputDevice() setting same device 2 or null device for output 1
+V/AudioPolicyManager(  178): startOutput()...stream 1 , mStreams[stream].mIndexCur = 7, output 1
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::checkAndSetVolume(int, int, android::audio_io_handle_t, uint32_t, int, bool) start 247
+E/AudioPolicyManager(  178): [LGE]AudioPolicyManager::checkAndSetVolume : stream =1 index = 7
+V/AudioPolicyManagerBase(  178): [LGE : device 2 Stream 1, VolIndex = 7 volmin =0 volmax =7
+V/AudioPolicyManagerBase(  178): [LGE : volInt = 100 , Volume = 1.000000 Strategy = 0
+V/AudioPolicyManagerBase(  178): [LGE : device 2 Stream 1
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::checkAndSetVolume(int, int, android::audio_io_handle_t, uint32_t, int, bool) end 247
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::startOutput(android::audio_io_handle_t, android::AudioSystem::stream_type, int) end 228
+V/SoundPool(  303): delete oldTrack 0x888158
+D/AudioTrack(  303): stop 0x888158
+V/AudioPolicyManagerBase(  178): releaseOutput() 1
+D/AudioFlinger(  178): remove track (4099) and delete from mixer
+D/[IJ_LGAllAppsView](  495): [LGAllAppsView.java:514:zoom()] zoom = 1.0   mCurMenuType0
+V/AudioHardwareMSM8660(  178): open driver
+V/AudioHardwareMSM8660(  178): get config
+V/AudioHardwareMSM8660(  178): set config
+V/AudioHardwareMSM8660(  178): buffer_size: 4800
+V/AudioHardwareMSM8660(  178): buffer_count: 2
+V/AudioHardwareMSM8660(  178): channel_count: 2
+V/AudioHardwareMSM8660(  178): sample_rate: 44100
+D/AudioHardwareMSM8660(  178): write(): dec_id = 1 cur_rx = 22
+V/AudioHardwareMSM8660(  178): cur_rx for pcm playback = 22
+D/AudioHardwareMSM8660(  178): value of device and enable is 22 1 ALSA dev id:14
+D/ACDB-LOADER(  178): ACDB -> send_audio_cal, acdb_id = 15, path =  0
+D/ACDB-LOADER(  178): ACDB -> send_audtable
+D/ACDB-LOADER(  178): ACDB -> ACDB_CMD_GET_AUDPROC_COMMON_TABLE
+D/ACDB-LOADER(  178): ACDB -> AUDIO_SET_AUDPROC_CAL
+D/ACDB-LOADER(  178): ACDB -> send_audvoltable
+D/ACDB-LOADER(  178): ACDB -> ACDB_CMD_GET_AUDPROC_GAIN_DEP_VOLTBL_STEP_COPP
+D/ACDB-LOADER(  178): ACDB -> AUDIO_SET_AUDPROC_VOL_CAL
+D/AudioHardwareMSM8660(  178): addToTable stream 1
+W/AudioFlinger(  178): write blocked for 133 msecs, 62 delayed writes, thread 0x25320
+V/SoundPool(  303): process 0x3506dc channel 227 EVENT_UNDERRUN
+V/SoundPool(  303): awake
+V/SoundPool(  303): Getting channel from stop list
+V/SoundPool(  303): stop
+D/AudioTrack(  303): stop 0x8881d0
+D/AudioFlinger(  178): stop(4101), calling thread 303
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::stopOutput(android::audio_io_handle_t, android::AudioSystem::stream_type, int) start 228
+V/AudioPolicyManager(  178): stopOutput() output 1, stream 1
+V/AudioPolicyManagerBase(  178): changeRefCount() stream 1, count 0
+V/AudioPolicyManagerBase(  178): getNewDevice() selected device 0
+E/AudioPolicyManager(  178): [EW0804]void android::AudioPolicyManager::setOutputDevice(android::audio_io_handle_t, uint32_t, bool, int) start 457
+V/AudioPolicyManager(  178): setOutputDevice() output 1 device 0 delayMs 0
+E/AudioPolicyManager(  178): EASTAR 0 prevDevice =0x2 device = 0x0 force = 0
+E/AudioPolicyManager(  178): [EW0804]void android::AudioPolicyManager::setOutputDevice(android::audio_io_handle_t, uint32_t, bool, int) end 457
+V/AudioPolicyManager(  178): setOutputDevice() setting same device 0 or null device for output 1
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::stopOutput(android::audio_io_handle_t, android::AudioSystem::stream_type, int) end 228
+V/SoundPool(  303): done_l(227)
+V/SoundPool(  303): move to front
+W/ResourceType(  303): Entry identifier 0x128 is larger than entry count 0xab
+I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.apiplaygroundsdk9/.MainActivity } from pid 495
+W/WindowManager(  303): [PhoneWindowManager.java:1099:addStartingWindow()] HistoryRecord{40a84bf8 com.crazyj36.apiplaygroundsdk9/.MainActivity} failed creating starting window
+W/WindowManager(  303): java.lang.RuntimeException: Binary XML file line #25: You must supply a layout_height attribute.
+W/WindowManager(  303): 	at android.content.res.TypedArray.getLayoutDimension(TypedArray.java:491)
+W/WindowManager(  303): 	at android.view.ViewGroup$LayoutParams.setBaseAttributes(ViewGroup.java:3599)
+W/WindowManager(  303): 	at android.view.ViewGroup$MarginLayoutParams.<init>(ViewGroup.java:3678)
+W/WindowManager(  303): 	at android.widget.LinearLayout$LayoutParams.<init>(LinearLayout.java:1400)
+W/WindowManager(  303): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:1326)
+W/WindowManager(  303): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:47)
+W/WindowManager(  303): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:625)
+W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
+W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
+W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.generateLayout(PhoneWindow.java:2290)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.installDecor(PhoneWindow.java:2345)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.getDecorView(PhoneWindow.java:1511)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindowManager.addStartingWindow(PhoneWindowManager.java:1070)
+W/WindowManager(  303): 	at com.android.server.WindowManagerService$H.handleMessage(WindowManagerService.java:8347)
+W/WindowManager(  303): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+W/WindowManager(  303): 	at android.os.Looper.loop(Looper.java:130)
+W/WindowManager(  303): 	at com.android.server.WindowManagerService$WMThread.run(WindowManagerService.java:582)
+V/SoundPool-JNI(  303): android_media_SoundPool_play
+V/SoundPool(  303): play sampleID=1, leftVolume=0.152522, rightVolume=0.152522, priority=0, loop=0, rate=1.000000
+V/SoundPool(  303): mState = 0 mChannelID=62, mNumChannels=2, mPos = 20736, mPriority=-1, mLoop=0
+V/SoundPool(  303): mState = 0 mChannelID=227, mNumChannels=1, mPos = 9600, mPriority=-1, mLoop=0
+V/SoundPool(  303): mState = 0 mChannelID=0, mNumChannels=1, mPos = 0, mPriority=-1, mLoop=0
+V/SoundPool(  303): mState = 0 mChannelID=0, mNumChannels=1, mPos = 0, mPriority=-1, mLoop=0
+V/SoundPool(  303): Allocated active channel
+V/SoundPool(  303): play channel 0x3506dc state = 0
+V/SoundPool(  303): SoundChannel::play 0x3506dc: sampleID=1, channelID=228, leftVolume=0.152522, rightVolume=0.152522, priority=0, loop=0, rate=1.000000
+D/AudioTrack(  303): Request AudioFlinger to create track
+D/AudioFlinger(  178): createTrack() lSessionId: 238
+D/AudioFlinger(  178): Track constructor name 4099, calling thread 303
+V/SoundPool(  303): setVolume 0x3edab8
+D/AudioTrack(  303): start 0x3edab8
+D/AudioFlinger(  178): start(4099), calling thread 303 session 238
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::startOutput(android::audio_io_handle_t, android::AudioSystem::stream_type, int) start 229
+V/AudioPolicyManager(  178): startOutput() output 1, stream 1
+V/AudioPolicyManagerBase(  178): changeRefCount() stream 1, count 1
+E/AudioPolicyManager(  178): [EW0804]virtual uint32_t android::AudioPolicyManager::getDeviceForStrategy(android::AudioPolicyManagerBase::routing_strategy, bool) start 235
+V/AudioPolicyManager(  178): getDeviceForStrategy() from cache strategy 0, device 2
+E/AudioPolicyManager(  178): [EW0804]virtual uint32_t android::AudioPolicyManager::getDeviceForStrategy(android::AudioPolicyManagerBase::routing_strategy, bool) end 235
+V/AudioPolicyManagerBase(  178): getNewDevice() selected device 2
+E/AudioPolicyManager(  178): [EW0804]void android::AudioPolicyManager::setOutputDevice(android::audio_io_handle_t, uint32_t, bool, int) start 458
+V/AudioPolicyManager(  178): setOutputDevice() output 1 device 2 delayMs 0
+E/AudioPolicyManager(  178): EASTAR 0 prevDevice =0x2 device = 0x2 force = 0
+E/AudioPolicyManager(  178): [EW0804]void android::AudioPolicyManager::setOutputDevice(android::audio_io_handle_t, uint32_t, bool, int) end 458
+V/AudioPolicyManager(  178): setOutputDevice() setting same device 2 or null device for output 1
+V/AudioPolicyManager(  178): startOutput()...stream 1 , mStreams[stream].mIndexCur = 7, output 1
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::checkAndSetVolume(int, int, android::audio_io_handle_t, uint32_t, int, bool) start 248
+E/AudioPolicyManager(  178): [LGE]AudioPolicyManager::checkAndSetVolume : stream =1 index = 7
+V/AudioPolicyManagerBase(  178): [LGE : device 2 Stream 1, VolIndex = 7 volmin =0 volmax =7
+V/AudioPolicyManagerBase(  178): [LGE : volInt = 100 , Volume = 1.000000 Strategy = 0
+V/AudioPolicyManagerBase(  178): [LGE : device 2 Stream 1
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::checkAndSetVolume(int, int, android::audio_io_handle_t, uint32_t, int, bool) end 248
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::startOutput(android::audio_io_handle_t, android::AudioSystem::stream_type, int) end 229
+V/SoundPool(  303): delete oldTrack 0x8881d0
+D/AudioTrack(  303): stop 0x8881d0
+V/AudioPolicyManagerBase(  178): releaseOutput() 1
+D/AudioFlinger(  178): remove track (4101) and delete from mixer
+D/Launcher.Workspace(  495): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
+D/Launcher.Workspace(  495): [Workspace.java:2036:hideWallpaper()] Show wallpaper
+I/ActivityManager(  303): process name to start: com.crazyj36.apiplaygroundsdk9
+E/ActivityManager(  303): heap conf. property name string trimmed: hs.com.crazyj36.apiplaygroundsd
+I/ActivityManager(  303): Start proc com.crazyj36.apiplaygroundsdk9 for activity com.crazyj36.apiplaygroundsdk9/.MainActivity: pid=11572 uid=10094 gids={}
+W/dalvikvm(11572): Link of class 'Lcom/crazyj36/apiplaygroundsdk9/MainActivity$7;' failed
+E/dalvikvm(11572): Could not find class 'com.crazyj36.apiplaygroundsdk9.MainActivity$7', referenced from method com.crazyj36.apiplaygroundsdk9.MainActivity.filesTask
+W/dalvikvm(11572): VFY: unable to resolve new-instance 38 (Lcom/crazyj36/apiplaygroundsdk9/MainActivity$7;) in Lcom/crazyj36/apiplaygroundsdk9/MainActivity;
+W/dalvikvm(11572): VFY: unable to resolve virtual method 57: Lcom/crazyj36/apiplaygroundsdk9/MainActivity;.checkSelfPermission (Ljava/lang/String;)I
+W/dalvikvm(11572): VFY: unable to resolve virtual method 57: Lcom/crazyj36/apiplaygroundsdk9/MainActivity;.checkSelfPermission (Ljava/lang/String;)I
+W/dalvikvm(11572): VFY: unable to resolve virtual method 20: Landroid/os/Vibrator;.hasVibrator ()Z
+W/dalvikvm(11572): VFY: unable to resolve virtual method 20: Landroid/os/Vibrator;.hasVibrator ()Z
+W/dalvikvm(11572): VFY: unable to resolve virtual method 20: Landroid/os/Vibrator;.hasVibrator ()Z
+W/dalvikvm(11572): VFY: unable to resolve virtual method 15: Landroid/content/res/Resources;.getColor (ILandroid/content/res/Resources$Theme;)I
+W/ResourceType(11572): Entry identifier 0x128 is larger than entry count 0xab
+V/SoundPool(  303): process 0x3506dc channel 228 EVENT_UNDERRUN
+V/SoundPool(  303): awake
+V/SoundPool(  303): Getting channel from stop list
+V/SoundPool(  303): stop
+D/AudioTrack(  303): stop 0x3edab8
+D/AudioFlinger(  178): stop(4099), calling thread 303
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::stopOutput(android::audio_io_handle_t, android::AudioSystem::stream_type, int) start 229
+V/AudioPolicyManager(  178): stopOutput() output 1, stream 1
+V/AudioPolicyManagerBase(  178): changeRefCount() stream 1, count 0
+V/AudioPolicyManagerBase(  178): getNewDevice() selected device 0
+E/AudioPolicyManager(  178): [EW0804]void android::AudioPolicyManager::setOutputDevice(android::audio_io_handle_t, uint32_t, bool, int) start 459
+V/AudioPolicyManager(  178): setOutputDevice() output 1 device 0 delayMs 0
+E/AudioPolicyManager(  178): EASTAR 0 prevDevice =0x2 device = 0x0 force = 0
+E/AudioPolicyManager(  178): [EW0804]void android::AudioPolicyManager::setOutputDevice(android::audio_io_handle_t, uint32_t, bool, int) end 459
+V/AudioPolicyManager(  178): setOutputDevice() setting same device 0 or null device for output 1
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::stopOutput(android::audio_io_handle_t, android::AudioSystem::stream_type, int) end 229
+V/SoundPool(  303): done_l(228)
+V/SoundPool(  303): move to front
+W/dalvikvm(11572): threadid=1: thread exiting with uncaught exception (group=0x40019560)
+E/AndroidRuntime(11572): FATAL EXCEPTION: main
+E/AndroidRuntime(11572): java.lang.NoClassDefFoundError: com.crazyj36.apiplaygroundsdk9.MainActivity$7
+E/AndroidRuntime(11572): 	at com.crazyj36.apiplaygroundsdk9.MainActivity.filesTask(MainActivity.java:256)
+E/AndroidRuntime(11572): 	at com.crazyj36.apiplaygroundsdk9.MainActivity.onCreate(MainActivity.java:58)
+E/AndroidRuntime(11572): 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1047)
+E/AndroidRuntime(11572): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1622)
+E/AndroidRuntime(11572): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:1674)
+E/AndroidRuntime(11572): 	at android.app.ActivityThread.access$1500(ActivityThread.java:117)
+E/AndroidRuntime(11572): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:942)
+E/AndroidRuntime(11572): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+E/AndroidRuntime(11572): 	at android.os.Looper.loop(Looper.java:130)
+E/AndroidRuntime(11572): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
+E/AndroidRuntime(11572): 	at java.lang.reflect.Method.invokeNative(Native Method)
+E/AndroidRuntime(11572): 	at java.lang.reflect.Method.invoke(Method.java:507)
+E/AndroidRuntime(11572): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
+E/AndroidRuntime(11572): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
+E/AndroidRuntime(11572): 	at dalvik.system.NativeStart.main(Native Method)
+W/ActivityManager(  303):   Force finishing activity com.crazyj36.apiplaygroundsdk9/.MainActivity
+W/ActivityManager(  303): Activity pause timeout for HistoryRecord{40a84bf8 com.crazyj36.apiplaygroundsdk9/.MainActivity}
+D/Launcher.Workspace(  495): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
+V/LGEmailProvider(  692): [LGEmailProvider.java:184:query()] EmailProvider.query: uri=content://com.lge.providers.lgemail/account, projection=[Ljava.lang.String;@40538f50, selection=null, match is 0
+V/LGEmailProvider(  692): [LGEmailProvider.java:223:query()] 1 : TABLE_NAMES=EAccount
+V/LGEmailProvider(  692): [LGEmailProvider.java:332:query()] EmailProvider.query result count=0
+D/Launcher.Workspace(  495): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
+V/SoundPool-JNI(  303): android_media_SoundPool_play
+V/SoundPool(  303): play sampleID=1, leftVolume=0.152522, rightVolume=0.152522, priority=0, loop=0, rate=1.000000
+V/SoundPool(  303): mState = 0 mChannelID=62, mNumChannels=2, mPos = 20736, mPriority=-1, mLoop=0
+V/SoundPool(  303): mState = 0 mChannelID=228, mNumChannels=1, mPos = 9600, mPriority=-1, mLoop=0
+V/SoundPool(  303): mState = 0 mChannelID=0, mNumChannels=1, mPos = 0, mPriority=-1, mLoop=0
+V/SoundPool(  303): mState = 0 mChannelID=0, mNumChannels=1, mPos = 0, mPriority=-1, mLoop=0
+V/SoundPool(  303): Allocated active channel
+V/SoundPool(  303): play channel 0x3506dc state = 0
+V/SoundPool(  303): SoundChannel::play 0x3506dc: sampleID=1, channelID=229, leftVolume=0.152522, rightVolume=0.152522, priority=0, loop=0, rate=1.000000
+D/AudioTrack(  303): Request AudioFlinger to create track
+D/AudioFlinger(  178): createTrack() lSessionId: 239
+D/AudioFlinger(  178): Track constructor name 4101, calling thread 303
+V/SoundPool(  303): setVolume 0x6780c0
+D/AudioTrack(  303): start 0x6780c0
+D/AudioFlinger(  178): start(4101), calling thread 303 session 239
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::startOutput(android::audio_io_handle_t, android::AudioSystem::stream_type, int) start 230
+V/AudioPolicyManager(  178): startOutput() output 1, stream 1
+V/AudioPolicyManagerBase(  178): changeRefCount() stream 1, count 1
+E/AudioPolicyManager(  178): [EW0804]virtual uint32_t android::AudioPolicyManager::getDeviceForStrategy(android::AudioPolicyManagerBase::routing_strategy, bool) start 236
+V/AudioPolicyManager(  178): getDeviceForStrategy() from cache strategy 0, device 2
+E/AudioPolicyManager(  178): [EW0804]virtual uint32_t android::AudioPolicyManager::getDeviceForStrategy(android::AudioPolicyManagerBase::routing_strategy, bool) end 236
+V/AudioPolicyManagerBase(  178): getNewDevice() selected device 2
+E/AudioPolicyManager(  178): [EW0804]void android::AudioPolicyManager::setOutputDevice(android::audio_io_handle_t, uint32_t, bool, int) start 460
+V/AudioPolicyManager(  178): setOutputDevice() output 1 device 2 delayMs 0
+E/AudioPolicyManager(  178): EASTAR 0 prevDevice =0x2 device = 0x2 force = 0
+E/AudioPolicyManager(  178): [EW0804]void android::AudioPolicyManager::setOutputDevice(android::audio_io_handle_t, uint32_t, bool, int) end 460
+V/AudioPolicyManager(  178): setOutputDevice() setting same device 2 or null device for output 1
+V/AudioPolicyManager(  178): startOutput()...stream 1 , mStreams[stream].mIndexCur = 7, output 1
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::checkAndSetVolume(int, int, android::audio_io_handle_t, uint32_t, int, bool) start 249
+E/AudioPolicyManager(  178): [LGE]AudioPolicyManager::checkAndSetVolume : stream =1 index = 7
+V/AudioPolicyManagerBase(  178): [LGE : device 2 Stream 1, VolIndex = 7 volmin =0 volmax =7
+V/AudioPolicyManagerBase(  178): [LGE : volInt = 100 , Volume = 1.000000 Strategy = 0
+V/AudioPolicyManagerBase(  178): [LGE : device 2 Stream 1
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::checkAndSetVolume(int, int, android::audio_io_handle_t, uint32_t, int, bool) end 249
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::startOutput(android::audio_io_handle_t, android::AudioSystem::stream_type, int) end 230
+V/SoundPool(  303): delete oldTrack 0x3edab8
+D/AudioTrack(  303): stop 0x3edab8
+V/AudioPolicyManagerBase(  178): releaseOutput() 1
+D/AudioFlinger(  178): remove track (4099) and delete from mixer
+W/InputManagerService(  303): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@40889e38
+I/ActivityManager(  303): Process com.crazyj36.apiplaygroundsdk9 (pid 11572) has died.
+V/SoundPool(  303): process 0x3506dc channel 229 EVENT_UNDERRUN
+V/SoundPool(  303): awake
+V/SoundPool(  303): Getting channel from stop list
+V/SoundPool(  303): stop
+D/AudioTrack(  303): stop 0x6780c0
+D/AudioFlinger(  178): stop(4101), calling thread 303
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::stopOutput(android::audio_io_handle_t, android::AudioSystem::stream_type, int) start 230
+V/AudioPolicyManager(  178): stopOutput() output 1, stream 1
+V/AudioPolicyManagerBase(  178): changeRefCount() stream 1, count 0
+V/AudioPolicyManagerBase(  178): getNewDevice() selected device 0
+E/AudioPolicyManager(  178): [EW0804]void android::AudioPolicyManager::setOutputDevice(android::audio_io_handle_t, uint32_t, bool, int) start 461
+V/AudioPolicyManager(  178): setOutputDevice() output 1 device 0 delayMs 0
+E/AudioPolicyManager(  178): EASTAR 0 prevDevice =0x2 device = 0x0 force = 0
+E/AudioPolicyManager(  178): [EW0804]void android::AudioPolicyManager::setOutputDevice(android::audio_io_handle_t, uint32_t, bool, int) end 461
+V/AudioPolicyManager(  178): setOutputDevice() setting same device 0 or null device for output 1
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::stopOutput(android::audio_io_handle_t, android::AudioSystem::stream_type, int) end 230
+V/SoundPool(  303): done_l(229)
+V/SoundPool(  303): move to front

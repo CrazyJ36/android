@@ -6,11 +6,14 @@ import android.app.Dialog;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.os.Bundle;
+import android.os.Build;
 import android.os.Vibrator;
 import android.os.VibrationEffect;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.view.MotionEvent;
+import android.view.DragEvent;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.content.pm.PackageManager;
@@ -24,6 +27,7 @@ import android.widget.ArrayAdapter;
 import java.util.Date;
 import java.util.Locale;
 
+import java.lang.NoSuchMethodError;
 import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -36,6 +40,9 @@ import java.io.File;
 
 public class MainActivity extends Activity {
 
+    private String filesTest = "";
+    private String storage = Environment.getExternalStorageDirectory().toString() + "/test";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,29 +52,16 @@ public class MainActivity extends Activity {
         if ((android.os.Build.VERSION.SDK_INT > 22) && (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
             requestPermissions(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
         }
+
         // get files
-        String filesTest = "";
-        String storage = Environment.getExternalStorageDirectory().toString() + "/test";
-	    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-	        filesTest = "Your files from " + storage + " are in a list below";
-	        File dir = new File(storage); // check to make sure is folder not file, app will crash
-	        File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
-	        if (dir.exists()) {
-	            if (fileList.length == 0) {
-	                filesTest = ("No files in " + storage + ".");
-	            }
-	            String[] names = new String[fileList.length];
-	            for (int i = 0; i < fileList.length; i++) {
-	                names[i] = fileList[i].getName();
-	            }
-	            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
-	            ListView listView = findViewById(R.id.docList);
-	            listView.setAdapter(adapter);
-	        } else {
-	            filesTest = ("No " + storage + " directory.");
-	        }
+        if (Build.VERSION.SDK_INT < 23) {
+            filesTask();
         } else {
-            filesTest = "Grant storage permission, then restart app.";
+	        if (Build.VERSION.SDK_INT >= 23 && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+		        filesTask();
+	        } else {
+	            filesTest = "Grant storage permission, then restart app.";
+	        }
         }
 
         // Name of app-wide log tag
@@ -76,17 +70,22 @@ public class MainActivity extends Activity {
         // Vibrate on Successfull start
         String vibrateTest = null;
         Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        VibrationEffect vibEffect = VibrationEffect.createOneShot(200, 50);
         try {
-            if ( !(vib.hasAmplitudeControl()) ) {
-            vibrateTest = "Device has no amplitude control, can't change strength.";
-            }
-            if (vib != null && vib.hasVibrator() && android.os.Build.VERSION.SDK_INT >= 26) {
-                //vib.vibrate(500);  // .vibrate(long) is deprecated
-                vib.vibrate(vibEffect); // amplitude is int 1-255 or VibrationEffect.DEFAULT_AMPLITUDE
+			if (Build.VERSION.SDK_INT <= 11 && vib !=null) {
+				vib.vibrate(200);
+                vibrateTest = "vibrate for 200ms, have not checked for vibrator";
+            } else if (vib != null && vib.hasVibrator() && android.os.Build.VERSION.SDK_INT >= 26) {
+ 		        vib.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
+				vibrateTest = "vibrated for 200ms at default amplitude using class VibrationEffect.";
+            } else if (vib !=null && vib.hasVibrator() && Build.VERSION.SDK_INT >= 26 && vib.hasAmplitudeControl()) {
+				vib.vibrate(VibrationEffect.createOneShot(200, 40));
+                vibrateTest = "vibrated for 40ms at 40 amplitude";
             } else if (vib != null && vib.hasVibrator() && android.os.Build.VERSION.SDK_INT < 26) {
                 vib.vibrate(200);
-            }
+				vibrateTest = "vibrated for 200ms at normal amplitude using class Vibrator.";
+            } else {
+				vibrateTest = "either no vibrator class a in framework, no vibrator, or sdk is older than oreo";
+			}
         } catch (NullPointerException nullPointerException) {
                 vibrateTest = "Vibrate error: " + nullPointerException.getLocalizedMessage();
         }
@@ -231,6 +230,40 @@ public class MainActivity extends Activity {
 
     public String packageNameOfString() {
         return String.class.getCanonicalName();
+    }
+
+    public void filesTask() {
+        filesTest = "Your files from " + storage + " are in a list below";
+        File dir = new File(storage); // check to make sure test is folder, not file, app will crash
+        File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
+        if (dir.exists()) {
+            if (fileList.length == 0) {
+                filesTest = ("No files in " + storage + ".");
+            }
+            String[] names = new String[fileList.length];
+            for (int i = 0; i < fileList.length; i++) {
+                names[i] = fileList[i].getName();
+            }
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
+            ListView listView = findViewById(R.id.docList);
+        /*  listView.setOnTouchListener(new View.OnTouchListener() {
+				@Override
+				public boolean onTouch(View thisListView, MotionEvent event) {
+					thisListView.getParent().requestDisallowInterceptTouchEvent(true); // thisListView is A easy to read representation of the parent view listView, instead of basic View 'v'
+					return false;
+				}
+            });*/
+            listView.setOnDragListener(new View.OnDragListener() {
+                @Override
+				public boolean onDrag(View v, DragEvent dragEvent) {
+                    v.getParent().requestDisallowInterceptTouchEvent(true);
+                    return false;
+               }
+            });
+            listView.setAdapter(adapter);
+        } else {
+            filesTest = ("No " + storage + " directory.");
+        }
     }
 
 }
