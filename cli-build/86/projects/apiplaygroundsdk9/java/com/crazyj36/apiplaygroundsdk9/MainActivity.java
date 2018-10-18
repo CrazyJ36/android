@@ -36,7 +36,6 @@ public class MainActivity extends Activity {
 
     // Strings for methods outside of onCreate()
     String filesTest = "";
-    String openFileTest = "";
     String logChannel = "APIPLAYGROUNDLOG";
 
     @Override
@@ -188,7 +187,6 @@ public class MainActivity extends Activity {
                 "String is from package: " + packageNameOfString(),
                 vibrateTest,
                 filesTest,
-                openFileTest,
         };
         results[0] = String.valueOf(results.length);
         int z = 0;
@@ -246,8 +244,6 @@ public class MainActivity extends Activity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
 				public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-                    Toast.makeText(MainActivity.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
-					openFileTest = String.valueOf(position);
 					if (position > 0) {
 						int filePosition = position - 1;
 						Uri uri = null;
@@ -257,7 +253,10 @@ public class MainActivity extends Activity {
 				            viewFile.setDataAndType(uri, "text/plain");
 		                    viewFile.setAction(Intent.ACTION_VIEW);
 						    startActivity(viewFile);
-						}
+					    } else {
+							// For higher api levels
+							Toast.makeText(MainActivity.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
+                        }
 					}
                 }
             });
