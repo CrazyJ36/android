@@ -2,8 +2,14 @@ package com.crazyj36.apiplayground;
 /* Ideas
    1 function that starts a dialog or toast.
    print all buttons/functions results in that
+
+   for notifications try increase counter on every click,
+   then add another notification with new notifiation id
  */
+
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +18,7 @@ import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.support.design.widget.BottomSheetDialog;
@@ -20,7 +27,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.app.AppCompatActivity;
@@ -36,15 +42,19 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
+
 import java.lang.String;
 import java.util.Objects;
 import java.util.Random;
+
 import static android.view.Gravity.END;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Variables
@@ -201,7 +211,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-
         //Switch
         final Switch switch1 = findViewById(R.id.switch1);
         switch1.setChecked(false);
@@ -213,15 +222,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (switch1.isChecked()) {
                     switch1.setText(R.string.switchOnTxt);
                     chkSwitchStr[0] = "ON";
-
                 } else if (!switch1.isChecked()) {
                     switch1.setText(R.string.switchOffTxt);
                     chkSwitchStr[0] = "OFF";
-
                 }
             }
         });
-
         // Check Switch Button
         findViewById(R.id.chkSwitchBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -229,19 +235,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(MainActivity.this, chkSwitchStr[0], Toast.LENGTH_SHORT).show();
             }
         });
-
         // Notification
+        final NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        if (Build.VERSION.SDK_INT >= 26) {
+            NotificationChannel notificationChannel = new NotificationChannel("APIPLAYGROUND_NOTIFICATION_CHANNEL", "API Playground Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+            assert notificationManager != null;
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
         findViewById(R.id.notifyBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NotificationCompat.Builder notifyBuild = new NotificationCompat.Builder(MainActivity.this, "1");
-                notifyBuild.setSmallIcon(R.drawable.notify);
-                notifyBuild.setContentTitle("My Notification");
-                notifyBuild.setContentText("This is Content Text of Notification");
-                notifyBuild.setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
-                notificationManager.notify(1, notifyBuild.build());
-
+                if (notificationManager != null) {
+                    NotificationCompat.Builder notifyBuild = new NotificationCompat.Builder(MainActivity.this, "APIPLAYGROUND_NOTIFICATION_CHANNEL");
+                    notifyBuild.setSmallIcon(R.drawable.notify);
+                    notifyBuild.setContentTitle("My Notification");
+                    notifyBuild.setContentText("API Playground Notification");
+                    notificationManager.notify(2, notifyBuild.build()); // id is random. only used here
+                }
             }
         });
         // Random Button
@@ -269,7 +279,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         // Fab Button
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -284,7 +293,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             }
         });
-
         // Bottom Sheet Button
         findViewById(R.id.bottomSheetBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -294,7 +302,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 bottomSheetDialog.show();
             }
         });
-
         // Vibrate Btn
         findViewById(R.id.vibBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -305,13 +312,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } catch (NullPointerException nullPointerException) {
                         Toast.makeText(MainActivity.this, "Null Pointer Exception Raised", Toast.LENGTH_SHORT).show();
                     }
-                }
-                else {
+                } else {
                     Toast.makeText(MainActivity.this, "No Vibrator Hardware in Device", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
         // Battery Check
         findViewById(R.id.batBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -336,10 +341,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 batDialog.show();
             }
         });
-
-        // Grid Buttons
-        // Methods are outside of onCreate()
-        // Implemented from MainActivity
+        // Grid Buttons Methods are outside of onCreate() Implemented finding buttons MainActivity
         Button grid1 = findViewById(R.id.grid1);
         grid1.setOnClickListener(this);
         Button grid2 = findViewById(R.id.grid2);
@@ -348,7 +350,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         grid3.setOnClickListener(this);
         Button grid4 = findViewById(R.id.grid4);
         grid4.setOnClickListener(this);
-
     }
 
     public void gridTstMsg(String num) {
@@ -372,7 +373,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 gridTstMsg("4");
                 break;
         }
-
     }
 
     // Catch When the Activity is destroyed in case this shouldn't happen
@@ -388,6 +388,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onConfigurationChanged(newConfig);
         Toast.makeText(this, "Activity 1 Config Changed", Toast.LENGTH_SHORT).show();
     }
+
     // Dev info Dialog
     public void aboutAppDialog() {
         final AlertDialog aboutDialog = new Builder(MainActivity.this).create();
@@ -396,9 +397,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         aboutDialog.setMessage("CrazyJ36\n2018");
         aboutDialog.show();
     }
+
     // A re-usable array
     public final String[] myWords() {
-        return new String[]{"one", "two", "three", "four", "five", "six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen"};
+        return new String[]{"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen"};
     }
 
 }
