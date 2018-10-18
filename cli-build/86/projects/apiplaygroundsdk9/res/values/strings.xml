@@ -32,4 +32,5 @@ of computer architecture and programming as a whole).</string>
     <string name="dialogBtn1Txt">Toast</string>
     <string name="dialogBtn2Txt">Close</string>
     <string name="dialogTitle">Info Dialog</string>
+    <string name="listHeaderTxt">Notes</string>
 </resources>

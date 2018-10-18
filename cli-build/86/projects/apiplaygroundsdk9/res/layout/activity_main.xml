@@ -106,7 +106,9 @@
         android:id="@+id/fileList"
         android:layout_width="match_parent"
         android:layout_height="168dp"
-        android:nestedScrollingEnabled="true" />
+        android:nestedScrollingEnabled="true"
+        android:scrollingCache="true"
+        android:fastScrollEnabled="true" />
 
   </LinearLayout>
 

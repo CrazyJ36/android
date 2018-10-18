@@ -13,32 +13,31 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.MotionEvent;
-import android.view.DragEvent;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.content.pm.PackageManager;
-import android.content.Context;
+import android.content.Intent;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
-
+import android.widget.AdapterView;
+import android.net.Uri;
 import java.util.Date;
 import java.util.Locale;
-
 import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
+import java.lang.ArrayIndexOutOfBoundsException;
 import java.io.IOException;
 import java.io.File;
 
-/* Ideas:
-   Flashing Text
-   Text Manipulation
-*/
-
 public class MainActivity extends Activity {
+
+    // Strings for methods outside of onCreate()
     String filesTest = "";
+    String openFileTest = "";
+    String logChannel = "APIPLAYGROUNDLOG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,25 +58,22 @@ public class MainActivity extends Activity {
 	        }
         }
 
-        // Name of app-wide log tag
-        final String logChannel = "APIPLAYGROUNDLOG";
-
         // Vibrate on Successfull start
         String vibrateTest = "";
         Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         try {
             if (Build.VERSION.SDK_INT < 11 && vib != null) {
-				vib.vibrate(400);
-                vibrateTest = "Vibrated for 400ms. Can't check for vibrate hardware. Though this is not null.";
+				vib.vibrate(100);
+                vibrateTest = "Vibrated for 100ms. Can't check for vibrate hardware. Success (Not null).";
             } else if (Build.VERSION.SDK_INT >= 26 && vib != null && vib.hasVibrator()) {
- 		        vib.vibrate(VibrationEffect.createOneShot(400, VibrationEffect.DEFAULT_AMPLITUDE));
-				vibrateTest = "Hasvibrator. Vibrated for 400ms, at default amplitude using class VibrationEffect.";
+ 		        vib.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
+				vibrateTest = "Hasvibrator. Vibrated for 200ms, at default amplitude using class VibrationEffect.";
             } else if (Build.VERSION.SDK_INT >= 26 && vib != null && vib.hasVibrator() && vib.hasAmplitudeControl()) {
-				vib.vibrate(VibrationEffect.createOneShot(400, 10));
-                vibrateTest = "Has vibrator. Vibrated for 400ms at %15 available amplitude using class Vibrator.";
+				vib.vibrate(VibrationEffect.createOneShot(1000, 10));
+                vibrateTest = "Has vibrator. Vibrated for 1000ms at %15 available amplitude using class Vibrator.";
             } else if (Build.VERSION.SDK_INT < 26 && Build.VERSION.SDK_INT >= 11 && vib != null && vib.hasVibrator()) {
-                vib.vibrate(400);
-				vibrateTest = "Has vibrator. Vibrated for 400ms at default amplitude using class Vibrator.";
+                vib.vibrate(300);
+				vibrateTest = "Has vibrator. Vibrated for 300ms at default amplitude using class Vibrator.";
             } else if (Build.VERSION.SDK_INT >= 11 && !(vib.hasVibrator())) { // Checks NullPointerException next in catch.
 				vibrateTest = "Vibrate: Hardware has no motor.";
             }
@@ -151,7 +147,7 @@ public class MainActivity extends Activity {
         String txt2 = "Two";
         tvSet.setText(String.format(Locale.US, "%s %s printed!", txt1, txt2));
 
-        // Logs
+        // Log button click
         String startMsg = "App Started";
         Log.i(logChannel, startMsg);
         Button btnLog = findViewById(R.id.btnLog);
@@ -173,7 +169,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        // set textview to what was entered in editText
+        // Set textview to what was entered in EditText
         final EditText etPrint = findViewById(R.id.etPrint);
         final TextView tvPrint = findViewById(R.id.tvPrint);
         Button btnPrint = findViewById(R.id.btnPrint);
@@ -186,13 +182,13 @@ public class MainActivity extends Activity {
 
         // From Here some function results will be put into a custom listview
         // Put results here from return value
-
         final String[] results = {
                 "",
                 "1 + 2 = " + intCast(),
                 "String is from package: " + packageNameOfString(),
                 vibrateTest,
                 filesTest,
+                openFileTest,
         };
         results[0] = String.valueOf(results.length);
         int z = 0;
@@ -217,36 +213,58 @@ public class MainActivity extends Activity {
         }
         resultsTextView.setText(buffOut);
     }
-
+    // Int tests.
     public String intCast() {
         int mint = 1 + 2;
         return String.valueOf(mint);
     }
-
+    // String tests.
     public String packageNameOfString() {
         return String.class.getCanonicalName();
     }
 
+    // Get files from sdcard, show names in listview
     public void filesTask() {
 		ListView listView = findViewById(R.id.fileList);
 	    String storage = Environment.getExternalStorageDirectory().toString() + "/test";
         filesTest = "Files from: " + storage + " are below.";
-        File dir = new File(storage); // check to make sure test is folder, not file, app will crash
-        File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
-        if (dir.exists()) {
+        File dir = new File(storage);
+        final File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
+        if (dir.exists() && dir.isDirectory()) {
             if (fileList.length == 0) {
-                filesTest = ("No files in " + storage + ".");
+                filesTest = ("No files created in " + storage + ".");
             }
             String[] names = new String[fileList.length];
             for (int i = 0; i < fileList.length; i++) {
                 names[i] = fileList[i].getName();
             }
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, names);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, R.layout.list_item, names);
+            View headerView = View.inflate(MainActivity.this, R.layout.list_header_view, null); // Get xml layout, make it inflatable here. null parent view.
+            listView.addHeaderView(headerView);
             listView.setAdapter(adapter);
-        } else {
-            filesTest = ("No " + storage + " directory.");
-        }
 
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+				public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+                    Toast.makeText(MainActivity.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
+					openFileTest = String.valueOf(position);
+					if (position > 0) {
+						int filePosition = position - 1;
+						Uri uri = null;
+						if (Build.VERSION.SDK_INT < 25) {
+							uri = Uri.fromFile(fileList[filePosition]);
+				            Intent viewFile = new Intent();
+				            viewFile.setDataAndType(uri, "text/plain");
+		                    viewFile.setAction(Intent.ACTION_VIEW);
+						    startActivity(viewFile);
+						}
+					}
+                }
+            });
+
+        } else {
+            filesTest = ("No " + storage + " directory. Create it to see corresponding files.");
+        }
         // Disable TouchEvent on ScrollView(which is current parent view) on ACTION_DOWN (tap down).
         if (Build.VERSION.SDK_INT < 21) {
 	        listView.setOnTouchListener(new View.OnTouchListener() {

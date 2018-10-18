@@ -36,6 +36,8 @@ public final class R {
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int dialog_layout=0x7f030001;
+        public static final int list_header_view=0x7f030002;
+        public static final int list_item=0x7f030003;
     }
     public static final class raw {
         public static final int file=0x7f040000;
@@ -53,6 +55,7 @@ public final class R {
         public static final int dialogTv1Txt=0x7f05000b;
         public static final int dialogTv2Txt=0x7f05000c;
         public static final int etPrintHint=0x7f050009;
+        public static final int listHeaderTxt=0x7f050010;
         public static final int normalDialogTxt=0x7f050004;
         public static final int tvDateTxt=0x7f050005;
         public static final int tvPrintTxt=0x7f050008;

@@ -1,0 +1,104 @@
+--------- beginning of main
+10-18 01:31:19.608  2292 27417 E NetworkScheduler: Invalid component specified.
+10-18 01:31:21.005   852 19873 D APM_AudioPolicyManager: startOutput() output 13, stream 1, session 1369
+10-18 01:31:21.006   523  1408 V msm8974_platform: platform_get_output_snd_device: enter: output devices(0x2)
+10-18 01:31:21.006   523  1408 V msm8974_platform: platform_get_output_snd_device: exit: snd_device(speaker)
+10-18 01:31:21.006   523  1408 V msm8974_platform: platform_get_backend_index:napb: backend port - 0 device - 2 
+10-18 01:31:21.006   523  1408 V msm8974_platform: platform_check_and_set_playback_backend_cfg: usecase->stream.out->config.format (0)
+10-18 01:31:21.006   523  1408 V msm8974_platform: platform_check_and_set_playback_backend_cfg:becf: afe: bitwidth 16, samplerate 48000 channels 2, backend_idx 0 usecase = 1 device (speaker)
+10-18 01:31:21.006   523  1408 V msm8974_platform: platform_check_and_set_playback_backend_cfg: new_snd_devices[0] is 2
+10-18 01:31:21.006   523  1408 V msm8974_platform: platform_get_backend_index:napb: backend port - 0 device - 2 
+10-18 01:31:21.006   523  1408 V msm8974_platform: platform_check_playback_backend_cfg:becf: afe: bitwidth 16, samplerate 48000 channels 2, backend_idx 0 usecase = 1 device (speaker)
+10-18 01:31:21.006   523  1408 V msm8974_platform: platform_check_playback_backend_cfg:becf: afe: Codec selected backend: 0 updated bit width: 16 andsample rate: 48000
+10-18 01:31:21.006   523  1408 V msm8974_platform: platform_send_audio_calibration: sending audio calibration for snd_device(2) acdb_id(14)
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> send_audio_cal, acdb_id = 14, path = 0, app id = 0x11130, sample rate = 48000
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> send_asm_topology
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_STREAM_TOPOLOGY_ID
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> send_adm_topology
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_COMMON_TOPOLOGY_ID
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> send_audtable
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_COMMON_TABLE_SIZE
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_COMMON_TABLE
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> AUDIO_SET_AUDPROC_CAL
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> send_audvoltable
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_VOL_STEP_TABLE_SIZE
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_GAIN_DEP_STEP_TABLE, vol index 0
+10-18 01:31:21.007   523  1408 D         : Failed to fetch the lookup information of the device 0000000E 
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> AUDIO_SET_VOL_CAL cal type = 12
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_STREAM_TABLE_SIZE
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> send_audstrmtable
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_STREAM_TABLE_V2
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> audstrm_cal->cal_type.cal_data.cal_size = 456
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> send_afe_topology
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AFE_TOPOLOGY_ID
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> GET_AFE_TOPOLOGY_ID for adcd_id 14, Topology Id 112fc
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> send_afe_cal
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AFE_COMMON_TABLE_SIZE
+10-18 01:31:21.007   523  1408 D         : Failed to fetch the lookup information of the device 0000000E 
+10-18 01:31:21.007   523  1408 E ACDB-LOADER: Error: ACDB_CMD_GET_AFE_COMMON_TABLE_SIZE Returned = -19
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AFE_COMMON_TABLE
+10-18 01:31:21.007   523  1408 D         : Failed to fetch the lookup information of the device 0000000E 
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> AUDIO_SET_AFE_CAL
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> send_hw_delay : acdb_id = 14 path = 0
+10-18 01:31:21.007   523  1408 D ACDB-LOADER: ACDB -> ACDB_AVSYNC_INFO: ACDB_CMD_GET_DEVICE_PROPERTY
+10-18 01:31:21.009   843   896 V /system/vendor/bin/adsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:194: fopen success: /system/vendor/lib/rfsa/adsp/tas2560_TI.bin
+10-18 01:31:21.011 27814 27814 D AndroidRuntime: Shutting down VM
+--------- beginning of crash
+10-18 01:31:21.012 27814 27814 E AndroidRuntime: FATAL EXCEPTION: main
+10-18 01:31:21.012 27814 27814 E AndroidRuntime: Process: com.crazyj36.apiplaygroundsdk9, PID: 27814
+10-18 01:31:21.012 27814 27814 E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke a virtual method on a null object reference
+10-18 01:31:21.012 27814 27814 E AndroidRuntime: 	at com.crazyj36.apiplaygroundsdk9.MainActivity$6.onItemClick(MainActivity.java:257)
+10-18 01:31:21.012 27814 27814 E AndroidRuntime: 	at android.widget.AdapterView.performItemClick(AdapterView.java:318)
+10-18 01:31:21.012 27814 27814 E AndroidRuntime: 	at android.widget.AbsListView.performItemClick(AbsListView.java:1165)
+10-18 01:31:21.012 27814 27814 E AndroidRuntime: 	at android.widget.AbsListView$PerformClick.run(AbsListView.java:3160)
+10-18 01:31:21.012 27814 27814 E AndroidRuntime: 	at android.widget.AbsListView$3.run(AbsListView.java:4075)
+10-18 01:31:21.012 27814 27814 E AndroidRuntime: 	at android.os.Handler.handleCallback(Handler.java:789)
+10-18 01:31:21.012 27814 27814 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:98)
+10-18 01:31:21.012 27814 27814 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:164)
+10-18 01:31:21.012 27814 27814 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6695)
+10-18 01:31:21.012 27814 27814 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+10-18 01:31:21.012 27814 27814 E AndroidRuntime: 	at com.android.internal.os.Zygote$MethodAndArgsCaller.run(Zygote.java:240)
+10-18 01:31:21.012 27814 27814 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:772)
+10-18 01:31:21.014   523  1408 D audio_mot_sp: TAS2560_ALGO:audio_extn_mot_spkr_send_cal send Rdc,5.621958
+--------- beginning of system
+10-18 01:31:21.016  1419  2926 W ActivityManager:   Force finishing activity com.crazyj36.apiplaygroundsdk9/.MainActivity
+10-18 01:31:21.022  1419  1515 I ActivityManager: Showing crash dialog for package com.crazyj36.apiplaygroundsdk9 u0
+10-18 01:31:21.039   523  1408 D audio_hw_primary: enable_snd_device: snd_device(2: speaker)
+10-18 01:31:21.040   523  1408 D audio_hw_primary: enable_audio_route: usecase(1) apply and update mixer path: low-latency-playback speaker
+10-18 01:31:21.042   523  1408 V msm8974_platform: platform_get_backend_index:napb: backend port - 0 device - 2 
+10-18 01:31:21.042   523  1408 I audio_hw_utils: Set Audio Stream 12 App Type Cfg: app_type 69936 (DEFAULT), acdb_dev_id 14, sample_rate 48000
+10-18 01:31:21.082  1419 11058 I OpenGLRenderer: Initialized EGL, version 1.4
+10-18 01:31:21.083  1419 11058 D OpenGLRenderer: Swap behavior 2
+10-18 01:31:21.092  1419 11058 W Adreno-EGL: <qeglDrvAPI_eglGetConfigAttrib:612>: EGL_BAD_ATTRIBUTE
+10-18 01:31:21.094  1419  1419 W RenderThread: type=1400 audit(0.0:3257): avc: denied { dac_read_search } for uid=1000 capability=2 scontext=u:r:system_server:s0 tcontext=u:r:system_server:s0 tclass=capability permissive=0
+10-18 01:31:21.190   852  1183 D APM_AudioPolicyManager: stopOutput() output 13, stream 1, session 1369
+10-18 01:31:21.248  5884  5910 D ConnectivityManager: getMobileDataEnabled()+ subId=1
+10-18 01:31:21.249  5884  5910 D ConnectivityManager: getMobileDataEnabled()- subId=1 retVal=true
+10-18 01:31:21.251  5884  5910 D ConnectivityManager: getMobileDataEnabled()+ subId=1
+10-18 01:31:21.252  5884  5910 D ConnectivityManager: getMobileDataEnabled()- subId=1 retVal=true
+10-18 01:31:21.518  1419  1514 W ActivityManager: Activity pause timeout for ActivityRecord{f8e88fe u0 com.crazyj36.apiplaygroundsdk9/.MainActivity t280 f}
+10-18 01:31:21.609 24498 24540 W Adreno-EGL: <qeglDrvAPI_eglGetConfigAttrib:612>: EGL_BAD_ATTRIBUTE
+10-18 01:31:21.619 24577 24593 W Adreno-EGL: <qeglDrvAPI_eglGetConfigAttrib:612>: EGL_BAD_ATTRIBUTE
+10-18 01:31:21.648  1419  1512 W MayaPerformanceService: resetBlockRules no packageName,ui:99212
+10-18 01:31:21.680   571  1409 E SurfaceFlinger: Permission Denial: can't openGlobalTransaction pid=24498, uid<=10103
+10-18 01:31:21.681 24498 24498 E BpSurfaceComposerClient: Failed to transact (-1)
+10-18 01:31:21.681   571   693 E SurfaceFlinger: Permission Denial: can't openGlobalTransaction pid=24498, uid<=10103
+10-18 01:31:21.681 24498 24498 E BpSurfaceComposerClient: Failed to transact (-1)
+10-18 01:31:21.689   571   728 I SFPerfTracer:      triggers: (rate: 0:41) (34962 sw vsyncs) (0 skipped) (0:579562 vsyncs) (1:839989)
+10-18 01:31:21.994  1419  2999 V LocSvc_HIDL_OsNpGlue_jni: [onJavaLocationChanged][159] [HC] =>> [HS]
+10-18 01:31:21.994   877   877 V LocSvc_HIDL_IzatOsNpGlue: [locationChanged][33] [HS] <<<<= [HC]
+10-18 01:31:21.995   877  2286 E IzatSvc_ComboNetworkProvider: Exiting with error proc line 208 "1"
+10-18 01:31:22.063   852 19873 D APM_AudioPolicyManager: startOutput() output 13, stream 1, session 1369
+10-18 01:31:22.064  1419  2926 W ActivityManager:   Force finishing activity com.crazyj36.apiplaygroundsdk9/.MainActivity
+10-18 01:31:22.065  1419  2926 I ActivityManager: Killing 27814:com.crazyj36.apiplaygroundsdk9/u0a255 (adj 199): crash
+10-18 01:31:22.095  1419  1889 W InputDispatcher: channel 'e7835b com.crazyj36.apiplaygroundsdk9/com.crazyj36.apiplaygroundsdk9.MainActivity (server)' ~ Consumer closed input channel or an error occurred.  events=0x9
+10-18 01:31:22.095  1419  1889 E InputDispatcher: channel 'e7835b com.crazyj36.apiplaygroundsdk9/com.crazyj36.apiplaygroundsdk9.MainActivity (server)' ~ Channel is unrecoverably broken and will be disposed!
+10-18 01:31:22.096  1419  2925 I WindowManager: WIN DEATH: Window{e7835b u0 com.crazyj36.apiplaygroundsdk9/com.crazyj36.apiplaygroundsdk9.MainActivity}
+10-18 01:31:22.096  1419  2925 W InputDispatcher: Attempted to unregister already unregistered input channel 'e7835b com.crazyj36.apiplaygroundsdk9/com.crazyj36.apiplaygroundsdk9.MainActivity (server)'
+10-18 01:31:22.097  1419  1604 W ActivityManager: setHasOverlayUi called on unknown pid: 27814
+10-18 01:31:22.192   852  1183 D APM_AudioPolicyManager: stopOutput() output 13, stream 1, session 1369
+10-18 01:31:22.213  1419  1846 W AppOps  : Finishing op nesting under-run: uid 1000 pkg android code 24 time=0 duration=0 nesting=0
+10-18 01:31:22.269  5884  5910 V CSEvent : CSEvent::SetError[0]
+10-18 01:31:22.347  1419  1602 W RemoteFillService: Not handling { when=-3ms what=3 target=com.android.internal.os.HandlerCaller$MyHandler hashCode=c2db6aa } as service for ComponentInfo{com.google.android.gms/com.google.android.gms.autofill.service.AutofillService} is already destroyed
+10-18 01:31:22.349  1419 11058 I OpenGLRenderer: Initialized EGL, version 1.4
+10-18 01:31:22.349  1419 11058 D OpenGLRenderer: Swap behavior 2
