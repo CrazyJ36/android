@@ -45,7 +45,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Variables
+        /*
         final FloatingActionButton fab = findViewById(R.id.fab);
+        */
         // Phone permission
         Activity.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 1);
         // Toolbar
