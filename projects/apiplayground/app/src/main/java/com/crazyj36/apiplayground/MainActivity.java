@@ -232,7 +232,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         // Notification
         final NotificationManager notificationManager = getSystemService(NotificationManager.class);
-
         if (Build.VERSION.SDK_INT >= 26) {
             NotificationChannel notificationChannel = new NotificationChannel("APIPLAYGROUND_NOTIFICATION_CHANNEL", "Notify Button", NotificationManager.IMPORTANCE_DEFAULT);
             if ( notificationManager != null) {
