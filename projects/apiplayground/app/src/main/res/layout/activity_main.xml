@@ -97,7 +97,9 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/numFldHint"
-                    android:inputType="phone" />
+                    android:inputType="phone"
+                    android:importantForAutofill="auto"
+                    android:autofillHints="My Phone Number"/>
 
                 <Button
                     android:id="@+id/urlButton"

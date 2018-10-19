@@ -47,14 +47,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Random;
 
-import static android.view.Gravity.END;
-
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Variables
@@ -67,8 +62,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final ImageButton toolbarMenu = findViewById(R.id.toolbarMenu);
         toolbarMenu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                final PopupMenu menu = new PopupMenu(MainActivity.this, toolbarMenu, END);
+            public void onClick(View v) {
+                final PopupMenu menu = new PopupMenu(MainActivity.this, toolbarMenu, android.view.Gravity.END);
                 menu.getMenuInflater().inflate(R.menu.options_activity1, menu.getMenu());
                 if (fab.isShown()) {
                     menu.getMenu().findItem(R.id.showFab).setEnabled(false);
@@ -237,10 +232,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         // Notification
         final NotificationManager notificationManager = getSystemService(NotificationManager.class);
+
         if (Build.VERSION.SDK_INT >= 26) {
-            NotificationChannel notificationChannel = new NotificationChannel("APIPLAYGROUND_NOTIFICATION_CHANNEL", "API Playground Notifications", NotificationManager.IMPORTANCE_DEFAULT);
-            assert notificationManager != null;
-            notificationManager.createNotificationChannel(notificationChannel);
+            NotificationChannel notificationChannel = new NotificationChannel("APIPLAYGROUND_NOTIFICATION_CHANNEL", "Notify Button", NotificationManager.IMPORTANCE_DEFAULT);
+            if ( notificationManager != null) {
+                notificationManager.createNotificationChannel(notificationChannel);
+            } else {
+                Toast.makeText(this, "Notification Manager Service returned null", Toast.LENGTH_SHORT).show();
+            }
         }
         findViewById(R.id.notifyBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -248,9 +247,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (notificationManager != null) {
                     NotificationCompat.Builder notifyBuild = new NotificationCompat.Builder(MainActivity.this, "APIPLAYGROUND_NOTIFICATION_CHANNEL");
                     notifyBuild.setSmallIcon(R.drawable.notify);
-                    notifyBuild.setContentTitle("My Notification");
-                    notifyBuild.setContentText("API Playground Notification");
-                    notificationManager.notify(2, notifyBuild.build()); // id is random. only used here
+                    notifyBuild.setContentTitle("API Playground Notification");
+                    notifyBuild.setContentText("This is the content of notification");
+                    notificationManager.notify(0, notifyBuild.build()); /* Id here is random. Stands for the individual id
+                    of this notification. If I click notifyBtn A second time, A new notification would not be created,
+                    as this notification id is already used in notifications .Only used here.
+                    If I want to start another notification, or repeat this one, A new NotificationCompat.Builder must be instantiated with A
+                    new notification id must be used. */
                 }
             }
         });
