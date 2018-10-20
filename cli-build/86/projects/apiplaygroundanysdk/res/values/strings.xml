@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">API Playground Any SDK </string>
     <string name="tvConcatTxt">This TextView uses custom string concatenation at the start of text. Can also be used for other Java String Tests</string>
-    <string name="btnCustomTxt">Button</string>
+    <string name="act2BtnTxt">Next</string>
+    <string name="btnCustomTxt">Custom</string>
     <string name="btnDialogCIdeasTxt">Dialog</string>
     <string name="tvSdkTxt">SDK Version: </string>
     <string name="dialogCIdeasTxt">Programs: Find size of int, float, double and char. Demonstrate the working of keyword long. Swap two numbers. 
@@ -34,4 +35,6 @@ of computer architecture and programming as a whole).</string>
     <string name="dialogBtn2Txt">Close</string>
     <string name="dialogTitle">Info Dialog</string>
     <string name="listHeaderTxt">Notes</string>
+    <!--Activity 2-->
+    <string name="act2Txt">Activity 2</string>
 </resources>

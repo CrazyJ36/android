@@ -9,35 +9,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="4dp" >
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp" >
 
     <TextView
         android:id="@+id/tvSdk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:paddingBottom="4dp" />
+    
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+		android:layout_height="28dp"
+        android:paddingTop="4dp" >
+			<TextView
+			    android:id="@+id/tvConcat"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+                android:singleLine="true" />
+    </HorizontalScrollView>
 
     <ScrollView
         android:id="@+id/scrollViewForRawFile"
 		android:layout_width="match_parent"
 		android:layout_height="128dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:nestedScrollingEnabled="true"
         android:scrollingCache="false" >
 	    <TextView
 	        android:id="@+id/tvFile"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
             android:drawableTop="@drawable/top_text_drawable" />
     </ScrollView>
-
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-		android:layout_height="48dp" >
-			<TextView
-			    android:id="@+id/tvConcat"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content" />
-    </HorizontalScrollView>
 
     <Button
         android:id="@+id/btnCustom"
@@ -122,6 +128,13 @@
         android:scrollingCache="true"
         android:fastScrollEnabled="true" />
 
+    <Button
+        android:id="@+id/act2btn"
+		android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+		android:text="@string/act2BtnTxt" />
+ 
   </LinearLayout>
 
 </ScrollView>

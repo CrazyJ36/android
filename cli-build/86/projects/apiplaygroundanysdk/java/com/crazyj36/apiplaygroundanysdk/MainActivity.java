@@ -47,6 +47,15 @@ public class MainActivity extends Activity {
         if ((android.os.Build.VERSION.SDK_INT > 22) && (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
             requestPermissions(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
         }
+        // Activity 2 start button
+        Button act2Btn = findViewById(R.id.act2btn);
+        act2Btn.setOnClickListener(new OnClickListener() {
+			@Override
+            public void onClick(View act2BtnView) {
+                Intent startSecondActivity = new Intent(MainActivity.this, Main2Activity.class);
+                startActivity(startSecondActivity);
+            }
+        });
         // If xml android:nestedScrollingEnabled doesn't work, make some ui views scroll using custom method.
         if (sdkVersion < 21) {
 			ScrollView scrollViewForRawFile = findViewById(R.id.scrollViewForRawFile);
