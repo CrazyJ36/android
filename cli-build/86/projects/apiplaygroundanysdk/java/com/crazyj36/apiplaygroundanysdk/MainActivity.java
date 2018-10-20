@@ -24,6 +24,8 @@ import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.ScrollView;
+import android.app.ActionBar;
+//import android.widget.Toolbar;
 import android.net.Uri;
 import java.util.Date;
 import java.util.Locale;
@@ -42,20 +44,19 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // ActionBar is usable in default platform from api 11.
+        if (sdkVersion >= 11) {
+            ActionBar actionBar = getActionBar();
+			String title = getResources().getString(R.string.app_name);
+			actionBar.setSubtitle("an app");
+            Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
+        }
         setContentView(R.layout.activity_main);
 	    // storage permission
         if ((android.os.Build.VERSION.SDK_INT > 22) && (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
             requestPermissions(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
         }
-        // Activity 2 start button
-        Button act2Btn = findViewById(R.id.act2btn);
-        act2Btn.setOnClickListener(new OnClickListener() {
-			@Override
-            public void onClick(View act2BtnView) {
-                Intent startSecondActivity = new Intent(MainActivity.this, Main2Activity.class);
-                startActivity(startSecondActivity);
-            }
-        });
+
         // If xml android:nestedScrollingEnabled doesn't work, make some ui views scroll using custom method.
         if (sdkVersion < 21) {
 			ScrollView scrollViewForRawFile = findViewById(R.id.scrollViewForRawFile);
@@ -160,7 +161,7 @@ public class MainActivity extends Activity {
         String txt2 = "Two";
         tvSet.setText(String.format(Locale.US, "%s %s printed!", txt1, txt2) + " " + getResources().getString(R.string.tvConcatTxt));
 
-        // Log button click
+        // Log in onCreate() and on button click.
         String startMsg = "App Started";
         Log.i(logChannel, startMsg);
         Button btnLog = findViewById(R.id.btnLog);
@@ -191,6 +192,23 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
                 tvPrint.setText(etPrint.getText());
             }
+        });
+		// Activity 2 start button
+        Button act2Btn = findViewById(R.id.act2btn);
+        act2Btn.setOnClickListener(new OnClickListener() {
+			@Override
+            public void onClick(View act2BtnView) {
+                Intent startSecondActivity = new Intent(MainActivity.this, Main2Activity.class);
+                startActivity(startSecondActivity);
+            }
+        });
+        // Button Press and long click
+		Button btnPressLong = findViewById(R.id.btnPressLong);
+		btnPressLong.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Toast.makeText(this, "Short Tap", Toast.LENGTH_SHORT).show();
+			}
         });
         // From Here some function results will be put into a custom listview
         // Put results here from return value

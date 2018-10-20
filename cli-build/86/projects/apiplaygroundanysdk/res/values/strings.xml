@@ -17,6 +17,7 @@ Find the sum of natural numbers using recursion. Find factorial of A number usin
 to decimal and vice-versa. Convert Octal to decimal and vice-versa. Convert Binary to octal and vice-versa. Reverse sentence using recursion.</string>
     <string name="tvDateTxt">Tap Date</string>
     <string name="btnLogTxt">Log</string>
+    <string name="btnPressLongTxt>Tap/Long</string>
     <string name="btnDateTxt">Date</string>
     <string name="tvPrintTxt">Type in the field below, then tap Show Text</string>
     <string name="etPrintHint">Type here…</string>
