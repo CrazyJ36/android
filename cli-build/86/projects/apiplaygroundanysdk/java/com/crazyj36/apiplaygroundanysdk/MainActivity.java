@@ -10,7 +10,6 @@ import android.os.Vibrator;
 import android.os.VibrationEffect;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.view.MotionEvent;
@@ -35,7 +34,6 @@ import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.File;
-import java.lang.reflect.Method;
 
 public class MainActivity extends Activity {
     // Strings for methods outside of onCreate()
@@ -315,21 +313,15 @@ public class MainActivity extends Activity {
 				public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
 					if (position > 0) {
 						int filePosition = position - 1;
-						Uri	uri = Uri.fromFile(fileList[filePosition]);
+						Uri uri;
+					    if (sdkVersion < 24) {
+                            uri = Uri.fromFile(fileList[filePosition]); // No too secure, though fine, broadcasts actual file pointer.
+                        } else {
+							uri = Uri.parse(fileList[filePosition].getPath());  // this one broadcasts a file path only
+                        }
 			            Intent viewFile = new Intent(Intent.ACTION_VIEW);
-						//viewFile.setPackage("com.android.htmlviewer"); open with ony one package example.
-                        //viewFile.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-						//viewFile.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-						//viewFile.addFlags(Intent.FLAG_GRANT_PREFIX_URI_PERMISSION);
 						viewFile.setDataAndType(uri, "text/plain");
-						if (sdkVersion >= 24) {
-							try {
-						    	Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
-							} catch (Exception e) {
-								Toast.makeText(MainActivity.this, "Start file chooser: " + e.getLocalizedMessage(), Toast.LENGTH_LONG);
-							}
-						}
-					    startActivity(Intent.createChooser(viewFile, "Open " + fileList[filePosition].getName() + " with:"));
+					    startActivity(viewFile); // createChooser is not so pretty
 					}
                 }
             });
