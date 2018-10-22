@@ -20,7 +20,7 @@ to decimal and vice-versa. Convert Octal to decimal and vice-versa. Convert Bina
     <string name="btnPressLongTxt">Tap/Long</string>
     <string name="btnPlayAudioTxt">Play</string>
     <string name="tvMediaPlayingTxt">Audio playing...</string>
-	<string name="tvMediaDoneTxt">MediaPlayer resources released</string>
+	<string name="tvMediaDoneTxt">MediaPlayer released</string>
 	<string name="tvMediaNotPlayingTxt">Nothing happening</string>
     <string name="btnDateTxt">Date</string>
     <string name="tvPrintTxt">Type in the field below, then tap Show</string>

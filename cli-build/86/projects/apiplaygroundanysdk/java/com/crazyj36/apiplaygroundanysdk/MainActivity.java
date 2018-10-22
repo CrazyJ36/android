@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.Manifest;
 import android.app.Dialog;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.os.Bundle;
 import android.os.Build;
 import android.os.Vibrator;
 import android.os.VibrationEffect;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.view.MotionEvent;
@@ -33,10 +33,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
-import java.lang.ArrayIndexOutOfBoundsException;
 import java.io.IOException;
 import java.io.File;
-import java.lang.Exception;
+import java.lang.reflect.Method;
 
 public class MainActivity extends Activity {
     // Strings for methods outside of onCreate()
@@ -50,9 +49,8 @@ public class MainActivity extends Activity {
         // ActionBar is usable in default platform from api 11.
         if (sdkVersion >= 11) {
             ActionBar actionBar = getActionBar();
-			String title = getResources().getString(R.string.app_name);
-			actionBar.setSubtitle("an app");
-            Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
+			actionBar.setSubtitle("CrazyJ36");
+
         }
         setContentView(R.layout.activity_main);
 	    // storage permission
@@ -65,7 +63,7 @@ public class MainActivity extends Activity {
 			ScrollView scrollViewForRawFile = findViewById(R.id.scrollViewForRawFile);
         	makeScrollable(scrollViewForRawFile);
 		}
-        // Start loading files
+        // Files Load
         if (Build.VERSION.SDK_INT < 23) {
             filesTask();
         } else {
@@ -317,17 +315,21 @@ public class MainActivity extends Activity {
 				public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
 					if (position > 0) {
 						int filePosition = position - 1;
-						Uri uri = null;
-						if (Build.VERSION.SDK_INT < 25) {
-							uri = Uri.fromFile(fileList[filePosition]);
-				            Intent viewFile = new Intent();
-				            viewFile.setDataAndType(uri, "text/plain");
-		                    viewFile.setAction(Intent.ACTION_VIEW);
-						    startActivity(viewFile);
-					    } else {
-							// Above doesn't work, fix it.
-							Toast.makeText(MainActivity.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
-                        }
+						Uri	uri = Uri.fromFile(fileList[filePosition]);
+			            Intent viewFile = new Intent(Intent.ACTION_VIEW);
+						//viewFile.setPackage("com.android.htmlviewer"); open with ony one package example.
+                        //viewFile.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+						//viewFile.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+						//viewFile.addFlags(Intent.FLAG_GRANT_PREFIX_URI_PERMISSION);
+						viewFile.setDataAndType(uri, "text/plain");
+						if (sdkVersion >= 24) {
+							try {
+						    	Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
+							} catch (Exception e) {
+								Toast.makeText(MainActivity.this, "Start file chooser: " + e.getLocalizedMessage(), Toast.LENGTH_LONG);
+							}
+						}
+					    startActivity(Intent.createChooser(viewFile, "Open " + fileList[filePosition].getName() + " with:"));
 					}
                 }
             });
