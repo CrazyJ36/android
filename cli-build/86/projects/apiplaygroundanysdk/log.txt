@@ -1,0 +1,84 @@
+--------- beginning of /dev/log/main
+W/ResourceType(  305): Entry identifier 0x128 is larger than entry count 0xab
+W/WindowManager(  305): [PhoneWindowManager.java:1099:addStartingWindow()] HistoryRecord{40702328 com.crazyj36.apiplaygroundanysdk/.MainActivity} failed creating starting window
+W/WindowManager(  305): java.lang.RuntimeException: Binary XML file line #25: You must supply a layout_height attribute.
+W/WindowManager(  305): 	at android.content.res.TypedArray.getLayoutDimension(TypedArray.java:491)
+W/WindowManager(  305): 	at android.view.ViewGroup$LayoutParams.setBaseAttributes(ViewGroup.java:3599)
+W/WindowManager(  305): 	at android.view.ViewGroup$MarginLayoutParams.<init>(ViewGroup.java:3678)
+W/WindowManager(  305): 	at android.widget.LinearLayout$LayoutParams.<init>(LinearLayout.java:1400)
+W/WindowManager(  305): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:1326)
+W/WindowManager(  305): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:47)
+W/WindowManager(  305): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:625)
+W/WindowManager(  305): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
+W/WindowManager(  305): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
+W/WindowManager(  305): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
+W/WindowManager(  305): 	at com.android.internal.policy.impl.PhoneWindow.generateLayout(PhoneWindow.java:2290)
+W/WindowManager(  305): 	at com.android.internal.policy.impl.PhoneWindow.installDecor(PhoneWindow.java:2345)
+W/WindowManager(  305): 	at com.android.internal.policy.impl.PhoneWindow.getDecorView(PhoneWindow.java:1511)
+W/WindowManager(  305): 	at com.android.internal.policy.impl.PhoneWindowManager.addStartingWindow(PhoneWindowManager.java:1070)
+W/WindowManager(  305): 	at com.android.server.WindowManagerService$H.handleMessage(WindowManagerService.java:8347)
+W/WindowManager(  305): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+W/WindowManager(  305): 	at android.os.Looper.loop(Looper.java:130)
+W/WindowManager(  305): 	at com.android.server.WindowManagerService$WMThread.run(WindowManagerService.java:582)
+--------- beginning of /dev/log/system
+I/ActivityManager(  305): Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.apiplaygroundanysdk/.MainActivity bnds=[122,387][238,527] } from pid 497
+D/Launcher.Workspace(  497): [Workspace.java:2036:hideWallpaper()] Show wallpaper
+I/ActivityManager(  305): process name to start: com.crazyj36.apiplaygroundanysdk
+E/ActivityManager(  305): heap conf. property name string trimmed: hs.com.crazyj36.apiplaygroundan
+I/ActivityManager(  305): Start proc com.crazyj36.apiplaygroundanysdk for activity com.crazyj36.apiplaygroundanysdk/.MainActivity: pid=4102 uid=10001 gids={}
+W/dalvikvm( 4102): VFY: unable to resolve virtual method 97: Lcom/crazyj36/apiplaygroundanysdk/MainActivity;.getActionBar ()Landroid/app/ActionBar;
+W/dalvikvm( 4102): VFY: unable to resolve virtual method 94: Lcom/crazyj36/apiplaygroundanysdk/MainActivity;.checkSelfPermission (Ljava/lang/String;)I
+W/dalvikvm( 4102): VFY: unable to resolve virtual method 94: Lcom/crazyj36/apiplaygroundanysdk/MainActivity;.checkSelfPermission (Ljava/lang/String;)I
+W/dalvikvm( 4102): VFY: unable to resolve virtual method 34: Landroid/os/Vibrator;.hasVibrator ()Z
+W/dalvikvm( 4102): VFY: unable to resolve virtual method 34: Landroid/os/Vibrator;.hasVibrator ()Z
+W/dalvikvm( 4102): VFY: unable to resolve virtual method 34: Landroid/os/Vibrator;.hasVibrator ()Z
+W/dalvikvm( 4102): VFY: unable to resolve virtual method 34: Landroid/os/Vibrator;.hasVibrator ()Z
+W/dalvikvm( 4102): VFY: unable to resolve virtual method 20: Landroid/content/res/Resources;.getColor (ILandroid/content/res/Resources$Theme;)I
+W/ResourceType( 4102): Entry identifier 0x128 is larger than entry count 0xab
+W/dalvikvm( 4102): threadid=1: thread exiting with uncaught exception (group=0x40019560)
+E/AndroidRuntime( 4102): FATAL EXCEPTION: main
+E/AndroidRuntime( 4102): java.lang.RuntimeException: Unable to start activity ComponentInfo{com.crazyj36.apiplaygroundanysdk/com.crazyj36.apiplaygroundanysdk.MainActivity}: android.view.InflateException: Binary XML file line #64: Error inflating class GridLayout
+E/AndroidRuntime( 4102): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1658)
+E/AndroidRuntime( 4102): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:1674)
+E/AndroidRuntime( 4102): 	at android.app.ActivityThread.access$1500(ActivityThread.java:117)
+E/AndroidRuntime( 4102): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:942)
+E/AndroidRuntime( 4102): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+E/AndroidRuntime( 4102): 	at android.os.Looper.loop(Looper.java:130)
+E/AndroidRuntime( 4102): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
+E/AndroidRuntime( 4102): 	at java.lang.reflect.Method.invokeNative(Native Method)
+E/AndroidRuntime( 4102): 	at java.lang.reflect.Method.invoke(Method.java:507)
+E/AndroidRuntime( 4102): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
+E/AndroidRuntime( 4102): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
+E/AndroidRuntime( 4102): 	at dalvik.system.NativeStart.main(Native Method)
+E/AndroidRuntime( 4102): Caused by: android.view.InflateException: Binary XML file line #64: Error inflating class GridLayout
+E/AndroidRuntime( 4102): 	at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:581)
+E/AndroidRuntime( 4102): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:623)
+E/AndroidRuntime( 4102): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:626)
+E/AndroidRuntime( 4102): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
+E/AndroidRuntime( 4102): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
+E/AndroidRuntime( 4102): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
+E/AndroidRuntime( 4102): 	at com.android.internal.policy.impl.PhoneWindow.setContentView(PhoneWindow.java:221)
+E/AndroidRuntime( 4102): 	at android.app.Activity.setContentView(Activity.java:1657)
+E/AndroidRuntime( 4102): 	at com.crazyj36.apiplaygroundanysdk.MainActivity.onCreate(MainActivity.java:57)
+E/AndroidRuntime( 4102): 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1047)
+E/AndroidRuntime( 4102): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1622)
+E/AndroidRuntime( 4102): 	... 11 more
+E/AndroidRuntime( 4102): Caused by: java.lang.ClassNotFoundException: android.view.GridLayout in loader dalvik.system.PathClassLoader[/data/app/com.crazyj36.apiplaygroundanysdk-2.apk]
+E/AndroidRuntime( 4102): 	at dalvik.system.PathClassLoader.findClass(PathClassLoader.java:240)
+E/AndroidRuntime( 4102): 	at java.lang.ClassLoader.loadClass(ClassLoader.java:551)
+E/AndroidRuntime( 4102): 	at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+E/AndroidRuntime( 4102): 	at android.view.LayoutInflater.createView(LayoutInflater.java:471)
+E/AndroidRuntime( 4102): 	at android.view.LayoutInflater.onCreateView(LayoutInflater.java:549)
+E/AndroidRuntime( 4102): 	at com.android.internal.policy.impl.PhoneLayoutInflater.onCreateView(PhoneLayoutInflater.java:66)
+E/AndroidRuntime( 4102): 	at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:568)
+E/AndroidRuntime( 4102): 	... 21 more
+W/ActivityManager(  305):   Force finishing activity com.crazyj36.apiplaygroundanysdk/.MainActivity
+W/ActivityManager(  305): Activity pause timeout for HistoryRecord{40702328 com.crazyj36.apiplaygroundanysdk/.MainActivity}
+D/Launcher.Workspace(  497): [Workspace.java:2036:hideWallpaper()] Show wallpaper
+D/Launcher.Workspace(  497): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
+V/LGEmailProvider(  669): [LGEmailProvider.java:184:query()] EmailProvider.query: uri=content://com.lge.providers.lgemail/account, projection=[Ljava.lang.String;@4052f948, selection=null, match is 0
+V/LGEmailProvider(  669): [LGEmailProvider.java:223:query()] 1 : TABLE_NAMES=EAccount
+V/LGEmailProvider(  669): [LGEmailProvider.java:332:query()] EmailProvider.query result count=0
+I/ActivityManager(  305): No longer want com.devicescape.easywifi.mpcs (pid 1204): hidden #26
+W/InputManagerService(  305): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@409b4920
+I/ActivityManager(  305): Process com.crazyj36.apiplaygroundanysdk (pid 4102) has died.

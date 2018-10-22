@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Vibrator;
 import android.os.VibrationEffect;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.MotionEvent;
@@ -17,6 +18,8 @@ import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.content.pm.PackageManager;
 import android.content.Intent;
+import android.content.Context;
+import android.media.MediaPlayer;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.TextView;
@@ -25,7 +28,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.ScrollView;
 import android.app.ActionBar;
-//import android.widget.Toolbar;
 import android.net.Uri;
 import java.util.Date;
 import java.util.Locale;
@@ -34,6 +36,7 @@ import java.io.ByteArrayOutputStream;
 import java.lang.ArrayIndexOutOfBoundsException;
 import java.io.IOException;
 import java.io.File;
+import java.lang.Exception;
 
 public class MainActivity extends Activity {
     // Strings for methods outside of onCreate()
@@ -154,13 +157,14 @@ public class MainActivity extends Activity {
                 alertDialog.show();
            }
         });
-
-        // Concatenate two strings, c-like
-        final TextView tvSet = findViewById(R.id.tvConcat);
+         // Concatenate two strings, c-like
         String txt1 = "One";
         String txt2 = "Two";
-        tvSet.setText(String.format(Locale.US, "%s %s printed!", txt1, txt2) + " " + getResources().getString(R.string.tvConcatTxt));
-
+        String concatTxt = String.format(Locale.US, "%s %s printed!", txt1, txt2);
+        // Set TextView text from code, maybe not best practice.
+        String tvHorizontalTxt = getResources().getString(R.string.tvHorizontalTxt);
+        TextView horizontalTxt = findViewById(R.id.tvHorizontal);
+		horizontalTxt.setText(tvHorizontalTxt);
         // Log in onCreate() and on button click.
         String startMsg = "App Started";
         Log.i(logChannel, startMsg);
@@ -207,9 +211,41 @@ public class MainActivity extends Activity {
 		btnPressLong.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Toast.makeText(this, "Short Tap", Toast.LENGTH_SHORT).show();
+				Toast.makeText(MainActivity.this, "Short Tapped", Toast.LENGTH_SHORT).show();
 			}
         });
+		btnPressLong.setOnLongClickListener(new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View view) {
+				Toast.makeText(MainActivity.this, "Long Pressed", Toast.LENGTH_SHORT).show();
+                return(true);
+			}
+		});
+        // Button that plays an audio file
+		findViewById(R.id.btnPlayAudio).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View btnPlayAudioView) {
+				final TextView tvPlayAudioStatus = findViewById(R.id.tvPlayAudioStatus);
+ 				MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.flute);
+				mediaPlayer.start();
+				if (mediaPlayer.isPlaying()) {
+					tvPlayAudioStatus.setText(R.string.tvMediaPlayingTxt);
+        		}
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+		    		public void onCompletion(MediaPlayer mediaPlayer) {
+						mediaPlayer.release();
+						tvPlayAudioStatus.setText(R.string.tvMediaDoneTxt);
+                        Runnable runThis = new Runnable() { // The Runnable Thing, Object
+							@Override
+							public void run() {
+							    tvPlayAudioStatus.setText(R.string.tvMediaNotPlayingTxt); // This is the statement that will occur after handlers' delay.
+							}
+						};
+						new Handler().postDelayed(runThis, 3000); // postDelayed is like "post to cpu later". runThis will run after 3 seconds
+					}
+				});
+			}
+		});
         // From Here some function results will be put into a custom listview
         // Put results here from return value
         final String[] results = {
@@ -218,6 +254,7 @@ public class MainActivity extends Activity {
                 "String is from package: " + packageNameOfString(),
                 vibrateTest,
                 filesTest,
+                concatTxt,
         };
         results[0] = String.valueOf(results.length);
         int z = 0;
@@ -263,9 +300,10 @@ public class MainActivity extends Activity {
         File dir = new File(storage);
         final File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
         if (dir.exists() && dir.isDirectory()) {
-            if (fileList.length == 0) {
+			if (fileList.length == 0) {
                 filesTest = ("No files created in " + storage + ".");
-            }
+				return;
+			}
             String[] names = new String[fileList.length];
             for (int i = 0; i < fileList.length; i++) {
                 names[i] = fileList[i].getName();
@@ -287,15 +325,14 @@ public class MainActivity extends Activity {
 		                    viewFile.setAction(Intent.ACTION_VIEW);
 						    startActivity(viewFile);
 					    } else {
-							// For higher api levels
+							// Above doesn't work, fix it.
 							Toast.makeText(MainActivity.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
                         }
 					}
                 }
             });
-
         } else {
-            filesTest = ("No " + storage + " directory. Create it to see corresponding files.");
+            filesTest = ("No " + storage + " directory.");
         }
 
 

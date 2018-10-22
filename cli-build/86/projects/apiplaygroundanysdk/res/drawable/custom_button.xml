@@ -4,7 +4,7 @@
     android:shape="rectangle" >
 
     <corners
-        android:radius="4dp" />
+        android:radius="16dp" />
 
     <padding
         android:left="4dp"
