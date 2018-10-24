@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.Manifest;
 import android.app.Dialog;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.NotificationChannel;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.os.Bundle;
 import android.os.Build;
 import android.os.Vibrator;
@@ -15,6 +19,7 @@ import android.view.View;
 import android.view.MotionEvent;
 import android.widget.Button;
 import android.view.View.OnClickListener;
+import android.widget.RemoteViews;
 import android.content.pm.PackageManager;
 import android.content.Intent;
 import android.content.Context;
@@ -28,6 +33,7 @@ import android.widget.AdapterView;
 import android.widget.ScrollView;
 import android.app.ActionBar;
 import android.net.Uri;
+import java.lang.System;
 import java.util.Date;
 import java.util.Locale;
 import java.io.InputStream;
@@ -44,13 +50,13 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         // ActionBar is usable in default platform from api 11.
         if (sdkVersion >= 11) {
             ActionBar actionBar = getActionBar();
 			actionBar.setSubtitle("CrazyJ36");
 
         }
-        setContentView(R.layout.activity_main);
 	    // storage permission
         if ((android.os.Build.VERSION.SDK_INT > 22) && (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
             requestPermissions(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
@@ -123,7 +129,7 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
                 final Dialog dialog = new Dialog(MainActivity.this);
                 dialog.setContentView(R.layout.dialog_layout);
-                dialog.setTitle("A Dialog");
+                dialog.setTitle("C Description");
                 dialog.show();
                 dialog.findViewById(R.id.dialogBtn1).setOnClickListener(new OnClickListener() {
                     @Override
@@ -242,6 +248,44 @@ public class MainActivity extends Activity {
 				});
 			}
 		});
+		// Notification Button
+		final NotificationManager notificationManager = (NotificationManager) getSystemService("notification"); // getSystemService() string type ("vibrate") or class type (VIBRATOR_SERVICE)
+        if (notificationManager != null) {
+			if (sdkVersion >= 26) {
+			    NotificationChannel notificationChannel = new NotificationChannel("APIPLAYGROUNDANYSDK_NOTIFICATION_CHANNEL", "Notify Button", NotificationManager.IMPORTANCE_DEFAULT);
+				notificationChannel.shouldShowLights();
+				notificationManager.createNotificationChannel(notificationChannel);
+			}
+			findViewById(R.id.btnNotify).setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View thisBtn) {
+					if (sdkVersion >= 11) {
+						final Notification.Builder notifyBuild;
+						if (sdkVersion > 25) {
+							notifyBuild = new Notification.Builder(MainActivity.this, "APIPLAYGROUNDANYSDK_NOTIFICATION_CHANNEL");
+						} else {
+	                        notifyBuild = new Notification.Builder(MainActivity.this);
+						}
+						notifyBuild.setSmallIcon(R.drawable.top_text_drawable);
+						notifyBuild.setContentTitle("A notification");
+						notifyBuild.setContentText("This is the notification content");
+						notificationManager.notify(0, notifyBuild.build());
+					} else {
+						Notification notify = new Notification(R.drawable.top_text_drawable, "Ticker only shows in status, not notif..", System.currentTimeMillis());
+					    Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+						PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 1, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
+						notify.contentIntent = pendingIntent;
+						RemoteViews notifView = new RemoteViews(getPackageName(), R.layout.notification_layout);
+                        notifView.setImageViewResource(R.id.notificationIcon, R.drawable.top_text_drawable);
+                        notifView.setTextViewText(R.id.notificationTv, "A Custom Notification");
+						notify.contentView = notifView;
+						notificationManager.notify("APIPLAYGROUNDANYSDK_NOTIFICATION_CHANNEL", 0, notify);
+					}
+				}
+			});
+		} else {
+			Toast.makeText(MainActivity.this, "Notification Manager service returned null", Toast.LENGTH_LONG);
+		}
         // From Here some function results will be put into a custom listview
         // Put results here from return value
         final String[] results = {
@@ -306,7 +350,7 @@ public class MainActivity extends Activity {
             }
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, R.layout.list_item, names);
             View headerView = View.inflate(MainActivity.this, R.layout.list_header_view, null); // Get xml layout, make it inflatable here. null parent view.
-            listView.addHeaderView(headerView);
+            listView.addHeaderView(headerView, null, false);
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override

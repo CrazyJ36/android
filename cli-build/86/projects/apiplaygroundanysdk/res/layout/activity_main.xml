@@ -61,30 +61,40 @@
 	        android:text="@string/btnCustomTxt"
 	        android:textColor="@android:color/white" />
 
-    <LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="horizontal" >
+    <RelativeLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" >
 
 	    <Button
 	        android:id="@+id/btnDialogCIdeas"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="@string/btnDialogCIdeasTxt" />
+	        android:text="@string/btnDialogCIdeasTxt"
+			android:layout_alignParentStart="true" />
 
 	    <Button
 	        android:id="@+id/btnLog"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="@string/btnLogTxt" />
+	        android:text="@string/btnLogTxt"
+			android:layout_below="@id/btnDialogCIdeas" />
 	    
 	    <Button
 			android:id="@+id/btnPressLong"
 			android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-			android:text="@string/btnPressLongTxt" />
+			android:text="@string/btnPressLongTxt"
+			android:layout_toRightOf="@id/btnDialogCIdeas" />
 
-    </LinearLayout>
+		<Button
+			android:id="@+id/btnNotify"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/btnNotifyTxt"
+            android:layout_toRightOf="@id/btnLog"
+			android:layout_below="@id/btnPressLong" />
+
+    </RelativeLayout>
 
     <LinearLayout
 		android:layout_width="match_parent"
