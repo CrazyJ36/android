@@ -271,13 +271,13 @@ public class MainActivity extends Activity {
 						notifyBuild.setContentText("This is the notification content");
 						notificationManager.notify(0, notifyBuild.build());
 					} else {
-						Notification notify = new Notification(R.drawable.top_text_drawable, "Ticker only shows in status, not notif..", System.currentTimeMillis());
+						Notification notify = new Notification(R.drawable.top_text_drawable, "API Playground Any SDK", System.currentTimeMillis());
 					    Intent intent = new Intent(MainActivity.this, Main2Activity.class);
 						PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 1, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
 						notify.contentIntent = pendingIntent;
 						RemoteViews notifView = new RemoteViews(getPackageName(), R.layout.notification_layout);
                         notifView.setImageViewResource(R.id.notificationIcon, R.drawable.top_text_drawable);
-                        notifView.setTextViewText(R.id.notificationTv, "A Custom Notification");
+                        notifView.setTextViewText(R.id.notificationTv, "A Notification\nThis is the notification content");
 						notify.contentView = notifView;
 						notificationManager.notify("APIPLAYGROUNDANYSDK_NOTIFICATION_CHANNEL", 0, notify);
 					}
