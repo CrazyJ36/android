@@ -15,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.util.Patterns;
 
 public class Main2Activity extends Activity {
+	final int sdkVersion = android.os.Build.VERSION.SDK_INT;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,21 +27,29 @@ public class Main2Activity extends Activity {
 		findViewById(R.id.btnCall).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View callBtnView) {
-
-    			EditText etCall = findViewById(R.id.etCall);
-				String num = etCall.getText().toString();
-				if (!Patterns.PHONE.matcher(num).matches()) {
-					Toast.makeText(Main2Activity.this, "Enter normal phone number", Toast.LENGTH_SHORT).show();
-				}
-				if (checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-					Uri data = Uri.parse("tel:" + num);
-					Intent call = new Intent(Intent.ACTION_CALL, data);
-					Toast.makeText(Main2Activity.this, "Calling " + num, Toast.LENGTH_SHORT).show();
-					startActivity(call);
-				} else {
-					Toast.makeText(Main2Activity.this, "Check phone permission", Toast.LENGTH_SHORT).show();
+				if (sdkVersion < 23) {
+					doCall();
+    			} else {
+					if (checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+						doCall();
+					} else {
+						Toast.makeText(Main2Activity.this, "Check phone permission", Toast.LENGTH_SHORT).show();
+					}
 				}
 			}
 		});
     }
+	// call phone method
+	public void doCall() {
+		EditText etCall = findViewById(R.id.etCall);
+		String num = etCall.getText().toString();
+		if (!Patterns.PHONE.matcher(num).matches()) {
+			Toast.makeText(Main2Activity.this, "Enter normal phone number", Toast.LENGTH_SHORT).show();
+		} else {
+			Uri data = Uri.parse("tel:" + num);
+			Intent call = new Intent(Intent.ACTION_CALL, data);
+			Toast.makeText(Main2Activity.this, "Calling " + num, Toast.LENGTH_SHORT).show();
+			startActivity(call);
+		}
+	}
 }

@@ -46,23 +46,24 @@ import java.io.File;
 
 public class MainActivity extends Activity {
     // Strings for methods outside of onCreate()
-    String filesTest = "";
+	String filesTest = "";
     String logChannel = "APIPLAYGROUNDLOG";
     int sdkVersion = Build.VERSION.SDK_INT;
 	public static final int MY_PERMISSION = 0;
 	String[] permission = new String[] {Manifest.permission.READ_EXTERNAL_STORAGE};
+    ListView listView;
     // onCreate activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Files Load
-        if (Build.VERSION.SDK_INT < 23) {
+		// Files Load
+        if (sdkVersion < 23) {
             filesTask();
         } else {
-		    // get storage permission
+		// get storage permission
 			if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-				ListView listView = findViewById(R.id.fileList);
+				listView = findViewById(R.id.fileList);
 				listView.setEnabled(false);
 	        	requestPermissions(permission, MY_PERMISSION);
 			} else {
@@ -81,7 +82,7 @@ public class MainActivity extends Activity {
         	makeScrollable(scrollViewForRawFile);
 		}
         // Vibrate on Successfull start
-        String vibrateTest = "";
+		String vibrateTest = "";
         Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         try {
             if (Build.VERSION.SDK_INT < 11 && vib != null) {
@@ -102,7 +103,6 @@ public class MainActivity extends Activity {
         } catch (NullPointerException nullPointerException) {
                 vibrateTest = "Vibrate 'null' error: " + nullPointerException.getLocalizedMessage();
         }
-
         // Device SDK Version view
         TextView tvSdk = findViewById(R.id.tvSdk);
         tvSdk.setText(String.format(Locale.US, "%s %d", getString(R.string.tvSdkTxt), android.os.Build.VERSION.SDK_INT));
@@ -124,7 +124,6 @@ public class MainActivity extends Activity {
         }
         String fileText = outputStream.toString();
         tvFile.setText(fileText);
-
         // Dialog with layout example
         Button btnCustom = findViewById(R.id.btnCustom);
         btnCustom.setOnClickListener(new OnClickListener() {
@@ -148,7 +147,6 @@ public class MainActivity extends Activity {
                 });
             }
         });
-
         // Normal Dialog Builder Example
         Button btnDialog = findViewById(R.id.btnDialogCIdeas);
         btnDialog.setOnClickListener(new OnClickListener() {
@@ -165,7 +163,8 @@ public class MainActivity extends Activity {
          // Concatenate two strings, c-like
         String txt1 = "One";
         String txt2 = "Two";
-        String concatTxt = String.format(Locale.US, "%s %s printed!", txt1, txt2);
+		String concatTxt = "";
+        concatTxt = String.format(Locale.US, "%s %s printed!", txt1, txt2); // or System.out.printf("%t", var); in console
         // Set TextView text from code, maybe not best practice.
         String tvHorizontalTxt = getResources().getString(R.string.tvHorizontalTxt);
         TextView horizontalTxt = findViewById(R.id.tvHorizontal);
@@ -180,7 +179,6 @@ public class MainActivity extends Activity {
                 Log.i(logChannel, "Log Button clicked");
             }
         });
-
         // Java package Date()
         final TextView tvDate = findViewById(R.id.tvDate);
         Button btnDate = findViewById(R.id.btnDate);
@@ -191,7 +189,6 @@ public class MainActivity extends Activity {
                 tvDate.setText(date);
             }
         });
-
         // Set textview to what was entered in EditText
         final EditText etPrint = findViewById(R.id.etPrint);
         final TextView tvPrint = findViewById(R.id.tvPrint);
@@ -301,7 +298,7 @@ public class MainActivity extends Activity {
         };
         results[0] = String.valueOf(results.length);
         int z = 0;
-        StringBuffer text = new StringBuffer();
+		StringBuffer text = new StringBuffer();
         try {
             while (z < results.length) {
                 text.append(results[z]);
@@ -309,10 +306,10 @@ public class MainActivity extends Activity {
                 z++;
             }
         } catch (NullPointerException ConcatNullPointer) {
-            Toast.makeText(this, "My string concatenation caused NullPointerException", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "resultsTextView string concatenation caused NullPointerException", Toast.LENGTH_SHORT).show();
         }
         String buffOut = String.valueOf(text);
-        TextView resultsTextView = findViewById(R.id.resultsTextView);
+		TextView resultsTextView = findViewById(R.id.resultsTextView);
         if (android.os.Build.VERSION.SDK_INT > 22) {
             resultsTextView.setTextColor(getResources().getColor(android.R.color.black, null)); // Resources.Theme=null
             resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray, null));
@@ -321,7 +318,7 @@ public class MainActivity extends Activity {
             resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
         }
         resultsTextView.setText(buffOut);
-    }
+	}
     // Int tests.
     public String intCast() {
         int mint = 1 + 2;
@@ -331,15 +328,13 @@ public class MainActivity extends Activity {
     public String packageNameOfString() {
         return String.class.getCanonicalName();
     }
-
     // Get files from sdcard, show names in listview
     public void filesTask() {
-		final ListView listView = findViewById(R.id.fileList);
+		String storage = Environment.getExternalStorageDirectory().toString() + "/test";
+		listView = findViewById(R.id.fileList);
         if (sdkVersion < 21) {
             makeScrollable(listView);
         }
-	    String storage = Environment.getExternalStorageDirectory().toString() + "/test";
-        filesTest = "Files from: " + storage + " are below.";
         File dir = new File(storage);
         final File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
         if (dir.exists() && dir.isDirectory()) {
@@ -375,8 +370,6 @@ public class MainActivity extends Activity {
         } else {
             filesTest = ("No " + storage + " directory.");
         }
-
-
     }
     // Method to make any view scrollable. Insert View as parameter.
     public void makeScrollable(View currentView) {
@@ -406,6 +399,7 @@ public class MainActivity extends Activity {
 		switch (requestCode) {
 			case MY_PERMISSION:
 				if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					listView.setEnabled(true);
 					filesTask();
 				}
 				return;
