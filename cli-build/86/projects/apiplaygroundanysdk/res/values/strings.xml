@@ -43,4 +43,6 @@ of computer architecture and programming as a whole).</string>
     <string name="listHeaderTxt">Notes</string>
     <!--Activity 2-->
     <string name="act2Txt">Activity 2</string>
+    <string name="btnCallTxt">Call</string>
+    <string name="etCallHint">Phone Number...</string>
 </resources>

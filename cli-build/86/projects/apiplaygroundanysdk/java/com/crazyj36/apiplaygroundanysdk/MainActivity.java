@@ -1,3 +1,6 @@
+/* TODO: lg: Crash on call button
+		 make sure storage text gets updated when it needs to
+*/
 package com.crazyj36.apiplaygroundanysdk;
 
 import android.app.Activity;
@@ -46,37 +49,37 @@ public class MainActivity extends Activity {
     String filesTest = "";
     String logChannel = "APIPLAYGROUNDLOG";
     int sdkVersion = Build.VERSION.SDK_INT;
+	public static final int MY_PERMISSION = 0;
+	String[] permission = new String[] {Manifest.permission.READ_EXTERNAL_STORAGE};
     // onCreate activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // Files Load
+        if (Build.VERSION.SDK_INT < 23) {
+            filesTask();
+        } else {
+		    // get storage permission
+			if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+				ListView listView = findViewById(R.id.fileList);
+				listView.setEnabled(false);
+	        	requestPermissions(permission, MY_PERMISSION);
+			} else {
+				filesTask();
+			}
+		}
         // ActionBar is usable in default platform from api 11.
         if (sdkVersion >= 11) {
             ActionBar actionBar = getActionBar();
 			actionBar.setSubtitle("CrazyJ36");
 
         }
-	    // storage permission
-        if ((android.os.Build.VERSION.SDK_INT > 22) && (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
-            requestPermissions(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
-        }
-
         // If xml android:nestedScrollingEnabled doesn't work, make some ui views scroll using custom method.
         if (sdkVersion < 21) {
 			ScrollView scrollViewForRawFile = findViewById(R.id.scrollViewForRawFile);
         	makeScrollable(scrollViewForRawFile);
 		}
-        // Files Load
-        if (Build.VERSION.SDK_INT < 23) {
-            filesTask();
-        } else {
-	        if (Build.VERSION.SDK_INT >= 23 && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-		        filesTask();
-	        } else {
-	            filesTest = "Grant storage permission, then restart app.";
-	        }
-        }
         // Vibrate on Successfull start
         String vibrateTest = "";
         Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
@@ -276,8 +279,8 @@ public class MainActivity extends Activity {
 						PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 1, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
 						notify.contentIntent = pendingIntent;
 						RemoteViews notifView = new RemoteViews(getPackageName(), R.layout.notification_layout);
-                        notifView.setImageViewResource(R.id.notificationIcon, R.drawable.top_text_drawable);
-                        notifView.setTextViewText(R.id.notificationTv, "A Notification\nThis is the notification content");
+                        notifView.setTextViewText(R.id.notificationTvTitle, "API Playground Any SDK");
+						notifView.setTextViewText(R.id.notificationTvContent, "This is the notification content");
 						notify.contentView = notifView;
 						notificationManager.notify("APIPLAYGROUNDANYSDK_NOTIFICATION_CHANNEL", 0, notify);
 					}
@@ -331,7 +334,7 @@ public class MainActivity extends Activity {
 
     // Get files from sdcard, show names in listview
     public void filesTask() {
-        ListView listView = findViewById(R.id.fileList);
+		final ListView listView = findViewById(R.id.fileList);
         if (sdkVersion < 21) {
             makeScrollable(listView);
         }
@@ -397,5 +400,15 @@ public class MainActivity extends Activity {
             }
         });
     }
-
+	// show fileTasks() after granting storage permission. This whole method only applies the moment after you grant storage permission.
+    @Override
+	public void	onRequestPermissionsResult(int requestCode, String[] permission, int grantResults[]) {
+		switch (requestCode) {
+			case MY_PERMISSION:
+				if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					filesTask();
+				}
+				return;
+		}
+	}
 }
