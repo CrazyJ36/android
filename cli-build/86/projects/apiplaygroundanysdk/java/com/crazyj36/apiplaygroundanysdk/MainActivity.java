@@ -4,6 +4,7 @@
 package com.crazyj36.apiplaygroundanysdk;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.Manifest;
 import android.app.Dialog;
 import android.app.AlertDialog;
@@ -11,22 +12,21 @@ import android.app.NotificationManager;
 import android.app.NotificationChannel;
 import android.app.Notification;
 import android.app.PendingIntent;
-import android.os.Bundle;
+import android.app.ActionBar;
 import android.os.Build;
 import android.os.Vibrator;
 import android.os.VibrationEffect;
 import android.os.Environment;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.MotionEvent;
-import android.widget.Button;
 import android.view.View.OnClickListener;
-import android.widget.RemoteViews;
 import android.content.pm.PackageManager;
 import android.content.Intent;
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.widget.RemoteViews;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.TextView;
@@ -34,8 +34,8 @@ import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.ScrollView;
-import android.app.ActionBar;
 import android.net.Uri;
+import android.util.Log;
 import java.lang.System;
 import java.util.Date;
 import java.util.Locale;
@@ -60,28 +60,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-		// Files Load
-        if (sdkVersion < 23) {
-            filesTask();
-			updateResults();
-        } else {
-		// get storage permission
-			if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-				listView = findViewById(R.id.fileList);
-				listView.setEnabled(false);
-	        	requestPermissions(permission, MY_PERMISSION);
-			    filesTest = "Storage permission not granted, files list disabled";
-				updateResults();
-			} else {
-				filesTask();
-				updateResults();
-			}
-		}
         // ActionBar is usable in default platform from api 11.
         if (sdkVersion >= 11) {
             ActionBar actionBar = getActionBar();
 			actionBar.setSubtitle("CrazyJ36");
-
         }
         // If xml android:nestedScrollingEnabled doesn't work, make some ui views scroll using custom method.
         if (sdkVersion < 21) {
@@ -196,6 +178,9 @@ public class MainActivity extends Activity {
         });
         // Set textview to what was entered in EditText
         final EditText etPrint = findViewById(R.id.etPrint);
+		/*if (!etPrint.isFocused()) { // This doesn't work as isFocused() doesn't do what I expected (focused on editText click.)
+			etPrint.setCursorVisible(true);
+		} */
         final TextView tvPrint = findViewById(R.id.tvPrint);
         Button btnPrint = findViewById(R.id.btnPrint);
         btnPrint.setOnClickListener(new View.OnClickListener() {
@@ -291,29 +276,34 @@ public class MainActivity extends Activity {
 		} else {
 			Toast.makeText(MainActivity.this, "Notification Manager service returned null", Toast.LENGTH_LONG);
 		}
-        // From Here some function results will be put into a custom listview
+        // getStorage permission & start filesTask()
+        if (sdkVersion < 23) {
+            filesTask();
+        } else {
+			if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+				filesTest = "Requesting storage permission to show files";
+	        	requestPermissions(permission, MY_PERMISSION);
+			} else {
+				filesTask();
+			}
+		}
+		// put some function results into custom textview
 		updateResults();
+		listView = findViewById(R.id.fileList);
+	// end of onCreate
 	}
-    // Int tests.
-    public String intCast() {
-        int mint = 1 + 2;
-        return String.valueOf(mint);
-    }
-    // String tests.
-    public String packageNameOfString() {
-        return String.class.getCanonicalName();
-    }
     // Get files from sdcard, show names in listview
     public void filesTask() {
+		filesTest = "Files from " + storage + " are shown below";
 		listView = findViewById(R.id.fileList);
         if (sdkVersion < 21) {
             makeScrollable(listView);
         }
         File dir = new File(storage);
         final File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
-		filesTest = "Files from " + storage + " are below";
         if (dir.exists() && dir.isDirectory()) {
 			if (fileList.length == 0) {
+				listView.setEnabled(false);
                 filesTest = ("No files created in " + storage + ".");
 				return;
 			}
@@ -343,9 +333,57 @@ public class MainActivity extends Activity {
                 }
             });
         } else {
+			listView.setEnabled(false);
             filesTest = ("No " + storage + " directory.");
         }
+		updateResults();
     }
+	// show fileTasks() after granting storage permission. This whole method only applies the moment after you grant storage permission.
+    @Override
+	public void	onRequestPermissionsResult(int requestCode, String[] permission, int grantResults[]) {
+		switch (requestCode) {
+			case MY_PERMISSION:
+				if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        			listView.setEnabled(true);
+        			filesTask();
+					updateResults();
+        		} else {
+        			listView.setEnabled(false);
+                    filesTest = "Storage permission not granted, files list disabled";
+        			updateResults();
+        		}
+				return;
+		}
+    }
+    // Put results here from return value
+    public void updateResults() {
+		StringBuffer text = new StringBuffer();
+	    final String[] results = {
+	            "",
+	            "1 + 2 = " + intCast(),
+	            "String is from package: " + packageNameOfString(),
+	            vibrateTest,
+	            filesTest,
+	            concatTxt,
+	    };
+	    results[0] = String.valueOf(results.length);
+	    int z = 0;
+        while (z < results.length) {
+            text.append(results[z]);
+            text.append("\n");
+            z++;
+        }
+	    String buffOut = String.valueOf(text);
+		TextView resultsTextView = findViewById(R.id.resultsTextView);
+	    if (android.os.Build.VERSION.SDK_INT > 22) {
+	        resultsTextView.setTextColor(getResources().getColor(android.R.color.black, null)); // Resources.Theme=null
+	        resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray, null));
+	    } else {
+	        resultsTextView.setTextColor(getResources().getColor(android.R.color.black));
+	        resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+	    }
+	    resultsTextView.setText(buffOut);
+	}
     // Method to make any view scrollable. Insert View as parameter.
     public void makeScrollable(View currentView) {
         // Disable TouchEvent on ScrollView(which is current parent view) on ACTION_DOWN (tap down).
@@ -368,55 +406,13 @@ public class MainActivity extends Activity {
             }
         });
     }
-	// show fileTasks() after granting storage permission. This whole method only applies the moment after you grant storage permission.
-    @Override
-	public void	onRequestPermissionsResult(int requestCode, String[] permission, int grantResults[]) {
-		switch (requestCode) {
-			case MY_PERMISSION:
-				if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-					listView.setEnabled(true);
-					filesTask();
-					filesTest = "Files from " + storage + " are shown below";
-					updateResults();
-				} else {
-					listView.setEnabled(false);
-					filesTest = "Storage permission not granted, files list disabled";
-					updateResults();
-				}
-				return;
-		}
+    // Int tests.
+    public String intCast() {
+        int mint = 1 + 2;
+        return String.valueOf(mint);
     }
-    // Put results here from return value
-    public void updateResults() {
-		StringBuffer text = new StringBuffer();
-	    final String[] results = {
-	            "",
-	            "1 + 2 = " + intCast(),
-	            "String is from package: " + packageNameOfString(),
-	            vibrateTest,
-	            filesTest,
-	            concatTxt,
-	    };
-	    results[0] = String.valueOf(results.length);
-	    int z = 0;
-	    //try {
-	        while (z < results.length) {
-	            text.append(results[z]);
-	            text.append("\n");
-	            z++;
-	        }
-	    //} catch (NullPointerException ConcatNullPointer) {
-	      //  Toast.makeText(this, "resultsTextView string concatenation caused NullPointerException", Toast.LENGTH_SHORT).show();
-	    //}
-	    String buffOut = String.valueOf(text);
-		TextView resultsTextView = findViewById(R.id.resultsTextView);
-	    if (android.os.Build.VERSION.SDK_INT > 22) {
-	        resultsTextView.setTextColor(getResources().getColor(android.R.color.black, null)); // Resources.Theme=null
-	        resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray, null));
-	    } else {
-	        resultsTextView.setTextColor(getResources().getColor(android.R.color.black));
-	        resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
-	    }
-	    resultsTextView.setText(buffOut);
-	}
+    // String tests.
+    public String packageNameOfString() {
+        return String.class.getCanonicalName();
+    }
 }

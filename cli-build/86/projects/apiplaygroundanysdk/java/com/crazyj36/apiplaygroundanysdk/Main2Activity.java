@@ -26,10 +26,6 @@ public class Main2Activity extends Activity {
 		findViewById(R.id.btnCall).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View callBtnView) {
-				String callPerm = "Manifest.permission.CALL_PHONE";
-				if ((sdkVersion >= 23) && (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)) {
-					requestPermissions(new String[] {Manifest.permission.CALL_PHONE}, 0);
-				}
 				if (sdkVersion < 23) {
 					doCall();
     			} else {
@@ -37,6 +33,7 @@ public class Main2Activity extends Activity {
 						doCall();
 					} else {
 						Toast.makeText(Main2Activity.this, "Check phone permission", Toast.LENGTH_SHORT).show();
+						requestPermissions(new String[] {Manifest.permission.CALL_PHONE}, 0);
 					}
 				}
 			}

@@ -124,14 +124,14 @@
 	        android:id="@+id/tvDate"
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
-            android:layout_weight="0.7"
+            android:layout_weight="0.8"
 	        android:text="@string/tvDateTxt" />
 
 	    <Button
 	        android:id="@+id/btnDate"
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
-            android:layout_weight="0.3"
+            android:layout_weight="0.2"
 	        android:text="@string/btnDateTxt" />
 
     </LinearLayout>
@@ -151,7 +151,8 @@
 	        android:id="@+id/etPrint"
 			android:layout_width="0dp"         
 	        android:layout_height="wrap_content"
-            android:layout_weight="0.7"
+            android:layout_weight="0.8"
+			android:singleLine="true"
 	        android:hint="@string/etPrintHint"
 	        android:inputType="text" />
 
@@ -159,7 +160,7 @@
 	        android:id="@+id/btnPrint"
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
-            android:layout_weight="0.3"
+            android:layout_weight="0.2"
 	        android:text="@string/btnPrintTxt" />
 
     </LinearLayout>
@@ -172,7 +173,7 @@
     <ListView
         android:id="@+id/fileList"
         android:layout_width="match_parent"
-        android:layout_height="128dp"
+        android:layout_height="64dp"
         android:nestedScrollingEnabled="true"
         android:scrollingCache="true"
         android:fastScrollEnabled="true" />
