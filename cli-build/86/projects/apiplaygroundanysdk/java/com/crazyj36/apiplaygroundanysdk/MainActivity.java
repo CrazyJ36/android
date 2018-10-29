@@ -52,6 +52,9 @@ public class MainActivity extends Activity {
 	public static final int MY_PERMISSION = 0;
 	String[] permission = new String[] {Manifest.permission.READ_EXTERNAL_STORAGE};
     ListView listView;
+	String vibrateTest = "";
+	String concatTxt = "";
+	String storage = Environment.getExternalStorageDirectory().toString() + "/notes";
     // onCreate activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +63,18 @@ public class MainActivity extends Activity {
 		// Files Load
         if (sdkVersion < 23) {
             filesTask();
+			updateResults();
         } else {
 		// get storage permission
 			if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 				listView = findViewById(R.id.fileList);
 				listView.setEnabled(false);
 	        	requestPermissions(permission, MY_PERMISSION);
+			    filesTest = "Storage permission not granted, files list disabled";
+				updateResults();
 			} else {
 				filesTask();
+				updateResults();
 			}
 		}
         // ActionBar is usable in default platform from api 11.
@@ -82,7 +89,6 @@ public class MainActivity extends Activity {
         	makeScrollable(scrollViewForRawFile);
 		}
         // Vibrate on Successfull start
-		String vibrateTest = "";
         Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         try {
             if (Build.VERSION.SDK_INT < 11 && vib != null) {
@@ -163,7 +169,6 @@ public class MainActivity extends Activity {
          // Concatenate two strings, c-like
         String txt1 = "One";
         String txt2 = "Two";
-		String concatTxt = "";
         concatTxt = String.format(Locale.US, "%s %s printed!", txt1, txt2); // or System.out.printf("%t", var); in console
         // Set TextView text from code, maybe not best practice.
         String tvHorizontalTxt = getResources().getString(R.string.tvHorizontalTxt);
@@ -287,37 +292,7 @@ public class MainActivity extends Activity {
 			Toast.makeText(MainActivity.this, "Notification Manager service returned null", Toast.LENGTH_LONG);
 		}
         // From Here some function results will be put into a custom listview
-        // Put results here from return value
-        final String[] results = {
-                "",
-                "1 + 2 = " + intCast(),
-                "String is from package: " + packageNameOfString(),
-                vibrateTest,
-                filesTest,
-                concatTxt,
-        };
-        results[0] = String.valueOf(results.length);
-        int z = 0;
-		StringBuffer text = new StringBuffer();
-        try {
-            while (z < results.length) {
-                text.append(results[z]);
-                text.append("\n");
-                z++;
-            }
-        } catch (NullPointerException ConcatNullPointer) {
-            Toast.makeText(this, "resultsTextView string concatenation caused NullPointerException", Toast.LENGTH_SHORT).show();
-        }
-        String buffOut = String.valueOf(text);
-		TextView resultsTextView = findViewById(R.id.resultsTextView);
-        if (android.os.Build.VERSION.SDK_INT > 22) {
-            resultsTextView.setTextColor(getResources().getColor(android.R.color.black, null)); // Resources.Theme=null
-            resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray, null));
-        } else {
-            resultsTextView.setTextColor(getResources().getColor(android.R.color.black));
-            resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
-        }
-        resultsTextView.setText(buffOut);
+		updateResults();
 	}
     // Int tests.
     public String intCast() {
@@ -330,13 +305,13 @@ public class MainActivity extends Activity {
     }
     // Get files from sdcard, show names in listview
     public void filesTask() {
-		String storage = Environment.getExternalStorageDirectory().toString() + "/test";
 		listView = findViewById(R.id.fileList);
         if (sdkVersion < 21) {
             makeScrollable(listView);
         }
         File dir = new File(storage);
         final File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
+		filesTest = "Files from " + storage + " are below";
         if (dir.exists() && dir.isDirectory()) {
 			if (fileList.length == 0) {
                 filesTest = ("No files created in " + storage + ".");
@@ -401,8 +376,47 @@ public class MainActivity extends Activity {
 				if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 					listView.setEnabled(true);
 					filesTask();
+					filesTest = "Files from " + storage + " are shown below";
+					updateResults();
+				} else {
+					listView.setEnabled(false);
+					filesTest = "Storage permission not granted, files list disabled";
+					updateResults();
 				}
 				return;
 		}
+    }
+    // Put results here from return value
+    public void updateResults() {
+		StringBuffer text = new StringBuffer();
+	    final String[] results = {
+	            "",
+	            "1 + 2 = " + intCast(),
+	            "String is from package: " + packageNameOfString(),
+	            vibrateTest,
+	            filesTest,
+	            concatTxt,
+	    };
+	    results[0] = String.valueOf(results.length);
+	    int z = 0;
+	    //try {
+	        while (z < results.length) {
+	            text.append(results[z]);
+	            text.append("\n");
+	            z++;
+	        }
+	    //} catch (NullPointerException ConcatNullPointer) {
+	      //  Toast.makeText(this, "resultsTextView string concatenation caused NullPointerException", Toast.LENGTH_SHORT).show();
+	    //}
+	    String buffOut = String.valueOf(text);
+		TextView resultsTextView = findViewById(R.id.resultsTextView);
+	    if (android.os.Build.VERSION.SDK_INT > 22) {
+	        resultsTextView.setTextColor(getResources().getColor(android.R.color.black, null)); // Resources.Theme=null
+	        resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray, null));
+	    } else {
+	        resultsTextView.setTextColor(getResources().getColor(android.R.color.black));
+	        resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+	    }
+	    resultsTextView.setText(buffOut);
 	}
 }

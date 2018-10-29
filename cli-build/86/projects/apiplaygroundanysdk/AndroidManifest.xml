@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.crazyj36.apiplaygroundanysdk">
+    package="com.crazyj36.apiplaygroundanysdk"
+    android:versionCode="1"
+	android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="1" android:targetSdkVersion="28" />
     <uses-permission android:name="android.permission.VIBRATE" />
