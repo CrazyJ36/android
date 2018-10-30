@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.content.Intent;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.ActivityNotFoundException;
 import android.util.Patterns;
 
 public class Main2Activity extends Activity {
@@ -35,6 +36,60 @@ public class Main2Activity extends Activity {
 						Toast.makeText(Main2Activity.this, "Check phone permission", Toast.LENGTH_SHORT).show();
 						requestPermissions(new String[] {Manifest.permission.CALL_PHONE}, 0);
 					}
+				}
+			}
+		});
+		// Launch website button
+		Button btnWeb = findViewById(R.id.btnWeb);
+		btnWeb.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				EditText etWeb = findViewById(R.id.etWeb);
+				String url = etWeb.getText().toString();
+				if (sdkVersion >= 8) {
+					if (Patterns.DOMAIN_NAME.matcher(url).matches()) {
+						try {
+							String urlDomainFix = "http://www." + url;
+							Intent webPage = new Intent(Intent.ACTION_VIEW, Uri.parse(urlDomainFix));
+							startActivity(webPage);
+							Toast.makeText(Main2Activity.this, "Domain name fixed\nOpening: " + urlDomainFix + "\nin browser", Toast.LENGTH_LONG).show();
+						} catch (ActivityNotFoundException activityNotFound) {
+							Toast.makeText(Main2Activity.this, "You entered A Domain name, but there is no browser installed" + activityNotFound.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+						}
+					} else if (Patterns.WEB_URL.matcher(url).matches()) {
+						try {
+							Intent webPage = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+							startActivity(webPage);
+							Toast.makeText(Main2Activity.this, "Opening url:\n" + url + "\nin browser", Toast.LENGTH_LONG).show();
+						} catch (ActivityNotFoundException activityNotFound1) {
+							Toast.makeText(Main2Activity.this, "You entered A Url, but there is no browser installed" + activityNotFound1.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+						}
+					} else {
+						Toast.makeText(Main2Activity.this, "Enter A proper website name", Toast.LENGTH_SHORT).show();
+					}
+				} else {
+					Intent webPage = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+					Toast.makeText(Main2Activity.this, "Opening:\n" + url + "\nin browser", Toast.LENGTH_SHORT).show();
+					try {
+						startActivity(webPage);
+					} catch (ActivityNotFoundException activityNotFound) {
+						Toast.makeText(Main2Activity.this, "Must be typed as:\n\"http://www.website.com\"\nOr no browser installed", Toast.LENGTH_LONG).show();
+					}
+				}
+			}
+		});
+		findViewById(R.id.btnSms).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				EditText msgField = findViewById(R.id.etSms);
+				String msg = msgField.getText().toString();
+				Intent sendMsg = new Intent(Intent.ACTION_VIEW);
+				sendMsg.setData(Uri.parse("sms:"));
+				sendMsg.putExtra("sms_body", msg);
+				if (msg.equals("")) {
+					Toast.makeText(Main2Activity.this, "Enter message to send", Toast.LENGTH_SHORT);
+				} else {
+					startActivity(sendMsg);
 				}
 			}
 		});

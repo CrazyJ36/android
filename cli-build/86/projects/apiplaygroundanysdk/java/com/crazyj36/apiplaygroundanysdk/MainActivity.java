@@ -1,5 +1,7 @@
-/* TODO: lg: Crash on call button
-		 make sure storage text gets updated when it needs to
+/* TODO:
+  api < 11: notification timestamp
+*/
+/* IDEA:
 */
 package com.crazyj36.apiplaygroundanysdk;
 
@@ -45,6 +47,8 @@ import java.io.IOException;
 import java.io.File;
 
 public class MainActivity extends Activity {
+	// Use normal java class
+	String javaClassStr = new javaClass().myMethod();
     // Strings for methods outside of onCreate()
 	String filesTest = "";
     String logChannel = "APIPLAYGROUNDLOG";
@@ -75,21 +79,21 @@ public class MainActivity extends Activity {
         try {
             if (Build.VERSION.SDK_INT < 11 && vib != null) {
 				vib.vibrate(100);
-                vibrateTest = "Vibrated for 100ms. Can't check for vibrate hardware. Success (Not null).";
+                vibrateTest = "Vibrator Not null, Success";
             } else if (Build.VERSION.SDK_INT >= 26 && vib != null && vib.hasVibrator()) {
- 		        vib.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
-				vibrateTest = "Hasvibrator. Vibrated for 200ms, at default amplitude using class VibrationEffect.";
+ 		        vib.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+				vibrateTest = "Hasvibrator, Default amplitude, class VibrationEffect.";
             } else if (Build.VERSION.SDK_INT >= 26 && vib != null && vib.hasVibrator() && vib.hasAmplitudeControl()) {
-				vib.vibrate(VibrationEffect.createOneShot(1000, 10));
-                vibrateTest = "Has vibrator. Vibrated for 1000ms at %15 available amplitude using class Vibrator.";
+				vib.vibrate(VibrationEffect.createOneShot(100, 10));
+                vibrateTest = "Has vibrator. %15 amplitude, class Vibrator.";
             } else if (Build.VERSION.SDK_INT < 26 && Build.VERSION.SDK_INT >= 11 && vib != null && vib.hasVibrator()) {
-                vib.vibrate(300);
-				vibrateTest = "Has vibrator. Vibrated for 300ms at default amplitude using class Vibrator.";
+                vib.vibrate(100);
+				vibrateTest = "Has vibrator. Default amplitude, class Vibrator.";
             } else if (Build.VERSION.SDK_INT >= 11 && !(vib.hasVibrator())) { // Checks NullPointerException next in catch.
-				vibrateTest = "Vibrate: Hardware has no motor.";
+				vibrateTest = "No vibrate hardware.";
             }
         } catch (NullPointerException nullPointerException) {
-                vibrateTest = "Vibrate 'null' error: " + nullPointerException.getLocalizedMessage();
+                vibrateTest = "Vibrate 'null' error:\n" + nullPointerException.getLocalizedMessage();
         }
         // Device SDK Version view
         TextView tvSdk = findViewById(R.id.tvSdk);
@@ -148,10 +152,10 @@ public class MainActivity extends Activity {
                 alertDialog.show();
            }
         });
-         // Concatenate two strings, c-like
-        String txt1 = "One";
-        String txt2 = "Two";
-        concatTxt = String.format(Locale.US, "%s %s printed!", txt1, txt2); // or System.out.printf("%t", var); in console
+        // Concatenate two strings, c-like
+        String txt1 = "Hello";
+        String txt2 = "World";
+        concatTxt = String.format(Locale.US, "%s %s concatenated!", txt1, txt2); // or System.out.printf("%t", var); in console
         // Set TextView text from code, maybe not best practice.
         String tvHorizontalTxt = getResources().getString(R.string.tvHorizontalTxt);
         TextView horizontalTxt = findViewById(R.id.tvHorizontal);
@@ -240,42 +244,55 @@ public class MainActivity extends Activity {
 		});
 		// Notification Button
 		final NotificationManager notificationManager = (NotificationManager) getSystemService("notification"); // getSystemService() string type ("vibrate") or class type (VIBRATOR_SERVICE)
+        final String notifyChannel = "APIPLAYGROUNDANYSDK_NOTIFICATION_CHANNEL";
+		final Intent intent = new Intent(MainActivity.this, MainActivity.class);
+		final PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 1, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
         if (notificationManager != null) {
 			if (sdkVersion >= 26) {
-			    NotificationChannel notificationChannel = new NotificationChannel("APIPLAYGROUNDANYSDK_NOTIFICATION_CHANNEL", "Notify Button", NotificationManager.IMPORTANCE_DEFAULT);
-				notificationChannel.shouldShowLights();
+			    NotificationChannel notificationChannel = new NotificationChannel(notifyChannel, "Notify Button", NotificationManager.IMPORTANCE_DEFAULT);
 				notificationManager.createNotificationChannel(notificationChannel);
 			}
-			findViewById(R.id.btnNotify).setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View thisBtn) {
+		} else {
+			Toast.makeText(MainActivity.this, "Notification Manager null, notificationChannel not set", Toast.LENGTH_SHORT).show();
+		}
+		findViewById(R.id.btnNotify).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (notificationManager != null) {
 					if (sdkVersion >= 11) {
 						final Notification.Builder notifyBuild;
-						if (sdkVersion > 25) {
-							notifyBuild = new Notification.Builder(MainActivity.this, "APIPLAYGROUNDANYSDK_NOTIFICATION_CHANNEL");
+						if (sdkVersion >= 26) {
+							notifyBuild = new Notification.Builder(MainActivity.this, notifyChannel);
 						} else {
 	                        notifyBuild = new Notification.Builder(MainActivity.this);
 						}
+						if (sdkVersion >= 21) {
+							notifyBuild.setColor(9315498); // cool thing - also for below sdk 11, set colors in notification_layout.xml
+						}
 						notifyBuild.setSmallIcon(R.drawable.top_text_drawable);
+						notifyBuild.setContentIntent(pendingIntent);
 						notifyBuild.setContentTitle("A notification");
 						notifyBuild.setContentText("This is the notification content");
+						notifyBuild.setAutoCancel(true);
+						notifyBuild.setShowWhen(true);
+						notifyBuild.setDefaults(Notification.DEFAULT_ALL);
 						notificationManager.notify(0, notifyBuild.build());
 					} else {
 						Notification notify = new Notification(R.drawable.top_text_drawable, "API Playground Any SDK", System.currentTimeMillis());
-					    Intent intent = new Intent(MainActivity.this, Main2Activity.class);
-						PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 1, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
+						notify.flags = Notification.FLAG_AUTO_CANCEL;
 						notify.contentIntent = pendingIntent;
 						RemoteViews notifView = new RemoteViews(getPackageName(), R.layout.notification_layout);
                         notifView.setTextViewText(R.id.notificationTvTitle, "API Playground Any SDK");
-						notifView.setTextViewText(R.id.notificationTvContent, "This is the notification content");
+						notifView.setTextViewText(R.id.notificationTvContent, "A Notification\nThis is the notification content");
 						notify.contentView = notifView;
-						notificationManager.notify("APIPLAYGROUNDANYSDK_NOTIFICATION_CHANNEL", 0, notify);
+						notify.defaults = Notification.DEFAULT_ALL;
+						notificationManager.notify(notifyChannel, 0, notify);
 					}
+				} else {
+					Toast.makeText(MainActivity.this, "Notification Manager null, notification not made", Toast.LENGTH_LONG);
 				}
-			});
-		} else {
-			Toast.makeText(MainActivity.this, "Notification Manager service returned null", Toast.LENGTH_LONG);
-		}
+			}
+		});
         // getStorage permission & start filesTask()
         if (sdkVersion < 23) {
             filesTask();
@@ -294,7 +311,7 @@ public class MainActivity extends Activity {
 	}
     // Get files from sdcard, show names in listview
     public void filesTask() {
-		filesTest = "Files from " + storage + " are shown below";
+		filesTest = "Files at " + storage + " below";
 		listView = findViewById(R.id.fileList);
         if (sdkVersion < 21) {
             makeScrollable(listView);
@@ -304,7 +321,7 @@ public class MainActivity extends Activity {
         if (dir.exists() && dir.isDirectory()) {
 			if (fileList.length == 0) {
 				listView.setEnabled(false);
-                filesTest = ("No files created in " + storage + ".");
+                filesTest = ("No files in " + storage + ".");
 				return;
 			}
             String[] names = new String[fileList.length];
@@ -349,7 +366,7 @@ public class MainActivity extends Activity {
 					updateResults();
         		} else {
         			listView.setEnabled(false);
-                    filesTest = "Storage permission not granted, files list disabled";
+                    filesTest = "Storage permission denied, files disabled";
         			updateResults();
         		}
 				return;
@@ -361,10 +378,11 @@ public class MainActivity extends Activity {
 	    final String[] results = {
 	            "",
 	            "1 + 2 = " + intCast(),
-	            "String is from package: " + packageNameOfString(),
+	            "String package: " + packageNameOfString(),
 	            vibrateTest,
 	            filesTest,
 	            concatTxt,
+				javaClassStr,
 	    };
 	    results[0] = String.valueOf(results.length);
 	    int z = 0;
