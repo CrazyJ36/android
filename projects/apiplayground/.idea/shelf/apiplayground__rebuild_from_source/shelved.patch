@@ -1,0 +1,292 @@
+Index: app/src/main/res/drawable-v24/ic_launcher_foreground.xml
+===================================================================
+--- app/src/main/res/drawable-v24/ic_launcher_foreground.xml	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
++++ app/src/main/res/drawable-v24/ic_launcher_foreground.xml	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
+@@ -1,34 +0,0 @@
+-<vector xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:aapt="http://schemas.android.com/aapt"
+-    android:width="108dp"
+-    android:height="108dp"
+-    android:viewportWidth="108"
+-    android:viewportHeight="108">
+-    <path
+-        android:fillType="evenOdd"
+-        android:pathData="M32,64C32,64 38.39,52.99 44.13,50.95C51.37,48.37 70.14,49.57 70.14,49.57L108.26,87.69L108,109.01L75.97,107.97L32,64Z"
+-        android:strokeWidth="1"
+-        android:strokeColor="#00000000">
+-        <aapt:attr name="android:fillColor">
+-            <gradient
+-                android:endX="78.5885"
+-                android:endY="90.9159"
+-                android:startX="48.7653"
+-                android:startY="61.0927"
+-                android:type="linear">
+-                <item
+-                    android:color="#44000000"
+-                    android:offset="0.0" />
+-                <item
+-                    android:color="#00000000"
+-                    android:offset="1.0" />
+-            </gradient>
+-        </aapt:attr>
+-    </path>
+-    <path
+-        android:fillColor="#FFFFFF"
+-        android:fillType="nonZero"
+-        android:pathData="M66.94,46.02L66.94,46.02C72.44,50.07 76,56.61 76,64L32,64C32,56.61 35.56,50.11 40.98,46.06L36.18,41.19C35.45,40.45 35.45,39.3 36.18,38.56C36.91,37.81 38.05,37.81 38.78,38.56L44.25,44.05C47.18,42.57 50.48,41.71 54,41.71C57.48,41.71 60.78,42.57 63.68,44.05L69.11,38.56C69.84,37.81 70.98,37.81 71.71,38.56C72.44,39.3 72.44,40.45 71.71,41.19L66.94,46.02ZM62.94,56.92C64.08,56.92 65,56.01 65,54.88C65,53.76 64.08,52.85 62.94,52.85C61.8,52.85 60.88,53.76 60.88,54.88C60.88,56.01 61.8,56.92 62.94,56.92ZM45.06,56.92C46.2,56.92 47.13,56.01 47.13,54.88C47.13,53.76 46.2,52.85 45.06,52.85C43.92,52.85 43,53.76 43,54.88C43,56.01 43.92,56.92 45.06,56.92Z"
+-        android:strokeWidth="1"
+-        android:strokeColor="#00000000" />
+-</vector>
+Index: app/src/main/res/mipmap-anydpi-v26/battery_icon.xml
+===================================================================
+--- app/src/main/res/mipmap-anydpi-v26/battery_icon.xml	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
++++ app/src/main/res/mipmap-anydpi-v26/battery_icon.xml	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
+@@ -1,5 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+-    <background android:drawable="@drawable/ic_launcher_background"/>
+-    <foreground android:drawable="@mipmap/battery_icon_f"/>
+-</adaptive-icon>
+\ No newline at end of file
+Index: app/src/main/res/mipmap-anydpi-v26/battery_icon_round.xml
+===================================================================
+--- app/src/main/res/mipmap-anydpi-v26/battery_icon_round.xml	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
++++ app/src/main/res/mipmap-anydpi-v26/battery_icon_round.xml	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
+@@ -1,5 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+-    <background android:drawable="@drawable/ic_launcher_background"/>
+-    <foreground android:drawable="@mipmap/battery_icon_f"/>
+-</adaptive-icon>
+\ No newline at end of file
+Index: app/src/main/res/mipmap-anydpi-v26/brush_icon.xml
+===================================================================
+--- app/src/main/res/mipmap-anydpi-v26/brush_icon.xml	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
++++ app/src/main/res/mipmap-anydpi-v26/brush_icon.xml	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
+@@ -1,5 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+-    <background android:drawable="@drawable/ic_launcher_background"/>
+-    <foreground android:drawable="@mipmap/brush_icon_front"/>
+-</adaptive-icon>
+\ No newline at end of file
+Index: app/src/main/res/mipmap-anydpi-v26/brush_icon_round.xml
+===================================================================
+--- app/src/main/res/mipmap-anydpi-v26/brush_icon_round.xml	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
++++ app/src/main/res/mipmap-anydpi-v26/brush_icon_round.xml	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
+@@ -1,5 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+-    <background android:drawable="@drawable/ic_launcher_background"/>
+-    <foreground android:drawable="@mipmap/brush_icon_front"/>
+-</adaptive-icon>
+\ No newline at end of file
+Index: app/src/main/res/mipmap-anydpi-v26/build_icon.xml
+===================================================================
+--- app/src/main/res/mipmap-anydpi-v26/build_icon.xml	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
++++ app/src/main/res/mipmap-anydpi-v26/build_icon.xml	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
+@@ -1,5 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+-    <background android:drawable="@drawable/ic_launcher_background"/>
+-    <foreground android:drawable="@mipmap/build_icon_front"/>
+-</adaptive-icon>
+\ No newline at end of file
+Index: app/src/main/res/mipmap-anydpi-v26/build_icon_round.xml
+===================================================================
+--- app/src/main/res/mipmap-anydpi-v26/build_icon_round.xml	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
++++ app/src/main/res/mipmap-anydpi-v26/build_icon_round.xml	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
+@@ -1,5 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+-    <background android:drawable="@drawable/ic_launcher_background"/>
+-    <foreground android:drawable="@mipmap/build_icon_front"/>
+-</adaptive-icon>
+\ No newline at end of file
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    package=\"com.crazyj36.apiplayground\">\n\n    <uses-permission android:name=\"android.permission.CALL_PHONE\" />\n    <uses-permission android:name=\"android.permission.VIBRATE\" />\n\n    <application\n        android:allowBackup=\"true\"\n        android:icon=\"@mipmap/ic_launcher\"\n        android:label=\"@string/app_name\"\n        android:supportsRtl=\"true\"\n        android:theme=\"@style/AppTheme\">\n\n        <activity\n            android:name=\".MainActivity\"\n            android:configChanges=\"orientation|screenSize\"\n            android:windowSoftInputMode=\"stateHidden|adjustPan\">\n            <intent-filter>\n                <action android:name=\"android.intent.action.MAIN\" />\n                <action android:name=\"android.intent.action.VIEW\" />\n\n                <category android:name=\"android.intent.category.LAUNCHER\" />\n            </intent-filter>\n            <meta-data\n                android:name=\"android.app.shortcuts\"\n                android:resource=\"@xml/shortcuts\" />\n        </activity>\n        <activity\n            android:name=\".Main2Activity\"\n            android:configChanges=\"orientation|screenSize\">\n            <intent-filter>\n                <action android:name=\"android.intent.action.MAIN\" />\n            </intent-filter>\n        </activity>\n\n        <receiver android:name=\"AppWidget\">\n        <intent-filter>\n            <action android:name=\"android.appwidget.action.APPWIDGET_UPDATE\" />\n        </intent-filter>\n        <meta-data\n            android:name=\"android.appwidget.provider\"\n            android:resource=\"@xml/appwidgetinfo\" />\n        </receiver>\n\n    </application>\n</manifest>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
++++ app/src/main/AndroidManifest.xml	(date 1540953407877)
+@@ -5,7 +5,7 @@
+     <uses-permission android:name="android.permission.VIBRATE" />
+ 
+     <application
+-        android:allowBackup="true"
++        android:allowBackup="false"
+         android:icon="@mipmap/ic_launcher"
+         android:label="@string/app_name"
+         android:supportsRtl="true"
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Top-level build file where you can add configuration options common to all sub-projects/modules.\n\nbuildscript {\n    \n    repositories {\n        google()\n        jcenter()\n    }\n    dependencies {\n        classpath 'com.android.tools.build:gradle:3.2.1'\n        \n\n        // NOTE: Do not place your application dependencies here; they belong\n        // in the individual module build.gradle files\n    }\n}\n\nallprojects {\n    repositories {\n        google()\n        jcenter()\n    }\n}\n\ntask clean(type: Delete) {\n    delete rootProject.buildDir\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.gradle	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
++++ build.gradle	(date 1540951048824)
+@@ -1,27 +1,15 @@
+-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+-
+ buildscript {
+-    
+     repositories {
+         google()
+         jcenter()
+     }
+     dependencies {
+         classpath 'com.android.tools.build:gradle:3.2.1'
+-        
+-
+-        // NOTE: Do not place your application dependencies here; they belong
+-        // in the individual module build.gradle files
+     }
+ }
+-
+ allprojects {
+-    repositories {
+-        google()
+-        jcenter()
+-    }
+-}
+-
+-task clean(type: Delete) {
+-    delete rootProject.buildDir
+-}
++   repositories {
++       google()
++       jcenter()
++   }
++}
+\ No newline at end of file
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\n    <!-- App name -->\n    <string name=\"app_name\">API Playground</string>\n    <!-- Large Stories-->\n    <string name=\"bigText\">C is a general-purpose, imperative computer programming language, supporting structured programming, lexical variable scope and recursion</string>\n    <string name=\"bigText2\">C is an imperative procedural language. It was designed to be compiled using a relatively straightforward compiler, to provide low-level access to memory, to provide language constructs that map efficiently to machine instructions, and to require minimal run-time support. Despite its low-level capabilities, the language was designed to encourage cross-platform programming. A standards-compliant and portable-ly written C program can be compiled for a very wide variety of computer platforms and operating systems with few changes to its source code. The language has become available on a very wide range of platforms, from embedded micro-controllers to supercomputers.</string>\n    <!-- Shortcuts -->\n    <string name=\"disabledLabel1Shortcut\">Disabled Action</string>\n    <string name=\"disabledLabel2Shortcut\">Disabled Action</string>\n    <string name=\"longLabel1Shortcut\">Go to Main screen</string>\n    <string name=\"shortLabel1Shortcut\">Main</string>\n    <string name=\"longLabel2Shortcut\">Second Activity</string>\n    <string name=\"shortLabel2Shortcut\">More</string>\n    <!-- Image -->\n    <string name=\"imageDesc\">Image Representing Programming</string>\n    <!-- Activity 1 Buttons, Field Names -->\n    <string name=\"activityBtnTxt\">Next</string>\n    <string name=\"dialogBtnTxt\">Dialog</string>\n    <string name=\"toastBtnTxt\">Tap/Long</string>\n    <string name=\"audioBtnTxt\">Play</string>\n    <string name=\"songInfoTxt\">Not Playing</string>\n    <string name=\"mediaPlayerReleaseTxt\">Media Player Done</string>\n    <string name=\"mediaPlayingTxt\">Audio Playing</string>\n    <string name=\"callBtnTxt\">Call</string>\n    <string name=\"numFldHint\">Phone Number</string>\n    <string name=\"urlBtnTxt\">Go</string>\n    <string name=\"urlFldHint\">Web Page</string>\n    <string name=\"smsBtnTxt\">SMS</string>\n    <string name=\"smsFldHint\">Message</string>\n    <string name=\"switchOnTxt\">Switch Is On</string>\n    <string name=\"switchOffTxt\">Switch Is Off</string>\n    <string name=\"chkSwitchBtnTxt\">Check</string>\n    <string name=\"notifyBtnTxt\">Notify</string>\n    <string name=\"grid1BtnTxt\">1</string>\n    <string name=\"grid2BtnTxt\">2</string>\n    <string name=\"grid3BtnTxt\">3</string>\n    <string name=\"grid4BtnTxt\">4</string>\n    <string name=\"randomBtnTxt\">Random</string>\n    <string name=\"snackbarBtnTxt\">SnackBar</string>\n    <string name=\"bottomSheetBtnTxt\">Bottom Sheet</string>\n    <string name=\"batteryIcon\">Battery Icon</string>\n    <string name=\"brushIcon\">Brush Icon</string>\n    <string name=\"buildIcon\">Build Icon</string>\n    <string name=\"bottomSheetImg1Desc\">An Icon representing A battery(round)</string>\n    <string name=\"bottomSheetImg2Desc\">A Brush icon(round)</string>\n    <string name=\"bottomSheetImg3Desc\">An Icon representing the building of something(round)</string>\n    <string name=\"vibBtnTxt\">Vibrate</string>\n    <string name=\"batBtnTxt\">Battery</string>\n\n    <!-- Activity 2 Button, Field Names -->\n    <string name=\"act2AndroidImgDesc\">A Picture icon</string>\n    <string name=\"act2PicBtnTxt\">Picture</string>\n    <string name=\"act2PicDialog\">A Nature Landscape In A dialog pop-up</string>\n\n    <!-- Toolbar Titles -->\n    <string name=\"toolbarMenuDesc\">App Options</string>\n    <string name=\"toolbarAboutBtn\">About App</string>\n    <string name=\"toolbarSubmenuBtn\">Options</string>\n    <string name=\"toolbarSub1\">Show Hidden Fab</string>\n    <string name=\"toolbarSub2\">Checks 2</string>\n    <string name=\"toolbarAboutActivity\">About This Screen</string>\n    <string name=\"toolbarExitBtn\">Exit</string>\n    <!-- App Widget Strings -->\n    <string name=\"widgetText\">C is a fast programming language.</string>\n\n</resources>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
++++ app/src/main/res/values/strings.xml	(date 1540951402168)
+@@ -12,7 +12,6 @@
+     <string name="longLabel2Shortcut">Second Activity</string>
+     <string name="shortLabel2Shortcut">More</string>
+     <!-- Image -->
+-    <string name="imageDesc">Image Representing Programming</string>
+     <!-- Activity 1 Buttons, Field Names -->
+     <string name="activityBtnTxt">Next</string>
+     <string name="dialogBtnTxt">Dialog</string>
+@@ -38,9 +37,6 @@
+     <string name="randomBtnTxt">Random</string>
+     <string name="snackbarBtnTxt">SnackBar</string>
+     <string name="bottomSheetBtnTxt">Bottom Sheet</string>
+-    <string name="batteryIcon">Battery Icon</string>
+-    <string name="brushIcon">Brush Icon</string>
+-    <string name="buildIcon">Build Icon</string>
+     <string name="bottomSheetImg1Desc">An Icon representing A battery(round)</string>
+     <string name="bottomSheetImg2Desc">A Brush icon(round)</string>
+     <string name="bottomSheetImg3Desc">An Icon representing the building of something(round)</string>
+@@ -54,7 +50,6 @@
+ 
+     <!-- Toolbar Titles -->
+     <string name="toolbarMenuDesc">App Options</string>
+-    <string name="toolbarAboutBtn">About App</string>
+     <string name="toolbarSubmenuBtn">Options</string>
+     <string name="toolbarSub1">Show Hidden Fab</string>
+     <string name="toolbarSub2">Checks 2</string>
+Index: local.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>## This file must *NOT* be checked into Version Control Systems,\n# as it contains information specific to your local configuration.\n#\n# Location of the SDK. This is only used by Gradle.\n# For customization when using a Version Control System, please read the\n# header note.\n#Mon Oct 08 03:38:33 EDT 2018\nndk.dir=C\\:\\\\Users\\\\CrazyJ36\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\ndk-bundle\nsdk.dir=C\\:\\\\Users\\\\CrazyJ36\\\\AppData\\\\Local\\\\Android\\\\Sdk\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1252
+===================================================================
+--- local.properties	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
++++ local.properties	(date 1540947419420)
+@@ -1,9 +1,10 @@
+-## This file must *NOT* be checked into Version Control Systems,
++## This file is automatically generated by Android Studio.
++# Do not modify this file -- YOUR CHANGES WILL BE ERASED!
++#
++# This file should *NOT* be checked into Version Control Systems,
+ # as it contains information specific to your local configuration.
+ #
+ # Location of the SDK. This is only used by Gradle.
+ # For customization when using a Version Control System, please read the
+ # header note.
+-#Mon Oct 08 03:38:33 EDT 2018
+-ndk.dir=C\:\\Users\\CrazyJ36\\AppData\\Local\\Android\\Sdk\\ndk-bundle
+-sdk.dir=C\:\\Users\\CrazyJ36\\AppData\\Local\\Android\\Sdk
++sdk.dir=C\:\\Users\\CrazyJ36\\AppData\\Local\\Android\\Sdk
+\ No newline at end of file
+Index: app/src/main/res/layout/bottom_sheet.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n\n<HorizontalScrollView\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    android:layout_width=\"wrap_content\"\n    android:layout_height=\"wrap_content\">\n\n    <LinearLayout\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"match_parent\"\n        android:orientation=\"horizontal\">\n\n        <ImageView\n            android:layout_width=\"200dp\"\n            android:layout_height=\"200dp\"\n            android:contentDescription=\"@string/bottomSheetImg1Desc\"\n            android:src=\"@mipmap/battery_icon_round\" />\n\n        <ImageView\n            android:layout_width=\"200dp\"\n            android:layout_height=\"200dp\"\n            android:contentDescription=\"@string/bottomSheetImg2Desc\"\n            android:src=\"@mipmap/brush_icon_round\"/>\n\n        <ImageView\n            android:layout_width=\"200dp\"\n            android:layout_height=\"200dp\"\n            android:contentDescription=\"@string/bottomSheetImg3Desc\"\n            android:src=\"@mipmap/build_icon_round\"/>\n\n    </LinearLayout>\n\n</HorizontalScrollView>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/bottom_sheet.xml	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
++++ app/src/main/res/layout/bottom_sheet.xml	(date 1540949823931)
+@@ -14,19 +14,19 @@
+             android:layout_width="200dp"
+             android:layout_height="200dp"
+             android:contentDescription="@string/bottomSheetImg1Desc"
+-            android:src="@mipmap/battery_icon_round" />
++            android:src="@drawable/battery_icon" />
+ 
+         <ImageView
+             android:layout_width="200dp"
+             android:layout_height="200dp"
+             android:contentDescription="@string/bottomSheetImg2Desc"
+-            android:src="@mipmap/brush_icon_round"/>
++            android:src="@drawable/brush_icon"/>
+ 
+         <ImageView
+             android:layout_width="200dp"
+             android:layout_height="200dp"
+             android:contentDescription="@string/bottomSheetImg3Desc"
+-            android:src="@mipmap/build_icon_round"/>
++            android:src="@drawable/build_icon"/>
+ 
+     </LinearLayout>
+ 
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:orientation=\"vertical\">\n\n    <include layout=\"@layout/appbar\" />\n\n    <android.support.design.widget.CoordinatorLayout\n        xmlns:android=\"http://schemas.android.com/apk/res/android\"\n        xmlns:tools=\"http://schemas.android.com/tools\"\n        android:id=\"@+id/parentView\"\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"match_parent\"\n        android:orientation=\"vertical\">\n\n        <ScrollView xmlns:android=\"http://schemas.android.com/apk/res/android\"\n            xmlns:tools=\"http://schemas.android.com/tools\"\n            android:id=\"@+id/scrollview\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"match_parent\"\n            android:orientation=\"vertical\"\n            tools:context=\".MainActivity\">\n\n            <LinearLayout\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"wrap_content\"\n                android:orientation=\"vertical\">\n\n                <HorizontalScrollView\n                    android:layout_width=\"match_parent\"\n                    android:layout_height=\"30dp\">\n\n                    <TextView\n                        android:layout_width=\"wrap_content\"\n                        android:layout_height=\"30dp\"\n                        android:text=\"@string/bigText\" />\n                </HorizontalScrollView>\n\n                <android.support.v4.widget.NestedScrollView\n                    android:layout_width=\"match_parent\"\n                    android:layout_height=\"130dp\"\n                    android:scrollbars=\"vertical\">\n\n                    <TextView\n                        android:layout_width=\"match_parent\"\n                        android:layout_height=\"match_parent\"\n                        android:drawableTop=\"@drawable/image\"\n                        android:text=\"@string/bigText2\" />\n\n                </android.support.v4.widget.NestedScrollView>\n\n                <Button\n                    android:id=\"@+id/activity2Btn\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:text=\"@string/activityBtnTxt\"\n                    android:textAllCaps=\"false\" />\n\n                <Button\n                    android:id=\"@+id/dialogButton\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:text=\"@string/dialogBtnTxt\"\n                    android:textAllCaps=\"false\" />\n\n                <Button\n                    android:id=\"@+id/toastButton\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:text=\"@string/toastBtnTxt\"\n                    android:textAllCaps=\"false\" />\n\n                <Button\n                    android:id=\"@+id/audioButton\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:text=\"@string/audioBtnTxt\"\n                    android:textAllCaps=\"false\" />\n\n                <TextView\n                    android:id=\"@+id/songInfo\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:text=\"@string/songInfoTxt\" />\n\n                <Button\n                    android:id=\"@+id/callButton\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:text=\"@string/callBtnTxt\"\n                    android:textAllCaps=\"false\" />\n\n                <EditText\n                    android:id=\"@+id/numField\"\n                    android:layout_width=\"match_parent\"\n                    android:layout_height=\"wrap_content\"\n                    android:ems=\"10\"\n                    android:hint=\"@string/numFldHint\"\n                    android:inputType=\"phone\"\n                    android:importantForAutofill=\"auto\"\n                    android:autofillHints=\"My Phone Number\"/>\n\n                <Button\n                    android:id=\"@+id/urlButton\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:text=\"@string/urlBtnTxt\"\n                    android:textAllCaps=\"false\" />\n\n                <EditText\n                    android:id=\"@+id/urlField\"\n                    android:layout_width=\"match_parent\"\n                    android:layout_height=\"wrap_content\"\n                    android:ems=\"10\"\n                    android:hint=\"@string/urlFldHint\"\n                    android:inputType=\"textUri\"\n                    android:textAllCaps=\"false\" />\n\n                <Button\n                    android:id=\"@+id/smsButton\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:text=\"@string/smsBtnTxt\"\n                    android:textAllCaps=\"false\" />\n\n                <EditText\n                    android:id=\"@+id/smsField\"\n                    android:layout_width=\"match_parent\"\n                    android:layout_height=\"wrap_content\"\n                    android:hint=\"@string/smsFldHint\"\n                    android:inputType=\"text\" />\n\n                <Switch\n                    android:id=\"@+id/switch1\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\" />\n\n                <Button\n                    android:id=\"@+id/chkSwitchBtn\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:text=\"@string/chkSwitchBtnTxt\"\n                    android:textAllCaps=\"false\"/>\n\n                <Button\n                    android:id=\"@+id/notifyBtn\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:text=\"@string/notifyBtnTxt\"\n                    android:textAllCaps=\"false\" />\n\n                <GridLayout\n                    android:layout_width=\"match_parent\"\n                    android:layout_height=\"wrap_content\"\n                    android:columnCount=\"2\"\n                    android:rowCount=\"2\" >\n\n                    <Button\n                        android:id=\"@+id/grid1\"\n                        android:layout_width=\"wrap_content\"\n                        android:layout_height=\"wrap_content\"\n                        android:text=\"@string/grid1BtnTxt\" />\n\n                    <Button\n                        android:id=\"@+id/grid2\"\n                        android:layout_width=\"wrap_content\"\n                        android:layout_height=\"wrap_content\"\n                        android:text=\"@string/grid2BtnTxt\" />\n\n                    <Button\n                        android:id=\"@+id/grid3\"\n                        android:layout_width=\"wrap_content\"\n                        android:layout_height=\"wrap_content\"\n                        android:text=\"@string/grid3BtnTxt\" />\n\n                    <Button\n                        android:id=\"@+id/grid4\"\n                        android:layout_width=\"wrap_content\"\n                        android:layout_height=\"wrap_content\"\n                        android:text=\"@string/grid4BtnTxt\" />\n\n                </GridLayout>\n\n                <Button\n                    android:id=\"@+id/randomBtn\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:text=\"@string/randomBtnTxt\"\n                    android:textAllCaps=\"false\" />\n\n                <Button\n                    android:id=\"@+id/snackbarBtn\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:text=\"@string/snackbarBtnTxt\"\n                    android:textAllCaps=\"false\" />\n\n                <Button\n                    android:id=\"@+id/bottomSheetBtn\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:text=\"@string/bottomSheetBtnTxt\"\n                    android:textAllCaps=\"false\" />\n\n                <Button\n                    android:id=\"@+id/vibBtn\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:text=\"@string/vibBtnTxt\"\n                    android:textAllCaps=\"false\" />\n\n                <Button\n                    android:id=\"@+id/batBtn\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:text=\"@string/batBtnTxt\"\n                    android:textAllCaps=\"false\" />\n\n            </LinearLayout>\n        </ScrollView>\n\n        <android.support.design.widget.FloatingActionButton\n            android:id=\"@+id/fab\"\n            android:layout_width=\"wrap_content\"\n            android:layout_height=\"wrap_content\"\n            android:layout_gravity=\"end|bottom\"\n            android:layout_margin=\"16dp\"\n            android:src=\"@drawable/infoicon\" />\n\n    </android.support.design.widget.CoordinatorLayout>\n</LinearLayout>\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main.xml	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
++++ app/src/main/res/layout/activity_main.xml	(date 1540951402043)
+@@ -16,7 +16,6 @@
+ 
+         <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+-            android:id="@+id/scrollview"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical"
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>apply plugin: 'com.android.application'\n\nandroid {\n    compileSdkVersion 28\n    defaultConfig {\n        applicationId \"com.crazyj36.apiplayground\"\n        minSdkVersion 25\n        targetSdkVersion 28\n        versionCode 1\n        versionName \"1.0\"\n        testInstrumentationRunner \"android.support.test.runner.AndroidJUnitRunner\"\n    }\n    buildTypes {\n        release {\n            minifyEnabled false\n            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'\n        }\n    }\n}\n\ndependencies {\n    implementation fileTree(dir: 'libs', include: ['*.jar'])\n    implementation 'com.android.support:appcompat-v7:28.0.0'\n    implementation 'com.android.support:design:28.0.0'\n    testImplementation 'junit:junit:4.12'\n    androidTestImplementation 'com.android.support.test:runner:1.0.2'\n    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 7ac9dc171e14a9760f1e1de182da2315adcded8c)
++++ app/build.gradle	(date 1540951251273)
+@@ -20,7 +20,6 @@
+ 
+ dependencies {
+     implementation fileTree(dir: 'libs', include: ['*.jar'])
+-    implementation 'com.android.support:appcompat-v7:28.0.0'
+     implementation 'com.android.support:design:28.0.0'
+     testImplementation 'junit:junit:4.12'
+     androidTestImplementation 'com.android.support.test:runner:1.0.2'
