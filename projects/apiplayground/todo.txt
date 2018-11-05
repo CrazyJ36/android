@@ -1,0 +1,3 @@
+src/xml/appwiddetinfo.xml
+
+doesn't seem to be enclosed properly

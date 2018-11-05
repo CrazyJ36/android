@@ -433,4 +433,5 @@ public class MainActivity extends Activity {
     public String packageNameOfString() {
         return String.class.getCanonicalName();
     }
+
 }
