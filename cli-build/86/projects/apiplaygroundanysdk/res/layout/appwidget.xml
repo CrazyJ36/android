@@ -5,15 +5,15 @@
 	android:layout_height="match_parent"
 	android:layout_width="match_parent"
 	android:background="@android:color/black"
-	android:padding="4dp" >
+	android:padding="16dp" >
 
-	<TextView
-		android:id="@+id/tvWidget"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:textSize="12sp"
-		android:text="@string/tvWidgetTxt"
-		android:textColor="@android:color/white"
-		android:drawableTop="@drawable/top_text_drawable" />
+		<TextView
+			android:id="@+id/tvWidget"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="12sp"
+			android:text="@string/tvWidgetTxt"
+			android:textColor="@android:color/white"
+			android:drawableTop="@drawable/top_text_drawable" />
 
 </FrameLayout>

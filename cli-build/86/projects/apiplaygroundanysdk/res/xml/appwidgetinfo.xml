@@ -4,7 +4,9 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:minWidth="100dp"
 	android:minHeight="100dp"
+	android:updatePeriodMillis="4000"
 	android:initialLayout="@layout/appwidget"
+	android:previewImage="@mipmap/ic_launcher"
 	android:resizeMode="horizontal|vertical"
 	android:widgetCategory="home_screen|keyguard" >
 </appwidget-provider>

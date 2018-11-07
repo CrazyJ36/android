@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">API Playground Any SDK </string>
 	<string name="tvWidgetTxt">The text here should be the base to which the widget resizes itself, as the FrameLayout used to make the widget frame has it\'s height and width set to wrap_content.</string>
-	<string name="btnWidgetTxt">Toast</string>
     <string name="tvHorizontalTxt">This HorizontalScrollview (swipe it sideways) contains text that is in the file /res/values/strings.xml. Java code was used to actually to put it here. The text was not set in the activity.xml like usual.. Maybe not best codeing practice.</string>
     <string name="act2BtnTxt">Next</string>
     <string name="btnCustomTxt">Custom</string>
