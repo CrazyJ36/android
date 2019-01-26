@@ -1,14 +1,17 @@
 package com.crazyj36.apiplayground;
 
 import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.widget.RemoteViews;
 
-public class AppWidget extends android.appwidget.AppWidgetProvider {
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+public class AppWidget extends AppWidgetProvider {
+    public void onUpdate(final Context context, final AppWidgetManager appWidgetManager, final int[] appWidgetIds) {
+        final RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.appwidget);
+        remoteViews.setTextViewText(R.id.tvWidget, context.getPackageName());
 
-        // update widget view
-        appWidgetManager.updateAppWidget(appWidgetIds, new RemoteViews(context.getPackageName(), R.layout.appwidget));
+        appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
+
     }
 }
 
