@@ -8,14 +8,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
-
-import static android.view.Gravity.END;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -31,7 +31,7 @@ public class Main2Activity extends AppCompatActivity {
         toolbarMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final PopupMenu menu = new PopupMenu(Main2Activity.this, toolbarMenu, END);
+                final PopupMenu menu = new PopupMenu(Main2Activity.this, toolbarMenu, android.view.Gravity.END);
                 menu.getMenuInflater().inflate(R.menu.options_activity2, menu.getMenu());
                 menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
@@ -89,6 +89,44 @@ public class Main2Activity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String listClickText = mainWords[i] + " selected, " + "List index " + l;
                 Toast.makeText(Main2Activity.this, listClickText, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Checkboxes
+        final TextView tvChkStatus = findViewById(R.id.tvChkStatus);
+        final CheckBox chk1 = findViewById(R.id.chk1);
+        final CheckBox chk2 = findViewById(R.id.chk2);
+        final String[] tvChkStatusTxt = {""};
+
+        chk1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (chk1.isChecked() && !chk2.isChecked()) {
+                    tvChkStatusTxt[0] = "1 Checked";
+                } else if (!chk1.isChecked() && chk2.isChecked()) {
+                    tvChkStatusTxt[0] = "2 Checked";
+                } else if (chk1.isChecked() && chk2.isChecked()) {
+                    tvChkStatusTxt[0] = "Both Checked";
+                } else if (!chk1.isChecked() && !chk2.isChecked()) {
+                    tvChkStatusTxt[0] = "None Checked";
+                }
+                tvChkStatus.setText(tvChkStatusTxt[0]);
+            }
+        });
+
+        chk2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (chk1.isChecked() && !chk2.isChecked()) {
+                    tvChkStatusTxt[0] = "1 Checked";
+                } else if (!chk1.isChecked() && chk2.isChecked()) {
+                    tvChkStatusTxt[0] = "2 Checked";
+                } else if (chk1.isChecked() && chk2.isChecked()) {
+                    tvChkStatusTxt[0] = "Both Checked";
+                } else if (!chk1.isChecked() && !chk2.isChecked()) {
+                    tvChkStatusTxt[0] = "None Checked";
+                }
+                tvChkStatus.setText(tvChkStatusTxt[0]);
             }
         });
     }
