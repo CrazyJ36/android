@@ -26,10 +26,12 @@ import android.view.View.OnClickListener;
 import android.content.pm.PackageManager;
 import android.content.Intent;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.widget.RemoteViews;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.CheckBox;
 import android.widget.Toast;
 import android.widget.TextView;
 import android.widget.ListView;
@@ -293,6 +295,42 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
+	    // CheckBoxes
+	    final TextView tvChkStatus = findViewById(R.id.tvChkStatus);
+	    final CheckBox chk1 = findViewById(R.id.chk1);
+	    final CheckBox chk2 = findViewById(R.id.chk2);
+	    final String[] tvChkStatusTxt = {""};
+        tvChkStatus.setText("Select Some Checkboxes");
+        chk1.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (chk1.isChecked() && !chk2.isChecked()) {
+		            tvChkStatusTxt[0] = "1 Checked";
+		        } else if (!chk1.isChecked() && chk2.isChecked()) {
+		            tvChkStatusTxt[0] = "2 Checked";
+		        } else if (chk1.isChecked() && chk2.isChecked()) {
+					tvChkStatusTxt[0] = "Both Checked";
+		        } else if (!chk1.isChecked() && !chk2.isChecked()) {
+					tvChkStatusTxt[0] = "None Checked";
+		        }
+				tvChkStatus.setText(tvChkStatusTxt[0]);
+            }
+		});
+        chk2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+				if (chk1.isChecked() && !chk2.isChecked()) {
+		            tvChkStatusTxt[0] = "1 Checked";
+		        } else if (!chk1.isChecked() && chk2.isChecked()) {
+		            tvChkStatusTxt[0] = "2 Checked";
+		        } else if (chk1.isChecked() && chk2.isChecked()) {
+					tvChkStatusTxt[0] = "Both Checked";
+		        } else if (!chk1.isChecked() && !chk2.isChecked()) {
+					tvChkStatusTxt[0] = "None Checked";
+		        }
+				tvChkStatus.setText(tvChkStatusTxt[0]);
+            }
+        });
         // getStorage permission & start filesTask()
         if (sdkVersion < 23) {
             filesTask();
@@ -432,6 +470,13 @@ public class MainActivity extends Activity {
     // String tests.
     public String packageNameOfString() {
         return String.class.getCanonicalName();
+    }
+
+    // Catch config changes(screen rotated, screen size change, etc.)
+    @Override
+    public void onConfigurationChanged(Configuration configuration) {
+        super.onConfigurationChanged(configuration);
+		Toast.makeText(this, "Config Changed", Toast.LENGTH_SHORT).show();
     }
 
 }
