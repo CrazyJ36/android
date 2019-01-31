@@ -1,6 +1,8 @@
 <resources>
     <!-- App name -->
     <string name="app_name">API Playground</string>
+    <!-- App LOG Tag -->
+    <string name="tag">APIPLAYGROUND</string>
     <!-- Large Stories-->
     <string name="bigText">C is a general-purpose, imperative computer programming language, supporting structured programming, lexical variable scope and recursion</string>
     <string name="bigText2">C is an imperative procedural language. It was designed to be compiled using a relatively straightforward compiler, to provide low-level access to memory, to provide language constructs that map efficiently to machine instructions, and to require minimal run-time support. Despite its low-level capabilities, the language was designed to encourage cross-platform programming. A standards-compliant and portable-ly written C program can be compiled for a very wide variety of computer platforms and operating systems with few changes to its source code. The language has become available on a very wide range of platforms, from embedded micro-controllers to supercomputers.</string>
@@ -48,10 +50,11 @@
     <string name="batBtnTxt">Battery</string>
 
     <!-- Activity 2 Button, Field Names -->
-    <string name="act2AndroidImgDesc">A Picture icon</string>
-    <string name="act2PicBtnTxt">Picture</string>
-    <string name="act2PicDialog">A Nature Landscape In A dialog pop-up</string>
+    <string name="dialogImgBtnTxt">Picture</string>
+    <string name="dialogImgPicDesc">Picture of Earth</string>
+    <string name="imgColorBtnDesc">A Picture Icon</string>
 
+    <string name="imgColorSwitchTxt">Move</string>
     <!-- Toolbar Titles -->
     <string name="toolbarMenuDesc">App Options</string>
     <string name="toolbarAboutBtn">About App</string>

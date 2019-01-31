@@ -8,7 +8,7 @@ import android.widget.RemoteViews;
 public class AppWidget extends AppWidgetProvider {
     public void onUpdate(final Context context, final AppWidgetManager appWidgetManager, final int[] appWidgetIds) {
         final RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.appwidget);
-        remoteViews.setTextViewText(R.id.tvWidget, context.getPackageName());
+        remoteViews.setTextViewText(R.id.tvWidget, context.getResources().getText(R.string.bigText));
 
         appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
 

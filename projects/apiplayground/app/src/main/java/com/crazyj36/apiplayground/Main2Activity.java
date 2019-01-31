@@ -4,15 +4,20 @@ import android.content.res.Configuration;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -23,7 +28,8 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-
+        // imgColorBtn has two functions using it, so I made it available in all of onCreate()
+        final ImageView imgBtn = findViewById(R.id.imgColorBtn);
         // Toolbar
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setActionBar(toolbar);
@@ -50,12 +56,11 @@ public class Main2Activity extends AppCompatActivity {
         });
 
         // Image Color Button
-        ImageView imgBtn = findViewById(R.id.act2VideoIcon);
         final boolean[] isColored = {true};
         imgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImageView img1 = findViewById(R.id.act2VideoIcon);
+                ImageView img1 = findViewById(R.id.imgColorBtn);
                 if (isColored[0]) {
                     img1.setColorFilter(0xff0000ff);
                     isColored[0] = false;
@@ -65,9 +70,37 @@ public class Main2Activity extends AppCompatActivity {
                 }
             }
         });
-
+        imgBtn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                int imgBtnPos[] = new int[2];
+                imgBtn.getLocationOnScreen(imgBtnPos);
+                Log.i(getResources().getString(R.string.tag), "btn loc = " + imgBtnPos[0] + " " + imgBtnPos[1]);
+                Toast imgBtnInfo = Toast.makeText(Main2Activity.this, "Video Icon", Toast.LENGTH_SHORT);
+                imgBtnInfo.setGravity(Gravity.START | Gravity.TOP, imgBtnPos[0], imgBtnPos[1]);
+                imgBtnInfo.show();
+                return true;
+            }
+        });
+        // Switch that moves imgColor
+        final Switch imgColorMvSwitch = findViewById(R.id.imgColorMvSwitch);
+        final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(148, 148);
+        params.gravity = Gravity.START | Gravity.CENTER_HORIZONTAL;
+        imgBtn.setLayoutParams(params);
+        imgColorMvSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (imgColorMvSwitch.isChecked()) {
+                    params.gravity = Gravity.END | Gravity.CENTER_HORIZONTAL;
+                    imgBtn.setLayoutParams(params);
+                } else {
+                    params.gravity = Gravity.START | Gravity.CENTER_HORIZONTAL;
+                    imgBtn.setLayoutParams(params);
+                }
+            }
+        });
         // Picture Popup Button
-        findViewById(R.id.act2PicBtn).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.dialogImgBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final AlertDialog.Builder picDialog = new AlertDialog.Builder(Main2Activity.this);
@@ -92,56 +125,56 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
-        // Checkboxes
+        // CheckBoxes
+        // Checkboxes init
         final TextView tvChkStatus = findViewById(R.id.tvChkStatus);
+        final String[] chkValues = {"None Checked", "Both Checked", "First Checked", "Second Checked"};
         final CheckBox chk1 = findViewById(R.id.chk1);
         final CheckBox chk2 = findViewById(R.id.chk2);
-        final String[] tvChkStatusTxt = {""};
+        tvChkStatus.setText(chkValues[0]);
 
         chk1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (chk1.isChecked() && !chk2.isChecked()) {
-                    tvChkStatusTxt[0] = "1 Checked";
+                    tvChkStatus.setText(chkValues[2]);
                 } else if (!chk1.isChecked() && chk2.isChecked()) {
-                    tvChkStatusTxt[0] = "2 Checked";
+                    tvChkStatus.setText(chkValues[3]);
                 } else if (chk1.isChecked() && chk2.isChecked()) {
-                    tvChkStatusTxt[0] = "Both Checked";
+                    tvChkStatus.setText(chkValues[1]);
                 } else if (!chk1.isChecked() && !chk2.isChecked()) {
-                    tvChkStatusTxt[0] = "None Checked";
+                    tvChkStatus.setText(chkValues[0]);
                 }
-                tvChkStatus.setText(tvChkStatusTxt[0]);
             }
         });
-
         chk2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (chk1.isChecked() && !chk2.isChecked()) {
-                    tvChkStatusTxt[0] = "1 Checked";
+                    tvChkStatus.setText(chkValues[2]);
                 } else if (!chk1.isChecked() && chk2.isChecked()) {
-                    tvChkStatusTxt[0] = "2 Checked";
+                    tvChkStatus.setText(chkValues[3]);
                 } else if (chk1.isChecked() && chk2.isChecked()) {
-                    tvChkStatusTxt[0] = "Both Checked";
+                    tvChkStatus.setText(chkValues[1]);
                 } else if (!chk1.isChecked() && !chk2.isChecked()) {
-                    tvChkStatusTxt[0] = "None Checked";
+                    tvChkStatus.setText(chkValues[0]);
                 }
-                tvChkStatus.setText(tvChkStatusTxt[0]);
             }
         });
+
     }
 
     // Catch When the Activity is destroyed. This should only happen if back button pressed.
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Toast.makeText(this, "Activity 2 stopped", Toast.LENGTH_SHORT).show();
+        Log.i(getResources().getString(R.string.tag), "Activity2 Stopped");
     }
 
     // Catch when config changes(rotate), goes with <activity android:configChanges="orientation|screenSize" /> in AndroidManifest.xml
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        Toast.makeText(this, "Activity 2 Config Changed", Toast.LENGTH_SHORT).show();
+        Log.i(getResources().getString(R.string.tag), "Activity 2 Config Changed");
     }
 }

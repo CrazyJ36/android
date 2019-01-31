@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.BatteryManager;
@@ -31,6 +32,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.*;
 import android.widget.Button;
@@ -51,9 +53,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
         // Variables
         final FloatingActionButton fab = findViewById(R.id.fab);
+        //Disables AutoFill
+        if (Build.VERSION.SDK_INT >= 26)
+            getWindow().getDecorView().setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_YES_EXCLUDE_DESCENDANTS);
+
         // Phone permission
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 1);
         // Toolbar
@@ -234,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final NotificationManager notificationManager = getSystemService(NotificationManager.class);
         if (Build.VERSION.SDK_INT >= 26) {
             NotificationChannel notificationChannel = new NotificationChannel("APIPLAYGROUND_NOTIFICATION_CHANNEL", "Notify Button", NotificationManager.IMPORTANCE_DEFAULT);
-            if ( notificationManager != null) {
+            if (notificationManager != null) {
                 notificationManager.createNotificationChannel(notificationChannel);
             } else {
                 Toast.makeText(this, "Notification Manager Service returned null", Toast.LENGTH_SHORT).show();
@@ -381,14 +389,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Toast.makeText(this, "Activity 1 Stopped", Toast.LENGTH_SHORT).show();
+        Log.d(getResources().getString(R.string.tag), "Activity1 Stopped");
     }
 
     // Catch when config changes(rotate), goes with <activity android:configChanges="orientation|screenSize" /> in AndroidManifest.xml
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        Toast.makeText(this, "Activity 1 Config Changed", Toast.LENGTH_SHORT).show();
+        Log.d(getResources().getString(R.string.tag), "Activity1 Config Changed");
     }
 
     // Dev info Dialog
