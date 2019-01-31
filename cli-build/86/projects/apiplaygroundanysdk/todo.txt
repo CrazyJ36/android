@@ -1,2 +1,5 @@
 title bar: subtitle on 2.3, action bars
 checkboxes: switch case/smaller code
+
+message field popup menu, select wether text is to be 
+recipient or message.
