@@ -1,0 +1,4 @@
+#Thu Jan 31 06:01:12 EST 2019
+base.0=C\:\\Users\\crazy\\Development\\android\\cli-build\\86\\gradle-build\\template\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
+path.0=classes.dex
+renamed.0=classes.dex
