@@ -53,7 +53,11 @@
     <string name="dialogImgBtnTxt">Picture</string>
     <string name="dialogImgPicDesc">Picture of Earth</string>
     <string name="imgColorBtnDesc">A Picture Icon</string>
-
+    <string name="btnHideStatusBarTxt">Status bar</string>
+    <string name="radioBtnColorNavBarDesc">Color NavBar</string>
+    <string name="radioBtnColorNavBar1Txt">Black</string>
+    <string name="radioBtnColorNavBar2Txt">Blue</string>
+    <string name="radioBtnColorNavBar3Txt">Red</string>
     <string name="imgColorSwitchTxt">Move</string>
     <!-- Toolbar Titles -->
     <string name="toolbarMenuDesc">App Options</string>
@@ -62,6 +66,7 @@
     <string name="toolbarSub1">Show Hidden Fab</string>
     <string name="toolbarSub2">Checks 2</string>
     <string name="toolbarAboutActivity">About This Screen</string>
+    <string name="toolbarHideStatusBar">Hide status bar</string>
     <string name="toolbarExitBtn">Exit</string>
     <!-- App Widget Strings -->
     <string name="widgetText">C is a fast programming language.</string>

@@ -4,6 +4,7 @@ import android.content.res.Configuration;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,7 @@ public class Main2Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Load activity_main xml definition to Activity window
         setContentView(R.layout.activity_main2);
         // imgColorBtn has two functions using it, so I made it available in all of onCreate()
         final ImageView imgBtn = findViewById(R.id.imgColorBtn);
@@ -124,15 +127,15 @@ public class Main2Activity extends AppCompatActivity {
                 Toast.makeText(Main2Activity.this, listClickText, Toast.LENGTH_SHORT).show();
             }
         });
-
-        // CheckBoxes
-        // Checkboxes init
+        /* Checkboxes, this is the only usable logic in the case of changing one text view per 'which is checked'.
+           also try 'updating list of settings' when any, no matter which are checked.
+         */
         final TextView tvChkStatus = findViewById(R.id.tvChkStatus);
         final String[] chkValues = {"None Checked", "Both Checked", "First Checked", "Second Checked"};
         final CheckBox chk1 = findViewById(R.id.chk1);
         final CheckBox chk2 = findViewById(R.id.chk2);
-        tvChkStatus.setText(chkValues[0]);
 
+        tvChkStatus.setText(chkValues[0]);
         chk1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,6 +165,23 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
+    }
+
+    // Hide status bar. Rule of thumb (for games) is to never show action bar without status bar
+    public void hideStatusBar(MenuItem menuItem) {
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
+    // Radio buttons
+    public void radioBtnColorNavBarClick(View view) {
+        boolean isChecked = ( (RadioButton) view).isChecked();
+        switch (view.getId()) {
+            case R.id.radioBtnColorNavBar1:
+                if (isChecked) getWindow().setNavigationBarColor(Color.BLACK); break;
+            case R.id.radioBtnColorNavBar2:
+                if (isChecked) getWindow().setNavigationBarColor(Color.BLUE); break;
+            case R.id.radioBtnColorNavBar3:
+                if (isChecked) getWindow().setNavigationBarColor(Color.RED); break;
+        }
     }
 
     // Catch When the Activity is destroyed. This should only happen if back button pressed.

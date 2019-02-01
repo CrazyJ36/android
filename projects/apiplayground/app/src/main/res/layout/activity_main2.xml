@@ -8,7 +8,9 @@
     android:orientation="vertical"
     tools:context=".Main2Activity">
 
-    <include layout="@layout/appbar"></include>
+    <include layout="@layout/appbar">
+
+    </include>
 
     <Button
         android:id="@+id/dialogImgBtn"
@@ -16,6 +18,43 @@
         android:layout_height="wrap_content"
         android:text="@string/dialogImgBtnTxt"
         android:textAllCaps="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/radioBtnColorNavBarDesc"
+        android:singleLine="true"/>
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/radioBtnColorNavBar1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="start"
+            android:checked="true"
+            android:text="@string/radioBtnColorNavBar1Txt"
+            android:onClick="radioBtnColorNavBarClick"/>
+        <RadioButton
+            android:id="@+id/radioBtnColorNavBar2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:text="@string/radioBtnColorNavBar2Txt"
+            android:onClick="radioBtnColorNavBarClick"/>
+        <RadioButton
+            android:id="@+id/radioBtnColorNavBar3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="end"
+            android:text="@string/radioBtnColorNavBar3Txt"
+            android:onClick="radioBtnColorNavBarClick"/>
+    </RadioGroup>
 
     <ImageView
         android:id="@+id/imgColorBtn"

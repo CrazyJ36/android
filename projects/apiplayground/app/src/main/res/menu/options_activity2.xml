@@ -3,7 +3,12 @@
     <item
         android:id="@+id/toolbarAboutActivity2"
         android:title="@string/toolbarAboutActivity">
+    </item>
 
+    <item
+        android:id="@+id/toolbarHideStatus"
+        android:title="@string/toolbarHideStatusBar"
+        android:onClick="hideStatusBar">
     </item>
 
     <item
