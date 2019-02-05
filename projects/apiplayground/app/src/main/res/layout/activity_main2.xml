@@ -8,9 +8,7 @@
     android:orientation="vertical"
     tools:context=".Main2Activity">
 
-    <include layout="@layout/appbar">
-
-    </include>
+    <include layout="@layout/appbar" />
 
     <Button
         android:id="@+id/dialogImgBtn"
@@ -97,6 +95,58 @@
             android:id="@+id/tvChkStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/etAccounts1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/etAccounts1Hint"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                tools:targetApi="o" />
+            <EditText
+                android:id="@+id/etAccounts2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/etAccounts2Hint"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                tools:targetApi="o"/>
+            <Button
+                android:id="@+id/btnAccounts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btnAccountsTxt"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/accountsList"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvAccounts1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/tvAccounts2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
 
     </LinearLayout>
 
