@@ -1,7 +1,0 @@
-#Internal package file, do not edit.
-#Mon Sep 17 22:07:16 EDT 2018
-0.baseType=DIRECTORY
-0.base=C\:\\Users\\CrazyJ36\\Development\\android\\projects\\ReadBuiltInFile\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
-0.path=classes.dex
-0.set=DEX
-count=1
