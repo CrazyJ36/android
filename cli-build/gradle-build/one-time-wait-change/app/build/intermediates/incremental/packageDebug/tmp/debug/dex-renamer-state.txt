@@ -1,0 +1,4 @@
+#Thu Feb 07 12:25:24 EST 2019
+base.0=C\:\\Users\\crazy\\Development\\android\\cli-build\\windows\\gradle-build\\one-time-wait-change\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
+path.0=classes.dex
+renamed.0=classes.dex
