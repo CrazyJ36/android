@@ -1,3 +1,6 @@
+activity2 message field: crash on click of send button
+when there is no messaging app, rca tablet android 4.4.2
+
 title bar: subtitle on 2.3, action bars
 checkboxes: switch case/smaller code
 
