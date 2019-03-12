@@ -78,6 +78,7 @@ public class Main2Activity extends Activity {
 				}
 			}
 		});
+        // Btn SMS
 		findViewById(R.id.btnSms).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -89,8 +90,12 @@ public class Main2Activity extends Activity {
 				if (msg.equals("")) {
 					Toast.makeText(Main2Activity.this, "Enter message to send", Toast.LENGTH_SHORT);
 				} else {
-					startActivity(sendMsg);
-				}
+				    try {
+                	    startActivity(sendMsg);
+					} catch (ActivityNotFoundException activityNotFound) {
+						Toast.makeText(Main2Activity.this, "No messaging app.", Toast.LENGTH_LONG).show();
+                    }
+   				}
 			}
 		});
     // End of onCreate
