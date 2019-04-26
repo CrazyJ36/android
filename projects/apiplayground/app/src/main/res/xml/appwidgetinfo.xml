@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android">
-    android:minWidth="100dp"
-    android:minHeight="100dp"
-    android:updatePeriodMillis="40000"
+    android:minWidth="246dp"
+    android:minHeight="86dp"
+    android:updatePeriodMillis="3600000"
+    android:configure="null"
     android:previewImage="@mipmap/ic_launcher"
     android:initialLayout="@layout/appwidget"
-    android:resizeMode="horizontal | vertical"
-    android:widgetCategory="home_screen|keyguard" >
+    android:resizeMode="horizontal|vertical"
+    android:widgetCategory="home_screen" >
 </appwidget-provider>

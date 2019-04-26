@@ -1,0 +1,4 @@
+#Tue Mar 12 21:55:25 EDT 2019
+base.0=C\:\\Users\\crazy\\Development\\android\\projects\\button-case\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\7
+path.0=classes.dex
+renamed.0=classes.dex

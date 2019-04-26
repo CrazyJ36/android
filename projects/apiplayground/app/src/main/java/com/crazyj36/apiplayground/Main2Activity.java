@@ -1,35 +1,43 @@
 package com.crazyj36.apiplayground;
 
 import android.content.res.Configuration;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
+
+import java.util.HashMap;
 
 public class Main2Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Load activity_main xml definition to Activity window
         setContentView(R.layout.activity_main2);
-        // imgColorBtn has two functions using it, so I made it available in all of onCreate()
-        final ImageView imgBtn = findViewById(R.id.imgColorBtn);
+        // Coloring
+        getWindow().setNavigationBarColor(Color.LTGRAY);
         // Toolbar
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setActionBar(toolbar);
@@ -54,8 +62,8 @@ public class Main2Activity extends AppCompatActivity {
                 menu.show();
             }
         });
-
         // Image Color Button
+        final ImageView imgBtn = findViewById(R.id.imgColorBtn);
         final boolean[] isColored = {true};
         imgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,15 +132,15 @@ public class Main2Activity extends AppCompatActivity {
                 Toast.makeText(Main2Activity.this, listClickText, Toast.LENGTH_SHORT).show();
             }
         });
-
-        // CheckBoxes
-        // Checkboxes init
+        /* Checkboxes, this is the only usable logic in the case of changing one text view per 'which is checked'.
+           also try 'updating list of settings' when any, no matter which are checked.
+         */
         final TextView tvChkStatus = findViewById(R.id.tvChkStatus);
         final String[] chkValues = {"None Checked", "Both Checked", "First Checked", "Second Checked"};
         final CheckBox chk1 = findViewById(R.id.chk1);
         final CheckBox chk2 = findViewById(R.id.chk2);
-        tvChkStatus.setText(chkValues[0]);
 
+        tvChkStatus.setText(chkValues[0]);
         chk1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,16 +169,45 @@ public class Main2Activity extends AppCompatActivity {
                 }
             }
         });
+        // make accounts list
+        final EditText etAccounts1 = findViewById(R.id.etAccounts1);
+        final EditText etAccounts2 = findViewById(R.id.etAccounts2);
+        final TextView tvAccounts1 = findViewById(R.id.tvAccounts1);
+        final TextView tvAccounts2 = findViewById(R.id.tvAccounts2);
+        findViewById(R.id.btnAccounts).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String user = etAccounts1.getText().toString();
+                String pass = etAccounts2.getText().toString();
+                tvAccounts1.append(user + "\n");
+                tvAccounts2.append(pass + "\n");
+            }
+        });
+
 
     }
 
+    // Hide status bar. Rule of thumb (for games) is to never show action bar without status bar
+    public void hideStatusBar(MenuItem menuItem) {
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
+    // Radio buttons
+    public void radioBtnColorNavBarClick(View view) {
+        boolean isChecked = ( (RadioButton) view).isChecked();
+        switch (view.getId()) {
+            case R.id.radioBtnColorNavBar1:
+                if (isChecked) getWindow().setNavigationBarColor(Color.LTGRAY); break;
+            case R.id.radioBtnColorNavBar2:
+                if (isChecked) getWindow().setNavigationBarColor(Color.GREEN); break;
+            case R.id.radioBtnColorNavBar3:
+                if (isChecked) getWindow().setNavigationBarColor(Color.RED); break;
+        }
+    }
     // Catch When the Activity is destroyed. This should only happen if back button pressed.
     @Override
     protected void onDestroy() {
         super.onDestroy();
         Log.i(getResources().getString(R.string.tag), "Activity2 Stopped");
     }
-
     // Catch when config changes(rotate), goes with <activity android:configChanges="orientation|screenSize" /> in AndroidManifest.xml
     @Override
     public void onConfigurationChanged(Configuration newConfig) {

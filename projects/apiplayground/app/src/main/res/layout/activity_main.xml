@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -94,11 +95,11 @@
                     android:id="@+id/numField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:autofillHints="My Phone Number"
                     android:ems="10"
                     android:hint="@string/numFldHint"
-                    android:importantForAutofill="auto"
-                    android:inputType="phone" />
+                    android:importantForAutofill="no"
+                    android:inputType="phone"
+                    tools:targetApi="o"/>
 
                 <Button
                     android:id="@+id/urlButton"
@@ -113,8 +114,10 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/urlFldHint"
+                    android:importantForAutofill="no"
                     android:inputType="textUri"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    tools:targetApi="o" />
 
                 <Button
                     android:id="@+id/smsButton"
@@ -128,7 +131,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/smsFldHint"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:importantForAutofill="no"
+                    tools:targetApi="o"/>
 
                 <Switch
                     android:id="@+id/switch1"

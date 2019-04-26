@@ -10,12 +10,12 @@ package com.crazyj36.apiplayground;
 import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.BatteryManager;
@@ -55,13 +55,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
         // Variables
         final FloatingActionButton fab = findViewById(R.id.fab);
-        //Disables AutoFill
+        //Disables AutoFill. Easier in xml layout, though this statement can make autofill available to sdks that use it eg. 26 oreo
         if (Build.VERSION.SDK_INT >= 26)
             getWindow().getDecorView().setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_YES_EXCLUDE_DESCENDANTS);
-
         // Phone permission
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 1);
         // Toolbar
@@ -248,6 +246,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this, "Notification Manager Service returned null", Toast.LENGTH_SHORT).show();
             }
         }
+        final Intent notificationClickIntent = new Intent(MainActivity.this, MainActivity.class);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 1, notificationClickIntent,Intent.FLAG_ACTIVITY_NEW_TASK);
         findViewById(R.id.notifyBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -256,6 +256,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     notifyBuild.setSmallIcon(R.drawable.notify);
                     notifyBuild.setContentTitle("API Playground Notification");
                     notifyBuild.setContentText("This is the content of notification");
+                    notifyBuild.setContentIntent(pendingIntent);
                     notificationManager.notify(0, notifyBuild.build()); /* Id here is random. Stands for the individual id
                     of this notification. If I click notifyBtn A second time, A new notification would not be created,
                     as this notification id is already used in notifications .Only used here.
@@ -310,6 +311,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(MainActivity.this);
                 bottomSheetDialog.setContentView(R.layout.bottom_sheet);
                 bottomSheetDialog.show();
+
             }
         });
         // Vibrate Btn
