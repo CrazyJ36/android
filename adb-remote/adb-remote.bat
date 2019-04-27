@@ -1,1 +1,1 @@
-java -jar C:\Users\CrazyJ36\Development\android\adb-remote\adbportforward.jar client adblocation=C:\Users\CrazyJ36\Development\android\adb-remote\platform-tools remotehost=52.168.147.10 port=6037
+java -jar C:\Users\CrazyJ36\Development\android\adb-remote\adbportforward.jar client adblocation=C:\Users\CrazyJ36\Development\android\adb-remote\platform-tools remotehost=24.92.31.16 port=6037
