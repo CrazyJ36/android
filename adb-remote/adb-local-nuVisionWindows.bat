@@ -1,1 +1,0 @@
-java -jar C:\Users\thomas\development\android\adb-remote\adbportforward.jar server adblocation=C:\Users\thomas\development\android\adb-remote\platform-tools port=6037
