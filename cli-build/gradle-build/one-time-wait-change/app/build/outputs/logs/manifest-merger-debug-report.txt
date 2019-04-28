@@ -1,39 +1,39 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:2:5-15:14
-INJECTED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:2:5-15:14
-INJECTED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:2:5-15:14
+ADDED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:2:5-15:14
+INJECTED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:2:5-15:14
+INJECTED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:2:5-15:14
 	package
-		ADDED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:3:9-49
-		INJECTED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:3:9-49
+		INJECTED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:2:15-73
+		ADDED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:2:15-73
 application
-ADDED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:5:5-14:19
+ADDED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:5:5-14:19
 	android:label
-		ADDED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:6:6-42
+		ADDED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:6:6-42
 	android:allowBackup
-		ADDED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:7:6-33
+		ADDED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:7:6-33
 activity#com.crazyj36.onetimewaitchange.MainActivity
-ADDED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:8:2-13:13
+ADDED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:8:2-13:13
 	android:name
-		ADDED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:8:12-40
+		ADDED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:8:12-40
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:9:6-12:22
+ADDED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:9:6-12:22
 action#android.intent.action.MAIN
-ADDED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:10:3-54
+ADDED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:10:3-54
 	android:name
-		ADDED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:10:11-52
+		ADDED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:10:11-52
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:11:3-62
+ADDED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:11:3-62
 	android:name
-		ADDED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:11:13-60
+		ADDED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml:11:13-60
 uses-sdk
-INJECTED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml
-INJECTED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml

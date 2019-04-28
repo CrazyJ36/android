@@ -12,7 +12,7 @@
         errorLine1="     android:allowBackup=&quot;false&quot;>"
         errorLine2="     ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml"
+            file="C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml"
             line="7"
             column="6"/>
     </issue>
@@ -30,7 +30,7 @@
         errorLine1="    &lt;application "
         errorLine2="     ~~~~~~~~~~~">
         <location
-            file="C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml"
+            file="C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml"
             line="5"
             column="6"/>
     </issue>
@@ -48,7 +48,7 @@
         errorLine1="    &lt;application "
         errorLine2="    ^">
         <location
-            file="C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml"
+            file="C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\AndroidManifest.xml"
             line="5"
             column="5"/>
     </issue>
@@ -66,7 +66,7 @@
         errorLine1="  textView.setText(&quot;Wait Three Seconds&quot;);"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\java\com\crazyj36\onetimewaitchange\MainActivity.java"
+            file="C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\java\com\crazyj36\onetimewaitchange\MainActivity.java"
             line="16"
             column="20"/>
     </issue>
@@ -84,7 +84,7 @@
         errorLine1="    textView.setText(&quot;Some New Text&quot;); // Will happen after 3 seconds."
         errorLine2="                     ~~~~~~~~~~~~~~~">
         <location
-            file="C:\Users\crazy\Development\android\cli-build\windows\gradle-build\one-time-wait-change\app\src\main\java\com\crazyj36\onetimewaitchange\MainActivity.java"
+            file="C:\Users\Thomas\Development\android\cli-build\gradle-build\one-time-wait-change\app\src\main\java\com\crazyj36\onetimewaitchange\MainActivity.java"
             line="21"
             column="22"/>
     </issue>

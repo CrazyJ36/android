@@ -12,7 +12,7 @@
         errorLine1="     android:allowBackup=&quot;false&quot;>"
         errorLine2="     ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="C:\Users\crazy\Development\android\cli-build\86\gradle-build\template\app\src\main\AndroidManifest.xml"
+            file="C:\Users\Thomas\Development\android\cli-build\gradle-build\template\app\src\main\AndroidManifest.xml"
             line="7"
             column="6"/>
     </issue>
@@ -30,7 +30,7 @@
         errorLine1="    &lt;application "
         errorLine2="     ~~~~~~~~~~~">
         <location
-            file="C:\Users\crazy\Development\android\cli-build\86\gradle-build\template\app\src\main\AndroidManifest.xml"
+            file="C:\Users\Thomas\Development\android\cli-build\gradle-build\template\app\src\main\AndroidManifest.xml"
             line="5"
             column="6"/>
     </issue>
@@ -48,7 +48,7 @@
         errorLine1="    &lt;application "
         errorLine2="    ^">
         <location
-            file="C:\Users\crazy\Development\android\cli-build\86\gradle-build\template\app\src\main\AndroidManifest.xml"
+            file="C:\Users\Thomas\Development\android\cli-build\gradle-build\template\app\src\main\AndroidManifest.xml"
             line="5"
             column="5"/>
     </issue>
@@ -63,10 +63,10 @@
         explanation="When calling `TextView#setText`&#xA;* Never call `Number#toString()` to format numbers; it will not handle fraction separators and locale-specific digits properly. Consider using `String#format` with proper format specifications (`%d` or `%f`) instead.&#xA;* Do not pass a string literal (e.g. &quot;Hello&quot;) to display text. Hardcoded text can not be properly translated to other languages. Consider using Android resource strings instead.&#xA;* Do not build messages by concatenating text chunks. Such messages can not be properly translated."
         url="http://developer.android.com/guide/topics/resources/localization.html"
         urls="http://developer.android.com/guide/topics/resources/localization.html"
-        errorLine1="        text.setText(&quot;Template App&quot;);"
-        errorLine2="                     ~~~~~~~~~~~~~~">
+        errorLine1="        text.setText(&quot;Template Gradle CLI Built App&quot;);"
+        errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="C:\Users\crazy\Development\android\cli-build\86\gradle-build\template\app\src\main\java\com\crazyj36\template\MainActivity.java"
+            file="C:\Users\Thomas\Development\android\cli-build\gradle-build\template\app\src\main\java\com\crazyj36\template\MainActivity.java"
             line="14"
             column="22"/>
     </issue>

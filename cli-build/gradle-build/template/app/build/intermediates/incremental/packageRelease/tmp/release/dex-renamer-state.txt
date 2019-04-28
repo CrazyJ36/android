@@ -1,4 +1,4 @@
-#Thu Jan 31 06:01:15 EST 2019
-base.0=C\:\\Users\\crazy\\Development\\android\\cli-build\\86\\gradle-build\\template\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\out
+#Sun Apr 28 04:29:20 EDT 2019
+base.0=C\:\\Users\\Thomas\\Development\\android\\cli-build\\gradle-build\\template\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\out
 path.0=classes.dex
 renamed.0=classes.dex
