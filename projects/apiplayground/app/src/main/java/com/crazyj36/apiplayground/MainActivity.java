@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.BatteryManager;
@@ -247,7 +248,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         final Intent notificationClickIntent = new Intent(MainActivity.this, MainActivity.class);
-        final PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 1, notificationClickIntent,Intent.FLAG_ACTIVITY_NEW_TASK);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 1, notificationClickIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         findViewById(R.id.notifyBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -257,6 +259,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     notifyBuild.setContentTitle("API Playground Notification");
                     notifyBuild.setContentText("This is the content of notification");
                     notifyBuild.setContentIntent(pendingIntent);
+                    notifyBuild.setAutoCancel(true);
                     notificationManager.notify(0, notifyBuild.build()); /* Id here is random. Stands for the individual id
                     of this notification. If I click notifyBtn A second time, A new notification would not be created,
                     as this notification id is already used in notifications .Only used here.
@@ -281,7 +284,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.snackbarBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(topLayout, "This Is A SnackBar", Snackbar.LENGTH_INDEFINITE).setAction("Toast", new View.OnClickListener() {
+                Snackbar.make(topLayout, "This Is A SnackBar", Snackbar.LENGTH_INDEFINITE).setActionTextColor(Color.WHITE).setAction("Toast", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(MainActivity.this, "SnackBar Button Pushed", Toast.LENGTH_SHORT).show();
