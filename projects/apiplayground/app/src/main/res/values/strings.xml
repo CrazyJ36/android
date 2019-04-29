@@ -53,6 +53,7 @@
     <string name="dialogImgBtnTxt">Picture</string>
     <string name="dialogImgPicDesc">Picture of Earth</string>
     <string name="imgColorBtnDesc">A Picture Icon</string>
+    <string name="tvLongPressImgBtnReminder">You can press and long press the below image.</string>
     <string name="btnHideStatusBarTxt">Status bar</string>
     <string name="radioBtnColorNavBarDesc">Color NavBar</string>
     <string name="radioBtnColorNavBar1Txt">Gray</string>

@@ -348,8 +348,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 batDialog.setMessage("Battery Percentage: " + batLevel + "\n" + batCharging);
                 batDialog.setTitle("Battery");
                 batDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface batDialog, int i) {
-                        Toast.makeText(MainActivity.this, "Bat Dialog OK Btn Returned: " + i, Toast.LENGTH_SHORT).show();
+                    public void onClick(DialogInterface batDialog, int batRetInt) {
+                        String batRetStr = Integer.toString(batRetInt);
+                        Log.i(getResources().getString(R.string.tag), batRetStr);
                         batDialog.dismiss();
                     }
                 });
