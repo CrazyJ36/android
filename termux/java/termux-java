@@ -1,0 +1,43 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# Java Compiler, Runner for Android Termux.
+# Command line program arguments:
+function main {
+arg=$1
+file=$2
+java=$file.java
+class=$file.class
+dex=$file.dex
+
+if [ "$arg" == "-c" ]
+then
+  compileJava
+elif [ "$arg" == "-a" ]
+then
+  dexClass
+elif [ "$arg" == "-r" ]
+then
+  runJava
+elif [ "$arg" == "-h" ] || [ "$arg" == "--help" ] || [ "$arg" == "help" ] || [ -z "$arg" ]
+then
+  showHelp
+else
+  printf 'Typo in desired function or filename. View Help:\n$ termux-java -h\n'
+fi
+}
+
+# Java Functions
+function compileJava {
+  ecj $java
+}
+function dexClass {
+  dx --dex --output $dex $class
+}
+function runJava {
+  dalvikvm -cp $dex $file
+}
+function showHelp {
+  printf 'This script makes compiling and running Java on Android easy with Termux. Make sure the dependecies are installed:\n$ pkg install ecj dx\n\nUsage:\n$ termux-java <function> program.java\nFunctions in order:\n-c    Compile java file to .class using ecj.\n-a    Create executable .dex file from .class using dx.\n-r    Run java class using dalvikvm and .dex file.\n-h    Show this help.\n\nNote: You must not specify file types(.java, .class) when specifying files as arguments as the extensions are automatically generated, just remember to use the correct desired function.\n'
+}
+
+# Program starts running here
+main "$@"
