@@ -1,4 +1,4 @@
-Router must be configured virtual port, port forward, or dmz to let local Windows through.
+Your router must be configured with A virtual port, port forward, or dmz (not recommended) to let your local Windows through.
 For Android Studio adb, copy/replace ./platform-tools/adb* to this folder on server:
 Users/../AppData/Local/Android/sdk/platform-tools, don't update Android Studio platform-tools!
 
