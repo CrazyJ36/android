@@ -1,3 +1,6 @@
 #!/bin/bash
+# put in ~/bin
+# this enables urls', intents to be shared to termux
+
 elinks $1
 
