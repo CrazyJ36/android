@@ -8,6 +8,8 @@ package com.crazyj36.apiplayground;
  */
 
 import android.Manifest;
+import android.app.ActionBar;
+import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -94,6 +96,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 menu.show();
             }
         });
+        // ActionBar Subtitle
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) actionBar.setSubtitle("CrazyJ36");
         // Activity2 Button
         findViewById(R.id.activity2Btn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -366,6 +371,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         grid3.setOnClickListener(this);
         Button grid4 = findViewById(R.id.grid4);
         grid4.setOnClickListener(this);
+
     }
 
     public void gridTstMsg(String num) {

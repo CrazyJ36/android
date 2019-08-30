@@ -1,5 +1,6 @@
 package com.crazyj36.apiplayground;
 
+import android.app.Dialog;
 import android.content.res.Configuration;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -77,7 +79,7 @@ public class Main2Activity extends AppCompatActivity {
         imgBtn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                int imgBtnPos[] = new int[2];
+                int[] imgBtnPos = new int[2];
                 imgBtn.getLocationOnScreen(imgBtnPos);
                 Log.i(getResources().getString(R.string.tag), "btn loc = " + imgBtnPos[0] + " " + imgBtnPos[1]);
                 Toast imgBtnInfo = Toast.makeText(Main2Activity.this, "Video Icon", Toast.LENGTH_SHORT);
@@ -179,7 +181,29 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
-
+        // Dialog with layout example
+        Button btnCustom = findViewById(R.id.btnCustom);
+        btnCustom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(Main2Activity.this);
+                dialog.setContentView(R.layout.dialog_layout);
+                dialog.setTitle("C Description");
+                dialog.show();
+                dialog.findViewById(R.id.dialogBtn1).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(Main2Activity.this, "Dialog Button Pushed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                dialog.findViewById(R.id.dialogBtn2).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
     }
 
     // Hide status bar. Rule of thumb (for games) is to never show action bar without status bar
