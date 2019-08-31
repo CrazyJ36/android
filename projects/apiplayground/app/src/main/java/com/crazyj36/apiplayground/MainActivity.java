@@ -4,12 +4,13 @@ package com.crazyj36.apiplayground;
    print all buttons/functions results in that
 
    for notifications try increase counter on every click,
-   then add another notification with new notifiation id
+   then add another notification with new notification id
+
+   log button
  */
 
 import android.Manifest;
 import android.app.ActionBar;
-import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -53,11 +54,13 @@ import java.util.Objects;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
         // Variables
         final FloatingActionButton fab = findViewById(R.id.fab);
         //Disables AutoFill. Easier in xml layout, though this statement can make autofill available to sdks that use it eg. 26 oreo
@@ -304,6 +307,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 aboutAppDialog();
             }
         });
+
         fab.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -312,6 +316,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             }
         });
+
         // Bottom Sheet Button
         findViewById(R.id.bottomSheetBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -413,10 +418,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // Dev info Dialog
     public void aboutAppDialog() {
-        final AlertDialog aboutDialog = new Builder(MainActivity.this).create();
+        final AlertDialog.Builder aboutDialog = new AlertDialog.Builder(MainActivity.this);
         aboutDialog.setTitle("About Developer");
         aboutDialog.setIcon(R.drawable.profile);
+        aboutDialog.setView(R.layout.profile_layout);
         aboutDialog.setMessage("CrazyJ36\n2018");
+        aboutDialog.create();
         aboutDialog.show();
     }
 
@@ -425,4 +432,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return new String[]{"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen"};
     }
 
+    public void goToGit(View view) {
+        Intent gitUrl = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/CrazyJ36?tab=repositories"));
+        startActivity(gitUrl);
+    }
 }

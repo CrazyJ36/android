@@ -48,6 +48,8 @@
     <string name="bottomSheetImg3Desc">An Icon representing the building of something(round)</string>
     <string name="vibBtnTxt">Vibrate</string>
     <string name="batBtnTxt">Battery</string>
+    <string name="goToGitTvTxt">View my git repositories:</string>
+    <string name="goToGitBtnTxt">Github</string>
 
     <!-- Activity 2 Button, Field Names -->
     <string name="dialogImgBtnTxt">Picture</string>

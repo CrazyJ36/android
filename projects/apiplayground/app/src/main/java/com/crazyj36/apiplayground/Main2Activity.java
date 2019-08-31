@@ -210,24 +210,30 @@ public class Main2Activity extends AppCompatActivity {
     public void hideStatusBar(MenuItem menuItem) {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
+
     // Radio buttons
     public void radioBtnColorNavBarClick(View view) {
-        boolean isChecked = ( (RadioButton) view).isChecked();
+        boolean isChecked = ((RadioButton) view).isChecked();
         switch (view.getId()) {
             case R.id.radioBtnColorNavBar1:
-                if (isChecked) getWindow().setNavigationBarColor(Color.LTGRAY); break;
+                if (isChecked) getWindow().setNavigationBarColor(Color.LTGRAY);
+                break;
             case R.id.radioBtnColorNavBar2:
-                if (isChecked) getWindow().setNavigationBarColor(Color.GREEN); break;
+                if (isChecked) getWindow().setNavigationBarColor(Color.GREEN);
+                break;
             case R.id.radioBtnColorNavBar3:
-                if (isChecked) getWindow().setNavigationBarColor(Color.RED); break;
+                if (isChecked) getWindow().setNavigationBarColor(Color.RED);
+                break;
         }
     }
+
     // Catch When the Activity is destroyed. This should only happen if back button pressed.
     @Override
     protected void onDestroy() {
         super.onDestroy();
         Log.i(getResources().getString(R.string.tag), "Activity2 Stopped");
     }
+
     // Catch when config changes(rotate), goes with <activity android:configChanges="orientation|screenSize" /> in AndroidManifest.xml
     @Override
     public void onConfigurationChanged(Configuration newConfig) {

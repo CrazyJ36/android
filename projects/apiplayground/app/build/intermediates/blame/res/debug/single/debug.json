@@ -100,12 +100,12 @@
         "source": "C:\\Users\\CrazyJ36\\.gradle\\caches\\transforms-2\\files-2.1\\bbf07aa1da9ab954374e693dfcc335b9\\appcompat-v7-28.0.0\\res\\drawable-xxhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
     },
     {
-        "merged": "C:\\Users\\CrazyJ36\\development\\android\\projects\\apiplayground\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_list_pressed_holo_light.9.png.flat",
-        "source": "C:\\Users\\CrazyJ36\\.gradle\\caches\\transforms-2\\files-2.1\\bbf07aa1da9ab954374e693dfcc335b9\\appcompat-v7-28.0.0\\res\\drawable-mdpi-v4\\abc_list_pressed_holo_light.9.png"
-    },
-    {
         "merged": "C:\\Users\\CrazyJ36\\development\\android\\projects\\apiplayground\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
         "source": "C:\\Users\\CrazyJ36\\.gradle\\caches\\transforms-2\\files-2.1\\bbf07aa1da9ab954374e693dfcc335b9\\appcompat-v7-28.0.0\\res\\drawable-xhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "C:\\Users\\CrazyJ36\\development\\android\\projects\\apiplayground\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_list_pressed_holo_light.9.png.flat",
+        "source": "C:\\Users\\CrazyJ36\\.gradle\\caches\\transforms-2\\files-2.1\\bbf07aa1da9ab954374e693dfcc335b9\\appcompat-v7-28.0.0\\res\\drawable-mdpi-v4\\abc_list_pressed_holo_light.9.png"
     },
     {
         "merged": "C:\\Users\\CrazyJ36\\development\\android\\projects\\apiplayground\\app\\build\\intermediates\\res\\merged\\debug\\drawable_notification_bg_low.xml.flat",
@@ -238,6 +238,10 @@
     {
         "merged": "C:\\Users\\CrazyJ36\\development\\android\\projects\\apiplayground\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_ic_star_black_36dp.png.flat",
         "source": "C:\\Users\\CrazyJ36\\.gradle\\caches\\transforms-2\\files-2.1\\bbf07aa1da9ab954374e693dfcc335b9\\appcompat-v7-28.0.0\\res\\drawable-xxxhdpi-v4\\abc_ic_star_black_36dp.png"
+    },
+    {
+        "merged": "C:\\Users\\CrazyJ36\\development\\android\\projects\\apiplayground\\app\\build\\intermediates\\res\\merged\\debug\\layout_profile_layout.xml.flat",
+        "source": "C:\\Users\\CrazyJ36\\development\\android\\projects\\apiplayground\\app\\src\\main\\res\\layout\\profile_layout.xml"
     },
     {
         "merged": "C:\\Users\\CrazyJ36\\development\\android\\projects\\apiplayground\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_textfield_search_default_mtrl_alpha.9.png.flat",
