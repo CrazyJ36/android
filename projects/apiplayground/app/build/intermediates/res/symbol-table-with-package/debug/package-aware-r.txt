@@ -1212,7 +1212,6 @@ id transition_transform
 id tvAccounts1
 id tvAccounts2
 id tvChkStatus
-id tvWidget
 id uniform
 id unlabeled
 id up
@@ -1222,6 +1221,8 @@ id useLogo
 id vibBtn
 id view_offset_helper
 id visible
+id widgetBtn
+id widgetTv
 id withText
 id wrap_content
 integer abc_config_activityDefaultDur
@@ -1445,7 +1446,8 @@ string tvLongPressImgBtnReminder
 string urlBtnTxt
 string urlFldHint
 string vibBtnTxt
-string widgetText
+string widgetBtnTxt
+string widgetTvTxt
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog
