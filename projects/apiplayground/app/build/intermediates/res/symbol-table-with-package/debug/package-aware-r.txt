@@ -1081,6 +1081,7 @@ id grid4
 id group_divider
 id home
 id homeAsUp
+id hourBtn
 id icon
 id icon_group
 id ifRoom
@@ -1223,7 +1224,6 @@ id vibBtn
 id view_offset_helper
 id visible
 id widgetBtn
-id widgetParent
 id widgetTv
 id withText
 id wrap_content
@@ -1404,6 +1404,7 @@ string grid2BtnTxt
 string grid3BtnTxt
 string grid4BtnTxt
 string hide_bottom_view_on_scroll_behavior
+string hourBtnTxt
 string imageDesc
 string imgColorBtnDesc
 string imgColorSwitchTxt

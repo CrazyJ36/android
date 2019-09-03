@@ -1,15 +1,19 @@
 package com.crazyj36.apiplayground;
 
-import android.content.Context;
-import android.widget.Toast;
+
 
 class otherMethods {
 
-    private Context context;
-
-    void testToast() {
-        Toast.makeText(context.getApplicationContext(), "Test Toast", Toast.LENGTH_SHORT).show();
+    String otherMethodsStringFunc() {
+        return "Text defined at otherMethods.java, run in MainActivity.";
     }
+
+    int getHourOfDay() {
+        java.util.Calendar rightNow = java.util.Calendar.getInstance();
+        // Here Calendar.HOUR_OF_DAY shows in 24-hr time, Calendar.HOUR shows in 12-hr format.
+        return rightNow.get(java.util.Calendar.HOUR);
+    }
+
 
 }
 

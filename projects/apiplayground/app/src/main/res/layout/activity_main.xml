@@ -225,7 +225,15 @@
                     android:layout_height="wrap_content"
                     android:text="@string/otherFuncBtnTxt"
                     android:textAllCaps="false"
-                    android:onClick="otherClassMethodToast"/>
+                    android:onClick="otherMethodsStringToast"/>
+
+                <Button
+                    android:id="@+id/hourBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hourBtnTxt"
+                    android:textAllCaps="false"
+                    android:onClick="hourToast"/>
 
             </LinearLayout>
         </ScrollView>

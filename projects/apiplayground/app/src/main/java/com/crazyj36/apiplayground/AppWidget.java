@@ -5,9 +5,7 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.view.View;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 
 public class AppWidget extends AppWidgetProvider {
@@ -18,12 +16,10 @@ public class AppWidget extends AppWidgetProvider {
         RemoteViews widgetLayoutView;
         widgetLayoutView = new RemoteViews(context.getPackageName(), R.layout.appwidget);
 
-        // Make an pending intent for button(go to mainactivity
-        Intent intent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-        // Button launching above pending intent
-        // Attach A click listener to button to start pending intent from above.
-        widgetLayoutView.setOnClickPendingIntent(R.id.widgetBtn, pendingIntent);
+        // Make an pending intent for button(go to mainactivity)
+        Intent mainIntent = new Intent(context, MainActivity.class);
+        PendingIntent mainPendingIntent = PendingIntent.getActivity(context, 0, mainIntent, 0);
+        widgetLayoutView.setOnClickPendingIntent(R.id.widgetBtn, mainPendingIntent);
 
         // Set Widget text in code
         widgetLayoutView.setTextViewText(R.id.widgetTv, context.getResources().getText(R.string.widgetTvTxt));
@@ -31,6 +27,5 @@ public class AppWidget extends AppWidgetProvider {
         appWidgetManager.updateAppWidget(appWidgetIds, widgetLayoutView);
 
     }
-
 }
 

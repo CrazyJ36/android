@@ -437,9 +437,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(gitUrl);
     }
 
-    public void otherClassMethodToast(View view) {
-        otherMethods otherMethodsPointer = new otherMethods();
-        otherMethodsPointer.testToast();
+    public void otherMethodsStringToast(View view) {
+        // CharSequence of this Toast statement initializes A new otherMethods class and uses the string returned from function.
+        Toast.makeText(MainActivity.this, new otherMethods().otherMethodsStringFunc(), Toast.LENGTH_SHORT).show();
     }
 
+    public void hourToast(View view) {
+        Toast.makeText(this, "The current days' hour is: " + new otherMethods().getHourOfDay(), Toast.LENGTH_SHORT).show();
+    }
 }
