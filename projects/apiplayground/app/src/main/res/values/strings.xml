@@ -50,6 +50,7 @@
     <string name="batBtnTxt">Battery</string>
     <string name="goToGitTvTxt">View my git repositories:</string>
     <string name="goToGitBtnTxt">Github</string>
+    <string name="otherFuncBtnTxt">Extern. Func</string>
 
     <!-- Activity 2 Button, Field Names -->
     <string name="dialogImgBtnTxt">Picture</string>
@@ -88,7 +89,7 @@ of computer architecture and programming as a whole).</string>
     <string name="toolbarHideStatusBar">Hide status bar</string>
     <string name="toolbarExitBtn">Exit</string>
     <!-- App Widget Strings -->
-    <string name="widgetTvTxt">C is a fast programming language.</string>
+    <string name="widgetTvTxt">Widget Text</string>
     <string name="widgetBtnTxt">Launch</string>
 
 </resources>

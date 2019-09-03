@@ -436,4 +436,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent gitUrl = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/CrazyJ36?tab=repositories"));
         startActivity(gitUrl);
     }
+
+    public void otherClassMethodToast(View view) {
+        otherMethods otherMethodsPointer = new otherMethods();
+        otherMethodsPointer.testToast();
+    }
+
 }

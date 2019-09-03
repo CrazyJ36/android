@@ -1114,6 +1114,7 @@ id notification_main_column
 id notification_main_column_container
 id notifyBtn
 id numField
+id otherFuncBtn
 id outline
 id parallax
 id parentPanel
@@ -1222,6 +1223,7 @@ id vibBtn
 id view_offset_helper
 id visible
 id widgetBtn
+id widgetParent
 id widgetTv
 id withText
 id wrap_content
@@ -1412,6 +1414,7 @@ string mediaPlayingTxt
 string mtrl_chip_close_icon_content_description
 string notifyBtnTxt
 string numFldHint
+string otherFuncBtnTxt
 string password_toggle_content_description
 string path_password_eye
 string path_password_eye_mask_strike_through
