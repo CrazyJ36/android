@@ -5,7 +5,7 @@ package com.crazyj36.apiplayground;
 class otherMethods {
 
     String otherMethodsStringFunc() {
-        return "Text defined at otherMethods.java, run in MainActivity.";
+        return "Text defined in otherMethods.java, run in MainActivity.";
     }
 
     int getHourOfDay() {

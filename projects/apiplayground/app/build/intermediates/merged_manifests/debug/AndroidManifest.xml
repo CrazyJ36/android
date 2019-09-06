@@ -18,6 +18,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.crazyj36.apiplayground.MainActivity"
@@ -42,6 +43,7 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+        <activity android:name="com.crazyj36.apiplayground.showToast" />
 
         <receiver android:name="com.crazyj36.apiplayground.AppWidget" >
             <intent-filter>

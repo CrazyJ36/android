@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
-
 public class AppWidget extends AppWidgetProvider {
 
     public void onUpdate(final Context context, final AppWidgetManager appWidgetManager, final int[] appWidgetIds) {
@@ -17,9 +16,10 @@ public class AppWidget extends AppWidgetProvider {
         widgetLayoutView = new RemoteViews(context.getPackageName(), R.layout.appwidget);
 
         // Make an pending intent for button(go to mainactivity)
-        Intent mainIntent = new Intent(context, MainActivity.class);
-        PendingIntent mainPendingIntent = PendingIntent.getActivity(context, 0, mainIntent, 0);
-        widgetLayoutView.setOnClickPendingIntent(R.id.widgetBtn, mainPendingIntent);
+        Intent explicitToastIntent = new Intent(context, com.crazyj36.apiplayground.showToast.class);
+
+        PendingIntent showToastPendingIntent = PendingIntent.getActivity(context, 0, explicitToastIntent, 0 );
+        widgetLayoutView.setOnClickPendingIntent(R.id.widgetBtn, showToastPendingIntent);
 
         // Set Widget text in code
         widgetLayoutView.setTextViewText(R.id.widgetTv, context.getResources().getText(R.string.widgetTvTxt));

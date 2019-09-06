@@ -90,7 +90,7 @@ of computer architecture and programming as a whole).</string>
     <string name="toolbarHideStatusBar">Hide status bar</string>
     <string name="toolbarExitBtn">Exit</string>
     <!-- App Widget Strings -->
-    <string name="widgetTvTxt">Base Widget Text</string>
+    <string name="widgetTvTxt">C programming</string>
     <string name="widgetBtnTxt">Launch</string>
 
 </resources>
