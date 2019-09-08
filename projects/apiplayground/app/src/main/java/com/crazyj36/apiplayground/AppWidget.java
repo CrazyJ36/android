@@ -17,7 +17,6 @@ public class AppWidget extends AppWidgetProvider {
 
         // Make an pending intent for button(go to mainactivity)
         Intent explicitToastIntent = new Intent(context, com.crazyj36.apiplayground.showToast.class);
-
         PendingIntent showToastPendingIntent = PendingIntent.getActivity(context, 0, explicitToastIntent, 0 );
         widgetLayoutView.setOnClickPendingIntent(R.id.widgetBtn, showToastPendingIntent);
 

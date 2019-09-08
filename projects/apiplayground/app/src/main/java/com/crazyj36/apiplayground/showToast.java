@@ -10,8 +10,7 @@ public class showToast extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setVisible(false);
-        Toast.makeText(this, "Widget Button Pressed", Toast.LENGTH_LONG).show();
-        //finishAffinity();
+        Toast.makeText(getApplicationContext(), "Widget Button Pressed", Toast.LENGTH_LONG).show();
         finishAndRemoveTask();
     }
 
