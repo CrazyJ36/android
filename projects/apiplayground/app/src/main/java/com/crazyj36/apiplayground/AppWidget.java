@@ -8,23 +8,23 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 public class AppWidget extends AppWidgetProvider {
-
-    public void onUpdate(final Context context, final AppWidgetManager appWidgetManager, final int[] appWidgetIds) {
+    public void onUpdate(final Context onUpdateContext, final AppWidgetManager appWidgetManager, final int[] appWidgetIds) {
 
         // Get the xml layout for the Widget and it's ids.
         RemoteViews widgetLayoutView;
-        widgetLayoutView = new RemoteViews(context.getPackageName(), R.layout.appwidget);
-
-        // Make an pending intent for button(go to mainactivity)
-        Intent explicitToastIntent = new Intent(context, com.crazyj36.apiplayground.showToast.class);
-        PendingIntent showToastPendingIntent = PendingIntent.getActivity(context, 0, explicitToastIntent, 0 );
-        widgetLayoutView.setOnClickPendingIntent(R.id.widgetBtn, showToastPendingIntent);
+        widgetLayoutView = new RemoteViews(onUpdateContext.getPackageName(), R.layout.appwidget);
 
         // Set Widget text in code
-        widgetLayoutView.setTextViewText(R.id.widgetTv, context.getResources().getText(R.string.widgetTvTxt));
+        widgetLayoutView.setTextViewText(R.id.widgetTv, onUpdateContext.getResources().getText(R.string.widgetTvTxt));
 
+        // Widget button
+        Intent startMainIntent = new Intent(onUpdateContext, MainActivity.class);
+        PendingIntent pendingStartMain = PendingIntent.getActivity(onUpdateContext, 0, startMainIntent, 0);
+        widgetLayoutView.setOnClickPendingIntent(R.id.widgetBtn, pendingStartMain);
+
+        // Do refresh of widget
         appWidgetManager.updateAppWidget(appWidgetIds, widgetLayoutView);
-
     }
+
 }
 

@@ -32,7 +32,6 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".showToast" />
 
         <receiver android:name=".AppWidget">
         <intent-filter>

@@ -7,6 +7,8 @@ package com.crazyj36.apiplayground;
    then add another notification with new notification id
 
    log button
+
+   Try to decrease number of layout files by implementing the dialog views in java with Dialog.Builder
  */
 
 import android.Manifest;

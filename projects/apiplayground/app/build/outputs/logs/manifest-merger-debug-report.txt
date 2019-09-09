@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:1-47:12
-INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:1-47:12
-INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:1-47:12
-INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:1-47:12
+ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:1-46:12
+INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:1-46:12
+INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:1-46:12
+INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:1-46:12
 MERGED from [com.android.support:design:28.0.0] C:\Users\CrazyJ36\.gradle\caches\transforms-2\files-2.1\e3decd5bf9fbc8536b88bb6c57360e20\design-28.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\CrazyJ36\.gradle\caches\transforms-2\files-2.1\bbf07aa1da9ab954374e693dfcc335b9\appcompat-v7-28.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\CrazyJ36\.gradle\caches\transforms-2\files-2.1\59df75d251431efe4d450d41cc6b083b\support-fragment-28.0.0\AndroidManifest.xml:17:1-22:12
@@ -34,20 +34,20 @@ MERGED from [com.android.support:interpolator:28.0.0] C:\Users\CrazyJ36\.gradle\
 MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\CrazyJ36\.gradle\caches\transforms-2\files-2.1\b5f1a18436322a4d6243b4d563cfece4\livedata-1.1.1\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\CrazyJ36\.gradle\caches\transforms-2\files-2.1\6104c576404b17797d5f42ae60105d1d\livedata-core-1.1.1\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\CrazyJ36\.gradle\caches\transforms-2\files-2.1\7c5e711cb7599bc18a19cc1df98bc8d6\runtime-1.1.1\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:1-47:12
-INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:1-47:12
-INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:1-47:12
+INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:1-46:12
+INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:1-46:12
+INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:1-46:12
 	package
 		ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:2:5-41
 		INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:1-47:12
+		ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:1-46:12
 		INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:1-47:12
+		ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:1-46:12
 		INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:1:11-69
@@ -60,7 +60,7 @@ ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\
 	android:name
 		ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:5:22-63
 application
-ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:7:5-46:19
+ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:7:5-45:19
 MERGED from [com.android.support:design:28.0.0] C:\Users\CrazyJ36\.gradle\caches\transforms-2\files-2.1\e3decd5bf9fbc8536b88bb6c57360e20\design-28.0.0\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0] C:\Users\CrazyJ36\.gradle\caches\transforms-2\files-2.1\e3decd5bf9fbc8536b88bb6c57360e20\design-28.0.0\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-compat:28.0.0] C:\Users\CrazyJ36\.gradle\caches\transforms-2\files-2.1\dd1cf78f22bdd94f550130b281f27c97\support-compat-28.0.0\AndroidManifest.xml:22:5-94
@@ -117,26 +117,22 @@ ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\
 		ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:28:13-42
 intent-filter#action:name:android.intent.action.MAIN
 ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:31:13-33:29
-activity#com.crazyj36.apiplayground.showToast
-ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:35:9-47
-	android:name
-		ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:35:19-44
 receiver#com.crazyj36.apiplayground.AppWidget
-ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:37:9-44:20
+ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:36:9-43:20
 	android:name
-		ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:37:19-44
+		ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:36:19-44
 intent-filter#action:name:android.appwidget.action.APPWIDGET_UPDATE
-ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:38:9-40:25
+ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:37:9-39:25
 action#android.appwidget.action.APPWIDGET_UPDATE
-ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:39:13-80
+ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:38:13-80
 	android:name
-		ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:39:21-77
+		ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:38:21-77
 meta-data#android.appwidget.provider
-ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:41:9-43:53
+ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:40:9-42:53
 	android:resource
-		ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:43:13-50
+		ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:42:13-50
 	android:name
-		ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:42:13-54
+		ADDED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml:41:13-54
 uses-sdk
 INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\CrazyJ36\development\android\projects\apiplayground\app\src\main\AndroidManifest.xml

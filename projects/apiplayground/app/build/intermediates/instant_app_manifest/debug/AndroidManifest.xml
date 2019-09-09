@@ -44,7 +44,6 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name="com.crazyj36.apiplayground.showToast" />
 
         <receiver android:name="com.crazyj36.apiplayground.AppWidget" >
             <intent-filter>
