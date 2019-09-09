@@ -7,7 +7,7 @@
 
     <include layout="@layout/appbar" />
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/parentView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,7 +35,7 @@
                         android:text="@string/bigText" />
                 </HorizontalScrollView>
 
-                <android.support.v4.widget.NestedScrollView
+                <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
                     android:scrollbars="vertical">
@@ -46,7 +46,7 @@
                         android:drawableTop="@drawable/image"
                         android:text="@string/bigText2" />
 
-                </android.support.v4.widget.NestedScrollView>
+                </androidx.core.widget.NestedScrollView>
 
                 <Button
                     android:id="@+id/activity2Btn"
@@ -238,7 +238,7 @@
             </LinearLayout>
         </ScrollView>
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -246,7 +246,7 @@
             android:layout_margin="16dp"
             android:src="@drawable/infoicon" />
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
 
 

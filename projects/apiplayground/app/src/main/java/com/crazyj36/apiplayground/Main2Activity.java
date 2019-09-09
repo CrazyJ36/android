@@ -2,8 +2,10 @@ package com.crazyj36.apiplayground;
 
 import android.app.Dialog;
 import android.content.res.Configuration;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.graphics.Color;
 import android.util.Log;
@@ -236,7 +238,7 @@ public class Main2Activity extends AppCompatActivity {
 
     // Catch when config changes(rotate), goes with <activity android:configChanges="orientation|screenSize" /> in AndroidManifest.xml
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         Log.i(getResources().getString(R.string.tag), "Activity 2 Config Changed");
     }

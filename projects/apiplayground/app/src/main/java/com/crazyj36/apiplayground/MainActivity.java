@@ -28,15 +28,16 @@ import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.support.design.widget.BottomSheetDialog;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AlertDialog.Builder;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -413,7 +414,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // Catch when config changes(rotate), goes with <activity android:configChanges="orientation|screenSize" /> in AndroidManifest.xml
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         Log.d(getResources().getString(R.string.tag), "Activity1 Config Changed");
     }
