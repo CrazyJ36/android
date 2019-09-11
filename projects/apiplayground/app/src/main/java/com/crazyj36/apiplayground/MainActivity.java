@@ -28,16 +28,21 @@ import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Vibrator;
+
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -68,12 +73,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final FloatingActionButton fab = findViewById(R.id.fab);
         //Disables AutoFill. Easier in xml layout, though this statement can make autofill available to sdks that use it eg. 26 oreo
         if (Build.VERSION.SDK_INT >= 26)
+
             getWindow().getDecorView().setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_YES_EXCLUDE_DESCENDANTS);
         // Phone permission
-        ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 1);
+        ActivityCompat.requestPermissions(MainActivity.this, new String[]{
+                Manifest.permission.CALL_PHONE
+        }, 1);
         // Toolbar
         final Toolbar toolbar = findViewById(R.id.toolbar);
+
         setActionBar(toolbar);
+
         final ImageButton toolbarMenu = findViewById(R.id.toolbarMenu);
         toolbarMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +105,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             if (!fab.isShown()) {
                                 fab.show();
                             }
+                        } else if (menuItemChosen == R.id.toolbarAccentToggle) {
+                            setTheme(R.style.AppThemeDark);
+                            ViewGroup viewGroup = findViewById(R.id.act1RootView);
+                            getLayoutInflater().inflate(R.layout.activity_main, viewGroup);
+                            //findViewById(R.id.act1CoordinatorLayoutView).setBackground(R.drawable.black_background);
+                            setActionBar(toolbar);
+                            //setContentView(R.layout.activity_main);
                         }
                         return true;
                     }
@@ -105,6 +122,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // ActionBar Subtitle
         ActionBar actionBar = getActionBar();
         if (actionBar != null) actionBar.setSubtitle("CrazyJ36");
+
+        // Fab Button
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                aboutAppDialog();
+            }
+        });
+
+        fab.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                fab.cancelPendingInputEvents();
+                fab.hide();
+                return true;
+            }
+        });
+
         // Activity2 Button
         findViewById(R.id.activity2Btn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -291,7 +326,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         // SnackBar Button
-        final CoordinatorLayout topLayout = findViewById(R.id.parentView);
+        final CoordinatorLayout topLayout = findViewById(R.id.act1CoordinatorLayoutView);
         findViewById(R.id.snackbarBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -301,22 +336,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(MainActivity.this, "SnackBar Button Pushed", Toast.LENGTH_SHORT).show();
                     }
                 }).show();
-            }
-        });
-        // Fab Button
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                aboutAppDialog();
-            }
-        });
-
-        fab.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                fab.cancelPendingInputEvents();
-                fab.hide();
-                return true;
             }
         });
 

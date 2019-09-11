@@ -16,7 +16,9 @@
                 android:title="@string/toolbarSub1">
 
             </item>
-            <item android:title="@string/toolbarSub2">
+            <item
+                android:id="@+id/toolbarAccentToggle"
+                android:title="@string/toolbarSub2">
 
             </item>
         </menu>

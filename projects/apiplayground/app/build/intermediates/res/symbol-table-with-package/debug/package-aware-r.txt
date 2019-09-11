@@ -558,6 +558,7 @@ color abc_tint_spinner
 color abc_tint_switch_track
 color accent_material_dark
 color accent_material_light
+color backgroundDark
 color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
@@ -575,6 +576,9 @@ color cardview_light_background
 color cardview_shadow_end_color
 color cardview_shadow_start_color
 color colorAccent
+color colorDarkAccent
+color colorDarkPrimary
+color colorDarkPrimaryDark
 color colorPrimary
 color colorPrimaryDark
 color design_bottom_navigation_shadow_color
@@ -972,6 +976,7 @@ drawable activity2
 drawable avd_hide_password
 drawable avd_show_password
 drawable battery_icon
+drawable black_background
 drawable brush_icon
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
@@ -1058,6 +1063,8 @@ id accessibility_custom_action_7
 id accessibility_custom_action_8
 id accessibility_custom_action_9
 id accountsList
+id act1CoordinatorLayoutView
+id act1RootView
 id act2RootView
 id action_bar
 id action_bar_activity_content
@@ -1195,7 +1202,6 @@ id otherFuncBtn
 id outline
 id parallax
 id parentPanel
-id parentView
 id parent_matrix
 id pin
 id progress_circular
@@ -1280,6 +1286,7 @@ id toastButton
 id toolbar
 id toolbarAboutActivity1
 id toolbarAboutActivity2
+id toolbarAccentToggle
 id toolbarExit
 id toolbarExit2
 id toolbarHideStatus
@@ -1537,6 +1544,7 @@ style Animation_AppCompat_DropDownUp
 style Animation_AppCompat_Tooltip
 style Animation_Design_BottomSheetDialog
 style AppTheme
+style AppThemeDark
 style Base_AlertDialog_AppCompat
 style Base_AlertDialog_AppCompat_Light
 style Base_Animation_AppCompat_Dialog
