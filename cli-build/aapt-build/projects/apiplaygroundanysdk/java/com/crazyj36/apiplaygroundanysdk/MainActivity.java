@@ -51,8 +51,9 @@ import java.io.File;
 public class MainActivity extends Activity {
 	// Use normal java class
 	String javaClassStr = new javaClass().myMethod();
-    // Strings for methods outside of onCreate()
+    // Strings for methods outside, or inward(in if's) of onCreate()
 	String filesTest = "";
+    String notificationChannelDesc = "";
     String logChannel = "APIPLAYGROUNDLOG";
     int sdkVersion = Build.VERSION.SDK_INT;
 	public static final int MY_PERMISSION = 0;
@@ -245,13 +246,17 @@ public class MainActivity extends Activity {
 			}
 		});
 		// Notification Button
-		final NotificationManager notificationManager = (NotificationManager) getSystemService("notification"); // getSystemService() string type ("vibrate") or class type (VIBRATOR_SERVICE)
         final String notifyChannel = "APIPLAYGROUNDANYSDK_NOTIFICATION_CHANNEL";
+		final NotificationManager notificationManager = (NotificationManager) getSystemService("notification"); // getSystemService() string type ("vibrate") or class type (VIBRATOR_SERVICE)
 		final Intent intent = new Intent(MainActivity.this, MainActivity.class);
 		final PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 1, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
         if (notificationManager != null) {
 			if (sdkVersion >= 26) {
 			    NotificationChannel notificationChannel = new NotificationChannel(notifyChannel, "Notify Button", NotificationManager.IMPORTANCE_DEFAULT);
+				notificationChannel.setDescription("Showing functionality of basic notification.");
+                notificationChannelDesc = notificationChannel.getDescription();
+                notificationChannel.enableLights(true);
+                notificationChannel.enableVibration(true);
 				notificationManager.createNotificationChannel(notificationChannel);
 			}
 		} else {
@@ -275,9 +280,8 @@ public class MainActivity extends Activity {
 						notifyBuild.setContentIntent(pendingIntent);
 						notifyBuild.setContentTitle("A notification");
 						notifyBuild.setContentText("This is the notification content");
-						notifyBuild.setAutoCancel(true);
-						notifyBuild.setShowWhen(true);
-						notifyBuild.setDefaults(Notification.DEFAULT_ALL);
+						notifyBuild.setAutoCancel(true); // notification clears when clicked
+						notifyBuild.setShowWhen(true); // Shows timestamp of when notification arose.
 						notificationManager.notify(0, notifyBuild.build());
 					} else {
 						Notification notify = new Notification(R.drawable.top_text_drawable, "API Playground Any SDK", System.currentTimeMillis());
@@ -290,6 +294,7 @@ public class MainActivity extends Activity {
 						notify.defaults = Notification.DEFAULT_ALL;
 						notificationManager.notify(notifyChannel, 0, notify);
 					}
+					Toast.makeText(MainActivity.this, "Notification: " + notificationChannelDesc, Toast.LENGTH_LONG).show();
 				} else {
 					Toast.makeText(MainActivity.this, "Notification Manager null, notification not made", Toast.LENGTH_LONG);
 				}
