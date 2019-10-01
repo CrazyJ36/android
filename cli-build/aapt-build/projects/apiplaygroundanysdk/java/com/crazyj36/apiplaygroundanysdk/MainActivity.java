@@ -53,7 +53,6 @@ public class MainActivity extends Activity {
 	String javaClassStr = new javaClass().myMethod();
     // Strings for methods outside, or inward(in if's) of onCreate()
 	String filesTest = "";
-    String notificationChannelDesc = "";
     String logChannel = "APIPLAYGROUNDLOG";
     int sdkVersion = Build.VERSION.SDK_INT;
 	public static final int MY_PERMISSION = 0;
@@ -253,8 +252,6 @@ public class MainActivity extends Activity {
         if (notificationManager != null) {
 			if (sdkVersion >= 26) {
 			    NotificationChannel notificationChannel = new NotificationChannel(notifyChannel, "Notify Button", NotificationManager.IMPORTANCE_DEFAULT);
-				notificationChannel.setDescription("Showing functionality of basic notification.");
-                notificationChannelDesc = notificationChannel.getDescription();
                 notificationChannel.enableLights(true);
                 notificationChannel.enableVibration(true);
 				notificationManager.createNotificationChannel(notificationChannel);
@@ -294,7 +291,6 @@ public class MainActivity extends Activity {
 						notify.defaults = Notification.DEFAULT_ALL;
 						notificationManager.notify(notifyChannel, 0, notify);
 					}
-					Toast.makeText(MainActivity.this, "Notification: " + notificationChannelDesc, Toast.LENGTH_LONG).show();
 				} else {
 					Toast.makeText(MainActivity.this, "Notification Manager null, notification not made", Toast.LENGTH_LONG);
 				}
@@ -425,6 +421,7 @@ public class MainActivity extends Activity {
 	            vibrateTest,
 	            filesTest,
 	            concatTxt,
+                "The current days' hour is: " + new javaClass().getHourOfDay(),
 				javaClassStr,
 	    };
 	    results[0] = String.valueOf(results.length);
