@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">API Playground Any SDK </string>
+    <!--Activity 1-->
 	<string name="tvWidgetTxt">The text here should be the base to which the widget resizes itself, as the FrameLayout used to make the widget frame has it\'s height and width set to wrap_content.</string>
     <string name="tvHorizontalTxt">This HorizontalScrollview (swipe it sideways) contains text that is in the file /res/values/strings.xml. Java code was used to actually to put it here. The text was not set in the activity.xml like usual.. Maybe not best codeing practice.</string>
     <string name="act2BtnTxt">Next</string>
@@ -49,4 +50,11 @@ of computer architecture and programming as a whole).</string>
 	<string name="btnWebTxt">Go</string>
 	<string name="etSmsHint">Message</string>
 	<string name="btnSmsTxt">SMS</string>
+    <!--Shortcuts-->
+    <string name="Act1ShortcutShortLabel">1</string>
+    <string name="Act1ShortcutLongLabel">Go to Activity 1</string>
+    <string name="Act1ShortcutDisabledMsg">Act1 Shortcut Disabled</string>
+    <string name="Act2ShortcutShortLabel">2</string>
+    <string name="Act2ShortcutLongLabel">Go to Activity 2</string>
+    <string name="Act2ShortcutDisabledMsg">Act2 Shortcut Disabled</string>
 </resources>

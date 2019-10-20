@@ -29,18 +29,19 @@ public final class R {
         public static final int btnWeb=0x7f080019;
         public static final int chk1=0x7f08000d;
         public static final int chk2=0x7f08000e;
-        public static final int dialog1TextLayout=0x7f08001d;
-        public static final int dialogBtn1=0x7f080020;
-        public static final int dialogBtn2=0x7f080021;
-        public static final int dialogTv1=0x7f08001e;
-        public static final int dialogTv2=0x7f08001f;
+        public static final int clock=0x7f08001c;
+        public static final int dialog1TextLayout=0x7f08001e;
+        public static final int dialogBtn1=0x7f080021;
+        public static final int dialogBtn2=0x7f080022;
+        public static final int dialogTv1=0x7f08001f;
+        public static final int dialogTv2=0x7f080020;
         public static final int etCall=0x7f080016;
         public static final int etPrint=0x7f080011;
         public static final int etSms=0x7f08001a;
         public static final int etWeb=0x7f080018;
         public static final int fileList=0x7f080014;
-        public static final int notificationTvContent=0x7f080023;
-        public static final int notificationTvTitle=0x7f080022;
+        public static final int notificationTvContent=0x7f080024;
+        public static final int notificationTvTitle=0x7f080023;
         public static final int resultsTextView=0x7f080013;
         public static final int scrollViewForRawFile=0x7f080002;
         public static final int tvChkStatus=0x7f08000f;
@@ -50,7 +51,7 @@ public final class R {
         public static final int tvPlayAudioStatus=0x7f08000a;
         public static final int tvPrint=0x7f080010;
         public static final int tvSdk=0x7f080000;
-        public static final int tvWidget=0x7f08001c;
+        public static final int tvWidget=0x7f08001d;
     }
     public static final class layout {
         public static final int activity_main=0x7f040000;
@@ -69,6 +70,14 @@ public final class R {
         public static final int flute=0x7f060001;
     }
     public static final class string {
+        public static final int Act1ShortcutDisabledMsg=0x7f070022;
+        public static final int Act1ShortcutLongLabel=0x7f070021;
+        /** Shortcuts
+         */
+        public static final int Act1ShortcutShortLabel=0x7f070020;
+        public static final int Act2ShortcutDisabledMsg=0x7f070025;
+        public static final int Act2ShortcutLongLabel=0x7f070024;
+        public static final int Act2ShortcutShortLabel=0x7f070023;
         public static final int act2BtnTxt=0x7f070003;
         public static final int app_name=0x7f070000;
         /** Activity 2
@@ -102,9 +111,12 @@ public final class R {
         public static final int tvMediaPlayingTxt=0x7f07000d;
         public static final int tvPrintTxt=0x7f070011;
         public static final int tvSdkTxt=0x7f070006;
+        /** Activity 1
+         */
         public static final int tvWidgetTxt=0x7f070001;
     }
     public static final class xml {
         public static final int appwidgetinfo=0x7f050000;
+        public static final int shortcuts=0x7f050001;
     }
 }
