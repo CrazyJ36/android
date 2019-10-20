@@ -50,6 +50,9 @@ of computer architecture and programming as a whole).</string>
 	<string name="btnWebTxt">Go</string>
 	<string name="etSmsHint">Message</string>
 	<string name="btnSmsTxt">SMS</string>
+    <string name="toggleTxt">Select Toggle</string>
+    <string name="toggleOnTxt">Toggle Active</string>
+    <string name="toggleOffTxt">Toggle Disabled</string>
     <!--Shortcuts-->
     <string name="Act1ShortcutShortLabel">1</string>
     <string name="Act1ShortcutLongLabel">Go to Activity 1</string>

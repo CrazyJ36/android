@@ -155,7 +155,26 @@
 			android:id="@+id/tvChkStatus"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
-     </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal" >
+ 
+        <ToggleButton
+            android:id="@+id/toggle1"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/toggleTxt" />
+
+        <TextView
+            android:id="@+id/tvToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/toggleTxt" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvPrint"

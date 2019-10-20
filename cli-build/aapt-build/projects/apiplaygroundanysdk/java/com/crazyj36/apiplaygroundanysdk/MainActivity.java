@@ -38,6 +38,8 @@ import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.ScrollView;
+import android.widget.ToggleButton;
+import android.widget.CompoundButton;
 import android.net.Uri;
 import android.util.Log;
 import java.lang.System;
@@ -330,6 +332,20 @@ public class MainActivity extends Activity {
 					tvChkStatusTxt[0] = "None Checked";
 		        }
 				tvChkStatus.setText(tvChkStatusTxt[0]);
+            }
+        });
+        // Toggle
+        final ToggleButton toggle1 = findViewById(R.id.toggle1);
+        final TextView tvToggle = findViewById(R.id.tvToggle);
+        toggle1.setChecked(false);
+        toggle1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton toggleView, boolean isChecked) {
+                if (toggle1.isChecked()) {
+                    tvToggle.setText(getResources().getString(R.string.toggleOnTxt));
+                } else if (!toggle1.isChecked()) {
+                    tvToggle.setText(getResources().getString(R.string.toggleOffTxt));
+                }
             }
         });
         // getStorage permission & start filesTask()
