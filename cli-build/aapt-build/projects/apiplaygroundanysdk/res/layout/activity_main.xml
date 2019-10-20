@@ -206,11 +206,6 @@
         android:layout_gravity="bottom|right"
 		android:text="@string/act2BtnTxt" />
  
-    <AnalogClock
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center" />
- 
   </LinearLayout>
 
 </ScrollView>

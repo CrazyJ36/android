@@ -1,0 +1,28 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="activity_main_shorcut"
+        android:enabled="true"
+        android:icon="@drawable/top_text_drawable"
+        android:shortcutShortLabel="@string/Act1ShortcutShortLabel"
+        android:shortcutLongLabel="@string/Act1ShortcutLongLabel"
+        android:shortcutDisabledMessage="@string/Act1ShortcutDisabledMsg" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.crazyj36.apiplaygroundanysdk"
+            android:targetClass="com.crazyj36.apiplaygroundanysdk.MainActivity" />
+        <categories android:name="android.shortcut.Activities" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="activity_2_shorcut"
+        android:enabled="true"
+        android:icon="@drawable/top_text_drawable"
+        android:shortcutShortLabel="@string/Act2ShortcutShortLabel"
+        android:shortcutLongLabel="@string/Act2ShortcutLongLabel"
+        android:shortcutDisabledMessage="@string/Act2ShortcutDisabledMsg" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.crazyj36.apiplaygroundanysdk"
+            android:targetClass="com.crazyj36.apiplaygroundanysdk.Main2Activity" />
+        <categories android:name="android.shortcut.Activities" />
+    </shortcut>
+</shortcuts> 

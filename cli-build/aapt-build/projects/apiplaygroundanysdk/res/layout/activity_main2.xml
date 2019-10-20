@@ -71,4 +71,10 @@
 
 	</LinearLayout>
 
+    <AnalogClock
+        android:id="@+id/clock"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:gravity="center" />
+
 </LinearLayout>
