@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/appbar" />
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/act1CoordinatorLayoutView"
         android:layout_width="match_parent"
@@ -23,6 +25,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:text="@string/bigText" />
+                </HorizontalScrollView>
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:scrollbars="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:drawableTop="@drawable/image"
+                        android:text="@string/bigText2" />
+
+                </androidx.core.widget.NestedScrollView>
 
                 <Button
                     android:id="@+id/activity2Btn"
@@ -52,12 +77,39 @@
                     android:text="@string/audioBtnTxt"
                     android:textAllCaps="false" />
 
+                <TextView
+                    android:id="@+id/songInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/songInfoTxt" />
+
+                <EditText
+                    android:id="@+id/numField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/numFldHint"
+                    android:importantForAutofill="no"
+                    android:inputType="phone"
+                    tools:targetApi="o" />
+
                 <Button
                     android:id="@+id/callButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/callBtnTxt"
                     android:textAllCaps="false" />
+
+                <EditText
+                    android:id="@+id/urlField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/urlFldHint"
+                    android:importantForAutofill="no"
+                    android:inputType="textUri"
+                    android:textAllCaps="false"
+                    tools:targetApi="o" />
 
                 <Button
                     android:id="@+id/urlButton"
@@ -66,12 +118,26 @@
                     android:text="@string/urlBtnTxt"
                     android:textAllCaps="false" />
 
+                <EditText
+                    android:id="@+id/smsField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/smsFldHint"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    tools:targetApi="o" />
+
                 <Button
                     android:id="@+id/smsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/smsBtnTxt"
                     android:textAllCaps="false" />
+
+                <Switch
+                    android:id="@+id/switch1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <Button
                     android:id="@+id/chkSwitchBtn"
@@ -138,36 +204,6 @@
                     android:text="@string/hourBtnTxt"
                     android:textAllCaps="false" />
 
-                <EditText
-                    android:id="@+id/numField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/numFldHint"
-                    android:importantForAutofill="no"
-                    android:inputType="phone"
-                    tools:targetApi="o" />
-
-                <EditText
-                    android:id="@+id/urlField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/urlFldHint"
-                    android:importantForAutofill="no"
-                    android:inputType="textUri"
-                    android:textAllCaps="false"
-                    tools:targetApi="o" />
-
-                <EditText
-                    android:id="@+id/smsField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/smsFldHint"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    tools:targetApi="o" />
-
                 <GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -200,40 +236,6 @@
 
                 </GridLayout>
 
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:text="@string/bigText" />
-                </HorizontalScrollView>
-
-                <Switch
-                    android:id="@+id/switch1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:id="@+id/songInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/songInfoTxt" />
-
-                <androidx.core.widget.NestedScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:scrollbars="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:drawableTop="@drawable/image"
-                        android:text="@string/bigText2" />
-
-                </androidx.core.widget.NestedScrollView>
-
             </LinearLayout>
         </ScrollView>
 
@@ -247,7 +249,6 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <include layout="@layout/appbar" />
 </LinearLayout>
 
 

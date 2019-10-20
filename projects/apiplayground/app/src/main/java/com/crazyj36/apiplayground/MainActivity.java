@@ -288,6 +288,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (Build.VERSION.SDK_INT >= 26) {
             NotificationChannel notificationChannel = new NotificationChannel("APIPLAYGROUND_NOTIFICATION_CHANNEL", "Notify Button", NotificationManager.IMPORTANCE_DEFAULT);
             if (notificationManager != null) {
+                notificationChannel.enableLights(true);
+                notificationChannel.enableVibration(true);
                 notificationManager.createNotificationChannel(notificationChannel);
             } else {
                 Toast.makeText(this, "Notification Manager Service returned null", Toast.LENGTH_SHORT).show();
