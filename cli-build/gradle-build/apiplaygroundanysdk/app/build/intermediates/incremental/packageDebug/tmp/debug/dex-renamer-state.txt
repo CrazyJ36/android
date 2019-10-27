@@ -1,4 +1,0 @@
-#Sun Apr 28 04:55:01 EDT 2019
-base.0=C\:\\Users\\Thomas\\Development\\android\\cli-build\\gradle-build\\apiplaygroundanysdk\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
-path.0=classes.dex
-renamed.0=classes.dex
