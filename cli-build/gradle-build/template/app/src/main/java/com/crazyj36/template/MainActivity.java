@@ -12,7 +12,6 @@ public class MainActivity extends Activity {
 
         TextView text = (TextView) findViewById(R.id.textView);
         text.setText("Template Gradle CLI Built App");
-
         
     }
 }

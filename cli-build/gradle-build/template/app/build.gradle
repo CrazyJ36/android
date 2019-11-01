@@ -6,4 +6,5 @@ android {
         applicationId "com.crazyj36.template"
         targetSdkVersion 28
     }
+    
 }    

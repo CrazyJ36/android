@@ -1,7 +1,0 @@
-#Internal package file, do not edit.
-#Sun Apr 28 04:29:20 EDT 2019
-0.baseType=DIRECTORY
-0.base=C\:\\Users\\Thomas\\Development\\android\\cli-build\\gradle-build\\template\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\out
-0.path=classes.dex
-0.set=DEX
-count=1
