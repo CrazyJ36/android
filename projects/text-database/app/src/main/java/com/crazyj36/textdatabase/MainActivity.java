@@ -17,7 +17,7 @@ import java.io.IOException;
 
 
 public class MainActivity extends Activity {
-FileWriter fileWriter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
