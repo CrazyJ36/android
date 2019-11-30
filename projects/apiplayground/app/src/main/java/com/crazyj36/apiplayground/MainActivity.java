@@ -446,7 +446,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         aboutDialog.setTitle("About Developer");
         aboutDialog.setIcon(R.drawable.profile);
         aboutDialog.setView(R.layout.profile_layout);
-        aboutDialog.setMessage("CrazyJ36\n2018");
+        aboutDialog.setMessage("CrazyJ36 - 2019");
         aboutDialog.create();
         aboutDialog.show();
     }

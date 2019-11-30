@@ -48,7 +48,7 @@
     <string name="bottomSheetImg3Desc">An Icon representing the building of something(round)</string>
     <string name="vibBtnTxt">Vibrate</string>
     <string name="batBtnTxt">Battery</string>
-    <string name="goToGitTvTxt">View my git repositories:</string>
+    <string name="goToGitTvTxt">View my git repositories</string>
     <string name="goToGitBtnTxt">Github</string>
     <string name="otherFuncBtnTxt">Extern. Func</string>
     <string name="hourBtnTxt">Get Hour</string>
@@ -64,8 +64,9 @@
     <string name="radioBtnColorNavBar2Txt">Green</string>
     <string name="radioBtnColorNavBar3Txt">Red</string>
     <string name="imgColorSwitchTxt">Move</string>
-    <string name="etAccounts1Hint">A Username</string>
-    <string name="etAccounts2Hint">User password</string>
+    <string name="chkBoxDesc">Detect checked boxes</string>
+    <string name="etAccounts1Hint">Username</string>
+    <string name="etAccounts2Hint">Password</string>
     <string name="btnAccountsTxt">Add</string>
     <string name="btnCustomTxt">Custom</string>
     <string name="dialogTv1Txt">Before getting started with C programming, lets get familiarized with the language first. C is a general-purpose
@@ -90,7 +91,7 @@ of computer architecture and programming as a whole).</string>
     <string name="toolbarHideStatusBar">Hide status bar</string>
     <string name="toolbarExitBtn">Exit</string>
     <!-- App Widget Strings -->
-    <string name="widgetTvTxt">C programming</string>
+    <string name="widgetTvTxt">API Playground Widget</string>
     <string name="widgetBtnTxt">Launch</string>
 
 </resources>

@@ -1468,6 +1468,7 @@ string buildIcon
 string callBtnTxt
 string character_counter_content_description
 string character_counter_pattern
+string chkBoxDesc
 string chkSwitchBtnTxt
 string dialogBtn1Txt
 string dialogBtn2Txt
