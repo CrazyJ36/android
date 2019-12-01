@@ -106,12 +106,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 fab.show();
                             }
                         } else if (menuItemChosen == R.id.toolbarAccentToggle) {
-                            setTheme(R.style.AppThemeDark);
                             ViewGroup viewGroup = findViewById(R.id.act1RootView);
-                            //getLayoutInflater().inflate(R.layout.activity_main, viewGroup);
-                            //findViewById(R.id.act1CoordinatorLayoutView).setBackground(R.drawable.black_background);
-                            //setActionBar(toolbar);
-                            //setContentView(R.layout.activity_main);
+                            getTheme().applyStyle(R.style.AppThemeDark, true);
+                            viewGroup.setBackgroundColor(getResources().getColor(R.color.backgroundDark, getTheme()));
+                            getLayoutInflater().inflate(R.layout.activity_main, viewGroup);
                         }
                         return true;
                     }
@@ -446,7 +444,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         aboutDialog.setTitle("About Developer");
         aboutDialog.setIcon(R.drawable.profile);
         aboutDialog.setView(R.layout.profile_layout);
-        aboutDialog.setMessage("CrazyJ36 - 2019");
+        // aboutDialog.setMessage("CrazyJ36 - 2019");
         aboutDialog.create();
         aboutDialog.show();
     }

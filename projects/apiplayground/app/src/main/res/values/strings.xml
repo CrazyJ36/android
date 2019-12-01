@@ -52,7 +52,7 @@
     <string name="goToGitBtnTxt">Github</string>
     <string name="otherFuncBtnTxt">Extern. Func</string>
     <string name="hourBtnTxt">Get Hour</string>
-
+    <string name="aboutDialogCopyright">CrazyJ36 2019\n</string>
     <!-- Activity 2 Button, Field Names -->
     <string name="dialogImgBtnTxt">Picture</string>
     <string name="dialogImgPicDesc">Picture of Earth</string>

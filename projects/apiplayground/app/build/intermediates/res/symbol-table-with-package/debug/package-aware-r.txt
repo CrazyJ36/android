@@ -976,7 +976,6 @@ drawable activity2
 drawable avd_hide_password
 drawable avd_show_password
 drawable battery_icon
-drawable black_background
 drawable brush_icon
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
@@ -1447,6 +1446,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string aboutDialogCopyright
 string activityBtnTxt
 string app_name
 string appbar_scrolling_view_behavior

@@ -13,6 +13,7 @@
         <item name="colorPrimary">@color/colorDarkPrimary</item>
         <item name="colorPrimaryDark">@color/colorDarkPrimaryDark</item>
         <item name="colorAccent">@color/colorDarkAccent</item>
+        <item name="android:colorBackground">@color/backgroundDark</item>
     </style>
 
 </resources>

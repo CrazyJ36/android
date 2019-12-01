@@ -6,7 +6,7 @@
     <color name="colorAccent">#ff263238</color>
 
     <color name="colorDarkPrimary">#757575</color>
-    <color name="colorDarkPrimaryDark">#000000</color>
+    <color name="colorDarkPrimaryDark">#000024</color>
     <color name="colorDarkAccent">#795548</color>
     <color name="backgroundDark">#78909c</color>
 </resources>
