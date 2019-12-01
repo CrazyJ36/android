@@ -108,9 +108,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         } else if (menuItemChosen == R.id.toolbarAccentToggle) {
                             setTheme(R.style.AppThemeDark);
                             ViewGroup viewGroup = findViewById(R.id.act1RootView);
-                            getLayoutInflater().inflate(R.layout.activity_main, viewGroup);
+                            //getLayoutInflater().inflate(R.layout.activity_main, viewGroup);
                             //findViewById(R.id.act1CoordinatorLayoutView).setBackground(R.drawable.black_background);
-                            setActionBar(toolbar);
+                            //setActionBar(toolbar);
                             //setContentView(R.layout.activity_main);
                         }
                         return true;

@@ -3648,12 +3648,11 @@ of computer architecture and programming as a whole).</string><string name="dial
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style><style name="AppThemeDark" parent="Theme.AppCompat.Light.NoActionBar">
+    </style><style name="AppThemeDark" parent="Theme.AppCompat.DayNight.DarkActionBar">
         
         <item name="colorPrimary">@color/colorDarkPrimary</item>
         <item name="colorPrimaryDark">@color/colorDarkPrimaryDark</item>
         <item name="colorAccent">@color/colorDarkAccent</item>
-        <item name="android:background">@color/backgroundDark</item>
     </style></file><file name="appwidgetinfo" path="C:\Users\crazy\development\android\projects\apiplayground\app\src\main\res\xml\appwidgetinfo.xml" qualifiers="" type="xml"/><file name="shortcuts" path="C:\Users\crazy\development\android\projects\apiplayground\app\src\main\res\xml\shortcuts.xml" qualifiers="" type="xml"/></source><source path="C:\Users\crazy\development\android\projects\apiplayground\app\build\generated\res\rs\debug"/><source path="C:\Users\crazy\development\android\projects\apiplayground\app\build\generated\res\resValues\debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\crazy\development\android\projects\apiplayground\app\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug" generated-set="debug$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\crazy\development\android\projects\apiplayground\app\src\debug\res"/></dataSet><mergedItems><configuration qualifiers=""><declare-styleable name="AlertDialog">
         <attr name="android:layout"/>
         <attr format="reference" name="buttonPanelSideLayout"/>
