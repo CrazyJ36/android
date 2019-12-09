@@ -24,4 +24,8 @@ public class MainActivity extends Activity {
     public void android_func(View view) {
         Toast.makeText(this, getString(R.string.androidBtnDesc), Toast.LENGTH_SHORT).show();
     }
+
+    public void rotate_func(View view) {
+        Toast.makeText(this, getString(R.string.rotateBtnDesc), Toast.LENGTH_SHORT).show();
+    }
 }

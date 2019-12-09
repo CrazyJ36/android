@@ -1,37 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/contactBtn"
-        android:layout_width="wrap_content"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_account_box_black_48dp"
-        android:contentDescription="@string/contactBtnDesc"
-        android:backgroundTint="@android:color/transparent"
-        android:onClick="contacts_func" >
-    </ImageButton>
+        android:layout_gravity="top"
+        android:text="@string/instructions">
+    </TextView>
 
-    <ImageButton
-        android:id="@+id/clockBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/clockBtnDesc"
-        android:backgroundTint="@android:color/transparent"
-        android:src="@mipmap/ic_alarm_black_48dp"
-        android:onClick="clock_func" >
-    </ImageButton>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageButton
-        android:id="@+id/androidbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/androidBtnDesc"
-        android:backgroundTint="@android:color/transparent"
-        android:src="@mipmap/ic_android_black_48dp"
-        android:onClick="android_func" >
-    </ImageButton>
+        <ImageButton
+            android:id="@+id/contactBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="@string/contactBtnDesc"
+            android:onClick="contacts_func"
+            android:src="@mipmap/ic_account_box_black_48dp" />
 
+        <ImageButton
+            android:id="@+id/clockBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="@string/clockBtnDesc"
+            android:onClick="clock_func"
+            android:src="@mipmap/ic_alarm_black_48dp" />
+
+        <ImageButton
+            android:id="@+id/androidbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="@string/androidBtnDesc"
+            android:onClick="android_func"
+            android:src="@mipmap/ic_android_black_48dp" />
+
+        <ImageButton
+            android:id="@+id/rotateBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="@string/rotateBtnDesc"
+            android:onClick="rotate_func"
+            android:src="@mipmap/ic_3d_rotation_black_48dp"/>
+
+    </GridLayout>
 
 </LinearLayout>
