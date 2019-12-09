@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/contactBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_account_box_black_48dp"
+        android:contentDescription="@string/contactBtnDesc"
+        android:backgroundTint="@android:color/transparent"
+        android:onClick="contacts_func" >
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/clockBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/clockBtnDesc"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@mipmap/ic_alarm_black_48dp"
+        android:onClick="clock_func" >
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/androidbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/androidBtnDesc"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@mipmap/ic_android_black_48dp"
+        android:onClick="android_func" >
+    </ImageButton>
+
+
+</LinearLayout>

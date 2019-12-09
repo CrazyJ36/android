@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Material Icons</string>
+    <string name="contactBtnDesc">Contact Icon</string>
+    <string name="clockBtnDesc">Clock Icon</string>
+    <string name="androidBtnDesc">Android Icon</string>
+</resources>
