@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Launch App</string>
+    <string name="calculatorBtnTxt">Calculator</string>
+    <string name="contactsBtnTxt">Contacts</string>
+</resources>
