@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Timer Count</string>
+    <string name="instructions">This app counts to 5 with Toast Messages, then stops.\nIt uses Timer, TimerTask, runOnUIThread with Runnable.</string>
+</resources>
