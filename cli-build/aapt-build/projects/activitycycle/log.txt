@@ -1,0 +1,1533 @@
+--------- beginning of /dev/log/system
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/ActivityManager(  303): No content provider found for: 
+W/ActivityManager(  303): No content provider found for: 
+I/ActivityManager(  303): Force stopping package com.crazyj36.activitycycle uid=10002
+I/WindowManager(  303): WIN DEATH: Window{407de190 com.crazyj36.activitycycle/com.crazyj36.activitycycle.MainActivity paused=false}
+W/InputManagerService(  303): Got RemoteException sending setActive(false) notification to pid 1485 uid 10002
+I/PackageManager(  303): Package com.crazyj36.activitycycle codePath changed from /data/app/com.crazyj36.activitycycle-1.apk to /data/app/com.crazyj36.activitycycle-2.apk; Retaining data and using new
+I/PackageManager(  303): Unpacking native libraries for /data/app/com.crazyj36.activitycycle-2.apk
+I/ActivityManager(  303): Force stopping package com.crazyj36.activitycycle uid=10002
+W/PackageManager(  303): Code path for pkg : com.crazyj36.activitycycle changing from /data/app/com.crazyj36.activitycycle-1.apk to /data/app/com.crazyj36.activitycycle-2.apk
+W/PackageManager(  303): Resource path for pkg : com.crazyj36.activitycycle changing from /data/app/com.crazyj36.activitycycle-1.apk to /data/app/com.crazyj36.activitycycle-2.apk
+I/ActivityManager(  303): Force stopping package com.crazyj36.activitycycle uid=10002
+I/ActivityManager(  303): process name to start: com.lge.launcher2
+I/ActivityManager(  303): Start proc com.lge.launcher2 for broadcast com.lge.launcher2/.theme.LGThemeReceiver: pid=2462 uid=10061 gids={3003, 1015}
+W/RecognitionManagerService(  303): no available voice recognition services found
+I/ActivityManager(  303): Starting: Intent { flg=0x10000000 cmp=com.crazyj36.activitycycle/.MainActivity } from pid 2500
+I/ActivityManager(  303): process name to start: com.crazyj36.activitycycle
+I/ActivityManager(  303): Start proc com.crazyj36.activitycycle for activity com.crazyj36.activitycycle/.MainActivity: pid=2509 uid=10002 gids={1015}
+W/ProcessStats(  303): Skipping unknown process pid 2499
+W/ProcessStats(  303): Skipping unknown process pid 2500
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN flg=0x10000000 cmp=com.crazyj36.activitycycle/.MainActivity } from pid 464
+I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10200000 cmp=com.crazyj36.launcher/.MainActivity } from pid 303
+W/InputManagerService(  303): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@406eecb0
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:offline
+D/Vold    (  173): Share method ums now unavailable
+I/StorageNotification(  436): UMS connection changed to false (media state mounted)
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:online
+D/Vold    (  173): Share method ums now available
+I/StorageNotification(  436): UMS connection changed to true (media state mounted)
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN flg=0x10100000 cmp=com.crazyj36.activitycycle/.MainActivity } from pid 303
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:offline
+D/Vold    (  173): Share method ums now unavailable
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+I/StorageNotification(  436): UMS connection changed to false (media state mounted)
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:online
+D/Vold    (  173): Share method ums now available
+I/StorageNotification(  436): UMS connection changed to true (media state mounted)
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10200000 cmp=com.crazyj36.launcher/.MainActivity } from pid 303
+W/InputManagerService(  303): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@40592b08
+I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN flg=0x10000000 cmp=com.crazyj36.launcher/.MainActivity } from pid 464
+I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN flg=0x10000000 cmp=com.crazyj36.activitycycle/.MainActivity } from pid 464
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN flg=0x10000000 cmp=com.crazyj36.activitycycle/.MainActivity } from pid 464
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/ActivityManager(  303): No content provider found for: 
+W/ActivityManager(  303): No content provider found for: 
+I/ActivityManager(  303): Force stopping package com.crazyj36.activitycycle uid=10002
+I/WindowManager(  303): WINDOW DIED Window{40828608 com.crazyj36.activitycycle/com.crazyj36.activitycycle.MainActivity paused=false}
+I/PackageManager(  303): Package com.crazyj36.activitycycle codePath changed from /data/app/com.crazyj36.activitycycle-2.apk to /data/app/com.crazyj36.activitycycle-1.apk; Retaining data and using new
+I/PackageManager(  303): Unpacking native libraries for /data/app/com.crazyj36.activitycycle-1.apk
+I/ActivityManager(  303): Force stopping package com.crazyj36.activitycycle uid=10002
+W/PackageManager(  303): Code path for pkg : com.crazyj36.activitycycle changing from /data/app/com.crazyj36.activitycycle-2.apk to /data/app/com.crazyj36.activitycycle-1.apk
+W/PackageManager(  303): Resource path for pkg : com.crazyj36.activitycycle changing from /data/app/com.crazyj36.activitycycle-2.apk to /data/app/com.crazyj36.activitycycle-1.apk
+I/ActivityManager(  303): Force stopping package com.crazyj36.activitycycle uid=10002
+W/RecognitionManagerService(  303): no available voice recognition services found
+I/ActivityManager(  303): Starting: Intent { flg=0x10000000 cmp=com.crazyj36.activitycycle/.MainActivity } from pid 2867
+I/ActivityManager(  303): process name to start: com.crazyj36.activitycycle
+I/ActivityManager(  303): Start proc com.crazyj36.activitycycle for activity com.crazyj36.activitycycle/.MainActivity: pid=2876 uid=10002 gids={1015}
+I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN flg=0x10000000 cmp=com.crazyj36.activitycycle/.MainActivity } from pid 464
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:offline
+D/Vold    (  173): Share method ums now unavailable
+I/StorageNotification(  436): UMS connection changed to false (media state mounted)
+W/Vold    (  173): [AutoRun] Switch Event - name:MSM72K_UDC_AUTORUN, state:offline
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:online
+D/Vold    (  173): Share method ums now available
+W/Vold    (  173): [AutoRun] Switch Event - name:MSM72K_UDC_AUTORUN, state:online
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+I/StorageNotification(  436): UMS connection changed to true (media state mounted)
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:offline
+D/Vold    (  173): Share method ums now unavailable
+I/StorageNotification(  436): UMS connection changed to false (media state mounted)
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:online
+D/Vold    (  173): Share method ums now available
+I/StorageNotification(  436): UMS connection changed to true (media state mounted)
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:offline
+D/Vold    (  173): Share method ums now unavailable
+I/StorageNotification(  436): UMS connection changed to false (media state mounted)
+W/Vold    (  173): [AutoRun] Switch Event - name:MSM72K_UDC_AUTORUN, state:offline
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:online
+D/Vold    (  173): Share method ums now available
+W/Vold    (  173): [AutoRun] Switch Event - name:MSM72K_UDC_AUTORUN, state:online
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+I/StorageNotification(  436): UMS connection changed to true (media state mounted)
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+W/Vold    (  173): [AutoRun] Switch Event - name:MSM72K_UDC_AUTORUN, state:offline
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:offline
+D/Vold    (  173): Share method ums now unavailable
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+I/StorageNotification(  436): UMS connection changed to false (media state mounted)
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+I/WindowManager(  303): Setting rotation to 3, animFlags=0
+I/ActivityManager(  303): Config changed: { scale=1.0 imsi=0/0 loc=en_US touch=3 keys=1/1/2 nav=1/1 orien=2 layout=34 uiMode=17 seq=4}
+W/ProcessStats(  303): Skipping unknown process pid 3193
+W/ProcessStats(  303): Skipping unknown process pid 3194
+W/ProcessStats(  303): Skipping unknown process pid 3195
+W/ProcessStats(  303): Skipping unknown process pid 3196
+W/ProcessStats(  303): Skipping unknown process pid 3197
+W/ProcessStats(  303): Skipping unknown process pid 3198
+W/ProcessStats(  303): Skipping unknown process pid 3199
+W/ProcessStats(  303): Skipping unknown process pid 3200
+W/ProcessStats(  303): Skipping unknown process pid 3201
+W/ProcessStats(  303): Skipping unknown process pid 3202
+W/ProcessStats(  303): Skipping unknown process pid 3203
+W/ProcessStats(  303): Skipping unknown process pid 3204
+W/ProcessStats(  303): Skipping unknown process pid 3205
+W/ProcessStats(  303): Skipping unknown process pid 3206
+W/ProcessStats(  303): Skipping unknown process pid 3207
+W/ProcessStats(  303): Skipping unknown process pid 3208
+W/ProcessStats(  303): Skipping unknown process pid 3209
+W/ProcessStats(  303): Skipping unknown process pid 3210
+W/ProcessStats(  303): Skipping unknown process pid 3211
+W/ProcessStats(  303): Skipping unknown process pid 3212
+W/ProcessStats(  303): Skipping unknown process pid 3213
+W/ProcessStats(  303): Skipping unknown process pid 3214
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+I/WindowManager(  303): Setting rotation to 0, animFlags=0
+I/ActivityManager(  303): Config changed: { scale=1.0 imsi=0/0 loc=en_US touch=3 keys=1/1/2 nav=1/1 orien=1 layout=34 uiMode=17 seq=5}
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:online
+D/Vold    (  173): Share method ums now available
+W/Vold    (  173): [AutoRun] Switch Event - name:MSM72K_UDC_AUTORUN, state:online
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+I/StorageNotification(  436): UMS connection changed to true (media state mounted)
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+W/Vold    (  173): [AutoRun] Switch Event - name:MSM72K_UDC_AUTORUN, state:offline
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:offline
+D/Vold    (  173): Share method ums now unavailable
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+I/StorageNotification(  436): UMS connection changed to false (media state mounted)
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:online
+D/Vold    (  173): Share method ums now available
+W/Vold    (  173): [AutoRun] Switch Event - name:MSM72K_UDC_AUTORUN, state:online
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+I/StorageNotification(  436): UMS connection changed to true (media state mounted)
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:offline
+D/Vold    (  173): Share method ums now unavailable
+I/StorageNotification(  436): UMS connection changed to false (media state mounted)
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:online
+D/Vold    (  173): Share method ums now available
+I/StorageNotification(  436): UMS connection changed to true (media state mounted)
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+I/ActivityManager(  303): Starting: Intent { flg=0x10000000 cmp=com.crazyj36.activitycycle/.MainActivity } from pid 3336
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:offline
+D/Vold    (  173): Share method ums now unavailable
+W/Vold    (  173): [AutoRun] Switch Event - name:MSM72K_UDC_AUTORUN, state:offline
+I/StorageNotification(  436): UMS connection changed to false (media state mounted)
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:online
+D/Vold    (  173): Share method ums now available
+W/Vold    (  173): [AutoRun] Switch Event - name:MSM72K_UDC_AUTORUN, state:online
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+I/StorageNotification(  436): UMS connection changed to true (media state mounted)
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+W/Vold    (  173): [AutoRun] Switch Event - name:MSM72K_UDC_AUTORUN, state:offline
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:offline
+D/Vold    (  173): Share method ums now unavailable
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+I/StorageNotification(  436): UMS connection changed to false (media state mounted)
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:online
+D/Vold    (  173): Share method ums now available
+W/Vold    (  173): [AutoRun] Switch Event - name:MSM72K_UDC_AUTORUN, state:online
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+I/StorageNotification(  436): UMS connection changed to true (media state mounted)
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+W/Vold    (  173): [AutoRun] Switch Event - name:MSM72K_UDC_AUTORUN, state:offline
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:offline
+D/Vold    (  173): Share method ums now unavailable
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+I/StorageNotification(  436): UMS connection changed to false (media state mounted)
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:online
+D/Vold    (  173): Share method ums now available
+W/Vold    (  173): [AutoRun] Switch Event - name:MSM72K_UDC_AUTORUN, state:online
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+I/StorageNotification(  436): UMS connection changed to true (media state mounted)
+--------- beginning of /dev/log/main
+W/AutorunUtil(  541): [AutorunUtil.java:519:writeToFile()] can not write to this file : /sys/module/android/parameters/user_mode to this path : /sys/module/android/parameters/user_mode
+D/AutorunService(  541): [AutorunService.java:112:onStartCommand()] write user mode : 0
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:246:switchUsbMode()] try to switch mode to : AutoRun(CD-Rom)
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:269:prepare()] prepare to switch
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:270:prepare()] mode : AutoRun(CD-Rom) state : Idle
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:271:prepare()] is the Media Sync started ? >> false
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:466:startSwitchUsbModeTimerTask()] start UsbModeTimer remain time(ms) : 3000
+I/AutorunUtil(  541): [AutorunUtil.java:455:showNotification()] text : Select to switch USB connection mode ticker : null
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+D/AutorunUtil(  541): [AutorunUtil.java:381:isValidAutorunCondition()] is AutoRun on testing : false
+D/AutorunUtil(  541): [AutorunUtil.java:69:getPID()] pid : 6320
+D/AutorunUtil(  541): [AutorunUtil.java:382:isValidAutorunCondition()] isFactoryCable : false
+W/AutorunService(  541): [AutorunService.java:184:finalize()] finalize
+D/AutorunUtil(  541): [AutorunUtil.java:383:isValidAutorunCondition()] (obsolete) isPhoneActivated : false
+D/AutorunUtil(  541): [AutorunUtil.java:384:isValidAutorunCondition()] isSkipUICCProvisionedEnabled : false
+E/AutorunUtil(  541): [AutorunUtil.java:296:isUICCProvisioned()] imsi_m error!!!
+D/AutorunUtil(  541): [AutorunUtil.java:385:isValidAutorunCondition()] isUICCProvisioned : true
+D/AutorunUtil(  541): [AutorunUtil.java:224:isAutorunOn()] autorun hidden : autorun_enable
+D/AutorunUtil(  541): [AutorunUtil.java:386:isValidAutorunCondition()] isAutorunOn : true
+D/AutorunUtil(  541): [AutorunUtil.java:387:isValidAutorunCondition()] isInEmergencyCall : false
+D/AutorunUtil(  541): [AutorunUtil.java:388:isValidAutorunCondition()] getCallState : 0
+W/AutorunUtil(  541): [AutorunUtil.java:557:readFromFile()] can not read from this file : /sys/module/android/parameters/manual_test_mode
+D/AutorunUtil(  541): [AutorunUtil.java:359:isTestMode()] test mode : 
+D/AutorunUtil(  541): [AutorunUtil.java:389:isValidAutorunCondition()] isTestMode : false
+D/AutorunUtil(  541): [AutorunUtil.java:69:getPID()] pid : 6320
+E/AutorunUtil(  541): [AutorunUtil.java:296:isUICCProvisioned()] imsi_m error!!!
+D/AutorunUtil(  541): [AutorunUtil.java:224:isAutorunOn()] autorun hidden : autorun_enable
+W/AutorunUtil(  541): [AutorunUtil.java:557:readFromFile()] can not read from this file : /sys/module/android/parameters/manual_test_mode
+D/AutorunUtil(  541): [AutorunUtil.java:359:isTestMode()] test mode : 
+I/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:144:handleMessage()] mode : AutoRun(CD-Rom), state : Prepared
+D/AutorunUtil(  541): [AutorunUtil.java:510:writeToFile()] write to file this value : auto_run to this path : /sys/module/android/parameters/usb_mode
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:423:waitForUsbConfigured()] usb state is configured
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:415:waitForUsbConfigured()] USB State is configured
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:697:mountAutorunISO()] try to mount autorun iso image
+W/AutorunUtil(  541): [AutorunUtil.java:519:writeToFile()] can not write to this file : /sys/devices/platform/msm_hsusb/gadget/lun2/file to this path : /sys/devices/platform/msm_hsusb/gadget/lun2/file
+I/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:701:mountAutorunISO()] autorun iso has been mounted
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/PhoneChargerListener(  807): [null:-1:debug()] onReceive
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:MSM72K_UDC_AUTORUN, state:offline
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:offline
+D/Vold    (  173): Share method ums now unavailable
+I/StorageNotification(  436): UMS connection changed to false (media state mounted)
+D/AutorunStarter(  541): [AutorunStarter.java:27:onReceive()] action : android.intent.action.AUTORUN_DISCONNECTED
+D/AutorunUtil(  541): [AutorunUtil.java:69:getPID()] pid : 6320
+W/AutorunUtil(  541): [AutorunUtil.java:557:readFromFile()] can not read from this file : /sys/module/android/parameters/manual_test_mode
+D/AutorunUtil(  541): [AutorunUtil.java:359:isTestMode()] test mode : 
+D/Tethering(  303): [Tethering.java:810:processMessage()] InitialState.processMessage what=4
+D/Diag Command Observer(  303): [DiagCommandObserver.java:2581:onReceive()] [FLIGHT]usbConnected2=false
+D/Diag Command Observer(  303): [DiagCommandObserver.java:2582:onReceive()] [FLIGHT]sleepmode_test_on2=false
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:815:release()] release UsbConnectivitySwitch
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:506:cancelTimer()] mSwitchUsbModeTimer is cancelled
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+W/AutorunUtil(  541): [AutorunUtil.java:519:writeToFile()] can not write to this file : /sys/devices/platform/msm_hsusb/gadget/lun2/file to this path : /sys/devices/platform/msm_hsusb/gadget/lun2/file
+D/AutorunUtil(  541): [AutorunUtil.java:224:isAutorunOn()] autorun hidden : autorun_enable
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/AutorunUtil(  541): [AutorunUtil.java:510:writeToFile()] write to file this value : mass_storage to this path : /sys/module/android/parameters/usb_mode
+D/AutorunService(  541): [AutorunService.java:167:onDestroy()] Service is destroyed
+D/AutorunService(  541): [AutorunService.java:242:unregisterReceiver()] AutorunReceiver is unregisted
+D/PhoneChargerListener(  807): [null:-1:debug()] onReceive
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+D/Tethering(  303): [Tethering.java:311:interfaceAdded()] interfaceAdded :usb0
+D/Diag Command Observer(  303): [DiagCommandObserver.java:2581:onReceive()] [FLIGHT]usbConnected2=true
+D/Diag Command Observer(  303): [DiagCommandObserver.java:2582:onReceive()] [FLIGHT]sleepmode_test_on2=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:online
+D/Vold    (  173): Share method ums now available
+W/Vold    (  173): [AutoRun] Switch Event - name:MSM72K_UDC_AUTORUN, state:online
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+E/Tethering(  303): [Tethering.java:304:interfaceAdded()] active iface (usb0) reported as added, ignoring
+D/Diag Command Observer(  303): [DiagCommandObserver.java:2581:onReceive()] [FLIGHT]usbConnected2=true
+D/Diag Command Observer(  303): [DiagCommandObserver.java:2582:onReceive()] [FLIGHT]sleepmode_test_on2=false
+D/AutorunStarter(  541): [AutorunStarter.java:27:onReceive()] action : android.intent.action.AUTORUN_CONNECTED
+D/AutorunUtil(  541): [AutorunUtil.java:69:getPID()] pid : 6320
+W/AutorunUtil(  541): [AutorunUtil.java:557:readFromFile()] can not read from this file : /sys/module/android/parameters/manual_test_mode
+D/AutorunUtil(  541): [AutorunUtil.java:359:isTestMode()] test mode : 
+I/StorageNotification(  436): UMS connection changed to true (media state mounted)
+D/AutorunStarter(  541): [AutorunStarter.java:117:onReceive()] current state : 0
+D/AutorunService(  541): [AutorunService.java:45:onCreate()] Service is created
+D/AutorunService(  541): [AutorunService.java:197:registerReceiver()] AutorunReceiver is registed
+W/AutorunService(  541): [AutorunService.java:65:onStartCommand()] USB Cable plugged
+W/AutorunService(  541): [AutorunService.java:72:onStartCommand()] isFromStarter ?? : true
+I/AutorunUtil(  541): [AutorunUtil.java:455:showNotification()] text : Select to switch USB connection mode ticker : USB connected
+D/AutorunUtil(  541): [AutorunUtil.java:69:getPID()] pid : 6320
+D/AutorunUtil(  541): [AutorunUtil.java:381:isValidAutorunCondition()] is AutoRun on testing : false
+D/AutorunUtil(  541): [AutorunUtil.java:69:getPID()] pid : 6320
+D/AutorunUtil(  541): [AutorunUtil.java:382:isValidAutorunCondition()] isFactoryCable : false
+D/AutorunUtil(  541): [AutorunUtil.java:383:isValidAutorunCondition()] (obsolete) isPhoneActivated : false
+D/AutorunUtil(  541): [AutorunUtil.java:384:isValidAutorunCondition()] isSkipUICCProvisionedEnabled : false
+E/AutorunUtil(  541): [AutorunUtil.java:296:isUICCProvisioned()] imsi_m error!!!
+D/AutorunUtil(  541): [AutorunUtil.java:385:isValidAutorunCondition()] isUICCProvisioned : true
+D/AutorunUtil(  541): [AutorunUtil.java:224:isAutorunOn()] autorun hidden : autorun_enable
+D/AutorunUtil(  541): [AutorunUtil.java:386:isValidAutorunCondition()] isAutorunOn : true
+D/AutorunUtil(  541): [AutorunUtil.java:387:isValidAutorunCondition()] isInEmergencyCall : false
+D/AutorunUtil(  541): [AutorunUtil.java:388:isValidAutorunCondition()] getCallState : 0
+W/AutorunUtil(  541): [AutorunUtil.java:557:readFromFile()] can not read from this file : /sys/module/android/parameters/manual_test_mode
+D/AutorunUtil(  541): [AutorunUtil.java:359:isTestMode()] test mode : 
+D/AutorunUtil(  541): [AutorunUtil.java:389:isValidAutorunCondition()] isTestMode : false
+D/AutorunUtil(  541): [AutorunUtil.java:69:getPID()] pid : 6320
+E/AutorunUtil(  541): [AutorunUtil.java:296:isUICCProvisioned()] imsi_m error!!!
+D/AutorunUtil(  541): [AutorunUtil.java:224:isAutorunOn()] autorun hidden : autorun_enable
+W/AutorunUtil(  541): [AutorunUtil.java:557:readFromFile()] can not read from this file : /sys/module/android/parameters/manual_test_mode
+D/AutorunUtil(  541): [AutorunUtil.java:359:isTestMode()] test mode : 
+D/AutorunService(  541): [AutorunService.java:95:onStartCommand()] Autorun is ready
+D/AutorunService(  541): [AutorunService.java:98:onStartCommand()] Switch CD-Rom mode to start autorun iso mounting
+D/AutorunUEventObserver(  541): [AutorunUEventObserver.java:37:<init>()] AutorunUEventObserver is created
+W/AutorunUEventObserver(  541): [AutorunUEventObserver.java:71:init()] This kernel does not have autorun support
+D/AutorunUEventObserver(  541): [AutorunUEventObserver.java:76:init()] value : null
+D/AutorunService(  541): [AutorunService.java:103:onStartCommand()] Start UEvent observing
+W/AutorunUtil(  541): [AutorunUtil.java:519:writeToFile()] can not write to this file : /sys/module/android/parameters/user_mode to this path : /sys/module/android/parameters/user_mode
+D/AutorunService(  541): [AutorunService.java:112:onStartCommand()] write user mode : 0
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:246:switchUsbMode()] try to switch mode to : AutoRun(CD-Rom)
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:269:prepare()] prepare to switch
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:270:prepare()] mode : AutoRun(CD-Rom) state : Idle
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:271:prepare()] is the Media Sync started ? >> false
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+W/AutorunService(  541): [AutorunService.java:184:finalize()] finalize
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:466:startSwitchUsbModeTimerTask()] start UsbModeTimer remain time(ms) : 3000
+I/AutorunUtil(  541): [AutorunUtil.java:455:showNotification()] text : Select to switch USB connection mode ticker : null
+D/AutorunUtil(  541): [AutorunUtil.java:381:isValidAutorunCondition()] is AutoRun on testing : false
+D/AutorunUtil(  541): [AutorunUtil.java:69:getPID()] pid : 6320
+D/AutorunUtil(  541): [AutorunUtil.java:382:isValidAutorunCondition()] isFactoryCable : false
+D/AutorunUtil(  541): [AutorunUtil.java:383:isValidAutorunCondition()] (obsolete) isPhoneActivated : false
+D/AutorunUtil(  541): [AutorunUtil.java:384:isValidAutorunCondition()] isSkipUICCProvisionedEnabled : false
+E/AutorunUtil(  541): [AutorunUtil.java:296:isUICCProvisioned()] imsi_m error!!!
+D/AutorunUtil(  541): [AutorunUtil.java:385:isValidAutorunCondition()] isUICCProvisioned : true
+D/AutorunUtil(  541): [AutorunUtil.java:224:isAutorunOn()] autorun hidden : autorun_enable
+D/AutorunUtil(  541): [AutorunUtil.java:386:isValidAutorunCondition()] isAutorunOn : true
+D/AutorunUtil(  541): [AutorunUtil.java:387:isValidAutorunCondition()] isInEmergencyCall : false
+D/AutorunUtil(  541): [AutorunUtil.java:388:isValidAutorunCondition()] getCallState : 0
+W/AutorunUtil(  541): [AutorunUtil.java:557:readFromFile()] can not read from this file : /sys/module/android/parameters/manual_test_mode
+D/AutorunUtil(  541): [AutorunUtil.java:359:isTestMode()] test mode : 
+D/AutorunUtil(  541): [AutorunUtil.java:389:isValidAutorunCondition()] isTestMode : false
+D/AutorunUtil(  541): [AutorunUtil.java:69:getPID()] pid : 6320
+E/AutorunUtil(  541): [AutorunUtil.java:296:isUICCProvisioned()] imsi_m error!!!
+D/AutorunUtil(  541): [AutorunUtil.java:224:isAutorunOn()] autorun hidden : autorun_enable
+W/AutorunUtil(  541): [AutorunUtil.java:557:readFromFile()] can not read from this file : /sys/module/android/parameters/manual_test_mode
+D/AutorunUtil(  541): [AutorunUtil.java:359:isTestMode()] test mode : 
+I/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:144:handleMessage()] mode : AutoRun(CD-Rom), state : Prepared
+D/AutorunUtil(  541): [AutorunUtil.java:510:writeToFile()] write to file this value : auto_run to this path : /sys/module/android/parameters/usb_mode
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:423:waitForUsbConfigured()] usb state is configured
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:415:waitForUsbConfigured()] USB State is configured
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:697:mountAutorunISO()] try to mount autorun iso image
+W/AutorunUtil(  541): [AutorunUtil.java:519:writeToFile()] can not write to this file : /sys/devices/platform/msm_hsusb/gadget/lun2/file to this path : /sys/devices/platform/msm_hsusb/gadget/lun2/file
+I/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:701:mountAutorunISO()] autorun iso has been mounted
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+W/Vold    (  173): [AutoRun] Switch Event - name:MSM72K_UDC_AUTORUN, state:offline
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:offline
+D/Vold    (  173): Share method ums now unavailable
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/AutorunStarter(  541): [AutorunStarter.java:27:onReceive()] action : android.intent.action.AUTORUN_DISCONNECTED
+D/AutorunUtil(  541): [AutorunUtil.java:69:getPID()] pid : 6320
+W/AutorunUtil(  541): [AutorunUtil.java:557:readFromFile()] can not read from this file : /sys/module/android/parameters/manual_test_mode
+D/AutorunUtil(  541): [AutorunUtil.java:359:isTestMode()] test mode : 
+D/Tethering(  303): [Tethering.java:810:processMessage()] InitialState.processMessage what=4
+D/Diag Command Observer(  303): [DiagCommandObserver.java:2581:onReceive()] [FLIGHT]usbConnected2=false
+D/Diag Command Observer(  303): [DiagCommandObserver.java:2582:onReceive()] [FLIGHT]sleepmode_test_on2=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:815:release()] release UsbConnectivitySwitch
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:506:cancelTimer()] mSwitchUsbModeTimer is cancelled
+I/StorageNotification(  436): UMS connection changed to false (media state mounted)
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/AutorunUtil(  541): [AutorunUtil.java:519:writeToFile()] can not write to this file : /sys/devices/platform/msm_hsusb/gadget/lun2/file to this path : /sys/devices/platform/msm_hsusb/gadget/lun2/file
+D/AutorunUtil(  541): [AutorunUtil.java:224:isAutorunOn()] autorun hidden : autorun_enable
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/AutorunUtil(  541): [AutorunUtil.java:510:writeToFile()] write to file this value : mass_storage to this path : /sys/module/android/parameters/usb_mode
+D/AutorunService(  541): [AutorunService.java:167:onDestroy()] Service is destroyed
+D/AutorunService(  541): [AutorunService.java:242:unregisterReceiver()] AutorunReceiver is unregisted
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+D/Tethering(  303): [Tethering.java:311:interfaceAdded()] interfaceAdded :usb0
+D/Diag Command Observer(  303): [DiagCommandObserver.java:2581:onReceive()] [FLIGHT]usbConnected2=true
+D/Diag Command Observer(  303): [DiagCommandObserver.java:2582:onReceive()] [FLIGHT]sleepmode_test_on2=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:online
+D/Vold    (  173): Share method ums now available
+I/StorageNotification(  436): UMS connection changed to true (media state mounted)
+W/Vold    (  173): [AutoRun] Switch Event - name:MSM72K_UDC_AUTORUN, state:online
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+E/Tethering(  303): [Tethering.java:304:interfaceAdded()] active iface (usb0) reported as added, ignoring
+D/Diag Command Observer(  303): [DiagCommandObserver.java:2581:onReceive()] [FLIGHT]usbConnected2=true
+D/Diag Command Observer(  303): [DiagCommandObserver.java:2582:onReceive()] [FLIGHT]sleepmode_test_on2=false
+D/AutorunStarter(  541): [AutorunStarter.java:27:onReceive()] action : android.intent.action.AUTORUN_CONNECTED
+D/AutorunUtil(  541): [AutorunUtil.java:69:getPID()] pid : 6320
+W/AutorunUtil(  541): [AutorunUtil.java:557:readFromFile()] can not read from this file : /sys/module/android/parameters/manual_test_mode
+D/AutorunUtil(  541): [AutorunUtil.java:359:isTestMode()] test mode : 
+D/AutorunStarter(  541): [AutorunStarter.java:117:onReceive()] current state : 0
+D/AutorunService(  541): [AutorunService.java:45:onCreate()] Service is created
+D/AutorunService(  541): [AutorunService.java:197:registerReceiver()] AutorunReceiver is registed
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 0
+W/AutorunService(  541): [AutorunService.java:65:onStartCommand()] USB Cable plugged
+W/AutorunService(  541): [AutorunService.java:72:onStartCommand()] isFromStarter ?? : true
+I/AutorunUtil(  541): [AutorunUtil.java:455:showNotification()] text : Select to switch USB connection mode ticker : USB connected
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/AutorunUtil(  541): [AutorunUtil.java:69:getPID()] pid : 6320
+D/AutorunUtil(  541): [AutorunUtil.java:381:isValidAutorunCondition()] is AutoRun on testing : false
+D/AutorunUtil(  541): [AutorunUtil.java:69:getPID()] pid : 6320
+D/AutorunUtil(  541): [AutorunUtil.java:382:isValidAutorunCondition()] isFactoryCable : false
+D/AutorunUtil(  541): [AutorunUtil.java:383:isValidAutorunCondition()] (obsolete) isPhoneActivated : false
+D/AutorunUtil(  541): [AutorunUtil.java:384:isValidAutorunCondition()] isSkipUICCProvisionedEnabled : false
+E/AutorunUtil(  541): [AutorunUtil.java:296:isUICCProvisioned()] imsi_m error!!!
+D/AutorunUtil(  541): [AutorunUtil.java:385:isValidAutorunCondition()] isUICCProvisioned : true
+D/AutorunUtil(  541): [AutorunUtil.java:224:isAutorunOn()] autorun hidden : autorun_enable
+D/AutorunUtil(  541): [AutorunUtil.java:386:isValidAutorunCondition()] isAutorunOn : true
+D/AutorunUtil(  541): [AutorunUtil.java:387:isValidAutorunCondition()] isInEmergencyCall : false
+D/AutorunUtil(  541): [AutorunUtil.java:388:isValidAutorunCondition()] getCallState : 0
+W/AutorunUtil(  541): [AutorunUtil.java:557:readFromFile()] can not read from this file : /sys/module/android/parameters/manual_test_mode
+D/AutorunUtil(  541): [AutorunUtil.java:359:isTestMode()] test mode : 
+D/AutorunUtil(  541): [AutorunUtil.java:389:isValidAutorunCondition()] isTestMode : false
+D/AutorunUtil(  541): [AutorunUtil.java:69:getPID()] pid : 6320
+E/AutorunUtil(  541): [AutorunUtil.java:296:isUICCProvisioned()] imsi_m error!!!
+D/AutorunUtil(  541): [AutorunUtil.java:224:isAutorunOn()] autorun hidden : autorun_enable
+W/AutorunUtil(  541): [AutorunUtil.java:557:readFromFile()] can not read from this file : /sys/module/android/parameters/manual_test_mode
+D/AutorunUtil(  541): [AutorunUtil.java:359:isTestMode()] test mode : 
+D/AutorunService(  541): [AutorunService.java:95:onStartCommand()] Autorun is ready
+D/AutorunService(  541): [AutorunService.java:98:onStartCommand()] Switch CD-Rom mode to start autorun iso mounting
+D/AutorunUEventObserver(  541): [AutorunUEventObserver.java:37:<init>()] AutorunUEventObserver is created
+W/AutorunService(  541): [AutorunService.java:184:finalize()] finalize
+W/AutorunUEventObserver(  541): [AutorunUEventObserver.java:71:init()] This kernel does not have autorun support
+D/AutorunUEventObserver(  541): [AutorunUEventObserver.java:76:init()] value : null
+D/AutorunService(  541): [AutorunService.java:103:onStartCommand()] Start UEvent observing
+W/AutorunUtil(  541): [AutorunUtil.java:519:writeToFile()] can not write to this file : /sys/module/android/parameters/user_mode to this path : /sys/module/android/parameters/user_mode
+D/AutorunService(  541): [AutorunService.java:112:onStartCommand()] write user mode : 0
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:246:switchUsbMode()] try to switch mode to : AutoRun(CD-Rom)
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:269:prepare()] prepare to switch
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:270:prepare()] mode : AutoRun(CD-Rom) state : Idle
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:271:prepare()] is the Media Sync started ? >> false
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:466:startSwitchUsbModeTimerTask()] start UsbModeTimer remain time(ms) : 3000
+I/AutorunUtil(  541): [AutorunUtil.java:455:showNotification()] text : Select to switch USB connection mode ticker : null
+D/AutorunUtil(  541): [AutorunUtil.java:381:isValidAutorunCondition()] is AutoRun on testing : false
+D/AutorunUtil(  541): [AutorunUtil.java:69:getPID()] pid : 6320
+D/AutorunUtil(  541): [AutorunUtil.java:382:isValidAutorunCondition()] isFactoryCable : false
+D/AutorunUtil(  541): [AutorunUtil.java:383:isValidAutorunCondition()] (obsolete) isPhoneActivated : false
+D/AutorunUtil(  541): [AutorunUtil.java:384:isValidAutorunCondition()] isSkipUICCProvisionedEnabled : false
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+E/AutorunUtil(  541): [AutorunUtil.java:296:isUICCProvisioned()] imsi_m error!!!
+D/AutorunUtil(  541): [AutorunUtil.java:385:isValidAutorunCondition()] isUICCProvisioned : true
+D/AutorunUtil(  541): [AutorunUtil.java:224:isAutorunOn()] autorun hidden : autorun_enable
+D/AutorunUtil(  541): [AutorunUtil.java:386:isValidAutorunCondition()] isAutorunOn : true
+D/AutorunUtil(  541): [AutorunUtil.java:387:isValidAutorunCondition()] isInEmergencyCall : false
+D/AutorunUtil(  541): [AutorunUtil.java:388:isValidAutorunCondition()] getCallState : 0
+W/AutorunUtil(  541): [AutorunUtil.java:557:readFromFile()] can not read from this file : /sys/module/android/parameters/manual_test_mode
+D/AutorunUtil(  541): [AutorunUtil.java:359:isTestMode()] test mode : 
+D/AutorunUtil(  541): [AutorunUtil.java:389:isValidAutorunCondition()] isTestMode : false
+D/AutorunUtil(  541): [AutorunUtil.java:69:getPID()] pid : 6320
+E/AutorunUtil(  541): [AutorunUtil.java:296:isUICCProvisioned()] imsi_m error!!!
+D/AutorunUtil(  541): [AutorunUtil.java:224:isAutorunOn()] autorun hidden : autorun_enable
+W/AutorunUtil(  541): [AutorunUtil.java:557:readFromFile()] can not read from this file : /sys/module/android/parameters/manual_test_mode
+D/AutorunUtil(  541): [AutorunUtil.java:359:isTestMode()] test mode : 
+I/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:144:handleMessage()] mode : AutoRun(CD-Rom), state : Prepared
+D/AutorunUtil(  541): [AutorunUtil.java:510:writeToFile()] write to file this value : auto_run to this path : /sys/module/android/parameters/usb_mode
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:423:waitForUsbConfigured()] usb state is configured
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:415:waitForUsbConfigured()] USB State is configured
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:697:mountAutorunISO()] try to mount autorun iso image
+W/AutorunUtil(  541): [AutorunUtil.java:519:writeToFile()] can not write to this file : /sys/devices/platform/msm_hsusb/gadget/lun2/file to this path : /sys/devices/platform/msm_hsusb/gadget/lun2/file
+I/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:701:mountAutorunISO()] autorun iso has been mounted
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/PhoneChargerListener(  807): [null:-1:debug()] onReceive
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/ResourceType(  303): Entry identifier 0x128 is larger than entry count 0xab
+I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN flg=0x10000000 cmp=com.crazyj36.activitycycle/.MainActivity } from pid 464
+W/WindowManager(  303): [PhoneWindowManager.java:1099:addStartingWindow()] HistoryRecord{408d80a0 com.crazyj36.activitycycle/.MainActivity} failed creating starting window
+W/WindowManager(  303): java.lang.RuntimeException: Binary XML file line #25: You must supply a layout_height attribute.
+W/WindowManager(  303): 	at android.content.res.TypedArray.getLayoutDimension(TypedArray.java:491)
+W/WindowManager(  303): 	at android.view.ViewGroup$LayoutParams.setBaseAttributes(ViewGroup.java:3599)
+W/WindowManager(  303): 	at android.view.ViewGroup$MarginLayoutParams.<init>(ViewGroup.java:3678)
+W/WindowManager(  303): 	at android.widget.LinearLayout$LayoutParams.<init>(LinearLayout.java:1400)
+W/WindowManager(  303): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:1326)
+W/WindowManager(  303): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:47)
+W/WindowManager(  303): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:625)
+W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
+W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
+W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.generateLayout(PhoneWindow.java:2290)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.installDecor(PhoneWindow.java:2345)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.getDecorView(PhoneWindow.java:1511)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindowManager.addStartingWindow(PhoneWindowManager.java:1070)
+W/WindowManager(  303): 	at com.android.server.WindowManagerService$H.handleMessage(WindowManagerService.java:8347)
+W/WindowManager(  303): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+W/WindowManager(  303): 	at android.os.Looper.loop(Looper.java:130)
+W/WindowManager(  303): 	at com.android.server.WindowManagerService$WMThread.run(WindowManagerService.java:582)
+W/ResourceType( 2876): Entry identifier 0x128 is larger than entry count 0xab
+I/APIPLAYGROUNDANYSDKLOGTAG( 2876): [MainActivity.java:29:onCreate()] apiplayground created
+I/APIPLAYGROUNDANYSDKLOGTAG( 2876): [MainActivity.java:42:onResume()] apiplayground resumed
+I/#LGIME  (  444): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+I/ActivityManager(  303): [ActivityRecord.java:444:windowsVisible()] Displayed com.crazyj36.activitycycle/.MainActivity: +60ms
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:246:switchUsbMode()] try to switch mode to : Internet Connection
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:269:prepare()] prepare to switch
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:270:prepare()] mode : Internet Connection state : Idle
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:271:prepare()] is the Media Sync started ? >> false
+I/AutorunUtil(  541): [AutorunUtil.java:455:showNotification()] text : Internet connection ticker : null
+D/VoldCmdListener(  173): volume shared /mnt/sdcard ums
+I/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:144:handleMessage()] mode : Internet Connection, state : Prepared
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:506:cancelTimer()] mSwitchUsbModeTimer is cancelled
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:459:run()] The time is gone.. Run the system settings mode : Internet Connection
+D/AutorunUtil(  541): [AutorunUtil.java:510:writeToFile()] write to file this value : internet_connection to this path : /sys/module/android/parameters/usb_mode
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:0
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:offline
+D/Vold    (  173): Share method ums now unavailable
+I/StorageNotification(  436): UMS connection changed to false (media state mounted)
+D/Tethering(  303): [Tethering.java:810:processMessage()] InitialState.processMessage what=4
+D/Diag Command Observer(  303): [DiagCommandObserver.java:2581:onReceive()] [FLIGHT]usbConnected2=false
+D/Diag Command Observer(  303): [DiagCommandObserver.java:2582:onReceive()] [FLIGHT]sleepmode_test_on2=false
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_connected, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_connected'
+D/Tethering(  303): [Tethering.java:311:interfaceAdded()] interfaceAdded :usb0
+D/Diag Command Observer(  303): [DiagCommandObserver.java:2581:onReceive()] [FLIGHT]usbConnected2=true
+D/Diag Command Observer(  303): [DiagCommandObserver.java:2582:onReceive()] [FLIGHT]sleepmode_test_on2=false
+D/PowerManagerService(  303): setALSOption mAutoBrightessEnabled : false
+D/PowerManagerService(  303): [T] sys/devices/i2c-0/0-0038/lm3537_powersave write value : 2
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/AutorunReceiver(  541): [AutorunReceiver.java:40:onReceive()] action : com.lge.autorun.action.INTERNET_CONNECTION_CONNECTED
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:527:onCompleteSwitching()] USB mode switching completed.
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:533:onCompleteSwitching()] mode : Internet Connection, state : Completed
+E/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:556:onCompleteSwitching()] ticker : Internet connection
+D/UsbConnectivitySwitch(  541): [UsbConnectivitySwitch.java:558:onCompleteSwitching()] show notification mode : Internet Connection
+V/MediaProvider(  494): [MediaProvider.java:1926:query()]  selection : null selectionArgs : null groupBy : null sort : null
+V/AudioManager(  303): [AudioManager.java:1646:checkPlayConditions()] checkPlayConditions()... true
+V/MediaProvider(  494): [MediaProvider.java:1926:query()]  selection : null selectionArgs : null groupBy : null sort : null
+D/MediaPlayer(  303): setDataSource(255, 0, 576460752303423487)
+E/NexPlayerSDK(  178): Release Version 4.2.8.56
+E/NexPlayerSDK(  178): Nextreaming NexPlayerSDK Version 1.0.20
+W/NexPlayerSDK(  178): NexNotifyManager Start Success
+W/NEXTREAMING(  178): FLW0:NexPlayerSDK::setAudioSink 
+W/NEXTREAMING(  178): FLW0:NexPlayerSDK::setLooping(false) 
+W/NEXTREAMING(  178): FLW0:[nexPlayer_SetRepeat 901] Start(hPlayer=0x2d210, nStartTS=0, nEndTS=0, nRepeatCnt=0)
+W/NEXTREAMING(  178): FLW0:[nexPlayer_SetRepeat 948] End(hPlayer=0x2d210, eRet=0)
+W/NEXTREAMING(  178): FLW0:NexPlayerSDK::prepareAsync 
+W/NEXTREAMING(  178): FLW0:[nexPlayer_IsDrmContent 4346] [</?/>31] is not AVI DRM Content(3).
+W/NEXTREAMING(  178): FLW0:[nexPlayer_Close 492] Start(hPlayer=0x2d210)
+W/NEXTREAMING(  178): FLW0:[APIs_Core.c 1856] nexPlayer_Close_Core START
+W/NEXTREAMING(  178): INF0:[APIs_Core.c 1874] nexPlayer_Close_Core Already Closed(NEXPLAYER_ERROR_HAS_NO_EFFECT)
+W/NEXTREAMING(  178): FLW0:[nexPlayer_Close 517] End(hPlayer=0x2d210, eRet=1)
+W/NEXTREAMING(  178): FLW0:before nexPlayer_Open  ,nexPlayer close  player state = 1 , eTargetstate = 4   
+W/NEXTREAMING(  178): FLW0:[nexPlayer_Open 184] Start(hPlayer=0x2d210)
+W/NEXTREAMING(  178): FLW0:[nexPlayer_OpenForLocal 265] Start(hPlayer=0x2d210, pcName=</?/>31, iSrcType=1, isBlockingMode=1, isMemoryPlay=0, uMemorySize=0)
+W/NEXTREAMING(  178): FLW0:nexSALBody_TaskCreate NexAsyncProc, 44980
+W/NEXTREAMING(  178): FLW0:[nexPlayer_OpenForLocal 343] End(hPlayer=0x2d210, eRet=0)
+W/NEXTREAMING(  178): FLW0:[nexPlayer_Open 255] End(hPlayer=0x2d210)
+W/NEXTREAMING(  178): FLW0:[AsyncProc 79] [0]CurrentAsyncCmd : NEXPLAYER_ASYNC_CMD_OPEN_LOCAL
+W/NEXTREAMING(  178): FLW0:[APIs_Core.c 1290] nexPlayer_OpenForLocal_Core - local playback(SFC)
+W/NEXTREAMING(  178): INF0:[SimpleFileCache 121] NexSimpleFileCache Open[0x45c28], FileName[</?/>31], eMode[1], LineSize[16384], LineCnt[1]
+W/NEXTREAMING(  178): FLW0:[_FillContentInforFromSource 4004] AudioOnly!!
+W/NEXTREAMING(  178): FLW0:[CommonEvnets 979] NEXPLAYER_EVENT_STATUS_REPORT
+W/NEXTREAMING(  178): INF0:---- Content Information ---
+W/NEXTREAMING(  178): INF0:FileFormat            : 4096
+W/NEXTREAMING(  178): INF0:VideoAudioContentType : 1
+W/NEXTREAMING(  178): INF0:NumOfChannel          : 2
+W/NEXTREAMING(  178): INF0:Width                 : 0
+W/NEXTREAMING(  178): INF0:Height                : 0
+W/NEXTREAMING(  178): INF0:AudioCodecType        : 257
+W/NEXTREAMING(  178): INF0:VideoCodecType        : 0
+W/NEXTREAMING(  178): INF0:VideoFrameRate        : 0
+W/NEXTREAMING(  178): INF0:SamplingRateFrequency : 44100
+W/NEXTREAMING(  178): INF0:AudioBitrate          : 32000
+W/NEXTREAMING(  178): INF0:VideoBitrate          : 0
+W/NEXTREAMING(  178): INF0:TotalPlayTime         : 2509
+W/NEXTREAMING(  178): INF0:Pausable : TRUE
+W/NEXTREAMING(  178): INF0:Seekable : TRUE
+W/NEXTREAMING(  178): INF0:DRMType : 0
+W/NEXTREAMING(  178): INF0:---- Content Information ---
+W/NEXTREAMING(  178): FLW0:[CommonEvnets 1120] NEXPLAYER_EVENT_ASYNC_CMD_COMPLETE
+W/NEXTREAMING(  178): FLW0:[nexPlayer_GetInfo 3190] End(hPlayer=0x2d210)
+W/NEXTREAMING(  178): FLW0:[nexPlayer_Start 533] Start(hPlayer=0x2d210, uStart=0, a_bPausedAfterReady=1)
+W/NEXTREAMING(  178): FLW0:[nexPlayer_Start 620] End(hPlayer=0x2d210, eRet=0)
+W/NEXTREAMING(  178): INF0:[AsyncProc 586] After Call Callback function (Cmd ID : 0x00000001), Ret[0]
+W/NEXTREAMING(  178): FLW0:[AsyncProc 159] [0] CurrentAsyncCmd : NEXPLAYER_ASYNC_CMD_START_LOCAL
+W/NEXTREAMING(  178): INF0:[CAL 206] nexCAL_GetCodec() : [eMediaType = 1]
+W/NEXTREAMING(  178): INF0:[APIs_Core.c 86] nexPlayer_WrapSeekAPI uStart[0] uRetStartTS[0]
+W/NEXTREAMING(  178): INF0:nexRAL_GetRenderer 1,0
+W/NEXTREAMING(  178): FLW0:[CommonEvents 660] handleAudioRendererChooser, sampling 2509, 1 44100 
+W/NEXTREAMING(  178): INF0:nexRAL_GetRenderer 1,0,4429c
+W/NEXTREAMING(  178): INF0:[APIs_Core.c 2214] Buffering duration(msec) from Server : 2509
+W/NEXTREAMING(  178): INF0:[APIs_Core.c 2298] Go for Initialize...[100, 100, 100]
+E/NexAudioRenderer(  178): AudioRendererQCOM::AudioRendererQCOMClient::AudioRendererQCOMClient
+W/NEXTREAMING(  178): INF0:[AudioRenderer 241] no real instance
+W/NEXTREAMING(  178): INF0:[AudioRenderer 241] no real instance
+E/NexAudioRenderer(  178): AudioRendererQCOM ioConfigChanged() event 0
+W/NEXTREAMING(  178): INF0:[Buffering.c 2352] Video Codec/Renderer initialize Success
+W/NEXTREAMING(  178): FLW0:[APIs_Core.c 2446] ----->> Start Normal!(Stop->Start) No Seeking. hPlayer->m_uStartCTS:0
+W/NEXTREAMING(  178): FLW0:[APIs_Core.c 2451] ------------->> hPlayer->m_uStartCTS:0
+W/NEXTREAMING(  178): FLW0:[_FillContentInforFromSource 4004] AudioOnly!!
+W/NEXTREAMING(  178): FLW0:[CommonEvnets 979] NEXPLAYER_EVENT_STATUS_REPORT
+W/NEXTREAMING(  178): INF0:---- Content Information ---
+W/NEXTREAMING(  178): INF0:FileFormat            : 4096
+W/NEXTREAMING(  178): INF0:VideoAudioContentType : 1
+W/NEXTREAMING(  178): INF0:NumOfChannel          : 2
+W/NEXTREAMING(  178): INF0:Width                 : 0
+W/NEXTREAMING(  178): INF0:Height                : 0
+W/NEXTREAMING(  178): INF0:AudioCodecType        : 257
+W/NEXTREAMING(  178): INF0:VideoCodecType        : 0
+W/NEXTREAMING(  178): INF0:VideoFrameRate        : 0
+W/NEXTREAMING(  178): INF0:SamplingRateFrequency : 44100
+W/NEXTREAMING(  178): INF0:AudioBitrate          : 32000
+W/NEXTREAMING(  178): INF0:VideoBitrate          : 0
+W/NEXTREAMING(  178): INF0:TotalPlayTime         : 2509
+W/NEXTREAMING(  178): INF0:Pausable : TRUE
+W/NEXTREAMING(  178): INF0:Seekable : TRUE
+W/NEXTREAMING(  178): INF0:DRMType : 0
+W/NEXTREAMING(  178): INF0:---- Content Information ---
+W/NEXTREAMING(  178): INF0:[NEXPLAYER_ControlTask.c, 23] VideoExist(0), StillImage(0)
+W/NEXTREAMING(  178): INF0:[NEXPLAYER_ControlTask.c, 31] AudioExist(1), IgnoreAVSync(0)
+W/NEXTREAMING(  178): FLW0:nexSALBody_TaskCreate NexADec, 6e860
+W/NEXTREAMING(  178): INF0:[NEXPLAYER_ControlTask.c, 39] TextExist(0)
+W/NEXTREAMING(  178): FLW0:[CommonEvnets 1120] NEXPLAYER_EVENT_ASYNC_CMD_COMPLETE
+E/NexPlayerSDK(  178): [CommonEvnets 1538] MEDIA_PREPARED sent eTargetState=4, eState=4
+W/NEXTREAMING(  178): INF0:[AsyncProc 586] After Call Callback function (Cmd ID : 0x00000005), Ret[0]
+I/AudioService(  303): [AudioService.java:2724:requestAudioFocus()]  AudioFocus  requestAudioFocus() from android.media.AudioManager@405db6d0
+I/HSH     (  303): [AudioService.java:2725:requestAudioFocus()]  complie is complete
+D/MediaPlayer(  303): start state 8
+W/NEXTREAMING(  178): FLW0:NexPlayerSDK::setLooping(false) 
+W/NEXTREAMING(  178): FLW0:[nexPlayer_SetRepeat 901] Start(hPlayer=0x2d210, nStartTS=0, nEndTS=0, nRepeatCnt=0)
+W/NEXTREAMING(  178): FLW0:[nexPlayer_SetRepeat 948] End(hPlayer=0x2d210, eRet=0)
+W/NEXTREAMING(  178): FLW0:NexPlayerSDK::setLooping(false) 
+W/NEXTREAMING(  178): FLW0:[nexPlayer_SetRepeat 901] Start(hPlayer=0x2d210, nStartTS=0, nEndTS=0, nRepeatCnt=0)
+W/NEXTREAMING(  178): FLW0:[nexPlayer_SetRepeat 948] End(hPlayer=0x2d210, eRet=0)
+W/NEXTREAMING(  178): FLW0:NexPlayerSDK::start 
+W/NEXTREAMING(  178): FLW0:[nexPlayer_Resume 762] Start(hPlayer=0x2d210)
+W/NEXTREAMING(  178): FLW0:[nexPlayer_Resume 780] End(hPlayer=0x2d210, eRet=0)
+W/NEXTREAMING(  178): FLW0:[AsyncProc 213] [0] CurrentAsyncCmd : NEXPLAYER_ASYNC_CMD_RESUME
+W/NEXTREAMING(  178): FLW0:[CommonEvnets 1120] NEXPLAYER_EVENT_ASYNC_CMD_COMPLETE
+W/NEXTREAMING(  178): INF0:[AsyncProc 586] After Call Callback function (Cmd ID : 0x0000000a), Ret[0]
+D/AudioTrack(  178): Request AudioFlinger to create track
+D/AudioFlinger(  178): createTrack() lSessionId: 13
+D/AudioFlinger(  178): Track constructor name 4099, calling thread 178
+D/AudioTrack(  178): start 0x6eb58
+D/AudioFlinger(  178): start(4099), calling thread 178 session 13
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::startOutput(android::audio_io_handle_t, android::AudioSystem::stream_type, int) start 5
+V/AudioPolicyManager(  178): startOutput() output 1, stream 5
+V/AudioPolicyManagerBase(  178): changeRefCount() stream 5, count 1
+E/AudioPolicyManager(  178): [EW0804]virtual uint32_t android::AudioPolicyManager::getDeviceForStrategy(android::AudioPolicyManagerBase::routing_strategy, bool) start 9
+V/AudioPolicyManager(  178): getDeviceForStrategy() from cache strategy 3, device 2
+E/AudioPolicyManager(  178): [EW0804]virtual uint32_t android::AudioPolicyManager::getDeviceForStrategy(android::AudioPolicyManagerBase::routing_strategy, bool) end 9
+V/AudioPolicyManagerBase(  178): getNewDevice() selected device 2
+E/AudioPolicyManager(  178): [EW0804]void android::AudioPolicyManager::setOutputDevice(android::audio_io_handle_t, uint32_t, bool, int) start 10
+V/AudioPolicyManager(  178): setOutputDevice() output 1 device 2 delayMs 0
+E/AudioPolicyManager(  178): EASTAR 0 prevDevice =0x2 device = 0x2 force = 0
+E/AudioPolicyManager(  178): [EW0804]void android::AudioPolicyManager::setOutputDevice(android::audio_io_handle_t, uint32_t, bool, int) end 10
+V/AudioPolicyManager(  178): setOutputDevice() setting same device 2 or null device for output 1
+V/AudioPolicyManager(  178): startOutput()...stream 5 , mStreams[stream].mIndexCur = 5, output 1
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::checkAndSetVolume(int, int, android::audio_io_handle_t, uint32_t, int, bool) start 22
+E/AudioPolicyManager(  178): [LGE]AudioPolicyManager::checkAndSetVolume : stream =5 index = 5
+V/AudioPolicyManagerBase(  178): [LGE : device 2 Stream 5, VolIndex = 5 volmin =0 volmax =7
+V/AudioPolicyManagerBase(  178): [LGE : volInt = 80 , Volume = 0.316228 Strategy = 2
+V/AudioPolicyManagerBase(  178): [LGE : device 2 Stream 5
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::checkAndSetVolume(int, int, android::audio_io_handle_t, uint32_t, int, bool) end 22
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::startOutput(android::audio_io_handle_t, android::AudioSystem::stream_type, int) end 5
+W/NEXTREAMING(  178): FLW0:-------------------- NEXPLAYER_EVENT_TIME(0) Buffer Status --------------------
+V/AudioHardwareMSM8660(  178): open driver
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_mass_storage, state:online
+D/Vold    (  173): Share method ums now available
+V/AudioHardwareMSM8660(  178): get config
+V/AudioHardwareMSM8660(  178): set config
+V/AudioHardwareMSM8660(  178): buffer_size: 4800
+V/AudioHardwareMSM8660(  178): buffer_count: 2
+V/AudioHardwareMSM8660(  178): channel_count: 2
+V/AudioHardwareMSM8660(  178): sample_rate: 44100
+D/AudioHardwareMSM8660(  178): write(): dec_id = 1 cur_rx = 22
+V/AudioHardwareMSM8660(  178): cur_rx for pcm playback = 22
+D/AudioHardwareMSM8660(  178): value of device and enable is 22 1 ALSA dev id:14
+I/StorageNotification(  436): UMS connection changed to true (media state mounted)
+W/Vold    (  173): [AutoRun] Switch Event - name:usb_configuration, state:1
+W/Vold    (  173): [Apply Autorun]Ignoring unknown switch 'usb_configuration'
+E/Tethering(  303): [Tethering.java:304:interfaceAdded()] active iface (usb0) reported as added, ignoring
+D/Diag Command Observer(  303): [DiagCommandObserver.java:2581:onReceive()] [FLIGHT]usbConnected2=true
+D/Diag Command Observer(  303): [DiagCommandObserver.java:2582:onReceive()] [FLIGHT]sleepmode_test_on2=false
+D/ACDB-LOADER(  178): ACDB -> send_audio_cal, acdb_id = 15, path =  0
+D/ACDB-LOADER(  178): ACDB -> send_audtable
+D/ACDB-LOADER(  178): ACDB -> ACDB_CMD_GET_AUDPROC_COMMON_TABLE
+D/ACDB-LOADER(  178): ACDB -> AUDIO_SET_AUDPROC_CAL
+D/ACDB-LOADER(  178): ACDB -> send_audvoltable
+D/ACDB-LOADER(  178): ACDB -> ACDB_CMD_GET_AUDPROC_GAIN_DEP_VOLTBL_STEP_COPP
+D/ACDB-LOADER(  178): ACDB -> AUDIO_SET_AUDPROC_VOL_CAL
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/AudioHardwareMSM8660(  178): addToTable stream 1
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/AudioFlinger(  178): write blocked for 125 msecs, 6 delayed writes, thread 0x25320
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/NEXTREAMING(  178): FLW0:-------------------- NEXPLAYER_EVENT_TIME(1) Buffer Status --------------------
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/NEXTREAMING(  178): FLW0:-------------------- NEXPLAYER_EVENT_TIME(2) Buffer Status --------------------
+D/AudioTrack(  178): stop 0x6eb58
+D/AudioFlinger(  178): stop(4099), calling thread 178
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::stopOutput(android::audio_io_handle_t, android::AudioSystem::stream_type, int) start 5
+V/AudioPolicyManager(  178): stopOutput() output 1, stream 5
+V/AudioPolicyManagerBase(  178): changeRefCount() stream 5, count 0
+V/AudioPolicyManagerBase(  178): getNewDevice() selected device 0
+E/AudioPolicyManager(  178): [EW0804]void android::AudioPolicyManager::setOutputDevice(android::audio_io_handle_t, uint32_t, bool, int) start 11
+V/AudioPolicyManager(  178): setOutputDevice() output 1 device 0 delayMs 500
+E/AudioPolicyManager(  178): EASTAR 0 prevDevice =0x2 device = 0x0 force = 0
+E/AudioPolicyManager(  178): [EW0804]void android::AudioPolicyManager::setOutputDevice(android::audio_io_handle_t, uint32_t, bool, int) end 11
+V/AudioPolicyManager(  178): setOutputDevice() setting same device 0 or null device for output 1
+E/AudioPolicyManager(  178): [EW0804]virtual android::status_t android::AudioPolicyManager::stopOutput(android::audio_io_handle_t, android::AudioSystem::stream_type, int) end 5
+E/AudioSink(  178): SOLE_STST :: AudioOutput::SoleAudioEffectDeInit():: + Sole_Mgr_API_DeInit(); ----
+W/NEXTREAMING(  178): FLW0:[CommonEvents 880] SEND MEDIA_PLAYBACK_COMPLETE, TotalPlayTime=2509
+W/NEXTREAMING(  178): FLW0:[AsyncProc 208] [0] CurrentAsyncCmd : NEXPLAYER_ASYNC_CMD_PAUSE
+W/NEXTREAMING(  178): FLW0:[CommonEvnets 1120] NEXPLAYER_EVENT_ASYNC_CMD_COMPLETE
+W/NEXTREAMING(  178): INF0:[AsyncProc 586] After Call Callback function (Cmd ID : 0x00000009), Ret[0]
+I/AudioService(  303): [AudioService.java:2810:abandonAudioFocus()]  AudioFocus  abandonAudioFocus() from android.media.AudioManager@405db6d0
+D/AudioHardwareMSM8660(  178): AudioStreamOutMSM72xx::standby()
+D/AudioHardwareMSM8660(  178): Deroute pcm stream: 1, 14
+D/AudioHardwareMSM8660(  178): deleteFromTable stream 1
+D/AudioHardwareMSM8660(  178): value of device and enable is 22 0 ALSA dev id:14
+E/dalvikvm-heap( 3562): Creating VM heap of size start:2097152 max:536870912 base:0x4000d000
+D/MHPManager( 3562): [MHPLog.java:14:d()] [MHP_GOOKY] Load Library libandroid_runtime.so
+D/PackageParser(  303): [PackageParser.java:391:parsePackage()] Scanning package: /data/app/vmdl1539861542.tmp
+W/ResourceType(  303): getEntry failing because entryIndex 296 is beyond type entryCount 171
+W/ResourceType(  303): Failure getting entry for 0x01030128 (t=2 e=296) in package 0 (error -2147483647)
+W/ActivityManager(  303): No content provider found for: 
+W/ActivityManager(  303): No content provider found for: 
+I/PackageParser(  303): [PackageParser.java:1139:parsePackage()] com.crazyj36.activitycycle: compat added android.permission.WRITE_EXTERNAL_STORAGE android.permission.READ_PHONE_STATE
+W/PackageManager(  303): Attempt to re-install com.crazyj36.activitycycle without first uninstalling.
+E/dalvikvm-heap( 3576): Creating VM heap of size start:2097152 max:536870912 base:0x4000d000
+D/MHPManager( 3576): [MHPLog.java:14:d()] [MHP_GOOKY] Load Library libandroid_runtime.so
+D/PackageParser(  303): [PackageParser.java:391:parsePackage()] Scanning package: /data/app/vmdl927660335.tmp
+W/ActivityManager(  303): No content provider found for: 
+W/ActivityManager(  303): No content provider found for: 
+W/ResourceType(  303): getEntry failing because entryIndex 296 is beyond type entryCount 171
+W/ResourceType(  303): Failure getting entry for 0x01030128 (t=2 e=296) in package 0 (error -2147483647)
+I/PackageParser(  303): [PackageParser.java:1139:parsePackage()] com.crazyj36.activitycycle: compat added android.permission.WRITE_EXTERNAL_STORAGE android.permission.READ_PHONE_STATE
+I/PackageManager(  303): [PackageManagerService.java:6549:deletePackageLI()] Removing non-system package:com.crazyj36.activitycycle
+I/ActivityManager(  303): Force stopping package com.crazyj36.activitycycle uid=10002
+E/JavaBinder(  303): Transact on 0x498fc0 in Java object 0x408793b0 with code 3 failed
+E/JavaBinder(  303): !!! FAILED BINDER TRANSACTION !!!
+E/BinderProxy(  303): [Binder.java:373:callback()]       android.os.BinderProxy.callback(Binder.java:369)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       android.os.BinderProxy.transact(Native Method)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.internal.view.IInputMethodClient$Stub$Proxy.onUnbindMethod(IInputMethodClient.java:140)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.handleMessage(InputMethodManagerService.java:1393)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.executeOrSendMessage(InputMethodManagerService.java:598)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.unbindCurrentClientLocked(InputMethodManagerService.java:614)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.startInputLocked(InputMethodManagerService.java:706)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.startInput(InputMethodManagerService.java:817)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.internal.view.IInputMethodManager$Stub.onTransact(IInputMethodManager.java:107)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.onTransact(InputMethodManagerService.java:523)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       android.os.Binder.execTransact(Binder.java:320)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       dalvik.system.NativeStart.run(Native Method)]
+E/JavaBinder(  303): Transact on 0x498fc0 in Java object 0x408793b0 with code 4 failed
+E/JavaBinder(  303): !!! FAILED BINDER TRANSACTION !!!
+E/BinderProxy(  303): [Binder.java:373:callback()]       android.os.BinderProxy.callback(Binder.java:369)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       android.os.BinderProxy.transact(Native Method)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.internal.view.IInputMethodClient$Stub$Proxy.setActive(IInputMethodClient.java:152)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.unbindCurrentClientLocked(InputMethodManagerService.java:620)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.startInputLocked(InputMethodManagerService.java:706)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.startInput(InputMethodManagerService.java:817)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.internal.view.IInputMethodManager$Stub.onTransact(IInputMethodManager.java:107)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.onTransact(InputMethodManagerService.java:523)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       android.os.Binder.execTransact(Binder.java:320)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       dalvik.system.NativeStart.run(Native Method)]
+E/InputDispatcher(  303): channel '408efda8 com.crazyj36.activitycycle/com.crazyj36.activitycycle.MainActivity (server)' ~ Consumer closed input channel or an error occurred.  events=0x8
+E/InputDispatcher(  303): channel '408efda8 com.crazyj36.activitycycle/com.crazyj36.activitycycle.MainActivity (server)' ~ Channel is unrecoverably broken and will be disposed!
+I/WindowManager(  303): WINDOW DIED Window{408efda8 com.crazyj36.activitycycle/com.crazyj36.activitycycle.MainActivity paused=false}
+I/#LGIME  (  444): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+D/PackageManager(  303): [PackageManagerService.java:3046:scanPackageLI()] Scanning package com.crazyj36.activitycycle
+I/PackageManager(  303): Package com.crazyj36.activitycycle codePath changed from /data/app/com.crazyj36.activitycycle-1.apk to /data/app/com.crazyj36.activitycycle-2.apk; Retaining data and using new
+I/PackageManager(  303): Unpacking native libraries for /data/app/com.crazyj36.activitycycle-2.apk
+E/dalvikvm-heap( 3585): Creating VM heap of size start:2097152 max:536870912 base:0x4000e000
+D/PackageManager(  303): [PackageManagerService.java:3663:scanPackageLI()]   Activities: com.crazyj36.activitycycle.MainActivity
+I/ActivityManager(  303): Force stopping package com.crazyj36.activitycycle uid=10002
+W/PackageManager(  303): Code path for pkg : com.crazyj36.activitycycle changing from /data/app/com.crazyj36.activitycycle-1.apk to /data/app/com.crazyj36.activitycycle-2.apk
+W/PackageManager(  303): Resource path for pkg : com.crazyj36.activitycycle changing from /data/app/com.crazyj36.activitycycle-1.apk to /data/app/com.crazyj36.activitycycle-2.apk
+D/PackageManager(  303): [PackageManagerService.java:5957:updateSettingsLI()] New package installed in /data/app/com.crazyj36.activitycycle-2.apk
+I/ActivityManager(  303): Force stopping package com.crazyj36.activitycycle uid=10002
+E/PackageChangeReceiver( 1442): [Logging.java:117:e()] action/data of the intent is NULL or empty
+D/[LGHome]LGAppMenuInfoAdapter( 2462): [LGLog.java:28:d()] [LGAppMenuInfoAdapter.java:78:beginTransaction()] beginTransaction
+D/[LGHome]LGAppMenuInfoAdapter( 2462): [LGLog.java:28:d()] [LGAppMenuInfoAdapter.java:92:setTransactionSuccessful()] setTransactionSuccessful
+D/[LGHome]LGAppMenuInfoAdapter( 2462): [LGLog.java:28:d()] [LGAppMenuInfoAdapter.java:109:endTransaction()] endTransaction
+W/Launcher.Model( 2462): [LauncherModel.java:1665:run()] Nobody to tell about the new app.  Launcher is probably loading.
+E/PackageChangeReceiver( 1442): [Logging.java:117:e()] action/data of the intent is NULL or empty
+W/RecognitionManagerService(  303): no available voice recognition services found
+W/Searchables(  303): [Searchables.java:266:findGlobalSearchActivity()] No global search activity found
+I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN flg=0x10000000 cmp=com.crazyj36.activitycycle/.MainActivity } from pid 464
+W/ResourceType(  303): Entry identifier 0x128 is larger than entry count 0xab
+W/ResourceType(  303): Entry identifier 0x128 is larger than entry count 0xab
+W/WindowManager(  303): [PhoneWindowManager.java:1099:addStartingWindow()] HistoryRecord{4070f9f8 com.crazyj36.activitycycle/.MainActivity} failed creating starting window
+W/WindowManager(  303): java.lang.RuntimeException: Binary XML file line #25: You must supply a layout_height attribute.
+W/WindowManager(  303): 	at android.content.res.TypedArray.getLayoutDimension(TypedArray.java:491)
+W/WindowManager(  303): 	at android.view.ViewGroup$LayoutParams.setBaseAttributes(ViewGroup.java:3599)
+W/WindowManager(  303): 	at android.view.ViewGroup$MarginLayoutParams.<init>(ViewGroup.java:3678)
+W/WindowManager(  303): 	at android.widget.LinearLayout$LayoutParams.<init>(LinearLayout.java:1400)
+W/WindowManager(  303): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:1326)
+W/WindowManager(  303): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:47)
+W/WindowManager(  303): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:625)
+W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
+W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
+W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.generateLayout(PhoneWindow.java:2290)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.installDecor(PhoneWindow.java:2345)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.getDecorView(PhoneWindow.java:1511)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindowManager.addStartingWindow(PhoneWindowManager.java:1070)
+W/WindowManager(  303): 	at com.android.server.WindowManagerService$H.handleMessage(WindowManagerService.java:8347)
+W/WindowManager(  303): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+W/WindowManager(  303): 	at android.os.Looper.loop(Looper.java:130)
+W/WindowManager(  303): 	at com.android.server.WindowManagerService$WMThread.run(WindowManagerService.java:582)
+I/ActivityManager(  303): process name to start: com.crazyj36.activitycycle
+I/ActivityManager(  303): Start proc com.crazyj36.activitycycle for activity com.crazyj36.activitycycle/.MainActivity: pid=3616 uid=10002 gids={1015}
+W/ResourceType( 3616): Entry identifier 0x128 is larger than entry count 0xab
+I/APIPLAYGROUNDANYSDKLOGTAG( 3616): [MainActivity.java:29:onCreate()] apiplayground created
+I/APIPLAYGROUNDANYSDKLOGTAG( 3616): [MainActivity.java:42:onResume()] apiplayground resumed
+I/#LGIME  (  444): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+I/ActivityManager(  303): [ActivityRecord.java:444:windowsVisible()] Displayed com.crazyj36.activitycycle/.MainActivity: +162ms
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+E/dalvikvm-heap( 3675): Creating VM heap of size start:2097152 max:536870912 base:0x4000d000
+D/MHPManager( 3675): [MHPLog.java:14:d()] [MHP_GOOKY] Load Library libandroid_runtime.so
+W/ActivityManager(  303): No content provider found for: 
+D/PackageParser(  303): [PackageParser.java:391:parsePackage()] Scanning package: /data/app/vmdl677825315.tmp
+W/ResourceType(  303): getEntry failing because entryIndex 296 is beyond type entryCount 171
+W/ResourceType(  303): Failure getting entry for 0x01030128 (t=2 e=296) in package 0 (error -2147483647)
+I/PackageParser(  303): [PackageParser.java:1139:parsePackage()] com.crazyj36.activitycycle: compat added android.permission.WRITE_EXTERNAL_STORAGE android.permission.READ_PHONE_STATE
+W/ActivityManager(  303): No content provider found for: 
+I/PackageManager(  303): [PackageManagerService.java:6549:deletePackageLI()] Removing non-system package:com.crazyj36.activitycycle
+I/ActivityManager(  303): Force stopping package com.crazyj36.activitycycle uid=10002
+E/JavaBinder(  303): Transact on 0x49fa58 in Java object 0x408b7500 with code 3 failed
+E/JavaBinder(  303): !!! FAILED BINDER TRANSACTION !!!
+E/BinderProxy(  303): [Binder.java:373:callback()]       android.os.BinderProxy.callback(Binder.java:369)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       android.os.BinderProxy.transact(Native Method)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.internal.view.IInputMethodClient$Stub$Proxy.onUnbindMethod(IInputMethodClient.java:140)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.handleMessage(InputMethodManagerService.java:1393)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.executeOrSendMessage(InputMethodManagerService.java:598)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.unbindCurrentClientLocked(InputMethodManagerService.java:614)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.startInputLocked(InputMethodManagerService.java:706)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.startInput(InputMethodManagerService.java:817)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.internal.view.IInputMethodManager$Stub.onTransact(IInputMethodManager.java:107)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.onTransact(InputMethodManagerService.java:523)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       android.os.Binder.execTransact(Binder.java:320)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       dalvik.system.NativeStart.run(Native Method)]
+E/JavaBinder(  303): Transact on 0x49fa58 in Java object 0x408b7500 with code 4 failed
+E/JavaBinder(  303): !!! FAILED BINDER TRANSACTION !!!
+E/BinderProxy(  303): [Binder.java:373:callback()]       android.os.BinderProxy.callback(Binder.java:369)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       android.os.BinderProxy.transact(Native Method)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.internal.view.IInputMethodClient$Stub$Proxy.setActive(IInputMethodClient.java:152)]
+E/InputDispatcher(  303): channel '406dd290 com.crazyj36.activitycycle/com.crazyj36.activitycycle.MainActivity (server)' ~ Consumer closed input channel or an error occurred.  events=0x8
+E/InputDispatcher(  303): channel '406dd290 com.crazyj36.activitycycle/com.crazyj36.activitycycle.MainActivity (server)' ~ Channel is unrecoverably broken and will be disposed!
+I/WindowManager(  303): WIN DEATH: Window{406dd290 com.crazyj36.activitycycle/com.crazyj36.activitycycle.MainActivity paused=false}
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.unbindCurrentClientLocked(InputMethodManagerService.java:620)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.startInputLocked(InputMethodManagerService.java:706)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.startInput(InputMethodManagerService.java:817)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.internal.view.IInputMethodManager$Stub.onTransact(IInputMethodManager.java:107)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       com.android.server.InputMethodManagerService.onTransact(InputMethodManagerService.java:523)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       android.os.Binder.execTransact(Binder.java:320)]
+E/BinderProxy(  303): [Binder.java:373:callback()]       dalvik.system.NativeStart.run(Native Method)]
+I/#LGIME  (  444): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+D/PackageManager(  303): [PackageManagerService.java:3046:scanPackageLI()] Scanning package com.crazyj36.activitycycle
+I/PackageManager(  303): Package com.crazyj36.activitycycle codePath changed from /data/app/com.crazyj36.activitycycle-2.apk to /data/app/com.crazyj36.activitycycle-1.apk; Retaining data and using new
+I/PackageManager(  303): Unpacking native libraries for /data/app/com.crazyj36.activitycycle-1.apk
+E/dalvikvm-heap( 3709): Creating VM heap of size start:2097152 max:536870912 base:0x4000e000
+I/ActivityManager(  303): Force stopping package com.crazyj36.activitycycle uid=10002
+D/PackageManager(  303): [PackageManagerService.java:3663:scanPackageLI()]   Activities: com.crazyj36.activitycycle.MainActivity
+W/PackageManager(  303): Code path for pkg : com.crazyj36.activitycycle changing from /data/app/com.crazyj36.activitycycle-2.apk to /data/app/com.crazyj36.activitycycle-1.apk
+W/PackageManager(  303): Resource path for pkg : com.crazyj36.activitycycle changing from /data/app/com.crazyj36.activitycycle-2.apk to /data/app/com.crazyj36.activitycycle-1.apk
+D/PackageManager(  303): [PackageManagerService.java:5957:updateSettingsLI()] New package installed in /data/app/com.crazyj36.activitycycle-1.apk
+I/ActivityManager(  303): Force stopping package com.crazyj36.activitycycle uid=10002
+E/PackageChangeReceiver( 1442): [Logging.java:117:e()] action/data of the intent is NULL or empty
+D/[LGHome]LGAppMenuInfoAdapter( 2462): [LGLog.java:28:d()] [LGAppMenuInfoAdapter.java:78:beginTransaction()] beginTransaction
+D/[LGHome]LGAppMenuInfoAdapter( 2462): [LGLog.java:28:d()] [LGAppMenuInfoAdapter.java:92:setTransactionSuccessful()] setTransactionSuccessful
+D/[LGHome]LGAppMenuInfoAdapter( 2462): [LGLog.java:28:d()] [LGAppMenuInfoAdapter.java:109:endTransaction()] endTransaction
+W/Launcher.Model( 2462): [LauncherModel.java:1665:run()] Nobody to tell about the new app.  Launcher is probably loading.
+E/PackageChangeReceiver( 1442): [Logging.java:117:e()] action/data of the intent is NULL or empty
+W/RecognitionManagerService(  303): no available voice recognition services found
+W/Searchables(  303): [Searchables.java:266:findGlobalSearchActivity()] No global search activity found
+E/dalvikvm-heap( 3716): Creating VM heap of size start:2097152 max:536870912 base:0x4000d000
+D/MHPManager( 3716): [MHPLog.java:14:d()] [MHP_GOOKY] Load Library libandroid_runtime.so
+W/ResourceType(  303): Entry identifier 0x128 is larger than entry count 0xab
+W/ResourceType(  303): Entry identifier 0x128 is larger than entry count 0xab
+W/WindowManager(  303): [PhoneWindowManager.java:1099:addStartingWindow()] HistoryRecord{40703460 com.crazyj36.activitycycle/.MainActivity} failed creating starting window
+W/WindowManager(  303): java.lang.RuntimeException: Binary XML file line #25: You must supply a layout_height attribute.
+W/WindowManager(  303): 	at android.content.res.TypedArray.getLayoutDimension(TypedArray.java:491)
+W/WindowManager(  303): 	at android.view.ViewGroup$LayoutParams.setBaseAttributes(ViewGroup.java:3599)
+W/WindowManager(  303): 	at android.view.ViewGroup$MarginLayoutParams.<init>(ViewGroup.java:3678)
+W/WindowManager(  303): 	at android.widget.LinearLayout$LayoutParams.<init>(LinearLayout.java:1400)
+W/WindowManager(  303): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:1326)
+W/WindowManager(  303): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:47)
+W/WindowManager(  303): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:625)
+W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
+W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
+W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.generateLayout(PhoneWindow.java:2290)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.installDecor(PhoneWindow.java:2345)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.getDecorView(PhoneWindow.java:1511)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindowManager.addStartingWindow(PhoneWindowManager.java:1070)
+W/WindowManager(  303): 	at com.android.server.WindowManagerService$H.handleMessage(WindowManagerService.java:8347)
+W/WindowManager(  303): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+W/WindowManager(  303): 	at android.os.Looper.loop(Looper.java:130)
+W/WindowManager(  303): 	at com.android.server.WindowManagerService$WMThread.run(WindowManagerService.java:582)
+I/ActivityManager(  303): Starting: Intent { flg=0x10000000 cmp=com.crazyj36.activitycycle/.MainActivity } from pid 3716
+I/ActivityManager(  303): process name to start: com.crazyj36.activitycycle
+I/ActivityManager(  303): Start proc com.crazyj36.activitycycle for activity com.crazyj36.activitycycle/.MainActivity: pid=3723 uid=10002 gids={1015}
+W/ResourceType( 3723): Entry identifier 0x128 is larger than entry count 0xab
+I/APIPLAYGROUNDANYSDKLOGTAG( 3723): [MainActivity.java:30:onCreate()] apiplayground created
+I/APIPLAYGROUNDANYSDKLOGTAG( 3723): [MainActivity.java:47:onResume()] apiplayground resumed
+I/#LGIME  (  444): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+I/ActivityManager(  303): [ActivityRecord.java:444:windowsVisible()] Displayed com.crazyj36.activitycycle/.MainActivity: +126ms
+I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10200000 cmp=com.crazyj36.launcher/.MainActivity } from pid 303
+I/APIPLAYGROUNDANYSDKLOGTAG( 3723): [MainActivity.java:79:onSaveInstanceState()] apiplayground state saved
+I/#LGIME  (  444): [Glog.java:35:i()] Action : android.intent.action.CLOSE_SYSTEM_DIALOGS
+I/APIPLAYGROUNDANYSDKLOGTAG( 3723): [MainActivity.java:39:onPause()] apiplayground paused
+I/#LGIME  (  444): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+I/APIPLAYGROUNDANYSDKLOGTAG( 3723): [MainActivity.java:55:onStop()] apiplayground stopped
+I/#LGIME  (  444): [Glog.java:35:i()] Action : android.intent.action.CLOSE_SYSTEM_DIALOGS
+I/ActivityManager(  303): Starting: Intent { flg=0x10100000 cmp=com.crazyj36.activitycycle/.MainActivity } from pid 303
+I/APIPLAYGROUNDANYSDKLOGTAG( 3723): [MainActivity.java:47:onResume()] apiplayground resumed
+I/#LGIME  (  444): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+I/#LGIME  (  444): [Glog.java:35:i()] onKeyDown: 4
+I/APIPLAYGROUNDANYSDKLOGTAG( 3723): [MainActivity.java:39:onPause()] apiplayground paused
+I/#LGIME  (  444): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+I/APIPLAYGROUNDANYSDKLOGTAG( 3723): [MainActivity.java:55:onStop()] apiplayground stopped
+I/APIPLAYGROUNDANYSDKLOGTAG( 3723): [MainActivity.java:63:onDestroy()] apiplayground fully exited and destroyed
+D/WifiService(  303): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  303): ### wifiShouldBeEnabled=true
+D/WifiService(  303): ### mDeviceIdle=false
+D/WifiService(  303): ### lockHeld=false
+W/ResourceType(  303): Entry identifier 0x128 is larger than entry count 0xab
+I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN flg=0x10000000 cmp=com.crazyj36.activitycycle/.MainActivity } from pid 464
+W/WindowManager(  303): [PhoneWindowManager.java:1099:addStartingWindow()] HistoryRecord{406d3f08 com.crazyj36.activitycycle/.MainActivity} failed creating starting window
+W/WindowManager(  303): java.lang.RuntimeException: Binary XML file line #25: You must supply a layout_height attribute.
+W/WindowManager(  303): 	at android.content.res.TypedArray.getLayoutDimension(TypedArray.java:491)
+W/WindowManager(  303): 	at android.view.ViewGroup$LayoutParams.setBaseAttributes(ViewGroup.java:3599)
+W/WindowManager(  303): 	at android.view.ViewGroup$MarginLayoutParams.<init>(ViewGroup.java:3678)
+W/WindowManager(  303): 	at android.widget.LinearLayout$LayoutParams.<init>(LinearLayout.java:1400)
+W/WindowManager(  303): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:1326)
+W/WindowManager(  303): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:47)
+W/WindowManager(  303): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:625)
+W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
+W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
+W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.generateLayout(PhoneWindow.java:2290)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.installDecor(PhoneWindow.java:2345)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.getDecorView(PhoneWindow.java:1511)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindowManager.addStartingWindow(PhoneWindowManager.java:1070)
+W/WindowManager(  303): 	at com.android.server.WindowManagerService$H.handleMessage(WindowManagerService.java:8347)
+W/WindowManager(  303): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+W/WindowManager(  303): 	at android.os.Looper.loop(Looper.java:130)
+W/WindowManager(  303): 	at com.android.server.WindowManagerService$WMThread.run(WindowManagerService.java:582)
+W/ResourceType( 3723): Entry identifier 0x128 is larger than entry count 0xab
+I/APIPLAYGROUNDANYSDKLOGTAG( 3723): [MainActivity.java:30:onCreate()] apiplayground created
+I/APIPLAYGROUNDANYSDKLOGTAG( 3723): [MainActivity.java:47:onResume()] apiplayground resumed
+I/#LGIME  (  444): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+I/ActivityManager(  303): [ActivityRecord.java:444:windowsVisible()] Displayed com.crazyj36.activitycycle/.MainActivity: +76ms
+I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10200000 cmp=com.crazyj36.launcher/.MainActivity } from pid 303
+I/#LGIME  (  444): [Glog.java:35:i()] Action : android.intent.action.CLOSE_SYSTEM_DIALOGS
+I/APIPLAYGROUNDANYSDKLOGTAG( 3723): [MainActivity.java:79:onSaveInstanceState()] apiplayground state saved
+I/APIPLAYGROUNDANYSDKLOGTAG( 3723): [MainActivity.java:39:onPause()] apiplayground paused
+I/#LGIME  (  444): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+I/APIPLAYGROUNDANYSDKLOGTAG( 3723): [MainActivity.java:55:onStop()] apiplayground stopped
+I/#LGIME  (  444): [Glog.java:35:i()] Action : android.intent.action.CLOSE_SYSTEM_DIALOGS
+I/APIPLAYGROUNDANYSDKLOGTAG( 3723): [MainActivity.java:47:onResume()] apiplayground resumed
+I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN flg=0x10100000 cmp=com.crazyj36.activitycycle/.MainActivity } from pid 303
+I/#LGIME  (  444): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+I/#LGIME  (  444): [Glog.java:35:i()] onKeyDown: 4
+I/APIPLAYGROUNDANYSDKLOGTAG( 3723): [MainActivity.java:39:onPause()] apiplayground paused
+I/#LGIME  (  444): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+I/APIPLAYGROUNDANYSDKLOGTAG( 3723): [MainActivity.java:55:onStop()] apiplayground stopped
+I/APIPLAYGROUNDANYSDKLOGTAG( 3723): [MainActivity.java:63:onDestroy()] apiplayground fully exited and destroyed
