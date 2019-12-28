@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="tvStatusStartTxt">If the android system changes the state of this app, it will be 
+reflected here with A toast message, and in android logcat.
+    </string>  
+
+</resources>
