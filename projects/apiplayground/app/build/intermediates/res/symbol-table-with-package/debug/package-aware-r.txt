@@ -1178,7 +1178,9 @@ id line1
 id line3
 id listMode
 id listView1
+id listViewFiles
 id list_item
+id logBtn
 id masked
 id message
 id middle
@@ -1494,6 +1496,7 @@ string hourBtnTxt
 string imageDesc
 string imgColorBtnDesc
 string imgColorSwitchTxt
+string logBtnTxt
 string longLabel1Shortcut
 string longLabel2Shortcut
 string mediaPlayerReleaseTxt

@@ -175,7 +175,8 @@ public class MainActivity extends Activity {
             }
         });
         // Java package Date()
-        final TextView tvDate = findViewById(R.id.tvDate);
+        final TextView tvDate = findViewById(R.id.
+        tvDate);
         Button btnDate = findViewById(R.id.btnDate);
         btnDate.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -26,43 +26,47 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Vibrator;
-
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-
-import androidx.annotation.NonNull;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AlertDialog.Builder;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
-import android.view.*;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
-import java.lang.String;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.io.File;
 import java.util.Objects;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    String ApiPlaygroudLogChannel = "APIPLAYGROUNDLOG";
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,13 +75,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Variables
         final FloatingActionButton fab = findViewById(R.id.fab);
+
         //Disables AutoFill. Easier in xml layout, though this statement can make autofill available to sdks that use it eg. 26 oreo
         if (Build.VERSION.SDK_INT >= 26)
 
             getWindow().getDecorView().setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_YES_EXCLUDE_DESCENDANTS);
-        // Phone permission
+        // Phone/ storage permission
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{
-                Manifest.permission.CALL_PHONE
+                Manifest.permission.CALL_PHONE, Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
         }, 1);
         // Toolbar
         final Toolbar toolbar = findViewById(R.id.toolbar);
@@ -399,6 +405,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button grid4 = findViewById(R.id.grid4);
         grid4.setOnClickListener(this);
 
+        // Log Button
+        Button logBtn = findViewById(R.id.logBtn);
+        logBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(ApiPlaygroudLogChannel, "Log Button Clicked");
+            }
+        });
+
+        // Files List
+        ListView listView = findViewById(R.id.listViewFiles);
+        String notesPath = Environment.getExternalStorageDirectory().toString() + "/notes";
+        File dir = new File(notesPath);
+
+        final File[] fileList = dir.listFiles();
+        assert fileList != null;
+        String[] names = new String[fileList.length];
+        for (int i = 0; i < fileList.length; i++) {
+            names[i] = fileList[i].getName();
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, R.layout.list_view, names);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Uri uri = Uri.parse((fileList[position].getPath()));
+                Intent viewFile = new Intent(Intent.ACTION_VIEW);
+                viewFile.setDataAndType(uri, "text/plain");
+                startActivity(viewFile);
+
+            }
+        });
+
+        // End of onCreate()
     }
 
     public void gridTstMsg(String num) {
