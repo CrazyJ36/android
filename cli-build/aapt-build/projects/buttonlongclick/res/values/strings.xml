@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Button Long Click</string>
+    <string name="btnTxt">Click/Long</string>
+</resources>
