@@ -4,7 +4,8 @@
     <application
         android:allowBackup="false"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Wallpaper.NoTitleBar">
+        android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen">
+        <!--@android:style/Theme.Wallpaper.NoTitleBar-->
         <activity
             android:name=".MainActivity"
             android:label="Launcher"
