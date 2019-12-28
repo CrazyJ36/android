@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Button On Click</string>
+
+    <string name="tvInstructionsTxt">
+This demonstrates the two ways of setting actions for buttons. The difference between A buttons onClick methods which are:\n
+- Defining the onClick method while adding button to layout in xml, then linking it\'s onClick funtion with A single java method.\n
+- Instantiating the button in Java by id and defining its onClick action in the same Java file.\n
+    </string>
+
+    <string name="btnXmlClickTxt">XML Click</string>
+    <string name="btnJavaClickTxt">Java Click</string>
+</resources>
