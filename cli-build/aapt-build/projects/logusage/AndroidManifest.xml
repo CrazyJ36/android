@@ -6,10 +6,10 @@
 	android:versionName="1.0" >
 
     <uses-sdk
-		android:minSdkVersion="1" targetSdkVersion="28" />
+		android:minSdkVersion="1" targetSdkVersion="29" />
 
     <application
-        android:label="logusage"
+        android:label="@string/appname"
         android:theme="@android:style/Theme.DeviceDefault" >
 
 		<activity

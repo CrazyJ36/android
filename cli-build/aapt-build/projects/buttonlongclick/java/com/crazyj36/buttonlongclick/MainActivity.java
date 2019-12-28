@@ -22,9 +22,10 @@ public class MainActivity extends Activity {
         // button initialization 'final(global)' as it's used in other java functions.
         final Button button = findViewById(R.id.btn);
 
-        button.setOnClickListener(new OnClickListener() {
-            public void onClick(View view) {
-                generalToast("Short Clicked");
+        // only gets long click with setOnClickListener commented. Uncomment method to get both.
+        //button.setOnClickListener(new OnClickListener() {
+        //    public void onClick(View view) {
+        //        generalToast("Short Clicked");
 
                 // setOnLongClickListener nested within onClick in case the click is long.
                 button.setOnLongClickListener(new OnLongClickListener() {
@@ -37,8 +38,8 @@ public class MainActivity extends Activity {
                     }
                 });
 
-            }
-        }); // end of 'new OnClickListener() {}'
+        //    }
+        //}); // end of 'new OnClickListener() {}'
 
     } // end of onCreate()
 
