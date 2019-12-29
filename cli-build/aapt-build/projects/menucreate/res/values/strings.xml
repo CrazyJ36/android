@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Menu Create</string>
+
+    <string name="tvInstructionsTxt">
+Press menu button at top right,\n
+or if you use Android 2.3 or lower, press devices menu button.
+    </string>
+
+    <string name="menu1Txt">Menu item 1</string>
+    <string name="menu2Txt">Menu item 2</string>
+</resources>

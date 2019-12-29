@@ -1,4 +1,4 @@
-package com.crazyj36.actionmenu;
+package com.crazyj36.menucreate;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -15,9 +15,9 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menuView) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.layout.menu, menu);
+        menuInflater.inflate(R.menu.menu_layout, menuView);
         return true;
     }
 }
