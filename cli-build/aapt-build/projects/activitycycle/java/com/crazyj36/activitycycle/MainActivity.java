@@ -1,12 +1,8 @@
-/* 'i' in Log.i sends an INFO log message to devices logger, viewable by logcat.
-*  besides 'i', there are: Log.d (for debug), Log.e (error), Log.v (verbose), Log.w (warning),
-* and Log.wtf() in extreme cases.
+/* This creates A log message and toasts whenever MainActivity is:
+*  created, resumed, paused, stopped, or destroyed.
+*  It's an attempt to show an android apps' activity cycle while using the app.
 *
-* function definition for common usage:
-* Log.i(String appReferenceLogTag, String terminalMessage);
-*
-* Also, you can use println(int priority, String tag, String message) from normal java cmd line to produce logs.
-*
+*  This does not demonstrate saveing or loading states.
 * View logcat to get realtime info when activity state changes. This is the only way.
 */
 
@@ -19,8 +15,6 @@ import android.util.Log;
 
 public class MainActivity extends Activity {
 
-    String saveData;
-
     // A constant reference name to be used to find this apps log in your devices logcat messages.
     private static final String appLogTag = "ACTIVITYCYCLELOGTAG";
 
@@ -30,7 +24,7 @@ public class MainActivity extends Activity {
 
 	   	setContentView(R.layout.activity_main);
 
-        String msg = "activity created";
+        String msg = "onCreate()";
         Log.i(appLogTag, msg);
         toastStatus(msg);
     }
@@ -39,7 +33,7 @@ public class MainActivity extends Activity {
     protected void onPause() {
         // 'Super' as in MainActivitys' onPause() (activity put in background)
         super.onPause();
-        String msg = "activity paused";
+        String msg = "onPause()";
         Log.i(appLogTag, msg);
         toastStatus(msg);
     }
@@ -47,15 +41,16 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        String msg = "activity resumed";
+        String msg = "onResume()";
         Log.i(appLogTag, msg);
         toastStatus(msg);
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        String msg = "activity stopped";
+        String msg = "onStop()";
         Log.i(appLogTag, msg);
         toastStatus(msg);
     }
@@ -63,26 +58,8 @@ public class MainActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        String msg = "fully exited and destroyed";
+        String msg = "onDestroy()";
         Log.i(appLogTag, msg);
-        toastStatus(msg);
-    }
-
-
-    @Override
-    protected void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        String msg = "state saved app with bundle";
-        savedInstanceState.putString("save data", saveData);
-        Log.i(appLogTag, msg);
-        toastStatus(msg);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        String msg = "loaded savedInstance";
-        Log.i(appLogTag, msg + "loaded: " + savedInstanceState.getString(saveData));
         toastStatus(msg);
     }
 

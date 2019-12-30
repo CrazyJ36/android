@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Resume Counter</string>
+
+    <string name="tvInstructionsTxt">
+This app counts how many times you resume the app from the multitasking screen.\n
+When you go back to your homescreen from an app by pressing the home button to do other things, the app state is saved
+and can be resumed when you open it from the multitasking screen. This doesn\'t happen if you delibrately exit by, for 
+example pressing the back button multiple times or by swiping from multitasking). If you do that, the counter will be reset.
+    </string>
+
+</resources>
