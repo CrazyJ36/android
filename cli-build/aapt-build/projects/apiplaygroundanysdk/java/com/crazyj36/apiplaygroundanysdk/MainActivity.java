@@ -1,7 +1,6 @@
 /* TODO:
   api < 11: notification timestamp
-*/
-/* IDEA:
+
 */
 package com.crazyj36.apiplaygroundanysdk;
 
@@ -16,9 +15,9 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.ActionBar;
 import android.os.Build;
+import android.os.Environment;
 import android.os.Vibrator;
 import android.os.VibrationEffect;
-import android.os.Environment;
 import android.os.Handler;
 import android.view.View;
 import android.view.MotionEvent;
@@ -51,6 +50,7 @@ import java.io.IOException;
 import java.io.File;
 
 public class MainActivity extends Activity {
+
 	// Use normal java class
 	String javaClassStr = new javaClass().myMethod();
     // Strings for methods outside, or inward(in if's) of onCreate()
@@ -62,7 +62,8 @@ public class MainActivity extends Activity {
     ListView listView;
 	String vibrateTest = "";
 	String concatTxt = "";
-	String storage = Environment.getExternalStorageDirectory().toString() + "/notes";
+    String storage = Environment.getExternalStorageDirectory().toString() + "/notes";
+
     // onCreate activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +79,7 @@ public class MainActivity extends Activity {
 			ScrollView scrollViewForRawFile = findViewById(R.id.scrollViewForRawFile);
         	makeScrollable(scrollViewForRawFile);
 		}
-        // Vibrate on Successfull start
+        // Vibrator info
         Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         try {
             if (Build.VERSION.SDK_INT < 11 && vib != null) {

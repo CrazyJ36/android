@@ -1,0 +1,73 @@
+--------- beginning of /dev/log/main
+W/ResourceType(  305): Entry identifier 0x128 is larger than entry count 0xab
+--------- beginning of /dev/log/system
+I/ActivityManager(  305): Starting: Intent { act=android.intent.action.MAIN flg=0x10000000 cmp=com.crazyj36.apiplaygroundanysdk/.MainActivity } from pid 460
+W/WindowManager(  305): [PhoneWindowManager.java:1099:addStartingWindow()] HistoryRecord{4066b5e8 com.crazyj36.apiplaygroundanysdk/.MainActivity} failed creating starting window
+W/WindowManager(  305): java.lang.RuntimeException: Binary XML file line #25: You must supply a layout_height attribute.
+W/WindowManager(  305): 	at android.content.res.TypedArray.getLayoutDimension(TypedArray.java:491)
+W/WindowManager(  305): 	at android.view.ViewGroup$LayoutParams.setBaseAttributes(ViewGroup.java:3599)
+W/WindowManager(  305): 	at android.view.ViewGroup$MarginLayoutParams.<init>(ViewGroup.java:3678)
+W/WindowManager(  305): 	at android.widget.LinearLayout$LayoutParams.<init>(LinearLayout.java:1400)
+W/WindowManager(  305): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:1326)
+W/WindowManager(  305): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:47)
+W/WindowManager(  305): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:625)
+W/WindowManager(  305): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
+W/WindowManager(  305): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
+W/WindowManager(  305): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
+W/WindowManager(  305): 	at com.android.internal.policy.impl.PhoneWindow.generateLayout(PhoneWindow.java:2290)
+W/WindowManager(  305): 	at com.android.internal.policy.impl.PhoneWindow.installDecor(PhoneWindow.java:2345)
+W/WindowManager(  305): 	at com.android.internal.policy.impl.PhoneWindow.getDecorView(PhoneWindow.java:1511)
+W/WindowManager(  305): 	at com.android.internal.policy.impl.PhoneWindowManager.addStartingWindow(PhoneWindowManager.java:1070)
+W/WindowManager(  305): 	at com.android.server.WindowManagerService$H.handleMessage(WindowManagerService.java:8347)
+W/WindowManager(  305): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+W/WindowManager(  305): 	at android.os.Looper.loop(Looper.java:130)
+W/WindowManager(  305): 	at com.android.server.WindowManagerService$WMThread.run(WindowManagerService.java:582)
+I/ActivityManager(  305): process name to start: com.crazyj36.apiplaygroundanysdk
+E/ActivityManager(  305): heap conf. property name string trimmed: hs.com.crazyj36.apiplaygroundan
+I/ActivityManager(  305): Start proc com.crazyj36.apiplaygroundanysdk for activity com.crazyj36.apiplaygroundanysdk/.MainActivity: pid=1489 uid=10093 gids={}
+W/dalvikvm( 1489): VFY: unable to resolve virtual method 150: Lcom/crazyj36/apiplaygroundanysdk/MainActivity;.getActionBar ()Landroid/app/ActionBar;
+E/dalvikvm( 1489): Could not find class 'android.app.NotificationChannel', referenced from method com.crazyj36.apiplaygroundanysdk.MainActivity.onCreate
+W/dalvikvm( 1489): VFY: unable to resolve new-instance 9 (Landroid/app/NotificationChannel;) in Lcom/crazyj36/apiplaygroundanysdk/MainActivity;
+W/dalvikvm( 1489): VFY: unable to resolve virtual method 60: Landroid/os/Vibrator;.hasVibrator ()Z
+W/dalvikvm( 1489): VFY: unable to resolve virtual method 60: Landroid/os/Vibrator;.hasVibrator ()Z
+W/dalvikvm( 1489): VFY: unable to resolve virtual method 60: Landroid/os/Vibrator;.hasVibrator ()Z
+W/dalvikvm( 1489): VFY: unable to resolve virtual method 60: Landroid/os/Vibrator;.hasVibrator ()Z
+W/dalvikvm( 1489): VFY: unable to resolve virtual method 147: Lcom/crazyj36/apiplaygroundanysdk/MainActivity;.checkSelfPermission (Ljava/lang/String;)I
+W/dalvikvm( 1489): VFY: unable to resolve virtual method 46: Landroid/content/res/Resources;.getColor (ILandroid/content/res/Resources$Theme;)I
+W/ResourceType( 1489): Entry identifier 0x128 is larger than entry count 0xab
+I/APIPLAYGROUNDLOG( 1489): [MainActivity.java:170:onCreate()] App Started
+E/dalvikvm( 1489): Could not find class 'android.app.Notification$Builder', referenced from method com.crazyj36.apiplaygroundanysdk.MainActivity$10.onClick
+W/dalvikvm( 1489): VFY: unable to resolve new-instance 7 (Landroid/app/Notification$Builder;) in Lcom/crazyj36/apiplaygroundanysdk/MainActivity$10;
+E/dalvikvm( 1489): Could not find class 'android.app.Notification$Builder', referenced from method com.crazyj36.apiplaygroundanysdk.MainActivity$10.onClick
+W/dalvikvm( 1489): VFY: unable to resolve new-instance 7 (Landroid/app/Notification$Builder;) in Lcom/crazyj36/apiplaygroundanysdk/MainActivity$10;
+W/ApplicationContext( 1489): [ContextImpl.java:479:getExternalFilesDir()] Unable to create external files directory
+I/APIPLAYGROUNDLOG( 1489): [MainActivity.java:374:filesTask()] getExternalFilesDir() null pointer
+W/dalvikvm( 1489): threadid=1: thread exiting with uncaught exception (group=0x40019560)
+E/AndroidRuntime( 1489): FATAL EXCEPTION: main
+E/AndroidRuntime( 1489): java.lang.RuntimeException: Unable to start activity ComponentInfo{com.crazyj36.apiplaygroundanysdk/com.crazyj36.apiplaygroundanysdk.MainActivity}: java.lang.NullPointerException
+E/AndroidRuntime( 1489): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1658)
+E/AndroidRuntime( 1489): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:1674)
+E/AndroidRuntime( 1489): 	at android.app.ActivityThread.access$1500(ActivityThread.java:117)
+E/AndroidRuntime( 1489): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:942)
+E/AndroidRuntime( 1489): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+E/AndroidRuntime( 1489): 	at android.os.Looper.loop(Looper.java:130)
+E/AndroidRuntime( 1489): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
+E/AndroidRuntime( 1489): 	at java.lang.reflect.Method.invokeNative(Native Method)
+E/AndroidRuntime( 1489): 	at java.lang.reflect.Method.invoke(Method.java:507)
+E/AndroidRuntime( 1489): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
+E/AndroidRuntime( 1489): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
+E/AndroidRuntime( 1489): 	at dalvik.system.NativeStart.main(Native Method)
+E/AndroidRuntime( 1489): Caused by: java.lang.NullPointerException
+E/AndroidRuntime( 1489): 	at java.io.File.fixSlashes(File.java:205)
+E/AndroidRuntime( 1489): 	at java.io.File.init(File.java:189)
+E/AndroidRuntime( 1489): 	at java.io.File.<init>(File.java:139)
+E/AndroidRuntime( 1489): 	at com.crazyj36.apiplaygroundanysdk.MainActivity.filesTask(MainActivity.java:383)
+E/AndroidRuntime( 1489): 	at com.crazyj36.apiplaygroundanysdk.MainActivity.onCreate(MainActivity.java:355)
+E/AndroidRuntime( 1489): 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1047)
+E/AndroidRuntime( 1489): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1622)
+E/AndroidRuntime( 1489): 	... 11 more
+W/ActivityManager(  305):   Force finishing activity com.crazyj36.apiplaygroundanysdk/.MainActivity
+W/ActivityManager(  305): Activity pause timeout for HistoryRecord{4066b5e8 com.crazyj36.apiplaygroundanysdk/.MainActivity}
+W/InputManagerService(  305): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@405e0548
+I/ActivityManager(  305): Process com.crazyj36.apiplaygroundanysdk (pid 1489) has died.
+W/ActivityManager(  305): Activity destroy timeout for HistoryRecord{405ec3b8 com.crazyj36.apiplaygroundanysdk/.MainActivity}
