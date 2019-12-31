@@ -20,6 +20,9 @@ import android.os.Vibrator;
 import android.os.VibrationEffect;
 import android.os.Handler;
 import android.view.View;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View.OnClickListener;
 import android.content.pm.PackageManager;
@@ -51,8 +54,6 @@ import java.io.File;
 
 public class MainActivity extends Activity {
 
-	// Use normal java class
-	String javaClassStr = new javaClass().myMethod();
     // Strings for methods outside, or inward(in if's) of onCreate()
 	String filesTest = "";
     String logChannel = "APIPLAYGROUNDLOG";
@@ -62,13 +63,13 @@ public class MainActivity extends Activity {
     ListView listView;
 	String vibrateTest = "";
 	String concatTxt = "";
-    String storage = Environment.getExternalStorageDirectory().toString() + "/notes";
 
     // onCreate activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         // ActionBar is usable in default platform from api 11.
         if (sdkVersion >= 11) {
             ActionBar actionBar = getActionBar();
@@ -366,50 +367,52 @@ public class MainActivity extends Activity {
 		listView = findViewById(R.id.fileList);
 	// end of onCreate
 	}
-    // Get files from sdcard, show names in listview
+    // filesTask() Get files from sdcard, show names in listview
     public void filesTask() {
-		filesTest = "Files at " + storage + " below";
+        String storage = Environment.getExternalStorageDirectory().toString() + "/notes";
+        File dir = new File(storage);
 		listView = findViewById(R.id.fileList);
         if (sdkVersion < 21) {
             makeScrollable(listView);
         }
-        File dir = new File(storage);
-        final File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
-        if (dir.exists() && dir.isDirectory()) {
-			if (fileList.length == 0) {
-				listView.setEnabled(false);
-                filesTest = ("No files in " + storage + ".");
-				return;
-			}
-            String[] names = new String[fileList.length];
-            for (int i = 0; i < fileList.length; i++) {
-                names[i] = fileList[i].getName();
-            }
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, R.layout.list_item, names);
-            View headerView = View.inflate(MainActivity.this, R.layout.list_header_view, null); // Get xml layout, make it inflatable here. null parent view.
-            listView.addHeaderView(headerView, null, false);
-            listView.setAdapter(adapter);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-				public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-					if (position > 0) {
-						int filePosition = position - 1;
-						Uri uri;
-					    if (sdkVersion < 24) {
-                            uri = Uri.fromFile(fileList[filePosition]); // No too secure, though fine, broadcasts actual file pointer.
-                        } else {
-							uri = Uri.parse(fileList[filePosition].getPath());  // this one broadcasts a file path only
-                        }
-			            Intent viewFile = new Intent(Intent.ACTION_VIEW);
-						viewFile.setDataAndType(uri, "text/plain");
-					    startActivity(viewFile); // createChooser is not so pretty
-					}
-                }
-            });
-        } else {
-			listView.setEnabled(false);
-            filesTest = ("No " + storage + " directory.");
+        if (!(dir.exists() && dir.isDirectory())) {
+            filesTest = "No " + storage + " directory.";
+            listView.setEnabled(false);
+            updateResults();
+            return;
         }
+        final File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
+		if (fileList.length == 0) {
+			listView.setEnabled(false);
+            filesTest = ("No files in: " + dir.toString());
+			return;
+		}
+        filesTest = "Files at " + dir.toString() + " below";
+        String[] names = new String[fileList.length];
+        for (int i = 0; i < fileList.length; i++) {
+            names[i] = fileList[i].getName();
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, R.layout.list_item, names);
+        View headerView = View.inflate(MainActivity.this, R.layout.list_header_view, null); // Get xml layout, make it inflatable here. null parent view.
+        listView.addHeaderView(headerView, null, false);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+			public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+				if (position > 0) {
+					int filePosition = position - 1;
+					Uri uri;
+				    if (sdkVersion < 24) {
+                        uri = Uri.fromFile(fileList[filePosition]); // No too secure, though fine, broadcasts actual file pointer.
+                    } else {
+						uri = Uri.parse(fileList[filePosition].getPath());  // this one broadcasts a file path only
+                    }
+		            Intent viewFile = new Intent(Intent.ACTION_VIEW);
+					viewFile.setDataAndType(uri, "text/plain");
+				    startActivity(viewFile); // createChooser is not so pretty
+				}
+            }
+        });
 		updateResults();
     }
 	// show fileTasks() after granting storage permission. This whole method only applies the moment after you grant storage permission.
@@ -440,7 +443,7 @@ public class MainActivity extends Activity {
 	            filesTest,
 	            concatTxt,
                 "The current days' hour is: " + new javaClass().getHourOfDay(),
-				javaClassStr,
+				javaClass.myMethod(),  /* Using A normal java class file */
 	    };
 	    results[0] = String.valueOf(results.length);
 	    int z = 0;
@@ -491,12 +494,41 @@ public class MainActivity extends Activity {
     public String packageNameOfString() {
         return String.class.getCanonicalName();
     }
-
+    // Menu init
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_layout, menu);
+        return true;
+    }
+    // Menu onclicks
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuAbout:
+                generalToast("App by:\n@2019 CrazyJ36");
+                return true;
+            case R.id.menuExit:
+                MainActivity.this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     // Catch config changes(screen rotated, screen size change, etc.)
     @Override
     public void onConfigurationChanged(Configuration configuration) {
         super.onConfigurationChanged(configuration);
 		Toast.makeText(this, "Config Changed", Toast.LENGTH_SHORT).show();
     }
+    // onDestroy
+    @Override
+    protected void onDestroy() {
+        generalToast("apiplayground destroyed");
+        super.onDestroy();
+    }
 
+    public void generalToast(String text) {
+        Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
+    }
 }

@@ -213,7 +213,7 @@
     <ListView
         android:id="@+id/fileList"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="128dp"
         android:nestedScrollingEnabled="true"
         android:scrollingCache="true"
         android:fastScrollEnabled="true" />

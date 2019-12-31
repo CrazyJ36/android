@@ -43,6 +43,8 @@ of computer architecture and programming as a whole).</string>
     <string name="dialogBtn2Txt">Close</string>
     <string name="dialogTitle">Info Dialog</string>
     <string name="listHeaderTxt">Notes</string>
+    <string name="menuAboutTxt">About</string>
+    <string name="menuExitTxt">Exit</string>
     <!--Activity 2-->
     <string name="btnCallTxt">Call</string>
     <string name="etCallHint">Phone Number</string>
