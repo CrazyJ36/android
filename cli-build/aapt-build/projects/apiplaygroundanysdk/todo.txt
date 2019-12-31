@@ -4,3 +4,5 @@ message field popup menu, select wether text is to be
 recipient or message.
 
 change vibrater not null message for 2.3 make more important.
+
+storage will be in Android/data only on api > 29.
