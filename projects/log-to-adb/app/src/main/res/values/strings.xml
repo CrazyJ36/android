@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">Log To ADB</string>
-    <string name="instructions">Show Log info in \'adb logcat\'</string>
-    <string name="logBtnTxt">Log</string>
-</resources>

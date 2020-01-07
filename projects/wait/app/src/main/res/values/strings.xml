@@ -1,4 +1,0 @@
-<resources>
-    <string name="app_name">Wait</string>
-    <string name="instructions">Toasts once, then 5 seconds later toast again.\nUses Handler.postDelayed</string>
-</resources>

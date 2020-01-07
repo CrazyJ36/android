@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Wait</string>
+
+    <string name="tvInstructionsTxt">
+This app toasts, waits 5 secconds, then toasts again.
+It uses android API android.os.Handler().postDelayed(new Runnable run())
+    </string>
+
+</resources>

@@ -1,7 +1,1 @@
-# try to keep development cli/linux based. Not using android studio or needing to look up api reference.
-# makes you A better system developer.
-
-# refer to ~/devlopment/bash/build-android.sh for A breakdown of all that needs goes on in case of common errors.
-
-# export $CLASSPATH of the android dependencies needed to build for android(should add this to linux ~/.profile)
-/home/thomas/development/android/cli-build/86/sdk/android-{version}/android.jar:
+# refer to ~/devlopment/linux-scripts/build-android.sh for A breakdown of all that needs goes on in case of common errors.
