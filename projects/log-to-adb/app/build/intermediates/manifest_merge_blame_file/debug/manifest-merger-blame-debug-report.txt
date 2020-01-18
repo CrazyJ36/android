@@ -1,0 +1,46 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.crazyj36.logtoadb"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="14"
+8-->C:\Users\crazy\development\android\projects\activity-cycle\log-to-adb\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->C:\Users\crazy\development\android\projects\activity-cycle\log-to-adb\app\src\main\AndroidManifest.xml
+10
+11    <application
+11-->C:\Users\crazy\development\android\projects\activity-cycle\log-to-adb\app\src\main\AndroidManifest.xml:5:5-18:19
+12        android:allowBackup="false"
+12-->C:\Users\crazy\development\android\projects\activity-cycle\log-to-adb\app\src\main\AndroidManifest.xml:6:9-36
+13        android:debuggable="true"
+14        android:icon="@mipmap/ic_launcher"
+14-->C:\Users\crazy\development\android\projects\activity-cycle\log-to-adb\app\src\main\AndroidManifest.xml:7:9-43
+15        android:label="@string/app_name"
+15-->C:\Users\crazy\development\android\projects\activity-cycle\log-to-adb\app\src\main\AndroidManifest.xml:8:9-41
+16        android:supportsRtl="true"
+16-->C:\Users\crazy\development\android\projects\activity-cycle\log-to-adb\app\src\main\AndroidManifest.xml:9:9-35
+17        android:testOnly="true"
+18        android:theme="@android:style/Theme.DeviceDefault" >
+18-->C:\Users\crazy\development\android\projects\activity-cycle\log-to-adb\app\src\main\AndroidManifest.xml:10:9-59
+19        <activity android:name="com.crazyj36.logtoadb.MainActivity" >
+19-->C:\Users\crazy\development\android\projects\activity-cycle\log-to-adb\app\src\main\AndroidManifest.xml:11:9-17:20
+19-->C:\Users\crazy\development\android\projects\activity-cycle\log-to-adb\app\src\main\AndroidManifest.xml:11:19-47
+20            <intent-filter>
+20-->C:\Users\crazy\development\android\projects\activity-cycle\log-to-adb\app\src\main\AndroidManifest.xml:12:13-16:29
+21                <action android:name="android.intent.action.MAIN" />
+21-->C:\Users\crazy\development\android\projects\activity-cycle\log-to-adb\app\src\main\AndroidManifest.xml:13:17-69
+21-->C:\Users\crazy\development\android\projects\activity-cycle\log-to-adb\app\src\main\AndroidManifest.xml:13:25-66
+22                <action android:name="android.intent.action.VIEW" />
+22-->C:\Users\crazy\development\android\projects\activity-cycle\log-to-adb\app\src\main\AndroidManifest.xml:14:17-69
+22-->C:\Users\crazy\development\android\projects\activity-cycle\log-to-adb\app\src\main\AndroidManifest.xml:14:25-66
+23
+24                <category android:name="android.intent.category.LAUNCHER" />
+24-->C:\Users\crazy\development\android\projects\activity-cycle\log-to-adb\app\src\main\AndroidManifest.xml:15:17-77
+24-->C:\Users\crazy\development\android\projects\activity-cycle\log-to-adb\app\src\main\AndroidManifest.xml:15:27-74
+25            </intent-filter>
+26        </activity>
+27    </application>
+28
+29</manifest>
