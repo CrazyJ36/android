@@ -51,6 +51,8 @@ import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class MainActivity extends Activity {
 
@@ -63,6 +65,7 @@ public class MainActivity extends Activity {
     ListView listView;
 	String vibrateTest = "";
 	String concatTxt = "";
+    String writeMyFileString = "";
 
     // onCreate activity.
     @Override
@@ -351,6 +354,12 @@ public class MainActivity extends Activity {
                 }
             }
         });
+        // Write file
+        try {
+            writeMyFile();
+        } catch (IOException ioException) {
+            writeMyFileString = "writeMyFileIOException";
+        }
         // getStorage permission & start filesTask()
         if (sdkVersion < 23) {
             filesTask();
@@ -365,6 +374,7 @@ public class MainActivity extends Activity {
 		// put some function results into custom textview
 		updateResults();
 		listView = findViewById(R.id.fileList);
+
 	// end of onCreate
 	}
     // filesTask() Get files from sdcard, show names in listview
@@ -443,7 +453,10 @@ public class MainActivity extends Activity {
 	            filesTest,
 	            concatTxt,
                 "The current days' hour is: " + new javaClass().getHourOfDay(),
-				javaClass.myMethod(),  /* Using A normal java class file */
+				javaClass.myMethod(),
+                "basic string",
+                "Downloads dir name: " + Environment.DIRECTORY_DOWNLOADS,
+                writeMyFileString,
 	    };
 	    results[0] = String.valueOf(results.length);
 	    int z = 0;
@@ -531,4 +544,15 @@ public class MainActivity extends Activity {
     public void generalToast(String text) {
         Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
     }
+
+    public void writeMyFile() throws IOException {
+        if (getExternalFilesDir(null).exists() && getExternalFilesDir(null).isDirectory()) {
+            File newFile = new File(getExternalFilesDir(null) + "/my_file.txt");
+            FileWriter fileWriter = new FileWriter(newFile);
+            fileWriter.write("content of my_file.txt.");
+            writeMyFileString = "my_file.txt written to: " + getExternalFilesDir(null);
+            fileWriter.close();
+        }
+    }
+
 }
