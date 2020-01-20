@@ -62,4 +62,6 @@ of computer architecture and programming as a whole).</string>
     <string name="Act2ShortcutShortLabel">2</string>
     <string name="Act2ShortcutLongLabel">Go to Activity 2</string>
     <string name="Act2ShortcutDisabledMsg">Act2 Shortcut Disabled</string>
+    <!--Widget-->
+    <string name="widgetBtnTxt">Launch</string>
 </resources>
