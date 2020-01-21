@@ -20,6 +20,7 @@ import android.os.Vibrator;
 import android.os.VibrationEffect;
 import android.os.Handler;
 import android.os.BatteryManager;
+import android.os.PowerManager;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,6 +31,8 @@ import android.content.pm.PackageManager;
 import android.content.Intent;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.BroadcastReceiver;
+import android.content.IntentFilter;
 import android.media.MediaPlayer;
 import android.widget.RemoteViews;
 import android.widget.Button;
@@ -71,6 +74,7 @@ public class MainActivity extends Activity {
     String writeMyFileString = "";
     String planets = "";
     String battery = "";
+    String updaterTxt = "Press update button";
     // onCreate activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -272,7 +276,7 @@ public class MainActivity extends Activity {
 			Toast.makeText(MainActivity.this, "Notification Manager null, notificationChannel not set", Toast.LENGTH_SHORT).show();
 		}
 		findViewById(R.id.btnNotify).setOnClickListener(new OnClickListener() {
-			@Override
+ 			@Override
 			public void onClick(View view) {
 				if (notificationManager != null) {
 					if (sdkVersion >= 11) {
@@ -369,18 +373,18 @@ public class MainActivity extends Activity {
         for (int x = 0; x < planetsArr.length; x++) {
             planets += planetsArr[x] + " ";
         }
-        // Battery level and status
-        //BatteryManager batteryManager = getSystemService(BatteryManager.class);
-        BatteryManager batteryManager = (BatteryManager) getSystemService("batterymanager");
-        int batteryLevel = batteryManager.getIntProperty(
-            BatteryManager.BATTERY_PROPERTY_CAPACITY);
-        String batteryCharging = "";
-        if (batteryManager.isCharging()) {
-            batteryCharging = "Charging";
-        } else {
-            batteryCharging = "Discharging";
-        }
-        battery = "Battery: " + String.valueOf(batteryLevel) + "%, " + batteryCharging;
+        // Battery level and status using receiver.
+        MainActivity.this.registerReceiver(MainActivity.this.batteryBroadcast,
+            new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        // Update results button
+        Button updateTxtBtn = findViewById(R.id.updateTxtBtn);
+        updateTxtBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updaterTxt = "Update button clicked";
+                updateResults();
+            }
+        });
         // getStorage permission & start filesTask()
         if (sdkVersion < 23) {
             filesTask();
@@ -481,6 +485,7 @@ public class MainActivity extends Activity {
                 writeMyFileString,
                 "strings.xml array: " + planets,
                 battery,
+                updaterTxt,
 	    };
 	    results[0] = "Results feild entries: " + String.valueOf(results.length);
 	    int z = 0;
@@ -491,13 +496,8 @@ public class MainActivity extends Activity {
         }
 	    String buffOut = String.valueOf(text);
 		TextView resultsTextView = findViewById(R.id.resultsTextView);
-	    if (android.os.Build.VERSION.SDK_INT > 22) {
-	        resultsTextView.setTextColor(getResources().getColor(android.R.color.black, null)); // Resources.Theme=null
-	        resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray, null));
-	    } else {
-	        resultsTextView.setTextColor(getResources().getColor(android.R.color.black));
-	        resultsTextView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
-	    }
+	    resultsTextView.setTextColor(0xFF909090);
+	    resultsTextView.setBackgroundColor(0xFF505050);
 	    resultsTextView.setText(buffOut);
 	}
     // Method to make any view scrollable. Insert View as parameter.
@@ -547,7 +547,16 @@ public class MainActivity extends Activity {
                 dialogAbout.setContentView(R.layout.dialog_about);
                 dialogAbout.setTitle("About App");
                 dialogAbout.show();
-                Button dialogAboutBtn = findViewById(R.id.dialogAboutBtn);
+                // An onClick in A seperate layout must be defined this way.
+                dialogAbout.findViewById(R.id.dialogAboutBtn).setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                		String myGitUrl = "http://github.com/CrazyJ36?tab=repositories";
+                		Intent crazyj36Git = new Intent(Intent.ACTION_VIEW);
+                		crazyj36Git.setData(Uri.parse(myGitUrl));
+                		startActivity(crazyj36Git);
+            		}
+        		});
                 return true;
             case R.id.menuExit:
                 MainActivity.this.finish();
@@ -582,11 +591,14 @@ public class MainActivity extends Activity {
             fileWriter.close();
         }
     }
-    // About dialog github button action.
-    public void launchMyGit(View v) {
-        String myGitUrl = "http://github.com/CrazyJ36?tab=repositories";
-        Intent crazyj36Git = new Intent(Intent.ACTION_VIEW);
-        crazyj36Git.setData(Uri.parse(myGitUrl));
-        startActivity(crazyj36Git);
-    }
+    // Read battery state broadcast from system
+    private BroadcastReceiver batteryBroadcast = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int batteryLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+            battery = "Battery level: " + String.valueOf(batteryLevel) + "%";
+            updateResults();
+        }
+    };
+
 }

@@ -20,8 +20,6 @@
         android:id="@+id/dialogAboutBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/dialogAboutBtnTxt"
-        android:onClick="launchMyGit" />
-
+        android:text="@string/dialogAboutBtnTxt" />
 </LinearLayout>
     

@@ -94,6 +94,13 @@
             android:layout_toRightOf="@id/btnLog"
 			android:layout_below="@id/btnPressLong" />
 
+        <Button
+            android:id="@+id/updateTxtBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/updateTxtBtnTxt"
+            android:layout_toRightOf="@id/btnPressLong" />
+
     </RelativeLayout>
 
     <LinearLayout

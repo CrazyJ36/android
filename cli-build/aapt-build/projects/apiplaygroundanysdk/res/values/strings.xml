@@ -40,6 +40,7 @@ Binary to octal and vice-versa. Reverse sentence using recursion.
     <string name="btnLogTxt">Log</string>
     <string name="btnPressLongTxt">Tap/Long</string>
     <string name="btnNotifyTxt">Notify</string>
+    <string name="updateTxtBtnTxt">Update</string>
     <string name="btnPlayAudioTxt">Play</string>
     <string name="tvMediaPlayingTxt">Audio playing...</string>
 	<string name="tvMediaDoneTxt">MediaPlayer released</string>
