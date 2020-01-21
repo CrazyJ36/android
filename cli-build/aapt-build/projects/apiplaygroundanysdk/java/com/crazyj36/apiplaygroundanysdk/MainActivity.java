@@ -47,6 +47,7 @@ import android.util.Log;
 import java.lang.System;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Arrays;
 import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -392,6 +393,7 @@ public class MainActivity extends Activity {
             return;
         }
         final File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
+        Arrays.sort(fileList); // Doesn't sort numbered file names.
 		if (fileList.length == 0) {
 			listView.setEnabled(false);
             filesTest = ("No files in: " + dir.toString());
@@ -446,17 +448,17 @@ public class MainActivity extends Activity {
     public void updateResults() {
 		StringBuffer text = new StringBuffer();
 	    final String[] results = {
-	            "",
-	            "1 + 2 = " + intCast(),
-	            "String package: " + packageNameOfString(),
-	            vibrateTest,
-	            filesTest,
-	            concatTxt,
-                "The current days' hour is: " + new javaClass().getHourOfDay(),
-				javaClass.myMethod(),
-                "basic string",
-                "Downloads dir name: " + Environment.DIRECTORY_DOWNLOADS,
-                writeMyFileString,
+	            "\n",
+	            "1 + 2 = " + intCast() + "\n",
+	            "String package: " + packageNameOfString() + "\n",
+	            vibrateTest + "\n",
+	            filesTest + "\n",
+	            concatTxt + "\n",
+                "The current days' hour is: " + new javaClass().getHourOfDay() + "\n",
+				javaClass.myMethod() + "\n",
+                "basic string" + "\n",
+                "Downloads dir name: " + Environment.DIRECTORY_DOWNLOADS + "\n",
+                writeMyFileString + "\n",
 	    };
 	    results[0] = String.valueOf(results.length);
 	    int z = 0;
@@ -549,7 +551,7 @@ public class MainActivity extends Activity {
         if (getExternalFilesDir(null).exists() && getExternalFilesDir(null).isDirectory()) {
             File newFile = new File(getExternalFilesDir(null) + "/my_file.txt");
             FileWriter fileWriter = new FileWriter(newFile);
-            fileWriter.write("content of my_file.txt.");
+            fileWriter.write(getResources().getString(R.string.my_fileTxt));
             writeMyFileString = "my_file.txt written to: " + getExternalFilesDir(null);
             fileWriter.close();
         }
