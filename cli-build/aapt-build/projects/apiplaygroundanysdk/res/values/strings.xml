@@ -72,9 +72,12 @@ of computer architecture and programming as a whole).
     <string name="dialogBtn1Txt">Toast</string>
     <string name="dialogBtn2Txt">Close</string>
     <string name="dialogTitle">Info Dialog</string>
+    <string name="dialogAboutTxt">\@2020 CrazyJ36</string>
+    <string name="dialogAboutBtnTxt">View my GitHub</string>
     <string name="listHeaderTxt">Notes</string>
     <string name="menuAboutTxt">About</string>
     <string name="menuExitTxt">Exit</string>
+    <string name="menuThemeTxt">Theme</string>
     <string name="my_fileTxt">
 Content of my_file.txt. file creating in this files\' directory 
 doesn\'t require storage permission

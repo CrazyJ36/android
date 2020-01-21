@@ -448,19 +448,19 @@ public class MainActivity extends Activity {
     public void updateResults() {
 		StringBuffer text = new StringBuffer();
 	    final String[] results = {
-	            "\n",
-	            "1 + 2 = " + intCast() + "\n",
+                "index spacer?!",
+                "1 + 2 = " + intCast() + "\n",
+                "basic string" + "\n",
 	            "String package: " + packageNameOfString() + "\n",
 	            vibrateTest + "\n",
 	            filesTest + "\n",
 	            concatTxt + "\n",
                 "The current days' hour is: " + new javaClass().getHourOfDay() + "\n",
 				javaClass.myMethod() + "\n",
-                "basic string" + "\n",
                 "Downloads dir name: " + Environment.DIRECTORY_DOWNLOADS + "\n",
                 writeMyFileString + "\n",
 	    };
-	    results[0] = String.valueOf(results.length);
+	    results[0] = "Results feild entries: " + String.valueOf(results.length) + "\n";
 	    int z = 0;
         while (z < results.length) {
             text.append(results[z]);
@@ -521,7 +521,11 @@ public class MainActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menuAbout:
-                generalToast("App by:\n@2019 CrazyJ36");
+                Dialog dialogAbout = new Dialog(MainActivity.this);
+                dialogAbout.setContentView(R.layout.dialog_about);
+                dialogAbout.setTitle("About App");
+                dialogAbout.show();
+                Button dialogAboutBtn = findViewById(R.id.dialogAboutBtn);
                 return true;
             case R.id.menuExit:
                 MainActivity.this.finish();
@@ -556,5 +560,11 @@ public class MainActivity extends Activity {
             fileWriter.close();
         }
     }
-
+    // About dialog github button action.
+    public void launchMyGit(View v) {
+        String myGitUrl = "http://github.com/CrazyJ36?tab=repositories";
+        Intent crazyj36Git = new Intent(Intent.ACTION_VIEW);
+        crazyj36Git.setData(Uri.parse(myGitUrl));
+        startActivity(crazyj36Git);
+    }
 }
