@@ -19,6 +19,7 @@ import android.os.Environment;
 import android.os.Vibrator;
 import android.os.VibrationEffect;
 import android.os.Handler;
+import android.os.BatteryManager;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -48,6 +49,7 @@ import java.lang.System;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Arrays;
+import java.util.Objects;
 import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -67,7 +69,8 @@ public class MainActivity extends Activity {
 	String vibrateTest = "";
 	String concatTxt = "";
     String writeMyFileString = "";
-
+    String planets = "";
+    String battery = "";
     // onCreate activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -361,6 +364,23 @@ public class MainActivity extends Activity {
         } catch (IOException ioException) {
             writeMyFileString = "writeMyFileIOException";
         }
+        // String Array from xml
+        String[] planetsArr = getResources().getStringArray(R.array.string_array);
+        for (int x = 0; x < planetsArr.length; x++) {
+            planets += planetsArr[x] + " ";
+        }
+        // Battery level and status
+        //BatteryManager batteryManager = getSystemService(BatteryManager.class);
+        BatteryManager batteryManager = (BatteryManager) getSystemService("batterymanager");
+        int batteryLevel = batteryManager.getIntProperty(
+            BatteryManager.BATTERY_PROPERTY_CAPACITY);
+        String batteryCharging = "";
+        if (batteryManager.isCharging()) {
+            batteryCharging = "Charging";
+        } else {
+            batteryCharging = "Discharging";
+        }
+        battery = "Battery: " + String.valueOf(batteryLevel) + "%, " + batteryCharging;
         // getStorage permission & start filesTask()
         if (sdkVersion < 23) {
             filesTask();
@@ -448,23 +468,25 @@ public class MainActivity extends Activity {
     public void updateResults() {
 		StringBuffer text = new StringBuffer();
 	    final String[] results = {
-                "index spacer?!",
-                "1 + 2 = " + intCast() + "\n",
-                "basic string" + "\n",
-	            "String package: " + packageNameOfString() + "\n",
-	            vibrateTest + "\n",
-	            filesTest + "\n",
-	            concatTxt + "\n",
-                "The current days' hour is: " + new javaClass().getHourOfDay() + "\n",
-				javaClass.myMethod() + "\n",
-                "Downloads dir name: " + Environment.DIRECTORY_DOWNLOADS + "\n",
-                writeMyFileString + "\n",
+                "spacer, results[0] defined below",
+                "1 + 2 = " + intCast(),
+                "Basic String",
+	            "String package: " + packageNameOfString(),
+	            vibrateTest,
+	            filesTest,
+	            concatTxt,
+                "The current days' hour is: " + new javaClass().getHourOfDay(),
+				javaClass.myMethod(),
+                "Downloads dir name: " + Environment.DIRECTORY_DOWNLOADS,
+                writeMyFileString,
+                "strings.xml array: " + planets,
+                battery,
 	    };
-	    results[0] = "Results feild entries: " + String.valueOf(results.length) + "\n";
+	    results[0] = "Results feild entries: " + String.valueOf(results.length);
 	    int z = 0;
         while (z < results.length) {
             text.append(results[z]);
-            text.append("\n");
+            text.append("\n\n");
             z++;
         }
 	    String buffOut = String.valueOf(text);

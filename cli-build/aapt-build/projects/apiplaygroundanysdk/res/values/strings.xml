@@ -82,6 +82,13 @@ of computer architecture and programming as a whole).
 Content of my_file.txt. file creating in this files\' directory 
 doesn\'t require storage permission
     </string>
+    <string-array name="string_array">
+         <item>Sun</item>
+         <item>Mercury</item>
+         <item>Venus</item>
+         <item>Earth</item>
+    </string-array>
+
     <!--Activity 2-->
     <string name="btnCallTxt">Call</string>
     <string name="etCallHint">Phone Number</string>
