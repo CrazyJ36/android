@@ -1,82 +1,143 @@
---------- beginning of /dev/log/main
-W/ResourceType(  305): Entry identifier 0x128 is larger than entry count 0xab
-W/WindowManager(  305): [PhoneWindowManager.java:1099:addStartingWindow()] HistoryRecord{408133b8 com.crazyj36.apiplaygroundanysdk/.MainActivity} failed creating starting window
-W/WindowManager(  305): java.lang.RuntimeException: Binary XML file line #25: You must supply a layout_height attribute.
-W/WindowManager(  305): 	at android.content.res.TypedArray.getLayoutDimension(TypedArray.java:491)
-W/WindowManager(  305): 	at android.view.ViewGroup$LayoutParams.setBaseAttributes(ViewGroup.java:3599)
-W/WindowManager(  305): 	at android.view.ViewGroup$MarginLayoutParams.<init>(ViewGroup.java:3678)
-W/WindowManager(  305): 	at android.widget.LinearLayout$LayoutParams.<init>(LinearLayout.java:1400)
-W/WindowManager(  305): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:1326)
-W/WindowManager(  305): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:47)
-W/WindowManager(  305): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:625)
-W/WindowManager(  305): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
-W/WindowManager(  305): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
-W/WindowManager(  305): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
-W/WindowManager(  305): 	at com.android.internal.policy.impl.PhoneWindow.generateLayout(PhoneWindow.java:2290)
-W/WindowManager(  305): 	at com.android.internal.policy.impl.PhoneWindow.installDecor(PhoneWindow.java:2345)
-W/WindowManager(  305): 	at com.android.internal.policy.impl.PhoneWindow.getDecorView(PhoneWindow.java:1511)
-W/WindowManager(  305): 	at com.android.internal.policy.impl.PhoneWindowManager.addStartingWindow(PhoneWindowManager.java:1070)
-W/WindowManager(  305): 	at com.android.server.WindowManagerService$H.handleMessage(WindowManagerService.java:8347)
-W/WindowManager(  305): 	at android.os.Handler.dispatchMessage(Handler.java:99)
-W/WindowManager(  305): 	at android.os.Looper.loop(Looper.java:130)
-W/WindowManager(  305): 	at com.android.server.WindowManagerService$WMThread.run(WindowManagerService.java:582)
---------- beginning of /dev/log/system
-I/ActivityManager(  305): Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.apiplaygroundanysdk/.MainActivity } from pid 1117
-D/Launcher.Workspace( 1117): [Workspace.java:2036:hideWallpaper()] Show wallpaper
-I/ActivityManager(  305): process name to start: com.crazyj36.apiplaygroundanysdk
-E/ActivityManager(  305): heap conf. property name string trimmed: hs.com.crazyj36.apiplaygroundan
-I/ActivityManager(  305): Start proc com.crazyj36.apiplaygroundanysdk for activity com.crazyj36.apiplaygroundanysdk/.MainActivity: pid=3931 uid=10015 gids={1015}
-W/dalvikvm( 3931): VFY: unable to resolve virtual method 174: Lcom/crazyj36/apiplaygroundanysdk/MainActivity;.getActionBar ()Landroid/app/ActionBar;
-E/dalvikvm( 3931): Could not find class 'android.app.NotificationChannel', referenced from method com.crazyj36.apiplaygroundanysdk.MainActivity.onCreate
-W/dalvikvm( 3931): VFY: unable to resolve new-instance 9 (Landroid/app/NotificationChannel;) in Lcom/crazyj36/apiplaygroundanysdk/MainActivity;
-W/dalvikvm( 3931): VFY: unable to resolve virtual method 65: Landroid/os/Vibrator;.hasVibrator ()Z
-W/dalvikvm( 3931): VFY: unable to resolve virtual method 65: Landroid/os/Vibrator;.hasVibrator ()Z
-W/dalvikvm( 3931): VFY: unable to resolve virtual method 65: Landroid/os/Vibrator;.hasVibrator ()Z
-W/dalvikvm( 3931): VFY: unable to resolve virtual method 65: Landroid/os/Vibrator;.hasVibrator ()Z
-W/dalvikvm( 3931): VFY: unable to resolve virtual method 169: Lcom/crazyj36/apiplaygroundanysdk/MainActivity;.checkSelfPermission (Ljava/lang/String;)I
-W/ResourceType( 3931): Entry identifier 0x128 is larger than entry count 0xab
-W/dalvikvm( 3931): threadid=1: thread exiting with uncaught exception (group=0x40019560)
-E/AndroidRuntime( 3931): FATAL EXCEPTION: main
-E/AndroidRuntime( 3931): java.lang.RuntimeException: Unable to start activity ComponentInfo{com.crazyj36.apiplaygroundanysdk/com.crazyj36.apiplaygroundanysdk.MainActivity}: android.view.InflateException: Binary XML file line #236: Error inflating class GridLayout
-E/AndroidRuntime( 3931): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1658)
-E/AndroidRuntime( 3931): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:1674)
-E/AndroidRuntime( 3931): 	at android.app.ActivityThread.access$1500(ActivityThread.java:117)
-E/AndroidRuntime( 3931): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:942)
-E/AndroidRuntime( 3931): 	at android.os.Handler.dispatchMessage(Handler.java:99)
-E/AndroidRuntime( 3931): 	at android.os.Looper.loop(Looper.java:130)
-E/AndroidRuntime( 3931): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
-E/AndroidRuntime( 3931): 	at java.lang.reflect.Method.invokeNative(Native Method)
-E/AndroidRuntime( 3931): 	at java.lang.reflect.Method.invoke(Method.java:507)
-E/AndroidRuntime( 3931): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
-E/AndroidRuntime( 3931): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
-E/AndroidRuntime( 3931): 	at dalvik.system.NativeStart.main(Native Method)
-E/AndroidRuntime( 3931): Caused by: android.view.InflateException: Binary XML file line #236: Error inflating class GridLayout
-E/AndroidRuntime( 3931): 	at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:581)
-E/AndroidRuntime( 3931): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:623)
-E/AndroidRuntime( 3931): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:626)
-E/AndroidRuntime( 3931): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
-E/AndroidRuntime( 3931): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
-E/AndroidRuntime( 3931): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
-E/AndroidRuntime( 3931): 	at com.android.internal.policy.impl.PhoneWindow.setContentView(PhoneWindow.java:221)
-E/AndroidRuntime( 3931): 	at android.app.Activity.setContentView(Activity.java:1657)
-E/AndroidRuntime( 3931): 	at com.crazyj36.apiplaygroundanysdk.MainActivity.onCreate(MainActivity.java:86)
-E/AndroidRuntime( 3931): 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1047)
-E/AndroidRuntime( 3931): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1622)
-E/AndroidRuntime( 3931): 	... 11 more
-E/AndroidRuntime( 3931): Caused by: java.lang.ClassNotFoundException: android.view.GridLayout in loader dalvik.system.PathClassLoader[/data/app/com.crazyj36.apiplaygroundanysdk-1.apk]
-E/AndroidRuntime( 3931): 	at dalvik.system.PathClassLoader.findClass(PathClassLoader.java:240)
-E/AndroidRuntime( 3931): 	at java.lang.ClassLoader.loadClass(ClassLoader.java:551)
-E/AndroidRuntime( 3931): 	at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
-E/AndroidRuntime( 3931): 	at android.view.LayoutInflater.createView(LayoutInflater.java:471)
-E/AndroidRuntime( 3931): 	at android.view.LayoutInflater.onCreateView(LayoutInflater.java:549)
-E/AndroidRuntime( 3931): 	at com.android.internal.policy.impl.PhoneLayoutInflater.onCreateView(PhoneLayoutInflater.java:66)
-E/AndroidRuntime( 3931): 	at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:568)
-E/AndroidRuntime( 3931): 	... 21 more
-W/ActivityManager(  305):   Force finishing activity com.crazyj36.apiplaygroundanysdk/.MainActivity
-W/ActivityManager(  305): Activity destroy timeout for HistoryRecord{405ade88 com.crazyj36.apiplaygroundanysdk/.MainActivity}
-W/ActivityManager(  305): Activity pause timeout for HistoryRecord{408133b8 com.crazyj36.apiplaygroundanysdk/.MainActivity}
-D/Launcher.Workspace( 1117): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
-E/ActivityThread( 1117): Failed to find provider info for call_log
-E/ActivityThread( 1117): Failed to find provider info for com.lge.providers.lgemail
-D/Launcher.Workspace( 1117): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
-E/ActivityThread( 1117): Failed to find provider info for com.android.whatsnew
+--------- beginning of main
+01-22 10:04:16.114  1026  1274 D InputDispatcher: notifyMotion - action=ACTION_DOWN(0), id=0, pressure=0.251, tooltype=1, deviceId=4, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=44751082572000, downTime=44751082572000, 
+01-22 10:04:16.115  1026  1273 D InputTransport: channel 'ec4e24f com.teslacoilsw.launcher/com.teslacoilsw.launcher.NovaLauncher (server)' : action=ACTION_DOWN(0), id=0, tooltype=1, deviceId=4, source=0x1002, flags=0x0, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=44751082572000, eventTime=44751082572000, pointerCount=1
+01-22 10:04:16.115  1026  1273 D InputTransport: channel 'dba4412 com.android.systemui.ImageWallpaper (server)' : action=ACTION_DOWN(0), id=0, tooltype=1, deviceId=4, source=0x1002, flags=0x3, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=44751082572000, eventTime=44751082572000, pointerCount=1
+01-22 10:04:16.197  1026  1274 D InputDispatcher: notifyMotion - action=ACTION_UP(0), id=0, pressure=0.263, tooltype=1, deviceId=4, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=44751165422000, downTime=44751082572000, 
+01-22 10:04:16.198  1026  1273 D InputTransport: channel 'ec4e24f com.teslacoilsw.launcher/com.teslacoilsw.launcher.NovaLauncher (server)' : action=ACTION_UP(0), id=0, tooltype=1, deviceId=4, source=0x1002, flags=0x0, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=44751082572000, eventTime=44751165422000, pointerCount=1
+01-22 10:04:16.198  1026  1273 D InputTransport: channel 'dba4412 com.android.systemui.ImageWallpaper (server)' : action=ACTION_UP(0), id=0, tooltype=1, deviceId=4, source=0x1002, flags=0x3, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=44751082572000, eventTime=44751165422000, pointerCount=1
+--------- beginning of system
+01-22 10:04:16.199  2174  2174 I ViewRootImpl: ViewRoot's Touch Event : ACTION_UP
+01-22 10:04:16.205  1026  9858 I ActivityManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.apiplaygroundanysdk/.MainActivity bnds=[228,1007][407,1206]} from uid 10349
+01-22 10:04:16.210  1026  9858 D ActivityManager: setTaskToReturnTo : TaskRecord{661fe77 #82 A=com.crazyj36.apiplaygroundanysdk U=0 StackId=1 sz=0} / mTaskToReturnTo = 1
+01-22 10:04:16.211   487   512 I vendor.mediatek.hardware.power@1.1-impl: scnEnable hdl:39, timeout:3500
+01-22 10:04:16.212  1026  9858 D ActivityManager: setTaskToReturnTo : TaskRecord{661fe77 #82 A=com.crazyj36.apiplaygroundanysdk U=0 StackId=1 sz=1} / mTaskToReturnTo = 1
+01-22 10:04:16.212   487   511 I powerd  : [powerd_req] POWER_MSG_SCN_ENABLE: hdl:39, timeout:3500
+01-22 10:04:16.212   487   511 I libPerfService: perfUserScnEnable - handle:39
+01-22 10:04:16.214   487   511 I libPerfService: 39: legacy set freq: 1001000 -1 1508000 -1
+01-22 10:04:16.216   695   741 I PowerRM : FIA lock1 locked
+01-22 10:04:16.217   695   741 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-22 10:04:16.224   487   511 I libPerfService: 39: legacy set: 3 -1 4 -1
+01-22 10:04:16.227   478   478 W PHHandler: [PH] hint id(103) is not supported
+01-22 10:04:16.234   492   492 I DisplayDevice: [Built-in Screen (type:0)] fps:1.288160,dur:1552.60,max:1536.11,min:16.49
+01-22 10:04:16.240  1026  1242 D BezellessGripSuppressionFilter: getdisplaysize, x : 1080 y : 2160
+01-22 10:04:16.225  1026  9858 D ActivityManager: setTaskToReturnTo : TaskRecord{661fe77 #82 A=com.crazyj36.apiplaygroundanysdk U=0 StackId=1 sz=1} / mTaskToReturnTo = 1
+01-22 10:04:16.249  1026  9858 I ActivityManager: Start proc 6871:com.crazyj36.apiplaygroundanysdk/u0a438 for activity com.crazyj36.apiplaygroundanysdk/.MainActivity
+01-22 10:04:16.294  1026  9858 D InputDispatcher: Focus left window: Window{ec4e24f u0 com.teslacoilsw.launcher/com.teslacoilsw.launcher.NovaLauncher}
+01-22 10:04:16.299  1026  9858 I WindowManager: Starting window displayed
+01-22 10:04:16.321  1370  1370 I NavigationThemeResource: notify navigation bar color(0xffffffff)
+01-22 10:04:16.321  1370  1370 I NavigationThemeResource: NavigationKey Color is changed(WHITE_WITH_BORDER -> BLACK)
+01-22 10:04:16.321  1370  1370 I NavigationThemeResource:  BarMode=4, Theme=WHITE, LightBackground=true (NOT Transparent)
+01-22 10:04:16.321  1370  1370 I NavigationThemeResource: , Keyguard show=false, IME shown=false, Bar vertical=false, Panel expanded=false
+01-22 10:04:16.321  1370  1370 D StatusBar: setSystemUiVisibility vis=8608 mask=ffffffff oldVal=8708 newVal=8608 diff=100
+01-22 10:04:16.334  1026  4126 D OverlayManager: setEnabled packageName=com.android.systemui.theme.dark enable=true userId=0
+01-22 10:04:16.351  2468  2492 D ViewRootImpl: onChangedNavigationGuardColor(), color: ffffffff
+01-22 10:04:16.352  2468  2468 D DecorView: updateNavigationGuardColor navigationGuardColor=0xffffffff
+01-22 10:04:16.420   492  1165 I SurfaceFlinger: EventThread Client Pid (6871) created
+01-22 10:04:16.421   492  1165 I SurfaceFlinger: EventThread Client Pid (6871) created
+01-22 10:04:16.426  6871  6871 D AndroidRuntime: Shutting down VM
+--------- beginning of crash
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: FATAL EXCEPTION: main
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: Process: com.crazyj36.apiplaygroundanysdk, PID: 6871
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: java.lang.RuntimeException: Unable to start activity ComponentInfo{com.crazyj36.apiplaygroundanysdk/com.crazyj36.apiplaygroundanysdk.MainActivity}: android.view.InflateException: Binary XML file line #236: Binary XML file line #236: You must supply a layout_width attribute.
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2822)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2900)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.app.ActivityThread.-wrap11(Unknown Source:0)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1611)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:164)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6651)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:438)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:810)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: Caused by: android.view.InflateException: Binary XML file line #236: Binary XML file line #236: You must supply a layout_width attribute.
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: Caused by: java.lang.UnsupportedOperationException: Binary XML file line #236: You must supply a layout_width attribute.
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.content.res.TypedArray.getLayoutDimension(TypedArray.java:775)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.view.ViewGroup$LayoutParams.setBaseAttributes(ViewGroup.java:7628)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.view.ViewGroup$MarginLayoutParams.<init>(ViewGroup.java:7820)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.widget.LinearLayout$LayoutParams.<init>(LinearLayout.java:1976)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:1874)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:1872)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:865)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.view.LayoutInflater.rInflateChildren(LayoutInflater.java:824)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:866)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.view.LayoutInflater.rInflateChildren(LayoutInflater.java:824)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.view.LayoutInflater.inflate(LayoutInflater.java:515)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.view.LayoutInflater.inflate(LayoutInflater.java:423)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.view.LayoutInflater.inflate(LayoutInflater.java:374)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at com.android.internal.policy.PhoneWindow.setContentView(PhoneWindow.java:431)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.app.Activity.setContentView(Activity.java:2688)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at com.crazyj36.apiplaygroundanysdk.MainActivity.onCreate(MainActivity.java:87)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.app.Activity.performCreate(Activity.java:7028)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.app.Activity.performCreate(Activity.java:7019)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1215)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2775)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2900)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.app.ActivityThread.-wrap11(Unknown Source:0)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1611)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:164)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6651)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:438)
+01-22 10:04:16.427  6871  6871 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:810)
+01-22 10:04:16.429   667   685 D AAL     : 01-22 10:04:16.347 BL= 135,ESS= 256, 01-22 10:04:16.363 BL= 136,ESS= 256, 01-22 10:04:16.380 BL= 137,ESS= 256, 01-22 10:04:16.396 BL= 138,ESS= 256, 01-22 10:04:16.429 BL= 139,ESS= 256, 
+01-22 10:04:16.430  1026  4126 W ActivityManager:   Force finishing activity com.crazyj36.apiplaygroundanysdk/.MainActivity
+01-22 10:04:16.434  1026  6889 W AES     : Exception Log handling...
+01-22 10:04:16.434  1026  6889 W AES     : Skipped - do not care third party apk
+01-22 10:04:16.439  2468  2492 D ViewRootImpl: onChangedNavigationGuardColor(), color: ffffffff
+01-22 10:04:16.439  1026  1054 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 (has extras) } to com.google.android.gms/.stats.service.DropBoxEntryAddedReceiver
+01-22 10:04:16.439  2468  2468 D DecorView: updateNavigationGuardColor navigationGuardColor=0xffffffff
+01-22 10:04:16.443  1026  1054 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 (has extras) } to com.google.android.gms/.chimera.GmsIntentOperationService$PersistentTrustedReceiver
+01-22 10:04:16.459   695   741 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-22 10:04:16.459   695   741 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-22 10:04:16.459   695   741 I PowerRM : Window Changed
+01-22 10:04:16.459  1026  1055 D InputDispatcher: Focus entered window: Window{9d8342d u0 Application Error: com.crazyj36.apiplaygroundanysdk}
+01-22 10:04:16.461  1026  1055 D BezellessGripSuppressionFilter: getdisplaysize, x : 1080 y : 2160
+01-22 10:04:16.462  1026  1055 I ActivityManager: Showing crash dialog for package com.crazyj36.apiplaygroundanysdk u0
+01-22 10:04:16.475  1026  7476 I OpenGLRenderer: Initialized EGL, version 1.4
+01-22 10:04:16.475  1026  7476 D OpenGLRenderer: Swap behavior 2
+01-22 10:04:16.484  1370  1370 I NavigationThemeResource: notify navigation bar color(0x0)
+01-22 10:04:16.484  1370  1370 I NavigationThemeResource: NavigationKey Color is changed(BLACK -> WHITE_WITH_BORDER)
+01-22 10:04:16.484  1370  1370 I NavigationThemeResource:  BarMode=4, Theme=WHITE, LightBackground=false (Transparent)
+01-22 10:04:16.484  1370  1370 I NavigationThemeResource: , Keyguard show=false, IME shown=false, Bar vertical=false, Panel expanded=false
+01-22 10:04:16.484  1370  1370 D StatusBar: setSystemUiVisibility vis=8008 mask=ffffffff oldVal=8608 newVal=8008 diff=600
+01-22 10:04:16.485  2468  2492 D ViewRootImpl: onChangedNavigationGuardColor(), color: ffffffff
+01-22 10:04:16.485  2468  2468 D DecorView: updateNavigationGuardColor navigationGuardColor=0xffffffff
+01-22 10:04:16.512   667   685 D AAL     : 01-22 10:04:16.446 BL= 140,ESS= 256, 01-22 10:04:16.462 BL= 141,ESS= 256, 01-22 10:04:16.479 BL= 142,ESS= 256, 01-22 10:04:16.495 BL= 142,ESS= 257, 01-22 10:04:16.512 BL= 143,ESS= 258, 
+01-22 10:04:16.515  1026  1242 I WindowManager: Window{9d8342d u0 Application Error: com.crazyj36.apiplaygroundanysdk} start dimming: flags=1820002 effectFlags=0, layer=111000
+01-22 10:04:16.584  1370 31684 I SystemServicesProxy: RecentApps has 1 item(s).
+01-22 10:04:16.595   667   685 D AAL     : 01-22 10:04:16.529 BL= 143,ESS= 259, 01-22 10:04:16.545 BL= 143,ESS= 260, 01-22 10:04:16.562 BL= 146,ESS= 257, 01-22 10:04:16.578 BL= 147,ESS= 256, 01-22 10:04:16.595 BL= 148,ESS= 256, 
+01-22 10:04:16.598  1370 31684 D DDTIcon : getIconDrawableAsIconFrameTheme for com.crazyj36.apiplaygroundanysdk@2130903040
+01-22 10:04:16.599  1370 31684 D DDTIcon : maxBgRes = 0
+01-22 10:04:16.614  1370 31684 I SystemServicesProxy: Task.thumbnail loading failed for 82
+01-22 10:04:16.677   667   685 D AAL     : 01-22 10:04:16.611 BL= 149,ESS= 256, 01-22 10:04:16.628 BL= 150,ESS= 256, 01-22 10:04:16.644 BL= 151,ESS= 256, 01-22 10:04:16.661 BL= 152,ESS= 256, 01-22 10:04:16.677 BL= 153,ESS= 256, 
+01-22 10:04:16.777   667   685 D AAL     : 01-22 10:04:16.694 BL= 154,ESS= 256, 01-22 10:04:16.727 BL= 155,ESS= 256, 01-22 10:04:16.743 BL= 156,ESS= 256, 01-22 10:04:16.760 BL= 157,ESS= 256, 01-22 10:04:16.776 BL= 158,ESS= 256, 
+01-22 10:04:16.531  1026  1242 I WindowManager: Window{9d8342d u0 Application Error: com.crazyj36.apiplaygroundanysdk} start dimming: flags=1820002 effectFlags=0, layer=111000
+01-22 10:04:16.827  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=8 path=settings_secure.xml.backup sys=false lock=false imagePending=false whichPending=0x0 written=true
+01-22 10:04:16.827  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=128 path=settings_secure.xml.bak sys=false lock=false imagePending=false whichPending=0x0 written=true
+01-22 10:04:16.848  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=8 path=settings_secure.xml sys=false lock=false imagePending=false whichPending=0x0 written=true
+01-22 10:04:16.848  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=512 path=settings_secure.xml.bak sys=false lock=false imagePending=false whichPending=0x0 written=false
+01-22 10:04:16.876   667   685 D AAL     : 01-22 10:04:16.793 BL= 159,ESS= 256, 01-22 10:04:16.810 BL= 160,ESS= 256, 01-22 10:04:16.826 BL= 161,ESS= 256, 01-22 10:04:16.859 BL= 162,ESS= 256, 01-22 10:04:16.876 BL= 163,ESS= 256, 
+01-22 10:04:16.934  1026  1054 W ActivityManager: Activity pause timeout for ActivityRecord{a6f0b4d u0 com.crazyj36.apiplaygroundanysdk/.MainActivity t82 f}
+01-22 10:04:16.950  1026  1242 D InputDispatcher: Window went away: Window{bd9c98b u0 Splash Screen com.crazyj36.apiplaygroundanysdk}
+01-22 10:04:16.952   478   478 W PHHandler: [PH] hint id(103) is not supported
+01-22 10:04:16.952   487   512 I vendor.mediatek.hardware.power@1.1-impl: scnEnable hdl:39, timeout:3500
+01-22 10:04:16.952   695   741 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-22 10:04:16.954   487   511 I powerd  : [powerd_req] POWER_MSG_SCN_ENABLE: hdl:39, timeout:3500
+01-22 10:04:16.954   487   511 I libPerfService: perfUserScnEnable - handle:39
+01-22 10:04:16.959   667   685 D AAL     : 01-22 10:04:16.892 BL= 164,ESS= 256, 01-22 10:04:16.909 BL= 165,ESS= 256, 01-22 10:04:16.925 BL= 166,ESS= 256, 01-22 10:04:16.942 BL= 167,ESS= 256, 01-22 10:04:16.959 BL= 168,ESS= 256, 
+01-22 10:04:16.961   697   697 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-22 10:04:17.004  1026  9858 D OverlayManager: setEnabled packageName=com.android.systemui.theme.dark enable=true userId=0
+01-22 10:04:17.035  2174  2174 I Timeline: Timeline: Activity_idle id: android.os.BinderProxy@d7728ca time:44752003
+01-22 10:04:17.058   667   685 D AAL     : 01-22 10:04:16.975 BL= 169,ESS= 256, 01-22 10:04:17.008 BL= 170,ESS= 256, 01-22 10:04:17.025 BL= 171,ESS= 256, 01-22 10:04:17.041 BL= 170,ESS= 256, 01-22 10:04:17.058 BL= 169,ESS= 256, 
+01-22 10:04:17.073  1370 31684 I SystemServicesProxy: RecentApps has 1 item(s).
+01-22 10:04:17.076  1370 31684 I SystemServicesProxy: Task.thumbnail loading failed for 82
+01-22 10:04:17.085  1370  1541 I MobileSignalController: isRoaming = false, isCdmaRoaming = false
+01-22 10:04:17.085  1370  1541 I MobileSignalController: isRoaming = false
+01-22 10:04:17.085  1761  1761 D TeleService: PhoneInterfaceManager: [PhoneIntfMgr] mSigLevel = 3
+01-22 10:04:17.086  1370  1541 I NetworkController: onReceive: intent=Intent { act=android.intent.action.SIG_STR flg=0x10 (has extras) }
+01-22 10:04:17.157   667   685 D AAL     : 01-22 10:04:17.091 BL= 168,ESS= 256, 01-22 10:04:17.107 BL= 167,ESS= 256, 01-22 10:04:17.124 BL= 166,ESS= 256, 01-22 10:04:17.140 BL= 165,ESS= 256, 01-22 10:04:17.157 BL= 164,ESS= 256, 
+01-22 10:04:17.206   667   685 D AAL     : 01-22 10:04:17.174 BL= 163,ESS= 256, 
+01-22 10:04:17.568   487   512 I vendor.mediatek.hardware.power@1.1-impl: scnDisable hdl:39
+01-22 10:04:17.583   487   511 I libPerfService: 39: legacy set: -1 -1 -1 -1
+01-22 10:04:17.584   487   511 I libPerfService: 39: legacy set freq: -1 -1 -1 -1

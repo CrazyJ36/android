@@ -47,7 +47,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ScrollView;
 import android.widget.ToggleButton;
 import android.widget.CompoundButton;
-import android.widget.GridLayout;
+import android.widget.GridView;
 import android.net.Uri;
 import android.util.Log;
 import java.lang.System;
@@ -79,6 +79,7 @@ public class MainActivity extends Activity {
     String planets = "";
     String battery = "";
     String updaterTxt = "Update 0";
+    String numbersEntered = "";
     // onCreate activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -408,6 +409,19 @@ public class MainActivity extends Activity {
                 generalToast(numbers[randomNumbersItem]);
             }
         });
+        // Grid view clickable example
+        final Integer[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+        GridView gridView = findViewById(R.id.gridTextView);
+        final TextView tvNumberGrid = findViewById(R.id.tvNumberGrid);
+        ArrayAdapter<Integer> gridAdapter = new ArrayAdapter<Integer>(
+            this, android.R.layout.simple_list_item_1, numbers);
+        gridView.setAdapter(gridAdapter);
+	    gridView.setOnItemClickListener(new OnItemClickListener() {
+	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                numbersEntered = numbersEntered.concat(String.valueOf(numbers[position]));
+                tvNumberGrid.setText(numbersEntered);
+	        }
+	    });
         // getStorage permission & start filesTask()
         if (sdkVersion < 23) {
             filesTask();
@@ -624,23 +638,4 @@ public class MainActivity extends Activity {
             updateResults();
         }
     };
-    // Grid click
-    // all grid buttons have the same onclick method (this attached),
-    // we filter which button was clicked here.
-    public void onNumberGridClick(View v) {
-        switch(v.getId()) {
-            case(R.id.btnGrid1):
-                generalToast("Grid 1");
-                break;
-            case(R.id.btnGrid2):
-                generalToast("Grid 2");
-                break;
-            case(R.id.btnGrid3):
-                generalToast("Grid 3");
-                break;
-            case(R.id.btnGrid4):
-                generalToast("Grid 4");
-                break;
-        }
-    }
 }

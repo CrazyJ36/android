@@ -233,37 +233,22 @@
         android:scrollingCache="true"
         android:fastScrollEnabled="true" />
 
-    <GridLayout
-        android:id="@+id/gridBtns"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:columnCount="2"
-        android:rowCount="2" >
-        <Button
-            android:id="@+id/btnGrid1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btnGrid1Txt"
-            android:onClick="onNumberGridClick" />
-        <Button
-            android:id="@+id/btnGrid2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btnGrid2Txt" 
-            android:onClick="onNumberGridClick"/>
-        <Button
-            android:id="@+id/btnGrid3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btnGrid3Txt"
-            android:onClick="onNumberGridClick" />
-        <Button
-            android:id="@+id/btnGrid4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btnGrid4Txt"
-            android:onClick="onNumberGridClick" />
-    </GridLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="184dp"
+        android:orientation="horizontal"
+	    android:background="#ff505050" >
+	    <GridView
+	        android:id="@+id/gridTextView"
+	        android:layout_width="128dp"
+	        android:layout_height="match_parent"
+	        android:numColumns="3"
+	        android:stretchMode="columnWidth" />
+        <TextView
+            android:id="@+id/tvNumberGrid"
+            android:layout_width="128dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/act2btn"
