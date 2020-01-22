@@ -1,13 +1,17 @@
 package com.crazyj36.apiplaygroundanysdk;
 
 import android.app.Activity;
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.Manifest;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.Toast;
-import android.view.View.OnClickListener;
 import android.net.Uri;
 import android.content.Intent;
 import android.content.Context;
@@ -23,6 +27,11 @@ public class Main2Activity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        // actionbar define
+        if (sdkVersion >= 11) {
+        ActionBar actionBar = getActionBar();
+        actionBar.setSubtitle("Graphics stuff");
+        }
 		// btn call
 		findViewById(R.id.btnCall).setOnClickListener(new OnClickListener() {
 			@Override
@@ -113,4 +122,22 @@ public class Main2Activity extends Activity {
 			startActivity(call);
 		}
 	}
+    // Menu init
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu2_layout , menu);
+        return true;
+    }
+    // Menu onclicks
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch(menuItem.getItemId()) {
+            case R.id.menuExit:
+                Main2Activity.this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(menuItem);
+        }
+    }
 }

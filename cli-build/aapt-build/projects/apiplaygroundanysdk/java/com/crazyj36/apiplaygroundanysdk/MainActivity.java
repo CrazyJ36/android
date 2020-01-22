@@ -88,7 +88,7 @@ public class MainActivity extends Activity {
         // ActionBar is usable in default platform from api 11.
         if (sdkVersion >= 11) {
             ActionBar actionBar = getActionBar();
-			actionBar.setSubtitle("CrazyJ36");
+			actionBar.setSubtitle("Api stuff");
         }
         // If xml android:nestedScrollingEnabled doesn't work, make some ui views scroll using custom method.
         if (sdkVersion < 21) {
