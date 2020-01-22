@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="appname">Toast</string>
+    <string name="instructions">This app only displays A Toast message, nothing else.</string>
+</resources>

@@ -1,23 +1,150 @@
---------- beginning of /dev/log/main
-W/dalvikvm( 2097): threadid=1: thread exiting with uncaught exception (group=0x40019560)
---------- beginning of /dev/log/system
-E/AndroidRuntime( 2097): FATAL EXCEPTION: main
-E/AndroidRuntime( 2097): java.lang.SecurityException: Neither user 10015 nor current process has android.permission.REBOOT.
-E/AndroidRuntime( 2097): 	at android.os.Parcel.readException(Parcel.java:1322)
-E/AndroidRuntime( 2097): 	at android.os.Parcel.readException(Parcel.java:1276)
-E/AndroidRuntime( 2097): 	at android.os.IPowerManager$Stub$Proxy.reboot(IPowerManager.java:560)
-E/AndroidRuntime( 2097): 	at android.os.PowerManager.reboot(PowerManager.java:532)
-E/AndroidRuntime( 2097): 	at com.crazyj36.apiplaygroundanysdk.MainActivity$14.onClick(MainActivity.java:384)
-E/AndroidRuntime( 2097): 	at android.view.View.performClick(View.java:2520)
-E/AndroidRuntime( 2097): 	at android.view.View$PerformClick.run(View.java:9157)
-E/AndroidRuntime( 2097): 	at android.os.Handler.handleCallback(Handler.java:587)
-E/AndroidRuntime( 2097): 	at android.os.Handler.dispatchMessage(Handler.java:92)
-E/AndroidRuntime( 2097): 	at android.os.Looper.loop(Looper.java:130)
-E/AndroidRuntime( 2097): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
-E/AndroidRuntime( 2097): 	at java.lang.reflect.Method.invokeNative(Native Method)
-E/AndroidRuntime( 2097): 	at java.lang.reflect.Method.invoke(Method.java:507)
-E/AndroidRuntime( 2097): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
-E/AndroidRuntime( 2097): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
-E/AndroidRuntime( 2097): 	at dalvik.system.NativeStart.main(Native Method)
-W/ActivityManager(  283):   Force finishing activity com.crazyj36.apiplaygroundanysdk/.MainActivity
-W/ActivityManager(  283): Activity pause timeout for HistoryRecord{40784dc8 com.crazyj36.apiplaygroundanysdk/.MainActivity}
+--------- beginning of main
+01-21 21:52:33.679   697   697 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-21 21:52:33.679   697   697 E thermal_src: ERROR, recvmsg expect 4, but get 2 
+01-21 21:52:33.900  1026  1274 D InputDispatcher: notifyMotion - action=ACTION_DOWN(0), id=0, pressure=0.294, tooltype=1, deviceId=4, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=3269696550000, downTime=3269696550000, 
+01-21 21:52:33.900  1026  1273 D InputTransport: channel 'ec4e24f com.teslacoilsw.launcher/com.teslacoilsw.launcher.NovaLauncher (server)' : action=ACTION_DOWN(0), id=0, tooltype=1, deviceId=4, source=0x1002, flags=0x0, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=3269696550000, eventTime=3269696550000, pointerCount=1
+01-21 21:52:33.901  1026  1273 D InputTransport: channel 'dba4412 com.android.systemui.ImageWallpaper (server)' : action=ACTION_DOWN(0), id=0, tooltype=1, deviceId=4, source=0x1002, flags=0x3, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=3269696550000, eventTime=3269696550000, pointerCount=1
+--------- beginning of system
+01-21 21:52:33.902  2174  2174 I ViewRootImpl: ViewRoot's Touch Event : ACTION_DOWN
+01-21 21:52:33.965  1026  1274 D InputDispatcher: notifyMotion - action=ACTION_UP(0), id=0, pressure=0.294, tooltype=1, deviceId=4, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=3269762126000, downTime=3269696550000, 
+01-21 21:52:33.965  1026  1273 D InputTransport: channel 'ec4e24f com.teslacoilsw.launcher/com.teslacoilsw.launcher.NovaLauncher (server)' : action=ACTION_UP(0), id=0, tooltype=1, deviceId=4, source=0x1002, flags=0x0, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=3269696550000, eventTime=3269762126000, pointerCount=1
+01-21 21:52:33.965  1026  1273 D InputTransport: channel 'dba4412 com.android.systemui.ImageWallpaper (server)' : action=ACTION_UP(0), id=0, tooltype=1, deviceId=4, source=0x1002, flags=0x3, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=3269696550000, eventTime=3269762126000, pointerCount=1
+01-21 21:52:33.967  2174  2174 I ViewRootImpl: ViewRoot's Touch Event : ACTION_UP
+01-21 21:52:33.973  1026  7501 I ActivityManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.apiplaygroundanysdk/.MainActivity bnds=[228,1007][407,1206]} from uid 10349
+01-21 21:52:33.977  1026  7501 D ActivityManager: setTaskToReturnTo : TaskRecord{77976f1 #25 A=com.crazyj36.apiplaygroundanysdk U=0 StackId=1 sz=0} / mTaskToReturnTo = 1
+01-21 21:52:33.980   487   512 I vendor.mediatek.hardware.power@1.1-impl: scnEnable hdl:39, timeout:3500
+01-21 21:52:33.981   695   741 I PowerRM : FIA lock1 locked
+01-21 21:52:33.982   695   741 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-21 21:52:33.982   487   511 I powerd  : [powerd_req] POWER_MSG_SCN_ENABLE: hdl:39, timeout:3500
+01-21 21:52:33.982   487   511 I libPerfService: perfUserScnEnable - handle:39
+01-21 21:52:33.983  1026  7501 D ActivityManager: setTaskToReturnTo : TaskRecord{77976f1 #25 A=com.crazyj36.apiplaygroundanysdk U=0 StackId=1 sz=1} / mTaskToReturnTo = 1
+01-21 21:52:33.983   487   511 I libPerfService: 39: legacy set freq: 1001000 -1 1508000 -1
+01-21 21:52:33.989   487   511 I libPerfService: 39: legacy set: 3 -1 4 -1
+01-21 21:52:33.992   478   523 W PHHandler: [PH] hint id(103) is not supported
+01-21 21:52:34.004  1026  1242 D BezellessGripSuppressionFilter: getdisplaysize, x : 1080 y : 2160
+01-21 21:52:33.990  1026  7501 D ActivityManager: setTaskToReturnTo : TaskRecord{77976f1 #25 A=com.crazyj36.apiplaygroundanysdk U=0 StackId=1 sz=1} / mTaskToReturnTo = 1
+01-21 21:52:34.011  1026  7501 I ActivityManager: Start proc 11182:com.crazyj36.apiplaygroundanysdk/u0a438 for activity com.crazyj36.apiplaygroundanysdk/.MainActivity
+01-21 21:52:34.049  1026  7501 D InputDispatcher: Focus left window: Window{ec4e24f u0 com.teslacoilsw.launcher/com.teslacoilsw.launcher.NovaLauncher}
+01-21 21:52:34.057  1026  7501 I WindowManager: Starting window displayed
+01-21 21:52:34.080  1370  1370 I NavigationThemeResource: notify navigation bar color(0xffffffff)
+01-21 21:52:34.081  1370  1370 I NavigationThemeResource: NavigationKey Color is changed(WHITE_WITH_BORDER -> BLACK)
+01-21 21:52:34.081  1370  1370 I NavigationThemeResource:  BarMode=4, Theme=WHITE, LightBackground=true (NOT Transparent)
+01-21 21:52:34.081  1370  1370 I NavigationThemeResource: , Keyguard show=false, IME shown=false, Bar vertical=false, Panel expanded=false
+01-21 21:52:34.081  1370  1370 D StatusBar: setSystemUiVisibility vis=8608 mask=ffffffff oldVal=8708 newVal=8608 diff=100
+01-21 21:52:34.089  1026  6971 D OverlayManager: setEnabled packageName=com.android.systemui.theme.dark enable=true userId=0
+01-21 21:52:34.169   492   527 I SurfaceFlinger: EventThread Client Pid (11182) created
+01-21 21:52:34.169   492   531 I SurfaceFlinger: EventThread Client Pid (11182) created
+01-21 21:52:34.175 11182 11182 D AndroidRuntime: Shutting down VM
+--------- beginning of crash
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: FATAL EXCEPTION: main
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: Process: com.crazyj36.apiplaygroundanysdk, PID: 11182
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: java.lang.RuntimeException: Unable to start activity ComponentInfo{com.crazyj36.apiplaygroundanysdk/com.crazyj36.apiplaygroundanysdk.MainActivity}: android.view.InflateException: Binary XML file line #236: Binary XML file line #236: Error inflating class android.widget.GridView
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2822)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2900)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.app.ActivityThread.-wrap11(Unknown Source:0)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1611)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:164)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6651)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:438)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:810)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: Caused by: android.view.InflateException: Binary XML file line #236: Binary XML file line #236: Error inflating class android.widget.GridView
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: Caused by: android.view.InflateException: Binary XML file line #236: Error inflating class android.widget.GridView
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: Caused by: java.lang.reflect.InvocationTargetException
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at java.lang.reflect.Constructor.newInstance0(Native Method)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at java.lang.reflect.Constructor.newInstance(Constructor.java:334)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.view.LayoutInflater.createView(LayoutInflater.java:647)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at com.android.internal.policy.PhoneLayoutInflater.onCreateView(PhoneLayoutInflater.java:58)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.view.LayoutInflater.onCreateView(LayoutInflater.java:720)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:788)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:730)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:863)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.view.LayoutInflater.rInflateChildren(LayoutInflater.java:824)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:866)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.view.LayoutInflater.rInflateChildren(LayoutInflater.java:824)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.view.LayoutInflater.inflate(LayoutInflater.java:515)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.view.LayoutInflater.inflate(LayoutInflater.java:423)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.view.LayoutInflater.inflate(LayoutInflater.java:374)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at com.android.internal.policy.PhoneWindow.setContentView(PhoneWindow.java:431)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.app.Activity.setContentView(Activity.java:2688)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at com.crazyj36.apiplaygroundanysdk.MainActivity.onCreate(MainActivity.java:86)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.app.Activity.performCreate(Activity.java:7028)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.app.Activity.performCreate(Activity.java:7019)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1215)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2775)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2900)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.app.ActivityThread.-wrap11(Unknown Source:0)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1611)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:164)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6651)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:438)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:810)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: Caused by: java.lang.RuntimeException: Don't call setOnClickListener for an AdapterView. You probably want setOnItemClickListener instead
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.widget.AdapterView.setOnClickListener(AdapterView.java:808)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.view.View.<init>(View.java:5060)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.view.ViewGroup.<init>(ViewGroup.java:597)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.widget.AdapterView.<init>(AdapterView.java:248)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.widget.AbsListView.<init>(AbsListView.java:854)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.widget.GridView.<init>(GridView.java:134)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.widget.GridView.<init>(GridView.java:130)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	at android.widget.GridView.<init>(GridView.java:126)
+01-21 21:52:34.177 11182 11182 E AndroidRuntime: 	... 30 more
+01-21 21:52:34.181  1026 10101 W ActivityManager:   Force finishing activity com.crazyj36.apiplaygroundanysdk/.MainActivity
+01-21 21:52:34.181   667   685 D AAL     : 01-21 09:52:34.114 BL= 322,ESS= 256, 01-21 09:52:34.131 BL= 324,ESS= 256, 01-21 09:52:34.147 BL= 326,ESS= 256, 01-21 09:52:34.164 BL= 328,ESS= 256, 01-21 09:52:34.181 BL= 330,ESS= 256, 
+01-21 21:52:34.189  1026 11198 W AES     : Exception Log handling...
+01-21 21:52:34.190  1026 11198 W AES     : Skipped - do not care third party apk
+01-21 21:52:34.192  1026  1054 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 (has extras) } to com.google.android.gms/.stats.service.DropBoxEntryAddedReceiver
+01-21 21:52:34.192  1026  1054 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 (has extras) } to com.google.android.gms/.chimera.GmsIntentOperationService$PersistentTrustedReceiver
+01-21 21:52:34.208   695   741 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-21 21:52:34.208  1026  1055 D InputDispatcher: Focus entered window: Window{7d4e436 u0 Application Error: com.crazyj36.apiplaygroundanysdk}
+01-21 21:52:34.208   695   741 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-21 21:52:34.208   695   741 I PowerRM : Window Changed
+01-21 21:52:34.210  1026  1055 D BezellessGripSuppressionFilter: getdisplaysize, x : 1080 y : 2160
+01-21 21:52:34.210  1026  1055 I ActivityManager: Showing crash dialog for package com.crazyj36.apiplaygroundanysdk u0
+01-21 21:52:34.217   492   492 I DisplayDevice: [Built-in Screen (type:0)] fps:8.927887,dur:1008.08,max:776.80,min:11.69
+01-21 21:52:34.226  1026  7476 I OpenGLRenderer: Initialized EGL, version 1.4
+01-21 21:52:34.226  1026  7476 D OpenGLRenderer: Swap behavior 2
+01-21 21:52:34.249  1370  1370 D StatusBar: setSystemUiVisibility vis=8008 mask=ffffffff oldVal=8608 newVal=8008 diff=600
+01-21 21:52:34.252  1370  1370 I NavigationThemeResource: notify navigation bar color(0x0)
+01-21 21:52:34.253  1370  1370 I NavigationThemeResource: NavigationKey Color is changed(BLACK -> WHITE_WITH_BORDER)
+01-21 21:52:34.253  1370  1370 I NavigationThemeResource:  BarMode=4, Theme=WHITE, LightBackground=false (Transparent)
+01-21 21:52:34.253  1370  1370 I NavigationThemeResource: , Keyguard show=false, IME shown=false, Bar vertical=false, Panel expanded=false
+01-21 21:52:34.263   667   685 D AAL     : 01-21 09:52:34.197 BL= 332,ESS= 256, 01-21 09:52:34.213 BL= 334,ESS= 256, 01-21 09:52:34.230 BL= 337,ESS= 256, 01-21 09:52:34.247 BL= 337,ESS= 257, 01-21 09:52:34.263 BL= 338,ESS= 258, 
+01-21 21:52:34.266  1026  1242 I WindowManager: Window{7d4e436 u0 Application Error: com.crazyj36.apiplaygroundanysdk} start dimming: flags=1820002 effectFlags=0, layer=111000
+01-21 21:52:34.318  1370  1386 I SystemServicesProxy: RecentApps has 1 item(s).
+01-21 21:52:34.332  1370  1386 D DDTIcon : getIconDrawableAsIconFrameTheme for com.crazyj36.apiplaygroundanysdk@2130903040
+01-21 21:52:34.334  1370  1386 D DDTIcon : maxBgRes = 0
+01-21 21:52:34.346   667   685 D AAL     : 01-21 09:52:34.280 BL= 339,ESS= 259, 01-21 09:52:34.296 BL= 340,ESS= 260, 01-21 09:52:34.313 BL= 346,ESS= 257, 01-21 09:52:34.329 BL= 349,ESS= 256, 01-21 09:52:34.346 BL= 351,ESS= 256, 
+01-21 21:52:34.348  1370  1386 I SystemServicesProxy: Task.thumbnail loading failed for 25
+01-21 21:52:34.411  5667  5806 D ClClient: Not sending keepalive.  Current connection state=STOPPED
+01-21 21:52:34.428   667   685 D AAL     : 01-21 09:52:34.362 BL= 353,ESS= 256, 01-21 09:52:34.379 BL= 356,ESS= 256, 01-21 09:52:34.395 BL= 358,ESS= 256, 01-21 09:52:34.412 BL= 360,ESS= 256, 01-21 09:52:34.428 BL= 362,ESS= 256, 
+01-21 21:52:34.511   667   685 D AAL     : 01-21 09:52:34.445 BL= 364,ESS= 256, 01-21 09:52:34.461 BL= 366,ESS= 256, 01-21 09:52:34.478 BL= 368,ESS= 256, 01-21 09:52:34.494 BL= 370,ESS= 256, 01-21 09:52:34.511 BL= 372,ESS= 256, 
+01-21 21:52:34.281  1026  1242 I WindowManager: Window{7d4e436 u0 Application Error: com.crazyj36.apiplaygroundanysdk} start dimming: flags=1820002 effectFlags=0, layer=111000
+01-21 21:52:34.553  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=8 path=settings_secure.xml.backup sys=false lock=false imagePending=false whichPending=0x0 written=true
+01-21 21:52:34.553  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=128 path=settings_secure.xml.bak sys=false lock=false imagePending=false whichPending=0x0 written=true
+01-21 21:52:34.571  1026  1777 I WifiService: getWifiEnabledState uid=10088
+01-21 21:52:34.575  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=8 path=settings_secure.xml sys=false lock=false imagePending=false whichPending=0x0 written=true
+01-21 21:52:34.575  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=512 path=settings_secure.xml.bak sys=false lock=false imagePending=false whichPending=0x0 written=false
+01-21 21:52:34.594   667   685 D AAL     : 01-21 09:52:34.527 BL= 375,ESS= 256, 01-21 09:52:34.544 BL= 377,ESS= 256, 01-21 09:52:34.560 BL= 379,ESS= 256, 01-21 09:52:34.577 BL= 381,ESS= 256, 01-21 09:52:34.593 BL= 383,ESS= 256, 
+01-21 21:52:34.676   667   685 D AAL     : 01-21 09:52:34.610 BL= 385,ESS= 256, 01-21 09:52:34.626 BL= 387,ESS= 256, 01-21 09:52:34.643 BL= 389,ESS= 256, 01-21 09:52:34.660 BL= 392,ESS= 256, 01-21 09:52:34.676 BL= 394,ESS= 256, 
+01-21 21:52:34.683   697   697 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-21 21:52:34.683   697   697 E thermal_src: ERROR, recvmsg expect 4, but get 2 
+01-21 21:52:34.684  1026  1054 W ActivityManager: Activity pause timeout for ActivityRecord{cbcd957 u0 com.crazyj36.apiplaygroundanysdk/.MainActivity t25 f}
+01-21 21:52:34.701  1026  1242 D InputDispatcher: Window went away: Window{83cb8e5 u0 Splash Screen com.crazyj36.apiplaygroundanysdk}
+01-21 21:52:34.703   487   512 I vendor.mediatek.hardware.power@1.1-impl: scnEnable hdl:39, timeout:3500
+01-21 21:52:34.703   478   523 W PHHandler: [PH] hint id(103) is not supported
+01-21 21:52:34.704   487   511 I powerd  : [powerd_req] POWER_MSG_SCN_ENABLE: hdl:39, timeout:3500
+01-21 21:52:34.704   695   741 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-21 21:52:34.704   487   511 I libPerfService: perfUserScnEnable - handle:39
+01-21 21:52:34.753  1026  1777 D OverlayManager: setEnabled packageName=com.android.systemui.theme.dark enable=true userId=0
+01-21 21:52:34.759   667   685 D AAL     : 01-21 09:52:34.693 BL= 396,ESS= 256, 01-21 09:52:34.709 BL= 398,ESS= 256, 01-21 09:52:34.726 BL= 400,ESS= 256, 01-21 09:52:34.742 BL= 402,ESS= 256, 01-21 09:52:34.759 BL= 404,ESS= 256, 
+01-21 21:52:34.786  2174  2174 I Timeline: Timeline: Activity_idle id: android.os.BinderProxy@d7728ca time:3270583
+01-21 21:52:34.788  1370  1412 W zygote  : Checksum mismatch for dex LGSystemUI.apk
+01-21 21:52:34.788  1370  1412 W zygote  : Checksum mismatch for dex LGSystemUI.apk
+01-21 21:52:34.822  1370  1673 I SystemServicesProxy: RecentApps has 1 item(s).
+01-21 21:52:34.826  1370  1673 I SystemServicesProxy: Task.thumbnail loading failed for 25
+01-21 21:52:34.841   667   685 D AAL     : 01-21 09:52:34.775 BL= 406,ESS= 256, 01-21 09:52:34.792 BL= 404,ESS= 256, 01-21 09:52:34.808 BL= 402,ESS= 256, 01-21 09:52:34.825 BL= 400,ESS= 256, 01-21 09:52:34.841 BL= 398,ESS= 256, 
+01-21 21:52:34.940   667   685 D AAL     : 01-21 09:52:34.858 BL= 396,ESS= 256, 01-21 09:52:34.874 BL= 394,ESS= 256, 01-21 09:52:34.891 BL= 392,ESS= 256, 01-21 09:52:34.907 BL= 389,ESS= 256, 

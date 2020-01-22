@@ -1,4 +1,0 @@
-<resources>
-    <string name="app_name">Read Built-In File</string>
-    <string name="instructions">This reads text file from res/raw.</string>
-</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="appname">Read Built-In File</string>
+    <string name="instructions">
+This app contains A regular text file in the src/res/raw directory.
+The Java code will reads from that file and displays it\'s content
+in MainActivity. That file content is below:\n\n
+    </string>
+</resources>

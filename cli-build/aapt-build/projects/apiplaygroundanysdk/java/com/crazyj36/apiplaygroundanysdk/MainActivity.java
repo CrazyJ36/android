@@ -43,9 +43,11 @@ import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ScrollView;
 import android.widget.ToggleButton;
 import android.widget.CompoundButton;
+import android.widget.GridLayout;
 import android.net.Uri;
 import android.util.Log;
 import java.lang.System;
@@ -53,6 +55,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Random;
 import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -377,9 +380,9 @@ public class MainActivity extends Activity {
         // Battery level and status using receiver.
         MainActivity.this.registerReceiver(MainActivity.this.batteryBroadcast,
             new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        // Update results button
-        Button updateTxtBtn = findViewById(R.id.updateTxtBtn);
-        updateTxtBtn.setOnClickListener(new OnClickListener() {
+        // Button update text in results view
+        Button btnUpdateTxt = findViewById(R.id.btnUpdateTxt);
+        btnUpdateTxt.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (updaterTxt == "Update 0") {
@@ -395,6 +398,16 @@ public class MainActivity extends Activity {
         File appFilesDir = getExternalFilesDir(null);
         File[] appFilesList = appFilesDir.listFiles();
         filesDirLength = String.valueOf(appFilesList.length);
+        // Button random numbers
+        findViewById(R.id.btnRandomNumbers).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] numbers = getResources().getStringArray(R.array.numbers_array);
+                Random random = new Random();
+                int randomNumbersItem = random.nextInt(numbers.length);
+                generalToast(numbers[randomNumbersItem]);
+            }
+        });
         // getStorage permission & start filesTask()
         if (sdkVersion < 23) {
             filesTask();
@@ -611,5 +624,23 @@ public class MainActivity extends Activity {
             updateResults();
         }
     };
-
+    // Grid click
+    // all grid buttons have the same onclick method (this attached),
+    // we filter which button was clicked here.
+    public void onNumberGridClick(View v) {
+        switch(v.getId()) {
+            case(R.id.btnGrid1):
+                generalToast("Grid 1");
+                break;
+            case(R.id.btnGrid2):
+                generalToast("Grid 2");
+                break;
+            case(R.id.btnGrid3):
+                generalToast("Grid 3");
+                break;
+            case(R.id.btnGrid4):
+                generalToast("Grid 4");
+                break;
+        }
+    }
 }

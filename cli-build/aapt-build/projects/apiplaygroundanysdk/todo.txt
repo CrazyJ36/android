@@ -1,8 +1,15 @@
 custom dialog buttons cut off on tablet
 
+change vibrater not null message for 2.3 make more important.
+
+# graphics activity
 message field popup menu, select wether text is to be 
 recipient or message.
 
-change vibrater not null message for 2.3 make more important.
+picture dialog
 
-storage will be in Android/data only on api > 29.
+navbar like apiplayground
+
+user/pass field
+
+hide statusbar

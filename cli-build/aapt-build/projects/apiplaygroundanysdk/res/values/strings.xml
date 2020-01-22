@@ -83,13 +83,29 @@ of computer architecture and programming as a whole).
 Content of my_file.txt. file creating in this files\' directory 
 doesn\'t require storage permission
     </string>
+    <string name="btnRandomNumbersTxt">Random</string>
     <string-array name="string_array">
          <item>Sun</item>
          <item>Mercury</item>
          <item>Venus</item>
          <item>Earth</item>
     </string-array>
-
+    <string-array name="numbers_array">
+         <item>One</item>
+         <item>Two</item>
+         <item>Three</item>
+         <item>Four</item>
+         <item>Five</item>
+         <item>Six</item>
+         <item>Seven</item>
+         <item>Eight</item>
+         <item>Nine</item>
+         <item>Ten</item>
+    </string-array>
+    <string name="btnGrid1Txt">1</string>
+    <string name="btnGrid2Txt">2</string>
+    <string name="btnGrid3Txt">3</string>
+    <string name="btnGrid4Txt">4</string>
     <!--Activity 2-->
     <string name="btnCallTxt">Call</string>
     <string name="etCallHint">Phone Number</string>

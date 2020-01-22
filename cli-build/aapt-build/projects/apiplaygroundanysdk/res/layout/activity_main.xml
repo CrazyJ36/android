@@ -95,11 +95,19 @@
 			android:layout_below="@id/btnPressLong" />
 
         <Button
-            android:id="@+id/updateTxtBtn"
+            android:id="@+id/btnUpdateTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/updateTxtBtnTxt"
             android:layout_toRightOf="@id/btnPressLong" />
+
+        <Button
+            android:id="@+id/btnRandomNumbers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnRandomNumbersTxt"
+            android:layout_toRightOf="@id/btnNotify"
+            android:layout_below="@id/btnUpdateTxt" />
 
     </RelativeLayout>
 
@@ -224,6 +232,38 @@
         android:nestedScrollingEnabled="true"
         android:scrollingCache="true"
         android:fastScrollEnabled="true" />
+
+    <GridLayout
+        android:id="@+id/gridBtns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="2" >
+        <Button
+            android:id="@+id/btnGrid1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnGrid1Txt"
+            android:onClick="onNumberGridClick" />
+        <Button
+            android:id="@+id/btnGrid2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnGrid2Txt" 
+            android:onClick="onNumberGridClick"/>
+        <Button
+            android:id="@+id/btnGrid3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnGrid3Txt"
+            android:onClick="onNumberGridClick" />
+        <Button
+            android:id="@+id/btnGrid4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnGrid4Txt"
+            android:onClick="onNumberGridClick" />
+    </GridLayout>
 
     <Button
         android:id="@+id/act2btn"

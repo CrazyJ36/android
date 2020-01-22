@@ -1,4 +1,0 @@
-This is the text.txt file in:
-read-built-in-file\app\src\main\res\raw
-
-It's content is printed here directly.
