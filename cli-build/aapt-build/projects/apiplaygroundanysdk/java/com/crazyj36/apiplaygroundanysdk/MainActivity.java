@@ -69,12 +69,13 @@ public class MainActivity extends Activity {
 	public static final int MY_PERMISSION = 0;
 	String[] permission = new String[] {Manifest.permission.READ_EXTERNAL_STORAGE};
     ListView listView;
+    String filesDirLength = "";
 	String vibrateTest = "";
 	String concatTxt = "";
     String writeMyFileString = "";
     String planets = "";
     String battery = "";
-    String updaterTxt = "Press update button";
+    String updaterTxt = "Update 0";
     // onCreate activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -381,10 +382,19 @@ public class MainActivity extends Activity {
         updateTxtBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                updaterTxt = "Update button clicked";
+                if (updaterTxt == "Update 0") {
+                    updaterTxt = "Update 1";
+                } else if (updaterTxt == "Update 1") {
+                    updaterTxt = "Update 0";
+                }
                 updateResults();
             }
         });
+        // Files in external files directory /sdcard/Android/com.crazyj36.apiplaygroundanysdk/files
+        // The method of getting external files here should be done from android 10 onward.
+        File appFilesDir = getExternalFilesDir(null);
+        File[] appFilesList = appFilesDir.listFiles();
+        filesDirLength = String.valueOf(appFilesList.length);
         // getStorage permission & start filesTask()
         if (sdkVersion < 23) {
             filesTask();
@@ -473,6 +483,7 @@ public class MainActivity extends Activity {
 		StringBuffer text = new StringBuffer();
 	    final String[] results = {
                 "spacer, results[0] defined below",
+                updaterTxt,
                 "1 + 2 = " + intCast(),
                 "Basic String",
 	            "String package: " + packageNameOfString(),
@@ -483,9 +494,9 @@ public class MainActivity extends Activity {
 				javaClass.myMethod(),
                 "Downloads dir name: " + Environment.DIRECTORY_DOWNLOADS,
                 writeMyFileString,
+                filesDirLength + " files in external files directory",
                 "strings.xml array: " + planets,
                 battery,
-                updaterTxt,
 	    };
 	    results[0] = "Results feild entries: " + String.valueOf(results.length);
 	    int z = 0;
