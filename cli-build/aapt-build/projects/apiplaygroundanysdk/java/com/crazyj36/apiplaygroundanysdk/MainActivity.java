@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
         // ActionBar is usable in default platform from api 11.
         if (sdkVersion >= 11) {
             ActionBar actionBar = getActionBar();
-			actionBar.setSubtitle("Api stuff");
+			actionBar.setSubtitle("CrazyJ36");
         }
         // If xml android:nestedScrollingEnabled doesn't work, make some ui views scroll using custom method.
         if (sdkVersion < 21) {
@@ -454,7 +454,6 @@ public class MainActivity extends Activity {
             return;
         }
         final File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
-        Arrays.sort(fileList); // Doesn't sort numbered file names.
 		if (fileList.length == 0) {
 			listView.setEnabled(false);
             filesTest = ("No files in: " + dir.toString());
@@ -465,6 +464,7 @@ public class MainActivity extends Activity {
         for (int i = 0; i < fileList.length; i++) {
             names[i] = fileList[i].getName();
         }
+        Arrays.sort(names); // won't sort numbered filenames like note2, note1.
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, R.layout.list_item, names);
         View headerView = View.inflate(MainActivity.this, R.layout.list_header_view, null); // Get xml layout, make it inflatable here. null parent view.
         listView.addHeaderView(headerView, null, false);

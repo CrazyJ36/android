@@ -15,7 +15,8 @@ public class AppWidget extends AppWidgetProvider {
 	public void onUpdate(final Context context, final AppWidgetManager appWidgetManager, final int[] appWidgetIds) {
             if (VERSION.SDK_INT >= 3) {
                 final RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.appwidget);
-	            remoteViews.setTextViewText(R.id.tvWidget, "widget content text");
+
+	            remoteViews.setTextViewText(R.id.tvWidget, "Widget");
 
                 Intent startMainIntent = new Intent(context, MainActivity.class);
                 PendingIntent pendingStartMain = PendingIntent.getActivity(context, 0, startMainIntent, 0);

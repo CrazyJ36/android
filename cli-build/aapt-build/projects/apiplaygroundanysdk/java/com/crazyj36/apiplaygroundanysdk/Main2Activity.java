@@ -30,7 +30,7 @@ public class Main2Activity extends Activity {
         // actionbar define
         if (sdkVersion >= 11) {
         ActionBar actionBar = getActionBar();
-        actionBar.setSubtitle("Graphics stuff");
+        actionBar.setSubtitle("CrazyJ36");
         }
 		// btn call
 		findViewById(R.id.btnCall).setOnClickListener(new OnClickListener() {

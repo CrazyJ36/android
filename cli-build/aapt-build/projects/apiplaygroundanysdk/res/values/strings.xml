@@ -1,11 +1,6 @@
 <resources>
     <string name="app_name">API Playground Any SDK </string>
     <!--Activity 1-->
-	<string name="tvWidgetTxt">
-The text here should be the base to which the widget resizes itself, 
-as the FrameLayout used to make the widget frame has it\'s height 
-and width set to wrap_content.
-    </string>
     <string name="tvHorizontalTxt">
 This HorizontalScrollview (swipe it sideways) contains text that is 
 in the file /res/values/strings.xml. Java code was used to actually to put it here. 
@@ -102,10 +97,6 @@ doesn\'t require storage permission
          <item>Nine</item>
          <item>Ten</item>
     </string-array>
-    <string name="btnGrid1Txt">1</string>
-    <string name="btnGrid2Txt">2</string>
-    <string name="btnGrid3Txt">3</string>
-    <string name="btnGrid4Txt">4</string>
     <!--Activity 2-->
     <string name="btnCallTxt">Call</string>
     <string name="etCallHint">Phone Number</string>
