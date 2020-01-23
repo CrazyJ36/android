@@ -2,7 +2,7 @@ package com.crazyj36.dialogs;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.app.Dialog;
+import android.app.AlertDialog;
 import android.view.View;
 
 public class MainActivity extends Activity {
@@ -15,8 +15,10 @@ public class MainActivity extends Activity {
     }
 
     public void showDialog(View v) {
-        Dialog dialog = new Dialog(MainActivity.this);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+        dialog.create();
         dialog.setTitle("Dialog");
+        dialog.setMessage("Message");
         dialog.show();
     }
 }
