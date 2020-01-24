@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">API Playground Any SDK </string>
     <!--Activity 1-->
@@ -71,6 +72,7 @@ of computer architecture and programming as a whole).
     <string name="dialogAboutTxt">\@2020 CrazyJ36</string>
     <string name="dialogAboutBtnTxt">View my GitHub</string>
     <string name="listHeaderTxt">Notes</string>
+    <string name="gridHeaderTxt">Enter Number</string>
     <string name="menuAboutTxt">About</string>
     <string name="menuExitTxt">Exit</string>
     <string name="menuThemeTxt">Theme</string>

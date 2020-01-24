@@ -50,6 +50,7 @@ import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.net.Uri;
 import android.util.Log;
+import android.util.DisplayMetrics;
 import java.lang.System;
 import java.util.Date;
 import java.util.Locale;
@@ -80,6 +81,7 @@ public class MainActivity extends Activity {
     String battery = "";
     String updaterTxt = "Update 0";
     String numbersEntered = "";
+    String displayResolution = "";
     // onCreate activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,6 +187,7 @@ public class MainActivity extends Activity {
         // Log in onCreate() and on button click.
         String startMsg = "App Started";
         Log.i(logChannel, startMsg);
+        Log.println(4, logChannel, "Log.println() test"); // just like Log.i() priority 4 is the INFO constant.
         Button btnLog = findViewById(R.id.btnLog);
         btnLog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,9 +208,6 @@ public class MainActivity extends Activity {
         });
         // Set textview to what was entered in EditText
         final EditText etPrint = findViewById(R.id.etPrint);
-		/*if (!etPrint.isFocused()) { // This doesn't work as isFocused() doesn't do what I expected (focused on editText click.)
-			etPrint.setCursorVisible(true);
-		} */
         final TextView tvPrint = findViewById(R.id.tvPrint);
         Button btnPrint = findViewById(R.id.btnPrint);
         btnPrint.setOnClickListener(new View.OnClickListener() {
@@ -414,7 +414,7 @@ public class MainActivity extends Activity {
         GridView gridView = findViewById(R.id.gridTextView);
         final TextView tvNumberGrid = findViewById(R.id.tvNumberGrid);
         ArrayAdapter<Integer> gridAdapter = new ArrayAdapter<Integer>(
-            this, android.R.layout.simple_list_item_1, numbers);
+            MainActivity.this, android.R.layout.simple_list_item_1, numbers);
         gridView.setAdapter(gridAdapter);
 	    gridView.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -422,6 +422,10 @@ public class MainActivity extends Activity {
                 tvNumberGrid.setText(numbersEntered);
 	        }
 	    });
+        // Get display resolution
+        DisplayMetrics displayMetrics = getApplicationContext().getResources().getDisplayMetrics();
+        displayResolution = "Resolution Width: " + String.valueOf(displayMetrics.widthPixels)
+            + " Height: " + String.valueOf(displayMetrics.heightPixels);
         // getStorage permission & start filesTask()
         if (sdkVersion < 23) {
             filesTask();
@@ -466,8 +470,8 @@ public class MainActivity extends Activity {
         }
         Arrays.sort(names); // won't sort numbered filenames like note2, note1.
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, R.layout.list_item, names);
-        View headerView = View.inflate(MainActivity.this, R.layout.list_header_view, null); // Get xml layout, make it inflatable here. null parent view.
-        listView.addHeaderView(headerView, null, false);
+        View listHeaderView = View.inflate(MainActivity.this, R.layout.list_header_view, null); // Get xml layout, make it inflatable here. null parent view.
+        listView.addHeaderView(listHeaderView, null, false);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -524,6 +528,7 @@ public class MainActivity extends Activity {
                 filesDirLength + " files in external files directory",
                 "strings.xml array: " + planets,
                 battery,
+                displayResolution,
 	    };
 	    results[0] = "Results feild entries: " + String.valueOf(results.length);
 	    int z = 0;
