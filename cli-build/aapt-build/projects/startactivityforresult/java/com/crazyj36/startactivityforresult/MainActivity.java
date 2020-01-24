@@ -6,35 +6,43 @@ import android.view.View;
 import android.content.Intent;
 import android.widget.Button;
 import android.widget.TextView;
-import android.net.Uri;
 
 public class MainActivity extends Activity {
-
-    static final int INTENT_REQUEST = 1;
-
+    int INTENT_REQUEST = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 	   	setContentView(R.layout.activity_main);
-
         Button button = findViewById(R.id.btnChoose);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent chooseIntent = new Intent(Intent.ACTION_CREATE_SHORTCUT);
+
+                /* For intents here:
+                   ACTION_PICK_ACTIVITY: returns working intent(data) to chosen activity.
+                     and data.toUri(0) will show to full intent string.
+                     Can startActivity(data) in onActivityResult()
+                */
+                Intent chooseIntent = new Intent(Intent.ACTION_PICK_ACTIVITY);
                 startActivityForResult(chooseIntent, INTENT_REQUEST);
             }
         });
-
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+       super.onActivityResult(requestCode, resultCode, data);
        if (requestCode == INTENT_REQUEST && resultCode == RESULT_OK) {
            TextView tvResult = findViewById(R.id.tvResult);
-           String dataResult = data.toUri(2);
-           tvResult.setText(dataResult + "\n\n can parseUri after this to start what was chosen. Try it.");
+           String dataResult = data.toUri(0);
+           tvResult.setText(dataResult);
+	       Button btnLaunch = findViewById(R.id.btnLaunch);
+	       btnLaunch.setOnClickListener(new View.OnClickListener() {
+	           @Override
+	           public void onClick(View view) {
+	               startActivity(data);
+	           }
+	       });
        }
    }
 }

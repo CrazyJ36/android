@@ -1,0 +1,420 @@
+--------- beginning of main
+01-24 18:01:02.256   481   520 D sensors_hal_Ctx: polldata:1, count: 27, sensor:0, type:1, x:-0.351000 y:0.100000 z:9.765000
+01-24 18:01:02.354   697   697 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-24 18:01:02.455   481   520 D sensors_hal_Ctx: polldata:1, count: 26, sensor:0, type:1, x:-0.357000 y:0.100000 z:9.747000
+01-24 18:01:02.536   661 18744 D pseudo  : mtk_gps_sys_nmea_output_to_mnld: received 971 bytes:
+01-24 18:01:02.537   661 18744 D nmea_parser: nmea_reader_parse: prn[0]=7
+01-24 18:01:02.537   661 18744 D nmea_parser: nmea_reader_parse: snr[0]=20.800000
+01-24 18:01:02.537   661 18744 D nmea_parser: nmea_reader_parse: prn[1]=8
+01-24 18:01:02.537   661 18744 D nmea_parser: nmea_reader_parse: snr[1]=30.000000
+01-24 18:01:02.537   661 18744 D nmea_parser: nmea_reader_parse: prn[2]=11
+01-24 18:01:02.537   661 18744 D nmea_parser: nmea_reader_parse: snr[2]=20.000000
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: prn[3]=9
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: snr[3]=19.900000
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: prn[4]=30
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: snr[4]=14.100000
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: prn[5]=23
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: snr[5]=20.200000
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: prn[6]=48
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: snr[6]=0.000000
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: prn[7]=1
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: snr[7]=27.700000
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: prn[8]=27
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: snr[8]=18.100000
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: prn[9]=4
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: snr[9]=22.800000
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: prn[10]=28
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: snr[10]=14.700000
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: prn[11]=16
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: snr[11]=0.000000
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: prn[12]=17
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: snr[12]=28.100000
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: nmea:GSV,4,4,13,17,02,219,28.1*50
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: prn[0]=84
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: snr[0]=17.900000
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: prn[1]=73
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: snr[1]=21.200000
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: prn[2]=83
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: snr[2]=0.000000
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: prn[3]=74
+01-24 18:01:02.538   661 18744 D nmea_parser: nmea_reader_parse: snr[3]=0.000000
+01-24 18:01:02.539   661 18744 D nmea_parser: nmea_reader_parse: prn[4]=80
+01-24 18:01:02.539   661 18744 D nmea_parser: nmea_reader_parse: snr[4]=0.000000
+01-24 18:01:02.539   661 18744 D nmea_parser: nmea_reader_parse: prn[5]=72
+01-24 18:01:02.539   661 18744 D nmea_parser: nmea_reader_parse: snr[5]=15.000000
+01-24 18:01:02.539   661 18744 D nmea_parser: nmea_reader_parse: prn[6]=71
+01-24 18:01:02.539   661 18744 D nmea_parser: nmea_reader_parse: snr[6]=36.800000
+01-24 18:01:02.539   661 18744 D nmea_parser: nmea_reader_parse: prn[7]=85
+01-24 18:01:02.539   661 18744 D nmea_parser: nmea_reader_parse: snr[7]=14.700000
+01-24 18:01:02.539   661 18744 D nmea_parser: nmea_reader_parse: prn[8]=65
+01-24 18:01:02.539   661 18744 D nmea_parser: nmea_reader_parse: snr[8]=0.000000
+01-24 18:01:02.539   661 18744 D nmea_parser: nmea_reader_parse: prn[9]=82
+01-24 18:01:02.539   661 18744 D nmea_parser: nmea_reader_parse: snr[9]=0.000000
+01-24 18:01:02.539   661 18744 D nmea_parser: nmea_reader_parse: nmea:GSV,3,3,10,65,05,321,,82,01,024,*6F
+01-24 18:01:02.539   661 18744 D lge_gnss_ftm: ftm_get_test_state: test state:0
+01-24 18:01:02.539   661   972 D MNLD    : mnld_main_thread: main_event_hdlr msg
+01-24 18:01:02.540   661   972 W MNLD    : main_event_hdlr: GPS2MAIN_EVENT_UPDATE_LOCATION  lat=28.262945 lng=-82.185943 acc=1.700000
+01-24 18:01:02.540   661 18744 D pseudo  : mtk_gps_sys_nmea_output_to_app: len:971, [NMEA]$GNGGA,230103.00...
+01-24 18:01:02.540   661   972 D MNLD    : main_event_hdlr: wait_first_location=0
+01-24 18:01:02.540   661 18744 D gps_controlller: mtk_gps_sys_gps_mnl_callback: msg:0
+01-24 18:01:02.540   661   972 D MNLD    : main_event_hdlr: location_sync done
+01-24 18:01:02.540   661 18744 D gps_controlller: send_active_notify: send clean nmea timer cmd!
+01-24 18:01:02.540   661 18744 D gps_controlller: mtk_gps_sys_gps_mnl_callback: MTK_GPS_MSG_FIX_READY, GET_RTC_OK, 7.422, 0.008
+01-24 18:01:02.540   661   959 D gps_controlller: gps_control_thread: gps_control_thread wait
+01-24 18:01:02.540   699   766 D agps    : [agps][n][AGPS] [MNL] read  location_sync  lat=xxx lng=xxx acc=1
+01-24 18:01:02.540   661 18744 D gps_controlller: mtk_gps_sys_gps_mnl_callback: Age = 2, RTCDiff = 30, Time_interval = 10
+01-24 18:01:02.541   661 18744 D pseudo  : mtk_gps_sys_nmea_output_to_app: len:44, [vAGPS_Auto_Req]:g_FirstDbtt:0,u2BitMap:0x0
+01-24 18:01:02.542   699   766 D agps    : [agps][n][CP] [MD_1] write  cp2_util_send_location_sync lat,lng=xxx,xxx acc=1
+01-24 18:01:02.548  1026  1276 D LgeGnssLocationProvider: reportNmea() in LgeGnssLocationProvider=> nmea: $GNRMC,230103.000,A,2815.7767,N,08211.1566,W,0.000,144.00,240120,,,A*54
+01-24 18:01:02.552   705  1729 W         : update_location: we have a location when gps_state_intent: STOP (4)
+01-24 18:01:02.552  1026  1276 V GnssLocationProvider: SV count: 23
+01-24 18:01:02.555  1026  1276 V GnssLocationProvider: [SV INFO] TOTAL CNT : 23
+01-24 18:01:02.555  1026  1276 V GnssLocationProvider: [SV INFO] GPS - SV#7(20.8, 59.0, 332.0, U), SV#8(30.0, 59.0, 36.0, U), SV#11(20.0, 57.0, 141.0, U), SV#9(19.9, 40.0, 216.0, U), SV#30(14.1, 27.0, 318.0, U), SV#23(20.2, 26.0, 189.0, U), SV#1(27.7, 25.0, 152.0, U), SV#27(18.1, 24.0, 39.0, U), SV#4(22.8, 23.0, 183.0, U), SV#28(14.7, 15.0, 276.0, U), SV#16(0.0, 5.0, 70.0, ), SV#17(28.1, 2.0, 219.0, ), 
+01-24 18:01:02.555  1026  1276 V GnssLocationProvider: [SV INFO] GLO - SV#84(17.9, 59.0, 154.0, U), SV#73(21.2, 50.0, 26.0, U), SV#83(0.0, 43.0, 43.0, ), SV#74(0.0, 26.0, 326.0, ), SV#80(0.0, 18.0, 95.0, ), SV#72(15.0, 17.0, 281.0, U), SV#71(36.8, 13.0, 232.0, U), SV#85(14.7, 10.0, 192.0, U), SV#65(0.0, 5.0, 321.0, ), SV#82(0.0, 1.0, 24.0, ), 
+01-24 18:01:02.555  1026  1276 V GnssLocationProvider: [SV INFO] BDS - No SV
+01-24 18:01:02.555  1026  1276 V GnssLocationProvider: [SV INFO] GAL - No SV
+01-24 18:01:02.555  1026  1276 V GnssLocationProvider: [SV INFO] QZSS - No SV
+01-24 18:01:03.355   697   697 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-24 18:01:03.514   661 18744 D pseudo  : mtk_gps_sys_nmea_output_to_mnld: received 971 bytes:
+01-24 18:01:03.515   661 18744 D nmea_parser: nmea_reader_parse: prn[0]=7
+01-24 18:01:03.515   661 18744 D nmea_parser: nmea_reader_parse: snr[0]=20.900000
+01-24 18:01:03.515   661 18744 D nmea_parser: nmea_reader_parse: prn[1]=8
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: snr[1]=30.000000
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: prn[2]=11
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: snr[2]=19.900000
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: prn[3]=9
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: snr[3]=20.100000
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: prn[4]=30
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: snr[4]=13.600000
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: prn[5]=23
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: snr[5]=19.500000
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: prn[6]=48
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: snr[6]=0.000000
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: prn[7]=1
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: snr[7]=28.400000
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: prn[8]=27
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: snr[8]=18.700000
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: prn[9]=4
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: snr[9]=23.200000
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: prn[10]=28
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: snr[10]=14.600000
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: prn[11]=16
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: snr[11]=0.000000
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: prn[12]=17
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: snr[12]=27.000000
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: nmea:GSV,4,4,13,17,02,219,27.0*5E
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: prn[0]=84
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: snr[0]=18.300000
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: prn[1]=73
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: snr[1]=22.500000
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: prn[2]=83
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: snr[2]=0.000000
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: prn[3]=74
+01-24 18:01:03.516   661 18744 D nmea_parser: nmea_reader_parse: snr[3]=0.000000
+01-24 18:01:03.517   661 18744 D nmea_parser: nmea_reader_parse: prn[4]=80
+01-24 18:01:03.517   661 18744 D nmea_parser: nmea_reader_parse: snr[4]=0.000000
+01-24 18:01:03.517   661 18744 D nmea_parser: nmea_reader_parse: prn[5]=72
+01-24 18:01:03.517   661 18744 D nmea_parser: nmea_reader_parse: snr[5]=12.600000
+01-24 18:01:03.517   661 18744 D nmea_parser: nmea_reader_parse: prn[6]=71
+01-24 18:01:03.517   661 18744 D nmea_parser: nmea_reader_parse: snr[6]=36.700000
+01-24 18:01:03.517   661 18744 D nmea_parser: nmea_reader_parse: prn[7]=85
+01-24 18:01:03.517   661 18744 D nmea_parser: nmea_reader_parse: snr[7]=15.000000
+01-24 18:01:03.517   661 18744 D nmea_parser: nmea_reader_parse: prn[8]=65
+01-24 18:01:03.517   661 18744 D nmea_parser: nmea_reader_parse: snr[8]=0.000000
+01-24 18:01:03.517   661 18744 D nmea_parser: nmea_reader_parse: prn[9]=82
+01-24 18:01:03.517   661 18744 D nmea_parser: nmea_reader_parse: snr[9]=0.000000
+01-24 18:01:03.517   661 18744 D nmea_parser: nmea_reader_parse: nmea:GSV,3,3,10,65,05,321,,82,01,024,*6F
+01-24 18:01:03.517   661   972 D MNLD    : mnld_main_thread: main_event_hdlr msg
+01-24 18:01:03.518   661   972 W MNLD    : main_event_hdlr: GPS2MAIN_EVENT_UPDATE_LOCATION  lat=28.262945 lng=-82.185943 acc=1.100000
+01-24 18:01:03.518   661   972 D MNLD    : main_event_hdlr: wait_first_location=0
+01-24 18:01:03.518   661   972 D MNLD    : main_event_hdlr: location_sync done
+01-24 18:01:03.518   661 18744 D lge_gnss_ftm: ftm_get_test_state: test state:0
+01-24 18:01:03.518   661 18744 D pseudo  : mtk_gps_sys_nmea_output_to_app: len:971, [NMEA]$GNGGA,230104.00...
+01-24 18:01:03.519   661 18744 D gps_controlller: mtk_gps_sys_gps_mnl_callback: msg:0
+01-24 18:01:03.519   661 18744 D gps_controlller: send_active_notify: send clean nmea timer cmd!
+01-24 18:01:03.519   699   766 D agps    : [agps][n][AGPS] [MNL] read  location_sync  lat=xxx lng=xxx acc=1
+01-24 18:01:03.519   661 18744 D gps_controlller: mtk_gps_sys_gps_mnl_callback: MTK_GPS_MSG_FIX_READY, GET_RTC_OK, 7.282, 0.007
+01-24 18:01:03.519   661 18744 D gps_controlller: mtk_gps_sys_gps_mnl_callback: Age = 2, RTCDiff = 30, Time_interval = 10
+01-24 18:01:03.519   699   766 D agps    : [agps][n][CP] [MD_1] write  cp2_util_send_location_sync lat,lng=xxx,xxx acc=1
+01-24 18:01:03.519   661 18744 D pseudo  : mtk_gps_sys_nmea_output_to_app: len:44, [vAGPS_Auto_Req]:g_FirstDbtt:0,u2BitMap:0x0
+01-24 18:01:03.520   661   959 D gps_controlller: gps_control_thread: gps_control_thread wait
+01-24 18:01:03.534  1026  1277 D LgeGnssLocationProvider: reportNmea() in LgeGnssLocationProvider=> nmea: $GNRMC,230104.000,A,2815.7767,N,08211.1566,W,0.000,144.00,240120,,,A*53
+01-24 18:01:03.540   705  1729 W         : update_location: we have a location when gps_state_intent: STOP (4)
+01-24 18:01:03.541  1026  1277 V GnssLocationProvider: SV count: 23
+01-24 18:01:03.543  1026  1277 V GnssLocationProvider: [SV INFO] TOTAL CNT : 23
+01-24 18:01:03.543  1026  1277 V GnssLocationProvider: [SV INFO] GPS - SV#7(20.9, 59.0, 332.0, U), SV#8(30.0, 59.0, 36.0, U), SV#11(19.9, 57.0, 141.0, U), SV#9(20.1, 40.0, 216.0, U), SV#30(13.6, 27.0, 318.0, U), SV#23(19.5, 26.0, 189.0, U), SV#1(28.4, 25.0, 152.0, U), SV#27(18.7, 24.0, 39.0, U), SV#4(23.2, 23.0, 183.0, U), SV#28(14.6, 15.0, 276.0, U), SV#16(0.0, 5.0, 70.0, ), SV#17(27.0, 2.0, 219.0, ), 
+01-24 18:01:03.543  1026  1277 V GnssLocationProvider: [SV INFO] GLO - SV#84(18.3, 59.0, 154.0, U), SV#73(22.5, 50.0, 26.0, U), SV#83(0.0, 43.0, 43.0, ), SV#74(0.0, 26.0, 326.0, ), SV#80(0.0, 18.0, 95.0, ), SV#72(12.6, 17.0, 281.0, U), SV#71(36.7, 13.0, 232.0, U), SV#85(15.0, 10.0, 192.0, U), SV#65(0.0, 5.0, 321.0, ), SV#82(0.0, 1.0, 24.0, ), 
+01-24 18:01:03.543  1026  1277 V GnssLocationProvider: [SV INFO] BDS - No SV
+01-24 18:01:03.543  1026  1277 V GnssLocationProvider: [SV INFO] GAL - No SV
+01-24 18:01:03.543  1026  1277 V GnssLocationProvider: [SV INFO] QZSS - No SV
+01-24 18:01:03.594  1761  1761 D TeleService: CarrierConfigLoader: CarrierConfigLoader - existNodeDb : notSupport
+01-24 18:01:03.631  2124  2124 I LGRR    : [RRPolicyService] onServiceStateChanged
+01-24 18:01:03.632  2124  2124 D LGRR    : [ServiceStateListener] getServiceState() : 0
+01-24 18:01:03.632  2124  2124 D LGRR    : [RRPolicyConditionsImpl] DataRegState : 0
+01-24 18:01:03.632  2124  2124 D LGRR    : [RRPolicyConditionsImpl] roamType : 0
+01-24 18:01:03.632  1370  1370 I OperatorTextView: Operator(5) is invalid
+01-24 18:01:03.632  2124  2124 I LGRR    : [RRPreference] [Restore]ROAMING_TYPE : 0
+01-24 18:01:03.633  2124  2124 I LGRR    : [RRPolicyService] ServiceState Not Changed
+01-24 18:01:03.633  1370  1541 I MobileSignalController: mobileLabel_SPCS = Boost Mobile, mobileLabel = Boost Mobile, mInService = true
+01-24 18:01:03.634  1370  1370 I MSimUtils: getPhoneId : 0
+01-24 18:01:03.634  1370  1370 I MSimUtils: getDefaultDataPhoneId : 0
+01-24 18:01:03.637  1370  1541 I MobileSignalController: isRoaming = false, isCdmaRoaming = false
+01-24 18:01:03.638  1370  1541 I MobileSignalController: isRoaming = false
+01-24 18:01:03.638  1761  1761 D ServiceStateProvider: subId=1
+01-24 18:01:03.638  1026  1026 D WifiServerServiceExt: mReceiver: ACTION_SERVICE_STATE_CHANGED
+01-24 18:01:03.639  1026  1026 D WifiServerServiceExt:  ServiceState: {mVoiceRegState=0(IN_SERVICE), mDataRegState=0(IN_SERVICE), mVoiceRoamingType=home, mDataRoamingType=home, mVoiceOperatorAlphaLong=Boost Mobile, mVoiceOperatorAlphaShort=, mDataOperatorAlphaLong=Boost Mobile, mDataOperatorAlphaShort=, isManualNetworkSelection=false(automatic), mRilVoiceRadioTechnology=6(1xRTT), mRilDataRadioTechnology=14(LTE), mCssIndicator=unsupported, mNetworkId=307, mSystemId=5116, mCdmaRoamingIndicator=1, mCdmaDefaultRoamingIndicator=160, mIsEmergencyOnly=false, mIsDataRoamingFromRegistration=false, mIsUsingCarrierAggregation=false, mLteEarfcnRsrpBoost=0 mIsVoiceSearching=false mIsDataSearching=false mVoiceNetworkName=null mDataNetworkName=null Check64QAM0 Dual carrier0 LTE AdvanceMode0}
+01-24 18:01:03.639  1761  1761 I TeleService: SprintGuardUi: [RGuard]getRoamingType() roamingType = 1, roamingIndcation = 1 , curradiotech = 14
+01-24 18:01:03.639  1761  1761 I TeleService: SprintGuardUi: handleDataRoamingGuard() iconIndex : 1, iconPrevIndex: 1, roamingType : 1, dataRoaming : false
+01-24 18:01:03.639  1761  1761 I TeleService: SprintGuardUi: handleDataRoamingGuard() getRoaming() : false, getVoiceRoaming() : false, getDataRoamingType() : 0, getPhoneType() : 2
+01-24 18:01:03.639  1761  1761 I TeleService: SprintGuardUi: handleDataRoamingGuard() roamingIndcation() : 1, curradiotech : 14, roamingdataIndcation : 1, roamingType : 1
+01-24 18:01:03.640  1370  1541 I NetworkController: onReceive: intent=Intent { act=android.intent.action.SERVICE_STATE flg=0x1000010 (has extras) }
+01-24 18:01:03.641  1761  1761 V PhoneGlobalsNet: Action intent recieved : android.intent.action.SERVICE_STATE
+01-24 18:01:03.642  1761  1761 D ConfigUtils: appliedCarrierFeature() : SPR
+01-24 18:01:03.642  1761  1761 D ConfigUtils: OPERATOR : 9
+01-24 18:01:03.642  1761  1761 D ConfigUtils: isTargetOperator() : 9
+01-24 18:01:03.642  1370  1370 D KeyguardUpdateMonitor: received broadcast android.intent.action.SERVICE_STATE
+01-24 18:01:03.643  1370  1370 V KeyguardUpdateMonitor: action android.intent.action.SERVICE_STATE serviceState={mVoiceRegState=0(IN_SERVICE), mDataRegState=0(IN_SERVICE), mVoiceRoamingType=home, mDataRoamingType=home, mVoiceOperatorAlphaLong=Boost Mobile, mVoiceOperatorAlphaShort=, mDataOperatorAlphaLong=Boost Mobile, mDataOperatorAlphaShort=, isManualNetworkSelection=false(automatic), mRilVoiceRadioTechnology=6(1xRTT), mRilDataRadioTechnology=14(LTE), mCssIndicator=unsupported, mNetworkId=307, mSystemId=5116, mCdmaRoamingIndicator=1, mCdmaDefaultRoamingIndicator=160, mIsEmergencyOnly=false, mIsDataRoamingFromRegistration=false, mIsUsingCarrierAggregation=false, mLteEarfcnRsrpBoost=0 mIsVoiceSearching=false mIsDataSearching=false mVoiceNetworkName=null mDataNetworkName=null Check64QAM0 Dual carrier0 LTE AdvanceMode0} subId=1
+01-24 18:01:03.643  1370  1370 D KeyguardUpdateMonitor: handleServiceStateChange(subId=1, serviceState={mVoiceRegState=0(IN_SERVICE), mDataRegState=0(IN_SERVICE), mVoiceRoamingType=home, mDataRoamingType=home, mVoiceOperatorAlphaLong=Boost Mobile, mVoiceOperatorAlphaShort=, mDataOperatorAlphaLong=Boost Mobile, mDataOperatorAlphaShort=, isManualNetworkSelection=false(automatic), mRilVoiceRadioTechnology=6(1xRTT), mRilDataRadioTechnology=14(LTE), mCssIndicator=unsupported, mNetworkId=307, mSystemId=5116, mCdmaRoamingIndicator=1, mCdmaDefaultRoamingIndicator=160, mIsEmergencyOnly=false, mIsDataRoamingFromRegistration=false, mIsUsingCarrierAggregation=false, mLteEarfcnRsrpBoost=0 mIsVoiceSearching=false mIsDataSearching=false mVoiceNetworkName=null mDataNetworkName=null Check64QAM0 Dual carrier0 LTE AdvanceMode0}
+01-24 18:01:03.643  1370  1370 D CarrierText: updateCarrierText(): 1
+01-24 18:01:03.644  1761  1761 D PhoneGlobalsNet: subId: 1
+01-24 18:01:03.645  1761  1761 D PhoneGlobalsNet: networksettings : PhoneGlobals.java[469] : handleServiceStateChanged NetworkMode 10
+01-24 18:01:03.645  3079  3079 I CarrierServices: [2] cnv.onReceive: Received SERVICE_STATE intent, clearing cached cell info
+01-24 18:01:03.645  1370  1370 D CarrierText: Sprint carrierName from getNetworkOperatorName() API
+01-24 18:01:03.645  1761  1761 D NetworkSettingBootReceiver: mReceiver: android.intent.action.SERVICE_STATE
+01-24 18:01:03.645  1370  1370 D CarrierText: carrierName = Boost Mobile
+01-24 18:01:03.645  1370  1370 D UpdateKeyguardStatus_US_SPR: status =Normal, carrierName = Boost Mobile, slotId =0
+01-24 18:01:03.645  1370  1370 W Settings: Setting airplane_mode_on has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+01-24 18:01:03.647  1761  1761 D NetworkSettingBootReceiver: getDefaultDataPhoneId : 0
+01-24 18:01:03.647  1761  1761 D ConfigUtils: appliedCarrierFeature() : SPR
+01-24 18:01:03.647  1761  1761 D ConfigUtils: OPERATOR : 9
+01-24 18:01:03.647  1761  1761 D ConfigUtils: isTargetOperator() : 9
+01-24 18:01:03.647  1026  1026 D WifiServerServiceExt: currIso : US
+01-24 18:01:03.647  1026  1026 I WifiServerServiceExt: VoiceRegState = 0, DataRegState = 0
+01-24 18:01:03.647  1026  1026 I WifiServerServiceExt: VoiceRegState = 0, DataRegState = 0
+01-24 18:01:03.648  1370  1370 D CarrierText: Handling (subId=1) simSate : READY, carrierName : Boost Mobile, carrierTextForSimState : Boost Mobile
+01-24 18:01:03.649  1370  1370 D CarrierText: SIM ready and in service: subId=1, ss={mVoiceRegState=0(IN_SERVICE), mDataRegState=0(IN_SERVICE), mVoiceRoamingType=home, mDataRoamingType=home, mVoiceOperatorAlphaLong=Boost Mobile, mVoiceOperatorAlphaShort=, mDataOperatorAlphaLong=Boost Mobile, mDataOperatorAlphaShort=, isManualNetworkSelection=false(automatic), mRilVoiceRadioTechnology=6(1xRTT), mRilDataRadioTechnology=14(LTE), mCssIndicator=unsupported, mNetworkId=307, mSystemId=5116, mCdmaRoamingIndicator=1, mCdmaDefaultRoamingIndicator=160, mIsEmergencyOnly=false, mIsDataRoamingFromRegistration=false, mIsUsingCarrierAggregation=false, mLteEarfcnRsrpBoost=0 mIsVoiceSearching=false mIsDataSearching=false mVoiceNetworkName=null mDataNetworkName=null Check64QAM0 Dual carrier0 LTE AdvanceMode0}
+01-24 18:01:03.649  1370  1370 D CarrierText: displayText[0]: Boost Mobile
+01-24 18:01:03.860  1370  1541 I MobileSignalController: isRoaming = false, isCdmaRoaming = false
+01-24 18:01:03.860  1370  1541 I MobileSignalController: isRoaming = false
+01-24 18:01:03.861  1761  1761 D TeleService: PhoneInterfaceManager: [PhoneIntfMgr] mSigLevel = 2
+01-24 18:01:03.861  1370  1541 I NetworkController: onReceive: intent=Intent { act=android.intent.action.SIG_STR flg=0x10 (has extras) }
+01-24 18:01:04.022  1026  1274 D InputDispatcher: notifyMotion - action=ACTION_DOWN(0), id=0, pressure=0.294, tooltype=1, deviceId=4, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=208875365134000, downTime=208875365134000, 
+01-24 18:01:04.022  1026  1273 D InputTransport: channel 'd365fe com.teslacoilsw.launcher/com.teslacoilsw.launcher.NovaLauncher (server)' : action=ACTION_DOWN(0), id=0, tooltype=1, deviceId=4, source=0x1002, flags=0x0, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=208875365134000, eventTime=208875365134000, pointerCount=1
+01-24 18:01:04.022  1026  1273 D InputTransport: channel 'dba4412 com.android.systemui.ImageWallpaper (server)' : action=ACTION_DOWN(0), id=0, tooltype=1, deviceId=4, source=0x1002, flags=0x3, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=208875365134000, eventTime=208875365134000, pointerCount=1
+--------- beginning of system
+01-24 18:01:04.023  2174  2174 I ViewRootImpl: ViewRoot's Touch Event : ACTION_DOWN
+01-24 18:01:04.079  1026  1274 D InputDispatcher: notifyMotion - action=ACTION_UP(0), id=0, pressure=0.251, tooltype=1, deviceId=4, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=208875422957000, downTime=208875365134000, 
+01-24 18:01:04.079  1026  1273 D InputTransport: channel 'd365fe com.teslacoilsw.launcher/com.teslacoilsw.launcher.NovaLauncher (server)' : action=ACTION_UP(0), id=0, tooltype=1, deviceId=4, source=0x1002, flags=0x0, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=208875365134000, eventTime=208875422957000, pointerCount=1
+01-24 18:01:04.079  1026  1273 D InputTransport: channel 'dba4412 com.android.systemui.ImageWallpaper (server)' : action=ACTION_UP(0), id=0, tooltype=1, deviceId=4, source=0x1002, flags=0x3, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=208875365134000, eventTime=208875422957000, pointerCount=1
+01-24 18:01:04.081  2174  2174 I ViewRootImpl: ViewRoot's Touch Event : ACTION_UP
+01-24 18:01:04.094  1026  7501 I ActivityManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.startactivityforresult/.MainActivity} from uid 10349
+01-24 18:01:04.097  1026  7501 D ActivityManager: setTaskToReturnTo : TaskRecord{88d494c #339 A=com.crazyj36.startactivityforresult U=0 StackId=1 sz=0} / mTaskToReturnTo = 1
+01-24 18:01:04.098  1026  7501 D ActivityManager: setTaskToReturnTo : TaskRecord{88d494c #339 A=com.crazyj36.startactivityforresult U=0 StackId=1 sz=1} / mTaskToReturnTo = 1
+01-24 18:01:04.099   695   741 I PowerRM : FIA lock1 locked
+01-24 18:01:04.099   695   741 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-24 18:01:04.099   487   512 I vendor.mediatek.hardware.power@1.1-impl: scnEnable hdl:39, timeout:3500
+01-24 18:01:04.100   487   511 I powerd  : [powerd_req] POWER_MSG_SCN_ENABLE: hdl:39, timeout:3500
+01-24 18:01:04.100   487   511 I libPerfService: perfUserScnEnable - handle:39
+01-24 18:01:04.100   487   511 I libPerfService: 39: legacy set freq: 1001000 -1 1508000 -1
+01-24 18:01:04.109   487   511 I libPerfService: 39: legacy set: 3 -1 4 -1
+01-24 18:01:04.113   478   478 W PHHandler: [PH] hint id(103) is not supported
+01-24 18:01:04.119  1761  1761 D TeleService: PhoneInterfaceManager: [PhoneIntfMgr] mSigLevel = 3
+01-24 18:01:04.119  1370  1541 I MobileSignalController: isRoaming = false, isCdmaRoaming = false
+01-24 18:01:04.119  1370  1541 I MobileSignalController: isRoaming = false
+01-24 18:01:04.120  1370  1541 I MobileSignalController(1): Change in state to: connected=true,enabled=true,level=3,inetCondition=1,iconGroup=IconGroup(Default),activityIn=false,activityOut=false,rssi=0,lteadvancedmode=0,dataSim=false,networkName=Boost Mobile,networkNameData=Boost Mobile,dataConnected=true,roaming=false,isDefault=true,isEmergency=false,airplaneMode=false,carrierNetworkChangeMode=false,userSetup=true,roaming=false,activity=0,signalZero=false,isSimIcon=false,dataNetType=13,networkIcon=LTE,showRoaming=false,showSearching=false,selectedSim=false,voiceRatType=0,dataRatType=0,cbInfo=null,callState=0,isCat6=false,isMimo=false,isDataEnabled=true,internetConnectStatus=1
+01-24 18:01:04.120  1370  1541 I MobileSignalController: isRoaming = false, isCdmaRoaming = false
+01-24 18:01:04.120  1370  1541 I MobileSignalController: isRoaming = false
+01-24 18:01:04.120  1370  1541 I MobileSignalController: mobileLabel_SPCS = Boost Mobile, mobileLabel = Boost Mobile, mInService = true
+01-24 18:01:04.120  1370  1541 I NetworkController: onReceive: intent=Intent { act=android.intent.action.SIG_STR flg=0x10 (has extras) }
+01-24 18:01:04.126   492   492 I DisplayDevice: [Built-in Screen (type:0)] fps:0.490023,dur:4081.44,max:3190.01,min:891.43
+01-24 18:01:04.109  1026  7501 D ActivityManager: setTaskToReturnTo : TaskRecord{88d494c #339 A=com.crazyj36.startactivityforresult U=0 StackId=1 sz=1} / mTaskToReturnTo = 1
+01-24 18:01:04.133  1026  7501 I ActivityManager: Start proc 21655:com.crazyj36.startactivityforresult/u0a448 for activity com.crazyj36.startactivityforresult/.MainActivity
+01-24 18:01:04.151  1026  1242 D BezellessGripSuppressionFilter: getdisplaysize, x : 1080 y : 2160
+01-24 18:01:04.162  1026  1242 D InputDispatcher: Focus left window: Window{d365fe u0 com.teslacoilsw.launcher/com.teslacoilsw.launcher.NovaLauncher}
+01-24 18:01:04.201  1026  1242 I WindowManager: Starting window displayed
+01-24 18:01:04.210  1370  1370 I NavigationThemeResource: notify navigation bar color(0xffffffff)
+01-24 18:01:04.211  1370  1370 I NavigationThemeResource: NavigationKey Color is changed(WHITE_WITH_BORDER -> BLACK)
+01-24 18:01:04.211  1370  1370 I NavigationThemeResource:  BarMode=4, Theme=WHITE, LightBackground=true (NOT Transparent)
+01-24 18:01:04.211  1370  1370 I NavigationThemeResource: , Keyguard show=false, IME shown=false, Bar vertical=false, Panel expanded=false
+01-24 18:01:04.211  1370  1370 D StatusBar: setSystemUiVisibility vis=8608 mask=ffffffff oldVal=8708 newVal=8608 diff=100
+01-24 18:01:04.224  2468  7625 D ViewRootImpl: onChangedNavigationGuardColor(), color: ffffffff
+01-24 18:01:04.225  2468  2468 D DecorView: updateNavigationGuardColor navigationGuardColor=0xffffffff
+01-24 18:01:04.230  1026  7501 D OverlayManager: setEnabled packageName=com.android.systemui.theme.dark enable=true userId=0
+01-24 18:01:04.270   492   531 I SurfaceFlinger: EventThread Client Pid (21655) created
+01-24 18:01:04.271   492   531 I chatty  : uid=1000(system) Binder:492_2 identical 1 line
+01-24 18:01:04.274   492   531 I SurfaceFlinger: EventThread Client Pid (21655) created
+01-24 18:01:04.275 21655 21671 D OpenGLRenderer: HWUI GL Pipeline
+01-24 18:01:04.279   492   531 I SurfaceFlinger: [SF client] NEW(0xb04a00a0) for (1026:system_server)
+01-24 18:01:04.286 21655 21655 D BezellessGripSuppressionFilter: getdisplaysize, x : 1080 y : 2160
+01-24 18:01:04.311   695   741 I PowerRM : FIA lock1 unlocked
+01-24 18:01:04.311   695   741 I PowerRM : System FW:0 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-24 18:01:04.311   695   741 I PowerRM : System FW:0 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-24 18:01:04.311   695   741 I PowerRM : Window Changed
+01-24 18:01:04.313  1026  8364 D InputDispatcher: Focus entered window: Window{eb12980 u0 com.crazyj36.startactivityforresult/com.crazyj36.startactivityforresult.MainActivity}
+01-24 18:01:04.323 21655 21671 I OpenGLRenderer: Initialized EGL, version 1.4
+01-24 18:01:04.323 21655 21671 D OpenGLRenderer: Swap behavior 2
+01-24 18:01:04.348 21655 21671 E ion     : ioctl c0044901 failed with code -1: Invalid argument
+01-24 18:01:04.360   697   697 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-24 18:01:04.378  2468  7625 D ViewRootImpl: onChangedNavigationGuardColor(), color: ffffffff
+01-24 18:01:04.378  2468  2468 D DecorView: updateNavigationGuardColor navigationGuardColor=0xffffffff
+01-24 18:01:04.381  1026  1242 D InputDispatcher: Window went away: Window{672aa67 u0 Splash Screen com.crazyj36.startactivityforresult}
+01-24 18:01:04.382  1026  1076 I ActivityManager: Displayed com.crazyj36.startactivityforresult/.MainActivity: +257ms
+01-24 18:01:04.385  2468  2468 I HK/LatinKbdBaseView: closing org.pocketworkstation.pckeyboard.LatinKeyboardView{f787f95 V.ED..... ......ID 0,0-1080,675 #7f080004 app:id/LatinkeyboardBaseView}
+01-24 18:01:04.396 21655 21655 I Timeline: Timeline: Activity_idle id: android.os.BinderProxy@f5664c0 time:208875740
+01-24 18:01:04.407 16646 16864 D ClClient: Not sending keepalive.  Current connection state=STOPPED
+01-24 18:01:04.502   661 18744 D pseudo  : mtk_gps_sys_nmea_output_to_mnld: received 971 bytes:
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[0]=7
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[0]=20.300000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[1]=8
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[1]=28.000000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[2]=11
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[2]=16.800000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[3]=9
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[3]=20.300000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[4]=30
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[4]=14.800000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[5]=23
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[5]=20.100000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[6]=48
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[6]=0.000000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[7]=1
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[7]=28.200000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[8]=27
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[8]=18.600000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[9]=4
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[9]=19.600000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[10]=28
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[10]=14.600000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[11]=16
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[11]=0.000000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[12]=17
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[12]=22.900000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: nmea:GSV,4,4,13,17,02,219,22.9*52
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[0]=84
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[0]=18.600000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[1]=73
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[1]=26.400000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[2]=83
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[2]=0.000000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[3]=74
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[3]=0.000000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[4]=80
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[4]=0.000000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[5]=72
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[5]=12.600000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[6]=71
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: snr[6]=34.500000
+01-24 18:01:04.503   661 18744 D nmea_parser: nmea_reader_parse: prn[7]=85
+01-24 18:01:04.504   661 18744 D nmea_parser: nmea_reader_parse: snr[7]=15.100000
+01-24 18:01:04.504   661 18744 D nmea_parser: nmea_reader_parse: prn[8]=65
+01-24 18:01:04.504   661 18744 D nmea_parser: nmea_reader_parse: snr[8]=0.000000
+01-24 18:01:04.504   661 18744 D nmea_parser: nmea_reader_parse: prn[9]=82
+01-24 18:01:04.504   661 18744 D nmea_parser: nmea_reader_parse: snr[9]=0.000000
+01-24 18:01:04.504   661 18744 D nmea_parser: nmea_reader_parse: nmea:GSV,3,3,10,65,05,321,,82,01,024,*6F
+01-24 18:01:04.504   661 18744 D lge_gnss_ftm: ftm_get_test_state: test state:0
+01-24 18:01:04.504   661   972 D MNLD    : mnld_main_thread: main_event_hdlr msg
+01-24 18:01:04.504   661 18744 D pseudo  : mtk_gps_sys_nmea_output_to_app: len:971, [NMEA]$GNGGA,230105.00...
+01-24 18:01:04.504   661   972 W MNLD    : main_event_hdlr: GPS2MAIN_EVENT_UPDATE_LOCATION  lat=28.262945 lng=-82.185943 acc=1.100000
+01-24 18:01:04.504   661 18744 D gps_controlller: mtk_gps_sys_gps_mnl_callback: msg:0
+01-24 18:01:04.504   661   972 D MNLD    : main_event_hdlr: wait_first_location=0
+01-24 18:01:04.504   661 18744 D gps_controlller: send_active_notify: send clean nmea timer cmd!
+01-24 18:01:04.504   661 18744 D gps_controlller: mtk_gps_sys_gps_mnl_callback: MTK_GPS_MSG_FIX_READY, GET_RTC_OK, 7.389, 0.009
+01-24 18:01:04.504   661   959 D gps_controlller: gps_control_thread: gps_control_thread wait
+01-24 18:01:04.504   661   972 D MNLD    : main_event_hdlr: location_sync done
+01-24 18:01:04.504   661 18744 D gps_controlller: mtk_gps_sys_gps_mnl_callback: Age = 2, RTCDiff = 30, Time_interval = 10
+01-24 18:01:04.505   699   766 D agps    : [agps][n][AGPS] [MNL] read  location_sync  lat=xxx lng=xxx acc=1
+01-24 18:01:04.505   661 18744 D pseudo  : mtk_gps_sys_nmea_output_to_app: len:44, [vAGPS_Auto_Req]:g_FirstDbtt:0,u2BitMap:0x0
+01-24 18:01:04.506   699   766 D agps    : [agps][n][CP] [MD_1] write  cp2_util_send_location_sync lat,lng=xxx,xxx acc=1
+01-24 18:01:04.509  1026  1277 D LgeGnssLocationProvider: reportNmea() in LgeGnssLocationProvider=> nmea: $GNRMC,230105.000,A,2815.7767,N,08211.1566,W,0.000,144.00,240120,,,A*52
+01-24 18:01:04.512   705  1729 W         : update_location: we have a location when gps_state_intent: STOP (4)
+01-24 18:01:04.513  1026  1277 V GnssLocationProvider: SV count: 23
+01-24 18:01:04.515  1026  1277 V GnssLocationProvider: [SV INFO] TOTAL CNT : 23
+01-24 18:01:04.515  1026  1277 V GnssLocationProvider: [SV INFO] GPS - SV#7(20.3, 59.0, 332.0, U), SV#8(28.0, 59.0, 36.0, U), SV#11(16.8, 57.0, 141.0, U), SV#9(20.3, 40.0, 216.0, U), SV#30(14.8, 27.0, 318.0, U), SV#23(20.1, 26.0, 189.0, U), SV#1(28.2, 25.0, 152.0, U), SV#27(18.6, 24.0, 39.0, U), SV#4(19.6, 23.0, 183.0, U), SV#28(14.6, 15.0, 276.0, U), SV#16(0.0, 5.0, 70.0, ), SV#17(22.9, 2.0, 219.0, ), 
+01-24 18:01:04.515  1026  1277 V GnssLocationProvider: [SV INFO] GLO - SV#84(18.6, 59.0, 154.0, U), SV#73(26.4, 50.0, 26.0, U), SV#83(0.0, 43.0, 43.0, ), SV#74(0.0, 26.0, 326.0, ), SV#80(0.0, 18.0, 95.0, ), SV#72(12.6, 17.0, 281.0, U), SV#71(34.5, 13.0, 232.0, U), SV#85(15.1, 10.0, 192.0, U), SV#65(0.0, 5.0, 321.0, ), SV#82(0.0, 1.0, 24.0, ), 
+01-24 18:01:04.515  1026  1277 V GnssLocationProvider: [SV INFO] BDS - No SV
+01-24 18:01:04.515  1026  1277 V GnssLocationProvider: [SV INFO] GAL - No SV
+01-24 18:01:04.515  1026  1277 V GnssLocationProvider: [SV INFO] QZSS - No SV
+01-24 18:01:04.732  1026  1274 D InputDispatcher: notifyMotion - action=ACTION_DOWN(0), id=0, pressure=0.251, tooltype=1, deviceId=4, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=208876075702000, downTime=208876075702000, 
+01-24 18:01:04.732  1026  1273 D InputTransport: channel 'eb12980 com.crazyj36.startactivityforresult/com.crazyj36.startactivityforresult.MainActivity (server)' : action=ACTION_DOWN(0), id=0, tooltype=1, deviceId=4, source=0x1002, flags=0x0, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=208876075702000, eventTime=208876075702000, pointerCount=1
+01-24 18:01:04.732 21655 21655 I ViewRootImpl: ViewRoot's Touch Event : ACTION_DOWN
+01-24 18:01:04.789  1026  1274 D InputDispatcher: notifyMotion - action=ACTION_UP(0), id=0, pressure=0.251, tooltype=1, deviceId=4, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=208876133572000, downTime=208876075702000, 
+01-24 18:01:04.790  1026  1273 D InputTransport: channel 'eb12980 com.crazyj36.startactivityforresult/com.crazyj36.startactivityforresult.MainActivity (server)' : action=ACTION_UP(0), id=0, tooltype=1, deviceId=4, source=0x1002, flags=0x0, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=208876075702000, eventTime=208876133572000, pointerCount=1
+01-24 18:01:04.792 21655 21655 I ViewRootImpl: ViewRoot's Touch Event : ACTION_UP
+01-24 18:01:04.793 21655 21655 I AudioManagerEx: AudioManagerEx created
+01-24 18:01:04.796  1026  4339 I ActivityManager: START u0 {act=android.intent.action.SEND (has extras)} from uid 10448
+01-24 18:01:04.797 21655 21655 D AndroidRuntime: Shutting down VM
+--------- beginning of crash
+01-24 18:01:04.798 21655 21655 E AndroidRuntime: FATAL EXCEPTION: main
+01-24 18:01:04.798 21655 21655 E AndroidRuntime: Process: com.crazyj36.startactivityforresult, PID: 21655
+01-24 18:01:04.798 21655 21655 E AndroidRuntime: android.content.ActivityNotFoundException: No Activity found to handle Intent { act=android.intent.action.SEND (has extras) }
+01-24 18:01:04.798 21655 21655 E AndroidRuntime: 	at android.app.Instrumentation.checkStartActivityResult(Instrumentation.java:1944)
+01-24 18:01:04.798 21655 21655 E AndroidRuntime: 	at android.app.Instrumentation.execStartActivity(Instrumentation.java:1618)
+01-24 18:01:04.798 21655 21655 E AndroidRuntime: 	at android.app.Activity.startActivityForResult(Activity.java:4506)
+01-24 18:01:04.798 21655 21655 E AndroidRuntime: 	at android.app.Activity.startActivityForResult(Activity.java:4464)
+01-24 18:01:04.798 21655 21655 E AndroidRuntime: 	at com.crazyj36.startactivityforresult.MainActivity$1.onClick(MainActivity.java:35)
+01-24 18:01:04.798 21655 21655 E AndroidRuntime: 	at android.view.View.performClick(View.java:6313)
+01-24 18:01:04.798 21655 21655 E AndroidRuntime: 	at android.view.View$PerformClick.run(View.java:24933)
+01-24 18:01:04.798 21655 21655 E AndroidRuntime: 	at android.os.Handler.handleCallback(Handler.java:790)
+01-24 18:01:04.798 21655 21655 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+01-24 18:01:04.798 21655 21655 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:164)
+01-24 18:01:04.798 21655 21655 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6651)
+01-24 18:01:04.798 21655 21655 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+01-24 18:01:04.798 21655 21655 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:438)
+01-24 18:01:04.798 21655 21655 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:810)
+01-24 18:01:04.801  1026  4339 W ActivityManager:   Force finishing activity com.crazyj36.startactivityforresult/.MainActivity
+01-24 18:01:04.810  2468  7625 D ViewRootImpl: onChangedNavigationGuardColor(), color: ffffffff
+01-24 18:01:04.810  2468  2468 D DecorView: updateNavigationGuardColor navigationGuardColor=0xffffffff
+01-24 18:01:04.815  1026 21688 W AES     : Exception Log handling...
+01-24 18:01:04.816  1026 21688 W AES     : Skipped - do not care third party apk
+01-24 18:01:04.818  1026  1054 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 (has extras) } to com.google.android.gms/.stats.service.DropBoxEntryAddedReceiver
+01-24 18:01:04.819  1026  1054 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 (has extras) } to com.google.android.gms/.chimera.GmsIntentOperationService$PersistentTrustedReceiver
+01-24 18:01:04.835  1026  1055 D InputDispatcher: Focus left window: Window{eb12980 u0 com.crazyj36.startactivityforresult/com.crazyj36.startactivityforresult.MainActivity}
+01-24 18:01:04.835  1026  1055 D InputDispatcher: Focus entered window: Window{cd3220c u0 Application Error: com.crazyj36.startactivityforresult}
+01-24 18:01:04.837   695   741 I PowerRM : FIA lock1 locked
+01-24 18:01:04.837   695   741 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-24 18:01:04.837   695   741 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-24 18:01:04.837   695   741 I PowerRM : Window Changed
+01-24 18:01:04.838  1026  1055 D BezellessGripSuppressionFilter: getdisplaysize, x : 1080 y : 2160
+01-24 18:01:04.839  1026  1055 I ActivityManager: Showing crash dialog for package com.crazyj36.startactivityforresult u0
+01-24 18:01:04.860  1026  7476 I OpenGLRenderer: Initialized EGL, version 1.4
+01-24 18:01:04.860  1026  7476 D OpenGLRenderer: Swap behavior 2
+01-24 18:01:04.867  1370  1370 I NavigationThemeResource: notify navigation bar color(0x0)
+01-24 18:01:04.867  1370  1370 I NavigationThemeResource: NavigationKey Color is changed(BLACK -> WHITE_WITH_BORDER)
+01-24 18:01:04.867  1370  1370 I NavigationThemeResource:  BarMode=4, Theme=WHITE, LightBackground=false (Transparent)
+01-24 18:01:04.867  1370  1370 I NavigationThemeResource: , Keyguard show=false, IME shown=false, Bar vertical=false, Panel expanded=false
+01-24 18:01:04.868  1370  1370 D StatusBar: setSystemUiVisibility vis=8008 mask=ffffffff oldVal=8608 newVal=8008 diff=600
+01-24 18:01:04.868  2468  7625 D ViewRootImpl: onChangedNavigationGuardColor(), color: ffffffff
+01-24 18:01:04.869  2468  2468 D DecorView: updateNavigationGuardColor navigationGuardColor=0xffffffff
+01-24 18:01:04.900  1026  1242 I WindowManager: Window{cd3220c u0 Application Error: com.crazyj36.startactivityforresult} start dimming: flags=1820002 effectFlags=0, layer=111000
+01-24 18:01:04.904   487   512 I vendor.mediatek.hardware.power@1.1-impl: scnDisable hdl:39
+01-24 18:01:04.907  1370 17474 I SystemServicesProxy: RecentApps has 1 item(s).
+01-24 18:01:04.908   487   511 I libPerfService: 39: legacy set: -1 -1 -1 -1
+01-24 18:01:04.909   487   511 I libPerfService: 39: legacy set freq: -1 -1 -1 -1
+01-24 18:01:04.910  1370 17474 D DDTIcon : getIconDrawableAsIconFrameTheme for com.crazyj36.startactivityforresult@0
+01-24 18:01:04.911  1370 17474 W DDTIcon : getIconDrawableAsIconFrameTheme got null as icon. Replace it to default one for com.crazyj36.startactivityforresult
+01-24 18:01:04.913  1370 17474 D DDTIcon : maxBgRes = 0
+01-24 18:01:04.914   667   685 D AAL     : 01-24 06:01:04.836 BL=1011,ESS= 256, 01-24 06:01:04.864 BL=1007,ESS= 256, 01-24 06:01:04.881 BL=1003,ESS= 256, 01-24 06:01:04.897 BL=1000,ESS= 256, 01-24 06:01:04.914 BL= 996,ESS= 256, 
+01-24 18:01:04.914  1370 17474 I SystemServicesProxy: Task.thumbnail loading failed for 339
+01-24 18:01:04.997   667   685 D AAL     : 01-24 06:01:04.930 BL= 992,ESS= 256, 01-24 06:01:04.947 BL= 988,ESS= 256, 01-24 06:01:04.964 BL= 984,ESS= 256, 01-24 06:01:04.980 BL= 980,ESS= 256, 01-24 06:01:04.997 BL= 976,ESS= 256, 
+01-24 18:01:05.079   667   685 D AAL     : 01-24 06:01:05.013 BL= 972,ESS= 256, 01-24 06:01:05.030 BL= 968,ESS= 256, 01-24 06:01:05.046 BL= 964,ESS= 256, 01-24 06:01:05.063 BL= 960,ESS= 256, 01-24 06:01:05.079 BL= 956,ESS= 256, 
+01-24 18:01:05.133   492   492 I DisplayDevice: [Built-in Screen (type:0)] fps:32.766979,dur:1007.11,max:344.92,min:9.77
+01-24 18:01:04.916  1026  1242 I WindowManager: Window{cd3220c u0 Application Error: com.crazyj36.startactivityforresult} start dimming: flags=1820002 effectFlags=0, layer=111000
+01-24 18:01:05.149  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=8 path=settings_secure.xml.backup sys=false lock=false imagePending=false whichPending=0x0 written=true
+01-24 18:01:05.150  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=128 path=settings_secure.xml.bak sys=false lock=false imagePending=false whichPending=0x0 written=true
+01-24 18:01:05.162   667   685 D AAL     : 01-24 06:01:05.096 BL= 952,ESS= 256, 01-24 06:01:05.112 BL= 948,ESS= 256, 01-24 06:01:05.129 BL= 944,ESS= 256, 01-24 06:01:05.145 BL= 940,ESS= 256, 01-24 06:01:05.162 BL= 936,ESS= 256, 
+01-24 18:01:05.188  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=8 path=settings_secure.xml sys=false lock=false imagePending=false whichPending=0x0 written=true
+01-24 18:01:05.188  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=512 path=settings_secure.xml.bak sys=false lock=false imagePending=false whichPending=0x0 written=false
+01-24 18:01:05.245   667   685 D AAL     : 01-24 06:01:05.179 BL= 932,ESS= 256, 01-24 06:01:05.195 BL= 928,ESS= 256, 01-24 06:01:05.211 BL= 924,ESS= 256, 01-24 06:01:05.228 BL= 920,ESS= 256, 01-24 06:01:05.244 BL= 916,ESS= 256, 
+01-24 18:01:05.305  1026  1054 W ActivityManager: Activity pause timeout for ActivityRecord{dfedeaa u0 com.crazyj36.startactivityforresult/.MainActivity t339 f}
+01-24 18:01:05.315   478   478 W PHHandler: [PH] hint id(103) is not supported
+01-24 18:01:05.315   487   512 I vendor.mediatek.hardware.power@1.1-impl: scnEnable hdl:39, timeout:3500
+01-24 18:01:05.317   695   741 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-24 18:01:05.317   487   511 I powerd  : [powerd_req] POWER_MSG_SCN_ENABLE: hdl:39, timeout:3500
+01-24 18:01:05.318   487   511 I libPerfService: perfUserScnEnable - handle:39
+01-24 18:01:05.319   487   511 I libPerfService: 39: legacy set freq: 1001000 -1 1508000 -1
+01-24 18:01:05.326   487   511 I libPerfService: 39: legacy set: 3 -1 4 -1
+01-24 18:01:05.327   667   685 D AAL     : 01-24 06:01:05.261 BL= 912,ESS= 256, 01-24 06:01:05.277 BL= 908,ESS= 256, 01-24 06:01:05.294 BL= 904,ESS= 256, 01-24 06:01:05.311 BL= 900,ESS= 256, 01-24 06:01:05.327 BL= 896,ESS= 256, 
+01-24 18:01:05.363   697   697 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-24 18:01:05.379   697   697 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-24 18:01:05.410   667   685 D AAL     : 01-24 06:01:05.344 BL= 892,ESS= 256, 01-24 06:01:05.360 BL= 888,ESS= 256, 01-24 06:01:05.377 BL= 884,ESS= 256, 01-24 06:01:05.393 BL= 880,ESS= 256, 01-24 06:01:05.410 BL= 876,ESS= 256, 
+01-24 18:01:05.428  2174  2174 I Timeline: Timeline: Activity_idle id: android.os.BinderProxy@d7728ca time:208876771
