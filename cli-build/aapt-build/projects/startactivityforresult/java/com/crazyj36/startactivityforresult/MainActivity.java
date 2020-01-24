@@ -22,8 +22,7 @@ public class MainActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent chooseIntent = new Intent(Intent.ACTION_PICK);
-                chooseIntent.setType("image/*");
+                Intent chooseIntent = new Intent(Intent.ACTION_CREATE_SHORTCUT);
                 startActivityForResult(chooseIntent, INTENT_REQUEST);
             }
         });
@@ -34,7 +33,8 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
        if (requestCode == INTENT_REQUEST && resultCode == RESULT_OK) {
            TextView tvResult = findViewById(R.id.tvResult);
-           tvResult.setText(data.toString());
+           String dataResult = data.toUri(2);
+           tvResult.setText(dataResult + "\n\n can parseUri after this to start what was chosen. Try it.");
        }
    }
 }
