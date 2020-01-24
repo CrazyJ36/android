@@ -6,8 +6,6 @@ import android.view.View;
 import android.content.Intent;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.net.Uri;
 
 public class MainActivity extends Activity {
     int INTENT_REQUEST = 1;
@@ -24,13 +22,8 @@ public class MainActivity extends Activity {
                    ACTION_PICK_ACTIVITY: returns working intent(data) to chosen activity.
                      and data.toUri(0) will show to full intent string.
                      Can startActivity(data) in onActivityResult()
-                   ACTION_CREATE_SHORTCUT:
-
-                   ACTION...:
-
                 */
-                Intent chooseIntent = new Intent(Intent.ACTION_SEND);
-                chooseIntent.putStringExtra("CRA");
+                Intent chooseIntent = new Intent(Intent.ACTION_PICK_ACTIVITY);
                 startActivityForResult(chooseIntent, INTENT_REQUEST);
             }
         });
@@ -41,15 +34,13 @@ public class MainActivity extends Activity {
        super.onActivityResult(requestCode, resultCode, data);
        if (requestCode == INTENT_REQUEST && resultCode == RESULT_OK) {
            TextView tvResult = findViewById(R.id.tvResult);
-           //String dataResult = data.toUri(0);
-           //tvResult.setText(dataResult);
            String dataResult = data.toUri(0);
            tvResult.setText(dataResult);
 	       Button btnLaunch = findViewById(R.id.btnLaunch);
 	       btnLaunch.setOnClickListener(new View.OnClickListener() {
 	           @Override
 	           public void onClick(View view) {
-	               //startActivity(data);
+	               startActivity(data);
 	           }
 	       });
        }
