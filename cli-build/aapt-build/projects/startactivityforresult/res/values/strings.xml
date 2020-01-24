@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Start Activity For Result</string>
+    <string name="tvInstructionsTxt">
+    The button will start A chooser, after you choose the app
+    will display what was chosen.
+    </string>
+    <string name="btnChooseTxt">Choose</string>
+    <string name="tvResultTxt">Chosen result will show here</string>
+</resources>

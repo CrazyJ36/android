@@ -38,6 +38,7 @@ Binary to octal and vice-versa. Reverse sentence using recursion.
     <string name="btnNotifyTxt">Notify</string>
     <string name="updateTxtBtnTxt">Update</string>
     <string name="btnPlayAudioTxt">Play</string>
+    <string name="btnPopupMenuTxt">Popup</string>
     <string name="tvMediaPlayingTxt">Audio playing...</string>
 	<string name="tvMediaDoneTxt">MediaPlayer released</string>
 	<string name="tvMediaNotPlayingTxt">Nothing happening</string>
@@ -99,6 +100,8 @@ doesn\'t require storage permission
          <item>Nine</item>
          <item>Ten</item>
     </string-array>
+    <string name="popupMenuItem1Txt">PopupMenu item 1</string>
+    <string name="popupMenuItem2Txt">PopupMenu item 2</string>
     <!--Activity 2-->
     <string name="btnCallTxt">Call</string>
     <string name="etCallHint">Phone Number</string>

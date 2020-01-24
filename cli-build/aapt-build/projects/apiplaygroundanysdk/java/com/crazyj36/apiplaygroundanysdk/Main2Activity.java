@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.Toast;
@@ -135,9 +136,27 @@ public class Main2Activity extends Activity {
         switch(menuItem.getItemId()) {
             case R.id.menuExit:
                 Main2Activity.this.finish();
+                onDestroy();
                 return true;
             default:
                 return super.onOptionsItemSelected(menuItem);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    public void imageButtonPlayClick(View v) {
+       int[] imgBtnPos = new int[2];
+       v.getLocationOnScreen(imgBtnPos);
+       Toast imgBtnInfo = Toast.makeText(Main2Activity.this, "Play Button", Toast.LENGTH_SHORT);
+       imgBtnInfo.setGravity(Gravity.START | Gravity.TOP, imgBtnPos[0], imgBtnPos[1]);
+       imgBtnInfo.show();
+    }
+
+    public void generalToast(String text) {
+        Toast.makeText(Main2Activity.this, text, Toast.LENGTH_SHORT).show();
     }
 }

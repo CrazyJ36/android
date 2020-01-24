@@ -109,6 +109,13 @@
             android:layout_toRightOf="@id/btnNotify"
             android:layout_below="@id/btnUpdateTxt" />
 
+        <Button
+            android:id="@+id/btnPopupMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/btnUpdateTxt"
+            android:text="@string/btnPopupMenuTxt" />
+
     </RelativeLayout>
 
     <LinearLayout

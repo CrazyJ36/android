@@ -48,6 +48,7 @@ import android.widget.ScrollView;
 import android.widget.ToggleButton;
 import android.widget.CompoundButton;
 import android.widget.GridView;
+import android.widget.PopupMenu;
 import android.net.Uri;
 import android.util.Log;
 import android.util.DisplayMetrics;
@@ -82,6 +83,7 @@ public class MainActivity extends Activity {
     String updaterTxt = "Update 0";
     String numbersEntered = "";
     String displayResolution = "";
+    String popupMenuMenu = "";
     // onCreate activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -426,6 +428,16 @@ public class MainActivity extends Activity {
         DisplayMetrics displayMetrics = getApplicationContext().getResources().getDisplayMetrics();
         displayResolution = "Resolution Width: " + String.valueOf(displayMetrics.widthPixels)
             + " Height: " + String.valueOf(displayMetrics.heightPixels);
+        // PopupMenu Button
+        Button btnPopupMenu = findViewById(R.id.btnPopupMenu);
+        btnPopupMenu.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(MainActivity.this, v);
+                popupMenu.inflate(R.menu.popup_menu_layout); // or popupMenu.getMenuInflater().inflate(R.menu.popup_menu_layout, popupMenu.getMenu());
+                popupMenu.show();
+            }
+        });
         // getStorage permission & start filesTask()
         if (sdkVersion < 23) {
             filesTask();
@@ -617,7 +629,7 @@ public class MainActivity extends Activity {
     // onDestroy
     @Override
     protected void onDestroy() {
-        generalToast("apiplayground destroyed");
+        generalToast("apiplaygroundanysdk MainActivity destroyed");
         super.onDestroy();
     }
 
