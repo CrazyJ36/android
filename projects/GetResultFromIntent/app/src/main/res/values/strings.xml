@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">Get Result From Intent</string>
-    <string name="tvResultsTxt">Chosen Intent will show here</string>
-    <string name="btnChooseTxt">Choose</string>
-    <string name="btnLaunchTxt">Launch</string>
-</resources>
