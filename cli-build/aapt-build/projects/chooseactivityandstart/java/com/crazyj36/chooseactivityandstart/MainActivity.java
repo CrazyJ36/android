@@ -1,4 +1,4 @@
-package com.crazyj36.startactivityforresult;
+package com.crazyj36.chooseactivityandstart;
 
 import android.app.Activity;
 import android.os.Bundle;
