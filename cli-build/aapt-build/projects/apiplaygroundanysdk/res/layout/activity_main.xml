@@ -6,6 +6,7 @@
     android:layout_width="match_parent" >
 
   <LinearLayout 
+    android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -110,11 +111,11 @@
             android:layout_below="@id/btnUpdateTxt" />
 
         <Button
-            android:id="@+id/btnPopupMenu"
+            android:id="@+id/btnPopupWindow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/btnUpdateTxt"
-            android:text="@string/btnPopupMenuTxt" />
+            android:text="@string/btnPopupWindowTxt" />
 
     </RelativeLayout>
 

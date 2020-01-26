@@ -27,6 +27,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View.OnClickListener;
+import android.view.LayoutInflater;
+import android.view.Gravity;
+import android.view.ViewGroup.LayoutParams;
 import android.content.pm.PackageManager;
 import android.content.Intent;
 import android.content.Context;
@@ -34,6 +37,7 @@ import android.content.res.Configuration;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.media.MediaPlayer;
+import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,7 +52,7 @@ import android.widget.ScrollView;
 import android.widget.ToggleButton;
 import android.widget.CompoundButton;
 import android.widget.GridView;
-import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.net.Uri;
 import android.util.Log;
 import android.util.DisplayMetrics;
@@ -83,7 +87,6 @@ public class MainActivity extends Activity {
     String updaterTxt = "Update 0";
     String numbersEntered = "";
     String displayResolution = "";
-    String popupMenuMenu = "";
     // onCreate activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -428,14 +431,19 @@ public class MainActivity extends Activity {
         DisplayMetrics displayMetrics = getApplicationContext().getResources().getDisplayMetrics();
         displayResolution = "Resolution Width: " + String.valueOf(displayMetrics.widthPixels)
             + " Height: " + String.valueOf(displayMetrics.heightPixels);
-        // PopupMenu Button
-        Button btnPopupMenu = findViewById(R.id.btnPopupMenu);
-        btnPopupMenu.setOnClickListener(new OnClickListener() {
+        // PopupWindow Button
+        Button btnPopupWindow = findViewById(R.id.btnPopupWindow);
+        final LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        btnPopupWindow.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(MainActivity.this, v);
-                popupMenu.inflate(R.menu.popup_menu_layout); // or popupMenu.getMenuInflater().inflate(R.menu.popup_menu_layout, popupMenu.getMenu());
-                popupMenu.show();
+                PopupWindow popupWindow = new PopupWindow(
+                    inflater.inflate(R.layout.popup_window_layout, null),
+                    LayoutParams.WRAP_CONTENT,
+                    LayoutParams.WRAP_CONTENT
+                );
+                LinearLayout linearLayout = findViewById(R.id.rootView);
+                popupWindow.showAtLocation(linearLayout, Gravity.CENTER, 0, 0);
             }
         });
         // getStorage permission & start filesTask()

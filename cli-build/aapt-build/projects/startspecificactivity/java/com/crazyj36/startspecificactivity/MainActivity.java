@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
         Intent launchIntent = new Intent();
         ComponentName componentName = new ComponentName(
             "com.android.settings",
-            "com.android.settings.Settings$DeviceInfoSettingsActivity"
+            "com.android.settings.ApplicationSettings"
         );
         launchIntent.setComponent(componentName);
         startActivity(launchIntent);
