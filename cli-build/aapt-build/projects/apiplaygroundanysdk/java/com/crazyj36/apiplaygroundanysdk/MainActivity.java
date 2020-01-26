@@ -436,30 +436,23 @@ public class MainActivity extends Activity {
         displayResolution = "Resolution Width: " + String.valueOf(displayMetrics.widthPixels)
             + " Height: " + String.valueOf(displayMetrics.heightPixels);
         // PopupWindow Button
-        Button btnPopupWindow = findViewById(R.id.btnPopupWindow);
-	    LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         final LinearLayout linearLayout = findViewById(R.id.rootView);
 	    popupWindow = new PopupWindow(
 	        inflater.inflate(R.layout.popup_window_layout, null),
 	        LayoutParams.WRAP_CONTENT,
 	        LayoutParams.WRAP_CONTENT
 	    );
-
-        final ImageButton popupWindowBtn = findViewById(R.id.popupWindowBtn);
+        Button btnPopupWindow = findViewById(R.id.btnPopupWindow);
         btnPopupWindow.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                popupWindow.showAtLocation(linearLayout, Gravity.BOTTOM | Gravity.RIGHT, 0, 0);
-
-                // Causes: attempt to set onClickListener on A null object reference.
-                /*if (popupWindow.isShowing()) {
-                    popupWindowBtn.setOnClickListener(new OnClickListener() {
-			            @Override
-			            public void onClick(View v) {
-			                generalToast("Fab Clicked");
-			            }
-			        });
-                }*/
+                popupWindow.getContentView().findViewById(R.id.popupWindowFab).setOnClickListener(new OnClickListener() {
+                    public void onClick(View v) {
+                        generalToast("Fab Clicked");
+                    }
+                });
+                popupWindow.showAtLocation(linearLayout, Gravity.RIGHT | Gravity.BOTTOM, 0, 0);
             }
         });
         // getStorage permission & start filesTask()
@@ -617,6 +610,15 @@ public class MainActivity extends Activity {
         menuInflater.inflate(R.menu.menu_layout, menu);
         return true;
     }
+    // Called everytime menu is opened.
+    public boolean onPrepareOptionsMenu(Menu menu) {
+	    if (!popupWindow.isShowing()) {
+	        menu.getItem(1).setEnabled(false);
+	    } else {
+	        menu.getItem(1).setEnabled(true);
+	    }
+        return true;
+    }
     // Menu onclicks
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -640,8 +642,6 @@ public class MainActivity extends Activity {
             case R.id.menuHideFab:
                 if (popupWindow.isShowing()) {
                     popupWindow.dismiss();
-                }  else {
-                    generalToast("Fab not showing");
                 }
                 return true;
             case R.id.menuExit:
