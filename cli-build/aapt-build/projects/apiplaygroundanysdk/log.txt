@@ -1,89 +1,38 @@
 --------- beginning of /dev/log/main
-W/ResourceType(  303): Entry identifier 0x128 is larger than entry count 0xab
+W/dalvikvm( 1428): threadid=1: thread exiting with uncaught exception (group=0x40019560)
 --------- beginning of /dev/log/system
-I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.apiplaygroundanysdk/.MainActivity } from pid 464
-W/WindowManager(  303): [PhoneWindowManager.java:1099:addStartingWindow()] HistoryRecord{407dad50 com.crazyj36.apiplaygroundanysdk/.MainActivity} failed creating starting window
-W/WindowManager(  303): java.lang.RuntimeException: Binary XML file line #25: You must supply a layout_height attribute.
-W/WindowManager(  303): 	at android.content.res.TypedArray.getLayoutDimension(TypedArray.java:491)
-W/WindowManager(  303): 	at android.view.ViewGroup$LayoutParams.setBaseAttributes(ViewGroup.java:3599)
-W/WindowManager(  303): 	at android.view.ViewGroup$MarginLayoutParams.<init>(ViewGroup.java:3678)
-W/WindowManager(  303): 	at android.widget.LinearLayout$LayoutParams.<init>(LinearLayout.java:1400)
-W/WindowManager(  303): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:1326)
-W/WindowManager(  303): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:47)
-W/WindowManager(  303): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:625)
-W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
-W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
-W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
-W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.generateLayout(PhoneWindow.java:2290)
-W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.installDecor(PhoneWindow.java:2345)
-W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.getDecorView(PhoneWindow.java:1511)
-W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindowManager.addStartingWindow(PhoneWindowManager.java:1070)
-W/WindowManager(  303): 	at com.android.server.WindowManagerService$H.handleMessage(WindowManagerService.java:8347)
-W/WindowManager(  303): 	at android.os.Handler.dispatchMessage(Handler.java:99)
-W/WindowManager(  303): 	at android.os.Looper.loop(Looper.java:130)
-W/WindowManager(  303): 	at com.android.server.WindowManagerService$WMThread.run(WindowManagerService.java:582)
-D/Launcher.Workspace(  464): [Workspace.java:2036:hideWallpaper()] Show wallpaper
-I/ActivityManager(  303): process name to start: com.crazyj36.apiplaygroundanysdk
-E/ActivityManager(  303): heap conf. property name string trimmed: hs.com.crazyj36.apiplaygroundan
-I/ActivityManager(  303): Start proc com.crazyj36.apiplaygroundanysdk for activity com.crazyj36.apiplaygroundanysdk/.MainActivity: pid=4469 uid=10015 gids={1015}
-W/dalvikvm( 4469): VFY: unable to resolve virtual method 193: Lcom/crazyj36/apiplaygroundanysdk/MainActivity;.getActionBar ()Landroid/app/ActionBar;
-E/dalvikvm( 4469): Could not find class 'android.app.NotificationChannel', referenced from method com.crazyj36.apiplaygroundanysdk.MainActivity.onCreate
-W/dalvikvm( 4469): VFY: unable to resolve new-instance 9 (Landroid/app/NotificationChannel;) in Lcom/crazyj36/apiplaygroundanysdk/MainActivity;
-W/dalvikvm( 4469): VFY: unable to resolve virtual method 68: Landroid/os/Vibrator;.hasVibrator ()Z
-W/dalvikvm( 4469): VFY: unable to resolve virtual method 68: Landroid/os/Vibrator;.hasVibrator ()Z
-W/dalvikvm( 4469): VFY: unable to resolve virtual method 68: Landroid/os/Vibrator;.hasVibrator ()Z
-W/dalvikvm( 4469): VFY: unable to resolve virtual method 68: Landroid/os/Vibrator;.hasVibrator ()Z
-W/dalvikvm( 4469): VFY: unable to resolve virtual method 188: Lcom/crazyj36/apiplaygroundanysdk/MainActivity;.checkSelfPermission (Ljava/lang/String;)I
-W/ResourceType( 4469): Entry identifier 0x128 is larger than entry count 0xab
-I/APIPLAYGROUNDLOG( 4469): [MainActivity.java:198:onCreate()] App Started
-I/APIPLAYGROUNDLOG( 4469): Log.println() test
-E/dalvikvm( 4469): Could not find class 'android.app.Notification$Builder', referenced from method com.crazyj36.apiplaygroundanysdk.MainActivity$10.onClick
-W/dalvikvm( 4469): VFY: unable to resolve new-instance 7 (Landroid/app/Notification$Builder;) in Lcom/crazyj36/apiplaygroundanysdk/MainActivity$10;
-E/dalvikvm( 4469): Could not find class 'android.app.Notification$Builder', referenced from method com.crazyj36.apiplaygroundanysdk.MainActivity$10.onClick
-W/dalvikvm( 4469): VFY: unable to resolve new-instance 7 (Landroid/app/Notification$Builder;) in Lcom/crazyj36/apiplaygroundanysdk/MainActivity$10;
-W/dalvikvm( 4469): threadid=1: thread exiting with uncaught exception (group=0x40019560)
-E/AndroidRuntime( 4469): FATAL EXCEPTION: main
-E/AndroidRuntime( 4469): java.lang.RuntimeException: Binary XML file line #3: You must supply a layout_width attribute.
-E/AndroidRuntime( 4469): 	at android.content.res.TypedArray.getLayoutDimension(TypedArray.java:491)
-E/AndroidRuntime( 4469): 	at android.view.ViewGroup$LayoutParams.setBaseAttributes(ViewGroup.java:3598)
-E/AndroidRuntime( 4469): 	at android.view.ViewGroup$LayoutParams.<init>(ViewGroup.java:3551)
-E/AndroidRuntime( 4469): 	at android.widget.AbsListView$LayoutParams.<init>(AbsListView.java:5391)
-E/AndroidRuntime( 4469): 	at android.widget.AbsListView.generateLayoutParams(AbsListView.java:5185)
-E/AndroidRuntime( 4469): 	at android.widget.AbsListView.generateLayoutParams(AbsListView.java:88)
-E/AndroidRuntime( 4469): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:396)
-E/AndroidRuntime( 4469): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
-E/AndroidRuntime( 4469): 	at android.widget.ArrayAdapter.createViewFromResource(ArrayAdapter.java:332)
-E/AndroidRuntime( 4469): 	at android.widget.ArrayAdapter.getView(ArrayAdapter.java:323)
-E/AndroidRuntime( 4469): 	at android.widget.AbsListView.obtainView(AbsListView.java:2220)
-E/AndroidRuntime( 4469): 	at android.widget.GridView.onMeasure(GridView.java:935)
-E/AndroidRuntime( 4469): 	at android.view.View.measure(View.java:8390)
-E/AndroidRuntime( 4469): 	at android.view.ViewGroup.measureChildWithMargins(ViewGroup.java:3138)
-E/AndroidRuntime( 4469): 	at android.widget.LinearLayout.measureChildBeforeLayout(LinearLayout.java:1017)
-E/AndroidRuntime( 4469): 	at android.widget.LinearLayout.measureVertical(LinearLayout.java:386)
-E/AndroidRuntime( 4469): 	at android.widget.LinearLayout.onMeasure(LinearLayout.java:309)
-E/AndroidRuntime( 4469): 	at android.view.View.measure(View.java:8390)
-E/AndroidRuntime( 4469): 	at android.widget.ScrollView.measureChildWithMargins(ScrollView.java:1778)
-E/AndroidRuntime( 4469): 	at android.widget.FrameLayout.onMeasure(FrameLayout.java:250)
-E/AndroidRuntime( 4469): 	at android.widget.ScrollView.onMeasure(ScrollView.java:865)
-E/AndroidRuntime( 4469): 	at android.view.View.measure(View.java:8390)
-E/AndroidRuntime( 4469): 	at android.view.ViewGroup.measureChildWithMargins(ViewGroup.java:3138)
-E/AndroidRuntime( 4469): 	at android.widget.FrameLayout.onMeasure(FrameLayout.java:250)
-E/AndroidRuntime( 4469): 	at android.view.View.measure(View.java:8390)
-E/AndroidRuntime( 4469): 	at android.widget.LinearLayout.measureVertical(LinearLayout.java:531)
-E/AndroidRuntime( 4469): 	at android.widget.LinearLayout.onMeasure(LinearLayout.java:309)
-E/AndroidRuntime( 4469): 	at android.view.View.measure(View.java:8390)
-E/AndroidRuntime( 4469): 	at android.view.ViewGroup.measureChildWithMargins(ViewGroup.java:3138)
-E/AndroidRuntime( 4469): 	at android.widget.FrameLayout.onMeasure(FrameLayout.java:250)
-E/AndroidRuntime( 4469): 	at android.view.View.measure(View.java:8390)
-E/AndroidRuntime( 4469): 	at android.view.ViewRoot.performTraversals(ViewRoot.java:845)
-E/AndroidRuntime( 4469): 	at android.view.ViewRoot.handleMessage(ViewRoot.java:1869)
-E/AndroidRuntime( 4469): 	at android.os.Handler.dispatchMessage(Handler.java:99)
-E/AndroidRuntime( 4469): 	at android.os.Looper.loop(Looper.java:130)
-E/AndroidRuntime( 4469): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
-E/AndroidRuntime( 4469): 	at java.lang.reflect.Method.invokeNative(Native Method)
-E/AndroidRuntime( 4469): 	at java.lang.reflect.Method.invoke(Method.java:507)
-E/AndroidRuntime( 4469): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
-E/AndroidRuntime( 4469): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
-E/AndroidRuntime( 4469): 	at dalvik.system.NativeStart.main(Native Method)
-W/ActivityManager(  303):   Force finishing activity com.crazyj36.apiplaygroundanysdk/.MainActivity
-W/ActivityManager(  303): Activity pause timeout for HistoryRecord{407dad50 com.crazyj36.apiplaygroundanysdk/.MainActivity}
+E/AndroidRuntime( 1428): FATAL EXCEPTION: main
+E/AndroidRuntime( 1428): java.lang.IllegalStateException: Could not find a method fabClick(View) in the activity class android.app.Application for onClick handler on view class android.widget.ImageButton with id 'popupWindowBtn'
+E/AndroidRuntime( 1428): 	at android.view.View$1.onClick(View.java:2166)
+E/AndroidRuntime( 1428): 	at android.view.View.performClick(View.java:2520)
+E/AndroidRuntime( 1428): 	at android.view.View$PerformClick.run(View.java:9157)
+E/AndroidRuntime( 1428): 	at android.os.Handler.handleCallback(Handler.java:587)
+E/AndroidRuntime( 1428): 	at android.os.Handler.dispatchMessage(Handler.java:92)
+E/AndroidRuntime( 1428): 	at android.os.Looper.loop(Looper.java:130)
+E/AndroidRuntime( 1428): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
+E/AndroidRuntime( 1428): 	at java.lang.reflect.Method.invokeNative(Native Method)
+E/AndroidRuntime( 1428): 	at java.lang.reflect.Method.invoke(Method.java:507)
+E/AndroidRuntime( 1428): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
+E/AndroidRuntime( 1428): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
+E/AndroidRuntime( 1428): 	at dalvik.system.NativeStart.main(Native Method)
+E/AndroidRuntime( 1428): Caused by: java.lang.NoSuchMethodException: fabClick
+E/AndroidRuntime( 1428): 	at java.lang.ClassCache.findMethodByName(ClassCache.java:247)
+E/AndroidRuntime( 1428): 	at java.lang.Class.getMethod(Class.java:962)
+E/AndroidRuntime( 1428): 	at android.view.View$1.onClick(View.java:2159)
+E/AndroidRuntime( 1428): 	... 11 more
+W/ActivityManager(  285):   Force finishing activity com.crazyj36.apiplaygroundanysdk/.MainActivity
+W/ActivityManager(  285): Activity pause timeout for HistoryRecord{4071ec68 com.crazyj36.apiplaygroundanysdk/.MainActivity}
+D/Launcher.Workspace(  440): [Workspace.java:2036:hideWallpaper()] Show wallpaper
+D/Launcher.Workspace(  440): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
+E/ActivityThread(  440): Failed to find provider info for call_log
+E/ActivityThread(  440): Failed to find provider info for com.lge.providers.lgemail
+E/ActivityThread(  440): Failed to find provider info for com.android.whatsnew
+I/ActivityManager(  285): Process com.crazyj36.apiplaygroundanysdk (pid 1428) has died.
+I/WindowManager(  285): WIN DEATH: Window{40809ce8 com.crazyj36.apiplaygroundanysdk/com.crazyj36.apiplaygroundanysdk.MainActivity paused=false}
+E/InputDispatcher(  285): channel '407367f8 PopupWindow:40547ab0 (server)' ~ Consumer closed input channel or an error occurred.  events=0x8
+E/InputDispatcher(  285): channel '407367f8 PopupWindow:40547ab0 (server)' ~ Channel is unrecoverably broken and will be disposed!
+I/WindowManager(  285): WIN DEATH: Window{407367f8 PopupWindow:40547ab0 paused=false}
+E/JavaBinder(  285): Transact on 0x4ddab0 in Java object 0x4077aa30 with code 3 failed
+E/JavaBinder(  285): Transact on 0x4ddab0 in Java object 0x4077aa30 with code 4 failed
+W/InputManagerService(  285): Got RemoteException sending setActive(false) notification to pid 1428 uid 10015
+I/#LGIME  (  421): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
