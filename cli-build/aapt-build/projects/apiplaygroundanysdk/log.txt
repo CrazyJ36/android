@@ -1,104 +1,89 @@
---------- beginning of main
-01-24 00:31:02.321   481  1245 I sensors_hal_Accel: batch: handle:0, flag:0,samplingPeriodNs:200000000 maxBatchReportLatencyNs:0
-01-24 00:31:02.531  2370 30843 D BluetoothAdapter: isLeEnabled(): ON
-01-24 00:31:02.534  5259  5300 I bt_stack: [INFO:gatt_api.cc(1004)] GATT_Register
-01-24 00:31:02.535  5259  5300 I bt_stack: [INFO:gatt_api.cc(1027)] allocated gatt_if=6
-01-24 00:31:02.535  2370  4258 D BluetoothLeScanner: onScannerRegistered() - status=0 scannerId=6 mScannerId=0
-01-24 00:31:02.537  5259  5325 D BtGatt.GattService: startScan() : callingPackage=com.google.android.gms
-01-24 00:31:02.538  5259  5325 D LGBluetoothGattAdapter: isAllowPackage(): Package is OK : Return TRUE
-01-24 00:31:02.544   444 16947 D [BT]    : mtk_bt_op: BT_VND_OP_LPM_WAKE_SET_STATE
-01-24 00:31:02.652  1992  2004 I zygote  : Background concurrent copying GC freed 350002(16MB) AllocSpace objects, 5(168KB) LOS objects, 50% free, 16MB/32MB, paused 221us total 297.766ms
-01-24 00:31:02.680  1026  1274 D InputDispatcher: notifyMotion - action=ACTION_DOWN(0), id=0, pressure=0.173, tooltype=1, deviceId=4, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=149764798118000, downTime=149764798118000, 
-01-24 00:31:02.680  1026  1273 D InputTransport: channel '3ef64c0 com.crazyj36.apiplaygroundanysdk/com.crazyj36.apiplaygroundanysdk.Main2Activity (server)' : action=ACTION_DOWN(0), id=0, tooltype=1, deviceId=4, source=0x1002, flags=0x2, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=149764798118000, eventTime=149764798118000, pointerCount=1
---------- beginning of system
-01-24 00:31:02.681 32226 32226 I ViewRootImpl: ViewRoot's Touch Event : ACTION_DOWN
-01-24 00:31:02.690  1026  1055 D InputDispatcher: Window went away: Window{7ac8223 u0 PopupWindow:364d075}
-01-24 00:31:02.746  1026  1274 D InputDispatcher: notifyMotion - action=ACTION_UP(0), id=0, pressure=0.173, tooltype=1, deviceId=4, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=149764864184000, downTime=149764798118000, 
-01-24 00:31:02.746  1026  1273 D InputTransport: channel '3ef64c0 com.crazyj36.apiplaygroundanysdk/com.crazyj36.apiplaygroundanysdk.Main2Activity (server)' : action=ACTION_UP(0), id=0, tooltype=1, deviceId=4, source=0x1002, flags=0x2, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=149764798118000, eventTime=149764864184000, pointerCount=1
-01-24 00:31:02.748 32226 32226 I ViewRootImpl: ViewRoot's Touch Event : ACTION_UP
-01-24 00:31:02.752 32226 32226 D AndroidRuntime: Shutting down VM
---------- beginning of crash
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: FATAL EXCEPTION: main
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: Process: com.crazyj36.apiplaygroundanysdk, PID: 32226
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: java.lang.IllegalStateException: Could not execute method for android:onClick
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	at android.view.View$DeclaredOnClickListener.onClick(View.java:5388)
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	at android.view.View.performClick(View.java:6313)
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	at android.view.View$PerformClick.run(View.java:24933)
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	at android.os.Handler.handleCallback(Handler.java:790)
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:99)
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:164)
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6651)
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:438)
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:810)
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: Caused by: java.lang.reflect.InvocationTargetException
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	at android.view.View$DeclaredOnClickListener.onClick(View.java:5383)
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	... 9 more
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.String android.content.Context.getPackageName()' on a null object reference
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	at android.content.ContextWrapper.getPackageName(ContextWrapper.java:135)
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	at android.widget.Toast.<init>(Toast.java:135)
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	at android.widget.Toast.makeText(Toast.java:347)
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	at android.widget.Toast.makeText(Toast.java:337)
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	at com.crazyj36.apiplaygroundanysdk.MainActivity.generalToast(MainActivity.java:637)
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	at com.crazyj36.apiplaygroundanysdk.Main2Activity.imageButtonAccountClick(Main2Activity.java:145)
-01-24 00:31:02.753 32226 32226 E AndroidRuntime: 	... 11 more
-01-24 00:31:02.757  1026  4773 W ActivityManager:   Force finishing activity com.crazyj36.apiplaygroundanysdk/.Main2Activity
-01-24 00:31:02.764  1026 32278 W AES     : Exception Log handling...
-01-24 00:31:02.764  1026 32278 W AES     : Skipped - do not care third party apk
-01-24 00:31:02.767  2468  2492 D ViewRootImpl: onChangedNavigationGuardColor(), color: ffffffff
-01-24 00:31:02.767  2468  2468 D DecorView: updateNavigationGuardColor navigationGuardColor=0xffffffff
-01-24 00:31:02.767  1026  1054 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 (has extras) } to com.google.android.gms/.stats.service.DropBoxEntryAddedReceiver
-01-24 00:31:02.768  1026  1054 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 (has extras) } to com.google.android.gms/.chimera.GmsIntentOperationService$PersistentTrustedReceiver
-01-24 00:31:02.794  1026  1055 D InputDispatcher: Focus left window: Window{3ef64c0 u0 com.crazyj36.apiplaygroundanysdk/com.crazyj36.apiplaygroundanysdk.Main2Activity}
-01-24 00:31:02.794  1026  1055 D InputDispatcher: Focus entered window: Window{1d68b2d u0 Application Error: com.crazyj36.apiplaygroundanysdk}
-01-24 00:31:02.796   695   741 I PowerRM : FIA lock1 locked
-01-24 00:31:02.796   695   741 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
-01-24 00:31:02.797   695   741 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
-01-24 00:31:02.797   695   741 I PowerRM : Window Changed
-01-24 00:31:02.797  1026  1055 D BezellessGripSuppressionFilter: getdisplaysize, x : 1080 y : 2160
-01-24 00:31:02.798  1026  1055 I ActivityManager: Showing crash dialog for package com.crazyj36.apiplaygroundanysdk u0
-01-24 00:31:02.824  1026  7476 I OpenGLRenderer: Initialized EGL, version 1.4
-01-24 00:31:02.824  1026  7476 D OpenGLRenderer: Swap behavior 2
-01-24 00:31:02.829   667   685 D AAL     : 01-24 12:31:02.747 BL= 242,ESS= 256, 01-24 12:31:02.763 BL= 241,ESS= 256, 01-24 12:31:02.780 BL= 239,ESS= 256, 01-24 12:31:02.796 BL= 238,ESS= 256, 
-01-24 00:31:02.830  1370  1370 I NavigationThemeResource: notify navigation bar color(0x0)
-01-24 00:31:02.831  1370  1370 I NavigationThemeResource: NavigationKey Color is changed(BLACK -> WHITE_WITH_BORDER)
-01-24 00:31:02.831  1370  1370 I NavigationThemeResource:  BarMode=4, Theme=WHITE, LightBackground=false (Transparent)
-01-24 00:31:02.831  1370  1370 I NavigationThemeResource: , Keyguard show=false, IME shown=false, Bar vertical=false, Panel expanded=false
-01-24 00:31:02.831  1370  1370 D StatusBar: setSystemUiVisibility vis=8008 mask=ffffffff oldVal=8608 newVal=8008 diff=600
-01-24 00:31:02.834  2468  2492 D ViewRootImpl: onChangedNavigationGuardColor(), color: ffffffff
-01-24 00:31:02.834  2468  2468 D DecorView: updateNavigationGuardColor navigationGuardColor=0xffffffff
-01-24 00:31:02.866  1026  1242 I WindowManager: Window{1d68b2d u0 Application Error: com.crazyj36.apiplaygroundanysdk} start dimming: flags=1820002 effectFlags=0, layer=111000
-01-24 00:31:02.869  1370  1386 I SystemServicesProxy: RecentApps has 1 item(s).
-01-24 00:31:02.978   667   685 D AAL     : 01-24 12:31:02.912 BL= 239,ESS= 256, 01-24 12:31:02.928 BL= 241,ESS= 256, 01-24 12:31:02.945 BL= 242,ESS= 256, 01-24 12:31:02.962 BL= 244,ESS= 256, 01-24 12:31:02.978 BL= 245,ESS= 256, 
-01-24 00:31:02.984  1026  1313 V WifiServerServiceExt: checkPollTimer Cnt= 0 rssi =-67 threshold=-100
-01-24 00:31:03.049   492   492 I DisplayDevice: [Built-in Screen (type:0)] fps:21.850348,dur:1006.85,max:476.72,min:14.83
-01-24 00:31:03.061   667   685 D AAL     : 01-24 12:31:02.995 BL= 247,ESS= 256, 01-24 12:31:03.011 BL= 248,ESS= 256, 01-24 12:31:03.028 BL= 250,ESS= 256, 01-24 12:31:03.044 BL= 251,ESS= 256, 01-24 12:31:03.061 BL= 253,ESS= 256, 
-01-24 00:31:03.097   697   697 E thermal_src: ERROR, recvmsg expect 5, but get 2 
-01-24 00:31:02.881  1026  1242 I WindowManager: Window{1d68b2d u0 Application Error: com.crazyj36.apiplaygroundanysdk} start dimming: flags=1820002 effectFlags=0, layer=111000
-01-24 00:31:03.111  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=8 path=settings_secure.xml.backup sys=false lock=false imagePending=false whichPending=0x0 written=true
-01-24 00:31:03.111  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=128 path=settings_secure.xml.bak sys=false lock=false imagePending=false whichPending=0x0 written=true
-01-24 00:31:03.097   697   697 E thermal_src: ERROR, recvmsg expect 5, but get 2 
-01-24 00:31:03.144   667   685 D AAL     : 01-24 12:31:03.077 BL= 254,ESS= 256, 01-24 12:31:03.094 BL= 256,ESS= 256, 01-24 12:31:03.111 BL= 257,ESS= 256, 01-24 12:31:03.127 BL= 259,ESS= 256, 01-24 12:31:03.144 BL= 260,ESS= 256, 
-01-24 00:31:03.144  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=8 path=settings_secure.xml sys=false lock=false imagePending=false whichPending=0x0 written=true
-01-24 00:31:03.144  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=512 path=settings_secure.xml.bak sys=false lock=false imagePending=false whichPending=0x0 written=false
-01-24 00:31:03.226   667   685 D AAL     : 01-24 12:31:03.160 BL= 262,ESS= 256, 01-24 12:31:03.177 BL= 263,ESS= 256, 01-24 12:31:03.193 BL= 265,ESS= 256, 01-24 12:31:03.210 BL= 266,ESS= 256, 01-24 12:31:03.226 BL= 268,ESS= 256, 
-01-24 00:31:03.259  1026  1054 W ActivityManager: Activity pause timeout for ActivityRecord{66646a7 u0 com.crazyj36.apiplaygroundanysdk/.Main2Activity t212 f}
-01-24 00:31:03.269   695   741 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
-01-24 00:31:03.288   461   461 I WifiHAL : Get link stats
-01-24 00:31:03.289   461   461 E android.hardware.wifi@1.0-service: Invalid radio stats in link layer stats
-01-24 00:31:03.309   667   685 D AAL     : 01-24 12:31:03.243 BL= 269,ESS= 256, 01-24 12:31:03.260 BL= 271,ESS= 256, 01-24 12:31:03.276 BL= 272,ESS= 256, 01-24 12:31:03.292 BL= 274,ESS= 256, 01-24 12:31:03.309 BL= 275,ESS= 256, 
-01-24 00:31:03.377  1370  1386 I SystemServicesProxy: RecentApps has 1 item(s).
-01-24 00:31:03.392   667   685 D AAL     : 01-24 12:31:03.326 BL= 277,ESS= 256, 01-24 12:31:03.342 BL= 278,ESS= 256, 01-24 12:31:03.359 BL= 280,ESS= 256, 01-24 12:31:03.375 BL= 281,ESS= 256, 01-24 12:31:03.392 BL= 283,ESS= 256, 
-01-24 00:31:03.631  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=8 path=settings_secure.xml.backup sys=false lock=false imagePending=false whichPending=0x0 written=true
-01-24 00:31:03.632  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=128 path=settings_secure.xml.bak sys=false lock=false imagePending=false whichPending=0x0 written=true
-01-24 00:31:03.685  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=8 path=settings_secure.xml sys=false lock=false imagePending=false whichPending=0x0 written=true
-01-24 00:31:03.685  1026  1073 V WallpaperManagerService: Wallpaper file change: evt=512 path=settings_secure.xml.bak sys=false lock=false imagePending=false whichPending=0x0 written=false
-01-24 00:31:04.047  2370 30843 D BluetoothAdapter: isLeEnabled(): ON
-01-24 00:31:04.060   492   492 I DisplayDevice: [Built-in Screen (type:0)] fps:60.319904,dur:1011.27,max:19.30,min:15.09
-01-24 00:31:04.100   697   697 E thermal_src: ERROR, recvmsg expect 5, but get 2 
-01-24 00:31:04.101   697   697 E thermal_src: ERROR, recvmsg expect 4, but get 2 
-01-24 00:31:04.294  1645  1645 W LGIMS_J : [Apn::handleMessage:440] [0] Apn :: no proc - apn=INTERNET, msg=3006, proc=NETWORK_CAPABILITIES_CHANGED
-01-24 00:31:04.294  1370  1541 I NetworkController: onReceive: intent=Intent { act=android.net.wifi.RSSI_CHANGED flg=0x4000010 (has extras) }
-01-24 00:31:04.302  1370  1541 I LGWifiStatusTracker: Wifi connected = true, Wifi level = 2
-01-24 00:31:04.305  1370  1541 I NetworkController.WifiSignalController: mCurrentState.enabled = true, mCurrentState.connected = true, mCurrentState.detailedState = CONNECTED, mCurrentState.inetCondition = 1
+--------- beginning of /dev/log/main
+W/ResourceType(  303): Entry identifier 0x128 is larger than entry count 0xab
+--------- beginning of /dev/log/system
+I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.apiplaygroundanysdk/.MainActivity } from pid 464
+W/WindowManager(  303): [PhoneWindowManager.java:1099:addStartingWindow()] HistoryRecord{407dad50 com.crazyj36.apiplaygroundanysdk/.MainActivity} failed creating starting window
+W/WindowManager(  303): java.lang.RuntimeException: Binary XML file line #25: You must supply a layout_height attribute.
+W/WindowManager(  303): 	at android.content.res.TypedArray.getLayoutDimension(TypedArray.java:491)
+W/WindowManager(  303): 	at android.view.ViewGroup$LayoutParams.setBaseAttributes(ViewGroup.java:3599)
+W/WindowManager(  303): 	at android.view.ViewGroup$MarginLayoutParams.<init>(ViewGroup.java:3678)
+W/WindowManager(  303): 	at android.widget.LinearLayout$LayoutParams.<init>(LinearLayout.java:1400)
+W/WindowManager(  303): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:1326)
+W/WindowManager(  303): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:47)
+W/WindowManager(  303): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:625)
+W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
+W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
+W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.generateLayout(PhoneWindow.java:2290)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.installDecor(PhoneWindow.java:2345)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.getDecorView(PhoneWindow.java:1511)
+W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindowManager.addStartingWindow(PhoneWindowManager.java:1070)
+W/WindowManager(  303): 	at com.android.server.WindowManagerService$H.handleMessage(WindowManagerService.java:8347)
+W/WindowManager(  303): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+W/WindowManager(  303): 	at android.os.Looper.loop(Looper.java:130)
+W/WindowManager(  303): 	at com.android.server.WindowManagerService$WMThread.run(WindowManagerService.java:582)
+D/Launcher.Workspace(  464): [Workspace.java:2036:hideWallpaper()] Show wallpaper
+I/ActivityManager(  303): process name to start: com.crazyj36.apiplaygroundanysdk
+E/ActivityManager(  303): heap conf. property name string trimmed: hs.com.crazyj36.apiplaygroundan
+I/ActivityManager(  303): Start proc com.crazyj36.apiplaygroundanysdk for activity com.crazyj36.apiplaygroundanysdk/.MainActivity: pid=4469 uid=10015 gids={1015}
+W/dalvikvm( 4469): VFY: unable to resolve virtual method 193: Lcom/crazyj36/apiplaygroundanysdk/MainActivity;.getActionBar ()Landroid/app/ActionBar;
+E/dalvikvm( 4469): Could not find class 'android.app.NotificationChannel', referenced from method com.crazyj36.apiplaygroundanysdk.MainActivity.onCreate
+W/dalvikvm( 4469): VFY: unable to resolve new-instance 9 (Landroid/app/NotificationChannel;) in Lcom/crazyj36/apiplaygroundanysdk/MainActivity;
+W/dalvikvm( 4469): VFY: unable to resolve virtual method 68: Landroid/os/Vibrator;.hasVibrator ()Z
+W/dalvikvm( 4469): VFY: unable to resolve virtual method 68: Landroid/os/Vibrator;.hasVibrator ()Z
+W/dalvikvm( 4469): VFY: unable to resolve virtual method 68: Landroid/os/Vibrator;.hasVibrator ()Z
+W/dalvikvm( 4469): VFY: unable to resolve virtual method 68: Landroid/os/Vibrator;.hasVibrator ()Z
+W/dalvikvm( 4469): VFY: unable to resolve virtual method 188: Lcom/crazyj36/apiplaygroundanysdk/MainActivity;.checkSelfPermission (Ljava/lang/String;)I
+W/ResourceType( 4469): Entry identifier 0x128 is larger than entry count 0xab
+I/APIPLAYGROUNDLOG( 4469): [MainActivity.java:198:onCreate()] App Started
+I/APIPLAYGROUNDLOG( 4469): Log.println() test
+E/dalvikvm( 4469): Could not find class 'android.app.Notification$Builder', referenced from method com.crazyj36.apiplaygroundanysdk.MainActivity$10.onClick
+W/dalvikvm( 4469): VFY: unable to resolve new-instance 7 (Landroid/app/Notification$Builder;) in Lcom/crazyj36/apiplaygroundanysdk/MainActivity$10;
+E/dalvikvm( 4469): Could not find class 'android.app.Notification$Builder', referenced from method com.crazyj36.apiplaygroundanysdk.MainActivity$10.onClick
+W/dalvikvm( 4469): VFY: unable to resolve new-instance 7 (Landroid/app/Notification$Builder;) in Lcom/crazyj36/apiplaygroundanysdk/MainActivity$10;
+W/dalvikvm( 4469): threadid=1: thread exiting with uncaught exception (group=0x40019560)
+E/AndroidRuntime( 4469): FATAL EXCEPTION: main
+E/AndroidRuntime( 4469): java.lang.RuntimeException: Binary XML file line #3: You must supply a layout_width attribute.
+E/AndroidRuntime( 4469): 	at android.content.res.TypedArray.getLayoutDimension(TypedArray.java:491)
+E/AndroidRuntime( 4469): 	at android.view.ViewGroup$LayoutParams.setBaseAttributes(ViewGroup.java:3598)
+E/AndroidRuntime( 4469): 	at android.view.ViewGroup$LayoutParams.<init>(ViewGroup.java:3551)
+E/AndroidRuntime( 4469): 	at android.widget.AbsListView$LayoutParams.<init>(AbsListView.java:5391)
+E/AndroidRuntime( 4469): 	at android.widget.AbsListView.generateLayoutParams(AbsListView.java:5185)
+E/AndroidRuntime( 4469): 	at android.widget.AbsListView.generateLayoutParams(AbsListView.java:88)
+E/AndroidRuntime( 4469): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:396)
+E/AndroidRuntime( 4469): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
+E/AndroidRuntime( 4469): 	at android.widget.ArrayAdapter.createViewFromResource(ArrayAdapter.java:332)
+E/AndroidRuntime( 4469): 	at android.widget.ArrayAdapter.getView(ArrayAdapter.java:323)
+E/AndroidRuntime( 4469): 	at android.widget.AbsListView.obtainView(AbsListView.java:2220)
+E/AndroidRuntime( 4469): 	at android.widget.GridView.onMeasure(GridView.java:935)
+E/AndroidRuntime( 4469): 	at android.view.View.measure(View.java:8390)
+E/AndroidRuntime( 4469): 	at android.view.ViewGroup.measureChildWithMargins(ViewGroup.java:3138)
+E/AndroidRuntime( 4469): 	at android.widget.LinearLayout.measureChildBeforeLayout(LinearLayout.java:1017)
+E/AndroidRuntime( 4469): 	at android.widget.LinearLayout.measureVertical(LinearLayout.java:386)
+E/AndroidRuntime( 4469): 	at android.widget.LinearLayout.onMeasure(LinearLayout.java:309)
+E/AndroidRuntime( 4469): 	at android.view.View.measure(View.java:8390)
+E/AndroidRuntime( 4469): 	at android.widget.ScrollView.measureChildWithMargins(ScrollView.java:1778)
+E/AndroidRuntime( 4469): 	at android.widget.FrameLayout.onMeasure(FrameLayout.java:250)
+E/AndroidRuntime( 4469): 	at android.widget.ScrollView.onMeasure(ScrollView.java:865)
+E/AndroidRuntime( 4469): 	at android.view.View.measure(View.java:8390)
+E/AndroidRuntime( 4469): 	at android.view.ViewGroup.measureChildWithMargins(ViewGroup.java:3138)
+E/AndroidRuntime( 4469): 	at android.widget.FrameLayout.onMeasure(FrameLayout.java:250)
+E/AndroidRuntime( 4469): 	at android.view.View.measure(View.java:8390)
+E/AndroidRuntime( 4469): 	at android.widget.LinearLayout.measureVertical(LinearLayout.java:531)
+E/AndroidRuntime( 4469): 	at android.widget.LinearLayout.onMeasure(LinearLayout.java:309)
+E/AndroidRuntime( 4469): 	at android.view.View.measure(View.java:8390)
+E/AndroidRuntime( 4469): 	at android.view.ViewGroup.measureChildWithMargins(ViewGroup.java:3138)
+E/AndroidRuntime( 4469): 	at android.widget.FrameLayout.onMeasure(FrameLayout.java:250)
+E/AndroidRuntime( 4469): 	at android.view.View.measure(View.java:8390)
+E/AndroidRuntime( 4469): 	at android.view.ViewRoot.performTraversals(ViewRoot.java:845)
+E/AndroidRuntime( 4469): 	at android.view.ViewRoot.handleMessage(ViewRoot.java:1869)
+E/AndroidRuntime( 4469): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+E/AndroidRuntime( 4469): 	at android.os.Looper.loop(Looper.java:130)
+E/AndroidRuntime( 4469): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
+E/AndroidRuntime( 4469): 	at java.lang.reflect.Method.invokeNative(Native Method)
+E/AndroidRuntime( 4469): 	at java.lang.reflect.Method.invoke(Method.java:507)
+E/AndroidRuntime( 4469): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
+E/AndroidRuntime( 4469): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
+E/AndroidRuntime( 4469): 	at dalvik.system.NativeStart.main(Native Method)
+W/ActivityManager(  303):   Force finishing activity com.crazyj36.apiplaygroundanysdk/.MainActivity
+W/ActivityManager(  303): Activity pause timeout for HistoryRecord{407dad50 com.crazyj36.apiplaygroundanysdk/.MainActivity}

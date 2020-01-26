@@ -53,6 +53,7 @@ import android.widget.ToggleButton;
 import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.PopupWindow;
+import android.widget.ImageButton;
 import android.net.Uri;
 import android.util.Log;
 import android.util.DisplayMetrics;
@@ -87,6 +88,9 @@ public class MainActivity extends Activity {
     String updaterTxt = "Update 0";
     String numbersEntered = "";
     String displayResolution = "";
+
+    static PopupWindow popupWindow;
+
     // onCreate activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -419,7 +423,7 @@ public class MainActivity extends Activity {
         GridView gridView = findViewById(R.id.gridTextView);
         final TextView tvNumberGrid = findViewById(R.id.tvNumberGrid);
         ArrayAdapter<Integer> gridAdapter = new ArrayAdapter<Integer>(
-            MainActivity.this, android.R.layout.simple_list_item_1, numbers);
+            MainActivity.this, android.R.layout.test_list_item, numbers);
         gridView.setAdapter(gridAdapter);
 	    gridView.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -433,17 +437,29 @@ public class MainActivity extends Activity {
             + " Height: " + String.valueOf(displayMetrics.heightPixels);
         // PopupWindow Button
         Button btnPopupWindow = findViewById(R.id.btnPopupWindow);
-        final LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+	    LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        final LinearLayout linearLayout = findViewById(R.id.rootView);
+	    popupWindow = new PopupWindow(
+	        inflater.inflate(R.layout.popup_window_layout, null),
+	        LayoutParams.WRAP_CONTENT,
+	        LayoutParams.WRAP_CONTENT
+	    );
+
+        final ImageButton popupWindowBtn = findViewById(R.id.popupWindowBtn);
         btnPopupWindow.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupWindow popupWindow = new PopupWindow(
-                    inflater.inflate(R.layout.popup_window_layout, null),
-                    LayoutParams.WRAP_CONTENT,
-                    LayoutParams.WRAP_CONTENT
-                );
-                LinearLayout linearLayout = findViewById(R.id.rootView);
-                popupWindow.showAtLocation(linearLayout, Gravity.CENTER, 0, 0);
+                popupWindow.showAtLocation(linearLayout, Gravity.BOTTOM | Gravity.RIGHT, 0, 0);
+
+                // Causes: attempt to set onClickListener on A null object reference.
+                /*if (popupWindow.isShowing()) {
+                    popupWindowBtn.setOnClickListener(new OnClickListener() {
+			            @Override
+			            public void onClick(View v) {
+			                generalToast("Fab Clicked");
+			            }
+			        });
+                }*/
             }
         });
         // getStorage permission & start filesTask()
@@ -620,6 +636,13 @@ public class MainActivity extends Activity {
                 		startActivity(crazyj36Git);
             		}
         		});
+                return true;
+            case R.id.menuHideFab:
+                if (popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                }  else {
+                    generalToast("Fab not showing");
+                }
                 return true;
             case R.id.menuExit:
                 MainActivity.this.finish();

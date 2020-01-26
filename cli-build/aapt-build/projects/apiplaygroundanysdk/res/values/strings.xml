@@ -38,7 +38,7 @@ Binary to octal and vice-versa. Reverse sentence using recursion.
     <string name="btnNotifyTxt">Notify</string>
     <string name="updateTxtBtnTxt">Update</string>
     <string name="btnPlayAudioTxt">Play</string>
-    <string name="btnPopupWindowTxt">Window</string>
+    <string name="btnPopupWindowTxt">Fab</string>
     <string name="tvMediaPlayingTxt">Audio playing...</string>
 	<string name="tvMediaDoneTxt">MediaPlayer released</string>
 	<string name="tvMediaNotPlayingTxt">Nothing happening</string>
@@ -75,6 +75,7 @@ of computer architecture and programming as a whole).
     <string name="listHeaderTxt">Notes</string>
     <string name="gridHeaderTxt">Enter Number</string>
     <string name="menuAboutTxt">About</string>
+    <string name="menuHideFabTxt">Hide Fab</string>
     <string name="menuExitTxt">Exit</string>
     <string name="menuThemeTxt">Theme</string>
     <string name="my_fileTxt">

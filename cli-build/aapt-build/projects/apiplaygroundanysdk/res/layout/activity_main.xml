@@ -117,6 +117,15 @@
             android:layout_toRightOf="@id/btnUpdateTxt"
             android:text="@string/btnPopupWindowTxt" />
 
+        <Button
+	        android:id="@+id/act2btn"
+			android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="bottom|right"
+            android:layout_toRightOf="@id/btnRandomNumbers"
+            android:layout_below="@id/btnPopupWindow"
+			android:text="@string/act2BtnTxt" />
+
     </RelativeLayout>
 
     <LinearLayout
@@ -243,8 +252,8 @@
 
     <GridView
         android:id="@+id/gridTextView"
-        android:layout_width="236dp"
-        android:layout_height="256dp"
+        android:layout_width="160dp"
+        android:layout_height="128dp"
         android:numColumns="3"
         android:stretchMode="columnWidth"
         android:gravity="center"
@@ -252,16 +261,9 @@
 
     <TextView
         android:id="@+id/tvNumberGrid"
-        android:layout_width="236dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:background="#ff505050" />
-
-    <Button
-        android:id="@+id/act2btn"
-		android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-		android:text="@string/act2BtnTxt" />
  
   </LinearLayout>
 

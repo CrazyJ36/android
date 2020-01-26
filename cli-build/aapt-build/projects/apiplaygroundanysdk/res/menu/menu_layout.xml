@@ -6,8 +6,12 @@
         android:id="@+id/menuAbout"
         android:title="@string/menuAboutTxt" />
 
+   <item
+        android:id="@+id/menuHideFab"
+        android:title="@string/menuHideFabTxt" />
+ 
     <item
         android:id="@+id/menuExit"
         android:title="@string/menuExitTxt" />
-   
+ 
 </menu>
