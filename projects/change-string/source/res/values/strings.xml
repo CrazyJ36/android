@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">Java Tests</string>
-    // App Description
-    <string name="msgIntro">This is math info for java</string>
-    <string name="btnText">Print Hello</string>
-    <string name="msgBtnPrintHelp">
-        This button prints hello with OnClickListener</string>
-    <string name="btnPrintSuccessText">The button has been clicked and the action worked</string>
-</resources>

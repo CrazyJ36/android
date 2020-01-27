@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">Text Database</string>
-    <string name="intructions">Use input field and button to add text to\ndata file(/sdcard/text_database.txt)</string>
-    <string name="editText1Hint">Add data to file.</string>
-    <string name="button1Text">Add</string>
-</resources>

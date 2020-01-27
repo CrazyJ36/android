@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Text Database</string>
+    <string name="tvInstructionsTxt">
+Write text in EditText, then push Button.
+All entered content will be appended to A file 
+named textdatabase.txt in:\n
+/sdcard/Android/data/com.crazyj36.textdatabase/files/
+    </string>
+    <string name="etHint">Write some text...</string>
+    <string name="btnTxt">Send</string>
+</resources>

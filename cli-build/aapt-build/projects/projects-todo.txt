@@ -1,0 +1,3 @@
+dialog-only activity app using AndroidManifest @android:style/Theme.Dialog
+
+showcase android original theme using AndroidManifest @android:style/Theme
