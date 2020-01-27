@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Widget Update Button</string>
+    <string name="tvInstructionsTxt">
+This app only shows this screen and A home screen widget.\n
+You can manually update the widget status with A button.
+    </string>
+    <string name="tvWidgetTxt">Press Update</string>
+    <string name="btnWidgetTxt">Update</string>
+</resources>
