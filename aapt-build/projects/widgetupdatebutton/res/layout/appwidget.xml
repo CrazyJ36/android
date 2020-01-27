@@ -18,6 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:textColor="@android:color/white"
-        android:text="tvWidgetTxt"  />
+        android:text="@string/tvWidgetDefaultTxt"  />
 
 </LinearLayout>

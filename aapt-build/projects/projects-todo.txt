@@ -1,6 +1,13 @@
-showcase android original theme using AndroidManifest @android:style/Theme
-
-bring widgetupdatebuttons widget method to widgettemplate to get a better grasp of how
-the widgetupdatebutton works.
-
 work on create shortcut and start
+
+do open-webpage
+
+do scales
+
+do useAnotherMethod
+
+do material icons
+
+use lg sdk (q-slide floating apps, etc..)
+
+deal with multiwindow-samsung and hover-samsung

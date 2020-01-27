@@ -20,15 +20,16 @@ public class AppWidget extends AppWidgetProvider {
             updater = 0;
         }
         updater = updater + 1;
+
        // Set widget content
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.appwidget);
-        views.setTextViewText(R.id.tvWidget, "Counts every hour, or on Button click: " + String.valueOf(updater));
+        views.setTextViewText(R.id.tvWidget, "Counts on button click: " + String.valueOf(updater));
 
         // intent for widget to update itself.
         Intent intentUpdate = new Intent(context, AppWidget.class);
         intentUpdate.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
 
-        // Put the widget ids into the self update intent.
+        // Put the widget ids into the self update intent as extra.
         int[] idArray = new int[]{appWidgetId};
         intentUpdate.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, idArray);
 
@@ -42,12 +43,12 @@ public class AppWidget extends AppWidgetProvider {
 
     @Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        for (int appWidgetId : appWidgetIds) {
+        for (int appWidgetId : appWidgetIds) { // Syntax: (type variable arrayToGoThrough)
             // Using above method here
             myUpdateAppWidget(context, appWidgetManager, appWidgetId);
 
             // context is carried through the methods in this file, so even toast works.
-            Toast.makeText(context, "Widget updated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "AppWidget onUpdate() called.", Toast.LENGTH_SHORT).show();
         }
 	}
 }
