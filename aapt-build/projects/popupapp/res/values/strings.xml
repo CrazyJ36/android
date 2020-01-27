@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Popup App</string>
+    <string name="tvInstructionsTxt">
+The app theme which is \"Theme.Dialog\"\n
+makes this app always open in A Popup.\n
+Good when you need A floating activity.
+    </string>
+    <string name="btnTxt">Button</string>
+</resources>
