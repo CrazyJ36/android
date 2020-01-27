@@ -6,27 +6,37 @@ import android.content.Context;
 import android.widget.RemoteViews;
 import android.content.Intent;
 import android.app.PendingIntent;
-
+import android.widget.Toast;
 public class AppWidget extends AppWidgetProvider {
 
+    // A reference number to increment per update button click.
     static int updater = 0;
 
-        // Define updateAppWidget ourself
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
+    // defined widgets update method ourselfs.
+    static void myUpdateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
 
+        // increment number everytime updateAppWidget is called, up to 10
+        if (updater == 10) {
+            updater = 0;
+        }
         updater = updater + 1;
-        // Set widget content
+       // Set widget content
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.appwidget);
-        views.setTextViewText(R.id.tvWidget, String.valueOf(updater));
+        views.setTextViewText(R.id.tvWidget, "Counts every hour, or on Button click: " + String.valueOf(updater));
 
-        // Pending intent for widget to update itself.
+        // intent for widget to update itself.
         Intent intentUpdate = new Intent(context, AppWidget.class);
         intentUpdate.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+
+        // Put the widget ids into the self update intent.
         int[] idArray = new int[]{appWidgetId};
         intentUpdate.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, idArray);
+
+        // set self update intent to be called when button is clicked using A pending intent on the button.
         PendingIntent pendingUpdate = PendingIntent.getBroadcast(context, appWidgetId, intentUpdate, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setOnClickPendingIntent(R.id.btnWidget, pendingUpdate);
 
+        // regular widget refresh
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
@@ -34,7 +44,10 @@ public class AppWidget extends AppWidgetProvider {
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int appWidgetId : appWidgetIds) {
             // Using above method here
-            updateAppWidget(context, appWidgetManager, appWidgetId);
+            myUpdateAppWidget(context, appWidgetManager, appWidgetId);
+
+            // context is carried through the methods in this file, so even toast works.
+            Toast.makeText(context, "Widget updated", Toast.LENGTH_SHORT).show();
         }
 	}
 }

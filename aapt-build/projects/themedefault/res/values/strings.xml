@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Theme Default</string>
+    <string name="tvInstructionsTxt">
+This showcases the Android theme from API level 1.
+Available to all devices.</string>
+</resources>

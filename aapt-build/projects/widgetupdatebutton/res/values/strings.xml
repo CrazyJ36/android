@@ -5,6 +5,7 @@
     <string name="tvInstructionsTxt">
 This app only shows this screen and A home screen widget.\n
 You can manually update the widget status with A button.
+This app implements A preferred method to use A widget.
     </string>
     <string name="tvWidgetTxt">Press Update</string>
     <string name="btnWidgetTxt">Update</string>
