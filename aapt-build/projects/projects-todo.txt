@@ -1,5 +1,3 @@
-work on create shortcut and start
-
 do open-webpage
 
 do scales

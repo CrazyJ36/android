@@ -3,9 +3,9 @@
 <resources>
     <string name="appname">Create Shortcut and Start</string>
     <string name="tvInstructionsTxt">
-    The choose button will start an shortcut chooser, after you choose A
-    homescreen shortcut, this will display the shorcut intent chosen, you can
-    then launch that shortcut from intent with the launch button.
+    The Choose button will start A homescreen shortcut chooser, after you choose A
+    homescreen shortcut, this will display the chosen shorcuts\' launch intent, you can
+    then launch that shortcut with the Launch button.
     </string>
     <string name="btnChooseTxt">Choose</string>
     <string name="tvResultTxt">Chosen shortcut intent will show here</string>
