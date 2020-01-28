@@ -16,9 +16,8 @@ public class MainActivity extends Activity {
 
     public void showDialog(View v) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+        dialog.setTitle("Dialog").setMessage("Message");
         dialog.create();
-        dialog.setTitle("Dialog");
-        dialog.setMessage("Message");
         dialog.show();
     }
 }

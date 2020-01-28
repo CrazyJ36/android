@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Use Another Method</string>
+    <string name="tvInstructionsTxt">
+This app demostrates using multiple java files together
+by calling one files method from another.
+    </string>
+</resources>

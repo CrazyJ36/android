@@ -7,6 +7,7 @@ import android.widget.RemoteViews;
 import android.content.Intent;
 import android.app.PendingIntent;
 import android.widget.Toast;
+
 public class AppWidget extends AppWidgetProvider {
 
     // A reference number to increment per update button click.
@@ -49,6 +50,7 @@ public class AppWidget extends AppWidgetProvider {
 
             // context is carried through the methods in this file, so even toast works.
             Toast.makeText(context, "AppWidget onUpdate() called.", Toast.LENGTH_SHORT).show();
+
         }
 	}
 }
