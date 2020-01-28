@@ -7,9 +7,9 @@
     android:orientation="vertical" >
 
 	<TextView
+	    android:id="@+id/tvInstructions"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:id="@+id/tvInstructions"
         android:text="@string/tvInstructionsTxt" />
 
 </LinearLayout>

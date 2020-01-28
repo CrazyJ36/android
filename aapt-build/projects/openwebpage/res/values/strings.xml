@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <string name="appname">Template</string>
-    <string name="tvInstructionsTxt">Template</string>
+    <string name="appname">Open Webpage</string>
+    <string name="tvInstructionsTxt">
+The button opens http://msn.com using:\n
+new Intent(Intent.ACTION_VIEW) and\n
+setData(Uri.parse("http://www.msn.com"))\n
+    </string>
+    <string name="btnTxt">MSN</string>
 </resources>

@@ -1,8 +1,4 @@
-do open-webpage
-
-do scales
-
-do useAnotherMethod
+work on scales
 
 do material icons
 

@@ -1,10 +1,9 @@
 package com.crazyj36.scales;
-import android.content.DialogInterface;
-import android.support.v4.content.res.TypedArrayUtils;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.app.AlertDialog;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -12,21 +11,21 @@ import android.widget.Toast;
 
 import java.io.CharArrayWriter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        final ListView listView;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final ListView listView;
         listView = (ListView) findViewById(R.id.list);
 
         String orig = "C C#";
         char note1 = orig.charAt(0);
         String note2 = orig.substring(1,4);
 
-        final String var1 = (note2+" " + note1);
+        final String var1 = ( note2+" " + note1);
         Toast.makeText(getApplicationContext(), var1, Toast.LENGTH_LONG)
                 .show();
 
@@ -36,11 +35,12 @@ public class MainActivity extends AppCompatActivity {
         };
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_expandable_list_item_1, android.R.id.text1, values);
+
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 String itemValue = (String) listView.getItemAtPosition(position);
                 AlertDialog ipopUp = new AlertDialog.Builder(MainActivity.this).create();
                 ipopUp.setMessage("Variants of "+itemValue + "are:"+ var1);
@@ -51,9 +51,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 ipopUp.show();
-
-
             }
+
         });
     }
 }
