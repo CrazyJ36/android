@@ -1,0 +1,107 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.crazyj36.apiplayground"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="25"
+8-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.CALL_PHONE" />
+11-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:4:5-69
+11-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:4:22-66
+12    <uses-permission android:name="android.permission.VIBRATE" />
+12-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:5:5-66
+12-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:5:22-63
+13
+14    <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+14-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:6:5-88
+14-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:6:29-85
+15    <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE" />
+15-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:7:5-87
+15-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:7:29-84
+16
+17    <application
+17-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:9:5-47:19
+18        android:allowBackup="false"
+18-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:10:9-36
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.1.0] /home/thomas/.gradle/caches/transforms-2/files-2.1/e9dab9c67c1ee3668e0bbf86c6d8cbd8/core-1.1.0/AndroidManifest.xml:24:18-86
+20        android:debuggable="true"
+21        android:icon="@mipmap/ic_launcher"
+21-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:11:9-43
+22        android:label="@string/app_name"
+22-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:12:9-41
+23        android:supportsRtl="true"
+23-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:13:9-35
+24        android:testOnly="true"
+25        android:theme="@style/AppTheme" >
+25-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:14:9-40
+26        <activity
+26-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:16:9-28:20
+27            android:name="com.crazyj36.apiplayground.MainActivity"
+27-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:17:13-41
+28            android:configChanges="orientation|screenSize"
+28-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:18:13-59
+29            android:windowSoftInputMode="stateHidden|adjustPan" >
+29-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:19:13-64
+30            <intent-filter>
+30-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:20:13-24:29
+31                <action android:name="android.intent.action.MAIN" />
+31-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:21:17-69
+31-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:21:25-66
+32                <action android:name="android.intent.action.VIEW" />
+32-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:22:17-69
+32-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:22:25-66
+33
+34                <category android:name="android.intent.category.LAUNCHER" />
+34-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:23:17-77
+34-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:23:27-74
+35            </intent-filter>
+36
+37            <meta-data
+37-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:25:13-27:53
+38                android:name="android.app.shortcuts"
+38-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:26:17-53
+39                android:resource="@xml/shortcuts" />
+39-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:27:17-50
+40        </activity>
+41        <activity
+41-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:29:9-36:20
+42            android:name="com.crazyj36.apiplayground.Main2Activity"
+42-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:30:13-42
+43            android:configChanges="orientation|screenSize"
+43-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:31:13-59
+44            android:windowSoftInputMode="stateHidden|adjustPan" >
+44-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:32:13-64
+45            <intent-filter>
+45-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:33:13-35:29
+46                <action android:name="android.intent.action.MAIN" />
+46-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:21:17-69
+46-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:21:25-66
+47            </intent-filter>
+48        </activity>
+49
+50        <receiver android:name="com.crazyj36.apiplayground.AppWidget" >
+50-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:38:9-45:20
+50-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:38:19-44
+51            <intent-filter>
+51-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:39:9-41:25
+52                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+52-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:40:13-80
+52-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:40:21-77
+53            </intent-filter>
+54
+55            <meta-data
+55-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:42:9-44:53
+56                android:name="android.appwidget.provider"
+56-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:43:13-54
+57                android:resource="@xml/appwidgetinfo" />
+57-->/home/thomas/development/android/projects/apiplayground/app/src/main/AndroidManifest.xml:44:13-50
+58        </receiver>
+59    </application>
+60
+61</manifest>
