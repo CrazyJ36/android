@@ -1,79 +1,28 @@
---------- beginning of /dev/log/system
-D/WifiService(  305): ACTION_BATTERY_CHANGED pluggedType: 2
-D/WifiService(  305): ### wifiShouldBeEnabled=true
-D/WifiService(  305): ### mDeviceIdle=false
-D/WifiService(  305): ### lockHeld=false
 --------- beginning of /dev/log/main
-I/Battery (  613): [BatteryUsageService.java:103:onReceive()] intent_level : 2
-I/Battery (  613): [BatteryUsageService.java:104:onReceive()] scale : 100
-I/Battery (  613): [BatteryUsageService.java:105:onReceive()] battery_level : 2
-I/Battery (  613): [BatteryUsageWidgetViewManager.java:71:drawBatteryUsageWidget()] drawBatteryUsageWidget()
-I/Battery (  613): [BatteryUsageWidgetViewManager.java:72:drawBatteryUsageWidget()] level : 2
-D/WifiService(  305): ACTION_BATTERY_CHANGED pluggedType: 2
-D/WifiService(  305): ### wifiShouldBeEnabled=true
-D/WifiService(  305): ### mDeviceIdle=false
-D/WifiService(  305): ### lockHeld=false
-I/Battery (  613): [BatteryUsageService.java:103:onReceive()] intent_level : 2
-I/Battery (  613): [BatteryUsageService.java:104:onReceive()] scale : 100
-I/Battery (  613): [BatteryUsageService.java:105:onReceive()] battery_level : 2
-I/Battery (  613): [BatteryUsageWidgetViewManager.java:71:drawBatteryUsageWidget()] drawBatteryUsageWidget()
-I/Battery (  613): [BatteryUsageWidgetViewManager.java:72:drawBatteryUsageWidget()] level : 2
-D/WifiService(  305): ACTION_BATTERY_CHANGED pluggedType: 2
-D/WifiService(  305): ### wifiShouldBeEnabled=true
-D/WifiService(  305): ### mDeviceIdle=false
-D/WifiService(  305): ### lockHeld=false
-I/Battery (  613): [BatteryUsageService.java:103:onReceive()] intent_level : 2
-I/Battery (  613): [BatteryUsageService.java:104:onReceive()] scale : 100
-I/Battery (  613): [BatteryUsageService.java:105:onReceive()] battery_level : 2
-I/Battery (  613): [BatteryUsageWidgetViewManager.java:71:drawBatteryUsageWidget()] drawBatteryUsageWidget()
-I/Battery (  613): [BatteryUsageWidgetViewManager.java:72:drawBatteryUsageWidget()] level : 2
-I/ActivityManager(  305): Starting: Intent { act=android.intent.action.CREATE_SHORTCUT flg=0x3800000 cmp=com.android.settings/.CreateShortcut } from pid 305
-I/#LGIME  (  445): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 177
-I/ActivityManager(  305): [ActivityRecord.java:444:windowsVisible()] Displayed com.android.settings/.CreateShortcut: +127ms
-I/#LGIME  (  445): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
-W/IInputConnectionWrapper(  624): [IInputConnectionWrapper.java:391:executeMessage()] showStatusIcon on inactive InputConnection
-W/InputManagerService(  305): Starting input on non-focused client com.android.internal.view.IInputMethodClient$Stub$Proxy@409435a8 (uid=1000 pid=624)
-I/ActivityManager(  305): Starting: Intent { act=android.intent.action.VIEW cmp=android/com.android.internal.app.ResolverActivity (has extras) } from pid 3019
-I/ActivityManager(  305): [ActivityRecord.java:444:windowsVisible()] Displayed android/com.android.internal.app.ResolverActivity: +144ms
-D/WifiService(  305): ACTION_BATTERY_CHANGED pluggedType: 2
-D/WifiService(  305): ### wifiShouldBeEnabled=true
-D/WifiService(  305): ### mDeviceIdle=false
-D/WifiService(  305): ### lockHeld=false
-I/Battery (  613): [BatteryUsageService.java:103:onReceive()] intent_level : 2
-I/Battery (  613): [BatteryUsageService.java:104:onReceive()] scale : 100
-I/Battery (  613): [BatteryUsageService.java:105:onReceive()] battery_level : 2
-I/Battery (  613): [BatteryUsageWidgetViewManager.java:71:drawBatteryUsageWidget()] drawBatteryUsageWidget()
-I/Battery (  613): [BatteryUsageWidgetViewManager.java:72:drawBatteryUsageWidget()] level : 2
-D/WifiService(  305): ACTION_BATTERY_CHANGED pluggedType: 2
-D/WifiService(  305): ### wifiShouldBeEnabled=true
-D/WifiService(  305): ### mDeviceIdle=false
-D/WifiService(  305): ### lockHeld=false
-I/Battery (  613): [BatteryUsageService.java:103:onReceive()] intent_level : 2
-I/Battery (  613): [BatteryUsageService.java:104:onReceive()] scale : 100
-I/Battery (  613): [BatteryUsageService.java:105:onReceive()] battery_level : 2
-I/Battery (  613): [BatteryUsageWidgetViewManager.java:71:drawBatteryUsageWidget()] drawBatteryUsageWidget()
-I/Battery (  613): [BatteryUsageWidgetViewManager.java:72:drawBatteryUsageWidget()] level : 2
-I/ActivityManager(  305): Starting: Intent { act=android.intent.action.VIEW flg=0x3800000 cmp=com.lge.sns/.ui.profile.ProfileWebView (has extras) } from pid 305
-W/dalvikvm( 1677): threadid=1: thread exiting with uncaught exception (group=0x40019560)
-E/AndroidRuntime( 1677): FATAL EXCEPTION: main
-E/AndroidRuntime( 1677): java.lang.RuntimeException: Unable to start activity ComponentInfo{com.lge.sns/com.lge.sns.ui.profile.ProfileWebView}: java.lang.NullPointerException
-E/AndroidRuntime( 1677): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1658)
-E/AndroidRuntime( 1677): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:1674)
-E/AndroidRuntime( 1677): 	at android.app.ActivityThread.access$1500(ActivityThread.java:117)
-E/AndroidRuntime( 1677): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:942)
-E/AndroidRuntime( 1677): 	at android.os.Handler.dispatchMessage(Handler.java:99)
-E/AndroidRuntime( 1677): 	at android.os.Looper.loop(Looper.java:130)
-E/AndroidRuntime( 1677): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
-E/AndroidRuntime( 1677): 	at java.lang.reflect.Method.invokeNative(Native Method)
-E/AndroidRuntime( 1677): 	at java.lang.reflect.Method.invoke(Method.java:507)
-E/AndroidRuntime( 1677): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
-E/AndroidRuntime( 1677): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
-E/AndroidRuntime( 1677): 	at dalvik.system.NativeStart.main(Native Method)
-E/AndroidRuntime( 1677): Caused by: java.lang.NullPointerException
-E/AndroidRuntime( 1677): 	at com.lge.sns.agent.profile.impl.ContactSyncFacade.getContactDataForProfile(ContactSyncFacade.java:246)
-E/AndroidRuntime( 1677): 	at com.lge.sns.agent.profile.impl.ProfileFacade.getContactDataForProfile(ProfileFacade.java:699)
-E/AndroidRuntime( 1677): 	at com.lge.sns.ui.profile.ProfileWebView.onCreate(ProfileWebView.java:35)
-E/AndroidRuntime( 1677): 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1047)
-E/AndroidRuntime( 1677): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1622)
-E/AndroidRuntime( 1677): 	... 11 more
-W/ActivityManager(  305):   Force finishing activity com.lge.sns/.ui.profile.ProfileWebView
+W/dalvikvm( 4036): threadid=1: thread exiting with uncaught exception (group=0x40019560)
+--------- beginning of /dev/log/system
+I/ActivityManager(  305): Starting: Intent { (has extras) } from pid 4036
+E/AndroidRuntime( 4036): FATAL EXCEPTION: main
+E/AndroidRuntime( 4036): android.content.ActivityNotFoundException: No Activity found to handle Intent { (has extras) }
+E/AndroidRuntime( 4036): 	at android.app.Instrumentation.checkStartActivityResult(Instrumentation.java:1409)
+E/AndroidRuntime( 4036): 	at android.app.Instrumentation.execStartActivity(Instrumentation.java:1379)
+E/AndroidRuntime( 4036): 	at android.app.Activity.startActivityForResult(Activity.java:2827)
+E/AndroidRuntime( 4036): 	at android.app.Activity.startActivity(Activity.java:2933)
+E/AndroidRuntime( 4036): 	at com.crazyj36.createshortcutandstart.MainActivity$2.onClick(MainActivity.java:50)
+E/AndroidRuntime( 4036): 	at android.view.View.performClick(View.java:2520)
+E/AndroidRuntime( 4036): 	at android.view.View$PerformClick.run(View.java:9157)
+E/AndroidRuntime( 4036): 	at android.os.Handler.handleCallback(Handler.java:587)
+E/AndroidRuntime( 4036): 	at android.os.Handler.dispatchMessage(Handler.java:92)
+E/AndroidRuntime( 4036): 	at android.os.Looper.loop(Looper.java:130)
+E/AndroidRuntime( 4036): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
+E/AndroidRuntime( 4036): 	at java.lang.reflect.Method.invokeNative(Native Method)
+E/AndroidRuntime( 4036): 	at java.lang.reflect.Method.invoke(Method.java:507)
+E/AndroidRuntime( 4036): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
+E/AndroidRuntime( 4036): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
+E/AndroidRuntime( 4036): 	at dalvik.system.NativeStart.main(Native Method)
+W/ActivityManager(  305):   Force finishing activity com.crazyj36.createshortcutandstart/.MainActivity
+W/ActivityManager(  305): Activity pause timeout for HistoryRecord{40548640 com.crazyj36.createshortcutandstart/.MainActivity}
+D/Launcher.Workspace(  458): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
+E/ActivityThread(  458): Failed to find provider info for call_log
+E/ActivityThread(  458): Failed to find provider info for com.lge.providers.lgemail
+E/ActivityThread(  458): Failed to find provider info for com.android.whatsnew

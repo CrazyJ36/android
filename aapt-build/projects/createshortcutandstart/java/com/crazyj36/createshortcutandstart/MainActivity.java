@@ -6,8 +6,9 @@ import android.view.View;
 import android.content.Intent;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import java.net.URISyntaxException;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
 
 public class MainActivity extends Activity {
 
@@ -44,22 +45,20 @@ public class MainActivity extends Activity {
 	           @Override
 	           public void onClick(View view) {
 
-                   /* Here, intent data from startActivityResult() is used with the same intent string */
-                   //String shortcutIntent = data.toUri(0);
-                   //try {
-                       startActivity(data);
-                   //} catch (URISyntaxException uriSyntaxException) {
-                     //  Toast.makeText(MainActivity.this, uriSyntaxException.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                   //}
+                       ShortcutInfo.Builder shortcut = new ShortcutInfo.Builder(MainActivity.this, "id1");
+                       shortcut.setIntent(data);
+                       ShortcutInfo shortcutInfo = shortcut.build();
+                       ShortcutManager shortcutManager = createShortcutResultIntent(shortcutInfo);
+                       startActivity(shortcutIntent);
 	           }
 	       });
 
-           /* Get the string that was recieved during onActivityResult() */
            TextView tvResult = findViewById(R.id.tvResult);
-           //String dataResult = data.toUri(0);
 
-           // Name of chosen shortcut
-           String dataResult = data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME);
+           // Gets Name of chosen shortcut
+           // String dataResult = data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME);
+
+           String dataResult = data.toUri(Intent.URI_INTENT_SCHEME);
            tvResult.setText(dataResult);
 
        }
