@@ -18,9 +18,13 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 	   	setContentView(R.layout.activity_main);
 
-	    TextView tvResult = findViewById(R.id.tvResult);
+	   final TextView tvResult = findViewById(R.id.tvResult);
 
-	    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+       SharedPreferences sharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        sharedPreferences.registerOnSharedPreferenceChangeListener(
+            sharedPreferenceChangeListener);
+
         if (sharedPreferences.getBoolean("preference", false) == false) {
             tvResult.setText(getResources().getString(R.string.tvResultOffTxt));
         } else {
@@ -29,11 +33,21 @@ public class MainActivity extends Activity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_layout, menu);
-        return true;
-    }
+    puvblic void sharedPreferenceChangeListener() {
+        SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener =
+            new SharedPreferences.OnSharedPreferenceChangeListener() {
+                @Override
+                public void onSharedPreferenceChanged(
+                    SharedPreferences sharedPreferences, String key) {
+            i          f (key.equals("your_key")){ 
+
+@Override
+               
+onCreateOptionsMenu(Menu menu) {
+            }        getMenuInflater().inflate(R.menu.menu_layout, 
+            }        menu);
+        }        return true;
+    };    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
