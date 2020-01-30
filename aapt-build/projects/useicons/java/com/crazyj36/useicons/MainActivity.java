@@ -1,4 +1,4 @@
-package com.crazyj36.materialicons;
+package com.crazyj36.useicons;
 
 import android.app.Activity;
 import android.os.Bundle;

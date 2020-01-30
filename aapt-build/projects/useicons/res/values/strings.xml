@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Material Icons</string>
+    <string name="app_name">Use Icons</string>
     <string name="instructions">These Icons and more are available at:\nhttps://github.com/google/material-design-icons</string>
     <string name="contactBtnDesc">Contact Icon</string>
     <string name="clockBtnDesc">Clock Icon</string>

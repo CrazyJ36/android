@@ -1,8 +1,4 @@
-do webpage
-
 work on scales
-
-do material icons
 
 use lg sdk (q-slide floating apps, etc..)
 

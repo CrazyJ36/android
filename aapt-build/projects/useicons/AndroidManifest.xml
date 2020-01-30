@@ -1,11 +1,10 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.crazyj36.materialicons">
+<manifest 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.crazyj36.useicons">
 
+    <uses-sdk minSdkVersion="1" targetSdkVersion="29" />
     <application
-        android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault.Light">
 
         <activity

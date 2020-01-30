@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 
         btnWag.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                wagImg.setBackgroundResource(R.drawable.blink);
+	            wagImg.setBackgroundResource(R.drawable.blink);
                 ((AnimationDrawable) wagImg.getBackground()).start();
             }
         });
