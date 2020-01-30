@@ -1,3 +1,5 @@
+preferencesusage: learn how to use onsharedpreferencechanged()
+
 work on scales
 
 use lg sdk (q-slide floating apps, etc..)

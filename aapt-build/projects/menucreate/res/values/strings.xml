@@ -4,8 +4,10 @@
     <string name="appname">Menu Create</string>
 
     <string name="tvInstructionsTxt">
+This app shows how to use Menus.\n
 Press menu button at top right,\n
-or if you use Android 2.3 or lower, press devices menu button.
+or if you use Android 2.3 or lower,\n
+press devices menu button.
     </string>
 
     <string name="menu1Txt">Menu item 1</string>
