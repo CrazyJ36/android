@@ -12,7 +12,7 @@ The chosen setting persist apps stop/starts.
     </string>
 
     <string name="preferenceTitle">Change Main Text</string>
-    <string name="preferenceSummary">Choice reflects on Main screen\nRequires app restart(Check for onPrefChanged in API.</string>
+    <string name="preferenceSummary">Choice reflects on Main screen\nRequires app restart(use onPrefChanged from API.)</string>
     <string name="tvResultOffTxt">Setting set to Off</string>
     <string name="tvResultOnTxt">Setting enabled</string>
     <string name="menuSettingsTxt">Settings</string>

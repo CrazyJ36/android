@@ -11,9 +11,7 @@ public class ExamplePreferenceActivity extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         getFragmentManager().beginTransaction().replace(android.R.id.content, new ExamplePreferenceFragment()).commit();
-
     }
 
     public static class ExamplePreferenceFragment extends PreferenceFragment {

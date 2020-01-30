@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.widget.TextView;
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 
 public class MainActivity extends Activity {
 
@@ -18,36 +17,23 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 	   	setContentView(R.layout.activity_main);
 
-	   final TextView tvResult = findViewById(R.id.tvResult);
+        TextView tvResults = findViewById(R.id.tvResult);
 
-       SharedPreferences sharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        sharedPreferences.registerOnSharedPreferenceChangeListener(
-            sharedPreferenceChangeListener);
-
-        if (sharedPreferences.getBoolean("preference", false) == false) {
-            tvResult.setText(getResources().getString(R.string.tvResultOffTxt));
+        // The simple way preferences and set data accordingly.
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        if (sharedPreferences.getBoolean("preference", false) == true) {
+            tvResults.setText(getResources().getString(R.string.tvResultOnTxt));
         } else {
-            tvResult.setText(getResources().getString(R.string.tvResultOnTxt));
+            tvResults.setText(getResources().getString(R.string.tvResultOffTxt));
         }
 
     }
 
-    puvblic void sharedPreferenceChangeListener() {
-        SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener =
-            new SharedPreferences.OnSharedPreferenceChangeListener() {
-                @Override
-                public void onSharedPreferenceChanged(
-                    SharedPreferences sharedPreferences, String key) {
-            i          f (key.equals("your_key")){ 
-
-@Override
-               
-onCreateOptionsMenu(Menu menu) {
-            }        getMenuInflater().inflate(R.menu.menu_layout, 
-            }        menu);
-        }        return true;
-    };    }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_layout, menu);
+	    return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
