@@ -11,14 +11,16 @@
 	    android:id="@+id/tvInstructions"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-        android:text="@string/tvInstructionsTxt" />
+        android:text="@string/tvInstructionsTxt"
+        android:textColor="@android:color/secondary_text_dark" />
 
     <Button
         android:id="@+id/btn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:background="@android:color/black"
         android:text="@string/btn1Txt"
+        android:textColor="@android:color/white"
         android:onClick="toast" />
 
 </LinearLayout>
