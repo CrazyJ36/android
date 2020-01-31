@@ -3,10 +3,8 @@
     package="com.crazyj36.scales">
 
     <application
-        android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/appname"
-        android:theme="@style/AppTheme">
+        android:theme="@android:style/Theme.DeviceDefault">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
