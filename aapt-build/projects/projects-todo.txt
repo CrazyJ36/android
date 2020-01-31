@@ -1,3 +1,7 @@
+make popup (above what your doing) launcher using Theme.Translucent.NoTitleBar.
+
+minimaltheme: make navigationbar black
+
 preferencesusage: learn how to use onsharedpreferencechanged()
 
 finish scales
