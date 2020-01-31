@@ -1,4 +1,5 @@
-make popup (above what your doing) launcher using Theme.Translucent.NoTitleBar.
+make popup (above what your doing) launcher using
+Theme.Translucent.NoTitleBar, or Theme.Panel.
 
 minimaltheme: make navigationbar black
 
