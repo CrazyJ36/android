@@ -112,6 +112,9 @@ doesn\'t require storage permission
     <string name="toggleTxt">Select Toggle</string>
     <string name="toggleOnTxt">Toggle Active</string>
     <string name="toggleOffTxt">Toggle Disabled</string>
+    <string name="tvTextSizeSmallTxt">Small text for display</string>
+    <string name="tvTextSizeMediumTxt">Medium text for display</string>
+    <string name="tvTextSizeLargeTxt">Large text for display</string>
     <!--Shortcuts-->
     <string name="Act1ShortcutShortLabel">1</string>
     <string name="Act1ShortcutLongLabel">Go to Activity 1</string>
@@ -120,5 +123,6 @@ doesn\'t require storage permission
     <string name="Act2ShortcutLongLabel">Go to Activity 2</string>
     <string name="Act2ShortcutDisabledMsg">Act2 Shortcut Disabled</string>
     <!--Widget-->
-    <string name="widgetBtnTxt">Launch</string>
+    <string name="widgetLaunchBtnTxt">Launch</string>
+    <string name="widgetUpdateBtnTxt">Update</string>
 </resources>

@@ -1,3 +1,5 @@
+make lines in layout using <View/>
+
 work on panelapp
 
 minimaltheme: make navigationbar black

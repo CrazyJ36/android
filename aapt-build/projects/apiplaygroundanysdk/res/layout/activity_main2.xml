@@ -71,6 +71,31 @@
 
 	</LinearLayout>
 
+    <!--  The '?' in ?android:attributeName gets attributes from android package.
+          for the currently applied theme(theme as in if you
+          getting textColorSecondary for @android:style/Theme.DeviceDefault.
+          'attr' from ?android:attr/textColorSecondary can be omitted.
+          and @android:functionName= sets functions from android package
+          or from your package, where @string would reference
+          an R.string(R is your packages /res resources. -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:text="@string/tvTextSizeSmallTxt" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="@string/tvTextSizeMediumTxt" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:text="@string/tvTextSizeLargeTxt" />
+
     <AnalogClock
         android:id="@+id/clock"
         android:layout_height="wrap_content"
