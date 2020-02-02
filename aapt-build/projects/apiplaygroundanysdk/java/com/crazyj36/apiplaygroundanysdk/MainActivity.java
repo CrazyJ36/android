@@ -106,27 +106,29 @@ public class MainActivity extends Activity {
 			ScrollView scrollViewForRawFile = findViewById(R.id.scrollViewForRawFile);
         	makeScrollable(scrollViewForRawFile);
 		}
-        // Vibrator info
+
+       // Vibrator info
         Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         try {
-            if (Build.VERSION.SDK_INT < 11 && vib != null) {
+            if (sdkVersion < 11 && vib != null) {
 				vib.vibrate(100);
                 vibrateTest = "Vibrator Not null, Success";
-            } else if (Build.VERSION.SDK_INT >= 26 && vib != null && vib.hasVibrator()) {
+            } else if (sdkVersion >= 26 && vib != null && vib.hasVibrator()) {
  		        vib.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
 				vibrateTest = "Hasvibrator, Default amplitude, class VibrationEffect.";
-            } else if (Build.VERSION.SDK_INT >= 26 && vib != null && vib.hasVibrator() && vib.hasAmplitudeControl()) {
+            } else if (sdkVersion >= 26 && vib != null && vib.hasVibrator() && vib.hasAmplitudeControl()) {
 				vib.vibrate(VibrationEffect.createOneShot(100, 10));
                 vibrateTest = "Has vibrator. %15 amplitude, class Vibrator.";
-            } else if (Build.VERSION.SDK_INT < 26 && Build.VERSION.SDK_INT >= 11 && vib != null && vib.hasVibrator()) {
+            } else if (sdkVersion < 26 && Build.VERSION.SDK_INT >= 11 && vib != null && vib.hasVibrator()) {
                 vib.vibrate(100);
 				vibrateTest = "Has vibrator. Default amplitude, class Vibrator.";
-            } else if (Build.VERSION.SDK_INT >= 11 && !(vib.hasVibrator())) { // Checks NullPointerException next in catch.
+            } else if (sdkVersion >= 11 && !(vib.hasVibrator())) { // Checks NullPointerException next in catch.
 				vibrateTest = "No vibrate hardware.";
             }
         } catch (NullPointerException nullPointerException) {
                 vibrateTest = "Vibrate 'null' error:\n" + nullPointerException.getLocalizedMessage();
         }
+
         // Device SDK Version view
         TextView tvSdk = findViewById(R.id.tvSdk);
         tvSdk.setText(String.format(Locale.US, "%s %d", getString(R.string.tvSdkTxt), android.os.Build.VERSION.SDK_INT));
@@ -685,4 +687,6 @@ public class MainActivity extends Activity {
             updateResults();
         }
     };
+
+
 }
