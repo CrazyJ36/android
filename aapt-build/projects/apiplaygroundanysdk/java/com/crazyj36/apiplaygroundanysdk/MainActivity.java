@@ -1,7 +1,3 @@
-/* TODO:
-  api < 11: notification timestamp
-
-*/
 package com.crazyj36.apiplaygroundanysdk;
 
 import android.app.Activity;
@@ -107,27 +103,7 @@ public class MainActivity extends Activity {
         	makeScrollable(scrollViewForRawFile);
 		}
 
-       // Vibrator info
-        Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        try {
-            if (sdkVersion < 11 && vib != null) {
-				vib.vibrate(100);
-                vibrateTest = "Vibrator Not null, Success";
-            } else if (sdkVersion >= 26 && vib != null && vib.hasVibrator()) {
- 		        vib.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-				vibrateTest = "Hasvibrator, Default amplitude, class VibrationEffect.";
-            } else if (sdkVersion >= 26 && vib != null && vib.hasVibrator() && vib.hasAmplitudeControl()) {
-				vib.vibrate(VibrationEffect.createOneShot(100, 10));
-                vibrateTest = "Has vibrator. %15 amplitude, class Vibrator.";
-            } else if (sdkVersion < 26 && Build.VERSION.SDK_INT >= 11 && vib != null && vib.hasVibrator()) {
-                vib.vibrate(100);
-				vibrateTest = "Has vibrator. Default amplitude, class Vibrator.";
-            } else if (sdkVersion >= 11 && !(vib.hasVibrator())) { // Checks NullPointerException next in catch.
-				vibrateTest = "No vibrate hardware.";
-            }
-        } catch (NullPointerException nullPointerException) {
-                vibrateTest = "Vibrate 'null' error:\n" + nullPointerException.getLocalizedMessage();
-        }
+        vibratorInfo();
 
         // Device SDK Version view
         TextView tvSdk = findViewById(R.id.tvSdk);
@@ -688,5 +664,28 @@ public class MainActivity extends Activity {
         }
     };
 
+    private void vibratorInfo() {
+       // Vibrator info
+        Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        try {
+            if (sdkVersion < 11 && vib != null) {
+				vib.vibrate(100);
+                vibrateTest = "Vibrator Not null, Success";
+            } else if (sdkVersion >= 26 && vib != null && vib.hasVibrator()) {
+ 		        vib.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+				vibrateTest = "Hasvibrator, Default amplitude, class VibrationEffect.";
+            } else if (sdkVersion >= 26 && vib != null && vib.hasVibrator() && vib.hasAmplitudeControl()) {
+				vib.vibrate(VibrationEffect.createOneShot(100, 10));
+                vibrateTest = "Has vibrator. %15 amplitude, class Vibrator.";
+            } else if (sdkVersion < 26 && Build.VERSION.SDK_INT >= 11 && vib != null && vib.hasVibrator()) {
+                vib.vibrate(100);
+				vibrateTest = "Has vibrator. Default amplitude, class Vibrator.";
+            } else if (sdkVersion >= 11 && !(vib.hasVibrator())) { // Checks NullPointerException next in catch.
+				vibrateTest = "No vibrate hardware.";
+            }
+        } catch (NullPointerException nullPointerException) {
+                vibrateTest = "Vibrate 'null' error:\n" + nullPointerException.getLocalizedMessage();
+        }
+    }
 
 }
