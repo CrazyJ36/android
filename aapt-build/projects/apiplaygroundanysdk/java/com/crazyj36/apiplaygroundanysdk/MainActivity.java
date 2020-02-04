@@ -126,6 +126,7 @@ public class MainActivity extends Activity {
         }
         String fileText = outputStream.toString();
         tvFile.setText(fileText);
+
         // Dialog with layout example
         Button btnCustom = findViewById(R.id.btnCustom);
         btnCustom.setOnClickListener(new OnClickListener() {
@@ -149,6 +150,7 @@ public class MainActivity extends Activity {
                 });
             }
         });
+
         // Normal Dialog Builder Example
         Button btnDialog = findViewById(R.id.btnDialogCIdeas);
         btnDialog.setOnClickListener(new OnClickListener() {
@@ -162,14 +164,17 @@ public class MainActivity extends Activity {
                 alertDialog.show();
            }
         });
+
         // Concatenate two strings, c-like
         String txt1 = "Hello";
         String txt2 = "World";
         concatTxt = String.format(Locale.US, "%s %s concatenated!", txt1, txt2); // or System.out.printf("%t", var); in console
+
         // Set TextView text from code, maybe not best practice.
         String tvHorizontalTxt = getResources().getString(R.string.tvHorizontalTxt);
         TextView horizontalTxt = findViewById(R.id.tvHorizontal);
-		horizontalTxt.setText(tvHorizontalTxt);
+        horizontalTxt.setText(tvHorizontalTxt);
+        
         // Log in onCreate() and on button click.
         String startMsg = "App Started";
         Log.i(logChannel, startMsg);
@@ -181,6 +186,7 @@ public class MainActivity extends Activity {
                 Log.i(logChannel, "Log Button clicked");
             }
         });
+
         // Java package Date()
         final TextView tvDate = findViewById(R.id.
         tvDate);
@@ -192,6 +198,7 @@ public class MainActivity extends Activity {
                 tvDate.setText(date);
             }
         });
+
         // Set textview to what was entered in EditText
         final EditText etPrint = findViewById(R.id.etPrint);
         final TextView tvPrint = findViewById(R.id.tvPrint);
@@ -202,7 +209,8 @@ public class MainActivity extends Activity {
                 tvPrint.setText(etPrint.getText());
             }
         });
-		// Activity 2 start button
+
+        // Activity 2 start button
         Button act2Btn = findViewById(R.id.act2btn);
         act2Btn.setOnClickListener(new OnClickListener() {
 			@Override
@@ -211,6 +219,7 @@ public class MainActivity extends Activity {
                 startActivity(startSecondActivity);
             }
         });
+
         // Button Press and long click
 		Button btnPressLong = findViewById(R.id.btnPressLong);
 		btnPressLong.setOnClickListener(new OnClickListener() {
@@ -225,7 +234,8 @@ public class MainActivity extends Activity {
 				Toast.makeText(MainActivity.this, "Long Pressed", Toast.LENGTH_SHORT).show();
                 return(true);
 			}
-		});
+        });
+        
         // Button that plays an audio file
 		findViewById(R.id.btnPlayAudio).setOnClickListener(new OnClickListener() {
 			@Override
@@ -250,7 +260,8 @@ public class MainActivity extends Activity {
 					}
 				});
 			}
-		});
+        });
+        
 		// Notification Button
         final String notifyChannel = "APIPLAYGROUNDANYSDK_NOTIFICATION_CHANNEL";
 		final NotificationManager notificationManager = (NotificationManager) getSystemService("notification"); // getSystemService() string type ("vibrate") or class type (VIBRATOR_SERVICE)
@@ -302,7 +313,8 @@ public class MainActivity extends Activity {
 					Toast.makeText(MainActivity.this, "Notification Manager null, notification not made", Toast.LENGTH_LONG);
 				}
 			}
-		});
+        });
+        
 	    // CheckBoxes
 	    final TextView tvChkStatus = findViewById(R.id.tvChkStatus);
 	    final CheckBox chk1 = findViewById(R.id.chk1);
@@ -339,6 +351,7 @@ public class MainActivity extends Activity {
 				tvChkStatus.setText(tvChkStatusTxt[0]);
             }
         });
+
         // Toggle
         final ToggleButton toggle1 = findViewById(R.id.toggle1);
         final TextView tvToggle = findViewById(R.id.tvToggle);
@@ -353,20 +366,24 @@ public class MainActivity extends Activity {
                 }
             }
         });
+
         // Write file
         try {
             writeMyFile();
         } catch (IOException ioException) {
             writeMyFileString = "writeMyFileIOException";
         }
+
         // String Array from xml
         String[] planetsArr = getResources().getStringArray(R.array.string_array);
         for (int x = 0; x < planetsArr.length; x++) {
             planets += planetsArr[x] + " ";
         }
+
         // Battery level and status using receiver.
         MainActivity.this.registerReceiver(MainActivity.this.batteryBroadcast,
             new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
         // Button update text in results view
         Button btnUpdateTxt = findViewById(R.id.btnUpdateTxt);
         btnUpdateTxt.setOnClickListener(new OnClickListener() {
@@ -380,6 +397,7 @@ public class MainActivity extends Activity {
                 updateResults();
             }
         });
+
         // Files in external files directory /sdcard/Android/com.crazyj36.apiplaygroundanysdk/files
         // The method of getting external files here should be done from android 10 onward.
         File appFilesDir = getExternalFilesDir(null);
@@ -395,6 +413,7 @@ public class MainActivity extends Activity {
                 generalToast(numbers[randomNumbersItem]);
             }
         });
+
         // Grid view clickable example
         final Integer[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
         GridView gridView = findViewById(R.id.gridTextView);
@@ -407,11 +426,13 @@ public class MainActivity extends Activity {
                 numbersEntered = numbersEntered.concat(String.valueOf(numbers[position]));
                 tvNumberGrid.setText(numbersEntered);
 	        }
-	    });
+        });
+        
         // Get display resolution
         DisplayMetrics displayMetrics = getApplicationContext().getResources().getDisplayMetrics();
         displayResolution = "Resolution Width: " + String.valueOf(displayMetrics.widthPixels)
             + " Height: " + String.valueOf(displayMetrics.heightPixels);
+
         // PopupWindow Button
         LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         final LinearLayout linearLayout = findViewById(R.id.rootView);
@@ -432,6 +453,7 @@ public class MainActivity extends Activity {
                 popupWindow.showAtLocation(linearLayout, Gravity.RIGHT | Gravity.BOTTOM, 0, 0);
             }
         });
+
         // getStorage permission & start filesTask()
         if (sdkVersion < 23) {
             filesTask();
@@ -447,8 +469,10 @@ public class MainActivity extends Activity {
 		updateResults();
 		listView = findViewById(R.id.fileList);
 
-	// end of onCreate
-	}
+    // end of onCreate
+    
+    }
+    
     // filesTask() Get files from sdcard, show names in listview
     public void filesTask() {
         String storage = Environment.getExternalStorageDirectory().toString() + "/notes";
@@ -498,6 +522,7 @@ public class MainActivity extends Activity {
         });
 		updateResults();
     }
+
 	// show fileTasks() after granting storage permission. This whole method only applies the moment after you grant storage permission.
     @Override
 	public void	onRequestPermissionsResult(int requestCode, String[] permission, int grantResults[]) {
@@ -515,6 +540,7 @@ public class MainActivity extends Activity {
 				return;
 		}
     }
+
     // Put results here from return value
     public void updateResults() {
 		StringBuffer text = new StringBuffer();
@@ -548,7 +574,8 @@ public class MainActivity extends Activity {
 	    resultsTextView.setTextColor(0xFF909090);
 	    resultsTextView.setBackgroundColor(0xFF505050);
 	    resultsTextView.setText(buffOut);
-	}
+    }
+    
     // Method to make any view scrollable. Insert View as parameter.
     public void makeScrollable(View currentView) {
         // Disable TouchEvent on ScrollView(which is current parent view) on ACTION_DOWN (tap down).
@@ -571,15 +598,18 @@ public class MainActivity extends Activity {
             }
         });
     }
+
     // Int tests.
     public String intCast() {
         int mint = 1 + 2;
         return String.valueOf(mint);
     }
+
     // String tests.
     public String packageNameOfString() {
         return String.class.getCanonicalName();
     }
+
     // Menu init
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -587,6 +617,7 @@ public class MainActivity extends Activity {
         menuInflater.inflate(R.menu.menu_layout, menu);
         return true;
     }
+
     // Called everytime menu is opened.
     public boolean onPrepareOptionsMenu(Menu menu) {
 	    if (!popupWindow.isShowing()) {
@@ -596,6 +627,7 @@ public class MainActivity extends Activity {
 	    }
         return true;
     }
+
     // Menu onclicks
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -628,12 +660,14 @@ public class MainActivity extends Activity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
     // Catch config changes(screen rotated, screen size change, etc.)
     @Override
     public void onConfigurationChanged(Configuration configuration) {
         super.onConfigurationChanged(configuration);
 		Toast.makeText(this, "Config Changed", Toast.LENGTH_SHORT).show();
     }
+
     // onDestroy
     @Override
     protected void onDestroy() {
@@ -654,6 +688,7 @@ public class MainActivity extends Activity {
             fileWriter.close();
         }
     }
+    
     // Read battery state broadcast from system
     private BroadcastReceiver batteryBroadcast = new BroadcastReceiver() {
         @Override
