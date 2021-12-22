@@ -1,5 +1,5 @@
 # android
-My Android App development source code.
+My Android App projects.
 
 *** 
 DISCLAIMER:  
