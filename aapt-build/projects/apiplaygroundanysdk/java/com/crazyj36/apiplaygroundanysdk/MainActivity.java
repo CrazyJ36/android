@@ -15,6 +15,7 @@ import android.os.Environment;
 import android.os.Vibrator;
 import android.os.VibrationEffect;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.BatteryManager;
 import android.os.PowerManager;
 import android.view.View;
@@ -235,7 +236,7 @@ public class MainActivity extends Activity {
                 return(true);
 			}
         });
-        
+
         // Button that plays an audio file
 		findViewById(R.id.btnPlayAudio).setOnClickListener(new OnClickListener() {
 			@Override
@@ -253,15 +254,15 @@ public class MainActivity extends Activity {
                         Runnable runThis = new Runnable() { // The Runnable Thing, Object
 							@Override
 							public void run() {
-							    tvPlayAudioStatus.setText(R.string.tvMediaNotPlayingTxt); // This is the statement that will occur after handlers' delay.
-							}
+							    tvPlayAudioStatus.setText(R.string.tvMediaNotPlayingTxt); // runs after the following delay.
+                            }
 						};
-						new Handler().postDelayed(runThis, 3000); // postDelayed is like "post to cpu later". runThis will run after 3 seconds
+						new Handler(Looper.getMainLooper()).postDelayed(runThis, 3000); // postDelayed is like "post to cpu later". runThis will run after 3 seconds
 					}
 				});
 			}
         });
-        
+
 		// Notification Button
         final String notifyChannel = "APIPLAYGROUNDANYSDK_NOTIFICATION_CHANNEL";
 		final NotificationManager notificationManager = (NotificationManager) getSystemService("notification"); // getSystemService() string type ("vibrate") or class type (VIBRATOR_SERVICE)
@@ -419,7 +420,7 @@ public class MainActivity extends Activity {
         GridView gridView = findViewById(R.id.gridTextView);
         final TextView tvNumberGrid = findViewById(R.id.tvNumberGrid);
         ArrayAdapter<Integer> gridAdapter = new ArrayAdapter<Integer>(
-            MainActivity.this, android.R.layout.test_list_item, numbers);
+            MainActivity.this, R.layout.grid_item, numbers);
         gridView.setAdapter(gridAdapter);
 	    gridView.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -427,7 +428,7 @@ public class MainActivity extends Activity {
                 tvNumberGrid.setText(numbersEntered);
 	        }
         });
-        
+
         // Get display resolution
         DisplayMetrics displayMetrics = getApplicationContext().getResources().getDisplayMetrics();
         displayResolution = "Resolution Width: " + String.valueOf(displayMetrics.widthPixels)
@@ -470,12 +471,10 @@ public class MainActivity extends Activity {
 		listView = findViewById(R.id.fileList);
 
     // end of onCreate
-    
     }
-    
-    // filesTask() Get files from sdcard, show names in listview
+    // filesTask() Get files from app storage, show names in listview
     public void filesTask() {
-        String storage = Environment.getExternalStorageDirectory().toString() + "/notes";
+        String storage = getExternalFilesDir("/notes").toString();
         File dir = new File(storage);
 		listView = findViewById(R.id.fileList);
         if (sdkVersion < 21) {
@@ -712,7 +711,7 @@ public class MainActivity extends Activity {
             } else if (sdkVersion >= 26 && vib != null && vib.hasVibrator() && vib.hasAmplitudeControl()) {
 				vib.vibrate(VibrationEffect.createOneShot(100, 10));
                 vibrateTest = "Has vibrator. %15 amplitude, class Vibrator.";
-            } else if (sdkVersion < 26 && Build.VERSION.SDK_INT >= 11 && vib != null && vib.hasVibrator()) {
+            } else if (Build.VERSION.SDK_INT >= 11 && sdkVersion < 26 && vib != null && vib.hasVibrator()) {
                 vib.vibrate(100);
 				vibrateTest = "Has vibrator. Default amplitude, class Vibrator.";
             } else if (sdkVersion >= 11 && !(vib.hasVibrator())) { // Checks NullPointerException next in catch.
