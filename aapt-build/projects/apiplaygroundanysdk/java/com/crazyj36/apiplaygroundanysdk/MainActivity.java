@@ -84,7 +84,7 @@ public class MainActivity extends Activity {
     String updaterTxt = "Update 0";
     String numbersEntered = "";
     String displayResolution = "";
-
+    String storage;
     static PopupWindow popupWindow;
 
     // onCreate activity.
@@ -175,7 +175,7 @@ public class MainActivity extends Activity {
         String tvHorizontalTxt = getResources().getString(R.string.tvHorizontalTxt);
         TextView horizontalTxt = findViewById(R.id.tvHorizontal);
         horizontalTxt.setText(tvHorizontalTxt);
-        
+
         // Log in onCreate() and on button click.
         String startMsg = "App Started";
         Log.i(logChannel, startMsg);
@@ -368,7 +368,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        // Write file
+        // Write file to /data/data/com.crazyj36.apiplaygroundanysdk/
         try {
             writeMyFile();
         } catch (IOException ioException) {
@@ -401,7 +401,7 @@ public class MainActivity extends Activity {
 
         // Files in external files directory /sdcard/Android/com.crazyj36.apiplaygroundanysdk/files
         // The method of getting external files here should be done from android 10 onward.
-        File appFilesDir = getExternalFilesDir(null);
+        File appFilesDir = getDir("files", 0);
         File[] appFilesList = appFilesDir.listFiles();
         filesDirLength = String.valueOf(appFilesList.length);
         // Button random numbers
@@ -472,9 +472,14 @@ public class MainActivity extends Activity {
 
     // end of onCreate
     }
-    // filesTask() Get files from app storage, show names in listview
+
+    // filesTask() Get files from external /sdcard/Android/com.company.app/, show names in listview
     public void filesTask() {
-        String storage = getExternalFilesDir("/notes").toString();
+        if (sdkVersion >= 8) {
+            storage = getExternalFilesDir("external_files").toString(); // /sdcard/Android/com.company.app/
+        } else if (sdkVersion < 8) {
+            storage = getExternalStorageDirectory() + "notes".toString(); // /sdcard/notes/
+        }
         File dir = new File(storage);
 		listView = findViewById(R.id.fileList);
         if (sdkVersion < 21) {
@@ -556,7 +561,7 @@ public class MainActivity extends Activity {
 				javaClass.myMethod(),
                 "Downloads dir name: " + Environment.DIRECTORY_DOWNLOADS,
                 writeMyFileString,
-                filesDirLength + " files in external files directory",
+                filesDirLength + " files/dir in external files directory",
                 "strings.xml array: " + planets,
                 battery,
                 displayResolution,
@@ -574,7 +579,7 @@ public class MainActivity extends Activity {
 	    resultsTextView.setBackgroundColor(0xFF505050);
 	    resultsTextView.setText(buffOut);
     }
-    
+
     // Method to make any view scrollable. Insert View as parameter.
     public void makeScrollable(View currentView) {
         // Disable TouchEvent on ScrollView(which is current parent view) on ACTION_DOWN (tap down).
@@ -621,8 +626,7 @@ public class MainActivity extends Activity {
     public boolean onPrepareOptionsMenu(Menu menu) {
 	    if (!popupWindow.isShowing()) {
 	        menu.getItem(1).setEnabled(false);
-	    } else {
-	        menu.getItem(1).setEnabled(true);
+	    } else {	        menu.getItem(1).setEnabled(true);
 	    }
         return true;
     }
@@ -678,16 +682,17 @@ public class MainActivity extends Activity {
         Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
     }
 
+    // write to /data/data/com.crazyj36.apiplaygroundanysdk
     public void writeMyFile() throws IOException {
-        if (getExternalFilesDir(null).exists() && getExternalFilesDir(null).isDirectory()) {
-            File newFile = new File(getExternalFilesDir(null) + "/my_file.txt");
+        if (getFilesDir().exists() && getFilesDir().isDirectory()) {
+            File newFile = new File(getDir("files", 0) + "/data_file.txt");
             FileWriter fileWriter = new FileWriter(newFile);
             fileWriter.write(getResources().getString(R.string.my_fileTxt));
-            writeMyFileString = "my_file.txt written to: " + getExternalFilesDir(null);
+            writeMyFileString = "data_file.txt written to: " + getDir("files", 0);
             fileWriter.close();
         }
     }
-    
+
     // Read battery state broadcast from system
     private BroadcastReceiver batteryBroadcast = new BroadcastReceiver() {
         @Override

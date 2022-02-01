@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import android.net.Uri;
 import android.content.Intent;
@@ -109,16 +110,16 @@ public class Main2Activity extends Activity {
 			}
 		});
 
-    Button imgBtn = findViewById(R.id.imgBtn);
-    imgBtn.setOnClickListener(new View.OnClickListener() {
-        public void onClick(View v) {
-            int[] imgBtnPos = new int[2];
-            v.getLocationOnScreen(imgBtnPos);
-            Toast imgBtnInfo = Toast.makeText(Main2Activity.this, "Play Button", Toast.LENGTH_SHORT);
-            imgBtnInfo.setGravity(Gravity.START | Gravity.TOP, imgBtnPos[0], imgBtnPos[1]);
-            imgBtnInfo.show();
-        }
-    });
+	    ImageButton imgBtn = findViewById(R.id.imgBtn);
+	    imgBtn.setOnClickListener(new View.OnClickListener() {
+	        public void onClick(View v) {
+	            int[] imgBtnPos = new int[2];
+	            v.getLocationOnScreen(imgBtnPos);
+	            Toast imgBtnInfo = Toast.makeText(Main2Activity.this, "Play Button", Toast.LENGTH_SHORT);
+                if (sdkVersion < 30) imgBtnInfo.setGravity(Gravity.START | Gravity.TOP, imgBtnPos[0], imgBtnPos[1]);
+	            imgBtnInfo.show();
+	        }
+	    });
 
     // End of onCreate
     }
