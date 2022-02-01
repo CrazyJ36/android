@@ -401,9 +401,10 @@ public class MainActivity extends Activity {
 
         // Files in external files directory /sdcard/Android/com.crazyj36.apiplaygroundanysdk/files
         // The method of getting external files here should be done from android 10 onward.
-        File appFilesDir = getDir("files", 0);
+        File appFilesDir = getExternalFilesDir(null);
         File[] appFilesList = appFilesDir.listFiles();
         filesDirLength = String.valueOf(appFilesList.length);
+
         // Button random numbers
         findViewById(R.id.btnRandomNumbers).setOnClickListener(new OnClickListener() {
             @Override
@@ -476,20 +477,14 @@ public class MainActivity extends Activity {
     // filesTask() Get files from external /sdcard/Android/com.company.app/, show names in listview
     public void filesTask() {
         if (sdkVersion >= 8) {
-            storage = getExternalFilesDir("external_files").toString(); // /sdcard/Android/com.company.app/
+            storage = getExternalFilesDir("notes").toString(); // /sdcard/Android/com.company.app/
         } else if (sdkVersion < 8) {
-            storage = getExternalStorageDirectory() + "notes".toString(); // /sdcard/notes/
+            storage = Environment.getExternalStorageDirectory() + "notes".toString(); // /sdcard/notes/
         }
         File dir = new File(storage);
 		listView = findViewById(R.id.fileList);
         if (sdkVersion < 21) {
             makeScrollable(listView);
-        }
-        if (!(dir.exists() && dir.isDirectory())) {
-            filesTest = "No " + storage + " directory.";
-            listView.setEnabled(false);
-            updateResults();
-            return;
         }
         final File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
 		if (fileList.length == 0) {
@@ -685,10 +680,10 @@ public class MainActivity extends Activity {
     // write to /data/data/com.crazyj36.apiplaygroundanysdk
     public void writeMyFile() throws IOException {
         if (getFilesDir().exists() && getFilesDir().isDirectory()) {
-            File newFile = new File(getDir("files", 0) + "/data_file.txt");
+            File newFile = new File(getFilesDir() + "/data_file.txt");
             FileWriter fileWriter = new FileWriter(newFile);
             fileWriter.write(getResources().getString(R.string.my_fileTxt));
-            writeMyFileString = "data_file.txt written to: " + getDir("files", 0);
+            writeMyFileString = "data_file.txt written to: " + getFilesDir();
             fileWriter.close();
         }
     }
