@@ -118,6 +118,13 @@
             android:text="@string/btnPopupWindowTxt" />
 
         <Button
+            android:id="@+id/btnCreateDoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/btnPopupWindow"
+            android:text="@string/btnCreateDocTxt" />
+
+        <Button
 	        android:id="@+id/act2btn"
 			android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"

@@ -79,6 +79,7 @@ public class MainActivity extends Activity {
 	String vibrateTest = "";
 	String concatTxt = "";
     String writeMyFileString = "";
+    String isDocWritten = "";
     String planets = "";
     String battery = "";
     String updaterTxt = "Update 0";
@@ -315,7 +316,20 @@ public class MainActivity extends Activity {
 				}
 			}
         });
-        
+
+        // Create Document Button
+        final Button btnCreateDoc = findViewById(R.id.btnCreateDoc);
+        btnCreateDoc.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 try {
+                     createDocFile();
+                 } catch (IOException docFileIOException) {
+                     generalToast("IOException");
+                 }
+             }
+        });
+
 	    // CheckBoxes
 	    final TextView tvChkStatus = findViewById(R.id.tvChkStatus);
 	    final CheckBox chk1 = findViewById(R.id.chk1);
@@ -401,9 +415,13 @@ public class MainActivity extends Activity {
 
         // Files in external files directory /sdcard/Android/com.crazyj36.apiplaygroundanysdk/files
         // The method of getting external files here should be done from android 10 onward.
-        File appFilesDir = getExternalFilesDir(null);
-        File[] appFilesList = appFilesDir.listFiles();
-        filesDirLength = String.valueOf(appFilesList.length);
+        if (sdkVersion >= 8) {
+            File appFilesDir = getExternalFilesDir(null);
+            File[] appFilesList = appFilesDir.listFiles();
+            filesDirLength = String.valueOf(appFilesList.length);
+        } else if (sdkVersion < 8) {
+            filesDirLength = "get external app files on sdk < 8.";
+        }
 
         // Button random numbers
         findViewById(R.id.btnRandomNumbers).setOnClickListener(new OnClickListener() {
@@ -477,7 +495,7 @@ public class MainActivity extends Activity {
     // filesTask() Get files from external /sdcard/Android/com.company.app/, show names in listview
     public void filesTask() {
         if (sdkVersion >= 8) {
-            storage = getExternalFilesDir("notes").toString(); // /sdcard/Android/com.company.app/
+            storage = getFilesDir().toString(); // /sdcard/Android/com.company.app/
         } else if (sdkVersion < 8) {
             storage = Environment.getExternalStorageDirectory() + "notes".toString(); // /sdcard/notes/
         }
@@ -685,6 +703,18 @@ public class MainActivity extends Activity {
             fileWriter.write(getResources().getString(R.string.my_fileTxt));
             writeMyFileString = "data_file.txt written to: " + getFilesDir();
             fileWriter.close();
+        }
+    }
+
+    // Create document file
+    public void createDocFile() throws IOException {
+        File docPath = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
+        if (docPath != null) {
+            File docFile = new File(docPath, "my_document.txt");
+            FileWriter docFileWriter = new FileWriter(docFile);
+            docFileWriter.write("button clicked, content written");
+            docFileWriter.close();
+            generalToast("Wrote to Documents, filewriter closed.");
         }
     }
 

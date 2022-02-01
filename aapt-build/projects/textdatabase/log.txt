@@ -1,36 +1,101 @@
 --------- beginning of /dev/log/system
-D/WifiService(  305): ACTION_BATTERY_CHANGED pluggedType: 2
-D/WifiService(  305): ### wifiShouldBeEnabled=true
-D/WifiService(  305): ### mDeviceIdle=false
-D/WifiService(  305): ### lockHeld=false
+D/WifiService(  304): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  304): ### wifiShouldBeEnabled=true
+D/WifiService(  304): ### mDeviceIdle=false
+D/WifiService(  304): ### lockHeld=false
 --------- beginning of /dev/log/main
-I/Battery (  542): [BatteryUsageService.java:103:onReceive()] intent_level : 9
-I/Battery (  542): [BatteryUsageService.java:104:onReceive()] scale : 100
-I/Battery (  542): [BatteryUsageService.java:105:onReceive()] battery_level : 9
-I/Battery (  542): [BatteryUsageWidgetViewManager.java:71:drawBatteryUsageWidget()] drawBatteryUsageWidget()
-I/Battery (  542): [BatteryUsageWidgetViewManager.java:72:drawBatteryUsageWidget()] level : 9
-W/ApplicationContext( 3173): [ContextImpl.java:479:getExternalFilesDir()] Unable to create external files directory
-W/dalvikvm( 3173): threadid=1: thread exiting with uncaught exception (group=0x40019560)
-E/AndroidRuntime( 3173): FATAL EXCEPTION: main
-E/AndroidRuntime( 3173): java.lang.NullPointerException
-E/AndroidRuntime( 3173): 	at com.crazyj36.textdatabase.MainActivity$1.onClick(MainActivity.java:25)
-E/AndroidRuntime( 3173): 	at android.view.View.performClick(View.java:2520)
-E/AndroidRuntime( 3173): 	at android.view.View$PerformClick.run(View.java:9157)
-E/AndroidRuntime( 3173): 	at android.os.Handler.handleCallback(Handler.java:587)
-E/AndroidRuntime( 3173): 	at android.os.Handler.dispatchMessage(Handler.java:92)
-E/AndroidRuntime( 3173): 	at android.os.Looper.loop(Looper.java:130)
-E/AndroidRuntime( 3173): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
-E/AndroidRuntime( 3173): 	at java.lang.reflect.Method.invokeNative(Native Method)
-E/AndroidRuntime( 3173): 	at java.lang.reflect.Method.invoke(Method.java:507)
-E/AndroidRuntime( 3173): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
-E/AndroidRuntime( 3173): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
-E/AndroidRuntime( 3173): 	at dalvik.system.NativeStart.main(Native Method)
-W/ActivityManager(  305):   Force finishing activity com.crazyj36.textdatabase/.MainActivity
-W/ActivityManager(  305): Activity pause timeout for HistoryRecord{4091dd08 com.crazyj36.textdatabase/.MainActivity}
+I/Battery (  541): [BatteryUsageService.java:103:onReceive()] intent_level : 2
+I/Battery (  541): [BatteryUsageService.java:104:onReceive()] scale : 100
+I/Battery (  541): [BatteryUsageService.java:105:onReceive()] battery_level : 2
+I/Battery (  541): [BatteryUsageWidgetViewManager.java:71:drawBatteryUsageWidget()] drawBatteryUsageWidget()
+I/Battery (  541): [BatteryUsageWidgetViewManager.java:72:drawBatteryUsageWidget()] level : 2
+D/WifiService(  304): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  304): ### wifiShouldBeEnabled=true
+D/WifiService(  304): ### mDeviceIdle=false
+D/WifiService(  304): ### lockHeld=false
+I/Battery (  541): [BatteryUsageService.java:103:onReceive()] intent_level : 2
+I/Battery (  541): [BatteryUsageService.java:104:onReceive()] scale : 100
+I/Battery (  541): [BatteryUsageService.java:105:onReceive()] battery_level : 2
+I/Battery (  541): [BatteryUsageWidgetViewManager.java:71:drawBatteryUsageWidget()] drawBatteryUsageWidget()
+I/Battery (  541): [BatteryUsageWidgetViewManager.java:72:drawBatteryUsageWidget()] level : 2
+D/WifiService(  304): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  304): ### wifiShouldBeEnabled=true
+D/WifiService(  304): ### mDeviceIdle=false
+D/WifiService(  304): ### lockHeld=false
+I/Battery (  541): [BatteryUsageService.java:103:onReceive()] intent_level : 2
+I/Battery (  541): [BatteryUsageService.java:104:onReceive()] scale : 100
+I/Battery (  541): [BatteryUsageService.java:105:onReceive()] battery_level : 2
+I/Battery (  541): [BatteryUsageWidgetViewManager.java:71:drawBatteryUsageWidget()] drawBatteryUsageWidget()
+I/Battery (  541): [BatteryUsageWidgetViewManager.java:72:drawBatteryUsageWidget()] level : 2
+D/WifiService(  304): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  304): ### wifiShouldBeEnabled=true
+D/WifiService(  304): ### mDeviceIdle=false
+D/WifiService(  304): ### lockHeld=false
+I/Battery (  541): [BatteryUsageService.java:103:onReceive()] intent_level : 2
+I/Battery (  541): [BatteryUsageService.java:104:onReceive()] scale : 100
+I/Battery (  541): [BatteryUsageService.java:105:onReceive()] battery_level : 2
+I/Battery (  541): [BatteryUsageWidgetViewManager.java:71:drawBatteryUsageWidget()] drawBatteryUsageWidget()
+I/Battery (  541): [BatteryUsageWidgetViewManager.java:72:drawBatteryUsageWidget()] level : 2
+I/#LGIME  (  449): [Glog.java:35:i()] onKeyDown: 4
+I/#LGIME  (  449): [Glog.java:35:i()] ### onFinishInputView: false
+I/#LGIME  (  449): [Glog.java:35:i()] ### sendBroadcast : android.softkeypad.intent.HIDE 
+W/SensorFusion(  304): disable(7), EN(1, 0, 0, 1, 0), mEnabled(1), CON(1, 0, 0, 0, 0)
+W/ApplicationContext( 1338): [ContextImpl.java:479:getExternalFilesDir()] Unable to create external files directory
+W/dalvikvm( 1338): threadid=1: thread exiting with uncaught exception (group=0x40019560)
+E/AndroidRuntime( 1338): FATAL EXCEPTION: main
+E/AndroidRuntime( 1338): java.lang.NullPointerException
+E/AndroidRuntime( 1338): 	at com.crazyj36.textdatabase.MainActivity$1.onClick(MainActivity.java:26)
+E/AndroidRuntime( 1338): 	at android.view.View.performClick(View.java:2520)
+E/AndroidRuntime( 1338): 	at android.view.View$PerformClick.run(View.java:9157)
+E/AndroidRuntime( 1338): 	at android.os.Handler.handleCallback(Handler.java:587)
+E/AndroidRuntime( 1338): 	at android.os.Handler.dispatchMessage(Handler.java:92)
+E/AndroidRuntime( 1338): 	at android.os.Looper.loop(Looper.java:130)
+E/AndroidRuntime( 1338): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
+E/AndroidRuntime( 1338): 	at java.lang.reflect.Method.invokeNative(Native Method)
+E/AndroidRuntime( 1338): 	at java.lang.reflect.Method.invoke(Method.java:507)
+E/AndroidRuntime( 1338): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
+E/AndroidRuntime( 1338): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
+E/AndroidRuntime( 1338): 	at dalvik.system.NativeStart.main(Native Method)
+W/ActivityManager(  304):   Force finishing activity com.crazyj36.textdatabase/.MainActivity
+W/ActivityManager(  304): Activity pause timeout for HistoryRecord{408e8600 com.crazyj36.textdatabase/.MainActivity}
+D/Launcher.Workspace(  470): [Workspace.java:2036:hideWallpaper()] Show wallpaper
 D/Launcher.Workspace(  470): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
 E/ActivityThread(  470): Failed to find provider info for call_log
 E/ActivityThread(  470): Failed to find provider info for com.lge.providers.lgemail
 E/ActivityThread(  470): Failed to find provider info for com.android.whatsnew
-I/#LGIME  (  441): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
-I/ActivityManager(  305): Process com.crazyj36.textdatabase (pid 3173) has died.
-I/WindowManager(  305): WIN DEATH: Window{4096a0f0 com.crazyj36.textdatabase/com.crazyj36.textdatabase.MainActivity paused=false}
+E/InputDispatcher(  304): channel '409356b8 com.crazyj36.textdatabase/com.crazyj36.textdatabase.MainActivity (server)' ~ Consumer closed input channel or an error occurred.  events=0x8
+E/InputDispatcher(  304): channel '409356b8 com.crazyj36.textdatabase/com.crazyj36.textdatabase.MainActivity (server)' ~ Channel is unrecoverably broken and will be disposed!
+I/ActivityManager(  304): Process com.crazyj36.textdatabase (pid 1338) has died.
+I/WindowManager(  304): WIN DEATH: Window{409356b8 com.crazyj36.textdatabase/com.crazyj36.textdatabase.MainActivity paused=false}
+E/JavaBinder(  304): Transact on 0x470f38 in Java object 0x40920b00 with code 3 failed
+E/JavaBinder(  304): Transact on 0x470f38 in Java object 0x40920b00 with code 4 failed
+E/JavaBinder(  449): Transact on 0x303cd8 in Java object 0x4051c4c8 with code 15 failed
+W/InputManagerService(  304): Got RemoteException sending setActive(false) notification to pid 1338 uid 10017
+I/#LGIME  (  449): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+D/WifiService(  304): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  304): ### wifiShouldBeEnabled=true
+D/WifiService(  304): ### mDeviceIdle=false
+D/WifiService(  304): ### lockHeld=false
+I/Battery (  541): [BatteryUsageService.java:103:onReceive()] intent_level : 2
+I/Battery (  541): [BatteryUsageService.java:104:onReceive()] scale : 100
+I/Battery (  541): [BatteryUsageService.java:105:onReceive()] battery_level : 2
+I/Battery (  541): [BatteryUsageWidgetViewManager.java:71:drawBatteryUsageWidget()] drawBatteryUsageWidget()
+I/Battery (  541): [BatteryUsageWidgetViewManager.java:72:drawBatteryUsageWidget()] level : 2
+D/WifiService(  304): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  304): ### wifiShouldBeEnabled=true
+D/WifiService(  304): ### mDeviceIdle=false
+D/WifiService(  304): ### lockHeld=false
+I/Battery (  541): [BatteryUsageService.java:103:onReceive()] intent_level : 2
+I/Battery (  541): [BatteryUsageService.java:104:onReceive()] scale : 100
+I/Battery (  541): [BatteryUsageService.java:105:onReceive()] battery_level : 2
+D/WifiService(  304): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  304): ### wifiShouldBeEnabled=true
+D/WifiService(  304): ### mDeviceIdle=false
+D/WifiService(  304): ### lockHeld=false
+I/Battery (  541): [BatteryUsageWidgetViewManager.java:71:drawBatteryUsageWidget()] drawBatteryUsageWidget()
+I/Battery (  541): [BatteryUsageWidgetViewManager.java:72:drawBatteryUsageWidget()] level : 2
+I/Battery (  541): [BatteryUsageService.java:103:onReceive()] intent_level : 2
+I/Battery (  541): [BatteryUsageService.java:104:onReceive()] scale : 100
+I/Battery (  541): [BatteryUsageService.java:105:onReceive()] battery_level : 2
+I/Battery (  541): [BatteryUsageWidgetViewManager.java:71:drawBatteryUsageWidget()] drawBatteryUsageWidget()
+I/Battery (  541): [BatteryUsageWidgetViewManager.java:72:drawBatteryUsageWidget()] level : 2
