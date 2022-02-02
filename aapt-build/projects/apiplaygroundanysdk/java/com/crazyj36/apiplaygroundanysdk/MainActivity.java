@@ -92,11 +92,14 @@ public class MainActivity extends Activity {
     // onCreate activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /*
+        // Set activity theme programatically, though this can cause the activity to flash white from
+        // the light theme on opening, before changing to dark.
         if (sdkVersion <= 11) {
             setTheme(android.R.style.Theme);
         } else {
             setTheme(android.R.style.Theme_DeviceDefault);
-        }
+        }*/
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -756,24 +759,40 @@ public class MainActivity extends Activity {
     private void vibratorInfo() {
        // Vibrator info
         Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        try {
-            if (sdkVersion < 11 && vib != null) {
-				vib.vibrate(100);
-                vibrateTest = "Vibrator Not null, Success";
-            } else if (sdkVersion >= 26 && vib != null && vib.hasVibrator()) {
- 		        vib.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-				vibrateTest = "Hasvibrator, Default amplitude, class VibrationEffect.";
-            } else if (sdkVersion >= 26 && vib != null && vib.hasVibrator() && vib.hasAmplitudeControl()) {
-				vib.vibrate(VibrationEffect.createOneShot(100, 10));
-                vibrateTest = "Has vibrator. %15 amplitude, class Vibrator.";
-            } else if (Build.VERSION.SDK_INT >= 11 && sdkVersion < 26 && vib != null && vib.hasVibrator()) {
-                vib.vibrate(100);
-				vibrateTest = "Has vibrator. Default amplitude, class Vibrator.";
-            } else if (sdkVersion >= 11 && !(vib.hasVibrator())) { // Checks NullPointerException next in catch.
-				vibrateTest = "No vibrate hardware.";
-            }
-        } catch (NullPointerException nullPointerException) {
-                vibrateTest = "Vibrate 'null' error:\n" + nullPointerException.getLocalizedMessage();
+        if (sdkVersion < 26) {
+	        try {
+	            if (sdkVersion > 10 && vib.hasVibrator() && vib != null) {
+					vib.vibrate(100);
+	                vibrateTest = "Vibrated for 100ms, hasVibrator.";
+	            } else if (sdkVersion >= 11 && !(vib.hasVibrator())) { // Checks NullPointerException next in catch.
+					vibrateTest = "No vibrate hardware.";
+	            }
+                else { // try anyway for catch.
+                    vib.vibrate(100);
+                    vibrateTest = "Vibrated for 100ms.";
+                }
+	        } catch (NullPointerException nullPointerException) {
+	                vibrateTest = "Vibrate 'null' error:\n" + nullPointerException.getLocalizedMessage();
+	        }
+        }
+        else {
+	        try {
+	            if (sdkVersion > 10 && vib.hasVibrator() && vib.hasAmplitudeControl()) {
+	                vib.vibrate(VibrationEffect.createOneShot(100, 10));
+	                vibrateTest = "Hasvibrator, %15 amplitude, class VibrationEffect";
+	            }
+	            else if (vib.hasAmplitudeControl() == false) {
+	                vib.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+                    vibrateTest = "Class VibrationEffect, default_amplitude";
+	            }
+	            else if (sdkVersion >= 11 && !(vib.hasVibrator())) { // Checks NullPointerException next in catch.
+				    vibrateTest = "No vibrate hardware.";
+		        }
+           }
+           catch (NullPointerException nullPointerAtVibrationEffect) {
+                vibrateTest = "Error at VibrationEffect";
+                return;
+           }
         }
     }
 
