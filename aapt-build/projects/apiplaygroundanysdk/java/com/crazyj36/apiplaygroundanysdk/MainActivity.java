@@ -322,11 +322,7 @@ public class MainActivity extends Activity {
         btnCreateDoc.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 try {
-                     createDocFile();
-                 } catch (IOException docFileIOException) {
-                     generalToast("IOException");
-                 }
+                 createDocFile();
              }
         });
 
@@ -707,14 +703,21 @@ public class MainActivity extends Activity {
     }
 
     // Create document file
-    public void createDocFile() throws IOException {
-        File docPath = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
-        if (docPath != null) {
-            File docFile = new File(docPath, "my_document.txt");
-            FileWriter docFileWriter = new FileWriter(docFile);
-            docFileWriter.write("button clicked, content written");
-            docFileWriter.close();
-            generalToast("Wrote to Documents, filewriter closed.");
+    public void createDocFile() {
+        Intent createDocIntent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        createDocIntent.addCategory(Intent.CATEGORY_OPENABLE);
+        createDocIntent.setType("text/plain");
+        createDocIntent.putExtra(Intent.EXTRA_TITLE, "doc.txt");
+        startActivityForResult(createDocIntent, 1);
+        @Override
+        protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            if (resultCode == RESULT_OK && requestCode == WRITE_REQUEST_CODE) {
+                generalToast("Wrote to Documents.");
+            }
+            else {
+                generalToast("Didn't write to Document");
+            }
         }
     }
 
