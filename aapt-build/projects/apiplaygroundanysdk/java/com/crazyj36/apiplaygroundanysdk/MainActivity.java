@@ -72,6 +72,7 @@ public class MainActivity extends Activity {
 	String filesTest = "";
     String logChannel = "APIPLAYGROUNDLOG";
     int sdkVersion = Build.VERSION.SDK_INT;
+    int CREATE_DOCUMENT_REQUEST = 0;
 	public static final int MY_PERMISSION = 0;
 	String[] permission = new String[] {Manifest.permission.READ_EXTERNAL_STORAGE};
     ListView listView;
@@ -79,7 +80,7 @@ public class MainActivity extends Activity {
 	String vibrateTest = "";
 	String concatTxt = "";
     String writeMyFileString = "";
-    String isDocWritten = "";
+    String isDocWritten = "Press New Doc, or it's already created.";
     String planets = "";
     String battery = "";
     String updaterTxt = "Update 0";
@@ -410,13 +411,13 @@ public class MainActivity extends Activity {
         });
 
         // Files in external files directory /sdcard/Android/com.crazyj36.apiplaygroundanysdk/files
-        // The method of getting external files here should be done from android 10 onward.
+        // The method of getting external files here should be done from api 29 onward.
         if (sdkVersion >= 8) {
             File appFilesDir = getExternalFilesDir(null);
             File[] appFilesList = appFilesDir.listFiles();
             filesDirLength = String.valueOf(appFilesList.length);
         } else if (sdkVersion < 8) {
-            filesDirLength = "get external app files on sdk < 8.";
+            filesDirLength = "TODO: get external app files onto sdk < 8.";
         }
 
         // Button random numbers
@@ -491,7 +492,7 @@ public class MainActivity extends Activity {
     // filesTask() Get files from external /sdcard/Android/com.company.app/, show names in listview
     public void filesTask() {
         if (sdkVersion >= 8) {
-            storage = getFilesDir().toString(); // /sdcard/Android/com.company.app/
+            storage = getExternalFilesDir("notes").toString(); // /sdcard/Android/com.company.app/
         } else if (sdkVersion < 8) {
             storage = Environment.getExternalStorageDirectory() + "notes".toString(); // /sdcard/notes/
         }
@@ -574,6 +575,7 @@ public class MainActivity extends Activity {
                 "strings.xml array: " + planets,
                 battery,
                 displayResolution,
+                isDocWritten,
 	    };
 	    results[0] = "Results feild entries: " + String.valueOf(results.length);
 	    int z = 0;
@@ -708,19 +710,20 @@ public class MainActivity extends Activity {
         createDocIntent.addCategory(Intent.CATEGORY_OPENABLE);
         createDocIntent.setType("text/plain");
         createDocIntent.putExtra(Intent.EXTRA_TITLE, "doc.txt");
-        startActivityForResult(createDocIntent, 1);
-        @Override
-        protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-            super.onActivityResult(requestCode, resultCode, data);
-            if (resultCode == RESULT_OK && requestCode == WRITE_REQUEST_CODE) {
-                generalToast("Wrote to Documents.");
-            }
-            else {
-                generalToast("Didn't write to Document");
+        startActivityForResult(createDocIntent, CREATE_DOCUMENT_REQUEST);
+    }
+    // Return from above
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CREATE_DOCUMENT_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                 isDocWritten = "Done! " + data.getDataString();
+                 updateResults();
+            } else {
+                 isDocWritten = "Didn't create document";
+                 updateResults();
             }
         }
     }
-
     // Read battery state broadcast from system
     private BroadcastReceiver batteryBroadcast = new BroadcastReceiver() {
         @Override
