@@ -410,16 +410,6 @@ public class MainActivity extends Activity {
             }
         });
 
-        // Files in external files directory /sdcard/Android/com.crazyj36.apiplaygroundanysdk/files
-        // The method of getting external files here should be done from api 29 onward.
-        if (sdkVersion >= 8) {
-            File appFilesDir = getExternalFilesDir(null);
-            File[] appFilesList = appFilesDir.listFiles();
-            filesDirLength = String.valueOf(appFilesList.length);
-        } else if (sdkVersion < 8) {
-            filesDirLength = "TODO: get external app files onto sdk < 8.";
-        }
-
         // Button random numbers
         findViewById(R.id.btnRandomNumbers).setOnClickListener(new OnClickListener() {
             @Override
@@ -491,21 +481,45 @@ public class MainActivity extends Activity {
 
     // filesTask() Get files from external /sdcard/Android/com.company.app/, show names in listview
     public void filesTask() {
-        if (sdkVersion >= 8) {
-            storage = getExternalFilesDir("notes").toString(); // /sdcard/Android/com.company.app/
-        } else if (sdkVersion < 8) {
-            storage = Environment.getExternalStorageDirectory() + "notes".toString(); // /sdcard/notes/
+        // Files in external files directory /sdcard/Android/com.crazyj36.apiplaygroundanysdk/files
+        // The method of getting external files here should be done from api 29 onward.
+        try {
+            if (sdkVersion >= 8) {
+                File appFilesDir = getExternalFilesDir(null);
+                File[] appFilesList = appFilesDir.listFiles();
+                filesDirLength = String.valueOf(appFilesList.length) + " files/dirs in external app storage dir.";
+            }
+            else {
+                filesDirLength = "Get app files dir length on api < 8";
+                return;
+            }
+        }
+        catch (NullPointerException nullPointerException) {
+            filesDirLength = "No Storage Mounted";
+            filesTest = "No Storage Mounted";
+            return;
+        }
+        if (sdkVersion < 29) {
+            storage = Environment.getExternalStorageDirectory() + "/notes".toString(); // /sdcard/notes/
+        }
+        else {
+	        storage = getExternalFilesDir("notes").toString(); // /sdcard/Android/com.company.app/files/notes
         }
         File dir = new File(storage);
 		listView = findViewById(R.id.fileList);
         if (sdkVersion < 21) {
             makeScrollable(listView);
         }
-        final File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
-		if (fileList.length == 0) {
+        if (!(dir.exists() && dir.isDirectory())) {
+            filesTest = "No " + storage + " directory.";
+            listView.setEnabled(false);
+            return;
+        }
+	    final File[] fileList = dir.listFiles(); // try to sort by name. initially sorted by date.
+	    if (fileList.length == 0) {
 			listView.setEnabled(false);
-            filesTest = ("No files in: " + dir.toString());
-			return;
+	        filesTest = ("No files in: " + dir.toString());
+		    return;
 		}
         filesTest = "Files at " + dir.toString() + " below";
         String[] names = new String[fileList.length];
@@ -571,7 +585,7 @@ public class MainActivity extends Activity {
 				javaClass.myMethod(),
                 "Downloads dir name: " + Environment.DIRECTORY_DOWNLOADS,
                 writeMyFileString,
-                filesDirLength + " files/dir in external files directory",
+                filesDirLength,
                 "strings.xml array: " + planets,
                 battery,
                 displayResolution,
