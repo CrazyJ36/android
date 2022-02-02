@@ -92,6 +92,11 @@ public class MainActivity extends Activity {
     // onCreate activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (sdkVersion <= 11) {
+            setTheme(android.R.style.Theme);
+        } else {
+            setTheme(android.R.style.Theme_DeviceDefault);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
