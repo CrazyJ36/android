@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
 
         Intent launchIntent = new Intent(Intent.ACTION_VIEW);
 
-        Uri msnSite = Uri.parse("http://www.msn.com");
+        Uri msnSite = Uri.parse("https://www.msn.com");
         launchIntent.setData(msnSite);  // setDataAndType(msnSite, "text/html") caused duplicate pages to open, slowing the onClick down.
 
         startActivity(launchIntent);

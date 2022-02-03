@@ -1,66 +1,73 @@
---------- beginning of /dev/log/system
-W/ActivityManager(  303): Activity destroy timeout for HistoryRecord{408289d8 com.crazyj36.newactivity/.MainActivity}
 --------- beginning of /dev/log/main
-W/ResourceType(  303): Entry identifier 0x128 is larger than entry count 0xab
-W/WindowManager(  303): [PhoneWindowManager.java:1099:addStartingWindow()] HistoryRecord{4088e688 com.crazyj36.newactivity/.MainActivity} failed creating starting window
-W/WindowManager(  303): java.lang.RuntimeException: Binary XML file line #25: You must supply a layout_height attribute.
-W/WindowManager(  303): 	at android.content.res.TypedArray.getLayoutDimension(TypedArray.java:491)
-W/WindowManager(  303): 	at android.view.ViewGroup$LayoutParams.setBaseAttributes(ViewGroup.java:3599)
-W/WindowManager(  303): 	at android.view.ViewGroup$MarginLayoutParams.<init>(ViewGroup.java:3678)
-W/WindowManager(  303): 	at android.widget.LinearLayout$LayoutParams.<init>(LinearLayout.java:1400)
-W/WindowManager(  303): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:1326)
-W/WindowManager(  303): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:47)
-W/WindowManager(  303): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:625)
-W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
-W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
-W/WindowManager(  303): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
-W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.generateLayout(PhoneWindow.java:2290)
-W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.installDecor(PhoneWindow.java:2345)
-W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindow.getDecorView(PhoneWindow.java:1511)
-W/WindowManager(  303): 	at com.android.internal.policy.impl.PhoneWindowManager.addStartingWindow(PhoneWindowManager.java:1070)
-W/WindowManager(  303): 	at com.android.server.WindowManagerService$H.handleMessage(WindowManagerService.java:8347)
-W/WindowManager(  303): 	at android.os.Handler.dispatchMessage(Handler.java:99)
-W/WindowManager(  303): 	at android.os.Looper.loop(Looper.java:130)
-W/WindowManager(  303): 	at com.android.server.WindowManagerService$WMThread.run(WindowManagerService.java:582)
-I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.newactivity/.MainActivity } from pid 454
-D/Launcher.Workspace(  454): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
-D/Launcher.Workspace(  454): [Workspace.java:2036:hideWallpaper()] Show wallpaper
-I/ActivityManager(  303): process name to start: com.crazyj36.newactivity
-I/ActivityManager(  303): Start proc com.crazyj36.newactivity for activity com.crazyj36.newactivity/.MainActivity: pid=1903 uid=10023 gids={}
-W/ResourceType( 1903): Entry identifier 0x128 is larger than entry count 0xab
-I/#LGIME  (  433): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
-I/ActivityManager(  303): [ActivityRecord.java:444:windowsVisible()] Displayed com.crazyj36.newactivity/.MainActivity: +105ms
-W/dalvikvm( 1903): threadid=1: thread exiting with uncaught exception (group=0x40019560)
-I/ActivityManager(  303): Starting: Intent { cmp=com.crazyj36.newactivity/.NextActivity } from pid 1903
-E/AndroidRuntime( 1903): FATAL EXCEPTION: main
-E/AndroidRuntime( 1903): java.lang.IllegalStateException: Could not execute method of the activity
-E/AndroidRuntime( 1903): 	at android.view.View$1.onClick(View.java:2179)
-E/AndroidRuntime( 1903): 	at android.view.View.performClick(View.java:2520)
-E/AndroidRuntime( 1903): 	at android.view.View$PerformClick.run(View.java:9157)
-E/AndroidRuntime( 1903): 	at android.os.Handler.handleCallback(Handler.java:587)
-E/AndroidRuntime( 1903): 	at android.os.Handler.dispatchMessage(Handler.java:92)
-E/AndroidRuntime( 1903): 	at android.os.Looper.loop(Looper.java:130)
-E/AndroidRuntime( 1903): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
-E/AndroidRuntime( 1903): 	at java.lang.reflect.Method.invokeNative(Native Method)
-E/AndroidRuntime( 1903): 	at java.lang.reflect.Method.invoke(Method.java:507)
-E/AndroidRuntime( 1903): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
-E/AndroidRuntime( 1903): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
-E/AndroidRuntime( 1903): 	at dalvik.system.NativeStart.main(Native Method)
-E/AndroidRuntime( 1903): Caused by: java.lang.reflect.InvocationTargetException
-E/AndroidRuntime( 1903): 	at java.lang.reflect.Method.invokeNative(Native Method)
-E/AndroidRuntime( 1903): 	at java.lang.reflect.Method.invoke(Method.java:507)
-E/AndroidRuntime( 1903): 	at android.view.View$1.onClick(View.java:2174)
-E/AndroidRuntime( 1903): 	... 11 more
-E/AndroidRuntime( 1903): Caused by: android.content.ActivityNotFoundException: Unable to find explicit activity class {com.crazyj36.newactivity/com.crazyj36.newactivity.NextActivity}; have you declared this activity in your AndroidManifest.xml?
-E/AndroidRuntime( 1903): 	at android.app.Instrumentation.checkStartActivityResult(Instrumentation.java:1405)
-E/AndroidRuntime( 1903): 	at android.app.Instrumentation.execStartActivity(Instrumentation.java:1379)
-E/AndroidRuntime( 1903): 	at android.app.Activity.startActivityForResult(Activity.java:2827)
-E/AndroidRuntime( 1903): 	at android.app.Activity.startActivity(Activity.java:2933)
-E/AndroidRuntime( 1903): 	at com.crazyj36.newactivity.MainActivity.newActivity(MainActivity.java:17)
-E/AndroidRuntime( 1903): 	... 14 more
-W/ActivityManager(  303):   Force finishing activity com.crazyj36.newactivity/.MainActivity
-W/ActivityManager(  303): Activity pause timeout for HistoryRecord{4088e688 com.crazyj36.newactivity/.MainActivity}
-D/Launcher.Workspace(  454): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
-E/ActivityThread(  454): Failed to find provider info for call_log
-E/ActivityThread(  454): Failed to find provider info for com.lge.providers.lgemail
-E/ActivityThread(  454): Failed to find provider info for com.android.whatsnew
+W/ResourceType(  304): Entry identifier 0x128 is larger than entry count 0xab
+--------- beginning of /dev/log/system
+I/ActivityManager(  304): Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.newactivity/.MainActivity } from pid 471
+W/WindowManager(  304): [PhoneWindowManager.java:1099:addStartingWindow()] HistoryRecord{406cebc0 com.crazyj36.newactivity/.MainActivity} failed creating starting window
+W/WindowManager(  304): java.lang.RuntimeException: Binary XML file line #25: You must supply a layout_height attribute.
+W/WindowManager(  304): 	at android.content.res.TypedArray.getLayoutDimension(TypedArray.java:491)
+W/WindowManager(  304): 	at android.view.ViewGroup$LayoutParams.setBaseAttributes(ViewGroup.java:3599)
+W/WindowManager(  304): 	at android.view.ViewGroup$MarginLayoutParams.<init>(ViewGroup.java:3678)
+W/WindowManager(  304): 	at android.widget.LinearLayout$LayoutParams.<init>(LinearLayout.java:1400)
+W/WindowManager(  304): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:1326)
+W/WindowManager(  304): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:47)
+W/WindowManager(  304): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:625)
+W/WindowManager(  304): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
+W/WindowManager(  304): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
+W/WindowManager(  304): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
+W/WindowManager(  304): 	at com.android.internal.policy.impl.PhoneWindow.generateLayout(PhoneWindow.java:2290)
+W/WindowManager(  304): 	at com.android.internal.policy.impl.PhoneWindow.installDecor(PhoneWindow.java:2345)
+W/WindowManager(  304): 	at com.android.internal.policy.impl.PhoneWindow.getDecorView(PhoneWindow.java:1511)
+W/WindowManager(  304): 	at com.android.internal.policy.impl.PhoneWindowManager.addStartingWindow(PhoneWindowManager.java:1070)
+W/WindowManager(  304): 	at com.android.server.WindowManagerService$H.handleMessage(WindowManagerService.java:8347)
+W/WindowManager(  304): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+W/WindowManager(  304): 	at android.os.Looper.loop(Looper.java:130)
+W/WindowManager(  304): 	at com.android.server.WindowManagerService$WMThread.run(WindowManagerService.java:582)
+D/Launcher.Workspace(  471): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
+D/Launcher.Workspace(  471): [Workspace.java:2036:hideWallpaper()] Show wallpaper
+I/ActivityManager(  304): process name to start: com.crazyj36.newactivity
+I/ActivityManager(  304): Start proc com.crazyj36.newactivity for activity com.crazyj36.newactivity/.MainActivity: pid=2162 uid=10023 gids={}
+W/ResourceType( 2162): Entry identifier 0x128 is larger than entry count 0xab
+I/#LGIME  (  450): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+I/ActivityManager(  304): [ActivityRecord.java:444:windowsVisible()] Displayed com.crazyj36.newactivity/.MainActivity: +108ms
+W/dalvikvm( 2162): threadid=1: thread exiting with uncaught exception (group=0x40019560)
+I/ActivityManager(  304): Starting: Intent { cmp=com.crazyj36.newactivity/.NextActivity } from pid 2162
+E/AndroidRuntime( 2162): FATAL EXCEPTION: main
+E/AndroidRuntime( 2162): java.lang.IllegalStateException: Could not execute method of the activity
+E/AndroidRuntime( 2162): 	at android.view.View$1.onClick(View.java:2179)
+E/AndroidRuntime( 2162): 	at android.view.View.performClick(View.java:2520)
+E/AndroidRuntime( 2162): 	at android.view.View$PerformClick.run(View.java:9157)
+E/AndroidRuntime( 2162): 	at android.os.Handler.handleCallback(Handler.java:587)
+E/AndroidRuntime( 2162): 	at android.os.Handler.dispatchMessage(Handler.java:92)
+E/AndroidRuntime( 2162): 	at android.os.Looper.loop(Looper.java:130)
+E/AndroidRuntime( 2162): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
+E/AndroidRuntime( 2162): 	at java.lang.reflect.Method.invokeNative(Native Method)
+E/AndroidRuntime( 2162): 	at java.lang.reflect.Method.invoke(Method.java:507)
+E/AndroidRuntime( 2162): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
+E/AndroidRuntime( 2162): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
+E/AndroidRuntime( 2162): 	at dalvik.system.NativeStart.main(Native Method)
+E/AndroidRuntime( 2162): Caused by: java.lang.reflect.InvocationTargetException
+E/AndroidRuntime( 2162): 	at java.lang.reflect.Method.invokeNative(Native Method)
+E/AndroidRuntime( 2162): 	at java.lang.reflect.Method.invoke(Method.java:507)
+E/AndroidRuntime( 2162): 	at android.view.View$1.onClick(View.java:2174)
+E/AndroidRuntime( 2162): 	... 11 more
+E/AndroidRuntime( 2162): Caused by: android.content.ActivityNotFoundException: Unable to find explicit activity class {com.crazyj36.newactivity/com.crazyj36.newactivity.NextActivity}; have you declared this activity in your AndroidManifest.xml?
+E/AndroidRuntime( 2162): 	at android.app.Instrumentation.checkStartActivityResult(Instrumentation.java:1405)
+E/AndroidRuntime( 2162): 	at android.app.Instrumentation.execStartActivity(Instrumentation.java:1379)
+E/AndroidRuntime( 2162): 	at android.app.Activity.startActivityForResult(Activity.java:2827)
+E/AndroidRuntime( 2162): 	at android.app.Activity.startActivity(Activity.java:2933)
+E/AndroidRuntime( 2162): 	at com.crazyj36.newactivity.MainActivity.newActivity(MainActivity.java:17)
+E/AndroidRuntime( 2162): 	... 14 more
+W/ActivityManager(  304):   Force finishing activity com.crazyj36.newactivity/.MainActivity
+W/ActivityManager(  304): Activity pause timeout for HistoryRecord{406cebc0 com.crazyj36.newactivity/.MainActivity}
+D/Launcher.Workspace(  471): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
+E/ActivityThread(  471): Failed to find provider info for call_log
+E/ActivityThread(  471): Failed to find provider info for com.lge.providers.lgemail
+E/ActivityThread(  471): Failed to find provider info for com.android.whatsnew
+E/InputDispatcher(  304): channel '40731e40 com.crazyj36.newactivity/com.crazyj36.newactivity.MainActivity (server)' ~ Consumer closed input channel or an error occurred.  events=0x8
+E/InputDispatcher(  304): channel '40731e40 com.crazyj36.newactivity/com.crazyj36.newactivity.MainActivity (server)' ~ Channel is unrecoverably broken and will be disposed!
+I/ActivityManager(  304): Process com.crazyj36.newactivity (pid 2162) has died.
+I/WindowManager(  304): WIN DEATH: Window{40731e40 com.crazyj36.newactivity/com.crazyj36.newactivity.MainActivity paused=false}
+E/JavaBinder(  304): Transact on 0x5050f0 in Java object 0x40845730 with code 3 failed
+E/JavaBinder(  304): Transact on 0x5050f0 in Java object 0x40845730 with code 4 failed
+I/#LGIME  (  450): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+W/InputManagerService(  304): Got RemoteException sending setActive(false) notification to pid 2162 uid 10023
