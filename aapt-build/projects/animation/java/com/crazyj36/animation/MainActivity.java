@@ -4,11 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.content.Context;
 import android.view.View;
-import android.widget.Toast;
-import android.widget.ImageView;
-import android.widget.Button;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+//import android.view.animation.Animation;
+//import android.view.animation.AnimationUtils;
+//import android.widget.ImageView;
+//import android.animation.ObjectAnimator;
 
 public class MainActivity extends Activity {
 
@@ -17,15 +16,16 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 	   	setContentView(R.layout.activity_main);
 
-  	}
+        //final Animation animation = AnimationUtils.loadAnimation(this, R.anim.animation);
+        //final ImageView imageView = findViewById(R.id.imageView);
 
-    public void move(View view) {
-    	ImageView imageView = findViewById(R.id.imageView);
+        //imageView.startAnimation(animation);
 
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.move);
-        imageView.startAnimation(animation);
+        /*// On android sdk >= 11
+        ObjectAnimator animation = ObjectAnimator.ofFloat(imageView, "translationX", 100f);
+        animation.setDuration(1000);
+        animation.start();*/
 
-        Toast.makeText(MainActivity.this, "Done", Toast.LENGTH_SHORT).show();
     }
 }
 
