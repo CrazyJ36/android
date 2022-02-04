@@ -331,7 +331,15 @@ public class MainActivity extends Activity {
         btnCreateDoc.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 createDocFile();
+                 if (sdkVersion >= 8 && sdkVersion < 29) {
+                     createDocFileEnvironment();
+                 }
+                 else if (sdkVersion >= 29) {
+                     createDocFileIntent();
+                 }
+                 else {
+                     generalToast("create doc file in sdk < 8");
+                 }
              }
         });
 
@@ -726,8 +734,25 @@ public class MainActivity extends Activity {
         }
     }
 
-    // Create document file
-    public void createDocFile() {
+    // create document file on api < 19.
+    public void createDocFileEnvironment() {
+        try {
+            File dir = new File(Environment.getExternalStorageDirectory() + "/Documents");
+            if (!(dir.exists() && dir.isDirectory())) {
+                dir.mkdirs();
+            }
+            File doc = new File(dir + "/doc.txt");
+            FileWriter docFileWriter = new FileWriter(doc);
+            docFileWriter.write("Doc content");
+            docFileWriter.close();
+            isDocWritten = "Wrote doc with Envoronment.getExternalStorage()";
+        }
+        catch (IOException ioException) {
+            generalToast("IOException in createDocFileEnvironment()");
+        }
+    }
+    // Create document file on api >= 19
+    public void createDocFileIntent() {
         Intent createDocIntent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         createDocIntent.addCategory(Intent.CATEGORY_OPENABLE);
         createDocIntent.setType("text/plain");

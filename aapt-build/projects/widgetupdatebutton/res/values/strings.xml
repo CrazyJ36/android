@@ -5,6 +5,7 @@
     <string name="tvInstructionsTxt">
 This app only shows this screen and A home screen widget.\n
 You can manually update the widget status with A button.
+Updates automatically every 30 minutes or on button click.
 This app implements A preferred method to use A widget.
     </string>
     <string name="tvWidgetDefaultTxt">Default text.</string>

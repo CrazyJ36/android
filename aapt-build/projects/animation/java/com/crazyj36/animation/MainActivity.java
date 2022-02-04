@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
                // toX: to half percent of width as middle would be zero instead of 1080.
                Animation translate = new TranslateAnimation(0 - (parentWidth / 2), parentWidth / 2, 0, 0);
                translate.setDuration(800); // won't move without A duration.
-               translate.setFillAfter(true);
+               translate.setFillAfter(false);
                imageView.startAnimation(translate);
             }
             @Override

@@ -13,17 +13,26 @@ public class AppWidget extends AppWidgetProvider {
     // A reference number to increment per update button click.
     static int updater = 0;
 
+    @Override
+	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        for (int appWidgetId : appWidgetIds) { // Syntax: (type variable arrayToGoThrough)
+            // increment number on ever update. Updates include code from myUpdateAppWidget() and onUpdate().
+            updater = updater + 1;
+            // Using above method here. Runs code from myUpdateAppWidget() before the Toast below.
+            myUpdateAppWidget(context, appWidgetManager, appWidgetId);
+
+            // context is carried through the methods in this file, so even toast works.
+            Toast.makeText(context, "AppWidget and onUpdate() called.", Toast.LENGTH_SHORT).show();
+
+        }
+	}
+
     // defined widgets update method ourselfs.
     static void myUpdateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
 
-        // increment number everytime updateAppWidget is called, up to 10
-        if (updater == 10) {
-            updater = 0;
-        }
-        updater = updater + 1;
        // Set widget content
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.appwidget);
-        views.setTextViewText(R.id.tvWidget, "Counts every 30min or on button click: " + String.valueOf(updater));
+        views.setTextViewText(R.id.tvWidget, String.valueOf(updater));
 
         // intent for widget to update itself.
         Intent intentUpdate = new Intent(context, AppWidget.class);
@@ -37,22 +46,8 @@ public class AppWidget extends AppWidgetProvider {
         PendingIntent pendingUpdate = PendingIntent.getBroadcast(context, appWidgetId, intentUpdate, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setOnClickPendingIntent(R.id.btnWidget, pendingUpdate);
 
-        // Test A function outside of onUpdate(). I tried AlertDialog wont work, seems that can only be done by Activity with android.app.AlertDialog.
-        Toast.makeText(context, "AppWidget myUpdateAppWidget() called.", 0).show();
-
         // regular widget refresh
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
-    @Override
-	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        for (int appWidgetId : appWidgetIds) { // Syntax: (type variable arrayToGoThrough)
-            // Using above method here. Runs code from myUpdateAppWidget() before the Toast below.
-            myUpdateAppWidget(context, appWidgetManager, appWidgetId);
-
-            // context is carried through the methods in this file, so even toast works.
-            Toast.makeText(context, "AppWidget onUpdate() called.", Toast.LENGTH_SHORT).show();
-
-        }
-	}
 }

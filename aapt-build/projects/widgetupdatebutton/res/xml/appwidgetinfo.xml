@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!-- updatePeriodMillis: was 1800001 for 30 minutes -->
 <appwidget-provider
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:minWidth="189dp"
-    android:minHeight="40dp"
+    android:minWidth="32dp"
+    android:minHeight="32dp"
     android:updatePeriodMillis="1800001"
     android:initialLayout="@layout/appwidget" >
 </appwidget-provider>
