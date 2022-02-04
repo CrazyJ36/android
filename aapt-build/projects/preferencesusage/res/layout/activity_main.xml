@@ -16,6 +16,7 @@
         android:id="@+id/tvResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="bottom|center"
         android:text="@string/tvResultOffTxt" />
 
 </LinearLayout>
