@@ -2,5 +2,5 @@
 
 <resources>
     <string name="appname">Animation</string>
-    <string name="buttonTxt">Animate</string>
+    <string name="buttonText">Animate</string>
 </resources>

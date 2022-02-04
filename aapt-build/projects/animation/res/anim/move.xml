@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- fillAfter leaves the object where it ends up after animation -->
+<set
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/linear_interpolator"
+    android:fillAfter="false" 
+    android:shareInterpolator="true"
+    android:ordering="sequentially" >
+
+    <!-- 50% means percent of pixels, 50%p means percent of parent view -->
+    <!-- With 0% being center of vertical view, -50 = top, 50 = bottom -->
+    <translate
+        android:fromYDelta="-50%p"
+        android:toYDelta="50%p"
+        android:duration="800" />
+
+    <!-- startOffset is needed to run this translate after the duration of the last translate -->
+    <translate
+        android:startOffset="800"
+        android:fromYDelta="50%p"
+        android:toYDelta="-50%p"
+        android:duration="800" />
+</set>
