@@ -1,0 +1,36 @@
+--------- beginning of /dev/log/system
+I/ActivityManager(  303): Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.animation/.MainActivity bnds=[2,237][118,377] } from pid 468
+--------- beginning of /dev/log/main
+D/Launcher.Workspace(  468): [Workspace.java:2036:hideWallpaper()] Show wallpaper
+I/ActivityManager(  303): process name to start: com.crazyj36.animation
+I/ActivityManager(  303): Start proc com.crazyj36.animation for activity com.crazyj36.animation/.MainActivity: pid=3225 uid=10004 gids={}
+W/dalvikvm( 3225): threadid=1: thread exiting with uncaught exception (group=0x40019560)
+E/AndroidRuntime( 3225): FATAL EXCEPTION: main
+E/AndroidRuntime( 3225): java.lang.RuntimeException: Unable to instantiate activity ComponentInfo{com.crazyj36.animation/com.crazyj36.animation.MainActivity}: java.lang.NullPointerException
+E/AndroidRuntime( 3225): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1580)
+E/AndroidRuntime( 3225): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:1674)
+E/AndroidRuntime( 3225): 	at android.app.ActivityThread.access$1500(ActivityThread.java:117)
+E/AndroidRuntime( 3225): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:942)
+E/AndroidRuntime( 3225): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+E/AndroidRuntime( 3225): 	at android.os.Looper.loop(Looper.java:130)
+E/AndroidRuntime( 3225): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
+E/AndroidRuntime( 3225): 	at java.lang.reflect.Method.invokeNative(Native Method)
+E/AndroidRuntime( 3225): 	at java.lang.reflect.Method.invoke(Method.java:507)
+E/AndroidRuntime( 3225): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
+E/AndroidRuntime( 3225): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
+E/AndroidRuntime( 3225): 	at dalvik.system.NativeStart.main(Native Method)
+E/AndroidRuntime( 3225): Caused by: java.lang.NullPointerException
+E/AndroidRuntime( 3225): 	at android.app.Activity.findViewById(Activity.java:1647)
+E/AndroidRuntime( 3225): 	at com.crazyj36.animation.MainActivity.<init>(MainActivity.java:15)
+E/AndroidRuntime( 3225): 	at java.lang.Class.newInstanceImpl(Native Method)
+E/AndroidRuntime( 3225): 	at java.lang.Class.newInstance(Class.java:1409)
+E/AndroidRuntime( 3225): 	at android.app.Instrumentation.newActivity(Instrumentation.java:1021)
+E/AndroidRuntime( 3225): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1572)
+E/AndroidRuntime( 3225): 	... 11 more
+W/ActivityManager(  303):   Force finishing activity com.crazyj36.animation/.MainActivity
+W/ActivityManager(  303): Activity pause timeout for HistoryRecord{407cc018 com.crazyj36.animation/.MainActivity}
+D/Launcher.Workspace(  468): [Workspace.java:2036:hideWallpaper()] Show wallpaper
+D/Launcher.Workspace(  468): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
+E/ActivityThread(  468): Failed to find provider info for call_log
+E/ActivityThread(  468): Failed to find provider info for com.lge.providers.lgemail
+E/ActivityThread(  468): Failed to find provider info for com.android.whatsnew
