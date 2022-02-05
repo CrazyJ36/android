@@ -54,16 +54,21 @@ public class GameView extends View {
         Button buttonLeft = (Button) ((Activity)appContext).findViewById(R.id.buttonLeft);
 
         buttonLeft.setOnTouchListener(new View.OnTouchListener() {
-            Handler handler;
+            private Handler handler;
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         if (handler != null) return true;
                         handler = new Handler(Looper.getMainLooper());
-                        handler.postDelayed(onLeftPressed, 100);
+                        handler.postDelayed(onLeftPressed, 50);
                         break;
                     case MotionEvent.ACTION_UP:
+                        if (handler == null) return true;
+                        handler.removeCallbacks(onLeftPressed);
+                        handler = null;
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
                         if (handler == null) return true;
                         handler.removeCallbacks(onLeftPressed);
                         handler = null;
@@ -77,7 +82,7 @@ public class GameView extends View {
 		            currentX = currentX - 1;
 	                newX = currentX;
 	                textView.setText(String.valueOf(newX));
-	                handler.postDelayed(this, 100);
+	                handler.postDelayed(this, 50);
 	            }
 	        };
         });

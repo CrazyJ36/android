@@ -1,91 +1,32 @@
---------- beginning of /dev/log/system
-I/ActivityManager(  307): Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.avoidmeteors/.MainActivity } from pid 463
 --------- beginning of /dev/log/main
-D/Launcher.Workspace(  463): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
-D/Launcher.Workspace(  463): [Workspace.java:2036:hideWallpaper()] Show wallpaper
-I/ActivityManager(  307): process name to start: com.crazyj36.avoidmeteors
-I/ActivityManager(  307): Start proc com.crazyj36.avoidmeteors for activity com.crazyj36.avoidmeteors/.MainActivity: pid=2963 uid=10005 gids={}
-W/dalvikvm( 2963): threadid=1: thread exiting with uncaught exception (group=0x40019560)
-E/AndroidRuntime( 2963): FATAL EXCEPTION: main
-E/AndroidRuntime( 2963): java.lang.RuntimeException: Unable to start activity ComponentInfo{com.crazyj36.avoidmeteors/com.crazyj36.avoidmeteors.MainActivity}: android.view.InflateException: Binary XML file line #8: Error inflating class com.crazyj36.avoidmeteors.GameView
-E/AndroidRuntime( 2963): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1658)
-E/AndroidRuntime( 2963): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:1674)
-E/AndroidRuntime( 2963): 	at android.app.ActivityThread.access$1500(ActivityThread.java:117)
-E/AndroidRuntime( 2963): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:942)
-E/AndroidRuntime( 2963): 	at android.os.Handler.dispatchMessage(Handler.java:99)
-E/AndroidRuntime( 2963): 	at android.os.Looper.loop(Looper.java:130)
-E/AndroidRuntime( 2963): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
-E/AndroidRuntime( 2963): 	at java.lang.reflect.Method.invokeNative(Native Method)
-E/AndroidRuntime( 2963): 	at java.lang.reflect.Method.invoke(Method.java:507)
-E/AndroidRuntime( 2963): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
-E/AndroidRuntime( 2963): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
-E/AndroidRuntime( 2963): 	at dalvik.system.NativeStart.main(Native Method)
-E/AndroidRuntime( 2963): Caused by: android.view.InflateException: Binary XML file line #8: Error inflating class com.crazyj36.avoidmeteors.GameView
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.createView(LayoutInflater.java:518)
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:570)
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:623)
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
-E/AndroidRuntime( 2963): 	at com.android.internal.policy.impl.PhoneWindow.setContentView(PhoneWindow.java:221)
-E/AndroidRuntime( 2963): 	at android.app.Activity.setContentView(Activity.java:1657)
-E/AndroidRuntime( 2963): 	at com.crazyj36.avoidmeteors.MainActivity.onCreate(MainActivity.java:10)
-E/AndroidRuntime( 2963): 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1047)
-E/AndroidRuntime( 2963): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1622)
-E/AndroidRuntime( 2963): 	... 11 more
-E/AndroidRuntime( 2963): Caused by: java.lang.reflect.InvocationTargetException
-E/AndroidRuntime( 2963): 	at java.lang.reflect.Constructor.constructNative(Native Method)
-E/AndroidRuntime( 2963): 	at java.lang.reflect.Constructor.newInstance(Constructor.java:415)
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.createView(LayoutInflater.java:505)
-E/AndroidRuntime( 2963): 	... 21 more
-E/AndroidRuntime( 2963): Caused by: android.view.InflateException: Binary XML file line #8: Error inflating class <unknown>
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.createView(LayoutInflater.java:518)
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:570)
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:623)
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
-E/AndroidRuntime( 2963): 	at android.view.View.inflate(View.java:8884)
-E/AndroidRuntime( 2963): 	at com.crazyj36.avoidmeteors.GameView.<init>(GameView.java:23)
-E/AndroidRuntime( 2963): 	... 24 more
-E/AndroidRuntime( 2963): Caused by: java.lang.reflect.InvocationTargetException
-E/AndroidRuntime( 2963): 	at java.lang.reflect.Constructor.constructNative(Native Method)
-E/AndroidRuntime( 2963): 	at java.lang.reflect.Constructor.newInstance(Constructor.java:415)
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.createView(LayoutInflater.java:505)
-E/AndroidRuntime( 2963): 	... 31 more
-E/AndroidRuntime( 2963): Caused by: android.view.InflateException: Binary XML file line #8: Error inflating class <unknown>
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.createView(LayoutInflater.java:518)
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:570)
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:623)
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
-E/AndroidRuntime( 2963): 	at android.view.View.inflate(View.java:8884)
-E/AndroidRuntime( 2963): 	at com.crazyj36.avoidmeteors.GameView.<init>(GameView.java:23)
-E/AndroidRuntime( 2963): 	... 34 more
-E/AndroidRuntime( 2963): Caused by: java.lang.reflect.InvocationTargetException
-E/AndroidRuntime( 2963): 	at java.lang.reflect.Constructor.constructNative(Native Method)
-E/AndroidRuntime( 2963): 	at java.lang.reflect.Constructor.newInstance(Constructor.java:415)
-E/AndroidRuntime( 2963): 	at android.view.LayoutInflater.createView(LayoutInflater.java:505)
-E/AndroidRuntime( 2963): 	... 41 more
-E/AndroidRuntime( 2963): Caused by: android.view.InflateException: B
+W/dalvikvm(18717): threadid=1: thread exiting with uncaught exception (group=0x40019560)
+--------- beginning of /dev/log/system
+E/AndroidRuntime(18717): FATAL EXCEPTION: main
+E/AndroidRuntime(18717): java.lang.NullPointerException
+E/AndroidRuntime(18717): 	at com.crazyj36.avoidmeteors.GameView$1.onTouch(GameView.java:68)
+E/AndroidRuntime(18717): 	at android.view.View.dispatchTouchEvent(View.java:3916)
+E/AndroidRuntime(18717): 	at android.view.ViewGroup.dispatchTouchEvent(ViewGroup.java:942)
+E/AndroidRuntime(18717): 	at android.view.ViewGroup.dispatchTouchEvent(ViewGroup.java:942)
+E/AndroidRuntime(18717): 	at android.view.ViewGroup.dispatchTouchEvent(ViewGroup.java:942)
+E/AndroidRuntime(18717): 	at android.view.ViewGroup.dispatchTouchEvent(ViewGroup.java:942)
+E/AndroidRuntime(18717): 	at android.view.ViewGroup.dispatchTouchEvent(ViewGroup.java:942)
+E/AndroidRuntime(18717): 	at com.android.internal.policy.impl.PhoneWindow$DecorView.superDispatchTouchEvent(PhoneWindow.java:1775)
+E/AndroidRuntime(18717): 	at com.android.internal.policy.impl.PhoneWindow.superDispatchTouchEvent(PhoneWindow.java:1162)
+E/AndroidRuntime(18717): 	at android.app.Activity.dispatchTouchEvent(Activity.java:2096)
+E/AndroidRuntime(18717): 	at com.android.internal.policy.impl.PhoneWindow$DecorView.dispatchTouchEvent(PhoneWindow.java:1759)
+E/AndroidRuntime(18717): 	at android.view.ViewRoot.deliverPointerEvent(ViewRoot.java:2217)
+E/AndroidRuntime(18717): 	at android.view.ViewRoot.handleMessage(ViewRoot.java:1888)
+E/AndroidRuntime(18717): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+E/AndroidRuntime(18717): 	at android.os.Looper.loop(Looper.java:130)
+E/AndroidRuntime(18717): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
+E/AndroidRuntime(18717): 	at java.lang.reflect.Method.invokeNative(Native Method)
+E/AndroidRuntime(18717): 	at java.lang.reflect.Method.invoke(Method.java:507)
+E/AndroidRuntime(18717): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
+E/AndroidRuntime(18717): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
+E/AndroidRuntime(18717): 	at dalvik.system.NativeStart.main(Native Method)
 W/ActivityManager(  307):   Force finishing activity com.crazyj36.avoidmeteors/.MainActivity
-W/ActivityManager(  307): Activity pause timeout for HistoryRecord{406d7be0 com.crazyj36.avoidmeteors/.MainActivity}
+W/ActivityManager(  307): Activity pause timeout for HistoryRecord{406db430 com.crazyj36.avoidmeteors/.MainActivity}
 D/Launcher.Workspace(  463): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
 E/ActivityThread(  463): Failed to find provider info for call_log
 E/ActivityThread(  463): Failed to find provider info for com.lge.providers.lgemail
 E/ActivityThread(  463): Failed to find provider info for com.android.whatsnew
-E/JavaBinder(  307): Transact on 0x488638 in Java object 0x40765088 with code 9 failed
-E/JavaBinder(  307): !!! FAILED BINDER TRANSACTION !!!
-E/BinderProxy(  307): [Binder.java:373:callback()]       android.os.BinderProxy.callback(Binder.java:369)]
-E/BinderProxy(  307): [Binder.java:373:callback()]       android.os.BinderProxy.transact(Native Method)]
-E/BinderProxy(  307): [Binder.java:373:callback()]       android.app.ApplicationThreadProxy.scheduleDestroyActivity(ApplicationThreadNative.java:546)]
-E/BinderProxy(  307): [Binder.java:373:callback()]       com.android.server.am.ActivityStack.destroyActivityLocked(ActivityStack.java:3224)]
-E/BinderProxy(  307): [Binder.java:373:callback()]       com.android.server.am.ActivityStack.activityIdleInternal(ActivityStack.java:2871)]
-E/BinderProxy(  307): [Binder.java:373:callback()]       com.android.server.am.ActivityManagerService.activityIdle(ActivityManagerService.java:3780)]
-E/BinderProxy(  307): [Binder.java:373:callback()]       android.app.ActivityManagerNative.onTransact(ActivityManagerNative.java:367)]
-E/BinderProxy(  307): [Binder.java:373:callback()]       com.android.server.am.ActivityManagerService.onTransact(ActivityManagerService.java:1480)]
-E/BinderProxy(  307): [Binder.java:373:callback()]       android.os.Binder.execTransact(Binder.java:320)]
-W/InputManagerService(  307): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@40815258
-E/BinderProxy(  307): [Binder.java:373:callback()]       dalvik.system.NativeStart.run(Native Method)]
-I/ActivityManager(  307): Process com.crazyj36.avoidmeteors (pid 2963) has died.
