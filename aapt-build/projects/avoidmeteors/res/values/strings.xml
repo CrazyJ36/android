@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Avoid Meteors</string>
+    <string name="buttonLeftText">L</string>
+    <string name="buttonRightText">R</string>
+    <string name="buttonUpText">U</string>
+    <string name="buttonDownText">D</string>
+</resources>
