@@ -8,22 +8,16 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Color;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.view.MotionEvent;
-import android.view.LayoutInflater;
 import android.widget.Toast;
 import android.widget.TextView;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
-import com.crazyj36.avoidmeteors.MainActivity;
 
 public class GameView extends View {
-    int currentX = 480;
-    int currentY = 480;
-    int newX = 0;
-    int newY = 0;
-
+    int x = 480;
+    int y = 480;
 
     Context appContext;
     public GameView(Context context, AttributeSet attrs) {
@@ -44,14 +38,15 @@ public class GameView extends View {
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         Paint paint = new Paint();
-        paint.setColor(Color.GREEN);
-        canvas.drawCircle(50, 50, 24, paint);
+        paint.setColor(Color.GRAY);
+        postInvalidate();
+        canvas.drawCircle(x, y, 24, paint);
 
         // FindViewById while this class is added to main layout and loaded by MainActivity.
         // Requires matching up this classes' context with an entire appContext.
-        TextView textView = (TextView) ((Activity)appContext).findViewById(R.id.textView);
-        textView.setText(String.valueOf(currentX));
-        Button buttonLeft = (Button) ((Activity)appContext).findViewById(R.id.buttonLeft);
+        TextView textView = ((Activity)appContext).findViewById(R.id.textView);
+        textView.setText(String.valueOf(x));
+        Button buttonLeft = ((Activity)appContext).findViewById(R.id.buttonLeft);
 
         buttonLeft.setOnTouchListener(new View.OnTouchListener() {
             private Handler handler;
@@ -79,9 +74,8 @@ public class GameView extends View {
             Runnable onLeftPressed = new Runnable() {
 	            @Override
 	            public void run() {
-		            currentX = currentX - 1;
-	                newX = currentX;
-	                textView.setText(String.valueOf(newX));
+		            x = x - 1;
+	                textView.setText(String.valueOf(x));
 	                handler.postDelayed(this, 50);
 	            }
 	        };
