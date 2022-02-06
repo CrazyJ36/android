@@ -37,16 +37,18 @@ public class GameView extends View {
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Paint paint = new Paint();
-        paint.setColor(Color.GRAY);
-        postInvalidate();
-        canvas.drawCircle(x, y, 24, paint);
 
         // FindViewById while this class is added to main layout and loaded by MainActivity.
         // Requires matching up this classes' context with an entire appContext.
         TextView textView = ((Activity)appContext).findViewById(R.id.textView);
-        textView.setText(String.valueOf(x));
         Button buttonLeft = ((Activity)appContext).findViewById(R.id.buttonLeft);
+
+        Paint paint = new Paint();
+        paint.setColor(Color.GRAY);
+
+        invalidate();
+        canvas.drawCircle(x, y, 24, paint);
+	    textView.setText(String.valueOf(x));
 
         buttonLeft.setOnTouchListener(new View.OnTouchListener() {
             private Handler handler;
@@ -54,17 +56,14 @@ public class GameView extends View {
             public boolean onTouch(View view, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        if (handler != null) return true;
+                        //if (handler != null) return true;
+                        Toast.makeText(appContext, "Down", Toast.LENGTH_SHORT).show();
                         handler = new Handler(Looper.getMainLooper());
-                        handler.postDelayed(onLeftPressed, 50);
+                        handler.postDelayed(onLeftPressed, 5);
                         break;
                     case MotionEvent.ACTION_UP:
-                        if (handler == null) return true;
-                        handler.removeCallbacks(onLeftPressed);
-                        handler = null;
-                        break;
-                    case MotionEvent.ACTION_CANCEL:
-                        if (handler == null) return true;
+                        //if (handler == null) return true;
+                        Toast.makeText(appContext, "Up", Toast.LENGTH_SHORT).show();
                         handler.removeCallbacks(onLeftPressed);
                         handler = null;
                         break;
@@ -74,9 +73,11 @@ public class GameView extends View {
             Runnable onLeftPressed = new Runnable() {
 	            @Override
 	            public void run() {
-		            x = x - 1;
-	                textView.setText(String.valueOf(x));
-	                handler.postDelayed(this, 50);
+	            x = x - 1;
+			        invalidate();
+			        canvas.drawCircle(x, y, 24, paint);
+				    textView.setText(String.valueOf(x));
+	                handler.postDelayed(this, 5);
 	            }
 	        };
         });
