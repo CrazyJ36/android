@@ -17,12 +17,19 @@ import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 
-public class GameView extends View implements OnTouchListener {
+public class GameView extends View {
     Context appContext;
     int x;
     int y;
     int score = 0;
+    Button buttonLeft;
+    Button buttonRight;
+    Button buttonUp;
+    Button buttonDown;
     Handler handler = new Handler(Looper.getMainLooper());
+    Runnable onLeftPressed;
+    Runnable onRightPressed;
+
     Paint paint = new Paint();
 
     public GameView(Context context, AttributeSet attrs) {
@@ -36,15 +43,15 @@ public class GameView extends View implements OnTouchListener {
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Button buttonLeft = ((Activity)appContext).findViewById(R.id.buttonLeft);
-        Button buttonRight = ((Activity)appContext).findViewById(R.id.buttonRight);
-        Button buttonUp = ((Activity)appContext).findViewById(R.id.buttonUp);
-        Button buttonDown = ((Activity)appContext).findViewById(R.id.buttonDown);
-        buttonLeft.setOnTouchListener(this);
-        buttonRight.setOnTouchListener(this);
-        buttonUp.setOnTouchListener(this);
-        buttonDown.setOnTouchListener(this);
+        // FindViewById while this class is added to main layout and loaded by MainActivity.
+        // Requires matching up this classes' context with an entire appContext.
+        buttonLeft = ((Activity)appContext).findViewById(R.id.buttonLeft);
+        buttonRight = ((Activity)appContext).findViewById(R.id.buttonRight);
+        buttonUp = ((Activity)appContext).findViewById(R.id.buttonUp);
+        buttonDown = ((Activity)appContext).findViewById(R.id.buttonDown);
+
         TextView scoreView = ((Activity)appContext).findViewById(R.id.scoreView);
+
         // Build A new layout programatically from MainActivity by extending A view such as RelativeLayot in this class.
         /*buttonLeft = new Button(context);
         buttonLeft.setGravity(50);
@@ -57,158 +64,80 @@ public class GameView extends View implements OnTouchListener {
         paint.setColor(Color.GRAY);
         canvas.drawCircle(x, y, 24, paint);
         invalidate();
-    }
-        // FindViewById while this class is added to main layout and loaded by MainActivity.
-        // Requires matching up this classes' context with an entire appContext.
 
-
-/*        buttonLeft.setOnTouchListener(new View.OnTouchListener() {
+        buttonLeft.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent buttonLeftEvent) {
 		        Runnable onLeftPressed = new Runnable() {
 		            @Override
 		            public void run() {
-		                x = x - 5;
-				        canvas.drawCircle(x, y, 24, paint);
-                        handler.postDelayed(this, 5);
 						if (buttonLeftEvent.getAction() == MotionEvent.ACTION_UP) {
                             handler.removeCallbacks(this);
+                            return;
                         }
+                        x = x - 5;
+                        handler.postDelayed(this, 10);
 		            }
 		        };
-                if (buttonLeftEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    handler.postDelayed(onLeftPressed, 5);
-                }
+                handler.postDelayed(onLeftPressed, 10);
                 return false;
             }
-       });
+        });
         buttonRight.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent buttonRightEvent) {
 		        Runnable onRightPressed = new Runnable() {
 		            @Override
 		            public void run() {
-		                x = x + 5;
-				        canvas.drawCircle(x, y, 24, paint);
-                        handler.postDelayed(this, 5);
 						if (buttonRightEvent.getAction() == MotionEvent.ACTION_UP) {
                             handler.removeCallbacks(this);
+                            return;
                         }
+                        x = x + 5;
+                        handler.postDelayed(this, 10);
 		            }
 		        };
-                if (buttonRightEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    handler.postDelayed(onRightPressed, 5);
-                }
+                handler.postDelayed(onRightPressed, 10);
                 return false;
             }
-       });
+        });
         buttonUp.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent buttonUpEvent) {
 		        Runnable onUpPressed = new Runnable() {
 		            @Override
 		            public void run() {
-		                y = y - 5;
-				        canvas.drawCircle(x, y, 24, paint);
-                        handler.postDelayed(this, 5);
 						if (buttonUpEvent.getAction() == MotionEvent.ACTION_UP) {
                             handler.removeCallbacks(this);
+                            return;
                         }
+		                y = y - 5;
+                        handler.postDelayed(this, 10);
 		            }
 		        };
-                if (buttonUpEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    handler.postDelayed(onUpPressed, 5);
-                }
+                handler.postDelayed(onUpPressed, 10);
                 return false;
             }
-       });
+        });
         buttonDown.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent buttonDownEvent) {
 		        Runnable onDownPressed = new Runnable() {
 		            @Override
 		            public void run() {
-		                y = y + 5;
-				        canvas.drawCircle(x, y, 24, paint);
-                        handler.postDelayed(this, 5);
 						if (buttonDownEvent.getAction() == MotionEvent.ACTION_UP) {
                             handler.removeCallbacks(this);
+                            return;
                         }
+		                y = y + 5;
+                        handler.postDelayed(this, 10);
 		            }
 		        };
-                if (buttonDownEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    handler.postDelayed(onDownPressed, 5);
-                }
+                handler.postDelayed(onDownPressed, 10);
                 return false;
             }
-       });*/
+        });
 
-    @Override
-    public boolean onTouch(View view, MotionEvent event) {
-        switch (view.getId()) {
-            case R.id.buttonLeft:
-	            Runnable onLeftPressed = new Runnable() {
-		            @Override
-		            public void run() {
-		                x = x - 5;
-                        handler.postDelayed(this, 5);
-						if (event.getAction() == MotionEvent.ACTION_UP) {
-                            handler.removeCallbacks(this);
-                        }
-		            }
-			    };
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    handler.postDelayed(onLeftPressed, 5);
-                }
-				break;
-            case R.id.buttonRight:
-		        Runnable onRightPressed = new Runnable() {
-		            @Override
-		            public void run() {
-		                x = x + 5;
-                        handler.postDelayed(this, 5);
-						if (event.getAction() == MotionEvent.ACTION_UP) {
-                            handler.removeCallbacks(this);
-                        }
-		            }
-			    };
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    handler.postDelayed(onRightPressed, 5);
-                }
-                break;
-            case R.id.buttonUp:
-		        Runnable onUpPressed = new Runnable() {
-		            @Override
-		            public void run() {
-		                y = y - 5;
-                        handler.postDelayed(this, 5);
-						if (event.getAction() == MotionEvent.ACTION_UP) {
-                            handler.removeCallbacks(this);
-                        }
-		            }
-			    };
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    handler.postDelayed(onUpPressed, 5);
-                }
-                break;
-            case R.id.buttonDown:
-		        Runnable onDownPressed = new Runnable() {
-		            @Override
-		            public void run() {
-		                y = y + 5;
-                        handler.postDelayed(this, 5);
-						if (event.getAction() == MotionEvent.ACTION_UP) {
-                            handler.removeCallbacks(this);
-                        }
-		            }
-			    };
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    handler.postDelayed(onDownPressed, 5);
-                }
-                break;
-        }
-        return false;
     }
-
 }
 
