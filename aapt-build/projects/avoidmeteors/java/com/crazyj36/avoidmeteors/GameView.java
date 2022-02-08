@@ -31,7 +31,6 @@ public class GameView extends View implements OnTouchListener {
 	DisplayMetrics displayMetrics;
     Paint paint = new Paint();
 
-
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
         appContext = context;
@@ -78,19 +77,19 @@ public class GameView extends View implements OnTouchListener {
         switch (view.getId()) {
             case R.id.buttonLeft:
                 if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
-                    move('x' , '-', true);
+                    move('x', '-', true);
                     break;
                 } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    move('x', '-', false);
-                    break;
+                  move('x', '-', false);
+                  break;
                 } else break;
             case R.id.buttonRight:
                 if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
-                    move('x', '+', true);
+                    move('x' , '+', true);
                     break;
                 } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                  move('x', '+', false);
-                  break;
+                    move('x', '+', false);
+                    break;
                 } else break;
             case R.id.buttonUp:
                 if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
