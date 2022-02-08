@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.Color;
 import android.widget.Button;
 import android.view.MotionEvent;
@@ -17,7 +18,7 @@ import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 
-public class GameView extends View {
+public class GameView extends View implements OnTouchListener {
     Context appContext;
     int x;
     int y;
@@ -27,15 +28,14 @@ public class GameView extends View {
     Button buttonUp;
     Button buttonDown;
     Handler handler = new Handler(Looper.getMainLooper());
-    Runnable onLeftPressed;
-    Runnable onRightPressed;
-
+	DisplayMetrics displayMetrics;
     Paint paint = new Paint();
+
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
         appContext = context;
-	    DisplayMetrics displayMetrics = context.getApplicationContext().getResources().getDisplayMetrics();
+        displayMetrics = appContext.getApplicationContext().getResources().getDisplayMetrics();
 	    x = displayMetrics.widthPixels / 2;
 	    y = displayMetrics.heightPixels / 2;
     }
@@ -43,15 +43,27 @@ public class GameView extends View {
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        // FindViewById while this class is added to main layout and loaded by MainActivity.
-        // Requires matching up this classes' context with an entire appContext.
-        buttonLeft = ((Activity)appContext).findViewById(R.id.buttonLeft);
+        buttonLeft = ((Activity)appContext).findViewById(R.id.buttonLeft); // get entire appcontext
         buttonRight = ((Activity)appContext).findViewById(R.id.buttonRight);
         buttonUp = ((Activity)appContext).findViewById(R.id.buttonUp);
         buttonDown = ((Activity)appContext).findViewById(R.id.buttonDown);
-
+        buttonLeft.setOnTouchListener(this);
+        buttonRight.setOnTouchListener(this);
+        buttonUp.setOnTouchListener(this);
+        buttonDown.setOnTouchListener(this);
         TextView scoreView = ((Activity)appContext).findViewById(R.id.scoreView);
-
+        score = score + 1;
+        scoreView.setText(String.valueOf(score));
+        paint.setColor(Color.GRAY);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(10);
+        canvas.drawRect( (float)3 * displayMetrics.widthPixels / 100, // left
+                         (float)1 * displayMetrics.heightPixels / 100, // top
+                         (float)97 * displayMetrics.widthPixels / 100, // right
+                         (float)displayMetrics.heightPixels * 0.7f, // bottom percent
+                         paint);
+        canvas.drawCircle(x, y, 24, paint);
+        invalidate();
         // Build A new layout programatically from MainActivity by extending A view such as RelativeLayot in this class.
         /*buttonLeft = new Button(context);
         buttonLeft.setGravity(50);
@@ -59,85 +71,63 @@ public class GameView extends View {
         buttonLeft.setText("L");
 	    textView = new TextView(context);
         addView(buttonLeft);*/
-        score = score + 1;
-        scoreView.setText(String.valueOf(score));
-        paint.setColor(Color.GRAY);
-        canvas.drawCircle(x, y, 24, paint);
-        invalidate();
+    }
 
-        buttonLeft.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent buttonLeftEvent) {
-		        Runnable onLeftPressed = new Runnable() {
-		            @Override
-		            public void run() {
-						if (buttonLeftEvent.getAction() == MotionEvent.ACTION_UP) {
-                            handler.removeCallbacks(this);
-                            return;
-                        }
-                        x = x - 5;
-                        handler.postDelayed(this, 10);
-		            }
-		        };
-                handler.postDelayed(onLeftPressed, 10);
-                return false;
-            }
-        });
-        buttonRight.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent buttonRightEvent) {
-		        Runnable onRightPressed = new Runnable() {
-		            @Override
-		            public void run() {
-						if (buttonRightEvent.getAction() == MotionEvent.ACTION_UP) {
-                            handler.removeCallbacks(this);
-                            return;
-                        }
-                        x = x + 5;
-                        handler.postDelayed(this, 10);
-		            }
-		        };
-                handler.postDelayed(onRightPressed, 10);
-                return false;
-            }
-        });
-        buttonUp.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent buttonUpEvent) {
-		        Runnable onUpPressed = new Runnable() {
-		            @Override
-		            public void run() {
-						if (buttonUpEvent.getAction() == MotionEvent.ACTION_UP) {
-                            handler.removeCallbacks(this);
-                            return;
-                        }
-		                y = y - 5;
-                        handler.postDelayed(this, 10);
-		            }
-		        };
-                handler.postDelayed(onUpPressed, 10);
-                return false;
-            }
-        });
-        buttonDown.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent buttonDownEvent) {
-		        Runnable onDownPressed = new Runnable() {
-		            @Override
-		            public void run() {
-						if (buttonDownEvent.getAction() == MotionEvent.ACTION_UP) {
-                            handler.removeCallbacks(this);
-                            return;
-                        }
-		                y = y + 5;
-                        handler.postDelayed(this, 10);
-		            }
-		        };
-                handler.postDelayed(onDownPressed, 10);
-                return false;
-            }
-        });
+    @Override
+    public boolean onTouch(View view, MotionEvent event) {
+        switch (view.getId()) {
+            case R.id.buttonLeft:
+                if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+                    move('x' , '-', true);
+                    break;
+                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    move('x', '-', false);
+                    break;
+                } else break;
+            case R.id.buttonRight:
+                if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+                    move('x', '+', true);
+                    break;
+                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                  move('x', '+', false);
+                  break;
+                } else break;
+            case R.id.buttonUp:
+                if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+                    move('y' , '-', true);
+                    break;
+                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    move('y', '-', false);
+                    break;
+                } else break;
+            case R.id.buttonDown:
+                if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+                    move('y' , '+', true);
+                    break;
+                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    move('y', '+', false);
+                    break;
+                } else break;
+        }
+        return false;
+    }
 
+    public void move(char xOrY, char posOrNeg, boolean stop) {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (stop == true) {
+                    handler.removeCallbacks(this);
+                    return;
+                } else {
+                    handler.postDelayed(this, 10);
+                }
+                if (xOrY == 'x' && posOrNeg == '+') x = x + 1;
+                else if (xOrY == 'x' && posOrNeg == '-') x = x - 1;
+                else if (xOrY == 'y' && posOrNeg == '-') y = y - 1;
+                else if (xOrY == 'y' && posOrNeg == '+') y = y + 1;
+            }
+        }, 10);
     }
 }
 
