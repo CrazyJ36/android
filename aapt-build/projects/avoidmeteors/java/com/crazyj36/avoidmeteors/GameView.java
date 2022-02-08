@@ -62,7 +62,6 @@ public class GameView extends View implements OnTouchListener {
                          (float)displayMetrics.heightPixels * 0.7f, // bottom percent
                          paint);
         canvas.drawCircle(x, y, 24, paint);
-        invalidate();
         // Build A new layout programatically from MainActivity by extending A view such as RelativeLayot in this class.
         /*buttonLeft = new Button(context);
         buttonLeft.setGravity(50);
@@ -101,7 +100,7 @@ public class GameView extends View implements OnTouchListener {
                 } else break;
             case R.id.buttonDown:
                 if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
-                    move('y' , '+', true);
+                    move('y', '+', true);
                     break;
                 } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     move('y', '+', false);
@@ -117,16 +116,20 @@ public class GameView extends View implements OnTouchListener {
             public void run() {
                 if (stop == true) {
                     handler.removeCallbacks(this);
+                    if (handler.hasCallbacks(this)) Toast.makeText(appContext, "callbacks remain", Toast.LENGTH_SHORT).show();
                     return;
-                } else {
-                    handler.postDelayed(this, 10);
+                } else if (stop == false) {
+	                if (xOrY == 'x' && posOrNeg == '+') x = x + 1;
+	                else if (xOrY == 'x' && posOrNeg == '-') x = x - 1;
+	                else if (xOrY == 'y' && posOrNeg == '-') y = y - 1;
+	                else if (xOrY == 'y' && posOrNeg == '+') y = y + 1;
+                    else return;
+                    invalidate();
+                    handler.postDelayed(this, 1);
                 }
-                if (xOrY == 'x' && posOrNeg == '+') x = x + 1;
-                else if (xOrY == 'x' && posOrNeg == '-') x = x - 1;
-                else if (xOrY == 'y' && posOrNeg == '-') y = y - 1;
-                else if (xOrY == 'y' && posOrNeg == '+') y = y + 1;
             }
-        }, 10);
+        }, 1);
+        return;
     }
 }
 
