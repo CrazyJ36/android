@@ -1,20 +1,22 @@
 package com.crazyj36.avoidmeteors;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.MotionEvent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Color;
 import android.widget.Button;
-import android.view.MotionEvent;
 import android.widget.Toast;
 import android.widget.TextView;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 
@@ -33,6 +35,7 @@ public class GameView extends View implements OnTouchListener {
     Button buttonDown;
     Handler handler = new Handler(Looper.getMainLooper());
     Paint paint = new Paint();
+    AlertDialog.Builder dialogBuilder;
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -40,6 +43,24 @@ public class GameView extends View implements OnTouchListener {
         displayMetrics = appContext.getApplicationContext().getResources().getDisplayMetrics();
 	    x = displayMetrics.widthPixels / 2;
 	    y = displayMetrics.heightPixels / 2;
+		dialogBuilder = new AlertDialog.Builder(appContext);
+	    dialogBuilder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+	        @Override
+	        public void onClick(DialogInterface dialog, int which) {
+	            dialog.cancel();
+	        }
+	    });
+	    dialogBuilder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+	        @Override
+	        public void onCancel(DialogInterface onCancelDialog) {
+                score = 0;
+			    x = displayMetrics.widthPixels / 2;
+			    y = displayMetrics.heightPixels / 2;
+	            enemyX = 10;
+	            enemyY = 10;
+	            GameView.this.setWillNotDraw(false);
+	       }
+	    });
     }
 
     @Override
@@ -72,20 +93,32 @@ public class GameView extends View implements OnTouchListener {
                        x, y - 16, x + 18, y - 18,  // right arm
                        x, y - 16, x - 18, y - 18}; // left arm
         canvas.drawLines(pts, paint);
-        canvas.drawCircle(x, y - 28, 4, paint); // head
+        canvas.drawCircle(x, y - 28, 8, paint); // head
         // enemy
+        paint.setColor(Color.RED);
+        paint.setStyle(Paint.Style.FILL);
         random++;
         enemyY = enemyY + 10;
         if (random % 5 == 0) enemyX = enemyX + 20;
         else enemyX = enemyX + 10;
-        if (enemyX >= (98 * displayMetrics.widthPixels / 100)) enemyX = 6;
-        if (enemyY >= displayMetrics.heightPixels * 0.7) enemyY = 6;
+        if (enemyX >= (97 * displayMetrics.widthPixels / 100)) enemyX = 2 * displayMetrics.widthPixels / 100;
+        if (enemyY >= displayMetrics.heightPixels * 0.7) enemyY = 1 * displayMetrics.heightPixels / 100;
         canvas.drawCircle(enemyX, enemyY, 4, paint);
         // get hit
-        if ((enemyX >= x - 16 && enemyX <= x) && (enemyY >= y - 18 && enemyY <= y + 16)) {
+        if (( (enemyX >= x - 16 && enemyX <= x + 16) && (enemyY >= y - 32 && enemyY <= y + 16) ) ||
+            ( (enemyX + 1 >= x - 16 && enemyX + 1 <= x + 16) && (enemyY + 1 >= y - 32 && enemyY + 1 <= y + 16) ) ||
+            ( (enemyX + 2 >= x - 16 && enemyX + 2 <= x + 16) && (enemyY + 2 >= y - 32 && enemyY + 2 <= y + 16) ) ||
+            ( (enemyX + 3 >= x - 16 && enemyX + 3 <= x + 16) && (enemyY + 3 >= y - 32 && enemyY + 3 <= y + 16) ) ||
+            ( (enemyX + 4 >= x - 16 && enemyX + 4 <= x + 16) && (enemyY + 4 >= y - 32 && enemyY + 4 <= y + 16) ) ||
+            ( (enemyX + 5 >= x - 16 && enemyX + 5 <= x + 16) && (enemyY + 5 >= y - 32 && enemyY + 5 <= y + 16) ) ||
+            ( (enemyX + 6 >= x - 16 && enemyX + 6 <= x + 16) && (enemyY + 6 >= y - 32 && enemyY + 6 <= y + 16) ) ||
+            ( (enemyX + 7 >= x - 16 && enemyX + 7 <= x + 16) && (enemyY + 7 >= y - 32 && enemyY + 7 <= y + 16) ) ||
+            ( (enemyX + 8 >= x - 16 && enemyX + 8 <= x + 16) && (enemyY + 8 >= y - 32 && enemyY + 8 <= y + 16) ) ) {
             GameView.this.setWillNotDraw(true);
+		    dialogBuilder.setTitle("You're Hit!").setMessage("Score: " + String.valueOf(score)).setCancelable(false);
+            dialogBuilder.create().show();
         }
-        // refresh
+        // refresh screen for new frame
         invalidate();
     }
 
@@ -96,7 +129,7 @@ public class GameView extends View implements OnTouchListener {
                 if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
                     move('x', '-', true);
                 } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                  move('x', '-', false);
+                    move('x', '-', false);
                 }
                 break;
             case R.id.buttonRight:
@@ -125,12 +158,12 @@ public class GameView extends View implements OnTouchListener {
     }
 
     public void move(char xOrY, char posOrNeg, boolean stop) {
-        handler.postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() { // Future<?> means this Future service will run as null and return type null.
             @Override
             public void run() {
                 if (stop == true) {
                     handler.removeCallbacks(this);
-                    if (handler.hasCallbacks(this)) Toast.makeText(appContext, "stray callbacks", Toast.LENGTH_SHORT).show();
+                    return;
                 } else if (stop == false) {
 		            if (xOrY == 'x' && posOrNeg == '+') x = x + 1;
 		            else if (xOrY == 'x' && posOrNeg == '-') x = x - 1;
