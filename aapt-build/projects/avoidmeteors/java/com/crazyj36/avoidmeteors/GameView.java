@@ -20,15 +20,18 @@ import android.util.DisplayMetrics;
 
 public class GameView extends View implements OnTouchListener {
     Context appContext;
+    DisplayMetrics displayMetrics;
     int x;
     int y;
-    int score = -1;
+    int enemyX = 10;
+    int enemyY = 10;
+    int random = 0;
+    int score = 0;
     Button buttonLeft;
     Button buttonRight;
     Button buttonUp;
     Button buttonDown;
     Handler handler = new Handler(Looper.getMainLooper());
-	DisplayMetrics displayMetrics;
     Paint paint = new Paint();
 
     public GameView(Context context, AttributeSet attrs) {
@@ -55,21 +58,35 @@ public class GameView extends View implements OnTouchListener {
         scoreView.setText(String.valueOf(score));
         paint.setColor(Color.GRAY);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(10);
-        canvas.drawRect( (float)3 * displayMetrics.widthPixels / 100, // left
-                         (float)1 * displayMetrics.heightPixels / 100, // top
-                         (float)97 * displayMetrics.widthPixels / 100, // right
-                         (float)displayMetrics.heightPixels * 0.7f, // bottom percent
+        paint.setStrokeWidth(8);
+        // outline
+        canvas.drawRect( (float)2 * displayMetrics.widthPixels / 100, // left screen percentage
+                         (float)1 * displayMetrics.heightPixels / 100, // top screen percentage
+                         (float)98 * displayMetrics.widthPixels / 100, // right screen percentage
+                         (float)displayMetrics.heightPixels * 0.7f, // bottom screen percentage
                          paint);
-        canvas.drawCircle(x, y, 24, paint);
+        // character
+        float pts[] = {x, y, x, y - 24, // body
+                       x, y, x + 12, y + 16, // right leg
+                       x, y, x - 12, y + 16, // left leg
+                       x, y - 16, x + 18, y - 18,  // right arm
+                       x, y - 16, x - 18, y - 18}; // left arm
+        canvas.drawLines(pts, paint);
+        canvas.drawCircle(x, y - 28, 4, paint); // head
+        // enemy
+        random++;
+        enemyY = enemyY + 10;
+        if (random % 5 == 0) enemyX = enemyX + 20;
+        else enemyX = enemyX + 10;
+        if (enemyX >= (98 * displayMetrics.widthPixels / 100)) enemyX = 6;
+        if (enemyY >= displayMetrics.heightPixels * 0.7) enemyY = 6;
+        canvas.drawCircle(enemyX, enemyY, 4, paint);
+        // get hit
+        if ((enemyX >= x - 16 && enemyX <= x) && (enemyY >= y - 18 && enemyY <= y + 16)) {
+            GameView.this.setWillNotDraw(true);
+        }
+        // refresh
         invalidate();
-        // Build A new layout programatically from MainActivity by extending A view such as RelativeLayot in this class.
-        /*buttonLeft = new Button(context);
-        buttonLeft.setGravity(50);
-        buttonLeft.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        buttonLeft.setText("L");
-	    textView = new TextView(context);
-        addView(buttonLeft);*/
     }
 
     @Override
@@ -78,35 +95,31 @@ public class GameView extends View implements OnTouchListener {
             case R.id.buttonLeft:
                 if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
                     move('x', '-', true);
-                    break;
                 } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
                   move('x', '-', false);
-                  break;
-                } else break;
+                }
+                break;
             case R.id.buttonRight:
                 if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
                     move('x' , '+', true);
-                    break;
                 } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     move('x', '+', false);
-                    break;
-                } else break;
+                }
+                break;
             case R.id.buttonUp:
                 if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
                     move('y' , '-', true);
-                    break;
                 } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     move('y', '-', false);
-                    break;
-                } else break;
+                }
+                break;
             case R.id.buttonDown:
                 if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
                     move('y', '+', true);
-                    break;
                 } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     move('y', '+', false);
-                    break;
-                } else break;
+                }
+                break;
         }
         return false;
     }

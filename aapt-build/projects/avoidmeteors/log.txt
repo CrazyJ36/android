@@ -1,0 +1,909 @@
+--------- beginning of /dev/log/main
+D/ADB_SERVICES( 2838):  closing because is_eof=1 r=-1 s->fde.force_eof=0
+W/ADB_SERVICES( 2838): entered. LS(57) fd=24
+D/SurfaceFlinger(  174): SurfaceFlingerWatchdog:ERROR: open /dev/RT_Monitor failed.
+D/BatteryService(  694): mBatteryVoltage=4220, batteryLevel=50
+--------- beginning of /dev/log/system
+V/ActivityManager(  694): Broadcast sticky: Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) } ordered=false userid=-1 callerApp=null
+D/KeyguardUpdateMonitor(  759): received broadcast android.intent.action.BATTERY_CHANGED
+D/PowerUI (  759): action = android.intent.action.BATTERY_CHANGED
+D/PowerUI (  759): Intent start() ret = false mHideLowBDialog= true
+D/PowerUI (  759): oldBatteryLevel = 100mBatteryLevel = 100
+D/PowerUI (  759): dismissLowBatteryWarning
+D/StatusBar.BatteryController(  759): BatteryController onReceive action is android.intent.action.BATTERY_CHANGED
+D/PowerManagerService(  694): updateIsPoweredLocked: wasPowered=true, mIsPowered=true, oldPlugType=1, mPlugType=1, mBatteryLevel=100
+D/PowerManagerService(  694): handleSandman: canDream=true, mWakefulness=Awake
+D/WifiService(  694): onReceive, action:android.intent.action.BATTERY_CHANGED
+D/UsbDeviceManager(  694): onReceive - BATTERY_CHANGED - mPlugType: 1, mSettingUsbCharging: false, mConnected: false, mSettingUsbBicr: false
+D/WifiController(  694): DeviceActiveState{ when=0 what=155652 arg1=1 target=com.android.internal.util.StateMachine$SmHandler target=Handler (com.android.internal.util.StateMachine$SmHandler) {421bc000} }
+D/WifiController(  694): StaEnabledState{ when=-1ms what=155652 arg1=1 target=com.android.internal.util.StateMachine$SmHandler target=Handler (com.android.internal.util.StateMachine$SmHandler) {421bc000} }
+D/WifiController(  694): DefaultState{ when=-1ms what=155652 arg1=1 target=com.android.internal.util.StateMachine$SmHandler target=Handler (com.android.internal.util.StateMachine$SmHandler) {421bc000} }
+D/WifiController(  694): battery changed pluggedType: 1
+D/StatusBar.BatteryController(  759): mBatteryPercentage is 100% mShouldShowBatteryPercentage is false mLabelViews.size() 1
+D/StatusBar.BatteryController(  759): [Laptop] isPresent = false
+D/KeyguardUpdateMonitor(  759): handleBatteryUpdate index=0 updateInteresting=false
+D/SurfaceFlinger(  174): SurfaceFlingerWatchdog:ERROR: open /dev/RT_Monitor failed.
+I/ANRManager(  694): CPU update time < 2.5sec
+D/WifiStateMachine(  694): ConnectedState{ when=-3ms what=131155 arg1=6 target=com.android.internal.util.StateMachine$SmHandler target=Handler (com.android.internal.util.StateMachine$SmHandler) {41f03a88} }
+D/WifiStateMachine(  694): L2ConnectedState{ when=-3ms what=131155 arg1=6 target=com.android.internal.util.StateMachine$SmHandler target=Handler (com.android.internal.util.StateMachine$SmHandler) {41f03a88} }
+D/WifiHW  (  694): enter -->wifi_send_command cmd=IFNAME=wlan0 SIGNAL_POLL
+D/wpa_supplicant(  832): RX ctrl_iface - hexdump(len=11): 53 49 47 4e 41 4c 5f 50 4f 4c 4c
+D/wpa_supplicant(  832): wlan0: Control interface command 'SIGNAL_POLL'
+D/wpa_supplicant(  832): nl80211: survey data missing!
+D/WifiHW  (  694): leave --> reply=RSSI=-37
+D/WifiHW  (  694): LINKSPEED=65
+D/WifiHW  (  694): NOISE=9999
+D/WifiHW  (  694): FREQUENCY=2437
+D/WifiHW  (  694): 
+D/wifi    (  694): doStringCommand, buf IFNAME=wlan0 SIGNAL_POLL
+I/WifiStateMachine(  694): fetchRssiAndLinkSpeedNative, newRssi:-37, newLinkSpeed:65, SSID:"DONTDOIT-2G"
+W/ADB_SERVICES( 2838): create_local_service_socket() name=shell:export ANDROID_LOG_TAGS="''"; exec logcat
+W/ADB_SERVICES( 2838): service_to_fd() name=shell:export ANDROID_LOG_TAGS="''"; exec logcat
+W/ADB_SERVICES( 2838): read_meminfo() mem_free=108868
+W/ADB_SERVICES( 2838): create_subprocess() ret_fd=24 pid=11458
+W/ADB_SERVICES( 2838): LS(58): bound to 'shell:export ANDROID_LOG_TAGS="''"; exec logcat' via 24
+W/ADB_SERVICES(11458): adb: unable to open /proc/11458/oom_adj
+I/ANRManager(  694): updateProcessStats
+W/InputReader(  694): outer ID:0, tracking ID:1, pointer count:16
+W/InputReader(  694): inCount:16, pointer count:1
+D/InputReader(  694): AP_PROF:AppLaunch_dispatchPtr:Down:15036977, ID:0, Index:1630490464
+I/AP_PROF (  694): unable to open /proc/mtprof/status entry
+D/PowerManagerService(  694): userActivityFromNative
+V/Activity(  901): dispatchTouchEvent test into isResumed true
+D/PowerManagerService(  694): userActivityNoUpdateLocked: eventTime=15036977, event=2, flags=0x0, uid=1000
+D/PowerManagerNotifier(  694): onUserActivity: event=2, uid=1000
+D/PowerManagerService(  694): updateUserActivitySummaryLocked: mWakefulness=Awake, mUserActivitySummary=0x1, nextTimeout=16829977 (in 1792995 ms)
+D/PowerManagerService(  694): newScreenState = 2
+D/PowerManagerService(  694): updateScreenStateLocked: mScreenBrightnessModeSetting=0, autoBrightness=false, ecoBrightness=false, screenAutoBrightnessAdjustment=0.0, screenBrightness=255
+D/PowerManagerDisplayController(  694): requestPowerState: screenState=2, useProximitySensor=false, forceProximitySensorEnable=false, forceWakeUpEnable=false, screenBrightness=255, screenAutoBrightnessAdjustment=0.0, useAutoBrightness=false, useEcoBrightness=false, blockScreenOn=false, waitForNegativeProximity=false
+I/PowerManagerService(  694): setBrightness mButtonLight 0.
+D/PowerManagerService(  694): updateScreenStateLocked: mDisplayReady=true, newScreenState=2, mWakefulness=1, mWakeLockSummary=0x0, mUserActivitySummary=0x1, mBootCompleted=true
+D/PowerManagerService(  694): handleSandman: canDream=true, mWakefulness=Awake
+D/Launcher(  901): PagedView, onInterceptTouchEvent touch down: finishedScrolling = true, mScrollX = 1200, xDist = 0, mTouchState = 0, this = com.android.launcher2.Workspace{42003eb8 V.EDH... ........ 0,25-600,976 #7f070027 app:id/workspace}
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020205
+V/WallpaperService(  759): Delivering touch event: MotionEvent { action=ACTION_DOWN, id[0]=0, x[0]=227.12195, y[0]=756.49915, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, metaState=0, flags=0x1, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=15036977, downTime=15036977, deviceId=3, source=0x1002 }
+I/View    (  901): Touch down dispatch to com.android.launcher2.BubbleTextView{41e41c08 VFED..CL ........ 192,600-288,696 #9c020205}, event = MotionEvent { action=ACTION_DOWN, id[0]=0, x[0]=23.121948, y[0]=34.499146, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=15036977, downTime=15036977, deviceId=3, source=0x1002 }
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020205
+W/InputReader(  694): outer ID:0, tracking ID:1, pointer count:16
+W/InputReader(  694): inCount:16, pointer count:1
+V/WallpaperService(  759): Delivering touch event: MotionEvent { action=ACTION_MOVE, id[0]=0, x[0]=227.12195, y[0]=756.49915, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, metaState=0, flags=0x1, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=15036996, downTime=15036977, deviceId=3, source=0x1002 }
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020205
+W/InputReader(  694): outer ID:0, tracking ID:1, pointer count:16
+W/InputReader(  694): inCount:16, pointer count:1
+V/WallpaperService(  759): Delivering touch event: MotionEvent { action=ACTION_MOVE, id[0]=0, x[0]=227.12195, y[0]=756.49915, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, metaState=0, flags=0x1, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=15037015, downTime=15036977, deviceId=3, source=0x1002 }
+W/InputReader(  694): outer ID:0, tracking ID:1, pointer count:16
+W/InputReader(  694): inCount:16, pointer count:1
+V/WallpaperService(  759): Delivering touch event: MotionEvent { action=ACTION_MOVE, id[0]=0, x[0]=227.12195, y[0]=756.49915, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, metaState=0, flags=0x1, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=15037034, downTime=15036977, deviceId=3, source=0x1002 }
+W/InputReader(  694): outer ID:0, tracking ID:1, pointer count:16
+W/InputReader(  694): inCount:16, pointer count:1
+V/WallpaperService(  759): Delivering touch event: MotionEvent { action=ACTION_MOVE, id[0]=0, x[0]=227.12195, y[0]=756.49915, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, metaState=0, flags=0x1, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=15037052, downTime=15036977, deviceId=3, source=0x1002 }
+W/InputReader(  694): inCount:16, pointer count:0
+D/InputReader(  694): AP_PROF:AppLaunch_dispatchPtr:Up:15037072, ID:0, Index:1630491760
+V/WallpaperService(  759): Delivering touch event: MotionEvent { action=ACTION_UP, id[0]=0, x[0]=227.12195, y[0]=756.49915, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, metaState=0, flags=0x1, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=15037072, downTime=15036977, deviceId=3, source=0x1002 }
+D/Launcher(  901): PagedView, getPageNearestToCenterOfScreen: minDistanceFromScreenCenterIndex = 2, mScrollX = 1200
+D/Launcher(  901): PagedView, snapToPage: do nothing because mUnboundedScrollX equals with newX.
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020205
+I/View    (  901): Touch up dispatch to com.android.launcher2.BubbleTextView{41e41c08 VFED..CL ...p.... 192,600-288,696 #9c020205}, event = MotionEvent { action=ACTION_UP, id[0]=0, x[0]=23.121948, y[0]=34.499146, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=15037072, downTime=15036977, deviceId=3, source=0x1002 }
+W/InputReader(  694): inCount:16, pointer count:0
+I/BufferQueue(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb893ba88,id:270,api:1,p:901,c:174) [queue] fps:0.05, dur:19090.44, max:19090.44, min:19090.44
+V/Provider/Settings(  901): get setting for user 0 by user 0 so skipping cache
+V/Provider/Settings(  901):  from settings cache , name = sound_effects_enabled , value = 0
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020205
+D/Launcher(  901): Launcher, Click on view com.android.launcher2.BubbleTextView{41e41c08 VFED..CL ...P.... 192,600-288,696 #9c020205}
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020205
+D/Launcher(  901): Launcher, startActivitySafely v = com.android.launcher2.BubbleTextView{41e41c08 VFED..CL ...P.... 192,600-288,696 #9c020205}, intent = Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.avoidmeteors/.MainActivity bnds=[204,722][300,818] }, tag = ShortcutInfo(title=Avoid Meteorsintent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.avoidmeteors/.MainActivity bnds=[204,722][300,818] }id=85 type=0 container=-100 screen=2 cellX=2 cellY=5 spanX=1 spanY=1 dropPos=null unreadNum= 0)
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020205
+D/Launcher(  901): Launcher, startActivity v = com.android.launcher2.BubbleTextView{41e41c08 VFED..CL ...P.... 192,600-288,696 #9c020205}, intent = Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.avoidmeteors/.MainActivity bnds=[204,722][300,818] }, tag = ShortcutInfo(title=Avoid Meteorsintent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.avoidmeteors/.MainActivity bnds=[204,722][300,818] }id=85 type=0 container=-100 screen=2 cellX=2 cellY=5 spanX=1 spanY=1 dropPos=null unreadNum= 0)
+I/ActivityManager(  694): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.avoidmeteors/.MainActivity bnds=[204,722][300,818]} from pid 901
+D/MwActivityMonitor(  694): blockByRunningActivity processName = com.crazyj36.avoidmeteors, callerApp = ProcessRecord{4247ebf8 901:com.android.launcher/u0a13}, nextIntent = Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.avoidmeteors/.MainActivity bnds=[204,722][300,818] }
+D/MwActivityMonitor(  694): blockByFloatingStackSize floating stack size = 0
+I/BufferQueue(  174): [unnamed-174-271](this:0xb8933a88,id:271,api:0,p:-1,c:-1) BufferQueue
+I/BufferQueue(  174): [unnamed-174-271](this:0xb8933a88,id:271,api:0,p:-1,c:174) consumerConnect consumer=(174:/system/bin/surfaceflinger) controlledByApp=false
+I/BufferQueue(  174): [unnamed-174-271](this:0xb8933a88,id:271,api:0,p:-1,c:174) setConsumerName: unnamed-174-271
+I/GLConsumer(  174): [unnamed-174-271](this:0xb88f1a50,api:0) GLConsumer
+I/BufferQueue(  174): [DimLayer](this:0xb8933a88,id:271,api:0,p:-1,c:174) setConsumerName: DimLayer
+I/BufferQueue(  174): [unnamed-174-272](this:0xb88efa60,id:272,api:0,p:-1,c:-1) BufferQueue
+I/BufferQueue(  174): [unnamed-174-272](this:0xb88efa60,id:272,api:0,p:-1,c:174) consumerConnect consumer=(174:/system/bin/surfaceflinger) controlledByApp=false
+I/BufferQueue(  174): [unnamed-174-272](this:0xb88efa60,id:272,api:0,p:-1,c:174) setConsumerName: unnamed-174-272
+I/GLConsumer(  174): [unnamed-174-272](this:0xb89346f8,api:0) GLConsumer
+I/BufferQueue(  174): [DimLayer](this:0xb88efa60,id:272,api:0,p:-1,c:174) setConsumerName: DimLayer
+W/MALI    (  174): MTK_AUX_isMTKFormat:168: int MTK_AUX_isMTKFormat(ANativeWindowBuffer_t*): format=1
+I/GLConsumer(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb88f6a70,api:1) [void* android::GLConsumer::createImage(EGLDisplay, const android::sp<android::GraphicBuffer>&, const android::Rect&)]
+D/GLConsumer(  174):     GraphicBuffer: gb=0xb8911e28 handle=0xb8927b40 fmt=1
+D/GLConsumer(  174):     EGLImage: dpy=0x1, img=0x10000006
+I/SurfaceFlinger(  174): [Built-in Screen (type:0)] fps:0.497673,dur:4018.70,max:3040.23,min:978.48
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_IN_FRONT
+D/ActivityManager(  694): ACT-moveHomeTask toFront : false homeInFront = true
+D/ActivityManager(  694): ACT-BMW, insertTaskAtTop fromHome = true lastStack = ActivityStack{41efa980 stackId=0, 1 tasks} this = ActivityStack{4260c920 stackId=21, 0 tasks} topTask() = null
+D/ActivityManager(  694): ACT-BMW, insertTaskAtTop fromHome = true lastStack = ActivityStack{41efa980 stackId=0, 1 tasks} this = ActivityStack{4260c920 stackId=21, 1 tasks} topTask() = TaskRecord{4272af60 #41 A=com.crazyj36.avoidmeteors U=0 sz=0}
+D/WindowManager(  694): initFloatStackSize orientation = -1
+E/WindowManager(  694): Non floating stack did the function initFloatStackSize
+W/InputReader(  694): inCount:16, pointer count:0
+D/ActivityManager(  694): ACT-isFrontStack(), stack is front : ActivityStack{4260c920 stackId=21, 1 tasks}
+I/libPerfService(  694): 1: set: 2
+E/        (  694): Could not open '/data/data/hotplug/cmd'
+E/        (  694): error : 2, No such file or directory
+D/ActivityManager(  694): ACT-isFrontStack(), stack is front : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_BACK
+D/PowerManagerService(  694): acquireWakeLockInternal: lock=1106232288, flags=0x1, tag="ActivityManager-Launch", ws=null, uid=1000, pid=694
+D/PowerManagerNotifier(  694): onWakeLockAcquired: flags=1, tag="ActivityManager-Launch", packageName=android, ownerUid=1000, ownerPid=694, workSource=null
+D/PowerManagerService(  694): updateWakeLockSummaryLocked: mWakefulness=Awake, mWakeLockSummary=0x1
+D/PowerManagerService(  694): newScreenState = 2
+D/PowerManagerService(  694): updateScreenStateLocked: mScreenBrightnessModeSetting=0, autoBrightness=false, ecoBrightness=false, screenAutoBrightnessAdjustment=0.0, screenBrightness=255
+D/PowerManagerDisplayController(  694): requestPowerState: screenState=2, useProximitySensor=false, forceProximitySensorEnable=false, forceWakeUpEnable=false, screenBrightness=255, screenAutoBrightnessAdjustment=0.0, useAutoBrightness=false, useEcoBrightness=false, blockScreenOn=false, waitForNegativeProximity=false
+I/PowerManagerService(  694): setBrightness mButtonLight 0.
+D/PowerManagerService(  694): updateScreenStateLocked: mDisplayReady=true, newScreenState=2, mWakefulness=1, mWakeLockSummary=0x1, mUserActivitySummary=0x1, mBootCompleted=true
+D/PowerManagerService(  694): Acquiring suspend blocker "PowerManagerService.WakeLocks".
+D/PowerManagerService(  694): handleSandman: canDream=true, mWakefulness=Awake
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_BACK
+V/WindowManager(  694): Changing focus from Window{420db1c0 u0 com.android.launcher/com.android.launcher2.Launcher} to null Callers=com.android.server.wm.WindowManagerService.setFocusedApp:4374 com.android.server.am.ActivityManagerService.setFocusedActivityLocked:2439 com.android.server.am.ActivityStackSupervisor.startActivityUncheckedLocked:2198 com.android.server.am.ActivityStackSupervisor.startActivityLocked:1517 
+D/WindowManager(  694): setLastInputMethodWindowLw ime = null, target = null
+D/MwActivityMonitor(  694): addMonitor ActivityRecord{42498420 u0 com.crazyj36.avoidmeteors/.MainActivity t41}
+D/MwMonitorAppList(  694): matchAppList monitorApp = com.android.server.am.MwMonitorAppName@41f35a30
+D/MwMonitorAppList(  694): matchAppList processName = com.crazyj36.avoidmeteors, componentName = com.crazyj36.avoidmeteors/.MainActivity, result = false
+W/InputReader(  694): inCount:16, pointer count:0
+D/Launcher(  901): Launcher, (Launcher)onPause: this = com.android.launcher2.Launcher@422ebe60
+D/Launcher(  901): Launcher.DragController, cancelDrag: mDragging = false, mLastDropTarget = null
+D/ActivityThread(  901): ACT-AM_ON_PAUSE_CALLED ActivityRecord{41dfe9e8 token=android.os.BinderProxy@41dfe178 {com.android.launcher/com.android.launcher2.Launcher}}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is front : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is front : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_BACK
+D/dalvikvm(  177): threadid=4: exiting
+D/dalvikvm(  177): threadid=4: bye!
+D/dalvikvm(  177): threadid=3: exiting
+D/dalvikvm(  177): threadid=3: bye!
+D/dalvikvm(  177): threadid=2: exiting
+D/dalvikvm(  177): threadid=2: bye!
+D/dalvikvm(  177): pre gc
+D/dalvikvm(  177): Zygote::ForkAndSpecialize +
+D/dalvikvm(  177): Zygote::ForkAndSpecialize : 11463
+D/dalvikvm(11463): Zygote::ForkAndSpecialize : 0
+D/dalvikvm(  177): create interp thread : stack size=128KB
+D/dalvikvm(  177): create new thread
+D/dalvikvm(  177): new thread created
+D/dalvikvm(  177): update thread list
+D/dalvikvm(  177): threadid=2: interp stack at 0x5ba46000
+D/dalvikvm(  177): init ref table
+D/dalvikvm(  177): init mutex
+D/dalvikvm(  177): threadid=2: created from interp
+D/dalvikvm(  177): start new thread
+D/dalvikvm(  177): create interp thread : stack size=128KB
+D/dalvikvm(  177): threadid=2: notify debugger
+D/dalvikvm(  177): create new thread
+D/dalvikvm(  177): new thread created
+D/dalvikvm(  177): threadid=2 (ReferenceQueueDaemon): calling run()
+D/dalvikvm(  177): update thread list
+D/dalvikvm(  177): threadid=3: interp stack at 0x5bb66000
+D/dalvikvm(  177): init ref table
+D/dalvikvm(  177): init mutex
+D/dalvikvm(  177): threadid=3: created from interp
+D/dalvikvm(  177): start new thread
+D/dalvikvm(  177): create interp thread : stack size=128KB
+D/dalvikvm(  177): create new thread
+D/dalvikvm(  177): new thread created
+D/dalvikvm(  177): update thread list
+D/dalvikvm(  177): threadid=3: notify debugger
+D/dalvikvm(11463): zygote get new systemTid : 11463
+D/dalvikvm(  177): threadid=3 (FinalizerDaemon): calling run()
+D/dalvikvm(  177): threadid=4: interp stack at 0x5bc87000
+D/dalvikvm(  177): init ref table
+D/dalvikvm(  177): init mutex
+D/dalvikvm(  177): threadid=4: created from interp
+D/dalvikvm(  177): start new thread
+D/dalvikvm(  177): threadid=4: notify debugger
+D/dalvikvm(  177): threadid=4 (FinalizerWatchdogDaemon): calling run()
+I/ActivityManager(  694): Start proc com.crazyj36.avoidmeteors for activity com.crazyj36.avoidmeteors/.MainActivity: pid=11463 uid=10025 gids={50025}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_BACK
+D/dalvikvm(  694): create interp thread : stack size=128KB
+D/dalvikvm(  694): create new thread
+D/dalvikvm(  694): new thread created
+D/dalvikvm(  694): update thread list
+D/dalvikvm(  694): threadid=76: interp stack at 0x64016000
+D/dalvikvm(  694): init ref table
+D/dalvikvm(  694): init mutex
+D/dalvikvm(  694): threadid=76: created from interp
+D/dalvikvm(  694): start new thread
+I/libPerfService(  694): 1: set: 1
+E/        (  694): Could not open '/data/data/hotplug/cmd'
+E/        (  694): error : 2, No such file or directory
+D/ActivityManager(  694): ACT-isFrontStack(), stack is front : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_BACK
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_BACK
+D/ActivityThread(  901): ACT-PAUSE_ACTIVITY handled : 1 / android.os.BinderProxy@41dfe178
+I/BufferQueue(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb893ba88,id:270,api:1,p:901,c:174) new GraphicBuffer needed
+D/BufferQueue(  174):     [OLD] gb:NULL
+D/dalvikvm(  694): threadid=76: notify debugger
+D/dalvikvm(  694): threadid=76 (Thread-192): calling run()
+D/dalvikvm(  694): threadid=76: exiting
+D/dalvikvm(  694): threadid=76: bye!
+I/GraphicBuffer(  174): allocate buffer (w:976 h:600 f:1) handle(0xb893eee8) err(0)
+W/GraphicBufferExtra_hal(  174): gralloc extra device setBufInfo(...) is not supported
+I/BufferQueue(  174):     [NEW] gb=0xb893cb70, handle=0xb893eee8, w=976, h=600, s=976, f=0x1, u=0x00000f02
+D/GraphicBuffer(  901): create handle(0x5fe18530) (w:976, h:600, f:1)
+D/dalvikvm(11463): threadid=2: interp stack at 0x5bb46000
+D/dalvikvm(11463): init ref table
+D/dalvikvm(11463): init mutex
+D/dalvikvm(11463): threadid=3: interp stack at 0x5bc66000
+D/dalvikvm(11463): init ref table
+D/dalvikvm(11463): init mutex
+D/dalvikvm(11463): Elevating priority from 0 to -8
+D/dalvikvm(11463): threadid=4: interp stack at 0x5bd87000
+D/dalvikvm(11463): init ref table
+D/dalvikvm(11463): init mutex
+D/dalvikvm(11463): zygote get thread init done
+D/dalvikvm(11463): create interp thread : stack size=128KB
+D/dalvikvm(11463): create new thread
+D/dalvikvm(11463): new thread created
+D/dalvikvm(11463): update thread list
+D/dalvikvm(11463): threadid=5: interp stack at 0x5ee2d000
+D/dalvikvm(11463): init ref table
+D/dalvikvm(11463): init mutex
+D/dalvikvm(11463): threadid=5: created from interp
+D/dalvikvm(11463): start new thread
+D/dalvikvm(11463): create interp thread : stack size=128KB
+D/dalvikvm(11463): create new thread
+I/BufferQueue(  174): [unnamed-174-273](this:0xb891d570,id:273,api:0,p:-1,c:-1) BufferQueue
+I/BufferQueue(  174): [unnamed-174-273](this:0xb891d570,id:273,api:0,p:-1,c:174) consumerConnect consumer=(174:/system/bin/surfaceflinger) controlledByApp=false
+I/BufferQueue(  174): [unnamed-174-273](this:0xb891d570,id:273,api:0,p:-1,c:174) setConsumerName: unnamed-174-273
+I/GLConsumer(  174): [unnamed-174-273](this:0xb8941808,api:0) GLConsumer
+I/BufferQueue(  174): [Starting com.crazyj36.avoidmeteors](this:0xb891d570,id:273,api:0,p:-1,c:174) setConsumerName: Starting com.crazyj36.avoidmeteors
+I/BufferQueue(  174): [Starting com.crazyj36.avoidmeteors](this:0xb891d570,id:273,api:0,p:-1,c:174) setDefaultBufferSize: w=1, h=1
+D/dalvikvm(11463): new thread created
+D/dalvikvm(11463): update thread list
+D/dalvikvm(11463): threadid=5: notify debugger
+D/dalvikvm(11463): threadid=5 (ReferenceQueueDaemon): calling run()
+D/dalvikvm(11463): threadid=6: interp stack at 0x5ef4b000
+D/dalvikvm(11463): init ref table
+D/dalvikvm(11463): init mutex
+D/dalvikvm(11463): threadid=6: created from interp
+D/dalvikvm(11463): start new thread
+D/dalvikvm(11463): create interp thread : stack size=128KB
+D/dalvikvm(11463): create new thread
+D/dalvikvm(11463): new thread created
+D/dalvikvm(11463): update thread list
+D/dalvikvm(11463): threadid=6: notify debugger
+D/dalvikvm(11463): threadid=6 (FinalizerDaemon): calling run()
+W/MALI    (  174): MTK_AUX_isMTKFormat:168: int MTK_AUX_isMTKFormat(ANativeWindowBuffer_t*): format=1
+I/GLConsumer(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb88f6a70,api:1) [void* android::GLConsumer::createImage(EGLDisplay, const android::sp<android::GraphicBuffer>&, const android::Rect&)]
+D/GLConsumer(  174):     GraphicBuffer: gb=0xb893cb70 handle=0xb893eee8 fmt=1
+D/GLConsumer(  174):     EGLImage: dpy=0x1, img=0x10000007
+D/dalvikvm(11463): threadid=7: interp stack at 0x5f069000
+D/dalvikvm(11463): init ref table
+D/dalvikvm(11463): init mutex
+D/dalvikvm(11463): threadid=7: created from interp
+D/dalvikvm(11463): start new thread
+D/Launcher(  901): Launcher,  onSaveInstanceState: outState = Bundle[{launcher.state=1, apps_customize_currentTab=APPS, android:viewHierarchyState=Bundle[{android:views={-1694367232=android.view.AbsSavedState$1@41b00860, -1694235648=android.view.AbsSavedState$1@41b00860, -1694169856=android.view.AbsSavedState$1@41b00860, -1694104064=android.view.AbsSavedState$1@41b00860, -1677590528=android.view.AbsSavedState$1@41b00860, -1677590523=android.view.AbsSavedState$1@41b00860, -1677590269=android.view.AbsSavedState$1@41b00860, -1677590267=android.view.AbsSavedState$1@41b00860, -1677590011=android.view.AbsSavedState$1@41b00860, -1677589756=android.view.AbsSavedState$1@41b00860, -1677589500=android.view.AbsSavedState$1@41b00860, -1677589499=android.view.AbsSavedState$1@41b00860, 0=android.view.AbsSavedState$1@41b00860, 1=android.view.AbsSavedState$1@41b00860, 2=android.view.AbsSavedState$1@41b00860, 3=android.view.AbsSavedState$1@41b00860, 4=android.view.AbsSavedState$1@41b00860, 5=android.view.AbsSavedState$1@41b00860, 6=android.view.AbsSavedState$1@41b00860, 7=android.view.AbsSavedState$1@41b00860, 8=android.view.AbsSavedState$1@41b00860, 9=android.view.AbsSavedState$1@41b00860, 10=android.view.AbsSavedState$1@41b00860, 11=android.view.AbsSavedState$1@41b00860, 12=android.view.AbsSavedState$1@41b00860, 13=android.view.AbsSavedState$1@41b00860, 14=android.view.AbsSavedState$1@41b00860, 15=android.view.AbsSavedState$1@41b00860, 16=android.view.AbsSavedState$1@41b00860, 17=android.view.AbsSavedState$1@41b00860, 18=android.view.AbsSavedState$1@41b00860, 19=android.view.AbsSavedState$1@41b00860, 20=android.view.AbsSavedState$1@41b00860, 21=android.view.AbsSavedState$1@41b00860, 16908290=android.view.AbsSavedState$1@41b00860, 16908305=android.view.AbsSavedState$1@41b00860, 16908307=android.view.AbsSavedState$1@41b00860, 2131165188=android.view.AbsSavedState$1@41b00860, 2131165190=android.view.AbsSavedState$1@41b00860, 2131165191=android.view.AbsSavedState$1@41b00860, 2131165192=android.view.AbsSavedState$1@41b00860, 2131165193=android.view.AbsSavedState$1@41b00860, 2131165194=android.view.AbsSavedState$1@41b00860, 2131165195=android.view.AbsSavedState$1@41b00860, 2131165196=android.view.AbsSavedState$1@41b00860, 2131165197=android.view.AbsSavedState$1@41b00860, 2131165198=android.view.AbsSavedState$1@41b00860, 2131165199=android.view.AbsSavedState$1@41b00860, 2131165200=android.view.AbsSavedState$1@41b00860, 2131165201=android.view.AbsSavedState$1@41b00860, 2131165202=android.view.AbsSavedState$1@41b00860, 2131165205=android.view.AbsSavedState$1@41b00860, 2131165206=android.view.AbsSavedState$1@41b00860, 2131165207=android.view.AbsSavedState$1@41b00860, 2131165208=android.view.AbsSavedState$1@41b00860, 2131165209=android.view.AbsSavedState$1@41b00860, 2131165212=android.view.AbsSavedState$1@41b00860, 2131165213=android.view.AbsSavedState$1@41b00860, 2131165220=android.view.AbsSavedState$1@41b00860, 2131165221=android.view.AbsSavedState$1@41b00860, 2131165222=android.view.AbsSavedState$1@41b00860, 2131165223=android.view.AbsSavedState$1@41b00860, 2131165224=android.view.AbsSavedState$1@41b00860, 2131165225=android.view.AbsSavedState$1@41b00860, 2131165226=android.view.AbsSavedState$1@41b00860, 2131165227=android.view.AbsSavedState$1@41b00860, 2131165228=android.view.AbsSavedState$1@41b00860, 2131165230=android.view.AbsSavedState$1@41b00860, 2131165231=android.view.AbsSavedState$1@41b00860, 2131165232=android.view.AbsSavedState$1@41b00860, 2131165234=android.view.AbsSavedState$1@41b00860, 2131165235=android.view.AbsSavedState$1@41b00860, 2131165236=android.view.AbsSavedState$1@41b00860, 2131165237=android.view.AbsSavedState$1@41b00860, 2131165238=android.view.AbsSavedState$1@41b00860, 2131165239=android.view.AbsSavedState$1@41b00860, 2131165242=android.view.AbsSavedState$1@41b00860, 2131165243=android.view.AbsSavedState$1@41b00860, 2131165244=android.view.AbsSavedState$1@41b00860}}], apps_customize_currentIndex=11, launcher.current_screen=2}]
+V/ActivityThread(  901): Finishing stop of ActivityRecord{41dfe9e8 token=android.os.BinderProxy@41dfe178 {com.android.launcher/com.android.launcher2.Launcher}}: show=true win=com.android.internal.policy.impl.PhoneWindow@42330a50
+D/dalvikvm(11463): threadid=7: notify debugger
+D/dalvikvm(11463): threadid=7 (FinalizerWatchdogDaemon): calling run()
+D/ActivityThread(  901): ACT-STOP_ACTIVITY_SHOW handled : 0 / android.os.BinderProxy@41dfe178
+D/ActivityManager(  694): ACT-isFrontStack(), stack is front : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/dalvikvm(11463): threadid=8: interp stack at 0x5f483000
+D/dalvikvm(11463): init ref table
+D/dalvikvm(11463): init mutex
+D/dalvikvm(11463): threadid=9: interp stack at 0x5f5a1000
+D/dalvikvm(11463): init ref table
+D/dalvikvm(11463): init mutex
+I/BufferQueue(  174): [Starting com.crazyj36.avoidmeteors](this:0xb891d570,id:273,api:0,p:-1,c:174) setDefaultBufferSize: w=600, h=976
+I/WindowManager(  694): Losing focus: Window{420db1c0 u0 com.android.launcher/com.android.launcher2.Launcher}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is front : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/InputReader(  694): InputReader:: getSwitchState lock 
+D/InputReader(  694): InputReader::getStateLocked:: return 
+V/ActivityManager(  694): ensureActivitiesVisibleLocked: consider front
+D/ActivityManager(  694): ACT-isFrontStack(), stack is front : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is front : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_BACK
+V/ActivityManager(  694): ensureActivitiesVisibleLocked: consider back
+D/ActivityManager(  694): ACT-isFrontStack(), stack is front : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_BACK
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_BACK
+D/Launcher(  901): Launcher, (Launcher)onStop: this = com.android.launcher2.Launcher@422ebe60
+V/PhoneWindow(  901): DecorView setVisiblity: visibility = 4 ,Parent =ViewRoot{41e54c20 com.android.launcher/com.android.launcher2.Launcher,ident = 2}, this =com.android.internal.policy.impl.PhoneWindow$DecorView{41e486d8 I.E..... R....... 0,0-600,976}
+D/ActivityThread(  901): ACT-HIDE_WINDOW handled : 0 / android.os.BinderProxy@41dfe178
+D/ActivityManager(  694): ACT-isFrontStack(), stack is front : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is front : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_BACK
+V/ActivityManager(  694): ensureActivitiesVisibleLocked: consider front
+D/ActivityManager(  694): ACT-isFrontStack(), stack is front : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is front : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_IN_BACK
+V/ActivityManager(  694): ensureActivitiesVisibleLocked: consider back
+D/ActivityManager(  694): ACT-isFrontStack(), stack is front : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_IN_BACK
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_IN_BACK
+D/OpenGLRenderer(  901): Flushing caches (mode 0)
+D/GraphicBuffer(  901): close handle(0x5fe0f670) (w:976 h:600 f:1)
+D/GraphicBuffer(  901): close handle(0x5f7e8d28) (w:976 h:600 f:1)
+D/GraphicBuffer(  901): close handle(0x5fe18530) (w:976 h:600 f:1)
+I/BufferQueue(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb893ba88,id:270,api:1,p:-1,c:174) disconnect: api=1
+I/BufferQueue(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb893ba88,id:270,api:0,p:-1,c:174) getReleasedBuffers: returning mask 0xffffffff
+I/GLConsumer(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb88f6a70,api:0) destroying EGLImage dpy=0x1 img=0x1000000e
+I/GraphicBuffer(  174): free buffer (w:976 h:600 f:1) handle(0xb89124c8)
+I/GLConsumer(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb88f6a70,api:0) destroying EGLImage dpy=0x1 img=0x10000006
+I/GraphicBuffer(  174): free buffer (w:976 h:600 f:1) handle(0xb8927b40)
+I/GLConsumer(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb88f6a70,api:0) destroying EGLImage dpy=0x1 img=0x10000007
+D/IPCThreadState(  174): [DN #5] BR_CLEAR_DEATH_NOTIFICATION_DONE cookie 0xb890f568
+D/ActivityManager(  694): ACT-isFrontStack(), stack is front : ActivityStack{4260c920 stackId=21, 1 tasks}
+I/BufferQueue(  174): [Starting com.crazyj36.avoidmeteors](this:0xb891d570,id:273,api:0,p:694,c:174) connect: api=2 producer=(694:system_server) producerControlledByApp=false
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_IN_BACK
+I/BufferQueue(  174): [Starting com.crazyj36.avoidmeteors](this:0xb891d570,id:273,api:2,p:694,c:174) new GraphicBuffer needed
+D/BufferQueue(  174):     [OLD] gb:NULL
+D/NetworkPolicy(  694): onRecv: MSG_FOREGROUND_ACTIVITIES_CHANGED pid:uid:act=11463:10025:true
+I/GraphicBuffer(  174): allocate buffer (w:608 h:976 f:1) handle(0xb891bba8) err(0)
+W/GraphicBufferExtra_hal(  174): gralloc extra device setBufInfo(...) is not supported
+I/BufferQueue(  174):     [NEW] gb=0xb8911e28, handle=0xb891bba8, w=600, h=976, s=608, f=0x1, u=0x00000933
+V/NetworkStats(  694): setKernelCounterSet uid=10025 set=1
+D/NetworkPolicy(  694): onRecv: MSG_FOREGROUND_ACTIVITIES_CHANGED pid:uid:act=901:10013:false
+V/NetworkStats(  694): setKernelCounterSet uid=10013 set=0
+D/ConnectivityService(  694): onUidRulesChanged(uid=10025, uidRules=0)
+D/ConnectivityService(  694): onUidRulesChanged(uid=10013, uidRules=0)
+D/GraphicBuffer(  694): create handle(0x6599eda0) (w:608, h:976, f:1)
+V/Provider/Settings(11463): get setting for user 0 by user 0 so skipping cache
+D/ActivityManager(  694): getContentProviderImpl: from caller=android.app.ApplicationThreadProxy@429eaa90 (pid=11463, userId=0) to get content provider settings cpr=ContentProviderRecord{4211ec48 u0 com.android.providers.settings/.SettingsProvider}
+D/ActivityManager(  694): getContentProviderImpl: updateLruProcessLocked cpr.proc=ProcessRecord{41f35168 694:system/1000}
+D/ActivityThread(11463): hoder:android.app.IActivityManager$ContentProviderHolder@41dfd620,provider,holder.Provider:android.content.ContentProviderProxy@41dfdda0
+V/SettingsProvider(  694): call(system:anr_debugging_mechanism) for 0
+D/SettingsProvider(  694): lookupValue table system cache contains Key anr_debugging_mechanism , value = Bundle[{value=1}]
+V/Provider/Settings(11463): from db cache, name = anr_debugging_mechanism , value = 1
+D/asset   (11463): AssetManager-->addDefaultAssets CIP path not exsit!
+I/BufferQueue(  174): [Starting com.crazyj36.avoidmeteors](this:0xb891d570,id:273,api:2,p:694,c:174) new GraphicBuffer needed
+D/BufferQueue(  174):     [OLD] gb:NULL
+D/OpenGLRenderer(  901): Flushing caches (mode 1)
+D/Launcher(  901): Launcher, onTrimMemory: level = 20
+I/GraphicBuffer(  174): allocate buffer (w:608 h:976 f:1) handle(0xb88fe018) err(0)
+W/GraphicBufferExtra_hal(  174): gralloc extra device setBufInfo(...) is not supported
+I/BufferQueue(  174):     [NEW] gb=0xb88f5898, handle=0xb88fe018, w=600, h=976, s=608, f=0x1, u=0x00000933
+W/MALI    (  174): MTK_AUX_isMTKFormat:168: int MTK_AUX_isMTKFormat(ANativeWindowBuffer_t*): format=1
+D/GraphicBuffer(  694): create handle(0x64502b28) (w:608, h:976, f:1)
+D/Proxy   (11463): setHttpRequestCheckHandler
+D/dalvikvm(11463): open_cached_dex_file : /data/app/com.crazyj36.avoidmeteors-2.apk /data/dalvik-cache/data@app@com.crazyj36.avoidmeteors-2.apk@classes.dex
+D/ActivityThread(11463): BIND_APPLICATION handled : 0 / AppBindData{appInfo=ApplicationInfo{41dfa200 com.crazyj36.avoidmeteors}}
+V/ActivityThread(11463): ActivityRecord{41dfc5e8 token=android.os.BinderProxy@41dfb058 {com.crazyj36.avoidmeteors/com.crazyj36.avoidmeteors.MainActivity}}: app=android.app.Application@41e01790, appName=com.crazyj36.avoidmeteors, pkg=com.crazyj36.avoidmeteors, comp={com.crazyj36.avoidmeteors/com.crazyj36.avoidmeteors.MainActivity}, dir=/data/app/com.crazyj36.avoidmeteors-2.apk
+W/MALI    (  174): MTK_AUX_isMTKFormat:168: int MTK_AUX_isMTKFormat(ANativeWindowBuffer_t*): format=1
+I/GLConsumer(  174): [Starting com.crazyj36.avoidmeteors](this:0xb8941808,api:2) [void* android::GLConsumer::createImage(EGLDisplay, const android::sp<android::GraphicBuffer>&, const android::Rect&)]
+D/GLConsumer(  174):     GraphicBuffer: gb=0xb88f5898 handle=0xb88fe018 fmt=1
+D/GLConsumer(  174):     EGLImage: dpy=0x1, img=0x10000007
+D/PhoneStatusBar(  759): setSystemUiVisibility vis=0 mask=ffffffff oldVal=400 newVal=0 diff=400
+D/OpenGLRenderer(  901): Flushing caches (mode 0)
+D/AndroidRuntime(11463): Shutting down VM
+W/dalvikvm(11463): threadid=1: thread exiting with uncaught exception (group=0x419d5ce0)
+W/dalvikvm(11463): threadid=1: uncaught exception occurred
+W/System.err(11463): java.lang.RuntimeException: Unable to start activity ComponentInfo{com.crazyj36.avoidmeteors/com.crazyj36.avoidmeteors.MainActivity}: android.view.InflateException: Binary XML file line #10: Error inflating class com.crazyj36.avoidmeteors.GameView
+W/System.err(11463): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2359)
+W/System.err(11463): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2411)
+W/System.err(11463): 	at android.app.ActivityThread.access$800(ActivityThread.java:151)
+W/System.err(11463): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1342)
+W/System.err(11463): 	at android.os.Handler.dispatchMessage(Handler.java:110)
+W/System.err(11463): 	at android.os.Looper.loop(Looper.java:193)
+I/BufferQueue(  174): [FrameBufferSurface_0](this:0xb88e6740,id:0,api:1,p:174,c:174) [release] fps:0.26, dur:19123.53, max:19055.83, min:16.40
+I/BufferQueue(  174): [FrameBufferSurface_0](this:0xb88e6740,id:0,api:1,p:174,c:174) [queue] fps:0.26, dur:19123.45, max:19055.87, min:16.40
+W/System.err(11463): 	at android.app.ActivityThread.main(ActivityThread.java:5323)
+W/System.err(11463): 	at java.lang.reflect.Method.invokeNative(Native Method)
+W/System.err(11463): 	at java.lang.reflect.Method.invoke(Method.java:515)
+W/System.err(11463): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:825)
+W/System.err(11463): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:641)
+W/System.err(11463): 	at dalvik.system.NativeStart.main(Native Method)
+W/System.err(11463): Caused by: android.view.InflateException: Binary XML file line #10: Error inflating class com.crazyj36.avoidmeteors.GameView
+W/System.err(11463): 	at android.view.LayoutInflater.createView(LayoutInflater.java:620)
+W/System.err(11463): 	at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:696)
+W/System.err(11463): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:755)
+W/System.err(11463): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:492)
+W/System.err(11463): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:397)
+W/System.err(11463): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:353)
+W/System.err(11463): 	at com.android.internal.policy.impl.PhoneWindow.setContentView(PhoneWindow.java:341)
+W/System.err(11463): 	at android.app.Activity.setContentView(Activity.java:1948)
+W/System.err(11463): 	at com.crazyj36.avoidmeteors.MainActivity.onCreate(MainActivity.java:11)
+W/System.err(11463): 	at android.app.Activity.performCreate(Activity.java:5344)
+W/System.err(11463): 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1088)
+W/System.err(11463): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2323)
+W/System.err(11463): 	... 11 more
+W/System.err(11463): Caused by: java.lang.reflect.InvocationTargetException
+W/System.err(11463): 	at java.lang.reflect.Constructor.constructNative(Native Method)
+W/System.err(11463): 	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+W/System.err(11463): 	at android.view.LayoutInflater.createView(LayoutInflater.java:594)
+W/System.err(11463): 	... 22 more
+W/System.err(11463): Caused by: java.lang.NullPointerException
+W/System.err(11463): 	at com.crazyj36.avoidmeteors.GameView.<init>(GameView.java:23)
+W/System.err(11463): 	... 25 more
+W/dalvikvm(11463): threadid=1: calling UncaughtExceptionHandler
+E/AndroidRuntime(11463): FATAL EXCEPTION: main
+E/AndroidRuntime(11463): Process: com.crazyj36.avoidmeteors, PID: 11463
+E/AndroidRuntime(11463): java.lang.RuntimeException: Unable to start activity ComponentInfo{com.crazyj36.avoidmeteors/com.crazyj36.avoidmeteors.MainActivity}: android.view.InflateException: Binary XML file line #10: Error inflating class com.crazyj36.avoidmeteors.GameView
+E/AndroidRuntime(11463): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2359)
+E/AndroidRuntime(11463): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2411)
+E/AndroidRuntime(11463): 	at android.app.ActivityThread.access$800(ActivityThread.java:151)
+E/AndroidRuntime(11463): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1342)
+E/AndroidRuntime(11463): 	at android.os.Handler.dispatchMessage(Handler.java:110)
+E/AndroidRuntime(11463): 	at android.os.Looper.loop(Looper.java:193)
+E/AndroidRuntime(11463): 	at android.app.ActivityThread.main(ActivityThread.java:5323)
+E/AndroidRuntime(11463): 	at java.lang.reflect.Method.invokeNative(Native Method)
+E/AndroidRuntime(11463): 	at java.lang.reflect.Method.invoke(Method.java:515)
+E/AndroidRuntime(11463): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:825)
+E/AndroidRuntime(11463): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:641)
+E/AndroidRuntime(11463): 	at dalvik.system.NativeStart.main(Native Method)
+E/AndroidRuntime(11463): Caused by: android.view.InflateException: Binary XML file line #10: Error inflating class com.crazyj36.avoidmeteors.GameView
+E/AndroidRuntime(11463): 	at android.view.LayoutInflater.createView(LayoutInflater.java:620)
+E/AndroidRuntime(11463): 	at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:696)
+E/AndroidRuntime(11463): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:755)
+E/AndroidRuntime(11463): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:492)
+E/AndroidRuntime(11463): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:397)
+E/AndroidRuntime(11463): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:353)
+E/AndroidRuntime(11463): 	at com.android.internal.policy.impl.PhoneWindow.setContentView(PhoneWindow.java:341)
+E/AndroidRuntime(11463): 	at android.app.Activity.setContentView(Activity.java:1948)
+E/AndroidRuntime(11463): 	at com.crazyj36.avoidmeteors.MainActivity.onCreate(MainActivity.java:11)
+E/AndroidRuntime(11463): 	at android.app.Activity.performCreate(Activity.java:5344)
+E/AndroidRuntime(11463): 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1088)
+E/AndroidRuntime(11463): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2323)
+E/AndroidRuntime(11463): 	... 11 more
+E/AndroidRuntime(11463): Caused by: java.lang.reflect.InvocationTargetException
+E/AndroidRuntime(11463): 	at java.lang.reflect.Constructor.constructNative(Native Method)
+E/AndroidRuntime(11463): 	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+E/AndroidRuntime(11463): 	at android.view.LayoutInflater.createView(LayoutInflater.java:594)
+E/AndroidRuntime(11463): 	... 22 more
+E/AndroidRuntime(11463): Caused by: java.lang.NullPointerException
+E/AndroidRuntime(11463): 	at com.crazyj36.avoidmeteors.GameView.<init>(GameView.java:23)
+E/AndroidRuntime(11463): 	... 25 more
+V/Provider/Settings(  694): get setting for user 0 by user 0 so skipping cache
+V/Provider/Settings(  694):  from settings cache , name = dropbox:data_app_crash , value = null
+D/dalvikvm(  694): create interp thread : stack size=128KB
+D/dalvikvm(  694): create new thread
+D/dalvikvm(  694): new thread created
+D/dalvikvm(  694): update thread list
+D/dalvikvm(  694): threadid=76: interp stack at 0x64016000
+D/dalvikvm(  694): init ref table
+D/dalvikvm(  694): init mutex
+D/dalvikvm(  694): threadid=76: created from interp
+D/dalvikvm(  694): start new thread
+D/dalvikvm(  694): threadid=76: notify debugger
+D/dalvikvm(  694): threadid=76 (Error dump: data_app_crash): calling run()
+V/Provider/Settings(  694): get setting for user 0 by user 0 so skipping cache
+V/Provider/Settings(  694): get setting for user 0 by user 0 so skipping cache
+V/Provider/Settings(  694):  from settings cache , name = logcat_for_data_app_crash , value = null
+V/Provider/Settings(  694):  from settings cache , name = send_action_app_error , value = 1
+V/Provider/Settings(  694): get setting for user 0 by user 0 so skipping cache
+V/Provider/Settings(  694):  from settings cache , name = dropbox:data_app_crash , value = null
+V/Provider/Settings(  694): get setting for user 0 by user 0 so skipping cache
+W/ActivityManager(  694):   Force finishing activity com.crazyj36.avoidmeteors/.MainActivity
+V/Provider/Settings(  694):  from settings cache , name = dropbox:data_app_crash , value = null
+V/Provider/Settings(  694): get setting for user 0 by user 0 so skipping cache
+V/Provider/Settings(  694):  from settings cache , name = dropbox_age_seconds , value = null
+V/Provider/Settings(  694): get setting for user 0 by user 0 so skipping cache
+V/Provider/Settings(  694):  from settings cache , name = dropbox_max_files , value = null
+V/Provider/Settings(  694): get setting for user 0 by user 0 so skipping cache
+V/Provider/Settings(  694):  from settings cache , name = dropbox_quota_percent , value = null
+V/Provider/Settings(  694): get setting for user 0 by user 0 so skipping cache
+V/Provider/Settings(  694):  from settings cache , name = dropbox_reserve_percent , value = null
+V/Provider/Settings(  694): get setting for user 0 by user 0 so skipping cache
+V/Provider/Settings(  694):  from settings cache , name = dropbox_quota_kb , value = null
+D/ActivityManager(  694): ACT-isFrontStack(), stack is front : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_IN_BACK
+I/BufferQueue(  694): [unnamed-694-44](this:0x647cb008,id:44,api:0,p:-1,c:-1) BufferQueue
+I/BufferQueue(  694): [unnamed-694-44](this:0x647cb008,id:44,api:0,p:-1,c:694) consumerConnect consumer=(694:system_server) controlledByApp=false
+I/BufferQueue(  694): [unnamed-694-44](this:0x647cb008,id:44,api:0,p:-1,c:694) setConsumerName: unnamed-694-44
+I/BufferQueue(  694): [ScreenshotClient](this:0x647cb008,id:44,api:0,p:-1,c:694) setConsumerName: ScreenshotClient
+I/BufferQueue(  694): [ScreenshotClient](this:0x647cb008,id:44,api:0,p:174,c:694) connect: api=1 producer=(174:/system/bin/surfaceflinger) producerControlledByApp=false
+I/BufferQueue(  694): [ScreenshotClient](this:0x647cb008,id:44,api:1,p:174,c:694) new GraphicBuffer needed
+D/BufferQueue(  694):     [OLD] gb:NULL
+I/GraphicBuffer(  174): allocate buffer (w:208 h:341 f:1) handle(0xb8912520) err(0)
+D/GraphicBuffer(  694): create handle(0x62d31a50) (w:208, h:341, f:1)
+W/GraphicBufferExtra_hal(  694): gralloc extra device setBufInfo(...) is not supported
+I/BufferQueue(  694):     [NEW] gb=0x611f1b48, handle=0x62d31a50, w=200, h=341, s=208, f=0x1, u=0x00000333
+I/GraphicBuffer(  174): free buffer (w:208 h:341 f:1) handle(0xb8912520)
+D/GraphicBuffer(  174): create handle(0xb8912520) (w:208, h:341, f:1)
+W/MALI    (  174): MTK_AUX_isMTKFormat:168: int MTK_AUX_isMTKFormat(ANativeWindowBuffer_t*): format=1
+W/MALI    (  174): MTK_AUX_isMTKFormat:168: int MTK_AUX_isMTKFormat(ANativeWindowBuffer_t*): format=1
+W/MALI    (  174): MTK_AUX_isMTKFormat:168: int MTK_AUX_isMTKFormat(ANativeWindowBuffer_t*): format=1
+W/AES     (  694): Exception Log handling...
+D/GraphicBuffer(  174): close handle(0xb8912520) (w:208 h:341 f:1)
+I/BufferQueue(  694): [ScreenshotClient](this:0x647cb008,id:44,api:1,p:-1,c:694) disconnect: api=1
+I/BufferQueue(  694): [ScreenshotClient](this:0x647cb008,id:44,api:0,p:-1,c:694) getReleasedBuffers: returning mask 0xffffffff
+D/IPCThreadState(  694): [DN #5] BR_CLEAR_DEATH_NOTIFICATION_DONE cookie 0x5c2d1c48
+D/GraphicBuffer(  694): close handle(0x62d31a50) (w:208 h:341 f:1)
+I/BufferQueue(  694): [ScreenshotClient](this:0x647cb008,id:44,api:0,p:-1,c:-1) consumerDisconnect
+I/BufferQueue(  694): [ScreenshotClient](this:0x647cb008,id:44,api:0,p:-1,c:-1) ~BufferQueue
+D/PowerManagerService(  694): acquireWakeLockInternal: lock=1106232288, flags=0x1, tag="ActivityManager-Launch", ws=null, uid=1000, pid=694
+D/PowerManagerService(  694): updateWakeLockSummaryLocked: mWakefulness=Awake, mWakeLockSummary=0x1
+D/PowerManagerService(  694): newScreenState = 2
+D/PowerManagerService(  694): updateScreenStateLocked: mScreenBrightnessModeSetting=0, autoBrightness=false, ecoBrightness=false, screenAutoBrightnessAdjustment=0.0, screenBrightness=255
+D/PowerManagerDisplayController(  694): requestPowerState: screenState=2, useProximitySensor=false, forceProximitySensorEnable=false, forceWakeUpEnable=false, screenBrightness=255, screenAutoBrightnessAdjustment=0.0, useAutoBrightness=false, useEcoBrightness=false, blockScreenOn=false, waitForNegativeProximity=false
+I/PowerManagerService(  694): setBrightness mButtonLight 0.
+D/PowerManagerService(  694): updateScreenStateLocked: mDisplayReady=true, newScreenState=2, mWakefulness=1, mWakeLockSummary=0x1, mUserActivitySummary=0x1, mBootCompleted=true
+D/PowerManagerService(  694): handleSandman: canDream=true, mWakefulness=Awake
+V/ActivityManager(  694): Broadcast: Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 (has extras) } ordered=false userid=0 callerApp=ProcessRecord{41f35168 694:system/1000}
+V/Provider/Settings(  694): get setting for user 0 by user 0 so skipping cache
+V/Provider/Settings(  694):  from settings cache , name = anr_show_background , value = null
+V/WindowManager(  694): Changing focus from null to Window{4223cb80 u0 Application Error: com.crazyj36.avoidmeteors} Callers=com.android.server.wm.WindowManagerService.addWindow:2726 com.android.server.wm.Session.addToDisplay:163 android.view.ViewRootImpl.setView:611 android.view.WindowManagerGlobal.addView:261 
+I/WindowManager(  694): Gaining focus: Window{4223cb80 u0 Application Error: com.crazyj36.avoidmeteors}
+W/StatusBarManagerService(  694):  StatusBarManagerService false
+W/StatusBarManagerService(  694):  StatusBarManagerService mBar != null 
+W/CommandQueue (  759):  CommandQueue flag =  false
+D/ActivityThread(  874): BDC-Calling onReceive: intent=Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 cmp=com.google.android.gms/.stats.service.DropBoxEntryAddedReceiver (has extras) }, ordered=true, receiver=com.google.android.gms.stats.service.DropBoxEntryAddedReceiver@421f0b78
+D/dalvikvm(  694): GC_CONCURRENT freed 2539K (25076), 38% free 12857K/20500K, paused 5ms+11ms, total 113ms
+D/dalvikvm(  694): WAIT_FOR_CONCURRENT_GC blocked 82ms
+D/dalvikvm(  694): WAIT_FOR_CONCURRENT_GC blocked 70ms
+D/dalvikvm(  694): WAIT_FOR_CONCURRENT_GC blocked 79ms
+D/dalvikvm(  694): WAIT_FOR_CONCURRENT_GC blocked 84ms
+I/BufferQueue(  174): [unnamed-174-274](this:0xb893c0f0,id:274,api:0,p:-1,c:-1) BufferQueue
+I/BufferQueue(  174): [unnamed-174-274](this:0xb893c0f0,id:274,api:0,p:-1,c:174) consumerConnect consumer=(174:/system/bin/surfaceflinger) controlledByApp=false
+I/BufferQueue(  174): [unnamed-174-274](this:0xb893c0f0,id:274,api:0,p:-1,c:174) setConsumerName: unnamed-174-274
+I/GLConsumer(  174): [unnamed-174-274](this:0xb8941fb8,api:0) GLConsumer
+I/BufferQueue(  174): [Application Error: com.crazyj36.avoidmeteors](this:0xb893c0f0,id:274,api:0,p:-1,c:174) setConsumerName: Application Error: com.crazyj36.avoidmeteors
+I/BufferQueue(  174): [Application Error: com.crazyj36.avoidmeteors](this:0xb893c0f0,id:274,api:0,p:-1,c:174) setDefaultBufferSize: w=1, h=1
+I/BufferQueue(  174): [Application Error: com.crazyj36.avoidmeteors](this:0xb893c0f0,id:274,api:0,p:-1,c:174) setDefaultBufferSize: w=466, h=127
+D/ActivityThread(  874): BDC-RECEIVER handled : 0 / ReceiverData{intent=Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 cmp=com.google.android.gms/.stats.service.DropBoxEntryAddedReceiver (has extras) } packageName=com.google.android.gms resultCode=-1 resultData=null resultExtras=null}
+D/ActivityThread(  874): SVC-Creating service: CreateServiceData{token=android.os.BinderProxy@41f84870 className=com.google.android.gms.stats.service.DropBoxEntryAddedService packageName=com.google.android.gms intent=null}
+D/dalvikvm(  874): create interp thread : stack size=128KB
+I/BufferQueue(  174): [Application Error: com.crazyj36.avoidmeteors](this:0xb893c0f0,id:274,api:0,p:694,c:174) connect: api=2 producer=(694:system_server) producerControlledByApp=false
+D/dalvikvm(  874): create new thread
+D/dalvikvm(  874): new thread created
+D/dalvikvm(  874): update thread list
+D/AES     (  694): ExceptionLog: notify aed
+D/AES     (  694):     process : com.crazyj36.avoidmeteors
+D/AES     (  694):      module : com.crazyj36.avoidmeteors v1 (1.0)
+D/AES     (  694): 
+D/AES     (  694):       cause : data_app_crash
+D/AES     (  694):       pid : 11463
+D/AEE/LIBAEE(  694): shell: raise_exp(2, 11463, -1361051648, com.crazyj36.avoidmeteors, 0x0x6473a0a8, 0x0x0)
+D/dalvikvm(  874): threadid=17: interp stack at 0x63c72000
+D/AEE/AED (  166): $===AEE===AEE===AEE===$
+D/AEE/AED (  166): p 0 poll events 1 revents 0
+D/AEE/AED (  166): not know revents:0
+D/AEE/AED (  166): p 1 poll events 1 revents 1
+D/dalvikvm(  874): init ref table
+D/AEE/AED (  166): aed_main_fork_worker: generator 0x1bc50b8, worker 0xbe996898, recv_fd 15
+D/dalvikvm(  874): init mutex
+D/dalvikvm(  874): threadid=17: created from interp
+D/dalvikvm(  874): start new thread
+D/dalvikvm(  874): threadid=17: notify debugger
+D/dalvikvm(  874): threadid=17 (IntentService[DropBoxEntryAddedChimeraService]): calling run()
+D/AEE/AED (  166): p 2 poll events 1 revents 0
+D/AEE/AED (  166): not know revents:0
+D/AEE/AED (  166): p 3 poll events 1 revents 0
+D/AEE/AED (  166): not know revents:0
+D/AEE/AED (  166): p 4 poll events 1 revents 0
+D/AEE/AED (  166): not know revents:0
+I/BufferQueue(  174): [Application Error: com.crazyj36.avoidmeteors](this:0xb893c0f0,id:274,api:2,p:694,c:174) new GraphicBuffer needed
+D/BufferQueue(  174):     [OLD] gb:NULL
+I/GraphicBuffer(  174): allocate buffer (w:480 h:127 f:1) handle(0xb8927bb0) err(0)
+W/GraphicBufferExtra_hal(  174): gralloc extra device setBufInfo(...) is not supported
+I/BufferQueue(  174):     [NEW] gb=0xb890bfa8, handle=0xb8927bb0, w=466, h=127, s=480, f=0x1, u=0x00000933
+D/AEE/LIBAEE(  694): shell: connected with AED OK
+D/GraphicBuffer(  694): create handle(0x5c63cc98) (w:480, h:127, f:1)
+D/AEE/AED (11478): read success, handling msg (Ind, AE_IND_EXP_RAISED)
+I/DEBUG   (11478): [OnPurpose Redunant in preset_info] pid: 11463, tid: -1361051648, name: UNKNOWN  >>> com.crazyj36.avoidmeteors <<<
+V/AEE/AED (11478): dashboard_record_update() : rec->module = com.crazyj36.avoidmeteors 
+D/AEE/AED (11478): Duplicated exception, cnt = 2 
+D/AEE/AED (11478): Last exception time: 1644378427 
+D/AEE/AED (11478): cur time: 1644378450 
+D/AEE/AED (11478): Skip for Exp level'0'
+D/AEE/AED (  166): $===AEE===AEE===AEE===$
+D/AEE/AED (  166): p 0 poll events 1 revents 0
+D/AEE/AED (  166): not know revents:0
+D/AEE/AED (  166): p 1 poll events 1 revents 0
+D/AEE/AED (  166): not know revents:0
+D/AEE/AED (  166): p 2 poll events 1 revents 0
+D/AEE/AED (  166): not know revents:0
+D/AEE/AED (  166): p 3 poll events 1 revents 0
+D/AEE/AED (  166): not know revents:0
+D/AEE/AED (  166): p 4 poll events 1 revents 0
+D/AEE/AED (  166): not know revents:0
+D/AEE/LIBAEE(  694): shell: got the request (cmd:Ind,AE_IND_LOG_CLOSE)
+D/AEE/LIBAEE(  694): shell: Got session close ind from AED
+D/dalvikvm(  694): threadid=76: exiting
+D/dalvikvm(  694): threadid=76: bye!
+W/MALI    (  174): MTK_AUX_isMTKFormat:168: int MTK_AUX_isMTKFormat(ANativeWindowBuffer_t*): format=1
+V/WallpaperService(  759): Visibility change in com.android.systemui.ImageWallpaper$DrawableEngine@41e2c070: 0
+V/WallpaperService(  759): onVisibilityChanged(false): com.android.systemui.ImageWallpaper$DrawableEngine@41e2c070
+I/BufferQueue(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb893ba88,id:270,api:0,p:-1,c:-1) consumerDisconnect
+I/GraphicBuffer(  174): free buffer (w:976 h:600 f:1) handle(0xb893eee8)
+I/BufferQueue(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb893ba88,id:270,api:0,p:-1,c:-1) ~BufferQueue
+D/ActivityThread(  874): SVC-CREATE_SERVICE handled : 0 / CreateServiceData{token=android.os.BinderProxy@41f84870 className=com.google.android.gms.stats.service.DropBoxEntryAddedService packageName=com.google.android.gms intent=null}
+D/ActivityThread(  874): SVC-Calling onStartCommand: com.google.android.gms.stats.service.DropBoxEntryAddedService@426b4e50, flags=0, startId=1
+D/ActivityThread(  874): SVC-SERVICE_ARGS handled : 0 / ServiceArgsData{token=android.os.BinderProxy@41f84870 startId=1 args=Intent { act=com.google.android.gms.stats.ACTION_UPLOAD_DROPBOX_ENTRIES pkg=com.google.android.gms (has extras) }}
+D/ActivityThread(  874): BDC-Calling onReceive: intent=Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 cmp=com.google.android.gms/.chimera.GmsIntentOperationService$PersistentTrustedReceiver (has extras) }, ordered=true, receiver=com.google.android.gms.chimera.GmsIntentOperationService$PersistentTrustedReceiver@426aebb0
+V/Provider/Settings(  874): get setting for user 0 by user 0 so skipping cache
+V/Provider/Settings(  874):  from settings cache , name = multi_cb , value = null
+I/BufferQueue(  174): [DimLayer](this:0xb8933a88,id:271,api:0,p:-1,c:174) setDefaultBufferSize: w=1536, h=1536
+D/ActivityThread(  874): BDC-RECEIVER handled : 0 / ReceiverData{intent=Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 cmp=com.google.android.gms/.chimera.GmsIntentOperationService$PersistentTrustedReceiver (has extras) } packageName=com.google.android.gms resultCode=0 resultData=null resultExtras=null}
+D/ActivityThread( 9262): SVC-Creating service: CreateServiceData{token=android.os.BinderProxy@427218d0 className=com.google.android.gms.chimera.GmsIntentOperationService packageName=com.google.android.gms intent=null}
+D/ActivityThread( 9262): SVC-CREATE_SERVICE handled : 0 / CreateServiceData{token=android.os.BinderProxy@427218d0 className=com.google.android.gms.chimera.GmsIntentOperationService packageName=com.google.android.gms intent=null}
+D/ActivityThread( 9262): SVC-Calling onStartCommand: com.google.android.gms.chimera.GmsIntentOperationService@42722390, flags=0, startId=1
+D/ActivityThread( 9262): SVC-SERVICE_ARGS handled : 0 / ServiceArgsData{token=android.os.BinderProxy@427218d0 startId=1 args=Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }}
+D/dalvikvm( 9262): create interp thread : stack size=128KB
+D/dalvikvm( 9262): create new thread
+D/dalvikvm( 9262): new thread created
+D/dalvikvm( 9262): update thread list
+D/dalvikvm( 9262): threadid=14: interp stack at 0x631ba000
+D/dalvikvm( 9262): init ref table
+D/ActivityThread(  874): SVC-Destroying service: com.google.android.gms.stats.service.DropBoxEntryAddedService@426b4e50
+D/dalvikvm(  874): threadid=17: exiting
+D/dalvikvm(  874): threadid=17: bye!
+D/ActivityThread(  874): SVC-STOP_SERVICE handled : 0 / android.os.BinderProxy@41f84870
+D/dalvikvm( 9262): init mutex
+D/dalvikvm( 9262): threadid=14: created from interp
+D/dalvikvm( 9262): start new thread
+D/dalvikvm( 9262): threadid=14: notify debugger
+D/dalvikvm( 9262): threadid=14 ([com.google.android.gms.chimera.GmsIntentOperationService$ChimeraService-Executor] idle): calling run()
+D/dalvikvm( 9262): create interp thread : stack size=128KB
+D/dalvikvm( 9262): create new thread
+D/dalvikvm( 9262): new thread created
+D/dalvikvm( 9262): update thread list
+D/dalvikvm( 9262): threadid=15: interp stack at 0x6348c000
+D/dalvikvm( 9262): init ref table
+D/dalvikvm( 9262): init mutex
+D/dalvikvm( 9262): threadid=15: created from interp
+D/dalvikvm( 9262): start new thread
+D/dalvikvm( 9262): threadid=15: notify debugger
+D/dalvikvm( 9262): threadid=15 ([com.google.android.gms.chimera.GmsIntentOperationService$ChimeraService-Executor] idle): calling run()
+V/Provider/Settings( 9262): get setting for user 0 by user 0 so skipping cache
+V/Provider/Settings( 9262):  from settings cache , name = package_verifier_user_consent , value = -1
+W/ActivityManager(  694): Activity pause timeout for ActivityRecord{42498420 u0 com.crazyj36.avoidmeteors/.MainActivity t41 f}
+D/ActivityManager(  694): ACT-moveNextFloatingStackToTopLocked next = null curTop = null mStackState = STACK_STATE_HOME_IN_BACK
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_IN_BACK
+D/ActivityManager(  694): ACT-moveHomeTask toFront : true homeInFront = false
+D/WindowManager(  694): initFloatStackSize orientation = -1
+E/WindowManager(  694): Non floating stack did the function initFloatStackSize
+D/ActivityManager(  694): ACT-isFrontStack(), stack is back : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_FRONT
+D/ActivityManager(  694): ACT-isFrontStack(), stack is back : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_FRONT
+I/libPerfService(  694): 1: set: 2
+E/        (  694): Could not open '/data/data/hotplug/cmd'
+E/        (  694): error : 2, No such file or directory
+D/ActivityManager(  694): ACT-isFrontStack(), stack is back : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_FRONT
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_FRONT
+D/InputReader(  694): InputReader:: getSwitchState lock 
+D/InputReader(  694): InputReader::getStateLocked:: return 
+V/ActivityManager(  694): ensureActivitiesVisibleLocked: consider front
+D/ActivityManager(  694): ACT-isFrontStack(), stack is back : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_FRONT
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_FRONT
+V/ActivityManager(  694): ensureActivitiesVisibleLocked: consider back
+D/ActivityManager(  694): ACT-isFrontStack(), stack is back : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_FRONT
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_FRONT
+D/ActivityManager(  694): ACT-isFrontStack(), stack is back : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_TO_FRONT
+V/ActivityManager(  694): ensureActivitiesVisibleLocked: consider front
+D/ActivityManager(  694): ACT-isFrontStack(), stack is back : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_IN_FRONT
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_IN_FRONT
+V/ActivityManager(  694): ensureActivitiesVisibleLocked: consider back
+D/ActivityManager(  694): ACT-isFrontStack(), stack is back : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_IN_FRONT
+D/SurfaceFlinger(  174): SurfaceFlingerWatchdog:ERROR: open /dev/RT_Monitor failed.
+D/OpenGLRenderer(  901): Flushing caches (mode 0)
+D/dalvikvm(  694): create interp thread : stack size=128KB
+D/dalvikvm(  694): create new thread
+D/dalvikvm(  694): new thread created
+D/dalvikvm(  694): update thread list
+D/dalvikvm(  694): threadid=76: interp stack at 0x64016000
+D/dalvikvm(  694): init ref table
+D/dalvikvm(  694): init mutex
+D/dalvikvm(  694): threadid=76: created from interp
+D/dalvikvm(  694): start new thread
+D/NetworkPolicy(  694): onRecv: MSG_FOREGROUND_ACTIVITIES_CHANGED pid:uid:act=901:10013:true
+D/dalvikvm(  694): threadid=76: notify debugger
+D/dalvikvm(  694): threadid=76 (Thread-194): calling run()
+V/NetworkStats(  694): setKernelCounterSet uid=10013 set=1
+D/ConnectivityService(  694): onUidRulesChanged(uid=10013, uidRules=0)
+D/dalvikvm(  694): threadid=76: exiting
+V/ActivityThread(  901): Performing resume of ActivityRecord{41dfe9e8 token=android.os.BinderProxy@41dfe178 {com.android.launcher/com.android.launcher2.Launcher}} finished=false
+D/dalvikvm(  694): threadid=76: bye!
+D/Launcher(  901): Launcher, (Launcher)onStart: this = com.android.launcher2.Launcher@422ebe60
+D/Launcher(  901): Launcher, (Launcher)onResume: mRestoring = false, mOnResumeNeedsLoad = false,mOrientationChanged = false,mPagesAreRecreated = false, this = com.android.launcher2.Launcher@422ebe60
+D/Launcher(  901): OperatorChecker, getOperatorCheckerExt: context = com.android.launcher2.Launcher@422ebe60, mOperatorCheckerExt = com.mediatek.launcher2.ext.DefaultOperatorChecker@41eb8ad0
+D/DefaultOperatorChecker(  901): default supportEditAndHideApps called.
+D/ActivityThread(  901): ACT-AM_ON_RESUME_CALLED ActivityRecord{41dfe9e8 token=android.os.BinderProxy@41dfe178 {com.android.launcher/com.android.launcher2.Launcher}}
+V/ActivityThread(  901): Resume ActivityRecord{41dfe9e8 token=android.os.BinderProxy@41dfe178 {com.android.launcher/com.android.launcher2.Launcher}} started activity: false, hideForNow: false, finished: false
+V/ActivityThread(  901): Resuming ActivityRecord{41dfe9e8 token=android.os.BinderProxy@41dfe178 {com.android.launcher/com.android.launcher2.Launcher}} with isForward=false
+V/PhoneWindow(  901): DecorView setVisiblity: visibility = 0 ,Parent =ViewRoot{41e54c20 com.android.launcher/com.android.launcher2.Launcher,ident = 2}, this =com.android.internal.policy.impl.PhoneWindow$DecorView{41e486d8 V.E..... R.....ID 0,0-600,976}
+V/ActivityThread(  901): Scheduling idle handler for ActivityRecord{41dfe9e8 token=android.os.BinderProxy@41dfe178 {com.android.launcher/com.android.launcher2.Launcher}}
+D/ActivityThread(  901): ACT-RESUME_ACTIVITY handled : 0 / android.os.BinderProxy@41dfe178
+I/BufferQueue(  174): [unnamed-174-275](this:0xb893ba88,id:275,api:0,p:-1,c:-1) BufferQueue
+I/BufferQueue(  174): [unnamed-174-275](this:0xb893ba88,id:275,api:0,p:-1,c:174) consumerConnect consumer=(174:/system/bin/surfaceflinger) controlledByApp=false
+I/BufferQueue(  174): [unnamed-174-275](this:0xb893ba88,id:275,api:0,p:-1,c:174) setConsumerName: unnamed-174-275
+I/GLConsumer(  174): [unnamed-174-275](this:0xb891a878,api:0) GLConsumer
+I/BufferQueue(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb893ba88,id:275,api:0,p:-1,c:174) setConsumerName: com.android.launcher/com.android.launcher2.Launcher
+I/BufferQueue(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb893ba88,id:275,api:0,p:-1,c:174) setDefaultBufferSize: w=600, h=976
+I/BufferQueue(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb893ba88,id:275,api:0,p:901,c:174) connect: api=1 producer=(901:com.android.launcher) producerControlledByApp=true
+I/BufferQueue(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb893ba88,id:275,api:1,p:901,c:174) new GraphicBuffer needed
+D/BufferQueue(  174):     [OLD] gb:NULL
+I/GraphicBuffer(  174): allocate buffer (w:608 h:976 f:1) handle(0xb892aae0) err(0)
+W/GraphicBufferExtra_hal(  174): gralloc extra device setBufInfo(...) is not supported
+I/BufferQueue(  174):     [NEW] gb=0xb8929e38, handle=0xb892aae0, w=600, h=976, s=608, f=0x1, u=0x00000f02
+D/GraphicBuffer(  901): create handle(0x5fe0f670) (w:608, h:976, f:1)
+D/BufferQueue(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb893ba88,id:275,api:1,p:901,c:174) cancelBuffer: slot=0
+I/MaliEGL (  901): [Mali]surface->num_buffers=4, surface->num_frames=3, win_min_undequeued=1
+I/MaliEGL (  901): [Mali]max_allowed_dequeued_buffers=3
+I/BufferQueue(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb893ba88,id:275,api:1,p:901,c:174) setBufferCount: count=4
+I/GraphicBuffer(  174): free buffer (w:608 h:976 f:1) handle(0xb892aae0)
+I/BufferQueue(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb893ba88,id:275,api:1,p:901,c:174) getReleasedBuffers: returning mask 0xffffffff
+D/GraphicBuffer(  901): close handle(0x5fe0f670) (w:608 h:976 f:1)
+I/BufferQueue(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb893ba88,id:275,api:1,p:901,c:174) new GraphicBuffer needed
+D/BufferQueue(  174):     [OLD] gb:NULL
+I/GraphicBuffer(  174): allocate buffer (w:976 h:600 f:1) handle(0xb892aae0) err(0)
+W/GraphicBufferExtra_hal(  174): gralloc extra device setBufInfo(...) is not supported
+I/BufferQueue(  174):     [NEW] gb=0xb88f31d8, handle=0xb892aae0, w=976, h=600, s=976, f=0x1, u=0x00000f02
+D/GraphicBuffer(  901): create handle(0x5fe0f670) (w:976, h:600, f:1)
+D/OpenGLRenderer(  901): setViewport 600x976 <0x5f975078>
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020000
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020000
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020103
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020103
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020304
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020304
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020404
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020404
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020005
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020005
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020105
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020105
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020405
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020405
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020205
+W/ResourceType(  901): No known package when getting name for resource number 0x9c020205
+W/ResourceType(  901): No known package when getting name for resource number 0x9b020200
+W/ResourceType(  901): No known package when getting name for resource number 0x9b040400
+W/ResourceType(  901): No known package when getting name for resource number 0x9b050500
+W/ResourceType(  901): No known package when getting name for resource number 0x9b060600
+V/WallpaperService(  759): Visibility change in com.android.systemui.ImageWallpaper$DrawableEngine@41e2c070: 1
+V/WallpaperService(  759): onVisibilityChanged(true): com.android.systemui.ImageWallpaper$DrawableEngine@41e2c070
+V/WallpaperService(  759): Offsets change in com.android.systemui.ImageWallpaper$DrawableEngine@41e2c070: 0.0,0.0
+I/libPerfService(  694): 1: set: 1
+E/        (  694): Could not open '/data/data/hotplug/cmd'
+E/        (  694): error : 2, No such file or directory
+D/ActivityManager(  694): ACT-isFrontStack(), stack is back : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_IN_FRONT
+D/PowerManagerService(  694): releaseWakeLockInternal: lock=1106232288 [ActivityManager-Launch], flags=0x0, total_time=814ms
+D/PowerManagerNotifier(  694): onWakeLockReleased: flags=1, tag="ActivityManager-Launch", packageName=android, ownerUid=1000, ownerPid=694, workSource=null
+W/MALI    (  174): MTK_AUX_isMTKFormat:168: int MTK_AUX_isMTKFormat(ANativeWindowBuffer_t*): format=1
+D/PowerManagerService(  694): updateWakeLockSummaryLocked: mWakefulness=Awake, mWakeLockSummary=0x0
+D/PowerManagerService(  694): newScreenState = 2
+D/PowerManagerService(  694): updateScreenStateLocked: mScreenBrightnessModeSetting=0, autoBrightness=false, ecoBrightness=false, screenAutoBrightnessAdjustment=0.0, screenBrightness=255
+D/PowerManagerDisplayController(  694): requestPowerState: screenState=2, useProximitySensor=false, forceProximitySensorEnable=false, forceWakeUpEnable=false, screenBrightness=255, screenAutoBrightnessAdjustment=0.0, useAutoBrightness=false, useEcoBrightness=false, blockScreenOn=false, waitForNegativeProximity=false
+I/PowerManagerService(  694): setBrightness mButtonLight 0.
+D/PowerManagerService(  694): updateScreenStateLocked: mDisplayReady=true, newScreenState=2, mWakefulness=1, mWakeLockSummary=0x0, mUserActivitySummary=0x1, mBootCompleted=true
+D/PowerManagerService(  694): Releasing suspend blocker "PowerManagerService.WakeLocks".
+V/ActivityManager(  694): ensureActivitiesVisibleLocked: consider front
+D/ActivityManager(  694): ACT-isFrontStack(), stack is back : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_IN_FRONT
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_IN_FRONT
+V/ActivityManager(  694): ensureActivitiesVisibleLocked: consider back
+D/PowerManagerService(  694): handleSandman: canDream=true, mWakefulness=Awake
+D/ActivityManager(  694): ACT-isFrontStack(), stack is back : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_IN_FRONT
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_IN_FRONT
+D/NetworkPolicy(  694): onRecv: MSG_FOREGROUND_ACTIVITIES_CHANGED pid:uid:act=11463:10025:false
+V/NetworkStats(  694): setKernelCounterSet uid=10025 set=0
+D/ConnectivityService(  694): onUidRulesChanged(uid=10025, uidRules=0)
+I/SurfaceFlinger(  174): [Built-in Screen (type:0)] fps:49.271469,dur:1014.79,max:84.64,min:13.38
+I/BufferQueue(  174): [FrameBufferSurface_0](this:0xb88e6740,id:0,api:1,p:174,c:174) [release] fps:51.25, dur:1014.67, max:84.64, min:13.39
+I/BufferQueue(  174): [FrameBufferSurface_0](this:0xb88e6740,id:0,api:1,p:174,c:174) [queue] fps:51.24, dur:1014.79, max:84.64, min:13.39
+I/BufferQueue(  174): [Application Error: com.crazyj36.avoidmeteors](this:0xb893c0f0,id:274,api:2,p:694,c:174) new GraphicBuffer needed
+D/BufferQueue(  174):     [OLD] gb:NULL
+I/GraphicBuffer(  174): allocate buffer (w:480 h:127 f:1) handle(0xb88f5240) err(0)
+W/GraphicBufferExtra_hal(  174): gralloc extra device setBufInfo(...) is not supported
+I/BufferQueue(  174):     [NEW] gb=0xb8904e68, handle=0xb88f5240, w=466, h=127, s=480, f=0x1, u=0x00000933
+D/GraphicBuffer(  694): create handle(0x5c6461d0) (w:480, h:127, f:1)
+W/MALI    (  174): MTK_AUX_isMTKFormat:168: int MTK_AUX_isMTKFormat(ANativeWindowBuffer_t*): format=1
+I/GLConsumer(  174): [Application Error: com.crazyj36.avoidmeteors](this:0xb8941fb8,api:2) [void* android::GLConsumer::createImage(EGLDisplay, const android::sp<android::GraphicBuffer>&, const android::Rect&)]
+D/GLConsumer(  174):     GraphicBuffer: gb=0xb8904e68 handle=0xb88f5240 fmt=1
+D/GLConsumer(  174):     EGLImage: dpy=0x1, img=0x1000000d
+I/BufferQueue(  174): [com.android.launcher/com.android.launcher2.Launcher](this:0xb893ba88,id:275,api:1,p:901,c:174) new GraphicBuffer needed
+D/BufferQueue(  174):     [OLD] gb:NULL
+I/GraphicBuffer(  174): allocate buffer (w:976 h:600 f:1) handle(0xb8941dd0) err(0)
+W/GraphicBufferExtra_hal(  174): gralloc extra device setBufInfo(...) is not supported
+I/BufferQueue(  174):     [NEW] gb=0xb88f2f08, handle=0xb8941dd0, w=976, h=600, s=976, f=0x1, u=0x00000f02
+D/GraphicBuffer(  901): create handle(0x5fc00ed0) (w:976, h:600, f:1)
+W/InputReader(  694): outer ID:0, tracking ID:1, pointer count:16
+W/InputReader(  694): inCount:16, pointer count:1
+D/InputReader(  694): AP_PROF:AppLaunch_dispatchPtr:Down:15038632, ID:0, Index:1630490464
+I/AP_PROF (  694): unable to open /proc/mtprof/status entry
+D/PowerManagerService(  694): userActivityFromNative
+D/PowerManagerService(  694): userActivityNoUpdateLocked: eventTime=15038632, event=2, flags=0x0, uid=1000
+D/PowerManagerNotifier(  694): onUserActivity: event=2, uid=1000
+D/PowerManagerService(  694): updateUserActivitySummaryLocked: mWakefulness=Awake, mUserActivitySummary=0x1, nextTimeout=16831632 (in 1792998 ms)
+D/PowerManagerService(  694): newScreenState = 2
+D/PowerManagerService(  694): updateScreenStateLocked: mScreenBrightnessModeSetting=0, autoBrightness=false, ecoBrightness=false, screenAutoBrightnessAdjustment=0.0, screenBrightness=255
+D/PowerManagerDisplayController(  694): requestPowerState: screenState=2, useProximitySensor=false, forceProximitySensorEnable=false, forceWakeUpEnable=false, screenBrightness=255, screenAutoBrightnessAdjustment=0.0, useAutoBrightness=false, useEcoBrightness=false, blockScreenOn=false, waitForNegativeProximity=false
+I/PowerManagerService(  694): setBrightness mButtonLight 0.
+D/PowerManagerService(  694): updateScreenStateLocked: mDisplayReady=true, newScreenState=2, mWakefulness=1, mWakeLockSummary=0x0, mUserActivitySummary=0x1, mBootCompleted=true
+D/PowerManagerService(  694): handleSandman: canDream=true, mWakefulness=Awake
+I/View    (  694): Touch down dispatch to android.widget.Button{42aa0380 VFED..C. ......I. 0,0-434,54 #1020019 android:id/button1}, event = MotionEvent { action=ACTION_DOWN, id[0]=0, x[0]=196.21951, y[0]=34.705444, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=15038632, downTime=15038632, deviceId=3, source=0x1002 }
+I/BufferQueue(  174): [Application Error: com.crazyj36.avoidmeteors](this:0xb893c0f0,id:274,api:2,p:694,c:174) new GraphicBuffer needed
+D/BufferQueue(  174):     [OLD] gb:NULL
+I/GraphicBuffer(  174): allocate buffer (w:480 h:127 f:1) handle(0xb891b388) err(0)
+W/GraphicBufferExtra_hal(  174): gralloc extra device setBufInfo(...) is not supported
+I/BufferQueue(  174):     [NEW] gb=0xb893cb70, handle=0xb891b388, w=466, h=127, s=480, f=0x1, u=0x00000933
+D/GraphicBuffer(  694): create handle(0x62d818c0) (w:480, h:127, f:1)
+I/BufferQueue(  174): [Application Error: com.crazyj36.avoidmeteors](this:0xb893c0f0,id:274,api:2,p:694,c:174) [queue] fps:1.77, dur:1130.59, max:859.46, min:271.14
+W/InputReader(  694): outer ID:0, tracking ID:1, pointer count:16
+W/InputReader(  694): inCount:16, pointer count:1
+W/MALI    (  174): MTK_AUX_isMTKFormat:168: int MTK_AUX_isMTKFormat(ANativeWindowBuffer_t*): format=1
+I/GLConsumer(  174): [Application Error: com.crazyj36.avoidmeteors](this:0xb8941fb8,api:2) [void* android::GLConsumer::createImage(EGLDisplay, const android::sp<android::GraphicBuffer>&, const android::Rect&)]
+D/GLConsumer(  174):     GraphicBuffer: gb=0xb893cb70 handle=0xb891b388 fmt=1
+D/GLConsumer(  174):     EGLImage: dpy=0x1, img=0x1000000e
+W/InputReader(  694): outer ID:0, tracking ID:1, pointer count:16
+W/InputReader(  694): inCount:16, pointer count:1
+W/InputReader(  694): outer ID:0, tracking ID:1, pointer count:16
+W/InputReader(  694): inCount:16, pointer count:1
+W/InputReader(  694): outer ID:0, tracking ID:1, pointer count:16
+W/InputReader(  694): inCount:16, pointer count:1
+W/InputReader(  694): outer ID:0, tracking ID:1, pointer count:16
+W/InputReader(  694): inCount:16, pointer count:1
+W/InputReader(  694): inCount:16, pointer count:0
+D/InputReader(  694): AP_PROF:AppLaunch_dispatchPtr:Up:15038746, ID:0, Index:1630491760
+I/View    (  694): Touch up dispatch to android.widget.Button{42aa0380 VFED..C. ...P..I. 0,0-434,54 #1020019 android:id/button1}, event = MotionEvent { action=ACTION_UP, id[0]=0, x[0]=196.21951, y[0]=34.705444, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=15038746, downTime=15038632, deviceId=3, source=0x1002 }
+V/Provider/Settings(  694): get setting for user 0 by user 0 so skipping cache
+V/Provider/Settings(  694):  from settings cache , name = sound_effects_enabled , value = 0
+W/InputReader(  694): inCount:16, pointer count:0
+W/InputReader(  694): inCount:16, pointer count:0
+V/WindowManager(  694): Changing focus from Window{4223cb80 u0 Application Error: com.crazyj36.avoidmeteors EXITING} to Window{420db1c0 u0 com.android.launcher/com.android.launcher2.Launcher} Callers=com.android.server.wm.WindowManagerService.removeWindowLocked:2831 com.android.server.wm.WindowManagerService.removeWindow:2770 com.android.server.wm.Session.remove:182 android.view.ViewRootImpl.dispatchDetachedFromWindow:3256 
+D/WindowManager(  694): setLastInputMethodWindowLw ime = null, target = null
+D/PhoneStatusBar(  759): setSystemUiVisibility vis=400 mask=ffffffff oldVal=0 newVal=400 diff=400
+I/WindowManager(  694): Gaining focus: Window{420db1c0 u0 com.android.launcher/com.android.launcher2.Launcher}
+W/StatusBarManagerService(  694):  StatusBarManagerService false
+W/StatusBarManagerService(  694):  StatusBarManagerService mBar != null 
+I/WindowManager(  694): Losing focus: Window{4223cb80 u0 Application Error: com.crazyj36.avoidmeteors EXITING}
+I/Process (11463): Sending signal. PID: 11463 SIG: 9
+W/CommandQueue (  759):  CommandQueue flag =  false
+V/InputMethodManager(  901): onWindowFocus: null softInputMode=32 first=true flags=#1910100
+W/InputReader(  694): inCount:16, pointer count:0
+V/InputMethodManagerService(  694): windowGainedFocus: android.os.BinderProxy@425f8f08 controlFlags=#4 softInputMode=#20 windowFlags=#1910100
+W/InputMethodManagerService(  694): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@421cc6f8 attribute=null, token = android.os.BinderProxy@42246680
+D/IPCThreadState(  694): [DN #5] BR_DEAD_BINDER cookie 0x640b5518
+D/IPCThreadState(  694): [DN #5] BR_DEAD_BINDER cookie 0x62d322f0
+D/IPCThreadState(  694): [DN #5] BR_CLEAR_DEATH_NOTIFICATION_DONE cookie 0x640b5518
+D/IPCThreadState(  694): [DN #5] BR_DEAD_BINDER cookie 0x635af1a0
+D/DisplayManagerService(  694): Display listener for pid 11463 died.
+D/IPCThreadState(  694): [DN #5] BR_CLEAR_DEATH_NOTIFICATION_DONE cookie 0x635af1a0
+I/ActivityManager(  694): Process com.crazyj36.avoidmeteors (pid 11463) has died.
+D/ActivityManager(  694): ACT-isFrontStack(), stack is back : ActivityStack{4260c920 stackId=21, 1 tasks}
+D/MwActivityMonitor(  694): removeMonitor ActivityRecord{42498420 u0 com.crazyj36.avoidmeteors/.MainActivity t41 f}
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_IN_FRONT
+D/ActivityManager(  694): ACT-isFrontStack(), stack is HomeStack and mStackState : STACK_STATE_HOME_IN_FRONT
+I/BufferQueue(  174): [DimLayer](this:0xb88efa60,id:272,api:0,p:-1,c:-1) consumerDisconnect
+I/BufferQueue(  174): [DimLayer](this:0xb8933a88,id:271,api:0,p:-1,c:-1) consumerDisconnect
+I/BufferQueue(  174): [DimLayer](this:0xb88efa60,id:272,api:0,p:-1,c:-1) ~BufferQueue
+I/BufferQueue(  174): [DimLayer](this:0xb8933a88,id:271,api:0,p:-1,c:-1) ~BufferQueue
+D/GraphicBuffer(  694): close handle(0x6599eda0) (w:608 h:976 f:1)
+I/BufferQueue(  174): [Starting com.crazyj36.avoidmeteors](this:0xb891d570,id:273,api:2,p:-1,c:174) disconnect: api=2
+I/BufferQueue(  174): [Starting com.crazyj36.avoidmeteors](this:0xb891d570,id:273,api:0,p:-1,c:174) getReleasedBuffers: returning mask 0xffffffff
+I/GLConsumer(  174): [Starting com.crazyj36.avoidmeteors](this:0xb8941808,api:0) destroying EGLImage dpy=0x1 img=0x10000006
+I/GraphicBuffer(  174): free buffer (w:608 h:976 f:1) handle(0xb891bba8)
+I/GLConsumer(  174): [Starting com.crazyj36.avoidmeteors](this:0xb8941808,api:0) destroying EGLImage dpy=0x1 img=0x10000007
+D/GraphicBuffer(  694): close handle(0x64502b28) (w:608 h:976 f:1)
+D/SurfaceFlinger(  174): SurfaceFlingerWatchdog:ERROR: open /dev/RT_Monitor failed.
+D/IPCThreadState(  694): [DN #5] BR_CLEAR_DEATH_NOTIFICATION_DONE cookie 0x62d322f0
+I/BufferQueue(  174): [Starting com.crazyj36.avoidmeteors](this:0xb891d570,id:273,api:0,p:-1,c:-1) consumerDisconnect
+I/GraphicBuffer(  174): free buffer (w:608 h:976 f:1) handle(0xb88fe018)
+I/BufferQueue(  174): [Starting com.crazyj36.avoidmeteors](this:0xb891d570,id:273,api:0,p:-1,c:-1) ~BufferQueue
+D/WifiStateMachine(  694): ConnectedState{ when=-2ms what=131155 arg1=6 target=com.android.internal.util.StateMachine$SmHandler target=Handler (com.android.internal.util.StateMachine$SmHandler) {41f03a88} }
+D/WifiStateMachine(  694): L2ConnectedState{ when=-3ms what=131155 arg1=6 target=com.android.internal.util.StateMachine$SmHandler target=Handler (com.android.internal.util.StateMachine$SmHandler) {41f03a88} }
+D/WifiHW  (  694): enter -->wifi_send_command cmd=IFNAME=wlan0 SIGNAL_POLL
+D/wpa_supplicant(  832): RX ctrl_iface - hexdump(len=11): 53 49 47 4e 41 4c 5f 50 4f 4c 4c
+D/wpa_supplicant(  832): wlan0: Control interface command 'SIGNAL_POLL'
+D/wpa_supplicant(  832): nl80211: survey data missing!
+D/WifiHW  (  694): leave --> reply=RSSI=-36
+D/WifiHW  (  694): LINKSPEED=65
+D/WifiHW  (  694): NOISE=9999
+D/WifiHW  (  694): FREQUENCY=2437
+D/WifiHW  (  694): 
+D/wifi    (  694): doStringCommand, buf IFNAME=wlan0 SIGNAL_POLL
+I/WifiStateMachine(  694): fetchRssiAndLinkSpeedNative, newRssi:-36, newLinkSpeed:65, SSID:"DONTDOIT-2G"
+D/GraphicBuffer(  694): close handle(0x5c6461d0) (w:480 h:127 f:1)
+D/GraphicBuffer(  694): close handle(0x62d818c0) (w:480 h:127 f:1)
+I/BufferQueue(  174): [Application Error: com.crazyj36.avoidmeteors](this:0xb893c0f0,id:274,api:2,p:-1,c:174) disconnect: api=2
+I/BufferQueue(  174): [Application Error: com.crazyj36.avoidmeteors](this:0xb893c0f0,id:274,api:0,p:-1,c:174) getReleasedBuffers: returning mask 0xffffffff
+I/GLConsumer(  174): [Application Error: com.crazyj36.avoidmeteors](this:0xb8941fb8,api:0) destroying EGLImage dpy=0x1 img=0x10000008
+I/GLConsumer(  174): [Application Error: com.crazyj36.avoidmeteors](this:0xb8941fb8,api:0) destroying EGLImage dpy=0x1 img=0x1000000d
+I/GraphicBuffer(  174): free buffer (w:480 h:127 f:1) handle(0xb88f5240)
+I/GLConsumer(  174): [Application Error: com.crazyj36.avoidmeteors](this:0xb8941fb8,api:0) destroying EGLImage dpy=0x1 img=0x1000000e
+I/GraphicBuffer(  174): free buffer (w:480 h:127 f:1) handle(0xb891b388)
+D/IPCThreadState(  174): [DN #5] BR_CLEAR_DEATH_NOTIFICATION_DONE cookie 0xb8933938
+D/GraphicBuffer(  694): close handle(0x5c63cc98) (w:480 h:127 f:1)
+I/BufferQueue(  174): [Application Error: com.crazyj36.avoidmeteors](this:0xb893c0f0,id:274,api:0,p:-1,c:-1) consumerDisconnect
+I/GraphicBuffer(  174): free buffer (w:480 h:127 f:1) handle(0xb8927bb0)
+I/BufferQueue(  174): [Application Error: com.crazyj36.avoidmeteors](this:0xb893c0f0,id:274,api:0,p:-1,c:-1) ~BufferQueue
