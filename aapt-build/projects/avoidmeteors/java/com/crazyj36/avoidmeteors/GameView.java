@@ -123,6 +123,7 @@ public class GameView extends View implements OnTouchListener {
             ( (enemyX + 8 >= x - 16 && enemyX + 8 <= x + 16) && (enemyY + 8 >= y - 32 && enemyY + 8 <= y + 16) ) ) {
             //Thread.currentThread().interrupt();
             GameView.this.setWillNotDraw(true);
+            scoreView.setText("");
 		    dialogBuilder.setTitle("You're Hit!").setMessage("Score: " + String.valueOf(score)).setCancelable(false);
             dialogBuilder.create().show();
         }
@@ -130,6 +131,7 @@ public class GameView extends View implements OnTouchListener {
         if ((x + 12) >= (97 * displayMetrics.widthPixels / 100) || (x - 17) <= (2 * displayMetrics.widthPixels / 100) ||
                 (y + 19) >= (displayMetrics.heightPixels * 0.7f) || (y - 38) <= (1 * displayMetrics.heightPixels / 100)) {
             GameView.this.setWillNotDraw(true);
+            scoreView.setText("");
             dialogBuilder.setTitle("Out of Bounds!").setMessage("Try again.").setCancelable(false);
             dialogBuilder.create().show();
         }
