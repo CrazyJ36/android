@@ -1,8 +1,6 @@
 package com.crazyj36.avoidmeteors;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -20,6 +18,7 @@ import android.widget.TextView;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import java.lang.Thread;
+import com.crazyj36.avoidmeteors.MainActivity;
 
 public class GameView extends View implements OnTouchListener {
     Context appContext;
@@ -38,10 +37,10 @@ public class GameView extends View implements OnTouchListener {
     Thread rightThread;
     Thread upThread;
     Thread downThread;
-    Looper looper = Looper.getMainLooper();
     int frames = 999999; // max nanoseconds.
     Paint paint = new Paint();
     AlertDialog.Builder dialogBuilder;
+    MainActivity mainActivity = new MainActivity();
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -81,7 +80,7 @@ public class GameView extends View implements OnTouchListener {
         buttonRight.setOnTouchListener(this);
         buttonUp.setOnTouchListener(this);
         buttonDown.setOnTouchListener(this);
-        if (frames > 0) frames = frames = frames - 1; // lower the sleep nanoseconds.
+        if (frames > 0) frames = frames = frames - 50; // lower the sleep nanoseconds.
         TextView scoreView = ((Activity)appContext).findViewById(R.id.scoreView);
         score = score + 1;
         scoreView.setText(String.valueOf(score) + " " + String.valueOf(frames));
@@ -126,7 +125,7 @@ public class GameView extends View implements OnTouchListener {
 		    dialogBuilder.setTitle("You're Hit!").setMessage("Score: " + String.valueOf(score)).setCancelable(false);
             dialogBuilder.create().show();
         }
-        // refresh screen for new frame
+        // refresh screen for new frames
         invalidate();
     }
 
@@ -134,174 +133,128 @@ public class GameView extends View implements OnTouchListener {
     public boolean onTouch(View view, MotionEvent event) {
         leftThread = new Thread() {
             public void run() {
-                while (!Thread.currentThread().isInterrupted()) {
+                while (!leftThread.isInterrupted()) {
 			        if ((view.getId() == R.id.buttonLeft) && (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL)) {
 			            // an "up" toast equires Looper.prepare() to be called before this thread.
-			            this.interrupt();
+			            leftThread.interrupt();
 			            return;
 			        }
                     try {
-                        leftThread.sleep(1, frames);
+                        if (!leftThread.isInterrupted()) leftThread.sleep(1, frames); // stackoverflow if not running.
                     } catch (InterruptedException interruptedException) {
-                        Looper.prepare();
-                        Looper.loop();
-                        Toast.makeText(appContext, "interrupted during sleep", Toast.LENGTH_LONG).show();
-                        looper.quit();
+                        mainActivity.runOnUiThread(new Runnable() {
+                            public void run() { Toast.makeText(appContext, "buttonLeft: Interrupted during thread sleep", Toast.LENGTH_LONG).show(); };
+                        });
 						return;
                     }
-					x--;
-                    leftThread.run();
+                    if (!leftThread.isAlive()) {
+	    				x--;
+                        leftThread.run();
+                    }
                 }
             }
         };
         rightThread = new Thread() {
             public void run() {
-                while (!Thread.currentThread().isInterrupted()) {
+                while (!rightThread.isInterrupted()) {
 			        if ((view.getId() == R.id.buttonRight) && (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL)) {
-			            this.interrupt();
+			            rightThread.interrupt();
 			            return;
 			        }
                     try {
-                        rightThread.sleep(1, frames);
+                        if (!rightThread.isInterrupted()) rightThread.sleep(1, frames);
                     } catch (InterruptedException interruptedException) {
-                        Looper.prepare();
-                        Looper.loop();
-                        Toast.makeText(appContext, "interrupted during sleep", Toast.LENGTH_LONG).show();
-                        looper.quit();
+                        mainActivity.runOnUiThread(new Runnable() {
+                            public void run() { Toast.makeText(appContext, "buttonRight: interrupted during thread sleep", Toast.LENGTH_LONG).show(); };
+                        });
 						return;
                     }
-                    x++;
-                    rightThread.run();
+                    if (!rightThread.isAlive()) {
+                        x++;
+                        rightThread.run();
+                    }
                 }
             }
         };
         upThread = new Thread() {
             public void run() {
-                while (!Thread.currentThread().isInterrupted()) {
+                while (!upThread.isInterrupted()) {
 			        if ((view.getId() == R.id.buttonUp) && (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL)) {
-			            this.interrupt();
+			            upThread.interrupt();
 			            return;
 			        }
                     try {
-                        upThread.sleep(1, frames);
+                        if (!rightThread.isInterrupted()) upThread.sleep(1, frames);
                     } catch (InterruptedException interruptedException) {
-                        Looper.prepare();
-                        Looper.loop();
-                        Toast.makeText(appContext, "interrupted during sleep", Toast.LENGTH_LONG).show();
-                        looper.quit();
+                        mainActivity.runOnUiThread(new Runnable() {
+                            public void run() { Toast.makeText(appContext, "buttonUp: Interrupted during thread sleep", Toast.LENGTH_LONG).show(); };
+                        });
 						return;
                     }
-                    y--;
-                    upThread.run();
+                    if (!upThread.isAlive()) {
+                        y--;
+                        upThread.run();
+                    }
                 }
             }
         };
         downThread = new Thread() {
             public void run() {
-                while (!Thread.currentThread().isInterrupted()) {
+                while (!downThread.isInterrupted()) {
 			        if ((view.getId() == R.id.buttonDown) && (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL)) {
 			            downThread.interrupt();
 			            return;
 			        }
                     try {
-                        downThread.sleep(1, frames);
+                        if (!downThread.isInterrupted()) downThread.sleep(1, frames);
                     } catch (InterruptedException interruptedException) {
-                        Looper.prepare();
-                        Looper.loop();
-                        Toast.makeText(appContext, "interrupted during sleep", Toast.LENGTH_LONG).show();
-                        looper.quit();
+                        mainActivity.runOnUiThread(new Runnable() {
+                            public void run() { Toast.makeText(appContext, "buttonDown: Interrupted during thread sleep", Toast.LENGTH_LONG).show(); };
+                        });
 						return;
                     }
-                    y++;
-                    downThread.run();
+                    if (!downThread.isAlive()) {
+                        y++;
+                        downThread.run();
+                    }
                 }
             }
         };
-        if ( (view.getId() == R.id.buttonLeft || view.getId() == R.id.buttonRight || view.getId() == R.id.buttonUp || view.getId() == R.id.buttonDown ) &&
-             (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) ) {
-            leftThread.interrupt();
-            rightThread.interrupt();
-            upThread.interrupt();
-            downThread.interrupt();
-        }
+        // Double check that nothing is running at once.
+        /*if ((view.getId() == R.id.buttonLeft || view.getId() == R.id.buttonRight || view.getId() == R.id.buttonUp || view.getId() == R.id.buttonDown ) &&
+             (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL)) {
+               leftThread.interrupt();
+               rightThread.interrupt();
+               upThread.interrupt();
+               downThread.interrupt();
+        }*/
         switch(view.getId()) {
             case R.id.buttonLeft:
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    x--;
 	                leftThread.start();
                 }
                 break;
             case R.id.buttonRight:
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    x++;
                     rightThread.start();
                 }
                 break;
             case R.id.buttonUp:
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    y--;
                     upThread.start();
                 }
                 break;
             case R.id.buttonDown:
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    y++;
                     downThread.start();
                 }
                 break;
         }
         return false;
     }
-/*    @Override
-    public boolean onTouch(View view, MotionEvent event) {
-        switch(view.getId()) {
-            case R.id.buttonLeft:
-                if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
-                    x = x - 1;
-                    move('x', '-', true);
-                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    move('x', '-', false);
-                }
-                break;
-            case R.id.buttonRight:
-                if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
-                    move('x' , '+', true);
-                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    move('x', '+', false);
-                }
-                break;
-            case R.id.buttonUp:
-                if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
-                    move('y' , '-', true);
-                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    move('y', '-', false);
-                }
-                break;
-            case R.id.buttonDown:
-                if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
-                    move('y', '+', true);
-                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    move('y', '+', false);
-                }
-                break;
-        }
-        return false;
-    }*/
-
-    /*public void move(char xOrY, char posOrNeg, boolean stop) {
-	    handler.postDelayed(new Runnable() { // Future<?> means this Future service will run as null and return type null.
-	        @Override
-	        public void run() {
-	            if (stop == true) {
-	                handler.removeCallbacksAndMessages(this);
-	                return;
-	            } else if (stop == false) {
-		            if (xOrY == 'x' && posOrNeg == '+') x = x + 1;
-		            else if (xOrY == 'x' && posOrNeg == '-') x = x - 1;
-		            else if (xOrY == 'y' && posOrNeg == '-') y = y - 1;
-		            else if (xOrY == 'y' && posOrNeg == '+') y = y + 1;
-	                handler.postDelayed(this, 1);
-	            }
-	            handler.postDelayed(this, 1);
-	        }
-		}, 1);
-    }*/
-
 }
 
