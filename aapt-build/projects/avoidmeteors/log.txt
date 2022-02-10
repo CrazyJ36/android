@@ -1,81 +1,30 @@
 --------- beginning of /dev/log/system
-W/InputManagerService(  305): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@406777a0
-W/InputManagerService(  305): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@406d6368
---------- beginning of /dev/log/main
-W/dalvikvm( 5177): threadid=9: thread exiting with uncaught exception (group=0x40019560)
-E/AndroidRuntime( 5177): FATAL EXCEPTION: Thread-1855
-E/AndroidRuntime( 5177): java.lang.StackOverflowError
-E/AndroidRuntime( 5177): 	at java.lang.Thread.sleep(Thread.java:1213)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:165)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameView.java:174)
-E/AndroidRuntime( 5177): 	at com.crazyj36.avoidmeteors.GameView$4.run(GameVie
-W/ActivityManager(  305):   Force finishing activity com.crazyj36.avoidmeteors/.MainActivity
-D/Launcher.Workspace(  458): [Workspace.java:2036:hideWallpaper()] Show wallpaper
-D/Launcher.Workspace(  458): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
-E/ActivityThread(  458): Failed to find provider info for call_log
-E/ActivityThread(  458): Failed to find provider info for com.lge.providers.lgemail
-E/ActivityThread(  458): Failed to find provider info for com.android.whatsnew
-I/ActivityManager(  305): Process com.crazyj36.avoidmeteors (pid 5177) has died.
-E/JavaBinder(  305): Transact on 0x3a3200 in Java object 0x406cc0e0 with code 3 failed
-E/JavaBinder(  305): Transact on 0x3a3200 in Java object 0x406cc0e0 with code 4 failed
-W/InputManagerService(  305): Got RemoteException sending setActive(false) notification to pid 5177 uid 10005
-I/#LGIME  (  445): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@405861e0
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@40733500
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@40756700
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@406f9e68
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@40692e18
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@406789f0
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@40630920
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@405bf330
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@40576c98
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@40565210
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@4052ba88
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@4075bfb0
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@406e9108
+W/ActivityManager(  279): finishReceiver called but active receiver is different
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@406b6b50
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@4068a8b0
+D/WifiService(  279): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  279): ### wifiShouldBeEnabled=true
+D/WifiService(  279): ### mDeviceIdle=false
+D/WifiService(  279): ### lockHeld=false
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@4064a6b0
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@4061a958
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@405fdf68
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@405b16a8
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@40568ff8
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@4077d768
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@40853bd8
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@405a9468
+W/InputManagerService(  279): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@4071dd78

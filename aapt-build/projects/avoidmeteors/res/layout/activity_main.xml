@@ -5,9 +5,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="1" 
-    android:splitMotionEvents="false" >
-    <!-- splitMotionEvents prevents multiple button threads from running-->
+    android:weightSum="1" >
 
     <com.crazyj36.avoidmeteors.GameView
         android:id="@+id/gameView"
@@ -19,34 +17,35 @@
          android:layout_height="0dp"
          android:layout_weight="0.2"
          android:splitMotionEvents="false" >
+        <!-- splitMotionEvents prevents multiple button threads from running-->
 	    <TextView
 	        android:id="@+id/scoreView"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content" />
 	    <Button
 	        android:id="@+id/buttonUp"
-	        android:layout_width="48dp"
-	        android:layout_height="wrap_content"
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
             android:layout_centerHorizontal="true"
   	        android:text="@string/buttonUpText" />
 	    <Button
 	        android:id="@+id/buttonDown"
-	        android:layout_width="48dp"
-	        android:layout_height="wrap_content"
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/buttonUp"
 	        android:text="@string/buttonDownText" />
 	    <Button
 	        android:id="@+id/buttonLeft"
-	        android:layout_width="48dp"
-	        android:layout_height="wrap_content"
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
             android:layout_toLeftOf="@id/buttonDown"
             android:layout_marginTop="24dp"
 	        android:text="@string/buttonLeftText" />
 	    <Button
 	        android:id="@+id/buttonRight"
-	        android:layout_width="48dp"
-	        android:layout_height="wrap_content"
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
             android:layout_toRightOf="@id/buttonDown"
             android:layout_marginTop="24dp"
 	        android:text="@string/buttonRightText" />
