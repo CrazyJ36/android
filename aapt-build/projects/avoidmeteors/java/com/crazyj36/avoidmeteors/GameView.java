@@ -19,6 +19,7 @@ import android.widget.Toast;
 import android.widget.TextView;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import java.lang.Thread;
 
 public class GameView extends View implements OnTouchListener {
     Context appContext;
@@ -33,7 +34,12 @@ public class GameView extends View implements OnTouchListener {
     Button buttonRight;
     Button buttonUp;
     Button buttonDown;
-    Handler handler = new Handler(Looper.getMainLooper());
+    Thread leftThread;
+    Thread rightThread;
+    Thread upThread;
+    Thread downThread;
+    Looper looper = Looper.getMainLooper();
+    int frames = 999999; // max nanoseconds.
     Paint paint = new Paint();
     AlertDialog.Builder dialogBuilder;
 
@@ -54,6 +60,7 @@ public class GameView extends View implements OnTouchListener {
 	        @Override
 	        public void onCancel(DialogInterface onCancelDialog) {
                 score = 0;
+                frames = 999999;
 			    x = displayMetrics.widthPixels / 2;
 			    y = displayMetrics.heightPixels / 2;
 	            enemyX = 10;
@@ -74,9 +81,10 @@ public class GameView extends View implements OnTouchListener {
         buttonRight.setOnTouchListener(this);
         buttonUp.setOnTouchListener(this);
         buttonDown.setOnTouchListener(this);
+        if (frames > 0) frames = frames = frames - 1; // lower the sleep nanoseconds.
         TextView scoreView = ((Activity)appContext).findViewById(R.id.scoreView);
         score = score + 1;
-        scoreView.setText(String.valueOf(score));
+        scoreView.setText(String.valueOf(score) + " " + String.valueOf(frames));
         paint.setColor(Color.GRAY);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(8);
@@ -124,9 +132,128 @@ public class GameView extends View implements OnTouchListener {
 
     @Override
     public boolean onTouch(View view, MotionEvent event) {
+        leftThread = new Thread() {
+            public void run() {
+                while (!Thread.currentThread().isInterrupted()) {
+			        if ((view.getId() == R.id.buttonLeft) && (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL)) {
+			            // an "up" toast equires Looper.prepare() to be called before this thread.
+			            this.interrupt();
+			            return;
+			        }
+                    try {
+                        leftThread.sleep(1, frames);
+                    } catch (InterruptedException interruptedException) {
+                        Looper.prepare();
+                        Looper.loop();
+                        Toast.makeText(appContext, "interrupted during sleep", Toast.LENGTH_LONG).show();
+                        looper.quit();
+						return;
+                    }
+					x--;
+                    leftThread.run();
+                }
+            }
+        };
+        rightThread = new Thread() {
+            public void run() {
+                while (!Thread.currentThread().isInterrupted()) {
+			        if ((view.getId() == R.id.buttonRight) && (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL)) {
+			            this.interrupt();
+			            return;
+			        }
+                    try {
+                        rightThread.sleep(1, frames);
+                    } catch (InterruptedException interruptedException) {
+                        Looper.prepare();
+                        Looper.loop();
+                        Toast.makeText(appContext, "interrupted during sleep", Toast.LENGTH_LONG).show();
+                        looper.quit();
+						return;
+                    }
+                    x++;
+                    rightThread.run();
+                }
+            }
+        };
+        upThread = new Thread() {
+            public void run() {
+                while (!Thread.currentThread().isInterrupted()) {
+			        if ((view.getId() == R.id.buttonUp) && (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL)) {
+			            this.interrupt();
+			            return;
+			        }
+                    try {
+                        upThread.sleep(1, frames);
+                    } catch (InterruptedException interruptedException) {
+                        Looper.prepare();
+                        Looper.loop();
+                        Toast.makeText(appContext, "interrupted during sleep", Toast.LENGTH_LONG).show();
+                        looper.quit();
+						return;
+                    }
+                    y--;
+                    upThread.run();
+                }
+            }
+        };
+        downThread = new Thread() {
+            public void run() {
+                while (!Thread.currentThread().isInterrupted()) {
+			        if ((view.getId() == R.id.buttonDown) && (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL)) {
+			            downThread.interrupt();
+			            return;
+			        }
+                    try {
+                        downThread.sleep(1, frames);
+                    } catch (InterruptedException interruptedException) {
+                        Looper.prepare();
+                        Looper.loop();
+                        Toast.makeText(appContext, "interrupted during sleep", Toast.LENGTH_LONG).show();
+                        looper.quit();
+						return;
+                    }
+                    y++;
+                    downThread.run();
+                }
+            }
+        };
+        if ( (view.getId() == R.id.buttonLeft || view.getId() == R.id.buttonRight || view.getId() == R.id.buttonUp || view.getId() == R.id.buttonDown ) &&
+             (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) ) {
+            leftThread.interrupt();
+            rightThread.interrupt();
+            upThread.interrupt();
+            downThread.interrupt();
+        }
+        switch(view.getId()) {
+            case R.id.buttonLeft:
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+	                leftThread.start();
+                }
+                break;
+            case R.id.buttonRight:
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    rightThread.start();
+                }
+                break;
+            case R.id.buttonUp:
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    upThread.start();
+                }
+                break;
+            case R.id.buttonDown:
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    downThread.start();
+                }
+                break;
+        }
+        return false;
+    }
+/*    @Override
+    public boolean onTouch(View view, MotionEvent event) {
         switch(view.getId()) {
             case R.id.buttonLeft:
                 if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+                    x = x - 1;
                     move('x', '-', true);
                 } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     move('x', '-', false);
@@ -155,25 +282,26 @@ public class GameView extends View implements OnTouchListener {
                 break;
         }
         return false;
-    }
+    }*/
 
-    public void move(char xOrY, char posOrNeg, boolean stop) {
-        handler.postDelayed(new Runnable() { // Future<?> means this Future service will run as null and return type null.
-            @Override
-            public void run() {
-                if (stop == true) {
-                    handler.removeCallbacks(this);
-                    return;
-                } else if (stop == false) {
+    /*public void move(char xOrY, char posOrNeg, boolean stop) {
+	    handler.postDelayed(new Runnable() { // Future<?> means this Future service will run as null and return type null.
+	        @Override
+	        public void run() {
+	            if (stop == true) {
+	                handler.removeCallbacksAndMessages(this);
+	                return;
+	            } else if (stop == false) {
 		            if (xOrY == 'x' && posOrNeg == '+') x = x + 1;
 		            else if (xOrY == 'x' && posOrNeg == '-') x = x - 1;
 		            else if (xOrY == 'y' && posOrNeg == '-') y = y - 1;
 		            else if (xOrY == 'y' && posOrNeg == '+') y = y + 1;
-                    handler.postDelayed(this, 1);
-                }
-            }
-        }, 1);
-    }
+	                handler.postDelayed(this, 1);
+	            }
+	            handler.postDelayed(this, 1);
+	        }
+		}, 1);
+    }*/
 
 }
 
