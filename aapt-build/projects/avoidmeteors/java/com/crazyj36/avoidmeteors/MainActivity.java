@@ -1,6 +1,7 @@
 package com.crazyj36.avoidmeteors;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -15,16 +16,17 @@ public class MainActivity extends Activity implements OnTouchListener {
     Button buttonRight;
     Button buttonUp;
     Button buttonDown;
-    static TextView scoreView;
+    static TextView scoreView; // static enables variables to be accessed by other classes such as GameView
     Thread threadLeft;
     Thread threadRight;
     Thread threadUp;
     Thread threadDown;
+    // GameView gameView; also findViewById(R.id.gameView), then gameView.method() besides sharing static variables
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-	   	setContentView(R.layout.activity_main);
+	    setContentView(R.layout.activity_main);
         scoreView = findViewById(R.id.scoreView);
         buttonLeft = findViewById(R.id.buttonLeft);
         buttonRight = findViewById(R.id.buttonRight);
@@ -123,7 +125,7 @@ public class MainActivity extends Activity implements OnTouchListener {
         switch(view.getId()) {
             case R.id.buttonLeft:
                 if (view.getId() == R.id.buttonLeft && event.getAction() == MotionEvent.ACTION_DOWN) {
-                    GameView.x--;
+                    //GameView.x--;
                     threadLeft.start();
                 }
                 if (view.getId() == R.id.buttonLeft && (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL)) {

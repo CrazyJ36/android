@@ -14,22 +14,32 @@ import android.util.DisplayMetrics;
 import android.util.AttributeSet;
 
 public class GameView extends View {
-    DisplayMetrics displayMetrics;
-    static int x; // static so it can be changed by MainActivity onTouch().
-    static int y;
-    int enemyX = 10;
-    int enemyY = 10;
-    int random = 0;
-    int score = 0;
+    static DisplayMetrics displayMetrics;
+    //static int x; // static so it can be changed by MainActivity onTouch().
+    //static int y;
+    static float x;
+    static float y;
+    static int enemyX = 10;
+    static int enemyY = 10;
+    static int random = 0;
+    static int score = 0;
     static int frames = 999999;
     Paint paint = new Paint();
     AlertDialog.Builder dialogBuilder;
+    int pixW;
+    int pixH;
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        displayMetrics = context.getApplicationContext().getResources().getDisplayMetrics();
-	    x = displayMetrics.widthPixels / 2;
-	    y = displayMetrics.heightPixels / 2;
+
+        // character start
+        displayMetrics = getResources().getDisplayMetrics();
+	    int xHalf = displayMetrics.widthPixels / 2;
+	    int yHalf = displayMetrics.heightPixels / 2;
+        x = ;
+
+        final float dp = context.getResources().getDisplayMetrics().density;
+
 		dialogBuilder = new AlertDialog.Builder(context);
 	    dialogBuilder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
 	        @Override
@@ -42,8 +52,8 @@ public class GameView extends View {
 	        public void onCancel(DialogInterface onCancelDialog) {
                 score = 0;
                 frames = 999999;
-			    x = displayMetrics.widthPixels / 2;
-			    y = displayMetrics.heightPixels / 2;
+			    //x = displayMetrics.widthPixels / 2;
+			    //y = displayMetrics.heightPixels / 2;
 	            enemyX = 10;
 	            enemyY = 10;
 	            GameView.this.setWillNotDraw(false);
@@ -61,11 +71,11 @@ public class GameView extends View {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(8);
         // outline
-        canvas.drawRect( (float)2 * displayMetrics.widthPixels / 100, // left screen percentage
+ /*       canvas.drawRect( (float)2 * displayMetrics.widthPixels / 100, // left screen percentage
                          (float)1 * displayMetrics.heightPixels / 100, // top screen percentage
                          (float)98 * displayMetrics.widthPixels / 100, // right screen percentage
-                         (float)displayMetrics.heightPixels * 0.7f, // bottom screen percentage
-                         paint);
+                         (float)displayMetrics.heightPixels * 0.5f, // bottom screen percentage
+                         paint);*/
         // character
         float pts[] = {x, y, x, y - 24, // body
                        x, y, x + 12, y + 16, // right leg
