@@ -18,18 +18,18 @@ public class GameView extends View {
     static DisplayMetrics displayMetrics;
     static float x; // static so it can be changed by MainActivity onTouch().
     static float y;
-    static float enemyX = 10;
+    static float enemyX = 0;
     static float enemyY = 10;
     static int random = 0;
     static int score = 0;
     static int characterSpeed = 999999;
-    //float gameSpeed = 1;
-    //int gameSpeedInc = 0;
-    //boolean isMaxSpeed = false;
-    //boolean isMaxSpeedSaid = false;
+    long milliseconds = 50;
+    int nanoseconds = 999999;
+    boolean resetNanoseconds = false;
+    boolean isMiddleSpeed = false;
     Paint paint = new Paint();
     AlertDialog.Builder dialogBuilder;
-    //Thread thread;
+    Thread thread;
 
     public float dp(float desired) {
         float scale = GameView.this.getResources().getDisplayMetrics().density;
@@ -38,21 +38,36 @@ public class GameView extends View {
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        /*// loop sleep
+        // loop sleep
         thread = new Thread() {
             public void run() {
                 try {
-                    thread.sleep(10);
+                    if (milliseconds > 0 && nanoseconds > 0) {
+                        Thread.sleep(milliseconds, nanoseconds);
+                        milliseconds--;
+                        nanoseconds = nanoseconds - 10000;
+                    }
+
+                    else if (milliseconds <= 0 && nanoseconds > 0 && resetNanoseconds) {
+                    	Thread.sleep(0, nanoseconds);
+                    	nanoseconds = nanoseconds - 10000;
+                    }
+                    if (milliseconds <= 0 && nanoseconds <= 0) {
+                        resetNanoseconds = true;
+                        nanoseconds = 999999;
+                        MainActivity.toaster("Watch out!");
+                    }
+                    if (milliseconds == 0 && nanoseconds == 0) MainActivity.toaster("You've Won!");
                 } catch (InterruptedException interruptedException) {
                     MainActivity.toaster(interruptedException.getMessage());
                 }
                 thread.interrupt();
                 return;
             }
-        };*/
+        };
         // character start.
         displayMetrics = context.getResources().getDisplayMetrics();
-        x = displayMetrics.widthPixels / 2; // then do '- percent' for rectagle and out of bounds.
+        x = displayMetrics.widthPixels / 2;
         y = displayMetrics.heightPixels / 2 - dp(128);
         // game dialog and reset logic.
 		dialogBuilder = new AlertDialog.Builder(context);
@@ -67,12 +82,13 @@ public class GameView extends View {
 	        public void onCancel(DialogInterface onCancelDialog) {
                 score = 0;
                 characterSpeed = 999999;
-                //gameSpeed = 1;
+                milliseconds = 50;
+                nanoseconds = 999999;
                 //isMaxSpeed = false;
                 //isMaxSpeedSaid = false;
 			    x = displayMetrics.widthPixels / 2;
 			    y = displayMetrics.heightPixels / 2 - dp(128);
-	            enemyX = 10;
+	            enemyX = 0;
 	            enemyY = 10;
 	            GameView.this.setWillNotDraw(false);
 	       }
@@ -84,7 +100,7 @@ public class GameView extends View {
         super.onDraw(canvas);
         score = score + 1;
         if (characterSpeed > 0) characterSpeed = characterSpeed - 10; // lower the characterSpeed sleep nanoseconds.
-        MainActivity.scoreView.setText(GameView.this.getResources().getString(R.string.scoreText) + String.valueOf(score));
+        MainActivity.scoreView.setText(GameView.this.getResources().getString(R.string.scoreText) + String.valueOf(score) + "\n" + "Speed: " + String.valueOf(milliseconds) + " " + String.valueOf(nanoseconds));
         paint.setColor(Color.GRAY);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(dp(4)); // convert px to dp for actual drawing.
@@ -148,9 +164,9 @@ public class GameView extends View {
             dialogBuilder.setTitle("Out of Bounds!").setMessage("Try again.").setCancelable(false);
             dialogBuilder.create().show();
         }
-       // invalidate current painting for new frames.
-       //thread.run();
-       invalidate();
+        // invalidate current painting for new frames.
+        thread.run();
+        invalidate();
     }
 
 }
