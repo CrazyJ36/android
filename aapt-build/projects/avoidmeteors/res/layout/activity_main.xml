@@ -16,16 +16,16 @@
          android:layout_width="match_parent"
          android:layout_height="0dp"
          android:layout_weight="0.3"
-         android:layout_centerHorizontal="true"
-         android:splitMotionEvents="false">
+         android:splitMotionEvents="false" >
         <!-- splitMotionEvents prevents multiple button threads from running-->
 		    <TextView
 		        android:id="@+id/scoreView"
 		        android:layout_width="match_parent"
-		        android:layout_height="54dp" />
+		        android:layout_height="54dp"
+                android:gravity="center_horizontal" />
             <LinearLayout
                 android:id="@+id/buttonLayoutRoot"
-                android:layout_width="128dp"
+                android:layout_width="64dp"
                 android:layout_height="match_parent"
                 android:layout_below="@id/scoreView"
                 android:layout_centerHorizontal="true"
@@ -36,26 +36,26 @@
 			        android:id="@+id/buttonUp"
 			        android:layout_width="match_parent"
 			        android:layout_height="0dp"
-	                android:layout_weight="0.5"
+                    android:layout_weight="0.5"
 		  	        android:text="@string/buttonUpText" />
 			    <Button
 			        android:id="@+id/buttonDown"
 			        android:layout_width="match_parent"
 			        android:layout_height="0dp"
-	                android:layout_weight="0.5"
+                    android:layout_weight="0.5"
 			        android:text="@string/buttonDownText" />
             </LinearLayout>
 		    <Button
 		        android:id="@+id/buttonLeft"
-		        android:layout_width="128dp"
-		        android:layout_height="128dp"
+		        android:layout_width="64dp"
+		        android:layout_height="64dp"
 	            android:layout_toLeftOf="@id/buttonLayoutRoot"
                 android:layout_centerVertical="true"
 		        android:text="@string/buttonLeftText" />
 		    <Button
 		        android:id="@+id/buttonRight"
-		        android:layout_width="128dp"
-		        android:layout_height="128dp"
+		        android:layout_width="64dp"
+		        android:layout_height="64dp"
 	            android:layout_toRightOf="@id/buttonLayoutRoot"
                 android:layout_centerVertical="true"
 		        android:text="@string/buttonRightText" />

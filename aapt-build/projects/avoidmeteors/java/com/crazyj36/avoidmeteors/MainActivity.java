@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.MotionEvent;
+import android.content.Context;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.Toast;
@@ -21,11 +22,13 @@ public class MainActivity extends Activity implements OnTouchListener {
     Thread threadRight;
     Thread threadUp;
     Thread threadDown;
+    private static Context context;
     // GameView gameView; also findViewById(R.id.gameView), then gameView.method() besides sharing static variables
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.context = getApplicationContext();
 	    setContentView(R.layout.activity_main);
         scoreView = findViewById(R.id.scoreView);
         buttonLeft = findViewById(R.id.buttonLeft);
@@ -49,7 +52,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			            return;
 			        }
                     try {
-                        Thread.sleep(1, GameView.frames);
+                        Thread.sleep(1, GameView.characterSpeed);
                     } catch (InterruptedException interruptedException) {
                         runOnUiThread(new Runnable() {
                             public void run() {
@@ -71,7 +74,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			            return;
 			        }
                     try {
-                        Thread.sleep(1, GameView.frames);
+                        Thread.sleep(1, GameView.characterSpeed);
                     } catch (InterruptedException interruptedException) {
                         runOnUiThread(new Runnable() {
                             public void run() { Toast.makeText(MainActivity.this, "buttonRight: Attempted to sleep an interrupted thread, error", Toast.LENGTH_LONG).show(); };
@@ -91,7 +94,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			            return;
 			        }
                     try {
-                        Thread.sleep(1, GameView.frames);
+                        Thread.sleep(1, GameView.characterSpeed);
                     } catch (InterruptedException interruptedException) {
                         runOnUiThread(new Runnable() {
                             public void run() { Toast.makeText(MainActivity.this, "buttonUp: Attempted to sleep an interrupted thread, error.", Toast.LENGTH_LONG).show(); };
@@ -111,7 +114,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			            return;
 			        }
                     try {
-                        Thread.sleep(1, GameView.frames);
+                        Thread.sleep(1, GameView.characterSpeed);
                     } catch (InterruptedException interruptedException) {
                         runOnUiThread(new Runnable() {
                             public void run() { Toast.makeText(MainActivity.this, "buttonDown: Attempted to sleep an interrupted thread, error.", Toast.LENGTH_LONG).show(); };
@@ -161,6 +164,10 @@ public class MainActivity extends Activity implements OnTouchListener {
                 break;
         }
         return false;
+    }
+
+    public static void toaster(String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
 }
