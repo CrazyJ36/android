@@ -71,7 +71,7 @@ public class GameView extends View {
         canvas.drawRect( (float)2 * displayMetrics.widthPixels / 100, // left screen percentage
                          (float)1 * displayMetrics.heightPixels / 100, // top screen percentage
                          (float)98 * displayMetrics.widthPixels / 100, // right screen percentage
-                         dp(displayMetrics.heightPixels * 0.7f) - dp(54), // bottom screen percentage
+                         dp(displayMetrics.heightPixels * 0.7f) - dp(84), // bottom screen percentage
                          paint);
         // character
         float pts[] = {x, y, x, y - dp(8), // body
@@ -89,7 +89,7 @@ public class GameView extends View {
         if (random % 5f == 0) enemyX = enemyX + dp(20);
         else enemyX = enemyX + dp(10);
         if (enemyX >= (97 * displayMetrics.widthPixels / 100)) enemyX = dp(2) * displayMetrics.widthPixels / 100;
-        if (enemyY >= displayMetrics.heightPixels * 0.7f - dp(54)) enemyY = dp(1) * displayMetrics.heightPixels / 100;
+        if (enemyY >= displayMetrics.heightPixels * 0.7f - dp(84)) enemyY = dp(1) * displayMetrics.heightPixels / 100;
         canvas.drawCircle(enemyX, enemyY, dp(4), paint);
         // get hit
         if (( (enemyX >= x - dp(16) && enemyX <= x + dp(16)) && (enemyY >= y - dp(32) && enemyY <= y + dp(16)) ) ||
@@ -108,7 +108,7 @@ public class GameView extends View {
         }
         // out of bounds
         if ((x + dp(12)) >= (97 * displayMetrics.widthPixels / 100) || (x - dp(17)) <= (2 * displayMetrics.widthPixels / 100) ||
-                (y + dp(19)) >= (displayMetrics.heightPixels * 0.6f) || (y - dp(38)) <= (1 * displayMetrics.heightPixels / 100)) {
+                (y + dp(19)) >= (displayMetrics.heightPixels * 0.7f - dp(84)) || (y - dp(38)) <= (1 * displayMetrics.heightPixels / 100)) {
             GameView.this.setWillNotDraw(true);
             MainActivity.scoreView.setText("");
             dialogBuilder.setTitle("Out of Bounds!").setMessage("Try again.").setCancelable(false);
