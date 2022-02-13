@@ -1,78 +1,91 @@
---------- beginning of /dev/log/main
-W/ResourceType(  301): Entry identifier 0x128 is larger than entry count 0xab
-W/ResourceType(  301): Entry identifier 0x128 is larger than entry count 0xab
 --------- beginning of /dev/log/system
-I/ActivityManager(  301): Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.avoidmeteors/.MainActivity bnds=[122,237][238,377] } from pid 457
-W/WindowManager(  301): [PhoneWindowManager.java:1099:addStartingWindow()] HistoryRecord{4053fa70 com.crazyj36.avoidmeteors/.MainActivity} failed creating starting window
-W/WindowManager(  301): java.lang.RuntimeException: Binary XML file line #25: You must supply a layout_height attribute.
-W/WindowManager(  301): 	at android.content.res.TypedArray.getLayoutDimension(TypedArray.java:491)
-W/WindowManager(  301): 	at android.view.ViewGroup$LayoutParams.setBaseAttributes(ViewGroup.java:3599)
-W/WindowManager(  301): 	at android.view.ViewGroup$MarginLayoutParams.<init>(ViewGroup.java:3678)
-W/WindowManager(  301): 	at android.widget.LinearLayout$LayoutParams.<init>(LinearLayout.java:1400)
-W/WindowManager(  301): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:1326)
-W/WindowManager(  301): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:47)
-W/WindowManager(  301): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:625)
-W/WindowManager(  301): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
-W/WindowManager(  301): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
-W/WindowManager(  301): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
-W/WindowManager(  301): 	at com.android.internal.policy.impl.PhoneWindow.generateLayout(PhoneWindow.java:2290)
-W/WindowManager(  301): 	at com.android.internal.policy.impl.PhoneWindow.installDecor(PhoneWindow.java:2345)
-W/WindowManager(  301): 	at com.android.internal.policy.impl.PhoneWindow.getDecorView(PhoneWindow.java:1511)
-W/WindowManager(  301): 	at com.android.internal.policy.impl.PhoneWindowManager.addStartingWindow(PhoneWindowManager.java:1070)
-W/WindowManager(  301): 	at com.android.server.WindowManagerService$H.handleMessage(WindowManagerService.java:8347)
-W/WindowManager(  301): 	at android.os.Handler.dispatchMessage(Handler.java:99)
-W/WindowManager(  301): 	at android.os.Looper.loop(Looper.java:130)
-W/WindowManager(  301): 	at com.android.server.WindowManagerService$WMThread.run(WindowManagerService.java:582)
-D/Launcher.Workspace(  457): [Workspace.java:2036:hideWallpaper()] Show wallpaper
-I/ActivityManager(  301): process name to start: com.crazyj36.avoidmeteors
-I/ActivityManager(  301): Start proc com.crazyj36.avoidmeteors for activity com.crazyj36.avoidmeteors/.MainActivity: pid=1108 uid=10005 gids={}
-W/ResourceType( 1108): Entry identifier 0x128 is larger than entry count 0xab
-I/#LGIME  (  443): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
-W/dalvikvm( 1108): threadid=1: thread exiting with uncaught exception (group=0x40019560)
-E/AndroidRuntime( 1108): FATAL EXCEPTION: main
-E/AndroidRuntime( 1108): java.lang.IllegalArgumentException: timeout arguments out of range
-E/AndroidRuntime( 1108): 	at java.lang.VMThread.sleep(Native Method)
-E/AndroidRuntime( 1108): 	at java.lang.Thread.sleep(Thread.java:1213)
-E/AndroidRuntime( 1108): 	at com.crazyj36.avoidmeteors.GameView$1.run(GameView.java:45)
-E/AndroidRuntime( 1108): 	at com.crazyj36.avoidmeteors.GameView.onDraw(GameView.java:153)
-E/AndroidRuntime( 1108): 	at android.view.View.draw(View.java:6957)
-E/AndroidRuntime( 1108): 	at android.view.ViewGroup.drawChild(ViewGroup.java:1646)
-E/AndroidRuntime( 1108): 	at android.view.ViewGroup.dispatchDraw(ViewGroup.java:1373)
-E/AndroidRuntime( 1108): 	at android.view.ViewGroup.drawChild(ViewGroup.java:1644)
-E/AndroidRuntime( 1108): 	at android.view.ViewGroup.dispatchDraw(ViewGroup.java:1373)
-E/AndroidRuntime( 1108): 	at android.view.View.draw(View.java:6960)
-E/AndroidRuntime( 1108): 	at android.widget.FrameLayout.draw(FrameLayout.java:357)
-E/AndroidRuntime( 1108): 	at android.view.ViewGroup.drawChild(ViewGroup.java:1646)
-E/AndroidRuntime( 1108): 	at android.view.ViewGroup.dispatchDraw(ViewGroup.java:1373)
-E/AndroidRuntime( 1108): 	at android.view.ViewGroup.drawChild(ViewGroup.java:1644)
-E/AndroidRuntime( 1108): 	at android.view.ViewGroup.dispatchDraw(ViewGroup.java:1373)
-E/AndroidRuntime( 1108): 	at android.view.View.draw(View.java:6960)
-E/AndroidRuntime( 1108): 	at android.widget.FrameLayout.draw(FrameLayout.java:357)
-E/AndroidRuntime( 1108): 	at com.android.internal.policy.impl.PhoneWindow$DecorView.draw(PhoneWindow.java:1946)
-E/AndroidRuntime( 1108): 	at android.view.ViewRoot.draw(ViewRoot.java:1528)
-E/AndroidRuntime( 1108): 	at android.view.ViewRoot.performTraversals(ViewRoot.java:1264)
-E/AndroidRuntime( 1108): 	at android.view.ViewRoot.handleMessage(ViewRoot.java:1869)
-E/AndroidRuntime( 1108): 	at android.os.Handler.dispatchMessage(Handler.java:99)
-E/AndroidRuntime( 1108): 	at android.os.Looper.loop(Looper.java:130)
-E/AndroidRuntime( 1108): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
-E/AndroidRuntime( 1108): 	at java.lang.reflect.Method.invokeNative(Native Method)
-E/AndroidRuntime( 1108): 	at java.lang.reflect.Method.invoke(Method.java:507)
-E/AndroidRuntime( 1108): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
-E/AndroidRuntime( 1108): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
-E/AndroidRuntime( 1108): 	at dalvik.system.NativeStart.main(Native Method)
-W/ActivityManager(  301):   Force finishing activity com.crazyj36.avoidmeteors/.MainActivity
-W/ActivityManager(  301): Activity pause timeout for HistoryRecord{4053fa70 com.crazyj36.avoidmeteors/.MainActivity}
-D/Launcher.Workspace(  457): [Workspace.java:2036:hideWallpaper()] Show wallpaper
-D/Launcher.Workspace(  457): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
-E/ActivityThread(  457): Failed to find provider info for call_log
-E/ActivityThread(  457): Failed to find provider info for com.lge.providers.lgemail
-E/ActivityThread(  457): Failed to find provider info for com.android.whatsnew
-I/ActivityManager(  301): [ActivityRecord.java:444:windowsVisible()] Displayed com.crazyj36.avoidmeteors/.MainActivity: +1s734ms
-E/InputDispatcher(  301): channel '4072fb30 com.crazyj36.avoidmeteors/com.crazyj36.avoidmeteors.MainActivity (server)' ~ Consumer closed input channel or an error occurred.  events=0x8
-E/InputDispatcher(  301): channel '4072fb30 com.crazyj36.avoidmeteors/com.crazyj36.avoidmeteors.MainActivity (server)' ~ Channel is unrecoverably broken and will be disposed!
-E/JavaBinder(  301): Transact on 0x50b030 in Java object 0x408c7718 with code 3 failed
-E/JavaBinder(  301): Transact on 0x50b030 in Java object 0x408c7718 with code 4 failed
-I/#LGIME  (  443): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
-I/WindowManager(  301): WINDOW DIED Window{4072fb30 com.crazyj36.avoidmeteors/com.crazyj36.avoidmeteors.MainActivity paused=false}
-I/ActivityManager(  301): Process com.crazyj36.avoidmeteors (pid 1108) has died.
-W/InputManagerService(  301): Got RemoteException sending setActive(false) notification to pid 1108 uid 10005
+D/WifiService(  305): ACTION_BATTERY_CHANGED pluggedType: 2
+D/WifiService(  305): ### wifiShouldBeEnabled=true
+D/WifiService(  305): ### mDeviceIdle=false
+D/WifiService(  305): ### lockHeld=false
+--------- beginning of /dev/log/main
+W/ResourceType(  305): Entry identifier 0x128 is larger than entry count 0xab
+W/ResourceType(  305): Entry identifier 0x128 is larger than entry count 0xab
+W/WindowManager(  305): [PhoneWindowManager.java:1099:addStartingWindow()] HistoryRecord{4074e698 com.crazyj36.avoidmeteors/.MainActivity} failed creating starting window
+W/WindowManager(  305): java.lang.RuntimeException: Binary XML file line #25: You must supply a layout_height attribute.
+W/WindowManager(  305): 	at android.content.res.TypedArray.getLayoutDimension(TypedArray.java:491)
+W/WindowManager(  305): 	at android.view.ViewGroup$LayoutParams.setBaseAttributes(ViewGroup.java:3599)
+W/WindowManager(  305): 	at android.view.ViewGroup$MarginLayoutParams.<init>(ViewGroup.java:3678)
+W/WindowManager(  305): 	at android.widget.LinearLayout$LayoutParams.<init>(LinearLayout.java:1400)
+W/WindowManager(  305): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:1326)
+W/WindowManager(  305): 	at android.widget.LinearLayout.generateLayoutParams(LinearLayout.java:47)
+W/WindowManager(  305): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:625)
+W/WindowManager(  305): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:408)
+W/WindowManager(  305): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:320)
+W/WindowManager(  305): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:276)
+W/WindowManager(  305): 	at com.android.internal.policy.impl.PhoneWindow.generateLayout(PhoneWindow.java:2290)
+W/WindowManager(  305): 	at com.android.internal.policy.impl.PhoneWindow.installDecor(PhoneWindow.java:2345)
+W/WindowManager(  305): 	at com.android.internal.policy.impl.PhoneWindow.getDecorView(PhoneWindow.java:1511)
+W/WindowManager(  305): 	at com.android.internal.policy.impl.PhoneWindowManager.addStartingWindow(PhoneWindowManager.java:1070)
+W/WindowManager(  305): 	at com.android.server.WindowManagerService$H.handleMessage(WindowManagerService.java:8347)
+W/WindowManager(  305): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+W/WindowManager(  305): 	at android.os.Looper.loop(Looper.java:130)
+W/WindowManager(  305): 	at com.android.server.WindowManagerService$WMThread.run(WindowManagerService.java:582)
+I/ActivityManager(  305): Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.avoidmeteors/.MainActivity bnds=[122,237][238,377] } from pid 463
+D/Launcher.Workspace(  463): [Workspace.java:2036:hideWallpaper()] Show wallpaper
+I/ActivityManager(  305): process name to start: com.crazyj36.avoidmeteors
+I/ActivityManager(  305): Start proc com.crazyj36.avoidmeteors for activity com.crazyj36.avoidmeteors/.MainActivity: pid=1017 uid=10005 gids={}
+W/ResourceType( 1017): Entry identifier 0x128 is larger than entry count 0xab
+I/#LGIME  (  444): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+I/ActivityManager(  305): [ActivityRecord.java:444:windowsVisible()] Displayed com.crazyj36.avoidmeteors/.MainActivity: +482ms
+W/InputManagerService(  305): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@406d9870
+I/wpa_supplicant(  450): CTRL-EVENT-STATE-CHANGE id=0 state=6 BSSID=00:00:00:00:00:00
+V/WifiMonitor(  305): [WifiMonitor.java:190:run()] Event [CTRL-EVENT-STATE-CHANGE id=0 state=6 BSSID=00:00:00:00:00:00]
+V/WifiStateTracker(  305): [WifiStateTracker.java:1130:handleMessage()] Changing supplicant state: COMPLETED ==> GROUP_HANDSHAKE
+I/wpa_supplicant(  450): WPA: Group rekeying completed with 08:d5:9d:9c:dc:de [GTK=CCMP]
+I/wpa_supplicant(  450): CTRL-EVENT-STATE-CHANGE id=0 state=7 BSSID=00:00:00:00:00:00
+V/WifiMonitor(  305): [WifiMonitor.java:190:run()] Event [WPA: Group rekeying completed with 08:d5:9d:9c:dc:de [GTK=CCMP]]
+V/WifiMonitor(  305): [WifiMonitor.java:190:run()] Event [CTRL-EVENT-STATE-CHANGE id=0 state=7 BSSID=00:00:00:00:00:00]
+V/WifiStateTracker(  305): [WifiStateTracker.java:1130:handleMessage()] Changing supplicant state: GROUP_HANDSHAKE ==> COMPLETED
+W/InputManagerService(  305): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@40711a48
+W/dalvikvm( 1017): threadid=1: thread exiting with uncaught exception (group=0x40019560)
+E/AndroidRuntime( 1017): FATAL EXCEPTION: main
+E/AndroidRuntime( 1017): java.lang.IllegalArgumentException: timeout arguments out of range
+E/AndroidRuntime( 1017): 	at java.lang.VMThread.sleep(Native Method)
+E/AndroidRuntime( 1017): 	at java.lang.Thread.sleep(Thread.java:1213)
+E/AndroidRuntime( 1017): 	at com.crazyj36.avoidmeteors.GameView$1.run(GameView.java:64)
+E/AndroidRuntime( 1017): 	at com.crazyj36.avoidmeteors.GameView.onDraw(GameView.java:174)
+E/AndroidRuntime( 1017): 	at android.view.View.draw(View.java:6957)
+E/AndroidRuntime( 1017): 	at android.view.ViewGroup.drawChild(ViewGroup.java:1646)
+E/AndroidRuntime( 1017): 	at android.view.ViewGroup.dispatchDraw(ViewGroup.java:1373)
+E/AndroidRuntime( 1017): 	at android.view.ViewGroup.drawChild(ViewGroup.java:1644)
+E/AndroidRuntime( 1017): 	at android.view.ViewGroup.dispatchDraw(ViewGroup.java:1373)
+E/AndroidRuntime( 1017): 	at android.view.View.draw(View.java:6960)
+E/AndroidRuntime( 1017): 	at android.widget.FrameLayout.draw(FrameLayout.java:357)
+E/AndroidRuntime( 1017): 	at android.view.ViewGroup.drawChild(ViewGroup.java:1646)
+E/AndroidRuntime( 1017): 	at android.view.ViewGroup.dispatchDraw(ViewGroup.java:1373)
+E/AndroidRuntime( 1017): 	at android.view.ViewGroup.drawChild(ViewGroup.java:1644)
+E/AndroidRuntime( 1017): 	at android.view.ViewGroup.dispatchDraw(ViewGroup.java:1373)
+E/AndroidRuntime( 1017): 	at android.view.View.draw(View.java:6960)
+E/AndroidRuntime( 1017): 	at android.widget.FrameLayout.draw(FrameLayout.java:357)
+E/AndroidRuntime( 1017): 	at com.android.internal.policy.impl.PhoneWindow$DecorView.draw(PhoneWindow.java:1946)
+E/AndroidRuntime( 1017): 	at android.view.ViewRoot.draw(ViewRoot.java:1528)
+E/AndroidRuntime( 1017): 	at android.view.ViewRoot.performTraversals(ViewRoot.java:1264)
+E/AndroidRuntime( 1017): 	at android.view.ViewRoot.handleMessage(ViewRoot.java:1869)
+E/AndroidRuntime( 1017): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+E/AndroidRuntime( 1017): 	at android.os.Looper.loop(Looper.java:130)
+E/AndroidRuntime( 1017): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
+E/AndroidRuntime( 1017): 	at java.lang.reflect.Method.invokeNative(Native Method)
+E/AndroidRuntime( 1017): 	at java.lang.reflect.Method.invoke(Method.java:507)
+E/AndroidRuntime( 1017): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
+E/AndroidRuntime( 1017): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
+E/AndroidRuntime( 1017): 	at dalvik.system.NativeStart.main(Native Method)
+W/ActivityManager(  305):   Force finishing activity com.crazyj36.avoidmeteors/.MainActivity
+W/dalvikvm( 1017): threadid=8: thread exiting with uncaught exception (group=0x40019560)
+E/JavaBinder(  305): Transact on 0x45c350 in Java object 0x40592698 with code 3 failed
+I/ActivityManager(  305): Process com.crazyj36.avoidmeteors (pid 1017) has died.
+I/WindowManager(  305): WIN DEATH: Window{407127a0 com.crazyj36.avoidmeteors/com.crazyj36.avoidmeteors.MainActivity paused=true}
+D/Launcher.Workspace(  463): [Workspace.java:2036:hideWallpaper()] Show wallpaper
+D/Launcher.Workspace(  463): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
+E/JavaBinder(  305): Transact on 0x4bc148 in Java object 0x4054ba20 with code 3 failed
+E/JavaBinder(  305): Transact on 0x4bc148 in Java object 0x4054ba20 with code 4 failed
+I/#LGIME  (  444): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+W/InputManagerService(  305): Got RemoteException sending setActive(false) notification to pid 1017 uid 10005
+E/ActivityThread(  463): Failed to find provider info for call_log
+E/ActivityThread(  463): Failed to find provider info for com.lge.providers.lgemail
+E/ActivityThread(  463): Failed to find provider info for com.android.whatsnew

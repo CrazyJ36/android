@@ -23,10 +23,11 @@ public class GameView extends View {
     static int random = 0;
     static int score = 0;
     static int characterSpeed = 999999;
-    long milliseconds = 50;
+    long milliseconds = 30;
     int nanoseconds = 999999;
     boolean resetNanoseconds = false;
-    boolean isMiddleSpeed = false;
+    boolean isWatchoutSaid = false;
+    boolean isWon = false;
     Paint paint = new Paint();
     AlertDialog.Builder dialogBuilder;
     Thread thread;
@@ -42,22 +43,26 @@ public class GameView extends View {
         thread = new Thread() {
             public void run() {
                 try {
-                    if (milliseconds > 0 && nanoseconds > 0) {
-                        Thread.sleep(milliseconds, nanoseconds);
-                        milliseconds--;
+                    if (milliseconds != 0) {
                         nanoseconds = nanoseconds - 10000;
+                        if (nanoseconds <= 0) {
+                            milliseconds--;
+                            nanoseconds = 999999;
+                        }
+                        if (milliseconds == 15 && !isWatchoutSaid) {
+                            MainActivity.toaster("Watch out!");
+                            isWatchoutSaid = true;
+                        }
                     }
+                    else {
+                        if (!resetNanoseconds) {
+                            nanoseconds = 999999;
+                            resetNanoseconds = true;
+                        }
+                        if (resetNanoseconds && nanoseconds > 0) nanoseconds = nanoseconds - 10000;
+                    }
+                    Thread.sleep(milliseconds, nanoseconds);
 
-                    else if (milliseconds <= 0 && nanoseconds > 0 && resetNanoseconds) {
-                    	Thread.sleep(0, nanoseconds);
-                    	nanoseconds = nanoseconds - 10000;
-                    }
-                    if (milliseconds <= 0 && nanoseconds <= 0) {
-                        resetNanoseconds = true;
-                        nanoseconds = 999999;
-                        MainActivity.toaster("Watch out!");
-                    }
-                    if (milliseconds == 0 && nanoseconds == 0) MainActivity.toaster("You've Won!");
                 } catch (InterruptedException interruptedException) {
                     MainActivity.toaster(interruptedException.getMessage());
                 }
@@ -82,10 +87,11 @@ public class GameView extends View {
 	        public void onCancel(DialogInterface onCancelDialog) {
                 score = 0;
                 characterSpeed = 999999;
-                milliseconds = 50;
+                milliseconds = 30;
                 nanoseconds = 999999;
-                //isMaxSpeed = false;
-                //isMaxSpeedSaid = false;
+                resetNanoseconds = false;
+                isWatchoutSaid = false;
+                isWon = false;
 			    x = displayMetrics.widthPixels / 2;
 			    y = displayMetrics.heightPixels / 2 - dp(128);
 	            enemyX = 0;
@@ -99,8 +105,7 @@ public class GameView extends View {
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         score = score + 1;
-        if (characterSpeed > 0) characterSpeed = characterSpeed - 10; // lower the characterSpeed sleep nanoseconds.
-        MainActivity.scoreView.setText(GameView.this.getResources().getString(R.string.scoreText) + String.valueOf(score) + "\n" + "Speed: " + String.valueOf(milliseconds) + " " + String.valueOf(nanoseconds));
+        if (characterSpeed > 0) characterSpeed = characterSpeed - 10; // lower the characterSpeed sleep time in nanoseconds.
         paint.setColor(Color.GRAY);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(dp(4)); // convert px to dp for actual drawing.
@@ -165,8 +170,14 @@ public class GameView extends View {
             dialogBuilder.create().show();
         }
         // invalidate current painting for new frames.
-        thread.run();
-        invalidate();
+        if (milliseconds > 0 && nanoseconds > 0) {
+            thread.run();
+            MainActivity.scoreView.setText("Score: " + String.valueOf(score) + " Time: " + String.valueOf(milliseconds) + "." + String.valueOf(nanoseconds));
+            invalidate();
+        } else {
+                MainActivity.scoreView.setText("You've Won! " + "Score: " + String.valueOf(score));
+                MainActivity.toaster("You've Won!");
+       }
     }
 
 }
