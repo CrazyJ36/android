@@ -128,7 +128,7 @@ public class MainActivity extends Activity implements OnTouchListener {
         switch(view.getId()) {
             case R.id.buttonLeft:
                 if (view.getId() == R.id.buttonLeft && event.getAction() == MotionEvent.ACTION_DOWN) {
-                    //GameView.x--;
+                    GameView.x--;
                     threadLeft.start();
                 }
                 if (view.getId() == R.id.buttonLeft && (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL)) {
@@ -168,6 +168,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 
     public static void toaster(String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        GameView.reset();
     }
 
 }

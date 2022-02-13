@@ -9,7 +9,9 @@ import android.view.View;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Paint.Align;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.util.DisplayMetrics;
 import android.util.AttributeSet;
 import java.lang.Thread;
@@ -23,22 +25,27 @@ public class GameView extends View {
     static int random = 0;
     static int score = 0;
     static int characterSpeed = 999999;
-    long milliseconds = 30;
-    int nanoseconds = 999999;
-    boolean resetNanoseconds = false;
-    boolean isWatchoutSaid = false;
-    boolean isWon = false;
+    static long milliseconds = 30;
+    static int nanoseconds = 999999;
+    static boolean resetNanoseconds = false;
+    static boolean isGoSaid = false;
+    static boolean isWatchoutSaid = false;
+    static boolean isGettingFasterSaid = false;
+    static boolean isMaxSpeedSaid = false;
+    static boolean isWon = false;
     Paint paint = new Paint();
     AlertDialog.Builder dialogBuilder;
     Thread thread;
+    static Context appContext;
 
-    public float dp(float desired) {
-        float scale = GameView.this.getResources().getDisplayMetrics().density;
+    static float dp(float desired) {
+        float scale = appContext.getResources().getDisplayMetrics().density;
         return desired * scale + 0.5f;
     }
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        appContext = context;
         // loop sleep
         thread = new Thread() {
             public void run() {
@@ -49,7 +56,7 @@ public class GameView extends View {
                             milliseconds--;
                             nanoseconds = 999999;
                         }
-                        if (milliseconds == 15 && !isWatchoutSaid) {
+                        if (milliseconds == 10 && !isWatchoutSaid) {
                             MainActivity.toaster(GameView.this.getResources().getString(R.string.watchOutText));
                             isWatchoutSaid = true;
                         }
@@ -76,7 +83,7 @@ public class GameView extends View {
         y = displayMetrics.heightPixels / 2 - dp(128);
         // game dialog and reset logic.
 		dialogBuilder = new AlertDialog.Builder(context);
-	    dialogBuilder.setNeutralButton(GameView.this.getResources().getString(R.string.okText), new DialogInterface.OnClickListener() {
+	    dialogBuilder.setNeutralButton(GameView.this.getResources().getString(R.string.retryText), new DialogInterface.OnClickListener() {
 	        @Override
 	        public void onClick(DialogInterface dialog, int which) {
 	            dialog.cancel();
@@ -85,17 +92,7 @@ public class GameView extends View {
 	    dialogBuilder.setOnCancelListener(new DialogInterface.OnCancelListener() {
 	        @Override
 	        public void onCancel(DialogInterface onCancelDialog) {
-                score = 0;
-                characterSpeed = 999999;
-                milliseconds = 30;
-                nanoseconds = 999999;
-                resetNanoseconds = false;
-                isWatchoutSaid = false;
-                isWon = false;
-			    x = displayMetrics.widthPixels / 2;
-			    y = displayMetrics.heightPixels / 2 - dp(128);
-	            enemyX = 0;
-	            enemyY = 10;
+                reset();
 	            GameView.this.setWillNotDraw(false);
 	       }
 	    });
@@ -104,18 +101,23 @@ public class GameView extends View {
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        // show current score
+        if (!isGoSaid) {
+            MainActivity.toaster(GameView.this.getResources().getString(R.string.goText));
+            isGoSaid = true;
+        }
         score = score + 1;
-        MainActivity.scoreView.setText(
-            GameView.this.getResources().getString(R.string.scoreText) +
-            String.valueOf(score) +
-            GameView.this.getResources().getString(R.string.spaceChar) +
-            GameView.this.getResources().getString(R.string.speedText) +
-            String.valueOf(milliseconds) +
-            GameView.this.getResources().getString(R.string.periodText) +
-            String.valueOf(nanoseconds)
-        );
-        if (characterSpeed > 0) characterSpeed = characterSpeed - 10; // lower the characterSpeed sleep time in nanoseconds.
+        MainActivity.scoreView.setText(GameView.this.getResources().getString(R.string.scoreText) + String.valueOf(score));
+        if (!isGettingFasterSaid && characterSpeed < 700000) {
+            MainActivity.toaster(GameView.this.getResources().getString(R.string.gettingFasterText));
+            isGettingFasterSaid = true;
+        }
+        if (characterSpeed > 701 ) characterSpeed = characterSpeed - 700; // lower the characterSpeed sleep time in nanoseconds.
+        else {
+            if (!isMaxSpeedSaid) {
+                MainActivity.toaster(GameView.this.getResources().getString(R.string.maxCharacterSpeed));
+                isMaxSpeedSaid = true;
+            }
+        }
         paint.setColor(Color.GRAY);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(dp(4)); // convert px to dp for actual drawing.
@@ -170,19 +172,46 @@ public class GameView extends View {
             dialogBuilder.setCancelable(false);
             dialogBuilder.create().show();
         }
-        // set score, speed, and get new frames.
+        // keep game going until times up.
         if (milliseconds > 0 && nanoseconds > 0) {
             thread.run();
             invalidate();
 	    } else {
             MainActivity.scoreView.setText(
-                GameView.this.getResources().getString(R.string.wonText) +
                 GameView.this.getResources().getString(R.string.scoreText) +
-                String.valueOf(score)
+                String.valueOf(score - 1)
             );
-            MainActivity.toaster(GameView.this.getResources().getString(R.string.wonText));
+            canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+            paint.setTextSize(dp(32));
+            paint.setTextAlign(Align.CENTER);
+            paint.setColor(Color.GREEN);
+            canvas.drawText(
+                GameView.this.getResources().getString(R.string.wonText),
+                displayMetrics.widthPixels / 2,
+                displayMetrics.heightPixels / 2,
+                paint
+            );
+            reset();
         }
     }
 
+    public static void reset() {
+        score = 0;
+        characterSpeed = 999999;
+        milliseconds = 30;
+        nanoseconds = 999999;
+        resetNanoseconds = false;
+        isGoSaid = false;
+        isWatchoutSaid = false;
+        isGettingFasterSaid = false;
+        isMaxSpeedSaid = false;
+        isWon = false;
+	    x = displayMetrics.widthPixels / 2;
+	    y = displayMetrics.heightPixels / 2 - dp(128);
+        enemyX = 0;
+        enemyY = 10;
+    }
+
 }
+
 
