@@ -6,5 +6,4 @@
     <string name="buttonRightText">R</string>
     <string name="buttonUpText">U</string>
     <string name="buttonDownText">D</string>
-    <string name="scoreText">Current score: </string>
 </resources>
