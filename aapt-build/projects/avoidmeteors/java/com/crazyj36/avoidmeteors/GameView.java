@@ -50,7 +50,7 @@ public class GameView extends View {
                             nanoseconds = 999999;
                         }
                         if (milliseconds == 15 && !isWatchoutSaid) {
-                            MainActivity.toaster("Watch out!");
+                            MainActivity.toaster(GameView.this.getResources().getString(R.string.watchOutText));
                             isWatchoutSaid = true;
                         }
                     }
@@ -76,7 +76,7 @@ public class GameView extends View {
         y = displayMetrics.heightPixels / 2 - dp(128);
         // game dialog and reset logic.
 		dialogBuilder = new AlertDialog.Builder(context);
-	    dialogBuilder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+	    dialogBuilder.setNeutralButton(GameView.this.getResources().getString(R.string.okText), new DialogInterface.OnClickListener() {
 	        @Override
 	        public void onClick(DialogInterface dialog, int which) {
 	            dialog.cancel();
@@ -104,7 +104,17 @@ public class GameView extends View {
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        // show current score
         score = score + 1;
+        MainActivity.scoreView.setText(
+            GameView.this.getResources().getString(R.string.scoreText) +
+            String.valueOf(score) +
+            GameView.this.getResources().getString(R.string.spaceChar) +
+            GameView.this.getResources().getString(R.string.speedText) +
+            String.valueOf(milliseconds) +
+            GameView.this.getResources().getString(R.string.periodText) +
+            String.valueOf(nanoseconds)
+        );
         if (characterSpeed > 0) characterSpeed = characterSpeed - 10; // lower the characterSpeed sleep time in nanoseconds.
         paint.setColor(Color.GRAY);
         paint.setStyle(Paint.Style.STROKE);
@@ -133,19 +143,6 @@ public class GameView extends View {
             enemyX = enemyX + dp(4);
         }
         enemyY = enemyY + dp(8);
-        /*If ( gameSpeedInc % 50 == 0) {
-           if (gameSpeed < dp(30)) {
-               gameSpeed++;
-               enemyY = enemyY + (gameSpeed * 0.5f);
-           } else isMaxSpeed = true;
-           if (isMaxSpeed) {
-               if (!isMaxSpeedSaid) {
-                   MainActivity.toaster("Watch out!");
-                   isMaxSpeedSaid = true;
-               }
-           }
-        }*/
-        //gameSpeedInc++;
         if (enemyX >= (97 * displayMetrics.widthPixels / 100)) enemyX = 2 * displayMetrics.widthPixels / 100;
         if (enemyY >= displayMetrics.heightPixels * 0.7f - dp(86)) enemyY = 1 * displayMetrics.heightPixels / 100;
         canvas.drawCircle(enemyX, enemyY, dp(3), paint);
@@ -154,9 +151,11 @@ public class GameView extends View {
             ( (enemyX + dp(1) >= x - dp(8) && enemyX + dp(1) <= x + dp(8)) && (enemyY + dp(1) >= y - dp(15) && enemyY + dp(1) <= y + dp(16)) ) ||
             ( (enemyX + dp(2) >= x - dp(8) && enemyX + dp(2) <= x + dp(8)) && (enemyY + dp(2) >= y - dp(15) && enemyY + dp(2) <= y + dp(16)) ) ||
             ( (enemyX + dp(3) >= x - dp(8) && enemyX + dp(3) <= x + dp(8)) && (enemyY + dp(3) >= y - dp(15) && enemyY + dp(3) <= y + dp(16)) ) ) {
+            MainActivity.scoreView.setText(null);
             GameView.this.setWillNotDraw(true);
-            MainActivity.scoreView.setText("");
-		    dialogBuilder.setTitle("You're Hit!").setMessage("Score: " + String.valueOf(score)).setCancelable(false);
+		    dialogBuilder.setTitle(GameView.this.getResources().getString(R.string.hitText));
+            dialogBuilder.setMessage(GameView.this.getResources().getString(R.string.scoreText) + String.valueOf(score));
+            dialogBuilder.setCancelable(false);
             dialogBuilder.create().show();
         }
         // out of bounds
@@ -165,19 +164,24 @@ public class GameView extends View {
              (y + dp(8)) >= (displayMetrics.heightPixels * 0.7f - dp(86)) || // bottom bounds
              (y - dp(15)) <= (1 * displayMetrics.heightPixels / 100) ) {  // top
             GameView.this.setWillNotDraw(true);
-            MainActivity.scoreView.setText("");
-            dialogBuilder.setTitle("Out of Bounds!").setMessage("Try again.").setCancelable(false);
+            MainActivity.scoreView.setText(null);
+            dialogBuilder.setTitle(GameView.this.getResources().getString(R.string.outOfBoundsText));
+            dialogBuilder.setMessage(GameView.this.getResources().getString(R.string.tryAgainText));
+            dialogBuilder.setCancelable(false);
             dialogBuilder.create().show();
         }
-        // invalidate current painting for new frames.
+        // set score, speed, and get new frames.
         if (milliseconds > 0 && nanoseconds > 0) {
             thread.run();
-            MainActivity.scoreView.setText("Score: " + String.valueOf(score) + " Time: " + String.valueOf(milliseconds) + "." + String.valueOf(nanoseconds));
             invalidate();
-        } else {
-                MainActivity.scoreView.setText("You've Won! " + "Score: " + String.valueOf(score));
-                MainActivity.toaster("You've Won!");
-       }
+	    } else {
+            MainActivity.scoreView.setText(
+                GameView.this.getResources().getString(R.string.wonText) +
+                GameView.this.getResources().getString(R.string.scoreText) +
+                String.valueOf(score)
+            );
+            MainActivity.toaster(GameView.this.getResources().getString(R.string.wonText));
+        }
     }
 
 }

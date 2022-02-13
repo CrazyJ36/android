@@ -10,6 +10,7 @@
 
     <application
         android:label="@string/appname"
+        android:icon="@mipmap/icon"
         android:theme="@android:style/Theme.DeviceDefault" >
 
 		<activity
