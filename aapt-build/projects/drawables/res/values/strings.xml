@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Drawables</string>
+    <string name="tvInstructionsTxt">Shows to ways to load A drawable.xml resource, by setting ImageView src in activity layout, and programatically in java.</string>
+</resources>
