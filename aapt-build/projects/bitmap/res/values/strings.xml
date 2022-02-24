@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Bitmap</string>
+    <string name="tvInstructionsTxt">This app loads an image as bitmap.</string>
+</resources>
