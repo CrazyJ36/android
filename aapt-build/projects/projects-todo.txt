@@ -36,3 +36,4 @@ state that files is disabled when no
 files are in notes, or when there is
 no notes directory.
 
+use library (maven, gradle)
