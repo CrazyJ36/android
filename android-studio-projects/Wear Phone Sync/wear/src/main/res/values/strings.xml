@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Wear Phone Sync</string>
+    <string name="instructionsTxt">Tap button to update on both devices.</string>
+</resources>
