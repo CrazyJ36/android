@@ -1,12 +1,13 @@
 package com.crazyj36.wearphonesync;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -25,13 +26,20 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
     Button btn;
     String messagepath = "/message_path";
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         messageView = findViewById(R.id.data);
         btn = findViewById(R.id.btn);
-        btn.setOnClickListener(this);;
+        btn.setOnClickListener(this);
+        sharedPreferences = getSharedPreferences("count", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        Toast.makeText(this, "Phone", Toast.LENGTH_SHORT).show();
+
     }
     @Override
     public void onResume() {
@@ -45,7 +53,7 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
     }
     @Override
     public void onClick(View v) {
-        sendData(Data.count);
+        sendData(sharedPreferences.getInt("count", 0));
     }
     @Override
     public void onDataChanged(@NonNull DataEventBuffer dataEventBuffer) {
@@ -54,9 +62,10 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
                 String path = event.getDataItem().getUri().getPath();
                 if (messagepath.equals(path)) {
                     DataMapItem dataMapItem = DataMapItem.fromDataItem(event.getDataItem());
-                    int message = dataMapItem.getDataMap().getInt("message");
-                    messageView.setText(String.valueOf(message + 1));
-                    Data.count = Data.count + 1;
+                    int message = dataMapItem.getDataMap().getInt("message") + 1;
+                    editor.putInt("count", message);
+                    editor.apply();
+                    messageView.setText(String.valueOf(message));
                 }
             }
         }

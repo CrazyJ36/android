@@ -1,5 +1,6 @@
 package com.crazyj36.wearphonesync;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -8,6 +9,7 @@ import androidx.wear.ambient.AmbientModeSupport;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,23 +29,30 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
     Button btn;
     String messagepath = "/message_path";
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         messageView = findViewById(R.id.data);
         btn = findViewById(R.id.btn);
+        sharedPreferences = getSharedPreferences("count", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData(Data.count);
+                sendData(sharedPreferences.getInt("count", 0));
             }
         });
+        Toast.makeText(this, "Wear", Toast.LENGTH_SHORT).show();
     }
     @Override
     public void onResume() {
         super.onResume();
         Wearable.getDataClient(this).addListener(this);
+        // get count from other device if not the same number.
     }
     @Override
     public void onPause() {
@@ -57,9 +66,10 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                 String path = event.getDataItem().getUri().getPath();
                 if (messagepath.equals(path)) {
                     DataMapItem dataMapItem = DataMapItem.fromDataItem(event.getDataItem());
-                    int message = dataMapItem.getDataMap().getInt("message");
-                    messageView.setText(String.valueOf(message + 1));
-                    Data.count = Data.count + 1;
+                    int message = dataMapItem.getDataMap().getInt("message") + 1;
+                    editor.putInt("count", message);
+                    editor.apply();
+                    messageView.setText(String.valueOf(message));
                 }
             }
         }
@@ -69,7 +79,6 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         dataMap.getDataMap().putInt("message", message);
         PutDataRequest request = dataMap.asPutDataRequest();
         request.setUrgent();
-
         Task<DataItem> dataItemTask = Wearable.getDataClient(this).putDataItem(request);
         dataItemTask.addOnSuccessListener(new OnSuccessListener<DataItem>() {
             @Override
