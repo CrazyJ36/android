@@ -5,12 +5,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.wear.ambient.AmbientModeSupport;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -28,7 +26,6 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
     TextView messageView;
     Button btn;
     String messagepath = "/message_path";
-
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
@@ -86,14 +83,14 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
             public void onSuccess(DataItem dataItem) {
 
             }
-        }).addOnFailureListener(new OnFailureListener() {
+        });
+        dataItemTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
 
             }
         });
     }
-
     @Override
     public AmbientModeSupport.AmbientCallback getAmbientCallback() {
         return new AmbientModeSupport.AmbientCallback() {

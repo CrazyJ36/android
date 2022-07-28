@@ -18,14 +18,13 @@ import com.google.android.gms.wearable.DataItem;
 import com.google.android.gms.wearable.DataMapItem;
 import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.PutDataRequest;
-import com.google.android.gms.wearable.Wearable;;
+import com.google.android.gms.wearable.Wearable;
 
 public class MainPhoneActivity extends Activity implements DataClient.OnDataChangedListener, View.OnClickListener {
 
     TextView messageView;
     Button btn;
     String messagepath = "/message_path";
-
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
@@ -39,7 +38,6 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
         sharedPreferences = getSharedPreferences("count", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         Toast.makeText(this, "Phone", Toast.LENGTH_SHORT).show();
-
     }
     @Override
     public void onResume() {
@@ -77,14 +75,13 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
         request.setUrgent();
         Task<DataItem> dataItemTask = Wearable.getDataClient(this).putDataItem(request);
         dataItemTask.addOnSuccessListener(new OnSuccessListener<DataItem>() {
-                @Override
-                public void onSuccess(DataItem dataItem) {
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                }
-            });
+            @Override
+            public void onSuccess(DataItem dataItem) {}
+        });
+        dataItemTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {}
+        });
     }
 }
 
