@@ -52,7 +52,8 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
     public void onResume() {
         super.onResume();
         Wearable.getDataClient(this).addListener(this);
-        // get count from other device if not the same number.
+        // get count from other device if not the same number, as if you close the app
+        // on one device, tap the button on the other, number order is messed up.
     }
     @Override
     public void onPause() {
