@@ -2,7 +2,9 @@ package com.crazyj36.wearphonesync;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
-import android.support.wearable.activity.WearableActivity;
+import androidx.fragment.app.FragmentActivity;
+import androidx.wear.ambient.AmbientModeSupport;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,7 +21,7 @@ import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.PutDataRequest;
 import com.google.android.gms.wearable.Wearable;
 
-public class MainWearActivity extends WearableActivity implements DataClient.OnDataChangedListener {
+public class MainWearActivity extends FragmentActivity implements AmbientModeSupport.AmbientCallbackProvider, DataClient.OnDataChangedListener {
 
     TextView messageView;
     Button btn;
@@ -37,7 +39,6 @@ public class MainWearActivity extends WearableActivity implements DataClient.OnD
                 sendData(Data.count);
             }
         });
-        setAmbientEnabled();
     }
     @Override
     public void onResume() {
@@ -63,7 +64,6 @@ public class MainWearActivity extends WearableActivity implements DataClient.OnD
             }
         }
     }
-    // this is a broadcast
     private void sendData(int message) {
         PutDataMapRequest dataMap = PutDataMapRequest.create(messagepath);
         dataMap.getDataMap().putInt("message", message);
@@ -82,6 +82,14 @@ public class MainWearActivity extends WearableActivity implements DataClient.OnD
 
             }
         });
+    }
+
+    @Override
+    public AmbientModeSupport.AmbientCallback getAmbientCallback() {
+        return new AmbientModeSupport.AmbientCallback() {
+            public void onEnterAmbient(Bundle ambientDetails) {}
+            public void onExitAmbient(Bundle ambientDetails) {}
+        };
     }
 }
 
