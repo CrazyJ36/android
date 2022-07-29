@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -40,9 +38,7 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         btn = findViewById(R.id.btn);
         sharedPreferences = getSharedPreferences("count", MODE_PRIVATE);
         editor = sharedPreferences.edit();
-
         messageView.setText(String.valueOf(sharedPreferences.getInt("count",0)));
-
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +49,23 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
 
             }
         });
+        new Thread() {
+            public void run() {
+                editor.putInt("count", sharedPreferences.getInt("count", 0) + 1);
+                editor.apply();
+                sendData(sharedPreferences.getInt("count", 0));
+                editor.putInt("count", sharedPreferences.getInt("count", 0) - 1);
+                editor.apply();
+                sendData(sharedPreferences.getInt("count", 0));
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "synced", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                Thread.currentThread().interrupt();
+            }
+        }.start();
     }
     @Override
     public void onResume() {

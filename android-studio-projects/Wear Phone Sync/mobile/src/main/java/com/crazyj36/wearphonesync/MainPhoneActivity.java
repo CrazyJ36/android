@@ -39,7 +39,23 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
         sharedPreferences = getSharedPreferences("count", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         messageView.setText(String.valueOf(sharedPreferences.getInt("count",0)));
-
+        new Thread() {
+            public void run() {
+                editor.putInt("count", sharedPreferences.getInt("count", 0) + 1);
+                editor.apply();
+                sendData(sharedPreferences.getInt("count", 0));
+                editor.putInt("count", sharedPreferences.getInt("count", 0) - 1);
+                editor.apply();
+                sendData(sharedPreferences.getInt("count", 0));
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "synced", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                Thread.currentThread().interrupt();
+            }
+        }.start();
     }
     @Override
     public void onResume() {
