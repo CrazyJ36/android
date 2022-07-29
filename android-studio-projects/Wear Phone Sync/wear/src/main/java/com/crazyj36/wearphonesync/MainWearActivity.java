@@ -49,25 +49,15 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                 sendData(sharedPreferences.getInt("count", 0));
             }
         });
-        messageView.setText(String.valueOf(sharedPreferences.getInt("count",0)));
-
-        editor.putInt("count", sharedPreferences.getInt("count", 0) + 1);
-        editor.apply();
-        sendData(sharedPreferences.getInt("count", 0));
-        editor.putInt("count", sharedPreferences.getInt("count", 0) - 1);
-        editor.apply();
-        sendData(sharedPreferences.getInt("count", 0));
+        messageView.setText(String.valueOf(sharedPreferences.getInt("count", 0)));
+        sendData(0);
     }
     @Override
     public void onResume() {
         super.onResume();
         Wearable.getDataClient(this).addListener(this);
-        editor.putInt("count", sharedPreferences.getInt("count", 0) + 1);
-        editor.apply();
-        sendData(sharedPreferences.getInt("count", 0));
-        editor.putInt("count", sharedPreferences.getInt("count", 0) - 1);
-        editor.apply();
-        sendData(sharedPreferences.getInt("count", 0));
+        messageView.setText(String.valueOf(sharedPreferences.getInt("count", 0)));
+        sendData(0);
     }
     @Override
     public void onPause() {
@@ -82,9 +72,20 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                 if (messagepath.equals(path)) {
                     DataMapItem dataMapItem = DataMapItem.fromDataItem(event.getDataItem());
                     int message = dataMapItem.getDataMap().getInt("message");
-                    editor.putInt("count", message);
-                    editor.apply();
-                    messageView.setText(String.valueOf(sharedPreferences.getInt("count", 0)));
+
+                    if (message > 0) {
+                        if (message > sharedPreferences.getInt("count", 0)) {
+                            editor.putInt("count", message);
+                            editor.apply();
+                            messageView.setText(String.valueOf(message));
+                        } else { // other app just opened.
+                            messageView.setText(String.valueOf(sharedPreferences.getInt("count", 0)));
+                            sendData(sharedPreferences.getInt("count", 0));
+                        }
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "got 0", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         }
