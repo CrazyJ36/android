@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -33,24 +35,29 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toast.makeText(this, "Wear", Toast.LENGTH_SHORT).show();
         messageView = findViewById(R.id.data);
         btn = findViewById(R.id.btn);
         sharedPreferences = getSharedPreferences("count", MODE_PRIVATE);
         editor = sharedPreferences.edit();
+
+        messageView.setText(String.valueOf(sharedPreferences.getInt("count",0)));
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editor.putInt("count", sharedPreferences.getInt("count", 0) + 1);
+                editor.apply();
+                messageView.setText(String.valueOf(sharedPreferences.getInt("count",0)));
                 sendData(sharedPreferences.getInt("count", 0));
+
             }
         });
-        Toast.makeText(this, "Wear", Toast.LENGTH_SHORT).show();
     }
     @Override
     public void onResume() {
         super.onResume();
         Wearable.getDataClient(this).addListener(this);
-        // get count from other device if not the same number, as if you close the app
-        // on one device, tap the button on the other, number order is messed up.
     }
     @Override
     public void onPause() {
@@ -64,10 +71,10 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                 String path = event.getDataItem().getUri().getPath();
                 if (messagepath.equals(path)) {
                     DataMapItem dataMapItem = DataMapItem.fromDataItem(event.getDataItem());
-                    int message = dataMapItem.getDataMap().getInt("message") + 1;
+                    int message = dataMapItem.getDataMap().getInt("message");
                     editor.putInt("count", message);
                     editor.apply();
-                    messageView.setText(String.valueOf(message));
+                    messageView.setText(String.valueOf(sharedPreferences.getInt("count", 0)));
                 }
             }
         }

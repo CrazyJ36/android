@@ -32,12 +32,14 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toast.makeText(this, "Phone", Toast.LENGTH_SHORT).show();
         messageView = findViewById(R.id.data);
         btn = findViewById(R.id.btn);
         btn.setOnClickListener(this);
         sharedPreferences = getSharedPreferences("count", MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        Toast.makeText(this, "Phone", Toast.LENGTH_SHORT).show();
+        messageView.setText(String.valueOf(sharedPreferences.getInt("count",0)));
+
     }
     @Override
     public void onResume() {
@@ -51,6 +53,9 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
     }
     @Override
     public void onClick(View v) {
+        editor.putInt("count", sharedPreferences.getInt("count", 0) + 1);
+        editor.apply();
+        messageView.setText(String.valueOf(sharedPreferences.getInt("count",0)));
         sendData(sharedPreferences.getInt("count", 0));
     }
     @Override
@@ -60,10 +65,10 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
                 String path = event.getDataItem().getUri().getPath();
                 if (messagepath.equals(path)) {
                     DataMapItem dataMapItem = DataMapItem.fromDataItem(event.getDataItem());
-                    int message = dataMapItem.getDataMap().getInt("message") + 1;
+                    int message = dataMapItem.getDataMap().getInt("message");
                     editor.putInt("count", message);
                     editor.apply();
-                    messageView.setText(String.valueOf(message));
+                    messageView.setText(String.valueOf(sharedPreferences.getInt("count", 0)));
                 }
             }
         }
