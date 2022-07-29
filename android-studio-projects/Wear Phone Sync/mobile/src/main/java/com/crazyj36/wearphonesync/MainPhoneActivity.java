@@ -20,6 +20,9 @@ import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.PutDataRequest;
 import com.google.android.gms.wearable.Wearable;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainPhoneActivity extends Activity implements DataClient.OnDataChangedListener, View.OnClickListener {
 
     TextView messageView;
@@ -39,28 +42,24 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
         sharedPreferences = getSharedPreferences("count", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         messageView.setText(String.valueOf(sharedPreferences.getInt("count",0)));
-        new Thread() {
-            public void run() {
-                editor.putInt("count", sharedPreferences.getInt("count", 0) + 1);
-                editor.apply();
-                sendData(sharedPreferences.getInt("count", 0));
-                editor.putInt("count", sharedPreferences.getInt("count", 0) - 1);
-                editor.apply();
-                sendData(sharedPreferences.getInt("count", 0));
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), "synced", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                Thread.currentThread().interrupt();
-            }
-        }.start();
+
+        editor.putInt("count", sharedPreferences.getInt("count", 0) + 1);
+        editor.apply();
+        sendData(sharedPreferences.getInt("count", 0));
+        editor.putInt("count", sharedPreferences.getInt("count", 0) - 1);
+        editor.apply();
+        sendData(sharedPreferences.getInt("count", 0));
     }
     @Override
     public void onResume() {
         super.onResume();
         Wearable.getDataClient(this).addListener(this);
+        editor.putInt("count", sharedPreferences.getInt("count", 0) + 1);
+        editor.apply();
+        sendData(sharedPreferences.getInt("count", 0));
+        editor.putInt("count", sharedPreferences.getInt("count", 0) - 1);
+        editor.apply();
+        sendData(sharedPreferences.getInt("count", 0));
     }
     @Override
     public void onPause() {
@@ -71,7 +70,6 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
     public void onClick(View v) {
         editor.putInt("count", sharedPreferences.getInt("count", 0) + 1);
         editor.apply();
-        messageView.setText(String.valueOf(sharedPreferences.getInt("count",0)));
         sendData(sharedPreferences.getInt("count", 0));
     }
     @Override
@@ -97,11 +95,14 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
         Task<DataItem> dataItemTask = Wearable.getDataClient(this).putDataItem(request);
         dataItemTask.addOnSuccessListener(new OnSuccessListener<DataItem>() {
             @Override
-            public void onSuccess(DataItem dataItem) {}
+            public void onSuccess(DataItem dataItem) {
+            }
         });
         dataItemTask.addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@NonNull Exception e) {}
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), "sendData failed", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }
