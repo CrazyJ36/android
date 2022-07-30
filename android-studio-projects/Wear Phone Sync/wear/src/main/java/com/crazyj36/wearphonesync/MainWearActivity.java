@@ -40,12 +40,13 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         messageView = findViewById(R.id.data);
         sharedPreferences = getSharedPreferences("count", MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 editor.putInt("count", sharedPreferences.getInt("count", 1) + 1);
                 editor.apply();
-                //sendData(0);
                 sendData(sharedPreferences.getInt("count", 1));
+                Log.d("WEARPPHONESYNCTEST", "Sent new preference");
                 messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
             }
         });
@@ -59,9 +60,8 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                         if (tryLimit < 10) {
                             sendData(0);
                             sendData(sharedPreferences.getInt("count", 1));
-                            messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
                             tryLimit++;
-                            Log.d("WEARPHONESYNCTEST", "trying to sync: " + String.valueOf(tryLimit));
+                            Log.d("WEARPHONESYNCTEST", "Sent preference: " + tryLimit);
                         } else timer.cancel();
                     }
                 });
@@ -84,9 +84,8 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                         if (tryLimit < 10) {
                             sendData(0);
                             sendData(sharedPreferences.getInt("count", 1));
-                            messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
                             tryLimit++;
-                            Log.d("WEARPHONESYNCTEST", "trying to sync: " + String.valueOf(tryLimit));
+                            Log.d("WEARPHONESYNCTEST", "Sent preference: " + String.valueOf(tryLimit));
                         } else timer.cancel();
                     }
                 });
@@ -132,14 +131,12 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                         editor.apply();
                         sendData(0);
                         sendData(message);
-                        Log.d("WEARPHONESYNCTEST", "sent message");
+                        Log.d("WEARPHONESYNCTEST", "Got new preference");
                         messageView.setText(String.valueOf(message));
                     } else if (sharedPreferences.getInt("count", 1) > message) {
                         sendData(0);
                         sendData(sharedPreferences.getInt("count", 1));
-                        Log.d("WEARPHONESYNCTEST", "sent preference");
-                        messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
-                    } else if (sharedPreferences.getInt("count", 1) == message) {
+                        Log.d("WEARPHONESYNCTEST", "Sent preference");
                         messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
                     }
                 }
