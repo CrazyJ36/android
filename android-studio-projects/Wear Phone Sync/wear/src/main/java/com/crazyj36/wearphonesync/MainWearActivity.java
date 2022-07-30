@@ -44,7 +44,7 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
             public void onClick(View v) {
                 editor.putInt("count", sharedPreferences.getInt("count", 1) + 1);
                 editor.apply();
-                sendData(0);
+                //sendData(0);
                 sendData(sharedPreferences.getInt("count", 1));
                 messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
             }
@@ -138,6 +138,8 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                         sendData(0);
                         sendData(sharedPreferences.getInt("count", 1));
                         Log.d("WEARPHONESYNCTEST", "sent preference");
+                        messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
+                    } else if (sharedPreferences.getInt("count", 1) == message) {
                         messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
                     }
                 }

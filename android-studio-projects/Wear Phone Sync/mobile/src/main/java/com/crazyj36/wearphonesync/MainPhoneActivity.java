@@ -42,7 +42,7 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
             public void onClick(View v) {
                 editor.putInt("count", sharedPreferences.getInt("count", 1) + 1);
                 editor.apply();
-                sendData(0);
+                //sendData(0);
                 sendData(sharedPreferences.getInt("count", 1));
                 messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
             }
@@ -130,12 +130,14 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
                         editor.apply();
                         sendData(0);
                         sendData(message);
-                        Log.d("WEARPHONESYNCTEST", "sent message");
+                        Log.d("WEARPHONESYNCTEST", "sent new message");
                         messageView.setText(String.valueOf(message));
                     } else if (sharedPreferences.getInt("count", 1) > message) {
                         sendData(0);
                         sendData(sharedPreferences.getInt("count", 1));
                         Log.d("WEARPHONESYNCTEST", "sent preference");
+                        messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
+                    } else if (sharedPreferences.getInt("count", 1) == message) {
                         messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
                     }
                 }
