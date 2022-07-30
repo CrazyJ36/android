@@ -5,10 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.wear.ambient.AmbientModeSupport;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -27,7 +25,7 @@ import java.util.TimerTask;
 
 public class MainWearActivity extends FragmentActivity implements AmbientModeSupport.AmbientCallbackProvider, DataClient.OnDataChangedListener {
     TextView messageView;
-    String messagepath = "/message_path";
+    String messagepath = "/messagepath";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     Timer timer;
@@ -36,7 +34,6 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toast.makeText(this, "Wear", Toast.LENGTH_SHORT).show();
         messageView = findViewById(R.id.data);
         sharedPreferences = getSharedPreferences("count", MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -49,13 +46,19 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         timerTask = new TimerTask() {
             @Override
             public void run() {
-                Log.d("WEARPHONEAPPTEST", "Timer running");
-                sendData(0); // sending placeholder int causes A change, allowing onDataChanged to run code.
+                sendData(0);
                 sendData(sharedPreferences.getInt("count", 1));
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
+                    }
+                });
+
             }
         };
         timer = new Timer();
-        timer.schedule(timerTask, 1000, 1000);
+        timer.schedule(timerTask, 500, 500);
     }
     @Override
     public void onResume() {
@@ -75,16 +78,10 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                 if (Objects.requireNonNull(dataItem.getUri().getPath()).compareTo(messagepath) == 0){
                     DataMap dataMap = DataMapItem.fromDataItem(dataItem).getDataMap();
                     int message = dataMap.getInt("message");
-                    if (message > 0) {
-                        if (sharedPreferences.getInt("count", 1) < message) {
-                            editor.putInt("count", message);
-                            editor.apply();
-                            messageView.setText(String.valueOf(message));
-                        } else {
-                            messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
-                        }
+                    if (message > sharedPreferences.getInt("count", 1)) {
+                        editor.putInt("count", message);
+                        editor.apply();
                     }
-                    Log.d("WEARPHONEAPPTEST", "data changed on message_path");
                 }
             }
         }
@@ -98,13 +95,11 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         dataItemTask.addOnSuccessListener(new OnSuccessListener<DataItem>() {
             @Override
             public void onSuccess(DataItem dataItem) {
-                Log.d("WEARPHONEAPPTEST", "data sent");
             }
         });
         dataItemTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "sendData failed", Toast.LENGTH_SHORT).show();
             }
         });
     }
