@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -16,56 +15,51 @@ import com.google.android.gms.wearable.DataClient;
 import com.google.android.gms.wearable.DataEvent;
 import com.google.android.gms.wearable.DataEventBuffer;
 import com.google.android.gms.wearable.DataItem;
+import com.google.android.gms.wearable.DataMap;
 import com.google.android.gms.wearable.DataMapItem;
 import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.PutDataRequest;
 import com.google.android.gms.wearable.Wearable;
-
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainPhoneActivity extends Activity implements DataClient.OnDataChangedListener, View.OnClickListener {
-
+public class MainPhoneActivity extends Activity implements DataClient.OnDataChangedListener {
     TextView messageView;
-    Button btn;
     String messagepath = "/message_path";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-
+    Timer timer;
+    TimerTask timerTask;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toast.makeText(this, "Phone", Toast.LENGTH_SHORT).show();
         messageView = findViewById(R.id.data);
-        btn = findViewById(R.id.btn);
-        btn.setOnClickListener(this);
         sharedPreferences = getSharedPreferences("count", MODE_PRIVATE);
         editor = sharedPreferences.edit();
-
-        sendData(0); // sending placeholder int causes A change, allowing onDataChanged to run code.
-        sendData(sharedPreferences.getInt("count", 1));
-        sendData(0);
-        sendData(sharedPreferences.getInt("count", 1));
-        sendData(0);
-        sendData(sharedPreferences.getInt("count", 1));
-        sendData(0);
-        sendData(sharedPreferences.getInt("count", 1));
-
-
+        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                editor.putInt("count", sharedPreferences.getInt("count", 1) + 1);
+                editor.apply();
+            }
+        });
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                Log.d("WEARPHONEAPPTEST", "Timer running");
+                sendData(0); // sending placeholder int causes A change, allowing onDataChanged to run code.
+                sendData(sharedPreferences.getInt("count", 1));
+            }
+        };
+        timer = new Timer();
+        timer.schedule(timerTask, 1000, 1000);
     }
     @Override
     public void onResume() {
         super.onResume();
         Wearable.getDataClient(this).addListener(this);
-        sendData(0);
-        sendData(sharedPreferences.getInt("count", 1));
-        sendData(0);
-        sendData(sharedPreferences.getInt("count", 1));
-        sendData(0);
-        sendData(sharedPreferences.getInt("count", 1));
-        sendData(0);
-        sendData(sharedPreferences.getInt("count", 1));
     }
     @Override
     public void onPause() {
@@ -73,48 +67,23 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
         Wearable.getDataClient(this).removeListener(this);
     }
     @Override
-    public void onClick(View v) {
-        editor.putInt("count", sharedPreferences.getInt("count", 1) + 1);
-        editor.apply();
-        sendData(sharedPreferences.getInt("count", 1));
-    }
-    @Override
-    public void onDataChanged(@NonNull DataEventBuffer dataEventBuffer) {
+    public void onDataChanged(DataEventBuffer dataEventBuffer) {
         for (DataEvent event : dataEventBuffer) {
             if (event.getType() == DataEvent.TYPE_CHANGED) {
-                String path = event.getDataItem().getUri().getPath();
-                if (messagepath.equals(path)) {
-                    DataMapItem dataMapItem = DataMapItem.fromDataItem(event.getDataItem());
-                    int message = dataMapItem.getDataMap().getInt("message");
-
+                DataItem dataItem = event.getDataItem();
+                if (Objects.requireNonNull(dataItem.getUri().getPath()).compareTo(messagepath) == 0){
+                    DataMap dataMap = DataMapItem.fromDataItem(dataItem).getDataMap();
+                    int message = dataMap.getInt("message");
                     if (message > 0) {
                         if (sharedPreferences.getInt("count", 1) < message) {
                             editor.putInt("count", message);
                             editor.apply();
                             messageView.setText(String.valueOf(message));
-                            sendData(0);
-                            sendData(message);
-                            sendData(0);
-                            sendData(message);
-                            sendData(0);
-                            sendData(message);
-                            sendData(0);
-                            sendData(message);
-                        } else if (sharedPreferences.getInt("count", 1) > message) {
+                        } else {
                             messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
-                            sendData(0);
-                            sendData(sharedPreferences.getInt("count", 1));
-                            sendData(0);
-                            sendData(sharedPreferences.getInt("count", 1));
-                            sendData(0);
-                            sendData(sharedPreferences.getInt("count", 1));
-                            sendData(0);
-                            sendData(sharedPreferences.getInt("count", 1));
-                        } else if (sharedPreferences.getInt("count", 1) == message){
-                            messageView.setText(String.valueOf(message));
                         }
                     }
-                    Log.d("SEND_DATA_TEST", "data changed on message_path");
+                    Log.d("WEARPHONEAPPTEST", "data changed on message_path");
                 }
             }
         }
@@ -128,7 +97,7 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
         dataItemTask.addOnSuccessListener(new OnSuccessListener<DataItem>() {
             @Override
             public void onSuccess(DataItem dataItem) {
-                Log.d("SEND_DATA_TEST", "data sent");
+                Log.d("WEARPHONEAPPTEST", "data sent");
             }
         });
         dataItemTask.addOnFailureListener(new OnFailureListener() {
