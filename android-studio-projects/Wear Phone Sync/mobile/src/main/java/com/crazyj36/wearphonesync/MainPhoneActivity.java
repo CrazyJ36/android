@@ -54,7 +54,7 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (tryLimit < 20) {
+                        if (tryLimit < 10) {
                             sendData(0);
                             sendData(sharedPreferences.getInt("count", 1));
                             messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
@@ -66,7 +66,7 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
             }
         };
         timer = new Timer();
-        timer.schedule(timerTask, 0, 100);
+        timer.schedule(timerTask, 0, 1000);
     }
     @Override
     public void onResume() {
@@ -79,7 +79,7 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (tryLimit < 20) {
+                        if (tryLimit < 10) {
                             sendData(0);
                             sendData(sharedPreferences.getInt("count", 1));
                             messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
@@ -91,7 +91,7 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
             }
         };
         timer = new Timer();
-        timer.schedule(timerTask, 0, 100);
+        timer.schedule(timerTask, 0, 1000);
     }
     @Override
     public void onPause() {
@@ -135,7 +135,7 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
                     } else if (sharedPreferences.getInt("count", 1) > message) {
                         sendData(0);
                         sendData(sharedPreferences.getInt("count", 1));
-                        Log.d("WEARPHONESYNCTEST", "sent message");
+                        Log.d("WEARPHONESYNCTEST", "sent preference");
                         messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
                     }
                 }

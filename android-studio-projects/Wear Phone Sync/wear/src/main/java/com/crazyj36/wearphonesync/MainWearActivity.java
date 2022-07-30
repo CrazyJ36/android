@@ -56,7 +56,7 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (tryLimit < 20) {
+                        if (tryLimit < 10) {
                             sendData(0);
                             sendData(sharedPreferences.getInt("count", 1));
                             messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
@@ -68,7 +68,7 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
             }
         };
         timer = new Timer();
-        timer.schedule(timerTask, 0, 100);
+        timer.schedule(timerTask, 0, 1000);
     }
     @Override
     public void onResume() {
@@ -81,7 +81,7 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (tryLimit < 20) {
+                        if (tryLimit < 10) {
                             sendData(0);
                             sendData(sharedPreferences.getInt("count", 1));
                             messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
@@ -93,7 +93,7 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
             }
         };
         timer = new Timer();
-        timer.schedule(timerTask, 0, 100);
+        timer.schedule(timerTask, 0, 1000);
     }
     @Override
     public void onPause() {
