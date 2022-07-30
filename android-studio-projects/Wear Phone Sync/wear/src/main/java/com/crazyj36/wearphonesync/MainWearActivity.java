@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.wear.ambient.AmbientModeSupport;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,6 +32,7 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
     SharedPreferences.Editor editor;
     Timer timer;
     TimerTask timerTask;
+    int tryLimit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,34 +44,62 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
             public void onClick(View v) {
                 editor.putInt("count", sharedPreferences.getInt("count", 1) + 1);
                 editor.apply();
+                sendData(0);
+                sendData(sharedPreferences.getInt("count", 1));
+                messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
             }
         });
+        tryLimit = 0;
         timerTask = new TimerTask() {
             @Override
             public void run() {
-                sendData(0);
-                sendData(sharedPreferences.getInt("count", 1));
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
+                        if (tryLimit < 20) {
+                            sendData(0);
+                            sendData(sharedPreferences.getInt("count", 1));
+                            messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
+                            tryLimit++;
+                            Log.d("WEARPHONESYNCTEST", "trying to sync: " + String.valueOf(tryLimit));
+                        } else timer.cancel();
                     }
                 });
-
             }
         };
         timer = new Timer();
-        timer.schedule(timerTask, 500, 500);
+        timer.schedule(timerTask, 0, 100);
     }
     @Override
     public void onResume() {
         super.onResume();
         Wearable.getDataClient(this).addListener(this);
+        tryLimit = 0;
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (tryLimit < 20) {
+                            sendData(0);
+                            sendData(sharedPreferences.getInt("count", 1));
+                            messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
+                            tryLimit++;
+                            Log.d("WEARPHONESYNCTEST", "trying to sync: " + String.valueOf(tryLimit));
+                        } else timer.cancel();
+                    }
+                });
+            }
+        };
+        timer = new Timer();
+        timer.schedule(timerTask, 0, 100);
     }
     @Override
     public void onPause() {
         super.onPause();
         Wearable.getDataClient(this).removeListener(this);
+        timer.cancel();
     }
     private void sendData(int message) {
         PutDataMapRequest dataMap = PutDataMapRequest.create(messagepath);
@@ -99,6 +130,15 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                     if (message > sharedPreferences.getInt("count", 1)) {
                         editor.putInt("count", message);
                         editor.apply();
+                        sendData(0);
+                        sendData(message);
+                        Log.d("WEARPHONESYNCTEST", "sent message");
+                        messageView.setText(String.valueOf(message));
+                    } else if (sharedPreferences.getInt("count", 1) > message) {
+                        sendData(0);
+                        sendData(sharedPreferences.getInt("count", 1));
+                        Log.d("WEARPHONESYNCTEST", "sent preference");
+                        messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
                     }
                 }
             }
