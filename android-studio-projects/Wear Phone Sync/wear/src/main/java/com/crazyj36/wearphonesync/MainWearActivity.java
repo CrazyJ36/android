@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.wear.ambient.AmbientModeSupport;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,9 +22,6 @@ import com.google.android.gms.wearable.DataMapItem;
 import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.PutDataRequest;
 import com.google.android.gms.wearable.Wearable;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainWearActivity extends FragmentActivity implements AmbientModeSupport.AmbientCallbackProvider, DataClient.OnDataChangedListener {
 
@@ -42,25 +41,35 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         sharedPreferences = getSharedPreferences("count", MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        messageView.setText(String.valueOf(sharedPreferences.getInt("count", 0)));
-        sendData(0);
-        sendData(sharedPreferences.getInt("count", 0));
-
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editor.putInt("count", sharedPreferences.getInt("count", 0) + 1);
+                editor.putInt("count", sharedPreferences.getInt("count", 1) + 1);
                 editor.apply();
-                sendData(0);
-                sendData(sharedPreferences.getInt("count", 0));
-                messageView.setText(String.valueOf(sharedPreferences.getInt("count", 0)));
+                sendData(sharedPreferences.getInt("count", 1));
             }
         });
+        sendData(0); // sending placeholder int causes A change, allowing onDataChanged to run code.
+        sendData(sharedPreferences.getInt("count", 1));
+        sendData(0);
+        sendData(sharedPreferences.getInt("count", 1));
+        sendData(0);
+        sendData(sharedPreferences.getInt("count", 1));
+        sendData(0);
+        sendData(sharedPreferences.getInt("count", 1));
     }
     @Override
     public void onResume() {
         super.onResume();
         Wearable.getDataClient(this).addListener(this);
+        sendData(0);
+        sendData(sharedPreferences.getInt("count", 1));
+        sendData(0);
+        sendData(sharedPreferences.getInt("count", 1));
+        sendData(0);
+        sendData(sharedPreferences.getInt("count", 1));
+        sendData(0);
+        sendData(sharedPreferences.getInt("count", 1));
     }
     @Override
     public void onPause() {
@@ -77,17 +86,33 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                     int message = dataMapItem.getDataMap().getInt("message");
 
                     if (message > 0) {
-                        if (sharedPreferences.getInt("count", 0) <= message) {
+                        if (sharedPreferences.getInt("count", 1) < message) {
                             editor.putInt("count", message);
                             editor.apply();
                             messageView.setText(String.valueOf(message));
                             sendData(0);
-                            sendData(sharedPreferences.getInt("count", 0));
-                        } else if (sharedPreferences.getInt("count", 0) > message) {
+                            sendData(message);
                             sendData(0);
-                            sendData(sharedPreferences.getInt("count", 0));
+                            sendData(message);
+                            sendData(0);
+                            sendData(message);
+                            sendData(0);
+                            sendData(message);
+                        } else if (sharedPreferences.getInt("count", 1) > message) {
+                            messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
+                            sendData(0);
+                            sendData(sharedPreferences.getInt("count", 1));
+                            sendData(0);
+                            sendData(sharedPreferences.getInt("count", 1));
+                            sendData(0);
+                            sendData(sharedPreferences.getInt("count", 1));
+                            sendData(0);
+                            sendData(sharedPreferences.getInt("count", 1));
+                        } else if (sharedPreferences.getInt("count", 1) == message){
+                            messageView.setText(String.valueOf(message));
                         }
                     }
+                    Log.d("SEND_DATA_TEST", "data changed on message_path");
                 }
             }
         }
@@ -101,7 +126,7 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         dataItemTask.addOnSuccessListener(new OnSuccessListener<DataItem>() {
             @Override
             public void onSuccess(DataItem dataItem) {
-
+                Log.d("SEND_DATA_TEST", "data sent");
             }
         });
         dataItemTask.addOnFailureListener(new OnFailureListener() {

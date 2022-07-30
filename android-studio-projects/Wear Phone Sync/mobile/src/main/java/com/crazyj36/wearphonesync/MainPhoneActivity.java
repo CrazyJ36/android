@@ -3,6 +3,7 @@ package com.crazyj36.wearphonesync;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -42,14 +43,29 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
         sharedPreferences = getSharedPreferences("count", MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        messageView.setText(String.valueOf(sharedPreferences.getInt("count", 0)));
+        sendData(0); // sending placeholder int causes A change, allowing onDataChanged to run code.
+        sendData(sharedPreferences.getInt("count", 1));
         sendData(0);
-        sendData(sharedPreferences.getInt("count", 0));
+        sendData(sharedPreferences.getInt("count", 1));
+        sendData(0);
+        sendData(sharedPreferences.getInt("count", 1));
+        sendData(0);
+        sendData(sharedPreferences.getInt("count", 1));
+
+
     }
     @Override
     public void onResume() {
         super.onResume();
         Wearable.getDataClient(this).addListener(this);
+        sendData(0);
+        sendData(sharedPreferences.getInt("count", 1));
+        sendData(0);
+        sendData(sharedPreferences.getInt("count", 1));
+        sendData(0);
+        sendData(sharedPreferences.getInt("count", 1));
+        sendData(0);
+        sendData(sharedPreferences.getInt("count", 1));
     }
     @Override
     public void onPause() {
@@ -58,11 +74,9 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
     }
     @Override
     public void onClick(View v) {
-        editor.putInt("count", sharedPreferences.getInt("count", 0) + 1);
+        editor.putInt("count", sharedPreferences.getInt("count", 1) + 1);
         editor.apply();
-        sendData(0);
-        sendData(sharedPreferences.getInt("count", 0));
-        messageView.setText(String.valueOf(sharedPreferences.getInt("count", 0)));
+        sendData(sharedPreferences.getInt("count", 1));
     }
     @Override
     public void onDataChanged(@NonNull DataEventBuffer dataEventBuffer) {
@@ -74,17 +88,33 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
                     int message = dataMapItem.getDataMap().getInt("message");
 
                     if (message > 0) {
-                        if (sharedPreferences.getInt("count", 0) <= message) {
+                        if (sharedPreferences.getInt("count", 1) < message) {
                             editor.putInt("count", message);
                             editor.apply();
                             messageView.setText(String.valueOf(message));
                             sendData(0);
-                            sendData(sharedPreferences.getInt("count", 0));
-                        } else if (sharedPreferences.getInt("count", 0) > message) {
+                            sendData(message);
                             sendData(0);
-                            sendData(sharedPreferences.getInt("count", 0));
+                            sendData(message);
+                            sendData(0);
+                            sendData(message);
+                            sendData(0);
+                            sendData(message);
+                        } else if (sharedPreferences.getInt("count", 1) > message) {
+                            messageView.setText(String.valueOf(sharedPreferences.getInt("count", 1)));
+                            sendData(0);
+                            sendData(sharedPreferences.getInt("count", 1));
+                            sendData(0);
+                            sendData(sharedPreferences.getInt("count", 1));
+                            sendData(0);
+                            sendData(sharedPreferences.getInt("count", 1));
+                            sendData(0);
+                            sendData(sharedPreferences.getInt("count", 1));
+                        } else if (sharedPreferences.getInt("count", 1) == message){
+                            messageView.setText(String.valueOf(message));
                         }
                     }
+                    Log.d("SEND_DATA_TEST", "data changed on message_path");
                 }
             }
         }
@@ -98,6 +128,7 @@ public class MainPhoneActivity extends Activity implements DataClient.OnDataChan
         dataItemTask.addOnSuccessListener(new OnSuccessListener<DataItem>() {
             @Override
             public void onSuccess(DataItem dataItem) {
+                Log.d("SEND_DATA_TEST", "data sent");
             }
         });
         dataItemTask.addOnFailureListener(new OnFailureListener() {
