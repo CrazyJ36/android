@@ -70,6 +70,24 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         super.onPause();
         Wearable.getDataClient(this).removeListener(this);
     }
+    private void sendData(int message) {
+        PutDataMapRequest dataMap = PutDataMapRequest.create(messagepath);
+        dataMap.getDataMap().putInt("message", message);
+        PutDataRequest request = dataMap.asPutDataRequest();
+        request.setUrgent();
+        Task<DataItem> dataItemTask = Wearable.getDataClient(this).putDataItem(request);
+        dataItemTask.addOnSuccessListener(new OnSuccessListener<DataItem>() {
+            @Override
+            public void onSuccess(DataItem dataItem) {
+            }
+        });
+        dataItemTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // dataitem is null
+            }
+        });
+    }
     @Override
     public void onDataChanged(DataEventBuffer dataEventBuffer) {
         for (DataEvent event : dataEventBuffer) {
@@ -85,23 +103,6 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                 }
             }
         }
-    }
-    private void sendData(int message) {
-        PutDataMapRequest dataMap = PutDataMapRequest.create(messagepath);
-        dataMap.getDataMap().putInt("message", message);
-        PutDataRequest request = dataMap.asPutDataRequest();
-        request.setUrgent();
-        Task<DataItem> dataItemTask = Wearable.getDataClient(this).putDataItem(request);
-        dataItemTask.addOnSuccessListener(new OnSuccessListener<DataItem>() {
-            @Override
-            public void onSuccess(DataItem dataItem) {
-            }
-        });
-        dataItemTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-            }
-        });
     }
     @Override
     public AmbientModeSupport.AmbientCallback getAmbientCallback() {
