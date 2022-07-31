@@ -1,0 +1,27 @@
+plugins {
+    id 'com.android.application'
+}
+android {
+    compileSdkVersion 32
+    defaultConfig {
+        applicationId "com.crazyj36.wearnews"
+        minSdkVersion 23
+        targetSdkVersion 32
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.google.android.support:wearable:2.9.0'
+    implementation 'androidx.wear:wear:1.2.0'
+    implementation 'com.google.android.gms:play-services-wearable:17.1.0'
+    compileOnly 'com.google.android.wearable:wearable:2.9.0'
+    wearApp project(':wear')
+}

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Wear News</string>
+    <string name="instructions">This app sends news to the corresponding wear app.\nBoth must be running.</string>
+</resources>
