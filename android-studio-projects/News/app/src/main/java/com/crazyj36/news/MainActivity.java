@@ -37,8 +37,8 @@ public class MainActivity extends Activity {
             public void run() {
                 Looper.prepare();
                 try {
-                    // Document doc = Jsoup.connect("http://www.reddit.com/r/AskReddit+Music+technology+/new/.rss?sort=new").get();
-                    Document doc = Jsoup.connect("http://www.reddit.com/r/all/new/.rss").get();
+                    Document doc = Jsoup.connect("http://www.reddit.com/r/AskReddit+Music/new/.rss?sort=new").get();
+                    //Document doc = Jsoup.connect("http://www.reddit.com/r/all/new/.rss").get();
                     Element headline = doc.select("feed entry title").first();
                     Element categoryAttr = doc.select("feed entry category").first();
                     titleTxt = headline.text();
