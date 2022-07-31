@@ -3,7 +3,6 @@ package com.crazyj36.wearnews;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentActivity;
 import androidx.wear.ambient.AmbientModeSupport;
-
 import android.util.Log;
 import android.widget.TextView;
 import com.google.android.gms.wearable.DataClient;
@@ -19,8 +18,6 @@ import java.util.Objects;
 public class MainWearActivity extends FragmentActivity implements AmbientModeSupport.AmbientCallbackProvider, DataClient.OnDataChangedListener {
     TextView title;
     TextView sub;
-    String messagepath = "/messagepath";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,13 +36,12 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         super.onPause();
         Wearable.getDataClient(this).removeListener(this);
     }
-
     @Override
     public void onDataChanged(DataEventBuffer dataEventBuffer) {
         for (DataEvent event : dataEventBuffer) {
             if (event.getType() == DataEvent.TYPE_CHANGED) {
                 DataItem dataItem = event.getDataItem();
-                if (Objects.requireNonNull(dataItem.getUri().getPath()).compareTo(messagepath) == 0){
+                if (Objects.requireNonNull(dataItem.getUri().getPath()).compareTo("/message_path") == 0){
                     DataMap dataMap = DataMapItem.fromDataItem(dataItem).getDataMap();
                     String[] message = dataMap.getStringArray("message");
                     title.setText(message[0]);
