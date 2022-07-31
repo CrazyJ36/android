@@ -7,19 +7,24 @@ import org.jsoup.nodes.Element;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.Looper;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
-    TextView result;
-    String text = null;
+    TextView title;
+    TextView sub;
+    String titleTxt = null;
+    String subTxt = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        result = findViewById(R.id.result);
-        findViewById(R.id.getBtn).setOnClickListener(new View.OnClickListener() {
+        title = findViewById(R.id.title);
+        sub = findViewById(R.id.sub);
+        findViewById(R.id.updateBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getWebsite();
@@ -30,20 +35,22 @@ public class MainActivity extends Activity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                Looper.prepare();
                 try {
-                    //Document doc = Jsoup.connect("https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGRqTVhZU0FtVnVHZ0pKVGlnQVAB").get();
-                    //Element headline = doc.select("rss channel item title").first();
-                    Document doc = Jsoup.connect("https://www.reddit.com/r/AskReddit/new/.rss").get();
+                    // Document doc = Jsoup.connect("http://www.reddit.com/r/AskReddit+Music+technology+/new/.rss?sort=new").get();
+                    Document doc = Jsoup.connect("http://www.reddit.com/r/all/new/.rss").get();
                     Element headline = doc.select("feed entry title").first();
-
-                    text = headline.text();
+                    Element categoryAttr = doc.select("feed entry category").first();
+                    titleTxt = headline.text();
+                    subTxt = categoryAttr.attr("label");
                 } catch (IOException e) {
-                    result.setText("error");
+                    Toast.makeText(MainActivity.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 }
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        result.setText(text);
+                        title.setText(titleTxt);
+                        sub.setText(subTxt);
                     }
                 });
             }
