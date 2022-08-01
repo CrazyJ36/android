@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,24 +37,18 @@ public class MainPhoneActivity extends Activity {
                 stopService(intent);
                 timer.cancel();
                 info.setText("");
-                //finishAffinity();
+                finishAffinity();
             }
         });
     }
-
     public static void setInfoText(String text) {
         context.getMainExecutor().execute(new Runnable() {
             @Override
-            public void run() {
-                info.setText(text);
-            }
+            public void run() {info.setText(text);}
         });
-
     }
     @Override
-    public void onResume () {
-        super.onResume();
-    }
+    public void onResume () {super.onResume();}
     @Override
     public void onPause () {super.onPause();}
     @Override
@@ -62,18 +57,13 @@ public class MainPhoneActivity extends Activity {
         broadcastIntent.setAction("restartservice");
         broadcastIntent.setClass(this, Restarter.class);
         if (MainPhoneActivity.restart) {
-            broadcastIntent = new Intent();
-            broadcastIntent.setAction("restartservice");
-            broadcastIntent.setClass(this, Restarter.class);
             this.sendBroadcast(broadcastIntent);
         } else {
             info.setText("");
             stopService(broadcastIntent);
-            Toast.makeText(this, "service destroyed", Toast.LENGTH_SHORT).show();
-            timer.cancel();
+            Log.d("WEARNEWS", "service destroyed");
         }
         super.onDestroy();
-
     }
 }
 
