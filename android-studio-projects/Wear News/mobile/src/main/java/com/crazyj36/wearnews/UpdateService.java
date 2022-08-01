@@ -43,7 +43,7 @@ public class UpdateService extends Service {
         NotificationChannel notificationChannel = new NotificationChannel("notifychannel", "Notify Button", NotificationManager.IMPORTANCE_DEFAULT);
         notificationManager.createNotificationChannel(notificationChannel);
         notification = new Notification.Builder(this, "notifychannel")
-                .setSmallIcon(R.drawable.ic_launcher)  // the status icon
+                .setSmallIcon(R.drawable.ic_stat_name)  // the status icon
                 .setContentTitle(getString(R.string.app_name))  // the label of the entry
                 .setContentText(getString(R.string.serviceRunningTxt))  // the contents of the entry
                 .setContentIntent(contentIntent)  // The intent to send when the entry is clicked

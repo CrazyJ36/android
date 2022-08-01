@@ -3,8 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/crazy/AndroidStudioProjects/Wear News/mobile/src/main/res/drawable-anydpi/ic_stat_name.xml" value="0.1945" />
+        <entry key="..\:/Users/crazy/AndroidStudioProjects/Wear News/mobile/src/main/res/drawable/ic_launcher_background.xml" value="0.137" />
+        <entry key="..\:/Users/crazy/AndroidStudioProjects/Wear News/mobile/src/main/res/drawable/ic_launcher_foreground.xml" value="0.3675" />
         <entry key="..\:/Users/crazy/AndroidStudioProjects/Wear News/mobile/src/main/res/layout/activity_main.xml" value="0.17603850050658562" />
+        <entry key="..\:/Users/crazy/AndroidStudioProjects/Wear News/mobile/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3675" />
+        <entry key="..\:/Users/crazy/AndroidStudioProjects/Wear News/wear/src/main/res/drawable/ic_launcher_foreground.xml" value="0.3535" />
         <entry key="..\:/Users/crazy/AndroidStudioProjects/Wear News/wear/src/main/res/layout/activity_main.xml" value="0.6840551181102362" />
+        <entry key="..\:/Users/crazy/AndroidStudioProjects/Wear News/wear/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2615" />
         <entry key="..\:/Users/crazy/AndroidStudioProjects/Wear Phone Sync/mobile/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/crazy/AndroidStudioProjects/Wear Phone Sync/wear/src/main/res/layout/activity_main.xml" value="0.7951541850220264" />
       </map>
