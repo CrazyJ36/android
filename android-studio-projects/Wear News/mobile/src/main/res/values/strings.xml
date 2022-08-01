@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Wear News</string>
-    <string name="instructions">This app sends news to the corresponding wear app.\nBoth must be running.</string>
+    <string name="instructions">This app sends news to the corresponding wear app.</string>
+    <string name="noNewPostsText">No new posts…</string>
+    <string name="newPostsText">New posts…</string>
+    <string name="stopServiceBtnTxt">Stop</string>
+    <string name="startServiceBtnTxt">Start</string>
+    <string name="serviceRunningTxt">Service Runnning</string>
 </resources>

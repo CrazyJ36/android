@@ -46,7 +46,7 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                     String[] message = dataMap.getStringArray("message");
                     title.setText(message[0]);
                     sub.setText(message[1]);
-                    Log.d("WEARNEWS", "got data");
+                    Log.d("WEARNEWS", "got new post");
                 }
             }
         }
