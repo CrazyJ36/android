@@ -28,14 +28,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class UpdateService extends Service {
-    static String[] dataToSend = {"", ""};
+    static String[] currentPost = {"", ""};
     static String lastTitle = "";
-    ArrayList<String> recentPosts = new ArrayList<>();
+    static ArrayList<String> recentPosts = new ArrayList<>();
     int postCount = 0;
-    int nextRecentPost = 5;
     NotificationManager notificationManager;
     Notification notification;
     static Timer timer;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -68,11 +68,11 @@ public class UpdateService extends Service {
 
                     if (headline != null && categoryAttr != null) {
                         if (!headline.text().equals(lastTitle)) {
-                            dataToSend[1] = categoryAttr.attr("label");
+                            currentPost[1] = categoryAttr.attr("label");
                             recentPosts.add(headline.text());
                             lastTitle = recentPosts.get(postCount);
-                            dataToSend[0] = lastTitle;
-                            sendData(dataToSend);
+                            currentPost[0] = lastTitle;
+                            sendData(currentPost, recentPosts);
                             postCount++;
                             Log.d("WEARNEWS", "sent new post.");
                             MainPhoneActivity.setInfo3Text(getApplicationContext(), "last title:\n" + lastTitle);
@@ -80,17 +80,19 @@ public class UpdateService extends Service {
                             if (recentPosts.size() == 5) {
                                 recentPosts.remove(0);
                             }
+                            sendData(currentPost, recentPosts);
                         } else {
                             Log.d("WEARNEWS", "no new posts");
                             MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.noNewPostsText));
+                            sendData(currentPost, recentPosts);
                         }
                         MainPhoneActivity.setInfo2Text(getApplicationContext(), "Backup posts: " + String.valueOf(recentPosts.size()));
 
                     }
                 } catch (IOException e) {
-                    dataToSend[0] = "URL ERROR:";
-                    dataToSend[1] = e.getLocalizedMessage();
-                    sendData(dataToSend);
+                    currentPost[0] = "URL ERROR:";
+                    currentPost[1] = e.getLocalizedMessage();
+                    sendData(currentPost, recentPosts);
                 }
             }
         }, 0, 5000);
@@ -100,9 +102,10 @@ public class UpdateService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
-    private void sendData(String[] message) {
+    private void sendData(String[] currentPost, ArrayList<String> recentPosts) {
         PutDataMapRequest dataMap = PutDataMapRequest.create("/message_path");
-        dataMap.getDataMap().putStringArray("message", message);
+        dataMap.getDataMap().putStringArray("currentPost", currentPost);
+        dataMap.getDataMap().putStringArrayList("recentPosts", recentPosts);
         PutDataRequest request = dataMap.asPutDataRequest();
         request.setUrgent();
         Task<DataItem> dataItemTask = Wearable.getDataClient(getApplicationContext()).putDataItem(request);

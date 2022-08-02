@@ -5,8 +5,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.wear.ambient.AmbientModeSupport;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.android.gms.wearable.DataClient;
 import com.google.android.gms.wearable.DataEvent;
 import com.google.android.gms.wearable.DataEventBuffer;
@@ -14,6 +12,7 @@ import com.google.android.gms.wearable.DataItem;
 import com.google.android.gms.wearable.DataMap;
 import com.google.android.gms.wearable.DataMapItem;
 import com.google.android.gms.wearable.Wearable;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainWearActivity extends FragmentActivity implements AmbientModeSupport.AmbientCallbackProvider, DataClient.OnDataChangedListener {
@@ -49,14 +48,18 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                 DataItem dataItem = event.getDataItem();
                 if (Objects.requireNonNull(dataItem.getUri().getPath()).compareTo("/message_path") == 0){
                     DataMap dataMap = DataMapItem.fromDataItem(dataItem).getDataMap();
-                    String[] message = dataMap.getStringArray("message");
-                    assert message != null;
-                    newPostTitle = message[0];
-                    newPostSub = message[1];
+                    String[] currentPost = dataMap.getStringArray("currentPost");
+                    assert currentPost != null;
+                    newPostTitle = currentPost[0];
+                    newPostSub = currentPost[1];
                     title.setText(newPostTitle);
                     if (!(ambientController.isAmbient())) sub.setText(newPostSub);
                     lastTitle = newPostTitle;
                     Log.d("WEARNEWS", "got new post");
+
+                    // Store A few posts on watch to be viewed when woken from ambient mode.
+                    ArrayList<String> recentPosts = dataMap.getStringArrayList("recentPosts");
+                    // handle recent post backup here
                 }
             }
         }
@@ -69,8 +72,7 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         @Override
         public void onEnterAmbient(Bundle ambientDetails) {
             title.setText(lastTitle);
-            sub.setText("AOD mode");
-            Toast.makeText(getApplicationContext(), "AOD on, still showing posts", Toast.LENGTH_SHORT);
+            sub.setText(getString(R.string.aodModeText));
         }
 
         @Override
