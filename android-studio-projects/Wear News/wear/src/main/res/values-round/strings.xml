@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Wear News</string>
-    <string name="loadingMessage">Open phone app and wait, getting headlines…</string>
+    <string name="loadingMessage">Open phone app and start service to get headlines…</string>
 </resources>

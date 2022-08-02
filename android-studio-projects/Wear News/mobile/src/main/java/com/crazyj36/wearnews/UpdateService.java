@@ -1,14 +1,10 @@
 package com.crazyj36.wearnews;
 
-import static com.crazyj36.wearnews.MainPhoneActivity.info;
-import static com.crazyj36.wearnews.MainPhoneActivity.setInfoText;
-
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
@@ -29,7 +25,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class UpdateService extends Service {
-    static String[] data = {"", ""};
+    static String[] dataToSend = {"", ""};
     static String lastTitle = "";
     NotificationManager notificationManager;
     Notification notification;
@@ -39,7 +35,7 @@ public class UpdateService extends Service {
         super.onCreate();
         timer = new Timer();
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainPhoneActivity.class), 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainPhoneActivity.class), PendingIntent.FLAG_IMMUTABLE);
         NotificationChannel notificationChannel = new NotificationChannel("notifychannel", "Notify Button", NotificationManager.IMPORTANCE_DEFAULT);
         notificationManager.createNotificationChannel(notificationChannel);
         notification = new Notification.Builder(this, "notifychannel")
@@ -63,21 +59,21 @@ public class UpdateService extends Service {
                     doc = Jsoup.connect("https://www.reddit.com/user/crazy_j36/m/myrss/new/.rss").get();
                     Element headline = doc.select("feed entry title").first();
                     Element categoryAttr = doc.select("feed entry category").first();
-                    if (headline != null) {data[0] = headline.text();}
-                    if (categoryAttr != null) {data[1] = categoryAttr.attr("label");}
-                    if (!(lastTitle.equals(data[0]))) {
-                        sendData(data);
+                    if (headline != null) {dataToSend[0] = headline.text();}
+                    if (categoryAttr != null) {dataToSend[1] = categoryAttr.attr("label");}
+                    if (!(lastTitle.equals(dataToSend[0]))) {
+                        sendData(dataToSend);
                         Log.d("WEARNEWS", "sent new post.");
-                        lastTitle = data[0];
-                        setInfoText(getString(R.string.newPostsText));
+                        lastTitle = dataToSend[0];
+                        MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.newPostsText));
                     } else {
                         Log.d("WEARNEWS", "no new posts");
-                        setInfoText(getString(R.string.noNewPostsText));
+                        MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.noNewPostsText));
                     }
                 } catch (IOException e) {
-                    data[0] = "URL ERROR:";
-                    data[1] = e.getLocalizedMessage();
-                    sendData(data);
+                    dataToSend[0] = "URL ERROR:";
+                    dataToSend[1] = e.getLocalizedMessage();
+                    sendData(dataToSend);
                 }
             }
         }, 0, 5000);
@@ -106,29 +102,11 @@ public class UpdateService extends Service {
     }
     @Override
     public void onDestroy() {
-        Intent broadcastIntent = new Intent();
-        broadcastIntent.setAction("restartservice");
-        broadcastIntent.setClass(this, Restarter.class);
-        if (MainPhoneActivity.restart) {
-            this.sendBroadcast(broadcastIntent);
-        } else {
-            info.setText("");
-            notificationManager.cancel(1);
-            stopService(broadcastIntent);
-            Log.d("WEARNEWS", "service destroyed");
-            timer.cancel();
-        }
+        MainPhoneActivity.setInfoText(getApplicationContext(), "");
+        notificationManager.cancel(1);
+        timer.cancel();
+        Log.d("WEARNEWS", "service destroyed");
         super.onDestroy();
-    }
-}
-
-class Restarter extends BroadcastReceiver {
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        if (MainPhoneActivity.restart) {
-            context.startForegroundService(new Intent(context, UpdateService.class));
-            Log.d("WEARNEWS", "Service restarted");
-        }
     }
 }
 

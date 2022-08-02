@@ -5,6 +5,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.wear.ambient.AmbientModeSupport;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.gms.wearable.DataClient;
 import com.google.android.gms.wearable.DataEvent;
 import com.google.android.gms.wearable.DataEventBuffer;
@@ -14,10 +16,13 @@ import com.google.android.gms.wearable.DataMapItem;
 import com.google.android.gms.wearable.Wearable;
 import java.util.Objects;
 
-
 public class MainWearActivity extends FragmentActivity implements AmbientModeSupport.AmbientCallbackProvider, DataClient.OnDataChangedListener {
     TextView title;
     TextView sub;
+    String newPostTitle;
+    String newPostSub;
+    String lastTitle;
+    private AmbientModeSupport.AmbientController ambientController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +30,7 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         title = findViewById(R.id.title);
         sub = findViewById(R.id.sub);
         title.setText(getString(R.string.loadingMessage));
+        ambientController = AmbientModeSupport.attach(this);
     }
     @Override
     public void onResume() {
@@ -44,8 +50,12 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                 if (Objects.requireNonNull(dataItem.getUri().getPath()).compareTo("/message_path") == 0){
                     DataMap dataMap = DataMapItem.fromDataItem(dataItem).getDataMap();
                     String[] message = dataMap.getStringArray("message");
-                    title.setText(message[0]);
-                    sub.setText(message[1]);
+                    assert message != null;
+                    newPostTitle = message[0];
+                    newPostSub = message[1];
+                    title.setText(newPostTitle);
+                    if (!(ambientController.isAmbient())) sub.setText(newPostSub);
+                    lastTitle = newPostTitle;
                     Log.d("WEARNEWS", "got new post");
                 }
             }
@@ -53,12 +63,24 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
     }
     @Override
     public AmbientModeSupport.AmbientCallback getAmbientCallback() {
-        return new AmbientModeSupport.AmbientCallback() {
-            public void onEnterAmbient(Bundle ambientDetails) {
-            }
-            public void onExitAmbient(Bundle ambientDetails) {
-            }
-        };
+        return new MyAmbientCallback();
+    }
+    private class MyAmbientCallback extends AmbientModeSupport.AmbientCallback {
+        @Override
+        public void onEnterAmbient(Bundle ambientDetails) {
+            title.setText(lastTitle);
+            sub.setText("AOD mode");
+            Toast.makeText(getApplicationContext(), "AOD on, still showing posts", Toast.LENGTH_SHORT);
+        }
+
+        @Override
+        public void onExitAmbient() {
+            sub.setText(newPostSub);
+        }
+
+        @Override
+        public void onUpdateAmbient() {
+        }
     }
 }
 
