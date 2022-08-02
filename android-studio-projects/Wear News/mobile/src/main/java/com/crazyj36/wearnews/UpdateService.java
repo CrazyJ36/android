@@ -1,7 +1,5 @@
 package com.crazyj36.wearnews;
 
-//import static com.crazyj36.wearnews.MainWearActivity.ambientController;
-
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -29,13 +27,17 @@ import java.util.TimerTask;
 
 public class UpdateService extends Service {
     static String[] currentPost = {"", ""};
-    static String lastTitle = "";
+    static String lastTitle;
+    static String secondTitle;
+    static String thirdTitle;
+    static String fourthTitle;
+    static String fifthTitle;
     static ArrayList<String> recentPosts = new ArrayList<>();
     int postCount = 0;
     NotificationManager notificationManager;
     Notification notification;
     static Timer timer;
-
+    static boolean isServiceRunning;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -56,6 +58,7 @@ public class UpdateService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d("WEARNEWS", "service starting");
+        isServiceRunning = true;
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -65,28 +68,50 @@ public class UpdateService extends Service {
                     doc = Jsoup.connect("https://www.reddit.com/user/crazy_j36/m/myrss/new/.rss").get();
                     Element headline = doc.select("feed entry title").first();
                     Element categoryAttr = doc.select("feed entry category").first();
-
                     if (headline != null && categoryAttr != null) {
                         if (!headline.text().equals(lastTitle)) {
-                            currentPost[1] = categoryAttr.attr("label");
                             recentPosts.add(headline.text());
-                            lastTitle = recentPosts.get(postCount);
-                            currentPost[0] = lastTitle;
-                            sendData(currentPost, recentPosts);
-                            postCount++;
-                            Log.d("WEARNEWS", "sent new post.");
-                            MainPhoneActivity.setInfo3Text(getApplicationContext(), "last title:\n" + lastTitle);
-                            MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.newPostsText));
-                            if (recentPosts.size() == 5) {
+                            if (recentPosts.size() == 1) {
+                                lastTitle = recentPosts.get(0);
+                                MainPhoneActivity.setInfo2Text(getApplicationContext(), "latest: " + lastTitle);
+                            } else if (recentPosts.size() == 2) {
+                                secondTitle = recentPosts.get(1);
+                                MainPhoneActivity.setInfo3Text(getApplicationContext(), "backup 1: " + secondTitle);
+                            } else if (recentPosts.size() == 3) {
+                                thirdTitle = recentPosts.get(2);
+                                MainPhoneActivity.setInfo4Text(getApplicationContext(), "backup 2: " + thirdTitle);
+                            } else if (recentPosts.size() == 4) {
+                                fourthTitle = recentPosts.get(0);
+                                MainPhoneActivity.setInfo5Text(getApplicationContext(), "backup 3: " + fourthTitle);
+                            } else if (recentPosts.size() == 5) {
+                                fifthTitle = recentPosts.get(0);
+                                MainPhoneActivity.setInfo6Text(getApplicationContext(), "backup 4: " + fifthTitle);
+
+                            } else {
                                 recentPosts.remove(0);
+                                lastTitle = recentPosts.get(4);
+                                secondTitle = recentPosts.get(3);
+                                thirdTitle = recentPosts.get(2);
+                                fourthTitle = recentPosts.get(1);
+                                fifthTitle = recentPosts.get(0);MainPhoneActivity.setInfo2Text(getApplicationContext(), "latest: " + lastTitle);
+                                MainPhoneActivity.setInfo3Text(getApplicationContext(), "backup 1: " + secondTitle);
+                                MainPhoneActivity.setInfo4Text(getApplicationContext(), "backup 2: " + thirdTitle);
+                                MainPhoneActivity.setInfo5Text(getApplicationContext(), "backup 3: " + fourthTitle);
+                                MainPhoneActivity.setInfo6Text(getApplicationContext(), "backup 4: " + fifthTitle);
+
                             }
+
+                            currentPost[0] = lastTitle;
+                            currentPost[1] = categoryAttr.attr("label");
                             sendData(currentPost, recentPosts);
+                            Log.d("WEARNEWS", "sent new post.");
+                            MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.newPostsText));
+
+                            //only send recent posts every 15min.
                         } else {
                             Log.d("WEARNEWS", "no new posts");
                             MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.noNewPostsText));
-                            sendData(currentPost, recentPosts);
                         }
-                        MainPhoneActivity.setInfo2Text(getApplicationContext(), "Backup posts: " + String.valueOf(recentPosts.size()));
 
                     }
                 } catch (IOException e) {
@@ -125,6 +150,8 @@ public class UpdateService extends Service {
         MainPhoneActivity.setInfoText(getApplicationContext(), "");
         notificationManager.cancel(1);
         timer.cancel();
+        isServiceRunning = false;
+        recentPosts.removeAll(recentPosts);
         Log.d("WEARNEWS", "service destroyed");
         super.onDestroy();
     }

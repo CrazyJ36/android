@@ -58,7 +58,9 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                     Log.d("WEARNEWS", "got new post");
 
                     // Store A few posts on watch to be viewed when woken from ambient mode.
+                    // swipe forward or backward on posts or toast "up to date"
                     ArrayList<String> recentPosts = dataMap.getStringArrayList("recentPosts");
+                     //send all from service, gather to display later on wear.
                     // handle recent post backup here
                 }
             }
