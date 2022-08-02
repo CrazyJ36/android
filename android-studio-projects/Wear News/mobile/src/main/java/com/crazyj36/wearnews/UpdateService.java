@@ -1,6 +1,6 @@
 package com.crazyj36.wearnews;
 
-import static com.crazyj36.wearnews.MainWearActivity.ambientController;
+//import static com.crazyj36.wearnews.MainWearActivity.ambientController;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -28,7 +28,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class UpdateService extends Service {
-    MainWearActivity mainWearActivity = new MainWearActivity();
     static String[] dataToSend = {"", ""};
     static String lastTitle = "";
     ArrayList<String> recentPosts = new ArrayList<>();
@@ -82,9 +81,6 @@ public class UpdateService extends Service {
                                 recentPosts.remove(0);
                             }
                         } else {
-                            if (ambientController.isAmbient()) {
-
-                            }
                             Log.d("WEARNEWS", "no new posts");
                             MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.noNewPostsText));
                         }
