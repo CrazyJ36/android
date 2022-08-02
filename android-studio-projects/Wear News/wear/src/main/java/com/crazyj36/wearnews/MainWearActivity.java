@@ -4,7 +4,11 @@ import android.os.Bundle;
 import androidx.fragment.app.FragmentActivity;
 import androidx.wear.ambient.AmbientModeSupport;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.gms.wearable.DataClient;
 import com.google.android.gms.wearable.DataEvent;
 import com.google.android.gms.wearable.DataEventBuffer;
@@ -16,20 +20,24 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainWearActivity extends FragmentActivity implements AmbientModeSupport.AmbientCallbackProvider, DataClient.OnDataChangedListener {
-    TextView title;
-    TextView sub;
-    String newPostTitle;
-    String newPostSub;
-    String lastTitle;
+    TextView info;
+    TextView aodTitle;
+    TextView aodSub;
+    String currentTitle;
+    String currentSub;
+    static ArrayList<String> recentPostsTitles = new ArrayList<>();
+    static ArrayList<String> recentPostsSubs = new ArrayList<>();
     private AmbientModeSupport.AmbientController ambientController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        title = findViewById(R.id.title);
-        sub = findViewById(R.id.sub);
-        title.setText(getString(R.string.loadingMessage));
+        info = findViewById(R.id.info);
+        info.setText(R.string.loadingMessage);
+        aodTitle = findViewById(R.id.title);
+        aodSub = findViewById(R.id.sub);
         ambientController = AmbientModeSupport.attach(this);
+        new ArrayAdapter<String>(getApplicationContext(), R.layout.recent_posts_list, recentPostsTitles);
     }
     @Override
     public void onResume() {
@@ -50,18 +58,14 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                     DataMap dataMap = DataMapItem.fromDataItem(dataItem).getDataMap();
                     String[] currentPost = dataMap.getStringArray("currentPost");
                     assert currentPost != null;
-                    newPostTitle = currentPost[0];
-                    newPostSub = currentPost[1];
-                    title.setText(newPostTitle);
-                    if (!(ambientController.isAmbient())) sub.setText(newPostSub);
-                    lastTitle = newPostTitle;
+                    currentTitle = currentPost[0];
+                    currentSub = currentPost[1];
+                    recentPostsTitles = dataMap.getStringArrayList("recentPostsTitles");
+                    recentPostsSubs = dataMap.getStringArrayList("recentPostsSubs");
                     Log.d("WEARNEWS", "got new post");
-
-                    // Store A few posts on watch to be viewed when woken from ambient mode.
-                    // swipe forward or backward on posts or toast "up to date"
-                    ArrayList<String> recentPosts = dataMap.getStringArrayList("recentPosts");
-                     //send all from service, gather to display later on wear.
-                    // handle recent post backup here
+                    PostListAdapter postListAdapter = new PostListAdapter(this, recentPostsTitles);
+                    ListView listView = findViewById(R.id.recentPostsListView);
+                    listView.setAdapter(postListAdapter);
                 }
             }
         }
@@ -73,13 +77,13 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
     private class MyAmbientCallback extends AmbientModeSupport.AmbientCallback {
         @Override
         public void onEnterAmbient(Bundle ambientDetails) {
-            title.setText(lastTitle);
-            sub.setText(getString(R.string.aodModeText));
+            aodTitle.setText(currentTitle);
+            //aodSub.setText(lastSub);
         }
 
         @Override
         public void onExitAmbient() {
-            sub.setText(newPostSub);
+            aodTitle.setText(getString(R.string.loadingMessage));
         }
 
         @Override
@@ -87,5 +91,6 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         }
     }
 }
+
 
 

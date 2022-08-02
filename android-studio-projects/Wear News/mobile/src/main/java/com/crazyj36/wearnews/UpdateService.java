@@ -9,6 +9,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
 import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -22,6 +25,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -32,8 +36,13 @@ public class UpdateService extends Service {
     static String thirdTitle;
     static String fourthTitle;
     static String fifthTitle;
-    static ArrayList<String> recentPosts = new ArrayList<>();
-    int postCount = 0;
+    static String lastSub;
+    static String secondSub;
+    static String thirdSub;
+    static String fourthSub;
+    static String fifthSub;
+    static ArrayList<String> recentPostsTitles = new ArrayList<>();
+    static ArrayList<String> recentPostsSubs = new ArrayList<>();
     NotificationManager notificationManager;
     Notification notification;
     static Timer timer;
@@ -54,6 +63,7 @@ public class UpdateService extends Service {
                 .build();
         startForeground(1, notification);
         notificationManager.notify(1, notification);
+
     }
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -70,61 +80,81 @@ public class UpdateService extends Service {
                     Element categoryAttr = doc.select("feed entry category").first();
                     if (headline != null && categoryAttr != null) {
                         if (!headline.text().equals(lastTitle)) {
-                            recentPosts.add(headline.text());
-
-                            if (recentPosts.size() == 1) {
-                                lastTitle = recentPosts.get(0);
-                                MainPhoneActivity.setInfo2Text(getApplicationContext(), "latest: " + recentPosts.get(0));
-                            } else if (recentPosts.size() == 2) {
-                                lastTitle = recentPosts.get(1);
-                                secondTitle = recentPosts.get(0);
-                                MainPhoneActivity.setInfo2Text(getApplicationContext(), "latest: " + recentPosts.get(1));
-                                MainPhoneActivity.setInfo3Text(getApplicationContext(), "backup 1: " + recentPosts.get(0));
-                            } else if (recentPosts.size() == 3) {
-                                lastTitle = recentPosts.get(2);
-                                secondTitle = recentPosts.get(1);
-                                thirdTitle = recentPosts.get(0);
-                                MainPhoneActivity.setInfo2Text(getApplicationContext(), "latest: " + recentPosts.get(2));
-                                MainPhoneActivity.setInfo3Text(getApplicationContext(), "backup 1: " + recentPosts.get(1));
-                                MainPhoneActivity.setInfo4Text(getApplicationContext(), "backup 2: " + recentPosts.get(0));
-                            } else if (recentPosts.size() == 4) {
-                                lastTitle = recentPosts.get(3);
-                                secondTitle = recentPosts.get(2);
-                                thirdTitle = recentPosts.get(1);
-                                fourthTitle = recentPosts.get(0);
-                                MainPhoneActivity.setInfo2Text(getApplicationContext(), "latest: " + recentPosts.get(3));
-                                MainPhoneActivity.setInfo3Text(getApplicationContext(), "backup 2: " + recentPosts.get(2));
-                                MainPhoneActivity.setInfo4Text(getApplicationContext(), "backup 3: " + recentPosts.get(1));
-                                MainPhoneActivity.setInfo5Text(getApplicationContext(), "backup 4: " + recentPosts.get(0));
-                            } else if (recentPosts.size() == 5) {
-                                lastTitle = recentPosts.get(4);
-                                secondTitle = recentPosts.get(3);
-                                thirdTitle = recentPosts.get(2);
-                                fourthTitle = recentPosts.get(1);
-                                fifthTitle = recentPosts.get(0);
-                                MainPhoneActivity.setInfo2Text(getApplicationContext(), "latest: " + recentPosts.get(4));
-                                MainPhoneActivity.setInfo3Text(getApplicationContext(), "backup 2: " + recentPosts.get(3));
-                                MainPhoneActivity.setInfo4Text(getApplicationContext(), "backup 3: " + recentPosts.get(2));
-                                MainPhoneActivity.setInfo5Text(getApplicationContext(), "backup 4: " + recentPosts.get(1));
-                                MainPhoneActivity.setInfo6Text(getApplicationContext(), "backup 5: " + recentPosts.get(0));
+                            recentPostsTitles.add(headline.text());
+                            recentPostsSubs.add(categoryAttr.attr("label"));
+                            if (recentPostsTitles.size() == 1) {
+                                lastTitle = recentPostsTitles.get(0);
+                                lastSub = recentPostsSubs.get(0);
+                                MainPhoneActivity.setInfo2Text(getApplicationContext(), "latest: " + recentPostsTitles.get(0));
+                            } else if (recentPostsTitles.size() == 2) {
+                                lastTitle = recentPostsTitles.get(1);
+                                lastSub = recentPostsSubs.get(1);
+                                secondTitle = recentPostsTitles.get(0);
+                                secondSub = recentPostsSubs.get(0);
+                                MainPhoneActivity.setInfo2Text(getApplicationContext(), "latest: " + recentPostsTitles.get(1));
+                                MainPhoneActivity.setInfo3Text(getApplicationContext(), "backup 1: " + recentPostsTitles.get(0));
+                            } else if (recentPostsTitles.size() == 3) {
+                                lastTitle = recentPostsTitles.get(2);
+                                lastSub = recentPostsSubs.get(2);
+                                secondTitle = recentPostsTitles.get(1);
+                                secondSub = recentPostsSubs.get(1);
+                                thirdTitle = recentPostsTitles.get(0);
+                                thirdSub = recentPostsSubs.get(0);
+                                MainPhoneActivity.setInfo2Text(getApplicationContext(), "latest: " + recentPostsTitles.get(2));
+                                MainPhoneActivity.setInfo3Text(getApplicationContext(), "backup 1: " + recentPostsTitles.get(1));
+                                MainPhoneActivity.setInfo4Text(getApplicationContext(), "backup 2: " + recentPostsTitles.get(0));
+                            } else if (recentPostsTitles.size() == 4) {
+                                lastTitle = recentPostsTitles.get(3);
+                                lastSub = recentPostsSubs.get(3);
+                                secondTitle = recentPostsTitles.get(2);
+                                secondSub = recentPostsSubs.get(2);
+                                thirdTitle = recentPostsTitles.get(1);
+                                thirdSub = recentPostsSubs.get(1);
+                                fourthTitle = recentPostsTitles.get(0);
+                                fourthSub = recentPostsSubs.get(0);
+                                MainPhoneActivity.setInfo2Text(getApplicationContext(), "latest: " + recentPostsTitles.get(3));
+                                MainPhoneActivity.setInfo3Text(getApplicationContext(), "backup 2: " + recentPostsTitles.get(2));
+                                MainPhoneActivity.setInfo4Text(getApplicationContext(), "backup 3: " + recentPostsTitles.get(1));
+                                MainPhoneActivity.setInfo5Text(getApplicationContext(), "backup 4: " + recentPostsTitles.get(0));
+                            } else if (recentPostsTitles.size() == 5) {
+                                lastTitle = recentPostsTitles.get(4);
+                                lastSub = recentPostsSubs.get(4);
+                                secondTitle = recentPostsTitles.get(3);
+                                secondSub = recentPostsSubs.get(3);
+                                thirdTitle = recentPostsTitles.get(2);
+                                thirdSub = recentPostsSubs.get(2);
+                                fourthTitle = recentPostsTitles.get(1);
+                                fourthSub = recentPostsSubs.get(1);
+                                fifthTitle = recentPostsTitles.get(0);
+                                fifthSub = recentPostsSubs.get(0);
+                                MainPhoneActivity.setInfo2Text(getApplicationContext(), "latest: " + recentPostsTitles.get(4));
+                                MainPhoneActivity.setInfo3Text(getApplicationContext(), "backup 2: " + recentPostsTitles.get(3));
+                                MainPhoneActivity.setInfo4Text(getApplicationContext(), "backup 3: " + recentPostsTitles.get(2));
+                                MainPhoneActivity.setInfo5Text(getApplicationContext(), "backup 4: " + recentPostsTitles.get(1));
+                                MainPhoneActivity.setInfo6Text(getApplicationContext(), "backup 5: " + recentPostsTitles.get(0));
                             } else {
-                                recentPosts.remove(0);
-                                lastTitle = recentPosts.get(4);
-                                secondTitle = recentPosts.get(3);
-                                thirdTitle = recentPosts.get(2);
-                                fourthTitle = recentPosts.get(1);
-                                fifthTitle = recentPosts.get(0);
+                                recentPostsTitles.remove(0);
+                                recentPostsSubs.remove(0);
+                                lastTitle = recentPostsTitles.get(4);
+                                lastSub = recentPostsSubs.get(4);
+                                secondTitle = recentPostsTitles.get(3);
+                                secondSub = recentPostsSubs.get(3);
+                                thirdTitle = recentPostsTitles.get(2);
+                                thirdSub = recentPostsSubs.get(2);
+                                fourthTitle = recentPostsTitles.get(1);
+                                fourthSub = recentPostsSubs.get(1);
+                                fifthTitle = recentPostsTitles.get(0);
+                                fifthSub = recentPostsSubs.get(0);
                                 MainPhoneActivity.setInfo2Text(getApplicationContext(), "latest: " + lastTitle);
                                 MainPhoneActivity.setInfo3Text(getApplicationContext(), "backup 1: " + secondTitle);
                                 MainPhoneActivity.setInfo4Text(getApplicationContext(), "backup 2: " + thirdTitle);
                                 MainPhoneActivity.setInfo5Text(getApplicationContext(), "backup 3: " + fourthTitle);
                                 MainPhoneActivity.setInfo6Text(getApplicationContext(), "backup 4: " + fifthTitle);
-
                             }
 
                             currentPost[0] = lastTitle;
                             currentPost[1] = categoryAttr.attr("label");
-                            sendData(currentPost, recentPosts);
+                            sendData(currentPost, recentPostsTitles, recentPostsSubs);
                             Log.d("WEARNEWS", "sent new post.");
                             MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.newPostsText));
 
@@ -138,7 +168,7 @@ public class UpdateService extends Service {
                 } catch (IOException e) {
                     currentPost[0] = "URL ERROR:";
                     currentPost[1] = e.getLocalizedMessage();
-                    sendData(currentPost, recentPosts);
+                    sendData(currentPost, recentPostsTitles, recentPostsSubs);
                 }
             }
         }, 0, 5000);
@@ -148,10 +178,11 @@ public class UpdateService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
-    private void sendData(String[] currentPost, ArrayList<String> recentPosts) {
+    private void sendData(String[] currentPost, ArrayList<String> recentPostsTitles, ArrayList<String> recentPostsSubs) {
         PutDataMapRequest dataMap = PutDataMapRequest.create("/message_path");
         dataMap.getDataMap().putStringArray("currentPost", currentPost);
-        dataMap.getDataMap().putStringArrayList("recentPosts", recentPosts);
+        dataMap.getDataMap().putStringArrayList("recentPostsTitles", recentPostsTitles);
+        dataMap.getDataMap().putStringArrayList("recentPostsSubs", recentPostsSubs);
         PutDataRequest request = dataMap.asPutDataRequest();
         request.setUrgent();
         Task<DataItem> dataItemTask = Wearable.getDataClient(getApplicationContext()).putDataItem(request);
@@ -172,7 +203,8 @@ public class UpdateService extends Service {
         notificationManager.cancel(1);
         timer.cancel();
         isServiceRunning = false;
-        recentPosts.removeAll(recentPosts);
+        recentPostsTitles.removeAll(recentPostsTitles);
+        recentPostsSubs.removeAll(recentPostsSubs);
         Log.d("WEARNEWS", "service destroyed");
         super.onDestroy();
     }

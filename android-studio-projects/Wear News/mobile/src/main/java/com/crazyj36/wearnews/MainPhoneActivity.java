@@ -99,7 +99,8 @@ public class MainPhoneActivity extends Activity {
     public void onPause () {super.onPause();}
     @Override
     protected void onDestroy() {
-        UpdateService.recentPosts.clear();
+        UpdateService.recentPostsTitles.clear();
+        UpdateService.recentPostsSubs.clear();
         super.onDestroy();
     }
 }
