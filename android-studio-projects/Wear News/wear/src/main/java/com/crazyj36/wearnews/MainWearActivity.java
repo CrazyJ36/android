@@ -22,7 +22,7 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
     String newPostTitle;
     String newPostSub;
     String lastTitle;
-    private AmbientModeSupport.AmbientController ambientController;
+    public static AmbientModeSupport.AmbientController ambientController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

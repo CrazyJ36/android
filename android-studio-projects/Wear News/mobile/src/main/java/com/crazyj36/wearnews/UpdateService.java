@@ -1,5 +1,7 @@
 package com.crazyj36.wearnews;
 
+import static com.crazyj36.wearnews.MainWearActivity.ambientController;
+
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -21,12 +23,17 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class UpdateService extends Service {
+    MainWearActivity mainWearActivity = new MainWearActivity();
     static String[] dataToSend = {"", ""};
     static String lastTitle = "";
+    ArrayList<String> recentPosts = new ArrayList<>();
+    int postCount = 0;
+    int nextRecentPost = 5;
     NotificationManager notificationManager;
     Notification notification;
     static Timer timer;
@@ -59,16 +66,30 @@ public class UpdateService extends Service {
                     doc = Jsoup.connect("https://www.reddit.com/user/crazy_j36/m/myrss/new/.rss").get();
                     Element headline = doc.select("feed entry title").first();
                     Element categoryAttr = doc.select("feed entry category").first();
-                    if (headline != null) {dataToSend[0] = headline.text();}
-                    if (categoryAttr != null) {dataToSend[1] = categoryAttr.attr("label");}
-                    if (!(lastTitle.equals(dataToSend[0]))) {
-                        sendData(dataToSend);
-                        Log.d("WEARNEWS", "sent new post.");
-                        lastTitle = dataToSend[0];
-                        MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.newPostsText));
-                    } else {
-                        Log.d("WEARNEWS", "no new posts");
-                        MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.noNewPostsText));
+
+                    if (headline != null && categoryAttr != null) {
+                        if (!headline.text().equals(lastTitle)) {
+                            dataToSend[1] = categoryAttr.attr("label");
+                            recentPosts.add(headline.text());
+                            lastTitle = recentPosts.get(postCount);
+                            dataToSend[0] = lastTitle;
+                            sendData(dataToSend);
+                            postCount++;
+                            Log.d("WEARNEWS", "sent new post.");
+                            MainPhoneActivity.setInfo3Text(getApplicationContext(), "last title:\n" + lastTitle);
+                            MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.newPostsText));
+                            if (recentPosts.size() == 5) {
+                                recentPosts.remove(0);
+                            }
+                        } else {
+                            if (ambientController.isAmbient()) {
+
+                            }
+                            Log.d("WEARNEWS", "no new posts");
+                            MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.noNewPostsText));
+                        }
+                        MainPhoneActivity.setInfo2Text(getApplicationContext(), "Backup posts: " + String.valueOf(recentPosts.size()));
+
                     }
                 } catch (IOException e) {
                     dataToSend[0] = "URL ERROR:";
