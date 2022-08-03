@@ -9,38 +9,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/instructions"
-            android:paddingBottom="8dp"/>
+            android:paddingBottom="16dp" />
         <TextView
             android:id="@+id/info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dp"/>
-        <TextView
-            android:id="@+id/info2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dp"/>
-        <TextView
-            android:id="@+id/info3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dp"/>
-        <TextView
-            android:id="@+id/info4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dp"/>
-        <TextView
-            android:id="@+id/info5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dp"/>
-        <TextView
-            android:id="@+id/info6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -55,12 +29,14 @@
             android:id="@+id/startServiceButton"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="@string/startServiceBtnTxt" />
+            android:text="@string/startServiceBtnTxt"
+            style="?android:attr/buttonBarButtonStyle" />
         <Button
             android:id="@+id/stopServiceBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/stopServiceBtnTxt" />
+            android:text="@string/stopServiceBtnTxt"
+            style="?android:attr/buttonBarButtonStyle" />
     </LinearLayout>
 
 </RelativeLayout>
