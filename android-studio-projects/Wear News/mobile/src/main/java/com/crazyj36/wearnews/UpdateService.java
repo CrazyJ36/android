@@ -9,9 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
 import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,7 +22,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -151,7 +147,6 @@ public class UpdateService extends Service {
                                 MainPhoneActivity.setInfo5Text(getApplicationContext(), "backup 3: " + fourthTitle);
                                 MainPhoneActivity.setInfo6Text(getApplicationContext(), "backup 4: " + fifthTitle);
                             }
-
                             currentPost[0] = lastTitle;
                             currentPost[1] = categoryAttr.attr("label");
                             sendData(currentPost, recentPostsTitles, recentPostsSubs);

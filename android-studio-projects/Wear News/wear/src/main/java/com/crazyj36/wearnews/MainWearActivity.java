@@ -17,7 +17,12 @@ import com.google.android.gms.wearable.DataItem;
 import com.google.android.gms.wearable.DataMap;
 import com.google.android.gms.wearable.DataMapItem;
 import com.google.android.gms.wearable.Wearable;
+
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 import java.util.Objects;
 
 public class MainWearActivity extends FragmentActivity implements AmbientModeSupport.AmbientCallbackProvider, DataClient.OnDataChangedListener {
@@ -29,6 +34,9 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
     static ArrayList<String> recentPostsSubs = new ArrayList<>();
     PostListAdapter postListAdapter;
     private AmbientModeSupport.AmbientController ambientController;
+    Date date;
+    String time;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +44,7 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         info = findViewById(R.id.info);
         info.setText(R.string.loadingMessage);
         new ArrayAdapter<String>(getApplicationContext(), R.layout.recent_posts_list, recentPostsTitles);
+        listView = findViewById(R.id.recentPostsListView);
         ambientController = AmbientModeSupport.attach(this);
     }
     @Override
@@ -61,8 +70,9 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                     currentSub = currentPost[1];
                     recentPostsTitles = dataMap.getStringArrayList("recentPostsTitles");
                     recentPostsSubs = dataMap.getStringArrayList("recentPostsSubs");
+                    Collections.reverse(recentPostsTitles);
+                    Collections.reverse(recentPostsSubs);
                     postListAdapter = new PostListAdapter(this, recentPostsTitles);
-                    listView = findViewById(R.id.recentPostsListView);
                     listView.setAdapter(postListAdapter);
                     Log.d("WEARNEWS", "got new post");
 
@@ -84,7 +94,9 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         @Override
         public void onExitAmbient() {
             listView.setVisibility(View.VISIBLE);
-            //info.setText(Time)
+            date = Calendar.getInstance().getTime();
+            time = DateFormat.getTimeInstance(DateFormat.SHORT).format(date);
+            info.setText(time);
         }
 
         @Override
