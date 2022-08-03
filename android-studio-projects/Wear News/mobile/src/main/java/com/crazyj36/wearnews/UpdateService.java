@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.wearable.DataItem;
+
 import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.PutDataRequest;
 import com.google.android.gms.wearable.Wearable;
@@ -22,6 +23,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -174,10 +176,11 @@ public class UpdateService extends Service {
         return null;
     }
     private void sendData(String[] currentPost, ArrayList<String> recentPostsTitles, ArrayList<String> recentPostsSubs) {
-        PutDataMapRequest dataMap = PutDataMapRequest.create("/message_path");
+        PutDataMapRequest dataMap = PutDataMapRequest.create("/WEARNEWS_PATHTOWATCH");
         dataMap.getDataMap().putStringArray("currentPost", currentPost);
         dataMap.getDataMap().putStringArrayList("recentPostsTitles", recentPostsTitles);
         dataMap.getDataMap().putStringArrayList("recentPostsSubs", recentPostsSubs);
+        dataMap.getDataMap().putBoolean("checkIsServiceRunning", isServiceRunning);
         PutDataRequest request = dataMap.asPutDataRequest();
         request.setUrgent();
         Task<DataItem> dataItemTask = Wearable.getDataClient(getApplicationContext()).putDataItem(request);
@@ -192,14 +195,25 @@ public class UpdateService extends Service {
             }
         });
     }
+    /*public void onDataChanged(DataEventBuffer dataEventBuffer) {
+        for (DataEvent event : dataEventBuffer) {
+            if (event.getType() == DataEvent.TYPE_CHANGED) {
+                DataItem dataItem = event.getDataItem();
+                if (Objects.requireNonNull(dataItem.getUri().getPath()).compareTo("/WEARNEWS_PATHTOPHONE") == 0) {
+                    DataMap dataMap = DataMapItem.fromDataItem(dataItem).getDataMap();
+                }
+            }
+
+        }
+    }*/
     @Override
     public void onDestroy() {
         MainPhoneActivity.setInfoText(getApplicationContext(), "");
         notificationManager.cancel(1);
         timer.cancel();
         isServiceRunning = false;
-        recentPostsTitles.removeAll(recentPostsTitles);
-        recentPostsSubs.removeAll(recentPostsSubs);
+        sendData(currentPost, recentPostsTitles, recentPostsSubs);
+
         Log.d("WEARNEWS", "service destroyed");
         super.onDestroy();
     }

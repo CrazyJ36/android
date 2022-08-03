@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">Wear News</string>
-    <string name="loadingMessage">Open phone app and start service to get headlines…</string>
-    <string name="aodModeText">AOD mode</string>
+    <string name="serviceNotRunningText">Service not running, start from phone app.</string>
 </resources>

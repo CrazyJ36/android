@@ -1,6 +1,8 @@
 package com.crazyj36.wearnews;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.wear.ambient.AmbientModeSupport;
 import android.util.Log;
@@ -8,24 +10,29 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.gms.wearable.DataClient;
 import com.google.android.gms.wearable.DataEvent;
 import com.google.android.gms.wearable.DataEventBuffer;
 import com.google.android.gms.wearable.DataItem;
 import com.google.android.gms.wearable.DataMap;
 import com.google.android.gms.wearable.DataMapItem;
+import com.google.android.gms.wearable.PutDataMapRequest;
+import com.google.android.gms.wearable.PutDataRequest;
 import com.google.android.gms.wearable.Wearable;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainWearActivity extends FragmentActivity implements AmbientModeSupport.AmbientCallbackProvider, DataClient.OnDataChangedListener {
+    boolean isServiceRunning = false;
     TextView info;
     ListView listView;
     String currentTitle;
@@ -34,23 +41,24 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
     static ArrayList<String> recentPostsSubs = new ArrayList<>();
     PostListAdapter postListAdapter;
     private AmbientModeSupport.AmbientController ambientController;
-    Date date;
-    String time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         info = findViewById(R.id.info);
-        info.setText(R.string.loadingMessage);
         new ArrayAdapter<String>(getApplicationContext(), R.layout.recent_posts_list, recentPostsTitles);
         listView = findViewById(R.id.recentPostsListView);
         ambientController = AmbientModeSupport.attach(this);
+        if (!isServiceRunning) info.setText(getString(R.string.serviceNotRunningText));
+        else info.setText("");
     }
     @Override
     public void onResume() {
         super.onResume();
         Wearable.getDataClient(this).addListener(this);
+        if (!isServiceRunning) info.setText(getString(R.string.serviceNotRunningText));
+        else info.setText("");
     }
     @Override
     public void onPause() {
@@ -62,18 +70,23 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         for (DataEvent event : dataEventBuffer) {
             if (event.getType() == DataEvent.TYPE_CHANGED) {
                 DataItem dataItem = event.getDataItem();
-                if (Objects.requireNonNull(dataItem.getUri().getPath()).compareTo("/message_path") == 0){
+                if (Objects.requireNonNull(dataItem.getUri().getPath()).compareTo("/WEARNEWS_PATHTOWATCH") == 0){
                     DataMap dataMap = DataMapItem.fromDataItem(dataItem).getDataMap();
                     String[] currentPost = dataMap.getStringArray("currentPost");
+                    recentPostsTitles = dataMap.getStringArrayList("recentPostsTitles");
+                    recentPostsSubs = dataMap.getStringArrayList("recentPostsSubs");
+                    isServiceRunning = dataMap.getBoolean("checkIsServiceRunning");
+                    if (!isServiceRunning) info.setText(getString(R.string.serviceNotRunningText));
+                    else info.setText("");
+
                     assert currentPost != null;
                     currentTitle = currentPost[0];
                     currentSub = currentPost[1];
-                    recentPostsTitles = dataMap.getStringArrayList("recentPostsTitles");
-                    recentPostsSubs = dataMap.getStringArrayList("recentPostsSubs");
                     Collections.reverse(recentPostsTitles);
                     Collections.reverse(recentPostsSubs);
                     postListAdapter = new PostListAdapter(this, recentPostsTitles);
                     listView.setAdapter(postListAdapter);
+                    if (ambientController.isAmbient()) info.setText(currentPost[0]);
                     Log.d("WEARNEWS", "got new post");
 
                 }
@@ -88,19 +101,21 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         @Override
         public void onEnterAmbient(Bundle ambientDetails) {
             listView.setVisibility(View.GONE);
-            info.setText(currentTitle);
-        }
+            if (!isServiceRunning) info.setText(getString(R.string.serviceNotRunningText));
+            else info.setText("");
 
+        }
         @Override
         public void onExitAmbient() {
             listView.setVisibility(View.VISIBLE);
-            date = Calendar.getInstance().getTime();
-            time = DateFormat.getTimeInstance(DateFormat.SHORT).format(date);
-            info.setText(time);
+            if (!isServiceRunning) info.setText(getString(R.string.serviceNotRunningText));
+            else info.setText("");
         }
 
         @Override
         public void onUpdateAmbient() {
+            info.setText(currentTitle);
+
         }
     }
 }

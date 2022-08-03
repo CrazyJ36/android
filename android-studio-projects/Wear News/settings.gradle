@@ -14,4 +14,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Wear Phone Sync"
 include ':mobile', ':wear'
-include ':common'
