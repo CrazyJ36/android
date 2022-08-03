@@ -4,6 +4,7 @@ import android.os.Bundle;
 import androidx.fragment.app.FragmentActivity;
 import androidx.wear.ambient.AmbientModeSupport;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,12 +22,12 @@ import java.util.Objects;
 
 public class MainWearActivity extends FragmentActivity implements AmbientModeSupport.AmbientCallbackProvider, DataClient.OnDataChangedListener {
     TextView info;
-    TextView aodTitle;
-    TextView aodSub;
+    ListView listView;
     String currentTitle;
     String currentSub;
     static ArrayList<String> recentPostsTitles = new ArrayList<>();
     static ArrayList<String> recentPostsSubs = new ArrayList<>();
+    PostListAdapter postListAdapter;
     private AmbientModeSupport.AmbientController ambientController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +35,8 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         setContentView(R.layout.activity_main);
         info = findViewById(R.id.info);
         info.setText(R.string.loadingMessage);
-        aodTitle = findViewById(R.id.title);
-        aodSub = findViewById(R.id.sub);
-        ambientController = AmbientModeSupport.attach(this);
         new ArrayAdapter<String>(getApplicationContext(), R.layout.recent_posts_list, recentPostsTitles);
+        ambientController = AmbientModeSupport.attach(this);
     }
     @Override
     public void onResume() {
@@ -62,10 +61,11 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                     currentSub = currentPost[1];
                     recentPostsTitles = dataMap.getStringArrayList("recentPostsTitles");
                     recentPostsSubs = dataMap.getStringArrayList("recentPostsSubs");
-                    Log.d("WEARNEWS", "got new post");
-                    PostListAdapter postListAdapter = new PostListAdapter(this, recentPostsTitles);
-                    ListView listView = findViewById(R.id.recentPostsListView);
+                    postListAdapter = new PostListAdapter(this, recentPostsTitles);
+                    listView = findViewById(R.id.recentPostsListView);
                     listView.setAdapter(postListAdapter);
+                    Log.d("WEARNEWS", "got new post");
+
                 }
             }
         }
@@ -77,13 +77,14 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
     private class MyAmbientCallback extends AmbientModeSupport.AmbientCallback {
         @Override
         public void onEnterAmbient(Bundle ambientDetails) {
-            aodTitle.setText(currentTitle);
-            //aodSub.setText(lastSub);
+            listView.setVisibility(View.GONE);
+            info.setText(currentTitle);
         }
 
         @Override
         public void onExitAmbient() {
-            aodTitle.setText(getString(R.string.loadingMessage));
+            listView.setVisibility(View.VISIBLE);
+            //info.setText(Time)
         }
 
         @Override
