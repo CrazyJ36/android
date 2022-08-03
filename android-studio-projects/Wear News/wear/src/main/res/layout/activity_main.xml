@@ -1,38 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.wear.widget.BoxInsetLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
-
-    <DigitalClock
+    android:orientation="vertical">
+    <TextClock
+        android:id="@+id/textClock"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:format12Hour="hh:mm"
+        android:textSize="11sp"
+        android:textColor="@color/dark_grey" />
+    <androidx.wear.widget.BoxInsetLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:boxedEdges="all">
-
-        <TextView
-            android:id="@+id/info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"/>
-
-        <ListView
-            android:id="@+id/recentPostsListView"
+        android:background="@color/black">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/info"
-            android:nestedScrollingEnabled="true"
-            android:scrollingCache="true"
-            android:fastScrollEnabled="true" />
-
-    </RelativeLayout>
-
-</androidx.wear.widget.BoxInsetLayout>
-
+            android:layout_height="match_parent"
+            app:boxedEdges="all">
+            <TextView
+                android:id="@+id/info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"/>
+            <ListView
+                android:id="@+id/recentPostsListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/info"
+                android:nestedScrollingEnabled="true"
+                android:scrollingCache="true"
+                android:fastScrollEnabled="true"
+                android:scrollbars="none"
+                android:overScrollMode="never"/>
+        </RelativeLayout>
+    </androidx.wear.widget.BoxInsetLayout>
+</LinearLayout>

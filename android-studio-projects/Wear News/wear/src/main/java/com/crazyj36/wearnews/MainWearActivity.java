@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextClock;
 import android.widget.TextView;
 import com.google.android.gms.wearable.DataClient;
 import com.google.android.gms.wearable.DataEvent;
@@ -23,6 +24,7 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
     boolean isServiceRunning = false;
     TextView info;
     ListView listView;
+    TextClock textClock;
     String currentTitle;
     String currentSub;
     static ArrayList<String> recentPostsTitles = new ArrayList<>();
@@ -35,6 +37,7 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         info = findViewById(R.id.info);
+        textClock = findViewById(R.id.textClock);
         new ArrayAdapter<>(getApplicationContext(), R.layout.recent_posts_list, recentPostsTitles);
         listView = findViewById(R.id.recentPostsListView);
         ambientController = AmbientModeSupport.attach(this);
@@ -74,7 +77,10 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                     if (!isServiceRunning) {
                         listView.setVisibility(View.GONE);
                         info.setText(R.string.loadingMessage);
-                    } else info.setText("");
+                    } else {
+                        listView.setVisibility(View.VISIBLE);
+                        info.setText("");
+                    }
 
                     postListAdapter = new PostListAdapter(this, recentPostsTitles);
                     listView.setAdapter(postListAdapter);
@@ -95,6 +101,7 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
     private class MyAmbientCallback extends AmbientModeSupport.AmbientCallback {
         @Override
         public void onEnterAmbient(Bundle ambientDetails) {
+            textClock.setVisibility(View.GONE);
             listView.setVisibility(View.GONE);
             info.setTextColor(getApplicationContext().getColor(R.color.dark_grey));
             if (!isServiceRunning) info.setText(R.string.loadingMessage);
@@ -102,6 +109,7 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         }
         @Override
         public void onExitAmbient() {
+            textClock.setVisibility(View.VISIBLE);
             listView.setVisibility(View.VISIBLE);
             info.setTextColor(getApplicationContext().getColor(R.color.white));
             if (!isServiceRunning) {
@@ -109,15 +117,10 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                 info.setText(R.string.loadingMessage);
             } else info.setText("");
         }
-
         @Override
         public void onUpdateAmbient() {
             if (!isServiceRunning) info.setText(R.string.loadingMessage);
             else info.setText(currentTitle);
         }
     }
-
 }
-
-
-
