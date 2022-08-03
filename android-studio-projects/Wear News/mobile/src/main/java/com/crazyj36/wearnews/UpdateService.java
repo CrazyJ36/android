@@ -14,7 +14,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.wearable.DataItem;
-
 import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.PutDataRequest;
 import com.google.android.gms.wearable.Wearable;
@@ -23,7 +22,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -54,10 +52,10 @@ public class UpdateService extends Service {
         NotificationChannel notificationChannel = new NotificationChannel("notifychannel", "Notify Button", NotificationManager.IMPORTANCE_DEFAULT);
         notificationManager.createNotificationChannel(notificationChannel);
         notification = new Notification.Builder(this, "notifychannel")
-                .setSmallIcon(R.drawable.ic_stat_name)  // the status icon
-                .setContentTitle(getString(R.string.app_name))  // the label of the entry
-                .setContentText(getString(R.string.serviceRunningTxt))  // the contents of the entry
-                .setContentIntent(contentIntent)  // The intent to send when the entry is clicked
+                .setSmallIcon(R.drawable.ic_stat_name)
+                .setContentTitle(getString(R.string.app_name))
+                .setContentText(getString(R.string.serviceRunningTxt))
+                .setContentIntent(contentIntent)
                 .build();
         startForeground(1, notification);
         notificationManager.notify(1, notification);
@@ -80,6 +78,7 @@ public class UpdateService extends Service {
                         if (!headline.text().equals(lastTitle)) {
                             recentPostsTitles.add(headline.text());
                             recentPostsSubs.add(categoryAttr.attr("label"));
+                            // cleanup when sure I'm getting all the posts I want.
                             if (recentPostsTitles.size() == 1) {
                                 lastTitle = recentPostsTitles.get(0);
                                 lastSub = recentPostsSubs.get(0);
@@ -151,11 +150,10 @@ public class UpdateService extends Service {
                             }
                             currentPost[0] = lastTitle;
                             currentPost[1] = categoryAttr.attr("label");
-                            sendData(currentPost, recentPostsTitles, recentPostsSubs);
+                            sendData(currentPost, recentPostsTitles, recentPostsSubs); //only send recent posts every 15min.
                             Log.d("WEARNEWS", "sent new post.");
                             MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.newPostsText));
 
-                            //only send recent posts every 15min.
                         } else {
                             Log.d("WEARNEWS", "no new posts");
                             MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.noNewPostsText));
@@ -168,7 +166,7 @@ public class UpdateService extends Service {
                     sendData(currentPost, recentPostsTitles, recentPostsSubs);
                 }
             }
-        }, 0, 5000);
+        }, 0, 3000);
         return START_STICKY;
     }
     @Override
@@ -176,7 +174,7 @@ public class UpdateService extends Service {
         return null;
     }
     private void sendData(String[] currentPost, ArrayList<String> recentPostsTitles, ArrayList<String> recentPostsSubs) {
-        PutDataMapRequest dataMap = PutDataMapRequest.create("/WEARNEWS_PATHTOWATCH");
+        PutDataMapRequest dataMap = PutDataMapRequest.create("/WEARNEWS_MESSAGECHANNEL");
         dataMap.getDataMap().putStringArray("currentPost", currentPost);
         dataMap.getDataMap().putStringArrayList("recentPostsTitles", recentPostsTitles);
         dataMap.getDataMap().putStringArrayList("recentPostsSubs", recentPostsSubs);
@@ -192,28 +190,17 @@ public class UpdateService extends Service {
         dataItemTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+
             }
         });
     }
-    /*public void onDataChanged(DataEventBuffer dataEventBuffer) {
-        for (DataEvent event : dataEventBuffer) {
-            if (event.getType() == DataEvent.TYPE_CHANGED) {
-                DataItem dataItem = event.getDataItem();
-                if (Objects.requireNonNull(dataItem.getUri().getPath()).compareTo("/WEARNEWS_PATHTOPHONE") == 0) {
-                    DataMap dataMap = DataMapItem.fromDataItem(dataItem).getDataMap();
-                }
-            }
-
-        }
-    }*/
     @Override
     public void onDestroy() {
-        MainPhoneActivity.setInfoText(getApplicationContext(), "");
-        notificationManager.cancel(1);
-        timer.cancel();
         isServiceRunning = false;
         sendData(currentPost, recentPostsTitles, recentPostsSubs);
-
+        timer.cancel();
+        MainPhoneActivity.setInfoText(getApplicationContext(), "");
+        notificationManager.cancel(1);
         Log.d("WEARNEWS", "service destroyed");
         super.onDestroy();
     }

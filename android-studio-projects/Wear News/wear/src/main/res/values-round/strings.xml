@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Wear News</string>
-    <string name="serviceNotRunningText">Service not running, start from phone app.</string>
+    <string name="loadingMessage">Start service in corresponding app, and/or wait for new posts.</string>
 </resources>

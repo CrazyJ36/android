@@ -1,14 +1,12 @@
 package com.crazyj36.wearnews;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.Objects;
 
 public class MainPhoneActivity extends Activity {
@@ -99,8 +97,6 @@ public class MainPhoneActivity extends Activity {
     public void onPause () {super.onPause();}
     @Override
     protected void onDestroy() {
-        //UpdateService.recentPostsTitles.clear();
-        //UpdateService.recentPostsSubs.clear();
         super.onDestroy();
     }
 }
