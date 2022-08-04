@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -28,7 +29,7 @@ public class MainPhoneActivity extends Activity {
     TextView urlView;
     Document document;
     Element element;
-    String elementText;
+    int connectRetries = 0;
     static String connectException;
     Timer timer;
 
@@ -38,7 +39,6 @@ public class MainPhoneActivity extends Activity {
         setContentView(R.layout.activity_main);
         editText = findViewById(R.id.editText);
         urlView = findViewById(R.id.urlView);
-        urlView.setText(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("url", getString(R.string.noUrlSetText)));
         info.set(findViewById(R.id.info));
         if (UpdateService.isServiceRunning)
             Objects.requireNonNull(info.get()).setText(R.string.loadingMessage);
@@ -47,14 +47,10 @@ public class MainPhoneActivity extends Activity {
             @Override
             public void onClick(View view) {
                 if (!UpdateService.isServiceRunning) {
-                    if (!(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("url", getString(R.string.noUrlSetText))).equals(getString(R.string.noUrlSetText))) {
+                    if (!(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("url", getString(R.string.noUrlSetText))).equals(getString(R.string.noUrlSetText)))
                         startForegroundService(intent);
-                    } else {
-                        Toast.makeText(getApplicationContext(), getString(R.string.notStartingServiceUntilUrlIsSetText), Toast.LENGTH_SHORT).show();
-                    }
-                } else
-                    Toast.makeText(getApplicationContext(), getString(R.string.serviceAlreadyRunningText), Toast.LENGTH_SHORT).show();
-
+                    else Toast.makeText(getApplicationContext(), getString(R.string.notStartingServiceUntilUrlIsSetText), Toast.LENGTH_SHORT).show();
+                } else Toast.makeText(getApplicationContext(), getString(R.string.serviceAlreadyRunningText), Toast.LENGTH_SHORT).show();
             }
         });
         findViewById(R.id.stopServiceBtn).setOnClickListener(new View.OnClickListener() {
@@ -71,6 +67,7 @@ public class MainPhoneActivity extends Activity {
     }
 
     public void setRss(View view) {
+        connectRetries = 0;
         if (UpdateService.isServiceRunning) stopService(intent);
         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", getString(R.string.noUrlSetText)).apply();
         url = editText.getText().toString();
@@ -84,20 +81,20 @@ public class MainPhoneActivity extends Activity {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    try {
-                        document = Jsoup.connect(url).get();
-                        element = document.select("feed entry title").first();
-                    } catch (IOException e) {
-                        connectException = null;
-                        connectException = e.getLocalizedMessage();
-                    }
                     timer = new Timer();
                     timer.schedule(new TimerTask() {
                         @Override
                         public void run() {
-                            for (int connectionRetry = 0; connectionRetry < 6; connectionRetry++) {
-                                elementText = element.text();
-                                if (elementText != null) {
+                            while (connectRetries < 3) {
+                                try {
+                                    document = Jsoup.connect(url).get();
+                                } catch (IOException e) {
+                                    Log.d("WEARNEWS", e.getLocalizedMessage());
+
+                                }
+                                element = document.select("feed entry title").first();
+                                if (element != null) {
+                                    Log.d("WEARNEWS", "element not null");
                                     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", url).apply();
                                     runOnUiThread(new Runnable() {
                                         @Override
@@ -107,29 +104,28 @@ public class MainPhoneActivity extends Activity {
                                         }
                                     });
                                     timer.cancel();
+                                    Thread.currentThread().interrupt();
                                 } else {
-                                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", getString(R.string.noUrlSetText)).apply();
-                                    if (UpdateService.isServiceRunning) stopService(intent);
+                                    Log.d("WEARNEWS", "element null");
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
                                             Objects.requireNonNull(info.get()).setText("");
-                                            if (connectException != null)
-                                                Toast.makeText(getApplicationContext(), "connectException: " + connectException, Toast.LENGTH_LONG).show();
-                                            Toast.makeText(getApplicationContext(), "Not A reddit feed.\nGot element: \n" + elementText, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), getString(R.string.notAnRssFeedText), Toast.LENGTH_LONG).show();
                                             urlView.setText(getString(R.string.noUrlSetText));
                                         }
                                     });
+                                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", getString(R.string.noUrlSetText)).apply();
+                                    if (UpdateService.isServiceRunning) stopService(intent);
                                 }
+                                connectRetries++;
                             }
                         }
                     }, 0, 1000);
                 }
             }).start();
-            Thread.currentThread().interrupt();
         }
     }
-
     public static void setInfoText(Context context, String text) {
         context.getMainExecutor().execute(new Runnable() {
             @Override
