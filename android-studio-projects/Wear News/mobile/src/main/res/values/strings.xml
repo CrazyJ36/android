@@ -7,9 +7,13 @@
     <string name="startServiceBtnTxt">Start</string>
     <string name="loadingMessage">Getting posts…</string>
     <string name="serviceRunningTxt">Service Running.</string>
+    <string name="serviceAlreadyRunningText">Service already running.</string>
     <string name="serviceNotRunningText">Service is not running.</string>
+    <string name="stoppedServiceText">Stopped Service.</string>
+    <string name="notStartingServiceUntilUrlIsSetText">Not starting until A RSS feed URL is set.</string>
     <string name="setBtnText">Set</string>
     <string name="noUrlSetText">No preference is set.</string>
     <string name="startServiceText">You can now start the service.</string>
+    <string name="enterSomethingText">Enter something first.</string>
     <string name="notAnRssFeedText">"Not A reddit based rss feed."</string>
 </resources>
