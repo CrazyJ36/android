@@ -42,14 +42,18 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         listView = findViewById(R.id.recentPostsListView);
         ambientController = AmbientModeSupport.attach(this);
         if (!isServiceRunning) info.setText(R.string.loadingMessage);
-        else info.setText("");
+        else {
+            if (info.getVisibility() == View.VISIBLE) info.setVisibility(View.GONE); //info.setText("");
+        }
     }
     @Override
     public void onResume() {
         super.onResume();
         Wearable.getDataClient(this).addListener(this);
         if (!isServiceRunning) info.setText(R.string.loadingMessage);
-        else info.setText("");
+        else {
+            if (info.getVisibility() == View.VISIBLE) info.setVisibility(View.GONE); //info.setText("");
+        }
     }
     @Override
     public void onPause() {
@@ -73,22 +77,22 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                     Collections.reverse(recentPostsTitles);
                     Collections.reverse(recentPostsSubs);
 
+                    listView.setAdapter(new PostListAdapter(this, recentPostsTitles));
+
                     isServiceRunning = dataMap.getBoolean("checkIsServiceRunning");
                     if (!isServiceRunning) {
                         listView.setVisibility(View.GONE);
                         info.setText(R.string.loadingMessage);
                     } else {
                         listView.setVisibility(View.VISIBLE);
-                        info.setText("");
+                        //info.setText("");
                     }
-
-                    postListAdapter = new PostListAdapter(this, recentPostsTitles);
-                    listView.setAdapter(postListAdapter);
 
                     if (ambientController.isAmbient()) {
                         if (!isServiceRunning) info.setText(R.string.loadingMessage);
                         else info.setText(currentTitle);
-                    }
+                        if (listView.getVisibility() == View.VISIBLE) listView.setVisibility(View.GONE);
+                    } else if (info.getVisibility() == View.VISIBLE) info.setVisibility(View.GONE);
                     Log.d("WEARNEWS", "got new post");
                 }
             }
@@ -115,10 +119,14 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
             if (!isServiceRunning) {
                 listView.setVisibility(View.GONE);
                 info.setText(R.string.loadingMessage);
-            } else info.setText("");
+            } else {
+                //info.setText("");
+                if (info.getVisibility() == View.VISIBLE) info.setVisibility(View.GONE);
+            }
         }
         @Override
         public void onUpdateAmbient() {
+            if (listView.getVisibility() == View.VISIBLE) listView.setVisibility(View.GONE);
             if (!isServiceRunning) info.setText(R.string.loadingMessage);
             else info.setText(currentTitle);
         }

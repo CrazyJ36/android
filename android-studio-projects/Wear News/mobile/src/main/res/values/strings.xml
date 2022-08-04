@@ -6,4 +6,5 @@
     <string name="stopServiceBtnTxt">Stop</string>
     <string name="startServiceBtnTxt">Start</string>
     <string name="serviceRunningTxt">Service Runnning</string>
+    <string name="loadingMessage">Getting posts…</string>
 </resources>

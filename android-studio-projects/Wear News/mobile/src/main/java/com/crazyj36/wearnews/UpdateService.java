@@ -38,6 +38,7 @@ public class UpdateService extends Service {
     public void onCreate() {
         super.onCreate();
         timer = new Timer();
+        MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.loadingMessage));
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainPhoneActivity.class), PendingIntent.FLAG_IMMUTABLE);
         NotificationChannel notificationChannel = new NotificationChannel("notifychannel", "Notify Button", NotificationManager.IMPORTANCE_DEFAULT);
@@ -126,7 +127,6 @@ public class UpdateService extends Service {
         isServiceRunning = false;
         sendData(currentPost, recentPostsTitles, recentPostsSubs);
         timer.cancel();
-        MainPhoneActivity.setInfoText(getApplicationContext(), "");
         notificationManager.cancel(1);
         Log.d("WEARNEWS", "service destroyed");
         super.onDestroy();

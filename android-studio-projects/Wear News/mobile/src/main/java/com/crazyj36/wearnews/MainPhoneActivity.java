@@ -17,6 +17,7 @@ public class MainPhoneActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         info.set(findViewById(R.id.info));
+        if (UpdateService.isServiceRunning) Objects.requireNonNull(info.get()).setText(R.string.loadingMessage);
         intent = new Intent(this, UpdateService.class);
         findViewById(R.id.startServiceButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,7 +29,7 @@ public class MainPhoneActivity extends Activity {
         findViewById(R.id.stopServiceBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stopService(intent);
+                if (UpdateService.isServiceRunning) stopService(intent);
                 finishAffinity();
             }
         });
@@ -42,7 +43,10 @@ public class MainPhoneActivity extends Activity {
         });
     }
     @Override
-    public void onResume () {super.onResume();}
+    public void onResume () {
+        if (UpdateService.isServiceRunning) Objects.requireNonNull(info.get()).setText(R.string.loadingMessage);
+        super.onResume();
+    }
     @Override
     public void onPause () {super.onPause();}
     @Override

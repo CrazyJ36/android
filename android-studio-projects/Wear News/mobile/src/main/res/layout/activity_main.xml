@@ -4,20 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/instructionsTextView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/instructions"
-            android:paddingBottom="16dp" />
-        <TextView
-            android:id="@+id/info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:text="@string/instructions"
+        android:paddingBottom="16dp" />
+    <TextView
+        android:id="@+id/info"
+        android:layout_below="@id/instructionsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="wrap_content"
