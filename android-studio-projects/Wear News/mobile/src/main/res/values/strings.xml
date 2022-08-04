@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">Wear News</string>
-    <string name="instructions">This app sends news to the corresponding wear app.</string>
+    <string name="instructions">This app sends Reddit updates to your Wear OS SmartWatch every 3 seconds. Set A custom RSS feed url like:\n\nhttps://www.reddit.com/r/all/new/.rss\n\nthen tap start to view on the corresponding wear os app.\n\nTips: Setup A custom feed on reddit, paste it\'s url here and append "/new/.rss" to the end.\nAlso try the watch app with Always-On-Display enabled, if available.</string>
     <string name="noNewPostsText">No new posts…</string>
     <string name="newPostsText">New posts…</string>
     <string name="stopServiceBtnTxt">Stop</string>
     <string name="startServiceBtnTxt">Start</string>
-    <string name="serviceRunningTxt">Service Runnning</string>
     <string name="loadingMessage">Getting posts…</string>
+    <string name="serviceRunningTxt">Service Running.</string>
+    <string name="serviceNotRunningText">Service is not running.</string>
+    <string name="setBtnText">Set</string>
+    <string name="noUrlSetText">No preference is set.</string>
+    <string name="startServiceText">You can now start the service.</string>
+    <string name="notAnRssFeedText">"Not A reddit based rss feed:\n"</string>
 </resources>

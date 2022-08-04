@@ -8,6 +8,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -61,8 +62,16 @@ public class UpdateService extends Service {
             public void run() {
                 Document doc;
                 try {
-                    //doc = Jsoup.connect("https://www.reddit.com/r/all/new/.rss").get();
-                    doc = Jsoup.connect("https://www.reddit.com/user/crazy_j36/m/myrss/new/.rss").get();
+                    //doc = Jsoup.connect("https://www.reddit.com/user/crazy_j36/m/myrss/new/.rss").get();
+                    doc = Jsoup.connect(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("url", getString(R.string.noUrlSetText))).get();
+                    if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("url", getString(R.string.noUrlSetText)).equals("https://www.reddit.com/r/all/new/.rss")) {
+                        int i = 0;
+                        while (i < 3) {
+                            doc = Jsoup.connect("https://www.reddit.com/r/all/new/.rss").get();
+                            //Element headline = doc.select("feed entry title").first();
+                            i++;
+                        }
+                    }
                     Element headline = doc.select("feed entry title").first();
                     Element categoryAttr = doc.select("feed entry category").first();
                     if (headline != null && categoryAttr != null) {
@@ -90,9 +99,7 @@ public class UpdateService extends Service {
                         }
                     }
                 } catch (IOException e) {
-                    currentPost[0] = "URL ERROR:";
-                    currentPost[1] = e.getLocalizedMessage();
-                    sendData(currentPost, recentPostsTitles, recentPostsSubs);
+                    // taken care of in mainphoneactivity.java.
                 }
             }
         }, 0, 3000);

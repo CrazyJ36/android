@@ -17,6 +17,30 @@
         android:layout_height="wrap_content" />
 
     <LinearLayout
+        android:id="@+id/rssUrlLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerVertical="true">
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="@string/setBtnText"
+            android:onClick="setRss" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/urlView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/noUrlSetText"
+        android:layout_below="@id/rssUrlLayout"/>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
