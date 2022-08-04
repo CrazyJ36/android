@@ -29,7 +29,6 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
     String currentSub;
     static ArrayList<String> recentPostsTitles = new ArrayList<>();
     static ArrayList<String> recentPostsSubs = new ArrayList<>();
-    PostListAdapter postListAdapter;
     private AmbientModeSupport.AmbientController ambientController;
 
     @Override
@@ -41,19 +40,13 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         new ArrayAdapter<>(getApplicationContext(), R.layout.recent_posts_list, recentPostsTitles);
         listView = findViewById(R.id.recentPostsListView);
         ambientController = AmbientModeSupport.attach(this);
-        if (!isServiceRunning) info.setText(R.string.loadingMessage);
-        else {
-            if (info.getVisibility() == View.VISIBLE) info.setVisibility(View.GONE); //info.setText("");
-        }
+        setup();
     }
     @Override
     public void onResume() {
         super.onResume();
         Wearable.getDataClient(this).addListener(this);
-        if (!isServiceRunning) info.setText(R.string.loadingMessage);
-        else {
-            if (info.getVisibility() == View.VISIBLE) info.setVisibility(View.GONE); //info.setText("");
-        }
+        setup();
     }
     @Override
     public void onPause() {
@@ -67,7 +60,6 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                 DataItem dataItem = event.getDataItem();
                 if (Objects.requireNonNull(dataItem.getUri().getPath()).compareTo("/WEARNEWS_MESSAGECHANNEL") == 0){
                     DataMap dataMap = DataMapItem.fromDataItem(dataItem).getDataMap();
-
                     String[] currentPost = dataMap.getStringArray("currentPost");
                     assert currentPost != null;
                     currentTitle = currentPost[0];
@@ -76,23 +68,9 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
                     recentPostsSubs = dataMap.getStringArrayList("recentPostsSubs");
                     Collections.reverse(recentPostsTitles);
                     Collections.reverse(recentPostsSubs);
-
                     listView.setAdapter(new PostListAdapter(this, recentPostsTitles));
-
                     isServiceRunning = dataMap.getBoolean("checkIsServiceRunning");
-                    if (!isServiceRunning) {
-                        listView.setVisibility(View.GONE);
-                        info.setText(R.string.loadingMessage);
-                    } else {
-                        listView.setVisibility(View.VISIBLE);
-                        //info.setText("");
-                    }
-
-                    if (ambientController.isAmbient()) {
-                        if (!isServiceRunning) info.setText(R.string.loadingMessage);
-                        else info.setText(currentTitle);
-                        if (listView.getVisibility() == View.VISIBLE) listView.setVisibility(View.GONE);
-                    } else if (info.getVisibility() == View.VISIBLE) info.setVisibility(View.GONE);
+                    setup();
                     Log.d("WEARNEWS", "got new post");
                 }
             }
@@ -105,30 +83,42 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
     private class MyAmbientCallback extends AmbientModeSupport.AmbientCallback {
         @Override
         public void onEnterAmbient(Bundle ambientDetails) {
-            textClock.setVisibility(View.GONE);
-            listView.setVisibility(View.GONE);
-            info.setTextColor(getApplicationContext().getColor(R.color.dark_grey));
-            if (!isServiceRunning) info.setText(R.string.loadingMessage);
-            else info.setText(currentTitle);
+            setup();
         }
         @Override
         public void onExitAmbient() {
-            textClock.setVisibility(View.VISIBLE);
-            listView.setVisibility(View.VISIBLE);
-            info.setTextColor(getApplicationContext().getColor(R.color.white));
-            if (!isServiceRunning) {
-                listView.setVisibility(View.GONE);
-                info.setText(R.string.loadingMessage);
-            } else {
-                //info.setText("");
-                if (info.getVisibility() == View.VISIBLE) info.setVisibility(View.GONE);
-            }
+            setup();
         }
         @Override
         public void onUpdateAmbient() {
-            if (listView.getVisibility() == View.VISIBLE) listView.setVisibility(View.GONE);
-            if (!isServiceRunning) info.setText(R.string.loadingMessage);
-            else info.setText(currentTitle);
+            setup();
+        }
+    }
+    public void setup() {
+        if (!isServiceRunning && ambientController.isAmbient()) {
+            listView.setVisibility(View.GONE);
+            textClock.setVisibility(View.GONE);
+            info.setVisibility(View.VISIBLE);
+            info.setTextColor(getColor(R.color.dark_grey));
+            info.setText(R.string.loadingMessage);
+        } else if (!isServiceRunning && !ambientController.isAmbient()) {
+            listView.setVisibility(View.GONE);
+            textClock.setVisibility(View.VISIBLE);
+            info.setVisibility(View.VISIBLE);
+            info.setTextColor(getColor(R.color.white));
+            info.setText(R.string.loadingMessage);
+        } else if (isServiceRunning && ambientController.isAmbient()) {
+            listView.setVisibility(View.GONE);
+            textClock.setVisibility(View.GONE);
+            info.setVisibility(View.VISIBLE);
+            info.setTextColor(getColor(R.color.dark_grey));
+            info.setText(currentTitle);
+        } else if (isServiceRunning && !ambientController.isAmbient()) {
+            listView.setVisibility(View.VISIBLE);
+            textClock.setVisibility(View.VISIBLE);
+            info.setVisibility(View.GONE);
+            info.setTextColor(getColor(R.color.white));
+            info.setText(currentTitle);
         }
     }
 }
