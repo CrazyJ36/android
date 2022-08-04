@@ -11,5 +11,5 @@
     <string name="setBtnText">Set</string>
     <string name="noUrlSetText">No preference is set.</string>
     <string name="startServiceText">You can now start the service.</string>
-    <string name="notAnRssFeedText">"Not A reddit based rss feed:\n"</string>
+    <string name="notAnRssFeedText">"Not A reddit based rss feed."</string>
 </resources>

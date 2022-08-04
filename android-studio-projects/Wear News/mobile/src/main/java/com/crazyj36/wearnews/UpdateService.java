@@ -64,14 +64,6 @@ public class UpdateService extends Service {
                 try {
                     //doc = Jsoup.connect("https://www.reddit.com/user/crazy_j36/m/myrss/new/.rss").get();
                     doc = Jsoup.connect(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("url", getString(R.string.noUrlSetText))).get();
-                    if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("url", getString(R.string.noUrlSetText)).equals("https://www.reddit.com/r/all/new/.rss")) {
-                        int i = 0;
-                        while (i < 3) {
-                            doc = Jsoup.connect("https://www.reddit.com/r/all/new/.rss").get();
-                            //Element headline = doc.select("feed entry title").first();
-                            i++;
-                        }
-                    }
                     Element headline = doc.select("feed entry title").first();
                     Element categoryAttr = doc.select("feed entry category").first();
                     if (headline != null && categoryAttr != null) {

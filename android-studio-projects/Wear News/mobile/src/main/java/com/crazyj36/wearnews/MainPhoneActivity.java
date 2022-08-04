@@ -10,10 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.work.impl.model.Preference;
-
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
@@ -26,7 +24,6 @@ public class MainPhoneActivity extends Activity {
     EditText editText;
     TextView urlView;
     boolean jsoupConnected;
-    String connectError;
     String testElement;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +38,11 @@ public class MainPhoneActivity extends Activity {
         findViewById(R.id.startServiceButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               if (checkUrl()) {
-                    if (!UpdateService.isServiceRunning) {
-                        if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()) != null) startForegroundService(intent);
-                    }
-                    else Toast.makeText(getApplicationContext(), "Service already running", Toast.LENGTH_SHORT).show();
+                if (!UpdateService.isServiceRunning) {
+                    if (!(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("url", getString(R.string.noUrlSetText)).equals(""))) startForegroundService(intent);
                 }
+                else Toast.makeText(getApplicationContext(), "Service already running", Toast.LENGTH_SHORT).show();
+
             }
         });
         findViewById(R.id.stopServiceBtn).setOnClickListener(new View.OnClickListener() {
@@ -62,7 +58,43 @@ public class MainPhoneActivity extends Activity {
         });
     }
     public void setRss(View view) {
-        checkUrl();
+        if (UpdateService.isServiceRunning) stopService(intent);
+        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", getString(R.string.noUrlSetText)).apply();
+        url = editText.getText().toString();
+        if (url.equals("")) {
+            Toast.makeText(this, "Enter A reddit feed URL.", Toast.LENGTH_SHORT).show();
+            urlView.setText(getString(R.string.noUrlSetText));
+        } else if (!(Patterns.WEB_URL.matcher(url).matches())) {
+            Toast.makeText(this, "Not A URL:\n" + url, Toast.LENGTH_SHORT).show();
+            urlView.setText(getString(R.string.noUrlSetText));
+        }
+        else {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        jsoupConnected = true;
+                        Document doc = Jsoup.connect(url).get();
+                        Element element = doc.select("feed entry title").first();
+                        assert element != null;
+                        testElement = element.text();
+                    } catch (IOException e) {
+                        jsoupConnected = false;
+                    }
+                    Thread.currentThread().interrupt();
+                }
+            }).start();
+            if (jsoupConnected) {
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", url).apply();
+                urlView.setText(url);
+                Toast.makeText(this, getString(R.string.startServiceText), Toast.LENGTH_SHORT).show();
+            } else {
+                urlView.setText(getString(R.string.noUrlSetText));
+                if (UpdateService.isServiceRunning) stopService(intent);
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", getString(R.string.noUrlSetText)).apply();
+                Toast.makeText(this, getString(R.string.notAnRssFeedText), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
     public static void setInfoText(Context context, String text) {
         context.getMainExecutor().execute(new Runnable() {
@@ -71,46 +103,6 @@ public class MainPhoneActivity extends Activity {
                 Objects.requireNonNull(info.get()).setText(text);
              }
         });
-    }
-    public boolean checkUrl() {
-        url = editText.getText().toString();
-        if (url.equals("")) {
-            Toast.makeText(this, "Enter A reddit feed URL.", Toast.LENGTH_SHORT).show();
-            urlView.setText(getString(R.string.noUrlSetText));
-            if (UpdateService.isServiceRunning) stopService(intent);
-            return false;
-        } else if (!(Patterns.WEB_URL.matcher(url).matches())) {
-            Toast.makeText(this, "Not A URL:\n" + url, Toast.LENGTH_SHORT).show();
-            urlView.setText(getString(R.string.noUrlSetText));
-            if (UpdateService.isServiceRunning) stopService(intent);
-            return false;
-        }
-        else {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Element element = Jsoup.connect(url).get().select("feed entry title").first();
-                        jsoupConnected = element.text() != null;
-                        testElement = element.text();
-                    } catch (Exception e) {
-                        connectError = e.getLocalizedMessage();
-                    }
-                    Thread.currentThread().interrupt();
-                }
-            }).start();
-            if (jsoupConnected) {
-                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", url).apply();
-                urlView.setText(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("url", getString(R.string.noUrlSetText)));
-                Toast.makeText(this, getString(R.string.startServiceText), Toast.LENGTH_SHORT).show();
-                return true;
-            } else {
-                urlView.setText(getString(R.string.noUrlSetText));
-                if (UpdateService.isServiceRunning) stopService(intent);
-                Toast.makeText(getApplicationContext(), getString(R.string.notAnRssFeedText) + url + "\n" + "localizedMessage: " + connectError + "\n" + "element.text(): " + testElement, Toast.LENGTH_SHORT).show();
-            }
-        }
-        return false;
     }
     @Override
     public void onResume () {
