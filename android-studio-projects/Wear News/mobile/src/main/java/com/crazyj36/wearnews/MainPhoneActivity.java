@@ -31,7 +31,7 @@ public class MainPhoneActivity extends Activity {
     Element element;
     Timer timer;
     int connectRetries;
-    boolean showToast;
+    boolean repeat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +58,7 @@ public class MainPhoneActivity extends Activity {
             public void onClick(View view) {
                 if (UpdateService.isServiceRunning) {
                     stopService(intent);
-                    UpdateService.timer.cancel();
                     Toast.makeText(getApplicationContext(), getString(R.string.stoppedServiceText), Toast.LENGTH_SHORT).show();
-                    Objects.requireNonNull(info.get()).setText(getText(R.string.serviceNotRunningText));
                 } else
                     Toast.makeText(getApplicationContext(), getString(R.string.serviceNotRunningText), Toast.LENGTH_SHORT).show();
             }
@@ -68,16 +66,20 @@ public class MainPhoneActivity extends Activity {
     }
 
     public void setRss(View view) {
-        showToast = true;
-        if (UpdateService.isServiceRunning) stopService(intent);
-        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", getString(R.string.noUrlSetText)).apply();
+        repeat = true;
         url = editText.getText().toString();
         if (url.equals("")) {
+            stopService(intent);
+            Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
+            PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", getString(R.string.noUrlSetText)).apply();
+            urlView.setText(getString(R.string.noUrlSetText));
             Toast.makeText(this, getString(R.string.enterSomethingText), Toast.LENGTH_SHORT).show();
-            urlView.setText(getString(R.string.noUrlSetText));
         } else if (!(Patterns.WEB_URL.matcher(url).matches())) {
-            Toast.makeText(this, "Not A URL:\n" + url, Toast.LENGTH_SHORT).show();
+            stopService(intent);
+            Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
+            PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", getString(R.string.noUrlSetText)).apply();
             urlView.setText(getString(R.string.noUrlSetText));
+            Toast.makeText(this, "Not A URL:\n" + url, Toast.LENGTH_SHORT).show();
         } else {
             connectRetries = 0;
             new Thread(new Runnable() {
@@ -95,33 +97,35 @@ public class MainPhoneActivity extends Activity {
                             try {
                                 document = Jsoup.connect(url).get();
                                 element = document.select("feed entry title").first();
-
                                 if (element != null) {
-                                    Log.d("WEARNEWS", "element not null");
-                                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", url).apply();
-                                    urlView.setText(url);
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            if (showToast) {
-                                                Toast.makeText(MainPhoneActivity.this, getString(R.string.startServiceText), Toast.LENGTH_SHORT).show();
-                                                showToast = false;
+                                    if (repeat) {
+                                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", url).apply();
+                                        urlView.setText(url);
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                if (UpdateService.isServiceRunning) {
+                                                    Toast.makeText(MainPhoneActivity.this, getString(R.string.serviceURLUpdatedText), Toast.LENGTH_SHORT).show();
+                                                } else
+                                                    Toast.makeText(MainPhoneActivity.this, getString(R.string.startServiceText), Toast.LENGTH_SHORT).show();
+                                                repeat = false;
                                             }
-                                        }
-                                    });
+                                        });
+                                    }
                                 } else {
-                                    Log.d("WEARNEWS", "element null");
-                                    if (UpdateService.isServiceRunning) stopService(intent);
-                                    urlView.setText(getString(R.string.noUrlSetText));
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            if (showToast) {
+                                    if (repeat) {
+                                        stopService(intent);
+                                        Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
+                                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", getString(R.string.noUrlSetText)).apply();
+                                        urlView.setText(getString(R.string.noUrlSetText));
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
                                                 Toast.makeText(MainPhoneActivity.this, getString(R.string.notAnRssFeedText), Toast.LENGTH_SHORT).show();
-                                                showToast = false;
                                             }
-                                        }
-                                    });
+                                        });
+                                        repeat = false;
+                                    }
 
                                 }
                             } catch (IOException e) {

@@ -124,12 +124,13 @@ public class UpdateService extends Service {
     }
     @Override
     public void onDestroy() {
+        super.onDestroy();
         isServiceRunning = false;
         sendData(currentPost, recentPostsTitles, recentPostsSubs);
         timer.cancel();
         notificationManager.cancel(1);
+        MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.serviceNotRunningText));
         Log.d("WEARNEWS", "service destroyed");
-        super.onDestroy();
     }
 }
 

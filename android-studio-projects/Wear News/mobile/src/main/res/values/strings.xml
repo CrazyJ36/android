@@ -11,10 +11,11 @@
     <string name="serviceNotRunningText">Service is not running.</string>
     <string name="stoppedServiceText">Stopped Service.</string>
     <string name="notStartingServiceUntilUrlIsSetText">Not starting until A RSS feed URL is set.</string>
-    <string name="editTextHint">https://www.reddit.com/user/YOU/m/YOURCUSTOMFEED/new/.rss</string>
+    <string name="editTextHint">https://www.reddit.com/user/YOU/\nm/YOURCUSTOMFEED/new/.rss</string>
     <string name="setBtnText">Set</string>
     <string name="noUrlSetText">No preference is set.</string>
     <string name="startServiceText">You can now start the service.</string>
     <string name="enterSomethingText">Enter something first.</string>
     <string name="notAnRssFeedText">"Not A reddit-based xml feed."</string>
+    <string name="serviceURLUpdatedText">Service URL updated.</string>
 </resources>
