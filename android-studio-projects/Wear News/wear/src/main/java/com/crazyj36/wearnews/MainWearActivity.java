@@ -1,4 +1,4 @@
-package com.crazyj36.redditforwear;
+package com.crazyj36.wearnews;
 
 import android.os.Bundle;
 import androidx.fragment.app.FragmentActivity;

@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/instructions"
-        android:paddingBottom="16dp" />
+        android:paddingBottom="16dp"
+        android:layout_centerHorizontal="true" />
     <TextView
         android:id="@+id/info"
         android:layout_below="@id/instructionsTextView"

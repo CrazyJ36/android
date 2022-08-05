@@ -1,4 +1,4 @@
-package com.crazyj36.redditforwear;
+package com.crazyj36.wearnews;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
