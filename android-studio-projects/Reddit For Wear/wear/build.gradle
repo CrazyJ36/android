@@ -4,7 +4,7 @@ plugins {
 android {
     compileSdkVersion 33
     defaultConfig {
-        applicationId "com.crazyj36.wearnews"
+        applicationId "com.crazyj36.redditforwear"
         minSdkVersion 28
         targetSdkVersion 33
         versionCode 1
@@ -19,7 +19,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.google.android.support:wearable:2.9.0'
+    implementation 'androidx.wear:wear:1.2.0'
     implementation 'com.google.android.gms:play-services-wearable:17.1.0'
-    implementation "androidx.work:work-runtime:2.7.1"
-    implementation 'org.jsoup:jsoup:1.15.2'
+    compileOnly 'com.google.android.wearable:wearable:2.9.0'
+    wearApp project(':wear')
 }

@@ -1,4 +1,4 @@
-package com.crazyj36.wearnews;
+package com.crazyj36.redditforwear;
 
 import android.content.Context;
 import android.view.LayoutInflater;

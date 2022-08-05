@@ -1,4 +1,4 @@
-package com.crazyj36.wearnews;
+package com.crazyj36.redditforwear;
 
 import android.app.Activity;
 import android.content.Context;
@@ -70,7 +70,7 @@ public class MainPhoneActivity extends Activity {
     public void setRss(View view) {
         showToast = true;
         if (UpdateService.isServiceRunning) stopService(intent);
-
+        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", getString(R.string.noUrlSetText)).apply();
         url = editText.getText().toString();
         if (url.equals("")) {
             Toast.makeText(this, getString(R.string.enterSomethingText), Toast.LENGTH_SHORT).show();
@@ -113,7 +113,6 @@ public class MainPhoneActivity extends Activity {
                                     Log.d("WEARNEWS", "element null");
                                     if (UpdateService.isServiceRunning) stopService(intent);
                                     urlView.setText(getString(R.string.noUrlSetText));
-                                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", getString(R.string.noUrlSetText)).apply();
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {

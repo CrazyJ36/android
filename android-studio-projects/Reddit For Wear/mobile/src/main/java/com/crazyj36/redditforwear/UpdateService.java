@@ -1,4 +1,4 @@
-package com.crazyj36.wearnews;
+package com.crazyj36.redditforwear;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -62,7 +62,6 @@ public class UpdateService extends Service {
             public void run() {
                 Document doc;
                 try {
-                    //doc = Jsoup.connect("https://www.reddit.com/user/crazy_j36/m/myrss/new/.rss").get();
                     doc = Jsoup.connect(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("url", getString(R.string.noUrlSetText))).get();
                     Element headline = doc.select("feed entry title").first();
                     Element categoryAttr = doc.select("feed entry category").first();
