@@ -91,7 +91,9 @@ public class UpdateService extends Service {
                         }
                     }
                 } catch (IOException e) {
-                    // taken care of in mainphoneactivity.java.
+                    currentPost[0] = "Set new url in main app.";
+                    currentPost[1] = "IOException";
+                    sendData(currentPost, recentPostsTitles, recentPostsSubs);
                 }
             }
         }, 0, 3000);

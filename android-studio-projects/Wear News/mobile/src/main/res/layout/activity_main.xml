@@ -14,7 +14,8 @@
         android:id="@+id/info"
         android:layout_below="@id/instructionsTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"/>
 
     <LinearLayout
         android:id="@+id/rssUrlLayout"
@@ -39,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/noUrlSetText"
-        android:layout_below="@id/rssUrlLayout"/>
+        android:layout_below="@id/rssUrlLayout" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
