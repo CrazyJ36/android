@@ -39,6 +39,7 @@ public class MainWearActivity extends FragmentActivity implements AmbientModeSup
         textClock = findViewById(R.id.textClock);
         new ArrayAdapter<>(getApplicationContext(), R.layout.recent_posts_list, recentPostsTitles);
         listView = findViewById(R.id.recentPostsListView);
+        // maybe? listView.setEnabled(false);
         ambientController = AmbientModeSupport.attach(this);
         setup();
     }

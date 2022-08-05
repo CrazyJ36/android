@@ -6,11 +6,10 @@
 
     <TextView
         android:id="@+id/instructionsTextView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/instructions"
-        android:paddingBottom="16dp"
-        android:layout_centerHorizontal="true" />
+        android:paddingBottom="16dp" />
     <TextView
         android:id="@+id/info"
         android:layout_below="@id/instructionsTextView"
@@ -24,11 +23,17 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_centerVertical="true">
+
         <EditText
             android:id="@+id/editText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8"/>
+            android:layout_weight="0.8"
+            android:hint="@string/editTextHint"
+            android:importantForAutofill="no"
+            android:inputType="textUri"
+            android:minHeight="48dp"
+            android:textSize="14sp" />
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"

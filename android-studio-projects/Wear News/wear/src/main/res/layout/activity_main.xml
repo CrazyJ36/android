@@ -36,7 +36,7 @@
                 android:scrollingCache="true"
                 android:fastScrollEnabled="true"
                 android:scrollbars="none"
-                android:overScrollMode="never"/>
+                android:overScrollMode="never" />
         </RelativeLayout>
     </androidx.wear.widget.BoxInsetLayout>
 </LinearLayout>

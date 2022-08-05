@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Wear News</string>
-    <string name="loadingMessage">Start service from corresponding mobile app. Getting posts…</string>
+    <string name="loadingMessage">Start service from corresponding mobile app and wait for new posts…</string>
 </resources>
