@@ -25,15 +25,15 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Random;
 
 public class UpdateService extends Service {
-    static ArrayList<String> urls = MainPhoneActivity.urls;
+    Set<String> set;
     Random random = new Random();
-    Gson gson = new Gson();
-    static String[] urlArray;
     static String[] currentPost = {"", ""};
     static String lastTitle;
     static ArrayList<String> recentPostsTitles = new ArrayList<>();
@@ -69,9 +69,10 @@ public class UpdateService extends Service {
             public void run() {
                 Document doc;
                 try {
+                    set = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getStringSet("urls", set);
                     //doc = Jsoup.connect(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("url", getString(R.string.noUrlSetText))).get();
-                    urlArray = gson.fromJson(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("urls", getString(R.string.noUrlSetText)), String[].class);
-                    doc = Jsoup.connect(urlArray[random.nextInt(urlArray.length)]).get();
+                    doc = Jsoup.connect(String.valueOf(random.nextInt(set.size()))).get();
+                    //doc = Jsoup.connect();
                     Element headline = doc.select("feed entry title").first();
                     Element categoryAttr = doc.select("feed entry category").first();
                     if (headline != null && categoryAttr != null) {

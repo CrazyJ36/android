@@ -12,14 +12,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.gson.Gson;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
-import java.util.Random;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -28,10 +28,9 @@ public class MainPhoneActivity extends Activity {
     public static ThreadLocal<TextView> info = new ThreadLocal<>();
     String url;
     static ArrayList<String> urls = new ArrayList<>();
-    String[] preferenceArray;
     EditText editText;
     ListView urlView;
-    Gson gson = new Gson();
+    static Set<String> set;
     Document document;
     Element element;
     Timer timer;
@@ -45,9 +44,12 @@ public class MainPhoneActivity extends Activity {
         editText = findViewById(R.id.editText);
         urlView = findViewById(R.id.urlView);
         urlView.setAdapter(new UrlListAdapter(getApplicationContext(), urls));
-        preferenceArray = gson.fromJson(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("urls", getString(R.string.noUrlSetText)), String[].class);
-        for (int preferenceCount = 0; preferenceCount <= preferenceArray.length; preferenceCount++) {
-            Log.d("WEARNEWS", "Entered URL: " + preferenceArray[preferenceCount]);
+        set = new HashSet<>( PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getStringSet("urls", new HashSet<String>()));
+        Log.d("WEARNEWS", "URLS Size: " + set.size());
+        //urls.clear();
+        for (String str : set) {
+            urls.add(str);
+            Log.d("WEARNEWS", "set contains: " + str);
         }
         info.set(findViewById(R.id.info));
         if (UpdateService.isServiceRunning) Objects.requireNonNull(info.get()).setText(R.string.loadingMessage);
@@ -57,8 +59,9 @@ public class MainPhoneActivity extends Activity {
             @Override
             public void onClick(View view) {
                 if (!UpdateService.isServiceRunning) {
-                    if (preferenceArray.length > 0)
+                    if (!(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("urls", getString(R.string.noUrlSetText)).equals(getString(R.string.noUrlSetText)))) {
                         startForegroundService(intent);
+                    }
                     else Toast.makeText(getApplicationContext(), getString(R.string.notStartingServiceUntilUrlIsSetText), Toast.LENGTH_SHORT).show();
                 } else Toast.makeText(getApplicationContext(), getString(R.string.serviceAlreadyRunningText), Toast.LENGTH_SHORT).show();
             }
@@ -110,11 +113,18 @@ public class MainPhoneActivity extends Activity {
                                 }
                                 if (element != null) {
                                     if (repeat) {
-                                        urls.add(url);
-                                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("urls", gson.toJson(urls)).apply();
+                                        set.add(url);
+                                        Log.d("WEARNEWS", "Added to set");
+                                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putStringSet("urls", set).apply();
+                                        urls.clear();
+                                        for (String str : set) {
+                                            urls.add(str);
+                                            Log.d("WEARNEWS", "set contains: " + str);
+                                        }
                                         runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
+                                                urlView.invalidateViews();
                                                 if (UpdateService.isServiceRunning) {
                                                     Toast.makeText(MainPhoneActivity.this, getString(R.string.urlAddedText), Toast.LENGTH_SHORT).show();
                                                 } else
@@ -147,6 +157,7 @@ public class MainPhoneActivity extends Activity {
             }).start();
         }
     }
+
     public static void setInfoText(Context context, String text) {
         context.getMainExecutor().execute(new Runnable() {
             @Override
@@ -160,6 +171,13 @@ public class MainPhoneActivity extends Activity {
         super.onResume();
         if (UpdateService.isServiceRunning) Objects.requireNonNull(info.get()).setText(R.string.loadingMessage);
         else Objects.requireNonNull(info.get()).setText(getString(R.string.serviceNotRunningText));
+        Log.d("WEARNEWS", "Loading set");
+        Log.d("WEARNEWS", "URLS Size: " + set.size());
+        urls.clear();
+        for (String str : set) {
+            urls.add(str);
+            Log.d("WEARNEWS", "set contains: " + str);
+        }
     }
     @Override
     public void onPause() {

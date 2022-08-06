@@ -19,4 +19,5 @@
     <string name="notAnRssFeedText">"Not A reddit-based xml feed."</string>
     <string name="urlAddedText">URL list updated.</string>
     <string name="deleteUrlBtnText">Delete</string>
+    <string name="addUrlsText">Add some RSS feed URLs.</string>
 </resources>
