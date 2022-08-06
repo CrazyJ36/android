@@ -37,6 +37,7 @@ public class MainPhoneActivity extends Activity {
     Document document;
     Element element;
     static boolean includeLabel;
+    Thread thread;
     Timer timer;
     int connectRetries;
     boolean repeat;
@@ -101,85 +102,103 @@ public class MainPhoneActivity extends Activity {
             Toast.makeText(this, "Not A URL:\n" + url, Toast.LENGTH_SHORT).show();
         } else {
             connectRetries = 0;
-            new Thread(new Runnable() {
+            thread = new Thread() {
                 @Override
                 public void run() {
-                    timer = new Timer();
-                    timer.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            Log.d("WEARNEWS", "trying to connect...");
-                            if (connectRetries == 2) {
-                                timer.cancel();
-                                Thread.currentThread().interrupt();
-                            }
-                            try {
-                                document = Jsoup.connect(url).get();
-                                includeLabel = true;
-                                boolean tryNext = false;
-
-                                    element = document.select("feed entry title").first();
-                                    if (element == null) tryNext = true;
-                                if (tryNext) {
-                                    includeLabel = false;
+                    while (!Thread.currentThread().isInterrupted()) {
+                        timer = new Timer();
+                        timer.schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                Log.d("WEARNEWS", "trying to connect...");
+                                if (connectRetries == 2) {
+                                    timer.cancel();
+                                    Thread.currentThread().interrupt();
+                                }
+                                try {
                                     try {
-                                        element = document.select("rss channel item title").first();
-                                    } catch (Exception e) {
+                                        document = Jsoup.connect(url).get();
+                                    } catch (IllegalArgumentException malformedURLException) {
                                         stopService(intent);
                                         runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
-                                                Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
-                                                Toast.makeText(MainPhoneActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getApplicationContext(), malformedURLException.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                                             }
                                         });
                                         timer.cancel();
                                         Thread.currentThread().interrupt();
                                     }
-                                }
+                                    includeLabel = true;
+                                    boolean tryNext = false;
 
-                                if (element != null) {
-                                    if (repeat) {
-                                        set.add(url);
-                                        Log.d("WEARNEWS", "Added to set");
-                                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putStringSet("urls", set).apply();
-                                        urls.add(url);
-                                        for (String str : set) {
-                                            Log.d("WEARNEWS", "set contains: " + str);
+                                    if (!Thread.currentThread().isInterrupted()) element = document.select("feed entry title").first();
+                                    if (element == null) tryNext = true;
+                                    if (tryNext) {
+                                        includeLabel = false;
+                                        try {
+                                            element = document.select("rss channel item title").first();
+                                        } catch (Exception e) {
+                                            stopService(intent);
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
+                                                    Toast.makeText(MainPhoneActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                            timer.cancel();
+                                            Thread.currentThread().interrupt();
                                         }
-                                        runOnUiThread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                urlView.invalidateViews();
-                                                if (UpdateService.isServiceRunning) {
-                                                    Toast.makeText(MainPhoneActivity.this, getString(R.string.urlAddedText), Toast.LENGTH_SHORT).show();
-                                                } else
-                                                    Toast.makeText(MainPhoneActivity.this, getString(R.string.startServiceText), Toast.LENGTH_SHORT).show();
-                                                repeat = false;
-                                            }
-                                        });
                                     }
-                                } else {
-                                    if (repeat) {
-                                        stopService(intent);
-                                        runOnUiThread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
-                                                Toast.makeText(MainPhoneActivity.this, getString(R.string.notAnRssFeedText), Toast.LENGTH_SHORT).show();
+
+                                    if (element != null) {
+                                        if (repeat) {
+                                            set.add(url);
+                                            Log.d("WEARNEWS", "Added to set");
+                                            PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putStringSet("urls", set).apply();
+                                            urls.add(url);
+                                            for (String str : set) {
+                                                Log.d("WEARNEWS", "set contains: " + str);
                                             }
-                                        });
-                                        repeat = false;
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    urlView.invalidateViews();
+                                                    if (UpdateService.isServiceRunning) {
+                                                        Toast.makeText(MainPhoneActivity.this, getString(R.string.urlAddedText), Toast.LENGTH_SHORT).show();
+                                                    } else
+                                                        Toast.makeText(MainPhoneActivity.this, getString(R.string.startServiceText), Toast.LENGTH_SHORT).show();
+                                                    repeat = false;
+                                                }
+                                            });
+                                        }
+                                    } else {
+                                        if (repeat) {
+                                            stopService(intent);
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
+                                                    Toast.makeText(MainPhoneActivity.this, getString(R.string.notAnRssFeedText), Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                            repeat = false;
+                                        }
+                                        timer.cancel();
+                                        Thread.currentThread().interrupt();
                                     }
+                                } catch (IOException e) {
+                                    Log.d("WEARNEWS", e.getLocalizedMessage());
                                 }
-                            } catch (IOException e) {
-                                Log.d("WEARNEWS", e.getLocalizedMessage());
+                                connectRetries++;
                             }
-                            connectRetries++;
-                        }
-                    }, 0, 500);
+                        }, 0, 500);
+                        Thread.currentThread().interrupt();
+                    }
                 }
-            }).start();
+            };
+            thread.start();
         }
     }
 
