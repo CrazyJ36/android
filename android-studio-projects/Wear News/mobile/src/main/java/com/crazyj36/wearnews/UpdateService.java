@@ -18,6 +18,8 @@ import com.google.android.gms.wearable.DataItem;
 import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.PutDataRequest;
 import com.google.android.gms.wearable.Wearable;
+import com.google.gson.Gson;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -25,8 +27,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Random;
 
 public class UpdateService extends Service {
+    static ArrayList<String> urls = MainPhoneActivity.urls;
+    Random random = new Random();
+    Gson gson = new Gson();
+    static String[] urlArray;
     static String[] currentPost = {"", ""};
     static String lastTitle;
     static ArrayList<String> recentPostsTitles = new ArrayList<>();
@@ -62,7 +69,9 @@ public class UpdateService extends Service {
             public void run() {
                 Document doc;
                 try {
-                    doc = Jsoup.connect(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("url", getString(R.string.noUrlSetText))).get();
+                    //doc = Jsoup.connect(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("url", getString(R.string.noUrlSetText))).get();
+                    urlArray = gson.fromJson(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("urls", getString(R.string.noUrlSetText)), String[].class);
+                    doc = Jsoup.connect(urlArray[random.nextInt(urlArray.length)]).get();
                     Element headline = doc.select("feed entry title").first();
                     Element categoryAttr = doc.select("feed entry category").first();
                     if (headline != null && categoryAttr != null) {

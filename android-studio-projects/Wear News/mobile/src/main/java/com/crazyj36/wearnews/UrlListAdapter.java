@@ -31,11 +31,6 @@ public class UrlListAdapter extends ArrayAdapter<String> {
             @Override
             public void onClick(View view) {
                 MainPhoneActivity.urls.remove(position);
-
-                ArrayList<String> mainUrls = MainPhoneActivity.urls;
-                for (int i = 0; i < MainPhoneActivity.urls.size(); i++) {
-                    Log.d("WEARNEWS", MainPhoneActivity.urls.get(i));
-                }
                 notifyDataSetChanged();
             }
         });
