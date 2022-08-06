@@ -12,10 +12,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
@@ -33,6 +36,7 @@ public class MainPhoneActivity extends Activity {
     static Set<String> set;
     Document document;
     Element element;
+    static boolean includeLabel;
     Timer timer;
     int connectRetries;
     boolean repeat;
@@ -44,7 +48,7 @@ public class MainPhoneActivity extends Activity {
         editText = findViewById(R.id.editText);
         urlView = findViewById(R.id.urlView);
         urlView.setAdapter(new UrlListAdapter(getApplicationContext(), urls));
-        set = new HashSet<>( PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getStringSet("urls", new HashSet<String>()));
+        set = new HashSet<>(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getStringSet("urls", new HashSet<String>()));
         Log.d("WEARNEWS", "URLS Size: " + set.size());
         urls.clear();
         for (String str : set) {
@@ -55,7 +59,8 @@ public class MainPhoneActivity extends Activity {
             }
         }
         info.set(findViewById(R.id.info));
-        if (UpdateService.isServiceRunning) Objects.requireNonNull(info.get()).setText(R.string.loadingMessage);
+        if (UpdateService.isServiceRunning)
+            Objects.requireNonNull(info.get()).setText(R.string.loadingMessage);
         else Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
         intent = new Intent(this, UpdateService.class);
         findViewById(R.id.startServiceButton).setOnClickListener(new View.OnClickListener() {
@@ -64,9 +69,10 @@ public class MainPhoneActivity extends Activity {
                 if (!UpdateService.isServiceRunning) {
                     if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getStringSet("urls", set).size() > 0) {
                         startForegroundService(intent);
-                    }
-                    else Toast.makeText(getApplicationContext(), getString(R.string.notStartingServiceUntilUrlIsSetText), Toast.LENGTH_SHORT).show();
-                } else Toast.makeText(getApplicationContext(), getString(R.string.serviceAlreadyRunningText), Toast.LENGTH_SHORT).show();
+                    } else
+                        Toast.makeText(getApplicationContext(), getString(R.string.notStartingServiceUntilUrlIsSetText), Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(getApplicationContext(), getString(R.string.serviceAlreadyRunningText), Toast.LENGTH_SHORT).show();
             }
         });
         findViewById(R.id.stopServiceBtn).setOnClickListener(new View.OnClickListener() {
@@ -81,6 +87,7 @@ public class MainPhoneActivity extends Activity {
         });
 
     }
+
     public void setRss(View view) {
         repeat = true;
         url = editText.getText().toString();
@@ -88,14 +95,10 @@ public class MainPhoneActivity extends Activity {
             stopService(intent);
             Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
             Toast.makeText(this, getString(R.string.enterSomethingText), Toast.LENGTH_SHORT).show();
-        } else if (!(Patterns.WEB_URL.matcher(url).matches())) {
+        } else if (!Patterns.WEB_URL.matcher(url).matches()) {
             stopService(intent);
             Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
             Toast.makeText(this, "Not A URL:\n" + url, Toast.LENGTH_SHORT).show();
-        } else if(Patterns.DOMAIN_NAME.matcher(url).matches()) {
-            stopService(intent);
-            Objects.requireNonNull(info.get()).setText(getString(R.string.serviceNotRunningText));
-            Toast.makeText(getApplicationContext(), R.string.enterHttpText, Toast.LENGTH_SHORT).show();
         } else {
             connectRetries = 0;
             new Thread(new Runnable() {
@@ -112,12 +115,29 @@ public class MainPhoneActivity extends Activity {
                             }
                             try {
                                 document = Jsoup.connect(url).get();
-                                try {
+                                includeLabel = true;
+                                boolean tryNext = false;
+
                                     element = document.select("feed entry title").first();
-                                } catch (Exception exception) {
-                                    Log.e("WEARNEWS", exception.getLocalizedMessage());
-                                    element = document.select("rss channel item").first();
+                                    if (element == null) tryNext = true;
+                                if (tryNext) {
+                                    includeLabel = false;
+                                    try {
+                                        element = document.select("rss channel item title").first();
+                                    } catch (Exception e) {
+                                        stopService(intent);
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
+                                                Toast.makeText(MainPhoneActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                        timer.cancel();
+                                        Thread.currentThread().interrupt();
+                                    }
                                 }
+
                                 if (element != null) {
                                     if (repeat) {
                                         set.add(url);
@@ -151,7 +171,6 @@ public class MainPhoneActivity extends Activity {
                                         });
                                         repeat = false;
                                     }
-
                                 }
                             } catch (IOException e) {
                                 Log.d("WEARNEWS", e.getLocalizedMessage());
@@ -172,16 +191,20 @@ public class MainPhoneActivity extends Activity {
             }
         });
     }
+
     @Override
     public void onResume() {
         super.onResume();
-        if (UpdateService.isServiceRunning) Objects.requireNonNull(info.get()).setText(R.string.loadingMessage);
+        if (UpdateService.isServiceRunning)
+            Objects.requireNonNull(info.get()).setText(R.string.loadingMessage);
         else Objects.requireNonNull(info.get()).setText(getString(R.string.serviceNotRunningText));
     }
+
     @Override
     public void onPause() {
         super.onPause();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

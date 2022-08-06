@@ -74,7 +74,7 @@ public class UpdateService extends Service {
                     if (headline != null && categoryAttr != null) {
                         if (!headline.text().equals(lastTitle)) {
                             recentPostsTitles.add(headline.text());
-                            recentPostsSubs.add(categoryAttr.attr("label"));
+                            if (MainPhoneActivity.includeLabel) recentPostsSubs.add(categoryAttr.attr("label"));
                             if (recentPostsTitles.size() == 1) lastTitle = recentPostsTitles.get(0);
                             else if (recentPostsTitles.size() == 2) lastTitle = recentPostsTitles.get(1);
                             else if (recentPostsTitles.size() == 3) lastTitle = recentPostsTitles.get(2);
@@ -82,7 +82,7 @@ public class UpdateService extends Service {
                             else if (recentPostsTitles.size() == 5) lastTitle = recentPostsTitles.get(4);
                             else {
                                 recentPostsTitles.remove(0);
-                                recentPostsSubs.remove(0);
+                                if (MainPhoneActivity.includeLabel) recentPostsSubs.remove(0);
                                 lastTitle = recentPostsTitles.get(4);
                             }
                             currentPost[0] = lastTitle;
