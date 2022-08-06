@@ -46,10 +46,13 @@ public class MainPhoneActivity extends Activity {
         urlView.setAdapter(new UrlListAdapter(getApplicationContext(), urls));
         set = new HashSet<>( PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getStringSet("urls", new HashSet<String>()));
         Log.d("WEARNEWS", "URLS Size: " + set.size());
-        //urls.clear();
+        urls.clear();
         for (String str : set) {
             urls.add(str);
             Log.d("WEARNEWS", "set contains: " + str);
+            for (int i = 0; i < urls.size(); i++) {
+                Log.d("WEARNEWS", "Actual URLS: " + urls.get(i));
+            }
         }
         info.set(findViewById(R.id.info));
         if (UpdateService.isServiceRunning) Objects.requireNonNull(info.get()).setText(R.string.loadingMessage);
@@ -59,7 +62,7 @@ public class MainPhoneActivity extends Activity {
             @Override
             public void onClick(View view) {
                 if (!UpdateService.isServiceRunning) {
-                    if (!(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("urls", getString(R.string.noUrlSetText)).equals(getString(R.string.noUrlSetText)))) {
+                    if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getStringSet("urls", set).size() > 0) {
                         startForegroundService(intent);
                     }
                     else Toast.makeText(getApplicationContext(), getString(R.string.notStartingServiceUntilUrlIsSetText), Toast.LENGTH_SHORT).show();
@@ -89,6 +92,10 @@ public class MainPhoneActivity extends Activity {
             stopService(intent);
             Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
             Toast.makeText(this, "Not A URL:\n" + url, Toast.LENGTH_SHORT).show();
+        } else if(Patterns.DOMAIN_NAME.matcher(url).matches()) {
+            stopService(intent);
+            Objects.requireNonNull(info.get()).setText(getString(R.string.serviceNotRunningText));
+            Toast.makeText(getApplicationContext(), R.string.enterHttpText, Toast.LENGTH_SHORT).show();
         } else {
             connectRetries = 0;
             new Thread(new Runnable() {
@@ -116,9 +123,8 @@ public class MainPhoneActivity extends Activity {
                                         set.add(url);
                                         Log.d("WEARNEWS", "Added to set");
                                         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putStringSet("urls", set).apply();
-                                        urls.clear();
+                                        urls.add(url);
                                         for (String str : set) {
-                                            urls.add(str);
                                             Log.d("WEARNEWS", "set contains: " + str);
                                         }
                                         runOnUiThread(new Runnable() {
@@ -136,10 +142,10 @@ public class MainPhoneActivity extends Activity {
                                 } else {
                                     if (repeat) {
                                         stopService(intent);
-                                        Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
                                         runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
+                                                Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
                                                 Toast.makeText(MainPhoneActivity.this, getString(R.string.notAnRssFeedText), Toast.LENGTH_SHORT).show();
                                             }
                                         });
@@ -171,13 +177,6 @@ public class MainPhoneActivity extends Activity {
         super.onResume();
         if (UpdateService.isServiceRunning) Objects.requireNonNull(info.get()).setText(R.string.loadingMessage);
         else Objects.requireNonNull(info.get()).setText(getString(R.string.serviceNotRunningText));
-        Log.d("WEARNEWS", "Loading set");
-        Log.d("WEARNEWS", "URLS Size: " + set.size());
-        urls.clear();
-        for (String str : set) {
-            urls.add(str);
-            Log.d("WEARNEWS", "set contains: " + str);
-        }
     }
     @Override
     public void onPause() {

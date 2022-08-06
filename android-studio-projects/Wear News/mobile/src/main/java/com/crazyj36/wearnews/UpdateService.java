@@ -32,7 +32,6 @@ import java.util.TimerTask;
 import java.util.Random;
 
 public class UpdateService extends Service {
-    Set<String> set;
     Random random = new Random();
     static String[] currentPost = {"", ""};
     static String lastTitle;
@@ -69,10 +68,7 @@ public class UpdateService extends Service {
             public void run() {
                 Document doc;
                 try {
-                    set = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getStringSet("urls", set);
-                    //doc = Jsoup.connect(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("url", getString(R.string.noUrlSetText))).get();
-                    doc = Jsoup.connect(String.valueOf(random.nextInt(set.size()))).get();
-                    //doc = Jsoup.connect();
+                    doc = Jsoup.connect(MainPhoneActivity.urls.toArray(new String[MainPhoneActivity.urls.size()])[random.nextInt(MainPhoneActivity.urls.size())]).get();
                     Element headline = doc.select("feed entry title").first();
                     Element categoryAttr = doc.select("feed entry category").first();
                     if (headline != null && categoryAttr != null) {
