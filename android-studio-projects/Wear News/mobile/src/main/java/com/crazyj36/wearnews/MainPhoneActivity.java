@@ -7,8 +7,12 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +21,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,9 +31,11 @@ import java.util.TimerTask;
 public class MainPhoneActivity extends Activity {
     Intent intent;
     public static ThreadLocal<TextView> info = new ThreadLocal<>();
-    static String url;
+    String url;
+    static ArrayList<String> urls = new ArrayList<>();
     EditText editText;
-    TextView urlView;
+    TextView urlInfo;
+    ListView urlView;
     Document document;
     Element element;
     Timer timer;
@@ -38,8 +47,14 @@ public class MainPhoneActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         editText = findViewById(R.id.editText);
+        urlInfo = findViewById(R.id.urlInfo);
+        urlInfo.setText(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("url", getString(R.string.noUrlSetText)));
+        // test
+        urls.add("test");
+        urls.add("test 2");
+        urls.add("test 3");
         urlView = findViewById(R.id.urlView);
-        urlView.setText(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("url", getString(R.string.noUrlSetText)));
+        urlView.setAdapter(new UrlListAdapter(getApplicationContext(), urls));
         info.set(findViewById(R.id.info));
         if (UpdateService.isServiceRunning) Objects.requireNonNull(info.get()).setText(R.string.loadingMessage);
         else Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
@@ -72,13 +87,13 @@ public class MainPhoneActivity extends Activity {
             stopService(intent);
             Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
             PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", getString(R.string.noUrlSetText)).apply();
-            urlView.setText(getString(R.string.noUrlSetText));
+            urlInfo.setText(getString(R.string.noUrlSetText));
             Toast.makeText(this, getString(R.string.enterSomethingText), Toast.LENGTH_SHORT).show();
         } else if (!(Patterns.WEB_URL.matcher(url).matches())) {
             stopService(intent);
             Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
             PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", getString(R.string.noUrlSetText)).apply();
-            urlView.setText(getString(R.string.noUrlSetText));
+            urlInfo.setText(getString(R.string.noUrlSetText));
             Toast.makeText(this, "Not A URL:\n" + url, Toast.LENGTH_SHORT).show();
         } else {
             connectRetries = 0;
@@ -96,11 +111,17 @@ public class MainPhoneActivity extends Activity {
                             }
                             try {
                                 document = Jsoup.connect(url).get();
-                                element = document.select("feed entry title").first();
+                                try {
+                                    element = document.select("feed entry title").first();
+                                } catch (Exception exception) {
+                                    Log.e("WEARNEWS", exception.getLocalizedMessage());
+                                    element = document.select("rss channel item").first();
+                                }
                                 if (element != null) {
                                     if (repeat) {
-                                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", url).apply();
-                                        urlView.setText(url);
+                                        //PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().put("url", url).apply();
+                                        urlInfo.setText(url);
+                                        urls.add(url);
                                         runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
@@ -117,7 +138,7 @@ public class MainPhoneActivity extends Activity {
                                         stopService(intent);
                                         Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
                                         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("url", getString(R.string.noUrlSetText)).apply();
-                                        urlView.setText(getString(R.string.noUrlSetText));
+                                        urlInfo.setText(getString(R.string.noUrlSetText));
                                         runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
@@ -151,7 +172,7 @@ public class MainPhoneActivity extends Activity {
     public void onResume() {
         if (UpdateService.isServiceRunning) Objects.requireNonNull(info.get()).setText(R.string.loadingMessage);
         else Objects.requireNonNull(info.get()).setText(getString(R.string.serviceNotRunningText));
-        urlView.setText(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("url", getString(R.string.noUrlSetText)));
+        urlInfo.setText(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("url", getString(R.string.noUrlSetText)));
         super.onResume();
     }
 
