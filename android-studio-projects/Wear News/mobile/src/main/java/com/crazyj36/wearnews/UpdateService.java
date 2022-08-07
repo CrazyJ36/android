@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -41,7 +43,9 @@ public class UpdateService extends Service {
     Notification notification;
     static Timer timer;
     static boolean isServiceRunning;
+    String url;
     Element headline;
+    boolean includeLabel;
     Element categoryAttr;
     @Override
     public void onCreate() {
@@ -70,39 +74,47 @@ public class UpdateService extends Service {
             public void run() {
                 Document doc;
                 try {
-                    doc = Jsoup.connect(MainPhoneActivity.urls.toArray(new String[MainPhoneActivity.urls.size()])[random.nextInt(MainPhoneActivity.urls.size())]).get();
-                    if (MainPhoneActivity.includeLabel) {
-                        headline = doc.select("feed entry title").first();
-                        Element categoryAttr = doc.select("feed entry category").first();
-                    } else headline = doc.select("rss channel item title").first();
-                    if (headline != null) {
-                        if (!headline.text().equals(lastTitle)) {
-                            recentPostsTitles.add(headline.text());
-                            if (MainPhoneActivity.includeLabel) recentPostsSubs.add(categoryAttr.attr("label"));
-                            if (recentPostsTitles.size() == 1) lastTitle = recentPostsTitles.get(0);
-                            else if (recentPostsTitles.size() == 2) lastTitle = recentPostsTitles.get(1);
-                            else if (recentPostsTitles.size() == 3) lastTitle = recentPostsTitles.get(2);
-                            else if (recentPostsTitles.size() == 4) lastTitle = recentPostsTitles.get(3);
-                            else if (recentPostsTitles.size() == 5) lastTitle = recentPostsTitles.get(4);
-                            else {
-                                recentPostsTitles.remove(0);
-                                if (MainPhoneActivity.includeLabel) recentPostsSubs.remove(0);
-                                lastTitle = recentPostsTitles.get(4);
-                            }
-                            currentPost[0] = lastTitle;
-                            if (MainPhoneActivity.includeLabel) currentPost[1] = categoryAttr.attr("label");
-                            else currentPost[1] = "category placeholder";
-                            sendData(currentPost, recentPostsTitles, recentPostsSubs);
-                            Log.d("WEARNEWS", "sent new post.");
-                            MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.newPostsText));
-                        } else {
-                            Log.d("WEARNEWS", "no new posts");
-                            MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.noNewPostsText));
-                        }
+                    url = MainPhoneActivity.urls.toArray(new String[MainPhoneActivity.urls.size()])[random.nextInt(MainPhoneActivity.urls.size())];
+                    doc = Jsoup.connect(url).get();
+                    Log.d("WEARNEWS", "getting from url: " + url);
+
+                    int i = 0;
+                    while (i < MainPhoneActivity.feedTypes.length) {
+                        headline = doc.select(MainPhoneActivity.feedTypes[i]).first();
+                        if (headline == doc.select(MainPhoneActivity.feedTypes[0]).first()) includeLabel = true;
+                        else includeLabel = false;
+                        if (includeLabel) categoryAttr = doc.select("feed entry category").first();
+                        if (headline != null) break;
+                        i++;
                     }
+
+                    if (!headline.text().equals(lastTitle)) {
+                        recentPostsTitles.add(headline.text());
+                        if (includeLabel) recentPostsSubs.add(categoryAttr.attr("label"));
+                        if (recentPostsTitles.size() == 1) lastTitle = recentPostsTitles.get(0);
+                        else if (recentPostsTitles.size() == 2) lastTitle = recentPostsTitles.get(1);
+                        else if (recentPostsTitles.size() == 3) lastTitle = recentPostsTitles.get(2);
+                        else if (recentPostsTitles.size() == 4) lastTitle = recentPostsTitles.get(3);
+                        else if (recentPostsTitles.size() == 5) lastTitle = recentPostsTitles.get(4);
+                        else {
+                            recentPostsTitles.remove(0);
+                            if (includeLabel && recentPostsSubs.size() != 0) recentPostsSubs.remove(0);
+                            lastTitle = recentPostsTitles.get(4);
+                        }
+                        currentPost[0] = lastTitle;
+                        if (includeLabel) currentPost[1] = categoryAttr.attr("label");
+                        currentPost[1] = "category placeholder";
+                        sendData(currentPost, recentPostsTitles, recentPostsSubs);
+                        Log.d("WEARNEWS", "sent new post.");
+                        MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.newPostsText));
+                    } else {
+                        Log.d("WEARNEWS", "no new posts");
+                        MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.noNewPostsText));
+                    }
+
                 } catch (IOException e) {
-                    currentPost[0] = "Set new url in main app.";
-                    currentPost[1] = "IOException";
+                    currentPost[0] = "IOException";
+                    currentPost[1] = "in update service.";
                     sendData(currentPost, recentPostsTitles, recentPostsSubs);
                 }
             }

@@ -29,22 +29,22 @@ import java.util.TimerTask;
 public class MainPhoneActivity extends Activity {
     Intent intent;
     public static ThreadLocal<TextView> info = new ThreadLocal<>();
-    String url;
+    static String url;
     static ArrayList<String> urls = new ArrayList<>();
     EditText editText;
     ListView urlView;
     static Set<String> set;
     Document document;
     Element element;
-    static boolean includeLabel;
+    static String[] feedTypes = new String[2];
     Timer timer;
     int connectRetries;
     boolean repeat;
     boolean stopThread;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        feedTypes = new String[]{"feed entry title", "xml rss channel item title", "rss channel item title"};
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         editText = findViewById(R.id.editText);
@@ -52,13 +52,13 @@ public class MainPhoneActivity extends Activity {
         urlView.setAdapter(new UrlListAdapter(getApplicationContext(), urls));
         set = new HashSet<>(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getStringSet("urls", new HashSet<String>()));
         Log.d("WEARNEWS", "URLS Size: " + set.size());
-        urls.clear();
+        //urls.clear();
         for (String str : set) {
             urls.add(str);
             Log.d("WEARNEWS", "set contains: " + str);
-            for (int i = 0; i < urls.size(); i++) {
-                Log.d("WEARNEWS", "Actual URLS: " + urls.get(i));
-            }
+        }
+        for (int i = 0; i < urls.size(); i++) {
+            Log.d("WEARNEWS", "Actual URLS: " + urls.get(i));
         }
         info.set(findViewById(R.id.info));
         if (UpdateService.isServiceRunning)
@@ -87,7 +87,6 @@ public class MainPhoneActivity extends Activity {
                     Toast.makeText(getApplicationContext(), getString(R.string.serviceNotRunningText), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     public void setRss(View view) {
@@ -122,36 +121,25 @@ public class MainPhoneActivity extends Activity {
                             try {
                                 try {
                                     document = Jsoup.connect(url).get();
-                                    Log.d("WEARNEWS", "document set");
-                                } catch (IllegalArgumentException malformedURLException) {
+                                    Log.d("WEARNEWS", "document tried to connect.");
+                                } catch (IllegalArgumentException | MalformedURLException malformedURLException) {
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Toast.makeText(getApplicationContext(), getString(R.string.enterHttpText), Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getApplicationContext(), getString(R.string.malformedUrlText), Toast.LENGTH_LONG).show();
                                         }
                                     });
                                     if (UpdateService.isServiceRunning) stopService(intent);
                                     stopThread = true;
                                 }
-                                boolean tryNext = false;
-                                element = document.select("feed entry title").first();
-                                includeLabel = true;
-                                if (element == null) tryNext = true;
-                                if (tryNext) {
-                                    try {
-                                        element = document.select("rss channel item title").first();
-                                        includeLabel = false;
-                                    } catch (Exception e) {
-                                        runOnUiThread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                Objects.requireNonNull(info.get()).setText(R.string.serviceNotRunningText);
-                                                Toast.makeText(MainPhoneActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                                        stopThread = true;
-                                    }
+
+                                int i = 0;
+                                while (element == null) {
+                                    element = document.select(feedTypes[i]).first();
+                                    if (element != null) break;
+                                    i++;
                                 }
+
                                 if (element != null) {
                                     if (!set.contains(url)) {
                                         set.add(url);

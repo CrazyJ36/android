@@ -17,7 +17,7 @@
     <string name="startServiceText">You can now start the service.</string>
     <string name="enterSomethingText">Enter something first.</string>
     <string name="notAnRssFeedText">"Not an XML-based RSS feed."</string>
-    <string name="enterHttpText">Please include \"http://www.\"</string>
+    <string name="malformedUrlText">Please include \"https://www.\"</string>
     <string name="urlAddedText">URL list updated.</string>
     <string name="listAlreadyContainsUrlText">"List already contains this URL."</string>
     <string name="deleteUrlBtnText">Delete</string>
