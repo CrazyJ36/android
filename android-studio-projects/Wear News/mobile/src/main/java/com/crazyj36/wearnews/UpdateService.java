@@ -41,6 +41,8 @@ public class UpdateService extends Service {
     Notification notification;
     static Timer timer;
     static boolean isServiceRunning;
+    Element headline;
+    Element categoryAttr;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -69,9 +71,11 @@ public class UpdateService extends Service {
                 Document doc;
                 try {
                     doc = Jsoup.connect(MainPhoneActivity.urls.toArray(new String[MainPhoneActivity.urls.size()])[random.nextInt(MainPhoneActivity.urls.size())]).get();
-                    Element headline = doc.select("feed entry title").first();
-                    Element categoryAttr = doc.select("feed entry category").first();
-                    if (headline != null && categoryAttr != null) {
+                    if (MainPhoneActivity.includeLabel) {
+                        headline = doc.select("feed entry title").first();
+                        Element categoryAttr = doc.select("feed entry category").first();
+                    } else headline = doc.select("rss channel item title").first();
+                    if (headline != null) {
                         if (!headline.text().equals(lastTitle)) {
                             recentPostsTitles.add(headline.text());
                             if (MainPhoneActivity.includeLabel) recentPostsSubs.add(categoryAttr.attr("label"));
@@ -86,7 +90,8 @@ public class UpdateService extends Service {
                                 lastTitle = recentPostsTitles.get(4);
                             }
                             currentPost[0] = lastTitle;
-                            currentPost[1] = categoryAttr.attr("label");
+                            if (MainPhoneActivity.includeLabel) currentPost[1] = categoryAttr.attr("label");
+                            else currentPost[1] = "category placeholder";
                             sendData(currentPost, recentPostsTitles, recentPostsSubs);
                             Log.d("WEARNEWS", "sent new post.");
                             MainPhoneActivity.setInfoText(getApplicationContext(), getString(R.string.newPostsText));
