@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Database Example</string>
+    <string name="editTextHint">Add string to database</string>
+    <string name="buttonText">Add</string>
+</resources>
