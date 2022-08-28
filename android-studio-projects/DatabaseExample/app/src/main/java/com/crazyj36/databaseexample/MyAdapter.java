@@ -19,9 +19,9 @@ public class MyAdapter extends ArrayAdapter<Names> {
         }
         TextView listItemId = convertView.findViewById(R.id.listItemId);
         TextView listItemName = convertView.findViewById(R.id.listItemName);
-        Names names = getItem(position);
-        listItemId.setText(String.valueOf(names.id));
-        listItemName.setText(names.name);
+        Names name = getItem(position);
+        listItemId.setText(String.valueOf(name.id));
+        listItemName.setText(name.name);
         return convertView;
     }
 }

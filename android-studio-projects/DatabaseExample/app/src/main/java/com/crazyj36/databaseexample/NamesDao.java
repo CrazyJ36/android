@@ -11,10 +11,12 @@ public interface NamesDao {
     @Query("SELECT * FROM names")
     List<Names> getAll();
 
+    @Query("SELECT name from names WHERE id = :rowId")
+    String getNameById(long rowId);
+
     @Insert
     long insertNames(Names names);
 
     @Delete
     void deleteNames(Names names);
-
 }
