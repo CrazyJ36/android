@@ -2,4 +2,7 @@
     <string name="app_name">Database Example</string>
     <string name="editTextHint">Add string to database</string>
     <string name="buttonText">Add</string>
+    <string name="dialogTitleText">Delete?</string>
+    <string name="dialogPositiveButtonText">Delete</string>
+    <string name="dialogNegativeButtonText">Cancel</string>
 </resources>

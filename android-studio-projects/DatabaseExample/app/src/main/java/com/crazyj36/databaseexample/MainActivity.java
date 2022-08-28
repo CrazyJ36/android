@@ -2,21 +2,29 @@ package com.crazyj36.databaseexample;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
+
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     AppDatabase db; // to be closed later in onDestory()
-    NamesDao namesDao;
+    static NoteDao noteDao;
     EditText editText;
     ListView listView;
-    ArrayAdapter<Names> adapter;
-    ArrayList<Names> myList = new ArrayList<>();
+    static ArrayAdapter<Note> adapter;
+    static ArrayList<Note> myList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,39 +38,25 @@ public class MainActivity extends AppCompatActivity {
                 getApplicationContext(),
                 AppDatabase.class,
                 "database-name").build();
-        namesDao = db.namesDao();
+        noteDao = db.noteDao();
 
         // get all currently in database to populate listview
         doInsertAll();
 
         // add new name to database
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.addNoteButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 doAdd();
             }
         });
-
-        // delete from database
-        //doDelete(4);
-
-        // get database entry name from rowId
-        doGetNameById(6);
     }
     public void doInsertAll() {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 myList.clear();
-                myList.addAll(namesDao.getAll());
-            }
-        }).start();
-    }
-    public void doDelete(int idToDelete) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                namesDao.deleteNames(new Names(idToDelete, null));
+                myList.addAll(noteDao.getAll());
             }
         }).start();
     }
@@ -70,17 +64,18 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String item = editText.getText().toString();
+                String newNote = editText.getText().toString();
                 long id;
-                if (!item.equals("")) {
-                    id = namesDao.insertNames(new Names(0, item)); // id 0 doesn't is redundant here as Names.id auto-generates, but it's needed for doDelete(int id).
+                if (!newNote.equals("")) {
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
+                    id = noteDao.insertNote(new Note(0, newNote, simpleDateFormat.format(new Timestamp(System.currentTimeMillis())))); // id 0 doesn't is redundant here as Names.id auto-generates, but it's needed for doDelete(int id).
                     // receive reference of newly added item for further processing like adding to myList index.
-                    toast("New item id: " + String.valueOf(id));
                     myList.clear();
-                    myList.addAll(namesDao.getAll());
+                    myList.addAll(noteDao.getAll());
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            toast("New item id: " + String.valueOf(id));
                             adapter.notifyDataSetChanged();
                         }
                     });
@@ -88,12 +83,28 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
     }
-    public void doGetNameById(long id) {
+    public static void doDeleteNote(Context context) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                 if (namesDao.getNameById(id) != null) {
-                     toast("name set in " + id + ": " + namesDao.getNameById(id));
+                noteDao.deleteNote(new Note(MainActivity.noteDao.getId(), null, null));
+                myList.clear();
+                myList.addAll(noteDao.getAll());
+            }
+        }).start();
+        context.getMainExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+    public void doGetNoteById(int id) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                 if (noteDao.getNoteById(id) != null) {
+                     toast("name set in " + id + ": " + noteDao.getNoteById(id));
                  }
             }
         }).start();
