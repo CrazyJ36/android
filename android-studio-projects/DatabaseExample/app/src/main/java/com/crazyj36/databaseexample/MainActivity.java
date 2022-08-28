@@ -11,6 +11,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    AppDatabase db; // to be closed later in onDestory()
     NamesDao namesDao;
     EditText editText;
     ListView listView;
@@ -22,18 +23,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         editText = findViewById(R.id.editText);
         listView = findViewById(R.id.listView);
-        AppDatabase db = Room.databaseBuilder(
+        adapter = new MyAdapter(MainActivity.this, myList);
+        listView.setAdapter(adapter);
+
+        db = Room.databaseBuilder(
                 getApplicationContext(),
                 AppDatabase.class,
                 "database-name").build();
         namesDao = db.namesDao();
-        adapter = new MyAdapter(MainActivity.this, myList);
-        listView.setAdapter(adapter);
 
         // get all currently in database to populate listview
         doInsertAll();
 
-        // add to database
+        // add new name to database
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 String item = editText.getText().toString();
                 long id;
                 if (!item.equals("")) {
-                    id = namesDao.insertNames(new Names(0, item));
+                    id = namesDao.insertNames(new Names(0, item)); // id 0 doesn't is redundant here as Names.id auto-generates, but it's needed for doDelete(int id).
                     // receive reference of newly added item for further processing like adding to myList index.
                     toast("New item id: " + String.valueOf(id));
                     myList.clear();
@@ -103,5 +105,9 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    public void onDestroy() {
+        super.onDestroy();
+        db.close(); // Close the AppDatabase to avoid memory leaks;
     }
 }

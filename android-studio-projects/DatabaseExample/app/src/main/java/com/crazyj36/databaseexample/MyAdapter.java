@@ -22,6 +22,12 @@ public class MyAdapter extends ArrayAdapter<Names> {
         Names name = getItem(position);
         listItemId.setText(String.valueOf(name.id));
         listItemName.setText(name.name);
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         return convertView;
     }
 }
