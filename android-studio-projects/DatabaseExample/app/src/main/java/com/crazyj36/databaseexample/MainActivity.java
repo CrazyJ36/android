@@ -10,12 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
 
         // get all currently in database to populate listview
         doInsertAll();
+
+        // get content of specific note.
+        doGetContentById(16);
+
+        // get in by content
+        doGetIdByContent("d");
 
         // add new name to database
         findViewById(R.id.addNoteButton).setOnClickListener(new View.OnClickListener() {
@@ -75,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            toast("New item id: " + String.valueOf(id));
+                            toast("New item id: " + id);
                             adapter.notifyDataSetChanged();
                         }
                     });
@@ -83,11 +86,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
     }
-    public static void doDeleteNote(Context context) {
+    public static void doDeleteNote(Context context, Note note) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                noteDao.deleteNote(new Note(MainActivity.noteDao.getId(), null, null));
+                noteDao.deleteNote(note);
                 myList.clear();
                 myList.addAll(noteDao.getAll());
             }
@@ -99,13 +102,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void doGetNoteById(int id) {
+    public void doGetContentById(int id) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                 if (noteDao.getNoteById(id) != null) {
-                     toast("name set in " + id + ": " + noteDao.getNoteById(id));
+                 if (noteDao.getContentById(id) != null) {
+                     toast("content set in " + id + ": " + noteDao.getContentById(id));
                  }
+            }
+        }).start();
+    }
+    public void doGetIdByContent(String content) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                toast("ID of " + content + ": " + noteDao.getIdByContent(content));
             }
         }).start();
     }

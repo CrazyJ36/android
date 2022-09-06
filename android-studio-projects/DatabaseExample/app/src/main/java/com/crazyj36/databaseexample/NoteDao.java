@@ -11,11 +11,11 @@ public interface NoteDao {
     @Query("SELECT * FROM notes")
     List<Note> getAll();
 
-    @Query("SELECT content from notes WHERE id = :rowId")
-    String getNoteById(long rowId);
+    @Query("SELECT content FROM notes WHERE id = :rowId")
+    String getContentById(long rowId);
 
-    @Query("SELECT id from notes")
-    int getId();
+    @Query("SELECT id FROM notes WHERE content = (:content)")
+    int getIdByContent(String content);
 
     @Insert
     long insertNote(Note note);
