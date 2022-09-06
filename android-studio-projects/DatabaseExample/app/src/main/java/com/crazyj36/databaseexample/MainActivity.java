@@ -10,9 +10,13 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         doInsertAll();
 
         // get content of specific note.
-        doGetContentById(16);
+        doGetContentById(34);
 
         // get in by content
         doGetIdByContent("d");
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 String newNote = editText.getText().toString();
                 long id;
                 if (!newNote.equals("")) {
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy h:mm a", Locale.US);
                     id = noteDao.insertNote(new Note(0, newNote, simpleDateFormat.format(new Timestamp(System.currentTimeMillis())))); // id 0 doesn't is redundant here as Names.id auto-generates, but it's needed for doDelete(int id).
                     // receive reference of newly added item for further processing like adding to myList index.
                     myList.clear();
@@ -116,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                // in first occurrence of content.
                 toast("ID of " + content + ": " + noteDao.getIdByContent(content));
             }
         }).start();
