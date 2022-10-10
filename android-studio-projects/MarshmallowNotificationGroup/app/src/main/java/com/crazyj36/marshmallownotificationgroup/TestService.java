@@ -2,6 +2,7 @@ package com.crazyj36.marshmallownotificationgroup;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
@@ -19,13 +20,13 @@ public class TestService extends Service {
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("service running")
                 .setCategory(Notification.CATEGORY_SERVICE);
-
         startForeground(10, serviceNotificationBuilder.build());
-        MainActivity.toast(getApplicationContext(), "service running");
+        // Not for >= android 8.1, no notificationchannel.
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        MainActivity.toast(getApplicationContext(), "service running");
         Notification notification0 = new NotificationCompat.Builder(TestService.this, "0")
                 .setContentTitle("0")
                 .setSmallIcon(R.mipmap.ic_launcher)
