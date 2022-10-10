@@ -1,4 +1,4 @@
-package com.crazyj36.marshmallownotificationgroup;
+package com.crazyj36.notificationgrouptest;
 
 import android.content.Context;
 import android.content.Intent;
