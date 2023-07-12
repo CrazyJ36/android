@@ -1,65 +1,70 @@
 package com.crazyj36.wearphonesynctile
 
 import android.widget.Toast
-import androidx.wear.protolayout.ActionBuilders
-import androidx.wear.protolayout.DimensionBuilders
-import androidx.wear.protolayout.LayoutElementBuilders
-import androidx.wear.protolayout.LayoutElementBuilders.LayoutElement
-import androidx.wear.protolayout.ResourceBuilders
+import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.TimelineBuilders
-import androidx.wear.protolayout.TimelineBuilders.TimelineEntry
+import androidx.wear.protolayout.LayoutElementBuilders.Layout
+import androidx.wear.protolayout.LayoutElementBuilders.Text
+import androidx.wear.protolayout.ModifiersBuilders
+import androidx.wear.protolayout.ModifiersBuilders.Clickable
 import androidx.wear.tiles.EventBuilders
-import androidx.wear.tiles.RequestBuilders
-import androidx.wear.tiles.TileBuilders
+import androidx.wear.tiles.ResourceBuilders.Resources
+import androidx.wear.tiles.RequestBuilders.TileRequest
+import androidx.wear.tiles.RequestBuilders.ResourcesRequest
 import androidx.wear.tiles.TileBuilders.Tile
-import androidx.wear.tiles.TileRequestData
 import androidx.wear.tiles.TileService
 import com.google.android.gms.wearable.*
 import com.google.android.gms.wearable.DataClient.OnDataChangedListener
-import com.google.android.horologist.annotations.ExperimentalHorologistApi
-import com.google.android.horologist.tiles.ExperimentalHorologistTilesApi
-import com.google.android.horologist.tiles.SuspendingTileService
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
-import org.checkerframework.checker.nullness.qual.NonNull
 
 private const val RESOURCES_VERSION = "0"
 private val messagePath = "/messagepath"
-private var message: String = ""
 
-@OptIn(ExperimentalHorologistApi::class)
+
 class MyTileService : TileService(), OnDataChangedListener {
-    override fun onTileRequest(requestParams: RequestBuilders.TileRequest) =
+    private var message: String = "tap here to refresh after sending messages from phone."
+    private var count: Int = 0
+
+    override fun onTileRequest(requestParams: TileRequest): ListenableFuture<Tile> =
         Futures.immediateFuture(Tile.Builder()
             .setResourcesVersion(RESOURCES_VERSION)
             .setTileTimeline(
                 TimelineBuilders.Timeline.Builder().addTimelineEntry(
-                TimelineEntry.Builder().setLayout(
-                    LayoutElementBuilders.Layout.Builder().setRoot(
-                        LayoutElementBuilders.Text.Builder().setText(message)
-                            .build()
+                TimelineBuilders.TimelineEntry.Builder().setLayout(
+                    Layout.Builder().setRoot(
+                        Text.Builder()
+                            .setText(count++.toString() + ", " + message)
+                            .setModifiers(
+                                ModifiersBuilders.Modifiers.Builder()
+                                .setClickable(Clickable.Builder()
+                                    .setId("clickableId")
+                                    .setOnClick(LoadAction.Builder().build())
+                                    .build()
+                                ).build()
+                            ).build()
                         ).build()
                     ).build()
                 ).build()
             ).build()
         )
 
-    override fun onResourcesRequest(requestParams: RequestBuilders.ResourcesRequest) =
-        Futures.immediateFuture(
-            androidx.wear.tiles.ResourceBuilders.Resources.Builder()
-            .setVersion(RESOURCES_VERSION)
-            .build()
-        )
+    override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
+        super.onTileLeaveEvent(requestParams)
+        Wearable.getDataClient(this).removeListener(this)
+    }
 
-    override fun onCreate() {
-        super.onCreate()
+    override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
+        super.onTileEnterEvent(requestParams)
         Wearable.getDataClient(this).addListener(this)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        Wearable.getDataClient(this).removeListener(this)
-    }
+    @Deprecated("Deprecated in Java")
+    override fun onResourcesRequest(requestParams: ResourcesRequest) =
+        Futures.immediateFuture(Resources.Builder()
+            .setVersion(RESOURCES_VERSION)
+            .build()
+        )
 
     override fun onDataChanged(dataEventBuffer: DataEventBuffer) {
         dataEventBuffer.forEach { event ->
@@ -67,11 +72,15 @@ class MyTileService : TileService(), OnDataChangedListener {
                 event.dataItem.also { dataItem ->
                     if (dataItem.uri.path?.compareTo(messagePath) == 0) {
                         val dataMap: DataMap = DataMapItem.fromDataItem(dataItem).dataMap
+                        // setting message or count here doesn't seem to get back to onTileRequest
                         message = dataMap.getInt("message").toString()
-                        getUpdater(this).requestUpdate(MyTileService::class.java)
+                        LoadAction.Builder()
+                        Toast.makeText(this@MyTileService, "message: $message", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
     }
+
+
 }
