@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Alignment
 import androidx.wear.compose.material.Text
 
 class MainWearActivity: ComponentActivity() {
@@ -16,7 +17,9 @@ class MainWearActivity: ComponentActivity() {
                 modifier = Modifier
                     .fillMaxSize()
             ) {
-                Text(text = "MainActivity")
+                Text(
+                    modifier = Modifier.align(Alignment.Center),
+                    text = "MainActivity")
             }
         }
     }
