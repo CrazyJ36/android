@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">Wear Phone Sync Tile</string>
-    <string name="instructionsTxt">Tap button to update on both devices.</string>
-    <string name="tileDescription">Showing Wear/Phone Sync as Tile</string>
-    <string name="tileLabel">Wear Phone Sync Tile</string>
-</resources>
