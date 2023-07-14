@@ -1,19 +1,16 @@
 package com.crazyj36.wearphonesynctile
 
-import android.util.Log
 import android.widget.Toast
 import androidx.wear.protolayout.ActionBuilders
-import androidx.wear.protolayout.ActionBuilders.Action
+import androidx.wear.protolayout.ActionBuilders.LaunchAction
 import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.DimensionBuilders
-import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.LayoutElementBuilders.Box
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.LayoutElementBuilders.Layout
 import androidx.wear.protolayout.LayoutElementBuilders.VERTICAL_ALIGN_CENTER
 import androidx.wear.protolayout.ModifiersBuilders
 import androidx.wear.protolayout.ModifiersBuilders.Clickable
-import androidx.wear.protolayout.ModifiersBuilders.Modifiers
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders.Timeline
 import androidx.wear.protolayout.material.Button
@@ -22,7 +19,6 @@ import androidx.wear.tiles.EventBuilders
 import androidx.wear.tiles.RequestBuilders.TileRequest
 import androidx.wear.tiles.RequestBuilders.ResourcesRequest
 import androidx.wear.tiles.TileBuilders.Tile
-import androidx.wear.tiles.TileUpdateRequester
 import com.google.android.gms.wearable.*
 import com.google.android.gms.wearable.DataClient.OnDataChangedListener
 import com.google.android.horologist.annotations.ExperimentalHorologistApi
@@ -36,56 +32,34 @@ private val messagePath = "/messagepath"
 
 @OptIn(ExperimentalHorologistApi::class)
 class MyTileService : SuspendingTileService(), OnDataChangedListener {
-    private var message: String = "tap here to refresh after sending messages from phone."
-    private var count: Int = 0
-    private val timer = Timer()
-    private val timerTask = MyTimerTask()
 
-    @ExperimentalHorologistApi
-    override fun onCreate() {
-        super.onCreate()
-        timer.schedule(timerTask, 0, 3000)
-    }
-
-    @ExperimentalHorologistApi
-    override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
-        super.onTileLeaveEvent(requestParams)
-        Wearable.getDataClient(this).removeListener(this)
-    }
-
-    @ExperimentalHorologistApi
     override suspend fun resourcesRequest(requestParams: ResourcesRequest):
         ResourceBuilders.Resources = ResourceBuilders.Resources.Builder().setVersion(
             RESOURCES_VERSION).build()
 
-    @ExperimentalHorologistApi
     override suspend fun tileRequest(requestParams: TileRequest): Tile {
-        val text1: LayoutElementBuilders.Text = LayoutElementBuilders.Text.Builder()
-            .setText(message)
+        val text1: Text = Text.Builder(this@MyTileService, message).build()
+
+        val button = Button.Builder(this@MyTileService, Clickable.Builder()
+            .setOnClick(LaunchAction.Builder()
+                .setAndroidActivity(
+                    ActionBuilders.AndroidActivity.Builder()
+                        .setClassName(MainWearActivity::class.java.name)
+                        .setPackageName(this.packageName).build()
+                ).build()
+            ).build())
+            .setTextContent("button")
             .build()
-        val text2: LayoutElementBuilders.Text = LayoutElementBuilders.Text.Builder()
-            .setText(timerMessage.toString())
-            .setModifiers(
-                ModifiersBuilders.Modifiers.Builder()
-                    .setPadding(
-                        ModifiersBuilders.Padding.Builder().setTop(DimensionBuilders.dp(16f)).build()
-                    ).build()
-            ).build()
-        val button: Button = Button.Builder(applicationContext,
-            Clickable.Builder()
-                .setId("buttonId")
-                .setOnClick(LoadAction.Builder().build())
-                .build()
-        ).build()
+
         val box: Box = Box.Builder()
             .setVerticalAlignment(VERTICAL_ALIGN_CENTER)
             .setWidth(DimensionBuilders.expand())
             .setHeight(DimensionBuilders.expand())
-            .addContent(text1).addContent(text2).addContent(button).build()
+            .addContent(text1).addContent(button).build()
 
-        val newButton = Button.fromLayoutElement(box.contents[2])
-        newButton.let { Toast.makeText(applicationContext, "toast", Toast.LENGTH_SHORT).show() }
-        
+        //val newButton = Button.fromLayoutElement(box.contents[2])
+        //newButton.let { Toast.makeText(applicationContext, "toast", Toast.LENGTH_SHORT).show() }
+
         return Tile.Builder()
             .setResourcesVersion(RESOURCES_VERSION)
             .setTileTimeline(
@@ -99,10 +73,14 @@ class MyTileService : SuspendingTileService(), OnDataChangedListener {
             ).build()
     }
 
-    @ExperimentalHorologistApi
+
     override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
         super.onTileEnterEvent(requestParams)
         Wearable.getDataClient(this).addListener(this)
+    }
+    override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
+        super.onTileLeaveEvent(requestParams)
+        Wearable.getDataClient(this).removeListener(this)
     }
 
 
@@ -122,14 +100,7 @@ class MyTileService : SuspendingTileService(), OnDataChangedListener {
         }
     }
 
-    class MyTimerTask : TimerTask() {
-        override fun run() {
-            timerMessage++
-            LoadAction.Builder().build()
-        }
-    }
-
     companion object {
-        var timerMessage = 0
+        private var message: String = "message"
     }
 }
