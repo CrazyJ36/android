@@ -18,7 +18,16 @@ android {
             minifyEnabled false
         }
     }
-
+    compileOptions {
+        sourceCompatibility = 17
+        targetCompatibility = 17
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "1.4.8"
+    }
+    buildFeatures {
+        compose true
+    }
 }
 
 dependencies {
@@ -31,4 +40,5 @@ dependencies {
     implementation "com.google.android.horologist:horologist-tiles:0.4.11"
     implementation 'androidx.wear.protolayout:protolayout:1.0.0-beta01'
     implementation 'androidx.wear.protolayout:protolayout-material:1.0.0-beta01'
+    implementation 'androidx.compose.foundation:foundation:1.4.3'
 }
