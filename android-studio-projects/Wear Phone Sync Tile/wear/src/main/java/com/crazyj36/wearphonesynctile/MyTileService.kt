@@ -1,79 +1,68 @@
 package com.crazyj36.wearphonesynctile
 
-import android.widget.ImageButton
+import android.content.Context
 import android.widget.Toast
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.wear.compose.material.Text
-import androidx.wear.protolayout.ActionBuilders
-import androidx.wear.protolayout.ActionBuilders.LaunchAction
 import androidx.wear.protolayout.ActionBuilders.LoadAction
-import androidx.wear.protolayout.DeviceParametersBuilders
 import androidx.wear.protolayout.DimensionBuilders
 import androidx.wear.protolayout.LayoutElementBuilders
-import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.LayoutElementBuilders.Layout
-import androidx.wear.protolayout.ModifiersBuilders
-
 import androidx.wear.protolayout.ModifiersBuilders.Clickable
-import androidx.wear.protolayout.ModifiersBuilders.Modifiers
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.ResourceBuilders.ImageResource
+import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TimelineBuilders.Timeline
-import androidx.wear.protolayout.material.Button
 import androidx.wear.protolayout.material.CompactChip
-import androidx.wear.protolayout.material.Text
 import androidx.wear.protolayout.material.layouts.PrimaryLayout
 import androidx.wear.tiles.EventBuilders
-import androidx.wear.tiles.RequestBuilders.TileRequest
 import androidx.wear.tiles.RequestBuilders.ResourcesRequest
+import androidx.wear.tiles.RequestBuilders.TileRequest
 import androidx.wear.tiles.TileBuilders.Tile
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.wearable.*
 import com.google.android.gms.wearable.DataClient.OnDataChangedListener
 import com.google.android.horologist.annotations.ExperimentalHorologistApi
 import com.google.android.horologist.tiles.SuspendingTileService
-import com.google.common.io.Resources
 
 private const val RESOURCES_VERSION = "0"
 private val messagePath = "/messagepath"
+private var message: Int = 0
+private val prefFile: String = "file_count_preference"
+private val mode: Int = Context.MODE_PRIVATE
 
 @OptIn(ExperimentalHorologistApi::class)
 class MyTileService : SuspendingTileService(), OnDataChangedListener {
-
-
     override suspend fun resourcesRequest(requestParams: ResourcesRequest):
-        ResourceBuilders.Resources = ResourceBuilders.Resources.Builder()
+            ResourceBuilders.Resources = ResourceBuilders.Resources.Builder()
         .setVersion(RESOURCES_VERSION)
         .addIdToImageMapping(
             "button_icon",
-        ImageResource.Builder()
-            .setAndroidResourceByResId(
-                ResourceBuilders.AndroidImageResourceByResId.Builder()
-                .setResourceId(R.drawable.button_icon)
-                    .build())
-            .build())
+            ImageResource.Builder()
+                .setAndroidResourceByResId(
+                    ResourceBuilders.AndroidImageResourceByResId.Builder()
+                        .setResourceId(R.drawable.button_icon)
+                        .build()
+                )
+                .build()
+        )
         .build()
 
-
     override suspend fun tileRequest(requestParams: TileRequest): Tile {
+        when (requestParams.currentState.lastClickableId) {
+            "buttonId" -> {
+                getSharedPreferences(prefFile, mode).edit().putInt("count", getSharedPreferences(prefFile, mode).getInt("count", 1) + 1).apply()
+                sendData(getSharedPreferences(prefFile, mode).getInt("count", 1))
+                Toast.makeText(this@MyTileService, "clicked", Toast.LENGTH_SHORT).show()
+            }
+        }
         val deviceParameters = requestParams.deviceConfiguration
-        val text1: Text = Text.Builder(this@MyTileService, message).build()
-
+        val text1: LayoutElementBuilders.Text = LayoutElementBuilders.Text.Builder().setText(message.toString()).build()
         val button = CompactChip.Builder(
             this@MyTileService, "",
             Clickable.Builder().setId("buttonId").setOnClick(LoadAction.Builder().build()).build(),
-            deviceParameters)
-            .setIconContent("button_icon")
-            .build()
-
-        when(requestParams.currentState.lastClickableId) {
-            "buttonId" -> Toast.makeText(this@MyTileService, "toast", Toast.LENGTH_SHORT).show()
-        }
-        val primaryLayout = PrimaryLayout.Builder(
-            deviceParameters)
+            deviceParameters
+        ).setIconContent("button_icon").build()
+        val primaryLayout = PrimaryLayout.Builder(deviceParameters)
             .setPrimaryLabelTextContent(text1)
             .setPrimaryChipContent(button)
             .build()
@@ -81,9 +70,8 @@ class MyTileService : SuspendingTileService(), OnDataChangedListener {
             .setVerticalAlignment(LayoutElementBuilders.VERTICAL_ALIGN_CENTER)
             .setWidth(DimensionBuilders.expand())
             .setHeight(DimensionBuilders.expand())
-            .addContent(primaryLayout).build()
-        //val newButton = Button.fromLayoutElement(box.contents[2])
-        //newButton.let { Toast.makeText(applicationContext, "toast", Toast.LENGTH_SHORT).show() }
+            .addContent(primaryLayout)
+            .build()
         return Tile.Builder()
             .setResourcesVersion(RESOURCES_VERSION)
             .setTileTimeline(
@@ -97,16 +85,18 @@ class MyTileService : SuspendingTileService(), OnDataChangedListener {
             ).build()
     }
 
+    private fun secondaryText(current: String) = LayoutElementBuilders.Text.Builder()
+        .setText(current).build()
 
     override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
         super.onTileEnterEvent(requestParams)
         Wearable.getDataClient(this).addListener(this)
     }
+
     override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
         super.onTileLeaveEvent(requestParams)
         Wearable.getDataClient(this).removeListener(this)
     }
-
 
     override fun onDataChanged(dataEventBuffer: DataEventBuffer) {
         dataEventBuffer.forEach { event ->
@@ -114,17 +104,35 @@ class MyTileService : SuspendingTileService(), OnDataChangedListener {
                 event.dataItem.also { dataItem ->
                     if (dataItem.uri.path?.compareTo(messagePath) == 0) {
                         val dataMap: DataMap = DataMapItem.fromDataItem(dataItem).dataMap
-                        // setting message or count here doesn't seem to get back to onTileRequest
-                        message = dataMap.getInt("message").toString()
-                        LoadAction.Builder()
-                        Toast.makeText(this@MyTileService, "message: $message", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MyTileService, "got data", Toast.LENGTH_SHORT).show()
+                        val tempMessage = dataMap.getInt("message")
+                        if (tempMessage > getSharedPreferences(prefFile, mode).getInt("count", 1)) {
+                            getSharedPreferences(prefFile, mode).edit().putInt("count", tempMessage).apply()
+                            message = tempMessage
+                            getUpdater(this@MyTileService).requestUpdate(MyTileService::class.java) // only updates if the last update was >= 20 seconds ago
+                        } else if (getSharedPreferences(prefFile, mode).getInt("count", 1) > message) {
+                            sendData(getSharedPreferences(prefFile, mode).getInt("count", 1))
+                            message = getSharedPreferences(prefFile, mode).getInt("count", 1)
+                            getUpdater(this@MyTileService).requestUpdate(MyTileService::class.java)
+                        }
                     }
                 }
             }
         }
     }
-
-    companion object {
-        private var message: String = "message"
+    private fun sendData(message: Int) {
+        var dataMap = PutDataMapRequest.create(messagePath)
+        dataMap.getDataMap().putInt("message", message)
+        var request = dataMap.asPutDataRequest()
+        request.setUrgent()
+        var dataItemTask = Wearable.getDataClient(this@MyTileService).putDataItem(request)
+        dataItemTask.addOnSuccessListener(
+            object : OnSuccessListener<DataItem?> {
+                override fun onSuccess(dataItem: DataItem?) {}
+            })
+        dataItemTask.addOnFailureListener(
+            object : OnFailureListener {
+                override fun onFailure(e: Exception) {}
+            })
     }
 }
