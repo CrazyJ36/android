@@ -1,72 +1,76 @@
+
 package com.crazyj36.updatetile
 
-import android.util.Log
-import androidx.lifecycle.viewmodel.viewModelFactory
-import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.DimensionBuilders
 import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.LayoutElementBuilders.Layout
-import androidx.wear.protolayout.ModifiersBuilders.Clickable
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.ResourceBuilders.Resources
 import androidx.wear.protolayout.ResourceBuilders.ImageResource
+import androidx.wear.protolayout.TimelineBuilders.TimeInterval
 import androidx.wear.protolayout.TimelineBuilders.Timeline
 import androidx.wear.protolayout.TimelineBuilders.TimelineEntry
-import androidx.wear.protolayout.material.CompactChip
-import androidx.wear.protolayout.material.layouts.PrimaryLayout
-import androidx.wear.tiles.EventBuilders
-import androidx.wear.tiles.RequestBuilders.ResourcesRequest
+import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.RequestBuilders.TileRequest
 import androidx.wear.tiles.TileBuilders.Tile
-import androidx.wear.tiles.TileService
-import com.google.common.util.concurrent.Futures
-import com.google.common.util.concurrent.ListenableFuture
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
+import com.google.android.horologist.annotations.ExperimentalHorologistApi
+import com.google.android.horologist.tiles.SuspendingTileService
 
 private const val RESOURCES_VERSION = "0"
-private var counter: Int = 1
 
-class MyTileService : TileService() {
-    private var tileRequestParams: TileRequest? = null
+@OptIn(ExperimentalHorologistApi::class)
+class MyTileService : SuspendingTileService() {
+    val text1: LayoutElementBuilders.Text = LayoutElementBuilders.Text.Builder()
+            .setText("timeline entry 1")
+            .build()
+    val text2: LayoutElementBuilders.Text = LayoutElementBuilders.Text.Builder()
+            .setText("timeline entry 2")
+            .build()
+    val box1: LayoutElementBuilders.Box = LayoutElementBuilders.Box.Builder()
+            .setVerticalAlignment(LayoutElementBuilders.VERTICAL_ALIGN_CENTER)
+            .setWidth(DimensionBuilders.expand())
+            .setHeight(DimensionBuilders.expand())
+            .addContent(text1)
+            .build()
+    val box2: LayoutElementBuilders.Box = LayoutElementBuilders.Box.Builder()
+            .setVerticalAlignment(LayoutElementBuilders.VERTICAL_ALIGN_CENTER)
+            .setWidth(DimensionBuilders.expand())
+            .setHeight(DimensionBuilders.expand())
+            .addContent(text2)
+            .build()
 
-    override fun onTileRequest(requestParams: TileRequest): ListenableFuture<Tile> {
-        tileRequestParams = requestParams
-        Log.d("UPDATETILE", "tile reloaded")
-        LoadAction.Builder().build()
-        val text1: LayoutElementBuilders.Text = LayoutElementBuilders.Text.Builder().setText(counter.toString()).build()
-        val button = CompactChip.Builder(
-                this@MyTileService, "",
-                Clickable.Builder().setId("buttonId").setOnClick(LoadAction.Builder().build()).build(),
-                requestParams.deviceConfiguration
-        ).setIconContent("button_icon").build()
-        val primaryLayout = PrimaryLayout.Builder(requestParams.deviceConfiguration)
-                .setPrimaryLabelTextContent(text1)
-                .setPrimaryChipContent(button)
-                .build()
-        val box: LayoutElementBuilders.Box = LayoutElementBuilders.Box.Builder()
-                .setVerticalAlignment(LayoutElementBuilders.VERTICAL_ALIGN_CENTER)
-                .setWidth(DimensionBuilders.expand())
-                .setHeight(DimensionBuilders.expand())
-                .addContent(primaryLayout)
-                .build()
-
-        val timeline = Timeline.Builder()
-        timeline.addTimelineEntry(
-                TimelineEntry.Builder()
-                        .setLayout(Layout.Builder()
-                                .setRoot(box)
-                                .build())
-                        .build()
-        )
-        val tile = Tile.Builder()
+    override suspend fun tileRequest(requestParams: TileRequest): Tile {
+        return Tile.Builder()
                 .setResourcesVersion(RESOURCES_VERSION)
-                .setTileTimeline(timeline.build())
-        return Futures.immediateFuture(tile.build())
+                .setTileTimeline(Timeline.Builder()
+                    .addTimelineEntry(
+                            TimelineEntry.Builder()
+                                    .setLayout(Layout.Builder()
+                                            .setRoot(box1)
+                                            .build()
+                                    )
+                                    .setValidity(TimeInterval.Builder()
+                                            .setStartMillis(0)
+                                            .setEndMillis(3000)
+                                            .build()
+                                    ).build()
+                    ).addTimelineEntry(
+                            TimelineEntry.Builder()
+                                    .setLayout(Layout.Builder()
+                                            .setRoot(box2)
+                                            .build())
+                                    .setValidity(TimeInterval.Builder()
+                                            .setStartMillis(3000)
+                                            .setEndMillis(6000)
+                                            .build()
+                                    ).build()
+                    ).build()
+                ).build()
     }
-    override fun onTileResourcesRequest(requestParams: ResourcesRequest): ListenableFuture<Resources> =
-            Futures.immediateFuture(Resources.Builder()
+    override suspend fun resourcesRequest(requestParams: RequestBuilders.ResourcesRequest): Resources =
+            Resources.Builder()
                     .setVersion(RESOURCES_VERSION)
+                    // sends "button_icon" to onTileRequest().button.setIconContent
                     .addIdToImageMapping("button_icon", ImageResource.Builder()
                             .setAndroidResourceByResId(
                                     ResourceBuilders.AndroidImageResourceByResId.Builder()
@@ -74,19 +78,4 @@ class MyTileService : TileService() {
                                             .build())
                             .build())
                     .build()
-            )
-    override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
-        super.onTileEnterEvent(requestParams)  // doesn't call onTileRequest
-        Thread() {
-            if (tileRequestParams != null) {
-                for (i in 1..5) {
-                    counter++
-                    Log.d("UPDATETILE", "trying to reload")
-                    onTileRequest(tileRequestParams!!)
-                    LoadAction.Builder().build()
-                    Thread.sleep(1000)
-                }
-            }
-        }.start()
-    }
 }
