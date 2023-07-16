@@ -1,6 +1,7 @@
 package com.crazyj36.updatetile
 
 import android.util.Log
+import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.DimensionBuilders
 import androidx.wear.protolayout.LayoutElementBuilders
@@ -20,12 +21,19 @@ import androidx.wear.tiles.TileBuilders.Tile
 import androidx.wear.tiles.TileService
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
 private const val RESOURCES_VERSION = "0"
 private var counter: Int = 1
 
 class MyTileService : TileService() {
+    private var tileRequestParams: TileRequest? = null
+
     override fun onTileRequest(requestParams: TileRequest): ListenableFuture<Tile> {
+        tileRequestParams = requestParams
+        Log.d("UPDATETILE", "tile reloaded")
+        LoadAction.Builder().build()
         val text1: LayoutElementBuilders.Text = LayoutElementBuilders.Text.Builder().setText(counter.toString()).build()
         val button = CompactChip.Builder(
                 this@MyTileService, "",
@@ -42,6 +50,7 @@ class MyTileService : TileService() {
                 .setHeight(DimensionBuilders.expand())
                 .addContent(primaryLayout)
                 .build()
+
         val timeline = Timeline.Builder()
         timeline.addTimelineEntry(
                 TimelineEntry.Builder()
@@ -53,7 +62,6 @@ class MyTileService : TileService() {
         val tile = Tile.Builder()
                 .setResourcesVersion(RESOURCES_VERSION)
                 .setTileTimeline(timeline.build())
-
         return Futures.immediateFuture(tile.build())
     }
     override fun onTileResourcesRequest(requestParams: ResourcesRequest): ListenableFuture<Resources> =
@@ -67,18 +75,18 @@ class MyTileService : TileService() {
                             .build())
                     .build()
             )
-
     override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
-        super.onTileEnterEvent(requestParams)
-
-        requestParams.run {
-            for (i in 0..10) {
-                Log.d("UPDATETILE", "running: $i")
-                counter++
-                LoadAction.Builder().build()
-                Thread.sleep(1000)
+        super.onTileEnterEvent(requestParams)  // doesn't call onTileRequest
+        Thread() {
+            if (tileRequestParams != null) {
+                for (i in 1..5) {
+                    counter++
+                    Log.d("UPDATETILE", "trying to reload")
+                    onTileRequest(tileRequestParams!!)
+                    LoadAction.Builder().build()
+                    Thread.sleep(1000)
+                }
             }
-        }
-
+        }.start()
     }
 }
