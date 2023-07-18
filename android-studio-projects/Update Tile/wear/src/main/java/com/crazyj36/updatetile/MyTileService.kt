@@ -1,7 +1,5 @@
 package com.crazyj36.updatetile
 
-import android.accessibilityservice.GestureDescription
-import android.graphics.Path
 import android.widget.Toast
 import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.DimensionBuilders
