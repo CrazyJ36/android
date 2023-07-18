@@ -1,0 +1,10 @@
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/accessibilityServiceLabel"
+    android:packageNames="com.crazyj36.updatetile"
+    android:accessibilityEventTypes="typeViewClicked|typeViewFocused|typeWindowStateChanged|typeTouchInteractionStart|typeViewScrolled|typeViewLongClicked|typeViewSelected"
+    android:accessibilityFlags="flagIncludeNotImportantViews"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:notificationTimeout="10"
+    android:canRetrieveWindowContent="true"
+    android:canRequestTouchExplorationMode="true"
+    android:canPerformGestures="true" />

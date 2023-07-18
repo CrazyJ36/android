@@ -3,4 +3,5 @@
     <string name="tileDescription">How to update A Tile</string>
     <string name="tileLabel">Update Tile Tile</string>
     <string name="mainActivityText">Main Activity</string>
+    <string name="accessibilityServiceLabel">Placeholder service for auto clicker which refreshes watch tile.</string>
 </resources>

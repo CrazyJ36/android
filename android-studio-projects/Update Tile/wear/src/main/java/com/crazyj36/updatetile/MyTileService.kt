@@ -1,87 +1,96 @@
 package com.crazyj36.updatetile
 
-import android.content.Context
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.glance.Button
-import androidx.glance.GlanceId
-import androidx.glance.GlanceModifier
-import androidx.glance.background
-import androidx.glance.currentState
-import androidx.glance.layout.Alignment
-import androidx.glance.layout.Column
-import androidx.glance.layout.Row
-import androidx.glance.layout.padding
-import androidx.glance.semantics.contentDescription
-import androidx.glance.semantics.semantics
-import androidx.glance.state.PreferencesGlanceStateDefinition
-import androidx.glance.text.FontWeight
-import androidx.glance.text.Text
-import androidx.glance.text.TextStyle
-import androidx.glance.unit.ColorProvider
-import androidx.glance.wear.tiles.GlanceTileService
-import androidx.glance.wear.tiles.action.ActionCallback
-import androidx.glance.wear.tiles.action.actionRunCallback
-import androidx.glance.wear.tiles.state.updateWearTileState
-import androidx.wear.tiles.ActionBuilders.LoadAction
+import android.accessibilityservice.GestureDescription
+import android.graphics.Path
+import android.widget.Toast
+import androidx.wear.protolayout.ActionBuilders.LoadAction
+import androidx.wear.protolayout.DimensionBuilders
+import androidx.wear.protolayout.LayoutElementBuilders
+import androidx.wear.protolayout.ModifiersBuilders
+import androidx.wear.protolayout.ModifiersBuilders.Clickable
+import androidx.wear.protolayout.ResourceBuilders
+import androidx.wear.protolayout.TimelineBuilders
+import androidx.wear.tiles.RequestBuilders
+import androidx.wear.tiles.TileBuilders
+import com.google.android.horologist.annotations.ExperimentalHorologistApi
+import com.google.android.horologist.tiles.SuspendingTileService
+import androidx.wear.protolayout.material.layouts.PrimaryLayout
+import androidx.wear.protolayout.material.CompactChip
 import kotlinx.coroutines.delay
-import java.util.concurrent.Executor
 
-private val prefsCountKey = intPreferencesKey("count")
+val RESOURCES_VERSION = "1"
+var count = 0
 
-class MyTileService : GlanceTileService() {
-    override val stateDefinition = PreferencesGlanceStateDefinition
-
-    @Composable
-    override fun Content() {
-        val currentCount = currentState<Preferences>()[prefsCountKey] ?: 0
-        Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier =
-                GlanceModifier.semantics({ contentDescription = "demo of actionRunCallback" })
-        ) {
-
-            Text(
-                    text = currentCount.toString(),
-                    style = TextStyle(
-                            color = ColorProvider(Color.Gray),
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 20.sp
-                    )
-            )
-
-            Row(
-                    horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Button(
-                        text = "+",
-                        modifier = GlanceModifier.padding(5.dp).background(Color.Blue),
-                        onClick = actionRunCallback<ClickAddAction>()
-                )
-            }
-        }
+@OptIn(ExperimentalHorologistApi::class)
+class MyTileService: SuspendingTileService() {
+    override fun onCreate() {
+        super.onCreate()
+        MyAccessibilityService().pressScreen()
     }
-}
-class ClickAddAction : ActionCallback {
-    override suspend fun onAction(
-            context: Context,
-            glanceId: GlanceId
-    ) {
-        for (i in 1..5) {
-            updateWearTileState(context, PreferencesGlanceStateDefinition, glanceId) { prefs ->
-                prefs.toMutablePreferences().apply {
-                    set(prefsCountKey, (this[prefsCountKey] ?: 0) + 1)
+    override suspend fun resourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ResourceBuilders.Resources {
+        return ResourceBuilders.Resources.Builder()
+            .setVersion(RESOURCES_VERSION)
+            .addIdToImageMapping("button_icon", ResourceBuilders.ImageResource.Builder()
+                .setAndroidResourceByResId(
+                    ResourceBuilders.AndroidImageResourceByResId.Builder()
+                        .setResourceId(R.drawable.button_icon)
+                        .build())
+                .build())
+            .build()
+    }
+
+    override suspend fun tileRequest(requestParams: RequestBuilders.TileRequest): TileBuilders.Tile {
+        when (requestParams.currentState.lastClickableId) {
+            "buttonId" -> {
+                for (i in 1..5) {
+                    count++
+                    delay(1000)
+                    MyAccessibilityService().pressScreen()
                 }
+
+                Toast.makeText(this@MyTileService, "button clicked", Toast.LENGTH_SHORT).show()
             }
-            delay(1000)
+            "boxId" -> {
+                Toast.makeText(this@MyTileService, "box clicked", Toast.LENGTH_SHORT).show()
+            }
         }
+        val button = CompactChip.Builder(
+            this@MyTileService,
+            "",
+            Clickable.Builder().setId("buttonId").setOnClick(LoadAction.Builder().build()).build(),
+            requestParams.deviceConfiguration
+        ).setIconContent("button_icon").build()
+        val text1 = LayoutElementBuilders.Text.Builder()
+            .setText(count.toString())
+            .build()
+        val primaryLayout = PrimaryLayout.Builder(requestParams.deviceConfiguration)
+            .setPrimaryLabelTextContent(text1)
+            .setPrimaryChipContent(button)
+            .build()
+        val box: LayoutElementBuilders.Box = LayoutElementBuilders.Box.Builder()
+            .setVerticalAlignment(LayoutElementBuilders.VERTICAL_ALIGN_CENTER)
+            .setWidth(DimensionBuilders.expand())
+            .setHeight(DimensionBuilders.expand())
+            .addContent(primaryLayout)
+            .setModifiers(
+                ModifiersBuilders.Modifiers.Builder()
+                    .setClickable(Clickable.Builder()
+                        .setId("boxId")
+                        .setOnClick(LoadAction.Builder()
+                            .build()
+                        ).build()
+                    ).build()
+            )
+            .build()
+        val timeline = TimelineBuilders.Timeline.Builder()
+        timeline.addTimelineEntry(
+            TimelineBuilders.TimelineEntry.fromLayoutElement(box)
+        )
+        val tile = TileBuilders.Tile.Builder()
+            .setResourcesVersion(RESOURCES_VERSION)
+            .setTileTimeline(timeline.build())
+        return tile.build()
     }
+
 }
 
