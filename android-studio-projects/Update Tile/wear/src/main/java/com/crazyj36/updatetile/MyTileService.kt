@@ -1,5 +1,8 @@
 package com.crazyj36.updatetile
 
+import android.accessibilityservice.GestureDescription
+import android.graphics.Path
+import android.util.Log
 import android.widget.Toast
 import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.DimensionBuilders
@@ -15,6 +18,7 @@ import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders
 import com.google.android.horologist.annotations.ExperimentalHorologistApi
 import com.google.android.horologist.tiles.SuspendingTileService
+import kotlinx.coroutines.delay
 
 val RESOURCES_VERSION = "1"
 
@@ -28,6 +32,11 @@ class MyTileService: SuspendingTileService() {
 
     override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
         super.onTileLeaveEvent(requestParams)
+        runTouchEvent = false
+    }
+
+    override fun onTileRemoveEvent(requestParams: EventBuilders.TileRemoveEvent) {
+        super.onTileRemoveEvent(requestParams)
         runTouchEvent = false
     }
     override suspend fun resourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ResourceBuilders.Resources {
@@ -74,7 +83,6 @@ class MyTileService: SuspendingTileService() {
         when (requestParams.currentState.lastClickableId) {
             "buttonId" -> {
                 Toast.makeText(this@MyTileService, "button clicked", Toast.LENGTH_SHORT).show()
-
             }
             "boxId" -> {
                 Toast.makeText(this@MyTileService, "box clicked", Toast.LENGTH_SHORT).show()
