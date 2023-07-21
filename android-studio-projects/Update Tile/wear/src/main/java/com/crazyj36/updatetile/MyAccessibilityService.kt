@@ -7,25 +7,27 @@ import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 
 class MyAccessibilityService : AccessibilityService() {
-
-    override fun onAccessibilityEvent(p0: AccessibilityEvent?) {
-        Log.d("UPDATETILE", "onAccessibilityEvent()")
-        if (MyTileService.runTouchEvent) {
+    private var gesture: GestureDescription? = null
+    override fun onAccessibilityEvent(event: AccessibilityEvent?) {
+        if (MyTileService.isTileInView && event?.packageName == "com.crazyj36.updatetile") {
             MyTileService.count++
-            val path = Path()
-            path.moveTo(200f, 200f)
-            val gestureBuilder: GestureDescription.Builder = GestureDescription.Builder()
-            gestureBuilder.addStroke(GestureDescription.StrokeDescription(path, 0, 100))
-            val gesture = gestureBuilder.build()
-            Log.d("UPDATETILE", dispatchGesture(gesture, null, null).toString())
+            Log.d("UPDATETILE", "dispatched: " + dispatchGesture(gesture!!, null, null).toString())
         }
-
     }
     override fun onInterrupt() {
         Log.d("UPDATETILE", "onInterrupt()")
     }
-    protected override fun onServiceConnected() {
+    override fun onServiceConnected() {
         super.onServiceConnected()
         Log.d("UPDATETILE", "onServiceConnected()")
+        buildClickGesture()
+    }
+
+    private fun buildClickGesture() {
+        val path = Path()
+        val gestureBuilder: GestureDescription.Builder = GestureDescription.Builder()
+        path.moveTo(300f, 50f)
+        gestureBuilder.addStroke(GestureDescription.StrokeDescription(path, 0, 100))
+        gesture = gestureBuilder.build()
     }
 }

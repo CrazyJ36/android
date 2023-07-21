@@ -1,8 +1,7 @@
 package com.crazyj36.updatetile
 
-import android.accessibilityservice.GestureDescription
-import android.graphics.Path
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.DimensionBuilders
@@ -18,26 +17,25 @@ import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders
 import com.google.android.horologist.annotations.ExperimentalHorologistApi
 import com.google.android.horologist.tiles.SuspendingTileService
-import kotlinx.coroutines.delay
 
-val RESOURCES_VERSION = "1"
-
+const val RESOURCES_VERSION = "1"
 
 @OptIn(ExperimentalHorologistApi::class)
 class MyTileService: SuspendingTileService() {
     override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
         super.onTileEnterEvent(requestParams)
-        runTouchEvent = true
+        isTileInView = true
     }
-
     override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
         super.onTileLeaveEvent(requestParams)
-        runTouchEvent = false
+        isTileInView = false
     }
-
+    override fun onTileAddEvent(requestParams: EventBuilders.TileAddEvent) {
+        super.onTileAddEvent(requestParams)
+    }
     override fun onTileRemoveEvent(requestParams: EventBuilders.TileRemoveEvent) {
         super.onTileRemoveEvent(requestParams)
-        runTouchEvent = false
+        isTileInView = false
     }
     override suspend fun resourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ResourceBuilders.Resources {
         return ResourceBuilders.Resources.Builder()
@@ -55,7 +53,11 @@ class MyTileService: SuspendingTileService() {
         val button = CompactChip.Builder(
             this@MyTileService,
             "",
-            Clickable.Builder().setId("buttonId").setOnClick(LoadAction.Builder().build()).build(),
+            Clickable.Builder()
+                .setId("buttonId")
+                .setOnClick(LoadAction.Builder()
+                    .build()
+                ).build(),
             requestParams.deviceConfiguration
         ).setIconContent("button_icon").build()
         val text1 = LayoutElementBuilders.Text.Builder()
@@ -78,8 +80,7 @@ class MyTileService: SuspendingTileService() {
                             .build()
                         ).build()
                     ).build()
-            )
-            .build()
+            ).build()
         when (requestParams.currentState.lastClickableId) {
             "buttonId" -> {
                 Toast.makeText(this@MyTileService, "button clicked", Toast.LENGTH_SHORT).show()
@@ -99,7 +100,7 @@ class MyTileService: SuspendingTileService() {
     }
     companion object {
         var count = 0
-        var runTouchEvent = true
+        var isTileInView = false
     }
 }
 

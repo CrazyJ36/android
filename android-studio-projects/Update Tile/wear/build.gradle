@@ -37,6 +37,7 @@ dependencies {
     implementation 'androidx.wear.compose:compose-foundation:1.1.2'
     implementation 'androidx.wear.compose:compose-material:1.1.2'
     implementation 'androidx.wear.tiles:tiles-renderer:1.1.0'
+    implementation 'androidx.wear.tiles:tiles-proto:1.1.0'
     implementation 'com.google.android.horologist:horologist-tiles:0.4.12'
     compileOnly 'com.google.android.wearable:wearable:2.9.0'
 }
