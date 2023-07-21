@@ -7,11 +7,12 @@ import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 
 class MyAccessibilityService : AccessibilityService() {
-    private var gesture: GestureDescription? = null
+
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
-        if (MyTileService.isTileInView && event?.packageName == "com.crazyj36.updatetile") {
-            MyTileService.count++
-            Log.d("UPDATETILE", "dispatched: " + dispatchGesture(gesture!!, null, null).toString())
+        Log.d("UPDATETILE", "onAccessibilityEvent()")
+        Log.d("UPDATETILE", event.toString())
+        if (event?.eventType == AccessibilityEvent.TYPE_VIEW_CLICKED) {
+
         }
     }
     override fun onInterrupt() {
@@ -20,14 +21,8 @@ class MyAccessibilityService : AccessibilityService() {
     override fun onServiceConnected() {
         super.onServiceConnected()
         Log.d("UPDATETILE", "onServiceConnected()")
-        buildClickGesture()
     }
-
-    private fun buildClickGesture() {
-        val path = Path()
-        val gestureBuilder: GestureDescription.Builder = GestureDescription.Builder()
-        path.moveTo(300f, 50f)
-        gestureBuilder.addStroke(GestureDescription.StrokeDescription(path, 0, 100))
-        gesture = gestureBuilder.build()
+    companion object {
+        val instance = MyAccessibilityService()
     }
 }

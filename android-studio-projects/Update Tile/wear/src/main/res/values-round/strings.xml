@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Update Tile</string>
     <string name="tileDescription">How to update A Tile</string>
-    <string name="tileLabel">Update Tile Tile</string>
+    <string name="tileLabel">Update Tile</string>
     <string name="mainActivityText">Main Activity</string>
     <string name="accessibilityServiceLabel">Update Tile Refresher</string>
     <string name="accessibilityServiceDescription">Placeholder service for auto clicker which refreshes the watch tile.</string>
