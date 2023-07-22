@@ -1,8 +1,8 @@
 package com.crazyj36.updatetile
 
 import android.util.Log
+import android.view.accessibility.AccessibilityManager
 import android.widget.Toast
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.DimensionBuilders
 import androidx.wear.protolayout.LayoutElementBuilders
@@ -12,39 +12,18 @@ import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.layouts.PrimaryLayout
-import androidx.wear.tiles.EventBuilders
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders
 import com.google.android.horologist.annotations.ExperimentalHorologistApi
 import com.google.android.horologist.tiles.SuspendingTileService
+
 const val RESOURCES_VERSION = "1"
 
 @OptIn(ExperimentalHorologistApi::class)
 class MyTileService: SuspendingTileService() {
 
-    override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
-        super.onTileEnterEvent(requestParams)
-
-    }
-    override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
-        super.onTileLeaveEvent(requestParams)
-    }
-    override fun onTileAddEvent(requestParams: EventBuilders.TileAddEvent) {
-        super.onTileAddEvent(requestParams)
-    }
-    override fun onTileRemoveEvent(requestParams: EventBuilders.TileRemoveEvent) {
-        super.onTileRemoveEvent(requestParams)
-    }
-    override suspend fun resourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ResourceBuilders.Resources {
-        return ResourceBuilders.Resources.Builder()
-            .setVersion(RESOURCES_VERSION)
-            .addIdToImageMapping("button_icon", ResourceBuilders.ImageResource.Builder()
-                .setAndroidResourceByResId(
-                    ResourceBuilders.AndroidImageResourceByResId.Builder()
-                        .setResourceId(R.drawable.button_icon)
-                        .build())
-                .build())
-            .build()
+    companion object {
+        var count = 0
     }
 
     override suspend fun tileRequest(requestParams: RequestBuilders.TileRequest): TileBuilders.Tile {
@@ -53,8 +32,9 @@ class MyTileService: SuspendingTileService() {
             "",
             Clickable.Builder()
                 .setId("buttonId")
-                .setOnClick(LoadAction.Builder()
-                    .build()
+                .setOnClick(
+                    LoadAction.Builder()
+                        .build()
                 ).build(),
             requestParams.deviceConfiguration
         ).setIconContent("button_icon").build()
@@ -72,18 +52,23 @@ class MyTileService: SuspendingTileService() {
             .addContent(primaryLayout)
             .setModifiers(
                 ModifiersBuilders.Modifiers.Builder()
-                    .setClickable(Clickable.Builder()
-                        .setId("boxId")
-                        .setOnClick(LoadAction.Builder()
-                            .build()
-                        ).build()
+                    .setClickable(
+                        Clickable.Builder()
+                            .setId("boxId")
+                            .setOnClick(
+                                LoadAction.Builder()
+                                    .build()
+                            ).build()
                     ).build()
             ).build()
         when (requestParams.currentState.lastClickableId) {
             "buttonId" -> {
                 Log.d("UPDATETILE", "buttonId clicked")
-                // toast creates an accessibilityevent
-                Toast.makeText(this@MyTileService, "button clicked", Toast.LENGTH_SHORT).show()
+                val accessibilityManager: AccessibilityManager = getSystemService(ACCESSIBILITY_SERVICE) as AccessibilityManager
+                if (accessibilityManager.isEnabled) {
+                    // toast triggers an accessibilityevent in MyAccessibilityService
+                    Toast.makeText(this@MyTileService, "button clicked", Toast.LENGTH_SHORT).show()
+                } else Toast.makeText(this@MyTileService, "Accessibility not enabled for Update Tile.", Toast.LENGTH_SHORT).show()
             }
             "boxId" -> {
                 Log.d("UPDATETILE", "boxId clicked")
@@ -100,8 +85,19 @@ class MyTileService: SuspendingTileService() {
         return tile.build()
     }
 
-    companion object {
-        var count = 0
+    override suspend fun resourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ResourceBuilders.Resources {
+        return ResourceBuilders.Resources.Builder()
+            .setVersion(RESOURCES_VERSION)
+            .addIdToImageMapping(
+                "button_icon", ResourceBuilders.ImageResource.Builder()
+                    .setAndroidResourceByResId(
+                        ResourceBuilders.AndroidImageResourceByResId.Builder()
+                            .setResourceId(R.drawable.button_icon)
+                            .build()
+                    )
+                    .build()
+            )
+            .build()
     }
 }
 

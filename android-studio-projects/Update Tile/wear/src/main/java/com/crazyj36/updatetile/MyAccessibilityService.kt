@@ -19,6 +19,7 @@ class MyAccessibilityService : AccessibilityService() {
         val gesture = gestureBuilder.build()
         Log.d("UPDATETILE", "dispatched: " + dispatchGesture(gesture, null, null).toString())
     }
+
     override fun onInterrupt() {
         Log.d("UPDATETILE", "onInterrupt()")
     }
