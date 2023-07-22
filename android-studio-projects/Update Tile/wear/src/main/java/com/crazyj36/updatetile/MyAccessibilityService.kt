@@ -11,18 +11,15 @@ class MyAccessibilityService : AccessibilityService() {
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         Log.d("UPDATETILE", "onAccessibilityEvent()")
         Log.d("UPDATETILE", event.toString())
-        if (event?.eventType == AccessibilityEvent.TYPE_VIEW_CLICKED) {
-
-        }
+        MyTileService.count++
+        val path = Path()
+        val gestureBuilder: GestureDescription.Builder = GestureDescription.Builder()
+        path.moveTo(220f, 200f)
+        gestureBuilder.addStroke(GestureDescription.StrokeDescription(path, 0, 100))
+        val gesture = gestureBuilder.build()
+        Log.d("UPDATETILE", "dispatched: " + dispatchGesture(gesture, null, null).toString())
     }
     override fun onInterrupt() {
         Log.d("UPDATETILE", "onInterrupt()")
-    }
-    override fun onServiceConnected() {
-        super.onServiceConnected()
-        Log.d("UPDATETILE", "onServiceConnected()")
-    }
-    companion object {
-        val instance = MyAccessibilityService()
     }
 }

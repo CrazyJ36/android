@@ -1,12 +1,8 @@
 package com.crazyj36.updatetile
 
-import android.accessibilityservice.AccessibilityService
-import android.accessibilityservice.GestureDescription
-import android.content.Context
-import android.graphics.Path
-import android.os.Build
 import android.util.Log
-import android.view.accessibility.AccessibilityEvent
+import android.widget.Toast
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.DimensionBuilders
 import androidx.wear.protolayout.LayoutElementBuilders
@@ -21,14 +17,6 @@ import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders
 import com.google.android.horologist.annotations.ExperimentalHorologistApi
 import com.google.android.horologist.tiles.SuspendingTileService
-import 	android.view.accessibility.AccessibilityManager
-import android.widget.Toast
-import kotlinx.coroutines.Runnable
-import java.util.concurrent.Executor
-import java.util.concurrent.Executors
-import java.util.concurrent.ScheduledExecutorService
-import java.util.concurrent.TimeUnit
-
 const val RESOURCES_VERSION = "1"
 
 @OptIn(ExperimentalHorologistApi::class)
@@ -93,29 +81,13 @@ class MyTileService: SuspendingTileService() {
             ).build()
         when (requestParams.currentState.lastClickableId) {
             "buttonId" -> {
-
                 Log.d("UPDATETILE", "buttonId clicked")
-                /*val accessibilityManager = this@MyTileService.getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
-                if (accessibilityManager.isEnabled) {
-                    val accessibilityEvent = if (Build.VERSION.SDK_INT >= 30) AccessibilityEvent()
-                    else AccessibilityEvent.obtain()
-                    accessibilityEvent.eventType = AccessibilityEvent.TYPE_VIEW_CLICKED
-                    accessibilityEvent.className = javaClass.name
-                    accessibilityEvent.packageName = packageName
-                    accessibilityManager.sendAccessibilityEvent(accessibilityEvent)
-                else {
-                    Toast.makeText(this@MyTileService, "Accessibility service not enabled for Update Tile.", Toast.LENGTH_SHORT).show()
-                }*/
-                count++
-                val path = Path()
-                val gestureBuilder: GestureDescription.Builder = GestureDescription.Builder()
-                path.moveTo(220f, 200f)
-                gestureBuilder.addStroke(GestureDescription.StrokeDescription(path, 0, 100))
-                val gesture = gestureBuilder.build()
-                Log.d("UPDATETILE", "dispatched: " + MyAccessibilityService.instance.dispatchGesture(gesture, null, null).toString())
+                // toast creates an accessibilityevent
+                Toast.makeText(this@MyTileService, "button clicked", Toast.LENGTH_SHORT).show()
             }
             "boxId" -> {
                 Log.d("UPDATETILE", "boxId clicked")
+                Toast.makeText(this@MyTileService, "box clicked", Toast.LENGTH_SHORT).show()
             }
         }
         val timeline = TimelineBuilders.Timeline.Builder()
@@ -127,6 +99,7 @@ class MyTileService: SuspendingTileService() {
             .setTileTimeline(timeline.build())
         return tile.build()
     }
+
     companion object {
         var count = 0
     }
