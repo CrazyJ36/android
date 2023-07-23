@@ -5,4 +5,6 @@
     <string name="mainActivityText">Main Activity</string>
     <string name="accessibilityServiceLabel">Update Tile Refresher</string>
     <string name="accessibilityServiceDescription">Placeholder service for auto clicker which refreshes the watch tile.</string>
+    <string name="androidViewText">Android View</string>
+    <string name="buttonText">Button</string>
 </resources>
