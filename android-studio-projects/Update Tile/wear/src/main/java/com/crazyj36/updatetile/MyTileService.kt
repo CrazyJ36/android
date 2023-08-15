@@ -36,7 +36,7 @@ class MyTileService: SuspendingTileService() {
     }
 
     override suspend fun tileRequest(requestParams: RequestBuilders.TileRequest): TileBuilders.Tile {
-        val systemTime = DynamicInstant.platformTimeWithSecondsPrecision()
+        val systemTime = DynamicInstant.platformTimeWithSecondsPrecision().toDynamicInstantByteArray()
         when (requestParams.currentState.lastClickableId) {
             "buttonId" -> {
             }
@@ -54,7 +54,7 @@ class MyTileService: SuspendingTileService() {
                     this,
                     TypeBuilders.StringProp.Builder("--")
                         .setDynamicValue(
-                            DynamicBuilders.DynamicString.fromByteArray(systemTime.toDynamicInstantByteArray()))
+                            DynamicBuilders.DynamicString.fromByteArray(systemTime))
                         .build(),
                     StringLayoutConstraint.Builder("000").build()
                 ).build()
