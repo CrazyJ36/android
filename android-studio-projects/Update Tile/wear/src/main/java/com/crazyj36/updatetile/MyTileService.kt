@@ -102,6 +102,7 @@ class MyTileService: SuspendingTileService() {
             TimelineBuilders.TimelineEntry.fromLayoutElement(box)
         )
         val tile = TileBuilders.Tile.Builder()
+            .setFreshnessIntervalMillis(1000)
             .setResourcesVersion(RESOURCES_VERSION)
             .setTileTimeline(timeline.build())
         return tile.build()
