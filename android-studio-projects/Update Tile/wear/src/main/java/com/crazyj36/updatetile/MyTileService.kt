@@ -13,44 +13,15 @@ import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.Text
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders
-import com.google.android.horologist.annotations.ExperimentalHorologistApi
-import com.google.android.horologist.tiles.SuspendingTileService
+import androidx.wear.tiles.TileService
+import com.google.common.util.concurrent.Futures
+import com.google.common.util.concurrent.ListenableFuture
 
 const val RESOURCES_VERSION = "1"
 
-@OptIn(ExperimentalHorologistApi::class)
-class MyTileService: SuspendingTileService() {
+class MyTileService: TileService() {
 
-    override suspend fun tileRequest(requestParams: RequestBuilders.TileRequest): TileBuilders.Tile {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.BODY_SENSORS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            Toast.makeText(this, "Enable permission first.", Toast.LENGTH_SHORT).show()
-            return TileBuilders.Tile.Builder().build()
-        } else {
-            return TileBuilders.Tile.Builder()
-                .setFreshnessIntervalMillis(1000)
-                .setResourcesVersion(RESOURCES_VERSION)
-                .setTileTimeline(
-                    TimelineBuilders.Timeline.fromLayoutElement(
-                        Text.Builder(
-                            this,
-                            TypeBuilders.StringProp.Builder("--")
-                                .setDynamicValue(
-                                    DynamicString.constant("bpm: ")
-                                        .concat(PlatformHealthSources.heartRateBpm().format())
-                                )
-                                .build(),
-                            StringLayoutConstraint.Builder("000").build()
-                        ).build()
-                    )
-                ).build()
-        }
-    }
-
-    override suspend fun resourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ResourceBuilders.Resources {
+    /*override fun resourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ResourceBuilders.Resources {
         return ResourceBuilders.Resources.Builder()
             .setVersion(RESOURCES_VERSION)
             .addIdToImageMapping(
@@ -63,6 +34,50 @@ class MyTileService: SuspendingTileService() {
                     .build()
             )
             .build()
-    }
+    }*/
+
+    override fun onTileRequest(requestParams: RequestBuilders.TileRequest) =
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.BODY_SENSORS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            Futures.immediateFuture(
+                TileBuilders.Tile.Builder()
+                    .setResourcesVersion(RESOURCES_VERSION)
+                    .setTileTimeline(
+                        TimelineBuilders.Timeline.fromLayoutElement(
+                            Text.Builder(this, "permission")
+                                .build()
+                        )
+                    ).build()
+            )
+        } else {
+            Futures.immediateFuture(
+                TileBuilders.Tile.Builder()
+                    .setResourcesVersion(RESOURCES_VERSION)
+                    .setTileTimeline(
+                        TimelineBuilders.Timeline.fromLayoutElement(
+                            Text.Builder(
+                                this,
+                                TypeBuilders.StringProp.Builder("--")
+                                    .setDynamicValue(
+                                        DynamicString.constant("bpm: ")
+                                            .concat(PlatformHealthSources.heartRateBpm().format())
+                                    )
+                                    .build(),
+                                StringLayoutConstraint.Builder("000").build()
+                            ).build()
+                        )
+                    ).build()
+            )
+        }
 }
 
