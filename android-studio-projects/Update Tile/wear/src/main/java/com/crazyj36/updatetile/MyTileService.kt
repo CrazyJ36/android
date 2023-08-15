@@ -18,8 +18,6 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService: TileService() {
-    var context: Context? = null
-
     companion object {
         var count = 0
     }
@@ -42,13 +40,13 @@ class MyTileService: TileService() {
         val systemTime = DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
         Timer().schedule(MyTimerTask(applicationContext), 3000)
     }
-    class MyTimerTask(private val context: Context) : TimerTask() {
+    class MyTimerTask(context: Context) : TimerTask() {
+        val context = context
         override fun run() {
             Toast.makeText(context, "updated", Toast.LENGTH_SHORT).show()
             count++
             ActionBuilders.LoadAction.Builder().build()
         }
-
     }
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
         return Futures.immediateFuture(
