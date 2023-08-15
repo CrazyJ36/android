@@ -5,12 +5,14 @@ import android.content.pm.PackageManager
 import android.hardware.SensorManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.wear.protolayout.ActionBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.StateBuilders
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.expression.AppDataKey
+import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
 import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
@@ -24,9 +26,8 @@ import com.google.common.util.concurrent.ListenableFuture
 const val RESOURCES_VERSION = "1"
 
 class MyTileService: TileService() {
-
     companion object {
-        val INFO = AppDataKey<DynamicString>("info")
+        var count = 0
     }
     /*override fun resourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ResourceBuilders.Resources {
         return ResourceBuilders.Resources.Builder()
@@ -43,14 +44,13 @@ class MyTileService: TileService() {
             .build()
     }*/
 
-    override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> =
-
+    override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            Futures.immediateFuture(
+            return Futures.immediateFuture(
                 TileBuilders.Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
                     .setTileTimeline(
@@ -63,31 +63,25 @@ class MyTileService: TileService() {
             )
         } else {
             Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show()
-            val state = StateBuilders.State.Builder()
-                .addKeyToValueMapping(INFO,
-                    DynamicDataBuilders.DynamicDataValue
-                        .fromString("text"))
-                .build()
-            Futures.immediateFuture(
+            for (i in 0..10) {
+                val systemTime = DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
+                count++
+                ActionBuilders.LoadAction.Builder().build()
+            }
+            return Futures.immediateFuture(
                 TileBuilders.Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
-                            Text.Builder(
-                                this,
-                                TypeBuilders.StringProp.Builder("--")
-                                    .setDynamicValue(
-                                        PlatformHealthSources.heartRateBpm()
-                                            .format()
-                                ).build(),
-                                StringLayoutConstraint.Builder("000").build()
+                            Text.Builder(this,
+                                count.toString()
                             ).build()
                         )
                     )
-                    .setState(state)
                     .build()
-            )
-        }
+                )
+            }
+    }
     override fun onTileResourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ListenableFuture<ResourceBuilders.Resources> =
         Futures.immediateFuture(
             ResourceBuilders.Resources.Builder()
