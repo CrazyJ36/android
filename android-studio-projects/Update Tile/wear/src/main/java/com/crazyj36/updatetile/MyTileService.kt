@@ -10,17 +10,21 @@ import androidx.wear.protolayout.ModifiersBuilders
 import androidx.wear.protolayout.ModifiersBuilders.Clickable
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
+import androidx.wear.protolayout.expression.DynamicBuilders.DynamicInstant
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.layouts.PrimaryLayout
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders
 import com.google.android.horologist.annotations.ExperimentalHorologistApi
 import com.google.android.horologist.tiles.SuspendingTileService
+import kotlinx.coroutines.delay
 
 const val RESOURCES_VERSION = "1"
 
 @OptIn(ExperimentalHorologistApi::class)
 class MyTileService: SuspendingTileService() {
+
+    var text1 = LayoutElementBuilders.Text.Builder()
 
     companion object {
         var count = 0
@@ -38,11 +42,16 @@ class MyTileService: SuspendingTileService() {
                 ).build(),
             requestParams.deviceConfiguration
         ).setIconContent("button_icon").build()
-        val text1 = LayoutElementBuilders.Text.Builder()
-            .setText(count.toString())
-            .build()
+        for (i in 0..5) {
+            val systemTime = DynamicInstant.platformTimeWithSecondsPrecision()
+            text1 = LayoutElementBuilders.Text.Builder()
+                .setText(systemTime.toString())
+            delay(1000)
+            LoadAction.Builder().build()
+        }
+
         val primaryLayout = PrimaryLayout.Builder(requestParams.deviceConfiguration)
-            .setPrimaryLabelTextContent(text1)
+            .setPrimaryLabelTextContent(text1.build())
             .setPrimaryChipContent(button)
             .build()
         val box: LayoutElementBuilders.Box = LayoutElementBuilders.Box.Builder()
@@ -64,11 +73,11 @@ class MyTileService: SuspendingTileService() {
         when (requestParams.currentState.lastClickableId) {
             "buttonId" -> {
                 Log.d("UPDATETILE", "buttonId clicked")
-                val accessibilityManager: AccessibilityManager = getSystemService(ACCESSIBILITY_SERVICE) as AccessibilityManager
+                /*val accessibilityManager: AccessibilityManager = getSystemService(ACCESSIBILITY_SERVICE) as AccessibilityManager
                 if (accessibilityManager.isEnabled) {
                     // toast triggers an accessibilityevent in MyAccessibilityService
                     Toast.makeText(this@MyTileService, "button clicked", Toast.LENGTH_SHORT).show()
-                } else Toast.makeText(this@MyTileService, "Accessibility not enabled for Update Tile.", Toast.LENGTH_SHORT).show()
+                } else Toast.makeText(this@MyTileService, "Accessibility not enabled for Update Tile.", Toast.LENGTH_SHORT).show()*/
             }
             "boxId" -> {
                 Log.d("UPDATETILE", "boxId clicked")
