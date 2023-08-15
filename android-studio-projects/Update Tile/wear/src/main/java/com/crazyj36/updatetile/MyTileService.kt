@@ -55,7 +55,7 @@ class MyTileService: SuspendingTileService() {
         var text1: Text
         if (ActivityCompat.checkSelfPermission(
                 this,
-                Manifest.permission.ACTIVITY_RECOGNITION
+                Manifest.permission.BODY_SENSORS
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             text1 =
@@ -63,7 +63,7 @@ class MyTileService: SuspendingTileService() {
                     this,
                     TypeBuilders.StringProp.Builder("--")
                         .setDynamicValue(
-                            PlatformHealthSources.dailySteps()
+                            PlatformHealthSources.heartRateBpm()
                                 .format()
                         ).build(),
                     StringLayoutConstraint.Builder("000").build()
