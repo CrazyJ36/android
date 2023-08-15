@@ -2,14 +2,17 @@ package com.crazyj36.updatetile
 
 import android.Manifest
 import android.content.pm.PackageManager
-import androidx.annotation.NonNull
+import android.hardware.SensorManager
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.ResourceBuilders
+import androidx.wear.protolayout.StateBuilders
 import androidx.wear.protolayout.TimelineBuilders
-import androidx.wear.protolayout.TimelineBuilders.Timeline
 import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
+import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
+import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.Text
 import androidx.wear.tiles.RequestBuilders
@@ -22,6 +25,9 @@ const val RESOURCES_VERSION = "1"
 
 class MyTileService: TileService() {
 
+    companion object {
+        val INFO = AppDataKey<DynamicString>("info")
+    }
     /*override fun resourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ResourceBuilders.Resources {
         return ResourceBuilders.Resources.Builder()
             .setVersion(RESOURCES_VERSION)
@@ -38,6 +44,7 @@ class MyTileService: TileService() {
     }*/
 
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> =
+
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -51,9 +58,16 @@ class MyTileService: TileService() {
                             Text.Builder(this, "permission")
                                 .build()
                         )
-                    ).build()
+                    )
+                    .build()
             )
         } else {
+            Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show()
+            val state = StateBuilders.State.Builder()
+                .addKeyToValueMapping(INFO,
+                    DynamicDataBuilders.DynamicDataValue
+                        .fromString("text"))
+                .build()
             Futures.immediateFuture(
                 TileBuilders.Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
@@ -63,14 +77,15 @@ class MyTileService: TileService() {
                                 this,
                                 TypeBuilders.StringProp.Builder("--")
                                     .setDynamicValue(
-                                        DynamicString.constant("bpm: ")
-                                            .concat(PlatformHealthSources.heartRateBpm().format())
-                                    )
-                                    .build(),
+                                        PlatformHealthSources.heartRateBpm()
+                                            .format()
+                                ).build(),
                                 StringLayoutConstraint.Builder("000").build()
                             ).build()
                         )
-                    ).build()
+                    )
+                    .setState(state)
+                    .build()
             )
         }
     override fun onTileResourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ListenableFuture<ResourceBuilders.Resources> =
