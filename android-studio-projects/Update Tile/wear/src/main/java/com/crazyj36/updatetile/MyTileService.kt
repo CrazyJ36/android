@@ -20,6 +20,7 @@ import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicInstant
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicInt32
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
+import androidx.wear.protolayout.expression.DynamicBuilders.dynamicStringFromProto
 import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.CompactChip
@@ -38,16 +39,12 @@ const val RESOURCES_VERSION = "1"
 class MyTileService: SuspendingTileService() {
 
     companion object {
-        var COUNT = AppDataKey<DynamicInt32>("count")
         var count = 0
     }
 
     override suspend fun tileRequest(requestParams: RequestBuilders.TileRequest): TileBuilders.Tile {
         val systemTime = DynamicInstant.platformTimeWithSecondsPrecision()
-        val state = androidx.wear.protolayout.StateBuilders.State.Builder()
-            .addKeyToValueMapping(COUNT,
-                DynamicDataBuilders.DynamicDataValue.fromInt(count++)
-            ).build()
+
         when (requestParams.currentState.lastClickableId) {
             "buttonId" -> {
             }
@@ -55,7 +52,7 @@ class MyTileService: SuspendingTileService() {
             }
         }
         val text1 = Text.Builder(this,
-            DynamicInt32.from(COUNT).toString()
+            systemTime.toDynamicInstantByteArray().toString()
             ).build()
         val button = CompactChip.Builder(
             this@MyTileService,
@@ -93,7 +90,6 @@ class MyTileService: SuspendingTileService() {
             TimelineBuilders.TimelineEntry.fromLayoutElement(box)
         )
         val tile = TileBuilders.Tile.Builder()
-            .setState(state)
             .setResourcesVersion(RESOURCES_VERSION)
             .setTileTimeline(timeline.build())
         return tile.build()
