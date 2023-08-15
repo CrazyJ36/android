@@ -22,6 +22,7 @@ import androidx.wear.tiles.TileBuilders
 import androidx.wear.tiles.TileService
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -46,45 +47,31 @@ class MyTileService: TileService() {
             )
             .build()
     }*/
-
-    override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.BODY_SENSORS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            return Futures.immediateFuture(
-                TileBuilders.Tile.Builder()
-                    .setResourcesVersion(RESOURCES_VERSION)
-                    .setTileTimeline(
-                        TimelineBuilders.Timeline.fromLayoutElement(
-                            Text.Builder(this, "permission")
-                                .build()
-                        )
-                    )
-                    .build()
-            )
-        } else {
+    override fun onCreate() {
+        super.onCreate()
+        val systemTime = DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
+        for (i in 0..4) {
             Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show()
-            for (i in 0..10) {
-                val systemTime = DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
-                count++
-                ActionBuilders.LoadAction.Builder().build()
-                Thread.sleep(1000)
+            count++
+            ActionBuilders.LoadAction.Builder().build()
+            MainScope().launch {
+                delay(3000)
             }
-            return Futures.immediateFuture(
-                TileBuilders.Tile.Builder()
-                    .setResourcesVersion(RESOURCES_VERSION)
-                    .setTileTimeline(
-                        TimelineBuilders.Timeline.fromLayoutElement(
-                            Text.Builder(this,
-                                count.toString()
-                            ).build()
-                        )
+        }
+    }
+    override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
+        return Futures.immediateFuture(
+            TileBuilders.Tile.Builder()
+                .setResourcesVersion(RESOURCES_VERSION)
+                .setTileTimeline(
+                    TimelineBuilders.Timeline.fromLayoutElement(
+                        Text.Builder(this,
+                            count.toString()
+                        ).build()
                     )
-                    .build()
                 )
-            }
+                .build()
+        )
     }
     override fun onTileResourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ListenableFuture<ResourceBuilders.Resources> =
         Futures.immediateFuture(
