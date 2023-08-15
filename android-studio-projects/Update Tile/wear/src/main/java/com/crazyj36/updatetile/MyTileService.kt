@@ -2,6 +2,7 @@ package com.crazyj36.updatetile
 
 import android.Manifest
 import android.content.pm.PackageManager
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.DimensionBuilders
@@ -11,9 +12,12 @@ import androidx.wear.protolayout.ModifiersBuilders.Clickable
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders
+import androidx.wear.protolayout.TypeBuilders.Int32Prop
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
+import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicInstant
 import androidx.wear.protolayout.expression.PlatformHealthSources
+import androidx.wear.protolayout.expression.proto.DynamicProto.DynamicInt32
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.layouts.PrimaryLayout
 import androidx.wear.protolayout.material.Text
@@ -32,7 +36,7 @@ class MyTileService: SuspendingTileService() {
     }
 
     override suspend fun tileRequest(requestParams: RequestBuilders.TileRequest): TileBuilders.Tile {
-        val systemTime = DynamicInstant.platformTimeWithSecondsPrecision()
+        val systemTime = DynamicInstant.platformTimeWithSecondsPrecision().toDynamicInstantByteArray()
 
         when (requestParams.currentState.lastClickableId) {
             "buttonId" -> {
@@ -51,9 +55,8 @@ class MyTileService: SuspendingTileService() {
                     this,
                     TypeBuilders.StringProp.Builder("--")
                         .setDynamicValue(
-                            PlatformHealthSources.heartRateBpm()
-                                .format()
-                        ).build(),
+                            DynamicBuilders.DynamicString.fromByteArray(systemTime))
+                        .build(),
                     StringLayoutConstraint.Builder("000").build()
                 ).build()
         } else {
