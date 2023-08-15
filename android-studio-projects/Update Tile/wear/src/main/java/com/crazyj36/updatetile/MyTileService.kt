@@ -31,6 +31,7 @@ class MyTileService: SuspendingTileService() {
     }
 
     override suspend fun tileRequest(requestParams: RequestBuilders.TileRequest): TileBuilders.Tile {
+        val systemTime = DynamicInstant.platformTimeWithSecondsPrecision()
         val button = CompactChip.Builder(
             this@MyTileService,
             "",
@@ -43,9 +44,8 @@ class MyTileService: SuspendingTileService() {
             requestParams.deviceConfiguration
         ).setIconContent("button_icon").build()
         for (i in 0..5) {
-            val systemTime = DynamicInstant.platformTimeWithSecondsPrecision()
             text1 = LayoutElementBuilders.Text.Builder()
-                .setText(systemTime.toString())
+                .setText(count++.toString())
             delay(1000)
             LoadAction.Builder().build()
         }
