@@ -2,9 +2,6 @@ package com.crazyj36.updatetile
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.util.Log
-import android.view.accessibility.AccessibilityManager
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.DimensionBuilders
@@ -15,24 +12,15 @@ import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
-import androidx.wear.protolayout.TypeBuilders.StringProp
-import androidx.wear.protolayout.expression.AppDataKey
-import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicInstant
-import androidx.wear.protolayout.expression.DynamicBuilders.DynamicInt32
-import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
-import androidx.wear.protolayout.expression.DynamicBuilders.dynamicStringFromProto
-import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.layouts.PrimaryLayout
 import androidx.wear.protolayout.material.Text
 import androidx.wear.tiles.RequestBuilders
-import androidx.wear.tiles.StateBuilders
 import androidx.wear.tiles.TileBuilders
 import com.google.android.horologist.annotations.ExperimentalHorologistApi
 import com.google.android.horologist.tiles.SuspendingTileService
-import kotlinx.coroutines.delay
 
 const val RESOURCES_VERSION = "1"
 
@@ -52,7 +40,7 @@ class MyTileService: SuspendingTileService() {
             "boxId" -> {
             }
         }
-        var text1: Text
+        val text1: Text
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
