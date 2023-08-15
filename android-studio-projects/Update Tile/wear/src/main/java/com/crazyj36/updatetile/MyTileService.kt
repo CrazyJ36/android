@@ -70,9 +70,7 @@ class MyTileService: TileService() {
                 val systemTime = DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
                 count++
                 ActionBuilders.LoadAction.Builder().build()
-                MainScope().launch {
-                    delay(1000)
-                }
+                Thread.sleep(1000)
             }
             return Futures.immediateFuture(
                 TileBuilders.Tile.Builder()
