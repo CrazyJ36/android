@@ -14,6 +14,7 @@ import androidx.wear.protolayout.ModifiersBuilders.Clickable
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders
+import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders
@@ -51,9 +52,25 @@ class MyTileService: SuspendingTileService() {
             "boxId" -> {
             }
         }
-        val text1 = Text.Builder(this,
-            systemTime.toDynamicInstantByteArray().toString()
-            ).build()
+        var text1: Text
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACTIVITY_RECOGNITION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            text1 =
+                Text.Builder(
+                    this,
+                    TypeBuilders.StringProp.Builder("--")
+                        .setDynamicValue(
+                            PlatformHealthSources.dailySteps()
+                                .format()
+                        ).build(),
+                    StringLayoutConstraint.Builder("000").build()
+                ).build()
+        } else {
+            text1 = Text.Builder(this, "need permission").build()
+        }
         val button = CompactChip.Builder(
             this@MyTileService,
             "",
