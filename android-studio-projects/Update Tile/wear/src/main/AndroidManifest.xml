@@ -3,6 +3,7 @@
     package="com.crazyj36.updatetile">
 
     <uses-feature android:name="android.hardware.type.watch"/>
+    <uses-permission android:name="android.permission.BODY_SENSORS" />
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"

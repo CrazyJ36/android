@@ -1,8 +1,11 @@
 package com.crazyj36.updatetile
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.util.Log
 import android.view.accessibility.AccessibilityManager
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.DimensionBuilders
 import androidx.wear.protolayout.LayoutElementBuilders
@@ -10,9 +13,14 @@ import androidx.wear.protolayout.ModifiersBuilders
 import androidx.wear.protolayout.ModifiersBuilders.Clickable
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
+import androidx.wear.protolayout.TypeBuilders
+import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicInstant
+import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
+import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.layouts.PrimaryLayout
+import androidx.wear.protolayout.material.Text
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders
 import com.google.android.horologist.annotations.ExperimentalHorologistApi
@@ -24,14 +32,43 @@ const val RESOURCES_VERSION = "1"
 @OptIn(ExperimentalHorologistApi::class)
 class MyTileService: SuspendingTileService() {
 
-    var text1 = LayoutElementBuilders.Text.Builder()
-
     companion object {
         var count = 0
     }
 
     override suspend fun tileRequest(requestParams: RequestBuilders.TileRequest): TileBuilders.Tile {
         val systemTime = DynamicInstant.platformTimeWithSecondsPrecision()
+        when (requestParams.currentState.lastClickableId) {
+            "buttonId" -> {
+
+            }
+            "boxId" -> {
+
+            }
+        }
+        var text1: Text
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.BODY_SENSORS) == PackageManager.PERMISSION_GRANTED) {
+            text1 =
+                Text.Builder(
+                    this,
+                    TypeBuilders.StringProp.Builder("--")
+                        .setDynamicValue(
+                            PlatformHealthSources
+                                .heartRateBpm()
+                                .format()
+                                .concat(DynamicBuilders.DynamicString.constant("bpm"))
+                        )
+                         .build(),
+                    TypeBuilders.StringLayoutConstraint.Builder("000")
+                        .build()
+                ).build()
+        } else {
+            text1 = Text.Builder(this, "need body sensor permission").build()
+        }
+
+
+
         val button = CompactChip.Builder(
             this@MyTileService,
             "",
@@ -43,15 +80,8 @@ class MyTileService: SuspendingTileService() {
                 ).build(),
             requestParams.deviceConfiguration
         ).setIconContent("button_icon").build()
-        for (i in 0..5) {
-            text1 = LayoutElementBuilders.Text.Builder()
-                .setText(count++.toString())
-            delay(1000)
-            LoadAction.Builder().build()
-        }
-
         val primaryLayout = PrimaryLayout.Builder(requestParams.deviceConfiguration)
-            .setPrimaryLabelTextContent(text1.build())
+            .setPrimaryLabelTextContent(text1)
             .setPrimaryChipContent(button)
             .build()
         val box: LayoutElementBuilders.Box = LayoutElementBuilders.Box.Builder()
@@ -70,20 +100,6 @@ class MyTileService: SuspendingTileService() {
                             ).build()
                     ).build()
             ).build()
-        when (requestParams.currentState.lastClickableId) {
-            "buttonId" -> {
-                Log.d("UPDATETILE", "buttonId clicked")
-                /*val accessibilityManager: AccessibilityManager = getSystemService(ACCESSIBILITY_SERVICE) as AccessibilityManager
-                if (accessibilityManager.isEnabled) {
-                    // toast triggers an accessibilityevent in MyAccessibilityService
-                    Toast.makeText(this@MyTileService, "button clicked", Toast.LENGTH_SHORT).show()
-                } else Toast.makeText(this@MyTileService, "Accessibility not enabled for Update Tile.", Toast.LENGTH_SHORT).show()*/
-            }
-            "boxId" -> {
-                Log.d("UPDATETILE", "boxId clicked")
-                Toast.makeText(this@MyTileService, "box clicked", Toast.LENGTH_SHORT).show()
-            }
-        }
         val timeline = TimelineBuilders.Timeline.Builder()
         timeline.addTimelineEntry(
             TimelineBuilders.TimelineEntry.fromLayoutElement(box)
