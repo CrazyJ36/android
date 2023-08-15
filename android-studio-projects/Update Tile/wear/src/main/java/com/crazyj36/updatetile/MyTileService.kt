@@ -16,7 +16,10 @@ import androidx.wear.protolayout.TypeBuilders.Int32Prop
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicInstant
+import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
+import androidx.wear.protolayout.expression.DynamicDataKey
 import androidx.wear.protolayout.expression.PlatformHealthSources
+import androidx.wear.protolayout.expression.proto.DynamicProto
 import androidx.wear.protolayout.expression.proto.DynamicProto.DynamicInt32
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.layouts.PrimaryLayout
@@ -54,10 +57,12 @@ class MyTileService: SuspendingTileService() {
                     this,
                     TypeBuilders.StringProp.Builder("--")
                         .setDynamicValue(
-                            DynamicBuilders.DynamicString.fromByteArray(systemTime))
+                            DynamicBuilders.DynamicString.constant("bpm: ")
+                                .concat(PlatformHealthSources.heartRateBpm().format())
+                        )
                         .build(),
                     StringLayoutConstraint.Builder("000").build()
-                ).build()
+                ).setMaxLines(3).build()
         } else {
             text1 = Text.Builder(this, "need permission").build()
         }
