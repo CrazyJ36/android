@@ -50,16 +50,9 @@ class MyTileService: SuspendingTileService() {
         var text1: Text
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_GRANTED) {
-            val steps  = PlatformHealthSources.dailySteps()
             text1 =
                 Text.Builder(
-                    this,
-                    TypeBuilders.StringProp.Builder("--")
-                        .setDynamicValue(DynamicString.fromByteArray(steps.toDynamicInt32ByteArray())
-                        ).build(),
-                    TypeBuilders.StringLayoutConstraint
-                        .Builder("000")
-                        .build()
+                    this, DynamicInstant.platformTimeWithSecondsPrecision().toString()
                 ).build()
         } else {
             text1 = Text.Builder(this, "need permission").build()
