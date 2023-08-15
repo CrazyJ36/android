@@ -22,6 +22,9 @@ import androidx.wear.tiles.TileBuilders
 import androidx.wear.tiles.TileService
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 const val RESOURCES_VERSION = "1"
 
@@ -67,6 +70,9 @@ class MyTileService: TileService() {
                 val systemTime = DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
                 count++
                 ActionBuilders.LoadAction.Builder().build()
+                MainScope().launch {
+                    delay(1000)
+                }
             }
             return Futures.immediateFuture(
                 TileBuilders.Tile.Builder()
