@@ -16,6 +16,7 @@ import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicInstant
+import androidx.wear.protolayout.expression.DynamicBuilders.DynamicInt32
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.CompactChip
@@ -48,26 +49,21 @@ class MyTileService: SuspendingTileService() {
         }
         var text1: Text
         if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.BODY_SENSORS) == PackageManager.PERMISSION_GRANTED) {
+                Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_GRANTED) {
+            val steps  = PlatformHealthSources.dailySteps()
             text1 =
                 Text.Builder(
                     this,
                     TypeBuilders.StringProp.Builder("--")
-                        .setDynamicValue(
-                            PlatformHealthSources
-                                .heartRateBpm()
-                                .format()
-                                .concat(DynamicBuilders.DynamicString.constant("bpm"))
-                        )
-                         .build(),
-                    TypeBuilders.StringLayoutConstraint.Builder("000")
+                        .setDynamicValue(DynamicString.fromByteArray(steps.toDynamicInt32ByteArray())
+                        ).build(),
+                    TypeBuilders.StringLayoutConstraint
+                        .Builder("000")
                         .build()
                 ).build()
         } else {
-            text1 = Text.Builder(this, "need body sensor permission").build()
+            text1 = Text.Builder(this, "need permission").build()
         }
-
-
 
         val button = CompactChip.Builder(
             this@MyTileService,
