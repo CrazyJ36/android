@@ -2,10 +2,11 @@ package com.crazyj36.updatetile
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
+import androidx.wear.protolayout.TimelineBuilders.Timeline
 import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
@@ -36,19 +37,12 @@ class MyTileService: TileService() {
             .build()
     }*/
 
-    override fun onTileRequest(requestParams: RequestBuilders.TileRequest) =
+    override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> =
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             Futures.immediateFuture(
                 TileBuilders.Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
@@ -79,5 +73,11 @@ class MyTileService: TileService() {
                     ).build()
             )
         }
+    override fun onTileResourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ListenableFuture<ResourceBuilders.Resources> =
+        Futures.immediateFuture(
+            ResourceBuilders.Resources.Builder()
+            .setVersion(RESOURCES_VERSION)
+            .build()
+        )
 }
 
