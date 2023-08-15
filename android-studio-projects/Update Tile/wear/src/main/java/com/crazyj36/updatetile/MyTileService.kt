@@ -56,7 +56,7 @@ class MyTileService: SuspendingTileService() {
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACTIVITY_RECOGNITION
-            ) != PackageManager.PERMISSION_GRANTED
+            ) == PackageManager.PERMISSION_GRANTED
         ) {
             text1 =
                 Text.Builder(
