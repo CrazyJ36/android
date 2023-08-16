@@ -40,7 +40,7 @@ class MyTileService: TileService() {
         val systemTime = DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
         Timer().schedule(object: TimerTask() {
             override fun run() {
-                //Toast.makeText(applicationContext, "updated", Toast.LENGTH_SHORT).show()
+                Toast.makeText(MyTileService().applicationContext, "updated", Toast.LENGTH_SHORT).show()
                 count++
                 ActionBuilders.LoadAction.Builder().build()
             }
