@@ -38,7 +38,7 @@ class MyTileService: TileService() {
     }*/
     override fun onCreate() {
         super.onCreate()
-        context = MyTileService().applicationContext
+        context = this
         val systemTime = DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
         Timer().schedule(object: TimerTask() {
             override fun run() {
