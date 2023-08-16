@@ -1,5 +1,6 @@
 package com.crazyj36.updatetile
 
+import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.StateBuilders
 import androidx.wear.protolayout.TimelineBuilders
@@ -30,6 +31,7 @@ class MyTileService: TileService() {
         Timer().schedule(object: TimerTask() {
             override fun run() {
                 count++
+                LoadAction.Builder().build()
             }
         }, 0, 1000)
     }
