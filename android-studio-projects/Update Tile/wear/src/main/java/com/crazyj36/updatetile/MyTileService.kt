@@ -23,9 +23,10 @@ const val RESOURCES_VERSION = "1"
 class MyTileService: TileService() {
     var systemTime = DynamicBuilders.DynamicInstant
         .platformTimeWithSecondsPrecision()
+        .toDynamicInstantByteArray().decodeToString()
     companion object {
         var count = 0
-        /*val TEXT = AppDataKey<DynamicBuilders.DynamicString>("textKey")*/
+        var TEXT = AppDataKey<DynamicBuilders.DynamicString>("textKey")
     }
 
     override fun onCreate() {
@@ -34,15 +35,17 @@ class MyTileService: TileService() {
             override fun run() {
                 systemTime = DynamicBuilders.DynamicInstant
                     .platformTimeWithSecondsPrecision()
+                    .toDynamicInstantByteArray()
+                    .decodeToString()
             }
         }, 0, 1000)
     }
 
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
-        /*val state = StateBuilders.State.Builder()
+        val state = StateBuilders.State.Builder()
             .addKeyToValueMapping(TEXT,
-            DynamicDataBuilders.DynamicDataValue
-                .fromString(count.toString()))*/
+            DynamicDataBuilders.DynamicDataValue.fromString(systemTime)
+            )
         return Futures.immediateFuture(
             TileBuilders.Tile.Builder()
                 .setResourcesVersion(RESOURCES_VERSION)
@@ -52,13 +55,14 @@ class MyTileService: TileService() {
                             TypeBuilders.StringProp
                                 .Builder("--")
                                 .setDynamicValue(
-                                    DynamicBuilders.DynamicString.fromByteArray(systemTime.toDynamicInstantByteArray())
+                                    DynamicBuilders.DynamicString.from(TEXT)
                                 ).build(),
                             StringLayoutConstraint.Builder("00000")
                                 .build()
                         ).build()
                     )
                 )
+                .setState(state.build())
                 .build()
         )
     }
