@@ -18,7 +18,7 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService: TileService() {
-    
+
     companion object {
         var count = 0
     }
@@ -41,7 +41,6 @@ class MyTileService: TileService() {
         val systemTime = DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
         Timer().schedule(object: TimerTask() {
             override fun run() {
-                Toast.makeText(this@MyTileService, "updated", Toast.LENGTH_SHORT).show()
                 count++
                 ActionBuilders.LoadAction.Builder().build()
             }
@@ -49,6 +48,7 @@ class MyTileService: TileService() {
     }
 
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
+        Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show()
         return Futures.immediateFuture(
             TileBuilders.Tile.Builder()
                 .setResourcesVersion(RESOURCES_VERSION)
