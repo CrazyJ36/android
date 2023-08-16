@@ -29,20 +29,7 @@ class MyTileService: TileService() {
         var count = 0
         val TEXT = AppDataKey<DynamicString>("textKey")
     }
-    /*override fun resourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ResourceBuilders.Resources {
-        return ResourceBuilders.Resources.Builder()
-            .setVersion(RESOURCES_VERSION)
-            .addIdToImageMapping(
-                "button_icon", ResourceBuilders.ImageResource.Builder()
-                    .setAndroidResourceByResId(
-                        ResourceBuilders.AndroidImageResourceByResId.Builder()
-                            .setResourceId(R.drawable.button_icon)
-                            .build()
-                    )
-                    .build()
-            )
-            .build()
-    }*/
+    
     override fun onCreate() {
         super.onCreate()
         Timer().schedule(object: TimerTask() {
@@ -85,6 +72,15 @@ class MyTileService: TileService() {
         Futures.immediateFuture(
             ResourceBuilders.Resources.Builder()
             .setVersion(RESOURCES_VERSION)
+                .addIdToImageMapping(
+                    "button_icon", ResourceBuilders.ImageResource.Builder()
+                        .setAndroidResourceByResId(
+                            ResourceBuilders.AndroidImageResourceByResId.Builder()
+                                .setResourceId(R.drawable.button_icon)
+                                .build()
+                        )
+                        .build()
+                )
             .build()
         )
 }
