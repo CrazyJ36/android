@@ -5,6 +5,8 @@ import android.widget.Toast
 import androidx.wear.protolayout.ActionBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
+import androidx.wear.protolayout.TypeBuilders
+import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.material.Text
 import androidx.wear.tiles.RequestBuilders
@@ -38,24 +40,32 @@ class MyTileService: TileService() {
     }*/
     override fun onCreate() {
         super.onCreate()
-        val systemTime = DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
-        Timer().schedule(object: TimerTask() {
+        /*Timer().schedule(object: TimerTask() {
             override fun run() {
                 count++
                 ActionBuilders.LoadAction.Builder().build()
             }
-        }, 0, 3000)
+        }, 0, 3000)*/
     }
 
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
         Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show()
+        val systemTime = DynamicBuilders
+            .DynamicInstant
+            .platformTimeWithSecondsPrecision()
+            .toDynamicInstantByteArray()
         return Futures.immediateFuture(
             TileBuilders.Tile.Builder()
                 .setResourcesVersion(RESOURCES_VERSION)
                 .setTileTimeline(
                     TimelineBuilders.Timeline.fromLayoutElement(
                         Text.Builder(this,
-                            count.toString()
+                            TypeBuilders.StringProp
+                                .Builder("--")
+                                .setDynamicValue(DynamicBuilders.DynamicString.fromByteArray(systemTime))
+                                .build(),
+                            StringLayoutConstraint.Builder("00000")
+                                .build()
                         ).build()
                     )
                 )
