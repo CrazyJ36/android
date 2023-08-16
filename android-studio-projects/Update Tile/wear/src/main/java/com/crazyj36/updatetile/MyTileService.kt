@@ -1,5 +1,8 @@
 package com.crazyj36.updatetile
 
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.StateBuilders
@@ -9,6 +12,7 @@ import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicDataBuilders
+import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.Text
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders
@@ -21,50 +25,55 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService: TileService() {
-    var systemTime = DynamicBuilders.DynamicInstant
-        .platformTimeWithSecondsPrecision()
-        .toDynamicInstantByteArray().decodeToString()
     companion object {
         var count = 0
-        var TEXT = AppDataKey<DynamicBuilders.DynamicString>("textKey")
     }
 
     override fun onCreate() {
         super.onCreate()
         Timer().schedule(object: TimerTask() {
             override fun run() {
-                systemTime = DynamicBuilders.DynamicInstant
-                    .platformTimeWithSecondsPrecision()
-                    .toDynamicInstantByteArray()
-                    .decodeToString()
+
             }
         }, 0, 1000)
     }
 
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
-        val state = StateBuilders.State.Builder()
-            .addKeyToValueMapping(TEXT,
-            DynamicDataBuilders.DynamicDataValue.fromString(systemTime)
-            )
-        return Futures.immediateFuture(
-            TileBuilders.Tile.Builder()
-                .setResourcesVersion(RESOURCES_VERSION)
-                .setTileTimeline(
-                    TimelineBuilders.Timeline.fromLayoutElement(
-                        Text.Builder(this,
-                            TypeBuilders.StringProp
-                                .Builder("--")
-                                .setDynamicValue(
-                                    DynamicBuilders.DynamicString.from(TEXT)
-                                ).build(),
-                            StringLayoutConstraint.Builder("00000")
-                                .build()
-                        ).build()
+        return if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.BODY_SENSORS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return Futures.immediateFuture(TileBuilders.Tile.Builder()
+                .setTileTimeline(TimelineBuilders.Timeline.fromLayoutElement(
+                    Text.Builder(
+                        this,
+                        "permission"
+                    ).build()
+                ))
+                .build())
+        } else {
+            Futures.immediateFuture(
+                TileBuilders.Tile.Builder()
+                    .setResourcesVersion(RESOURCES_VERSION)
+                    .setTileTimeline(
+                        TimelineBuilders.Timeline.fromLayoutElement(
+                            Text.Builder(
+                                this,
+                                TypeBuilders.StringProp
+                                    .Builder("--")
+                                    .setDynamicValue(
+                                        PlatformHealthSources.heartRateBpm()
+                                            .format()
+                                    ).build(),
+                                StringLayoutConstraint.Builder("00000")
+                                    .build()
+                            ).build()
+                        )
                     )
-                )
-                .setState(state.build())
-                .build()
-        )
+                    .build()
+            )
+        }
     }
     override fun onTileResourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ListenableFuture<ResourceBuilders.Resources> =
         Futures.immediateFuture(
