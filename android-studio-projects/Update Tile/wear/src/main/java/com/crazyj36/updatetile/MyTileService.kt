@@ -3,13 +3,17 @@ package com.crazyj36.updatetile
 import android.Manifest
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
+import androidx.wear.protolayout.ActionBuilders.LoadAction
+import androidx.wear.protolayout.ModifiersBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
+import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
+import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.Text
-import androidx.wear.tiles.ActionBuilders
+import androidx.wear.protolayout.material.layouts.PrimaryLayout
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders
 import androidx.wear.tiles.TileService
@@ -29,13 +33,36 @@ class MyTileService: TileService() {
         super.onCreate()
         Timer().schedule(object: TimerTask() {
             override fun run() {
-                androidx.wear.protolayout.
-                ActionBuilders.LoadAction.Builder().build()
+                LoadAction.Builder().build()
             }
         }, 0, 2000)
     }
 
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
+        val systemTime = DynamicBuilders.DynamicInstant
+            .platformTimeWithSecondsPrecision()
+            .toDynamicInstantByteArray()
+        val text =  Text.Builder(
+            this,
+            TypeBuilders.StringProp.Builder(systemTime.decodeToString()
+                ).build(),
+            StringLayoutConstraint.Builder(
+                "000")
+                .build()
+        ).build()
+        val button = CompactChip.Builder(
+            this,
+            "",
+            ModifiersBuilders.Clickable.Builder()
+                .setOnClick(LoadAction.Builder().build())
+                .build(),
+            requestParams.deviceConfiguration)
+            .setIconContent("button_icon")
+        val primaryLayout = PrimaryLayout
+            .Builder(requestParams.deviceConfiguration)
+            .setPrimaryLabelTextContent(text)
+            .setPrimaryChipContent(
+                button.build())
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -58,19 +85,7 @@ class MyTileService: TileService() {
                     .setFreshnessIntervalMillis(2000)
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
-                            Text.Builder(
-                                this,
-                                TypeBuilders.StringProp
-                                    .Builder("--")
-                                    .setDynamicValue(
-                                        PlatformHealthSources
-                                            .heartRateBpm()
-                                            .format()
-                                    ).build(),
-                                StringLayoutConstraint.Builder(
-                                    "000")
-                                    .build()
-                            ).build()
+                            primaryLayout.build()
                         )
                     ).build()
             )
