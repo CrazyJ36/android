@@ -28,6 +28,9 @@ class MyTileService: TileService() {
 
     override fun onCreate() {
         super.onCreate()
+        val systemTime: DynamicBuilders.DynamicInstant =
+            DynamicBuilders.DynamicInstant.
+            platformTimeWithSecondsPrecision()
         Timer().schedule(object: TimerTask() {
             override fun run() {
                 count++
@@ -37,9 +40,6 @@ class MyTileService: TileService() {
     }
 
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
-        val systemTime: DynamicBuilders.DynamicInstant =
-            DynamicBuilders.DynamicInstant.
-            platformTimeWithSecondsPrecision()
         val state = StateBuilders.State.Builder()
             .addKeyToValueMapping(TEXT,
             DynamicDataBuilders.DynamicDataValue
