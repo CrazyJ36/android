@@ -7,7 +7,9 @@ import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
+import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders
+import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
 import androidx.wear.protolayout.material.Text
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders
@@ -23,6 +25,7 @@ class MyTileService: TileService() {
 
     companion object {
         var count = 0
+        val TEXT = AppDataKey<DynamicString>("appdatakey text")
     }
     /*override fun resourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ResourceBuilders.Resources {
         return ResourceBuilders.Resources.Builder()
@@ -62,8 +65,11 @@ class MyTileService: TileService() {
                         Text.Builder(this,
                             TypeBuilders.StringProp
                                 .Builder("--")
-                                .setDynamicValue(DynamicBuilders.DynamicString.fromByteArray(systemTime))
-                                .build(),
+                                .setDynamicValue(
+                                    DynamicBuilders
+                                        .DynamicString
+                                        .from(TEXT)
+                                ).build(),
                             StringLayoutConstraint.Builder("00000")
                                 .build()
                         ).build()
