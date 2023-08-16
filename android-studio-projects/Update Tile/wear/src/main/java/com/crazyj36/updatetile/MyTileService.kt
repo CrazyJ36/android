@@ -24,10 +24,10 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService: TileService() {
-
+    var state = StateBuilders.State.Builder()
     companion object {
         var count = 0
-        val TEXT = AppDataKey<DynamicString>("text")
+        val TEXT = AppDataKey<DynamicString>("textKey")
     }
     /*override fun resourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ResourceBuilders.Resources {
         return ResourceBuilders.Resources.Builder()
@@ -48,6 +48,9 @@ class MyTileService: TileService() {
         Timer().schedule(object: TimerTask() {
             override fun run() {
                 count++
+                state = StateBuilders.State.Builder()
+                    .addKeyToValueMapping(TEXT,
+                        DynamicDataBuilders.DynamicDataValue.fromString(count.toString()))
                 ActionBuilders.LoadAction.Builder().build()
             }
         }, 0, 3000)
@@ -55,18 +58,11 @@ class MyTileService: TileService() {
 
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
         Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show()
-        val state = StateBuilders.State.Builder()
-            .addKeyToValueMapping(TEXT,
-                DynamicDataBuilders.DynamicDataValue.fromString(count.toString()))
-            .build()
-        val systemTime = DynamicBuilders
-            .DynamicInstant
-            .platformTimeWithSecondsPrecision()
-            .toDynamicInstantByteArray()
+
         return Futures.immediateFuture(
             TileBuilders.Tile.Builder()
                 .setResourcesVersion(RESOURCES_VERSION)
-                .setState(state)
+                .setState(state.build())
                 .setTileTimeline(
                     TimelineBuilders.Timeline.fromLayoutElement(
                         Text.Builder(this,
