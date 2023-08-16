@@ -3,17 +3,13 @@ package com.crazyj36.updatetile
 import android.Manifest
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
-import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.ResourceBuilders
-import androidx.wear.protolayout.StateBuilders
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
-import androidx.wear.protolayout.expression.AppDataKey
-import androidx.wear.protolayout.expression.DynamicBuilders
-import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.Text
+import androidx.wear.tiles.ActionBuilders
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders
 import androidx.wear.tiles.TileService
@@ -33,9 +29,10 @@ class MyTileService: TileService() {
         super.onCreate()
         Timer().schedule(object: TimerTask() {
             override fun run() {
-
+                androidx.wear.protolayout.
+                ActionBuilders.LoadAction.Builder().build()
             }
-        }, 0, 1000)
+        }, 0, 2000)
     }
 
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
@@ -44,8 +41,10 @@ class MyTileService: TileService() {
                 Manifest.permission.BODY_SENSORS
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            return Futures.immediateFuture(TileBuilders.Tile.Builder()
-                .setTileTimeline(TimelineBuilders.Timeline.fromLayoutElement(
+            Futures.immediateFuture(TileBuilders.
+            Tile.Builder()
+                .setTileTimeline(TimelineBuilders.
+                Timeline.fromLayoutElement(
                     Text.Builder(
                         this,
                         "permission"
@@ -64,15 +63,16 @@ class MyTileService: TileService() {
                                 TypeBuilders.StringProp
                                     .Builder("--")
                                     .setDynamicValue(
-                                        PlatformHealthSources.heartRateBpm()
+                                        PlatformHealthSources
+                                            .heartRateBpm()
                                             .format()
                                     ).build(),
-                                StringLayoutConstraint.Builder("00000")
+                                StringLayoutConstraint.Builder(
+                                    "000")
                                     .build()
                             ).build()
                         )
-                    )
-                    .build()
+                    ).build()
             )
         }
     }
