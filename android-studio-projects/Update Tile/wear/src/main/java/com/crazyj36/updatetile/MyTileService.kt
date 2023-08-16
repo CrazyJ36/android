@@ -1,6 +1,5 @@
 package com.crazyj36.updatetile
 
-import android.widget.Toast
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.StateBuilders
 import androidx.wear.protolayout.TimelineBuilders
@@ -21,7 +20,7 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService: TileService() {
-    var state = StateBuilders.State.Builder()
+    private var state = StateBuilders.State.Builder()
     companion object {
         var count = 0
         val TEXT = AppDataKey<DynamicBuilders.DynamicString>("textKey")
@@ -32,17 +31,13 @@ class MyTileService: TileService() {
         Timer().schedule(object: TimerTask() {
             override fun run() {
                 count++
-                state = StateBuilders.State.Builder()
-                    .addKeyToValueMapping(TEXT,
-                        DynamicDataBuilders
-                            .DynamicDataValue
-                            .fromString(count.toString()))
             }
-        }, 0, 3000)
+        }, 0, 1000)
     }
 
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
-        Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show()
+        val systemTime: DynamicBuilders.DynamicInstant =
+            DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
         state.addKeyToValueMapping(TEXT,
             DynamicDataBuilders.DynamicDataValue.fromString(count.toString()))
         return Futures.immediateFuture(
@@ -55,9 +50,7 @@ class MyTileService: TileService() {
                             TypeBuilders.StringProp
                                 .Builder("--")
                                 .setDynamicValue(
-                                    DynamicBuilders
-                                        .DynamicString
-                                        .from(TEXT)
+                                    DynamicBuilders.DynamicString.from(TEXT)
                                 ).build(),
                             StringLayoutConstraint.Builder("00000")
                                 .build()
