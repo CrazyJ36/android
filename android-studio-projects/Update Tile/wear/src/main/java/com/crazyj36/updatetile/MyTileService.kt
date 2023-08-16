@@ -20,7 +20,6 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService: TileService() {
-    private var state = StateBuilders.State.Builder()
     companion object {
         var count = 0
         val TEXT = AppDataKey<DynamicBuilders.DynamicString>("textKey")
@@ -37,13 +36,15 @@ class MyTileService: TileService() {
 
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
         val systemTime: DynamicBuilders.DynamicInstant =
-            DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
-        state.addKeyToValueMapping(TEXT,
-            DynamicDataBuilders.DynamicDataValue.fromString(count.toString()))
+            DynamicBuilders.DynamicInstant.
+            platformTimeWithSecondsPrecision()
+        val state = StateBuilders.State.Builder()
+            .addKeyToValueMapping(TEXT,
+            DynamicDataBuilders.DynamicDataValue
+                .fromString(count.toString()))
         return Futures.immediateFuture(
             TileBuilders.Tile.Builder()
                 .setResourcesVersion(RESOURCES_VERSION)
-                .setState(state.build())
                 .setTileTimeline(
                     TimelineBuilders.Timeline.fromLayoutElement(
                         Text.Builder(this,
@@ -57,6 +58,7 @@ class MyTileService: TileService() {
                         ).build()
                     )
                 )
+                .setState(state.build())
                 .build()
         )
     }
