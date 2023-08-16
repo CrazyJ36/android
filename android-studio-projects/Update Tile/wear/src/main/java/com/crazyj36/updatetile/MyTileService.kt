@@ -27,7 +27,7 @@ class MyTileService: TileService() {
 
     companion object {
         var count = 0
-        val TEXT = AppDataKey<DynamicString>("appdatakey text")
+        val TEXT = AppDataKey<DynamicString>("text")
     }
     /*override fun resourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ResourceBuilders.Resources {
         return ResourceBuilders.Resources.Builder()
@@ -45,19 +45,19 @@ class MyTileService: TileService() {
     }*/
     override fun onCreate() {
         super.onCreate()
-        /*Timer().schedule(object: TimerTask() {
+        Timer().schedule(object: TimerTask() {
             override fun run() {
                 count++
                 ActionBuilders.LoadAction.Builder().build()
             }
-        }, 0, 3000)*/
+        }, 0, 3000)
     }
 
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
         Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show()
         val state = StateBuilders.State.Builder()
             .addKeyToValueMapping(TEXT,
-                DynamicDataBuilders.DynamicDataValue.fromString("new text"))
+                DynamicDataBuilders.DynamicDataValue.fromString(count.toString()))
             .build()
         val systemTime = DynamicBuilders
             .DynamicInstant
