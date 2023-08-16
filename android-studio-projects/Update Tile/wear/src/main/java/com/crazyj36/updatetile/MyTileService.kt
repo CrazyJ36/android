@@ -56,6 +56,7 @@ class MyTileService: TileService() {
             Futures.immediateFuture(
                 TileBuilders.Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
+                    .setFreshnessIntervalMillis(2000)
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                             Text.Builder(
