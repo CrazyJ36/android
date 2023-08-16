@@ -38,16 +38,15 @@ class MyTileService: TileService() {
     override fun onCreate() {
         super.onCreate()
         val systemTime = DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
-        Timer().schedule(MyTimerTask(applicationContext), 3000)
+        Timer().schedule(object: TimerTask() {
+            override fun run() {
+                Toast.makeText(applicationContext, "updated", Toast.LENGTH_SHORT).show()
+                count++
+                ActionBuilders.LoadAction.Builder().build()
+            }
+        }, 0, 3000)
     }
-    class MyTimerTask(context: Context) : TimerTask() {
-        val context = context
-        override fun run() {
-            Toast.makeText(context, "updated", Toast.LENGTH_SHORT).show()
-            count++
-            ActionBuilders.LoadAction.Builder().build()
-        }
-    }
+
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
         return Futures.immediateFuture(
             TileBuilders.Tile.Builder()
