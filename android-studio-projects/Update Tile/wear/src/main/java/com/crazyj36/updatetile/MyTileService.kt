@@ -68,12 +68,10 @@ class MyTileService: TileService() {
                     TimelineBuilders.Timeline.fromLayoutElement(
                     Text.Builder(this,
                         StringProp.Builder("--")
-                            .setDynamicValue(
+                            .setValue(
                                 PlatformHealthSources.heartRateBpm()
-                                .format()
-                                .concat(DynamicBuilders.
-                                DynamicString.constant(" bpm")))
-                            .build(),
+                                .format().toString()
+                            ).build(),
                         StringLayoutConstraint
                             .Builder("000")
                             .build()
