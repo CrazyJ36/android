@@ -24,8 +24,11 @@ import java.util.TimerTask
 
 const val RESOURCES_VERSION = "1"
 
-class MyTileService: TileService() {
+class MyTileService : TileService() {
     private val state = StateBuilders.State.Builder()
+    val systemTime = DynamicBuilders.DynamicInstant
+        .platformTimeWithSecondsPrecision()
+        .toDynamicInstantByteArray()
     companion object {
         var count = 0
         val TEXT = AppDataKey<DynamicBuilders.DynamicString>("text")
@@ -33,22 +36,23 @@ class MyTileService: TileService() {
 
     override fun onCreate() {
         super.onCreate()
-        Timer().schedule(object: TimerTask() {
+        Timer().schedule(object : TimerTask() {
             override fun run() {
                 count++
                 state.addKeyToValueMapping(
                     TEXT,
                     DynamicDataBuilders.DynamicDataValue
-                        .fromString(count.toString()))
+                        .fromString(systemTime.decodeToString())
+                )
                 getUpdater(this@MyTileService)
                     .requestUpdate(MyTileService::class.java)
             }
         }, 0, 1000)
     }
 
-    override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<Tile> {
-        val systemTime = DynamicBuilders.DynamicInstant
-            .platformTimeWithSecondsPrecision()
+    override fun onTileRequest(
+        requestParams: RequestBuilders.TileRequest
+    ): ListenableFuture<Tile> {
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -57,40 +61,44 @@ class MyTileService: TileService() {
             Futures.immediateFuture(
                 Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
-                    .setTileTimeline(TimelineBuilders
-                        .Timeline.fromLayoutElement(
-                            LayoutElementBuilders.Text.Builder()
-                                .setText("need permission")
-                                .build()
-                        )
+                    .setTileTimeline(
+                        TimelineBuilders
+                            .Timeline.fromLayoutElement(
+                                LayoutElementBuilders.Text.Builder()
+                                    .setText("need permission")
+                                    .build()
+                            )
                     ).build()
             )
         } else {
             Futures.immediateFuture(
                 Tile.Builder()
-                .setResourcesVersion(RESOURCES_VERSION)
-                .setFreshnessIntervalMillis(1000)
-                .setState(state.build())
-                .setTileTimeline(
-                    TimelineBuilders.Timeline.fromLayoutElement(
-                    Text.Builder(this,
-                        StringProp.Builder("--")
-                            .setDynamicValue(
-                                DynamicBuilders.DynamicString
-                                    .from(TEXT)
-                            ).build(),
-                        StringLayoutConstraint
-                            .Builder("000")
-                            .build()
-                    ).build())
-                ).build()
+                    .setResourcesVersion(RESOURCES_VERSION)
+                    .setFreshnessIntervalMillis(1000)
+                    .setState(state.build())
+                    .setTileTimeline(
+                        TimelineBuilders.Timeline.fromLayoutElement(
+                            Text.Builder(
+                                this,
+                                StringProp.Builder("--")
+                                    .setDynamicValue(
+                                        DynamicBuilders.DynamicString
+                                            .from(TEXT)
+                                    ).build(),
+                                StringLayoutConstraint
+                                    .Builder("000")
+                                    .build()
+                            ).build()
+                        )
+                    ).build()
             )
         }
     }
+
     override fun onTileResourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ListenableFuture<ResourceBuilders.Resources> =
         Futures.immediateFuture(
             ResourceBuilders.Resources.Builder()
-            .setVersion(RESOURCES_VERSION)
+                .setVersion(RESOURCES_VERSION)
                 .addIdToImageMapping(
                     "button_icon", ResourceBuilders.ImageResource.Builder()
                         .setAndroidResourceByResId(
@@ -100,7 +108,7 @@ class MyTileService: TileService() {
                         )
                         .build()
                 )
-            .build()
+                .build()
         )
 }
 
