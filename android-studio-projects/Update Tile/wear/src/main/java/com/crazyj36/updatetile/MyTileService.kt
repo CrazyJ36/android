@@ -43,7 +43,7 @@ class MyTileService : TileService() {
     ): ListenableFuture<Tile> {
         return if (ActivityCompat.checkSelfPermission(
                 this,
-                Manifest.permission.BODY_SENSORS
+                Manifest.permission.ACTIVITY_RECOGNITION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             Futures.immediateFuture(
@@ -66,12 +66,11 @@ class MyTileService : TileService() {
                         TimelineBuilders.Timeline.fromLayoutElement(
                             LayoutElementBuilders.Text.Builder()
                                 .setText(
-                                    StringProp.Builder(
-                                        PlatformHealthSources
-                                            .heartRateBpm()
-                                            .format().toString()
-                                    ).setDynamicValue(
-                                            PlatformHealthSources.heartRateBpm().format()
+                                    StringProp.Builder("--")
+                                        .setDynamicValue(
+                                            PlatformHealthSources
+                                                .dailySteps()
+                                                .format()
                                         ).build()
                             ).setLayoutConstraintsForDynamicText(
                                     StringLayoutConstraint.Builder(
