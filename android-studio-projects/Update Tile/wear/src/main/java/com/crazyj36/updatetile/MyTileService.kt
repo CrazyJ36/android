@@ -2,6 +2,7 @@ package com.crazyj36.updatetile
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
@@ -31,6 +32,21 @@ class MyTileService : TileService() {
                 count++
             }
         }, 0, 1000)*/
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.BODY_SENSORS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            Toast.makeText(this, "permission", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(
+                this,
+                PlatformHealthSources
+                    .heartRateBpm().format().toDynamicStringByteArray()
+                    .decodeToString(),
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 
     override fun onTileRequest(
