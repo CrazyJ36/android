@@ -44,9 +44,10 @@ class MyTileService: TileService() {
         val systemTime = DynamicBuilders.DynamicInstant
             .platformTimeWithSecondsPrecision()
         val text = Text.Builder(this,
-            StringProp.Builder(
+            StringProp.Builder("--")
+                .setDynamicValue(
                 PlatformHealthSources.dailySteps()
-                    .format().toString()
+                    .format()
             ).build(),
             StringLayoutConstraint
                 .Builder("000")
