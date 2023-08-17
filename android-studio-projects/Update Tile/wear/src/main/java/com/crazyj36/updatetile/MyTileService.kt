@@ -23,37 +23,22 @@ const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
     companion object {
-        //var count = 0
+        var count = 0
     }
 
     override fun onCreate() {
         super.onCreate()
-        /*Timer().schedule(object : TimerTask() {
+        Timer().schedule(object : TimerTask() {
             override fun run() {
                 count++
             }
-        }, 0, 1000)*/
+        }, 0, 1000)
 
     }
 
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.BODY_SENSORS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            Toast.makeText(this, "permission", Toast.LENGTH_LONG).show()
-        } else {
-            Toast.makeText(
-                this,
-                PlatformHealthSources
-                    .heartRateBpm().format().toDynamicStringByteArray()
-                    .decodeToString(),
-                Toast.LENGTH_LONG
-            ).show()
-        }
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -79,8 +64,7 @@ class MyTileService : TileService() {
                             LayoutElementBuilders.Text.Builder()
                                 .setText(
                                     StringProp.Builder(PlatformHealthSources
-                                        .heartRateBpm().format().toDynamicStringByteArray()
-                                        .decodeToString())
+                                        .heartRateBpm().format().toString())
                                         .setDynamicValue(
                                             PlatformHealthSources.heartRateBpm().format()
                                         ).build()
