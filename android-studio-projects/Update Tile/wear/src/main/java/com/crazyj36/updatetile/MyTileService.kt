@@ -38,7 +38,7 @@ class MyTileService : TileService() {
                     DynamicDataBuilders.DynamicDataValue.fromString(
                         count.toString()
                     )
-                )
+                ).build()
             }
         }, 0, 1000)
     }
@@ -49,7 +49,6 @@ class MyTileService : TileService() {
         return Futures.immediateFuture(
             Tile.Builder()
                 .setResourcesVersion(RESOURCES_VERSION)
-                .setFreshnessIntervalMillis(1000)
                 .setTileTimeline(
                     TimelineBuilders.Timeline.fromLayoutElement(
                         LayoutElementBuilders
