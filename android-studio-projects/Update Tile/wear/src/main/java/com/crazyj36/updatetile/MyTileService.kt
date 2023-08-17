@@ -13,16 +13,11 @@ import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicDataBuilders
-import androidx.wear.protolayout.expression.PlatformHealthSources
-import androidx.wear.protolayout.material.Text
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders.Tile
 import androidx.wear.tiles.TileService
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import java.util.Timer
 import java.util.TimerTask
 
@@ -90,7 +85,12 @@ class MyTileService : TileService() {
                                                 .DynamicString
                                                 .from(TEXT)
                                     ).build()
-                                ).build()
+                                ).setLayoutConstraintsForDynamicText(
+                                    StringLayoutConstraint
+                                        .Builder("000")
+                                        .build()
+                                )
+                                .build()
                             )
                         ).build()
                     )
