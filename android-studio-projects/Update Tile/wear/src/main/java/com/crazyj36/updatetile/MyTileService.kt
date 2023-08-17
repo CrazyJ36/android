@@ -1,9 +1,5 @@
 package com.crazyj36.updatetile
 
-import android.Manifest
-import android.content.pm.PackageManager
-import androidx.core.app.ActivityCompat
-import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.StateBuilders
@@ -12,8 +8,8 @@ import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders
+import androidx.wear.protolayout.expression.DynamicBuilders.DynamicInstant
 import androidx.wear.protolayout.expression.DynamicDataBuilders
-import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders.Tile
 import androidx.wear.tiles.TileService
@@ -37,24 +33,12 @@ class MyTileService : TileService() {
         Timer().schedule(object : TimerTask() {
             override fun run() {
                 count++
-                if (ActivityCompat.checkSelfPermission(
-                        this@MyTileService,
-                        Manifest.permission.BODY_SENSORS
-                    ) == PackageManager.PERMISSION_GRANTED
-                ) {
                 state.addKeyToValueMapping(
                     TEXT,
-                    /*DynamicDataBuilders.DynamicDataValue.fromString(
-                        count.toString()*/
-                    DynamicDataBuilders.DynamicDataValue
-                        .fromString(
-                            PlatformHealthSources
-                                .heartRateBpm()
-                                .format()
-                                .toString()
-                        )
+                    DynamicDataBuilders.DynamicDataValue.fromString(
+                        count.toString()
+                    )
                 )
-                }
             }
         }, 0, 1000)
     }
