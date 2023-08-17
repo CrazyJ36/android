@@ -39,6 +39,8 @@ class MyTileService : TileService() {
                         count.toString()
                     )
                 ).build()
+                getUpdater(this@MyTileService)
+                    .requestUpdate(MyTileService::class.java)
             }
         }, 0, 1000)
     }
@@ -49,6 +51,7 @@ class MyTileService : TileService() {
         return Futures.immediateFuture(
             Tile.Builder()
                 .setResourcesVersion(RESOURCES_VERSION)
+                .setState(state.build())
                 .setTileTimeline(
                     TimelineBuilders.Timeline.fromLayoutElement(
                         LayoutElementBuilders
@@ -66,9 +69,7 @@ class MyTileService : TileService() {
                                     .build()
                             ).build()
                     )
-                )
-                .setState(state.build())
-                .build()
+                ).build()
         )
     }
 
