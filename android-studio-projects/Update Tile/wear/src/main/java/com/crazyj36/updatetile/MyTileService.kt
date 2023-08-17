@@ -40,12 +40,15 @@ class MyTileService: TileService() {
                     TEXT,
                     DynamicDataBuilders.DynamicDataValue
                         .fromString(count.toString()))
-                getUpdater(this@MyTileService).requestUpdate(MyTileService::class.java)
+                getUpdater(this@MyTileService)
+                    .requestUpdate(MyTileService::class.java)
             }
         }, 0, 1000)
     }
 
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<Tile> {
+        val systemTime = DynamicBuilders.DynamicInstant
+            .platformTimeWithSecondsPrecision()
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
