@@ -3,7 +3,6 @@ package com.crazyj36.updatetile
 import android.Manifest
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
-import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
@@ -47,9 +46,8 @@ class MyTileService : TileService() {
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                             Text.Builder(this,
-                                StringProp.Builder("--")
-                                    .setValue(
-                                        "permission")
+                                StringProp.Builder(
+                                    "permission")
                                     .build(),
                             StringLayoutConstraint.Builder("000")
                                 .build()
@@ -61,22 +59,22 @@ class MyTileService : TileService() {
             Futures.immediateFuture(
                 Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
+                    .setFreshnessIntervalMillis(20000)
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
-                            LayoutElementBuilders
-                                .Text.Builder()
-                                .setText(
-                                    StringProp.Builder("--")
-                                        .setDynamicValue(
-                                            PlatformHealthSources
-                                                .heartRateBpm()
-                                                .format()
-                                        ).build()
-                                ).setLayoutConstraintsForDynamicText(
-                                    StringLayoutConstraint
-                                        .Builder("000")
-                                        .build()
-                                ).build()
+                            Text.Builder(
+                                this,
+                                StringProp.Builder("--")
+                                    .setDynamicValue(
+                                        PlatformHealthSources
+                                            .heartRateBpm()
+                                            .format()
+                                    ).build(),
+                                StringLayoutConstraint
+                                    .Builder("000")
+                                    .build()
+                            ).build()
+
                         )
                     ).build()
             )
