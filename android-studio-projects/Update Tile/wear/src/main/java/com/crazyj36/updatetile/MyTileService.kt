@@ -7,8 +7,10 @@ import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
+import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
+import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.Text
 import androidx.wear.tiles.RequestBuilders
@@ -50,6 +52,7 @@ class MyTileService : TileService() {
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                             LayoutElementBuilders.Text.Builder()
+                                .setMaxLines(5)
                                 .setText("permission required").build()
                         )
                     ).build()
@@ -63,9 +66,11 @@ class MyTileService : TileService() {
                         TimelineBuilders.Timeline.fromLayoutElement(
                             LayoutElementBuilders.Text.Builder()
                                 .setText(
-                                    StringProp.Builder(PlatformHealthSources
-                                        .heartRateBpm().format().toString())
-                                        .setDynamicValue(
+                                    StringProp.Builder(
+                                        PlatformHealthSources
+                                            .heartRateBpm()
+                                            .format().toString()
+                                    ).setDynamicValue(
                                             PlatformHealthSources.heartRateBpm().format()
                                         ).build()
                             ).setLayoutConstraintsForDynamicText(
