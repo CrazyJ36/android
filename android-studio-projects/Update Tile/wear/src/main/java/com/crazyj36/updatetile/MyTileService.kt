@@ -26,9 +26,6 @@ const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
     private val state = StateBuilders.State.Builder()
-    val systemTime = DynamicBuilders.DynamicInstant
-        .platformTimeWithSecondsPrecision()
-        .toDynamicInstantByteArray()
     companion object {
         var count = 0
         val TEXT = AppDataKey<DynamicBuilders.DynamicString>("text")
@@ -39,6 +36,9 @@ class MyTileService : TileService() {
         Timer().schedule(object : TimerTask() {
             override fun run() {
                 count++
+                val systemTime = DynamicBuilders.DynamicInstant
+                    .platformTimeWithSecondsPrecision()
+                    .toDynamicInstantByteArray()
                 state.addKeyToValueMapping(
                     TEXT,
                     DynamicDataBuilders.DynamicDataValue
