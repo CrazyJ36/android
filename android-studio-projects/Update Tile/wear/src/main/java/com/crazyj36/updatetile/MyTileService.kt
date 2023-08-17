@@ -45,7 +45,7 @@ class MyTileService: TileService() {
             .platformTimeWithSecondsPrecision()
             .toDynamicInstantByteArray()
         val text =  LayoutElementBuilders.Text.Builder()
-            .setText(systemTime.decodeToString()).build()
+            .setText("test").build()
         val button = CompactChip.Builder(
             this,
             "",
