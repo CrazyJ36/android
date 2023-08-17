@@ -33,6 +33,12 @@ class MyTileService : TileService() {
                 count++
             }
         }, 0, 1000)*/
+
+    }
+
+    override fun onTileRequest(
+        requestParams: RequestBuilders.TileRequest
+    ): ListenableFuture<Tile> {
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -48,12 +54,6 @@ class MyTileService : TileService() {
                 Toast.LENGTH_LONG
             ).show()
         }
-    }
-
-    override fun onTileRequest(
-        requestParams: RequestBuilders.TileRequest
-    ): ListenableFuture<Tile> {
-
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -73,7 +73,7 @@ class MyTileService : TileService() {
             Futures.immediateFuture(
                 Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
-                    .setFreshnessIntervalMillis(20000)
+                    .setFreshnessIntervalMillis(2000)
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                             LayoutElementBuilders.Text.Builder()
@@ -84,7 +84,11 @@ class MyTileService : TileService() {
                                         .setDynamicValue(
                                             PlatformHealthSources.heartRateBpm().format()
                                         ).build()
-                            ).build()
+                            ).setLayoutConstraintsForDynamicText(
+                                    StringLayoutConstraint.Builder(
+                                        "000")
+                                        .build())
+                                .build()
 
                         )
                     ).build()
