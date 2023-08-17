@@ -35,7 +35,7 @@ class MyTileService: TileService() {
         super.onCreate()
         Timer().schedule(object: TimerTask() {
             override fun run() {
-                LoadAction.Builder().build()
+                getUpdater(this@MyTileService).requestUpdate(MyTileService::class.java)
             }
         }, 0, 2000)
     }
