@@ -84,11 +84,11 @@ class MyTileService : TileService() {
                             LayoutElementBuilders
                                 .Text.Builder()
                                 .setText(
-                                StringProp.Builder("--")
-                                    .setDynamicValue(
-                                        DynamicBuilders
-                                            .DynamicString
-                                            .from(TEXT)
+                                    StringProp.Builder("--")
+                                        .setDynamicValue(
+                                            DynamicBuilders
+                                                .DynamicString
+                                                .from(TEXT)
                                     ).build()
                                 ).build()
                             )
