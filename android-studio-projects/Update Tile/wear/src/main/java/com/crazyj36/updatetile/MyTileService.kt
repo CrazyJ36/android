@@ -3,19 +3,17 @@ package com.crazyj36.updatetile
 import android.Manifest
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
-import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.LayoutElementBuilders
-import androidx.wear.protolayout.ModifiersBuilders
 import androidx.wear.protolayout.ResourceBuilders
+import androidx.wear.protolayout.StateBuilders
 import androidx.wear.protolayout.TimelineBuilders
-import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
+import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders
+import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
-import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.Text
-import androidx.wear.protolayout.material.layouts.PrimaryLayout
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders.Tile
 import androidx.wear.tiles.TileService
@@ -29,6 +27,7 @@ const val RESOURCES_VERSION = "1"
 class MyTileService: TileService() {
     companion object {
         var count = 0
+        val TEXT = AppDataKey<DynamicBuilders.DynamicString>("text")
     }
 
     override fun onCreate() {
@@ -38,10 +37,19 @@ class MyTileService: TileService() {
                 getUpdater(this@MyTileService).requestUpdate(MyTileService::class.java)
                 count++
             }
-        }, 0, 2000)
+        }, 0, 1000)
     }
 
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<Tile> {
+        val state = StateBuilders.State.Builder()
+            .addKeyToValueMapping(
+                TEXT,
+                DynamicDataBuilders.DynamicDataValue
+                    .fromString("test"))
+        state.addKeyToValueMapping(TEXT,
+            DynamicDataBuilders.DynamicDataValue
+                .fromString("test 2")
+        )
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -57,27 +65,26 @@ class MyTileService: TileService() {
                                 .build()
                         )
                     ).build()
-
             )
         } else {
             Futures.immediateFuture(
                 Tile.Builder()
                 .setResourcesVersion(RESOURCES_VERSION)
-                .setFreshnessIntervalMillis(2000)
+                .setFreshnessIntervalMillis(1000)
+                .setState(state.build())
                 .setTileTimeline(
                     TimelineBuilders.Timeline.fromLayoutElement(
                     Text.Builder(this,
                         StringProp.Builder("--")
-                            .setValue(
-                                PlatformHealthSources.heartRateBpm()
-                                .format().toString()
+                            .setDynamicValue(
+                                DynamicBuilders.DynamicString
+                                    .from(TEXT)
                             ).build(),
                         StringLayoutConstraint
                             .Builder("000")
                             .build()
-                    ).build()
-                )
-            ).build()
+                    ).build())
+                ).build()
             )
         }
     }
