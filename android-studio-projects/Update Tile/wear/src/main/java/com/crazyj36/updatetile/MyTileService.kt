@@ -41,23 +41,13 @@ class MyTileService : TileService() {
         Timer().schedule(object : TimerTask() {
             override fun run() {
                 count++
-                val systemTime = DynamicBuilders.DynamicInstant
-                    .platformTimeWithSecondsPrecision()
-                    .toDynamicInstantByteArray()
-                if (ActivityCompat.checkSelfPermission(
-                        this@MyTileService,
-                        Manifest.permission.BODY_SENSORS
-                    ) == PackageManager.PERMISSION_GRANTED
-                ) {
-                    state.addKeyToValueMapping(
-                        TEXT,
-                        DynamicDataBuilders.DynamicDataValue
-                            .fromString(
-                                count.toString() + "\n" +
-                                        PlatformHealthSources.heartRateBpm().format()
-                            )
+                state.addKeyToValueMapping(
+                    TEXT,
+                    DynamicDataBuilders.DynamicDataValue.fromString(
+                        count++.toString()
                     )
-                }
+                )
+                LoadAction.Builder().build()
             }
         }, 0, 1000)
     }
@@ -65,18 +55,6 @@ class MyTileService : TileService() {
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-        for (i in 0..5) {
-            state.addKeyToValueMapping(TEXT,
-                DynamicDataBuilders.
-                DynamicDataValue.fromString(
-                    count.toString()
-                )
-            )
-            MainScope().launch {
-                delay(1000)
-            }
-            LoadAction.Builder().build()
-        }
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -101,21 +79,21 @@ class MyTileService : TileService() {
                     .setFreshnessIntervalMillis(1000)
                     .setState(state.build())
                     .setTileTimeline(
-                        TimelineBuilders.Timeline.fromLayoutElement(
-                            Text.Builder(
-                                this,
+                        TimelineBuilders.Timeline.
+                        fromLayoutElement(
+                            LayoutElementBuilders
+                                .Text.Builder()
+                                .setText(
                                 StringProp.Builder("--")
                                     .setDynamicValue(
-                                        DynamicBuilders.DynamicString
+                                        DynamicBuilders
+                                            .DynamicString
                                             .from(TEXT)
-                                    ).build(),
-                                StringLayoutConstraint
-                                    .Builder("000")
-                                    .build()
-                            ).build()
-                        )
-                    ).build()
-            )
+                                    ).build()
+                                ).build()
+                            )
+                        ).build()
+                    )
         }
     }
 
