@@ -41,10 +41,15 @@ class MyTileService: TileService() {
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
         val systemTime = DynamicBuilders.DynamicInstant
             .platformTimeWithSecondsPrecision()
-            .toDynamicInstantByteArray()
+
         val text =  Text.Builder(
             this,
-            TypeBuilders.StringProp.Builder(systemTime.decodeToString()
+            TypeBuilders.StringProp.Builder("--")
+                .setDynamicValue(
+                    DynamicBuilders.DynamicString.fromByteArray(
+                        systemTime.toDynamicInstantByteArray()
+                    )
+
                 ).build(),
             StringLayoutConstraint.Builder(
                 "000")
