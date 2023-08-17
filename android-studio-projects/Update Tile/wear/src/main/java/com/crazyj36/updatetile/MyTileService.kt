@@ -25,6 +25,7 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService: TileService() {
+    private val state = StateBuilders.State.Builder()
     companion object {
         var count = 0
         val TEXT = AppDataKey<DynamicBuilders.DynamicString>("text")
@@ -34,22 +35,17 @@ class MyTileService: TileService() {
         super.onCreate()
         Timer().schedule(object: TimerTask() {
             override fun run() {
-                getUpdater(this@MyTileService).requestUpdate(MyTileService::class.java)
                 count++
+                state.addKeyToValueMapping(
+                    TEXT,
+                    DynamicDataBuilders.DynamicDataValue
+                        .fromString(count.toString()))
+                getUpdater(this@MyTileService).requestUpdate(MyTileService::class.java)
             }
         }, 0, 1000)
     }
 
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<Tile> {
-        val state = StateBuilders.State.Builder()
-            .addKeyToValueMapping(
-                TEXT,
-                DynamicDataBuilders.DynamicDataValue
-                    .fromString("test"))
-        state.addKeyToValueMapping(TEXT,
-            DynamicDataBuilders.DynamicDataValue
-                .fromString("test 2")
-        )
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
