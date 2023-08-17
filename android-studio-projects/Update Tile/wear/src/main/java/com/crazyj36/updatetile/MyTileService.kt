@@ -30,13 +30,17 @@ class MyTileService : TileService() {
 
     override fun onCreate() {
         super.onCreate()
+        val systemTime = DynamicInstant.platformTimeWithSecondsPrecision()
         Timer().schedule(object : TimerTask() {
             override fun run() {
                 count++
                 state.addKeyToValueMapping(
                     TEXT,
-                    DynamicDataBuilders.DynamicDataValue.fromString(
-                        count.toString()
+                    DynamicDataBuilders.DynamicDataValue
+                        .fromString(
+                        count.toString() + systemTime
+                            .toDynamicInstantByteArray()
+                            .decodeToString()
                     )
                 ).build()
                 getUpdater(this@MyTileService)
