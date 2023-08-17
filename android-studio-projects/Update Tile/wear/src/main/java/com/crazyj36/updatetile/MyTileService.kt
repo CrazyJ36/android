@@ -43,9 +43,8 @@ class MyTileService: TileService() {
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
         val systemTime = DynamicBuilders.DynamicInstant
             .platformTimeWithSecondsPrecision()
-            .toDynamicInstantByteArray()
         val text =  LayoutElementBuilders.Text.Builder()
-            .setText("test").build()
+            .setText(PlatformHealthSources.heartRateBpm().format().toString()).build()
         val button = CompactChip.Builder(
             this,
             "",
