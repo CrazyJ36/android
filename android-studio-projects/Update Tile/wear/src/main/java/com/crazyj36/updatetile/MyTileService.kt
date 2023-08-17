@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
@@ -63,13 +64,8 @@ class MyTileService : TileService() {
                     .setResourcesVersion(RESOURCES_VERSION)
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
-                            Text.Builder(this,
-                                StringProp.Builder(
-                                    "permission")
-                                    .build(),
-                            StringLayoutConstraint.Builder("000")
-                                .build()
-                        ).build()
+                            LayoutElementBuilders.Text.Builder()
+                                .setText("permission required").build()
                         )
                     ).build()
             )
@@ -80,17 +76,14 @@ class MyTileService : TileService() {
                     .setFreshnessIntervalMillis(20000)
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
-                            Text.Builder(
-                                this,
-                                StringProp.Builder(PlatformHealthSources
-                                    .heartRateBpm().format().toDynamicStringByteArray()
-                                    .decodeToString())
-                                    .setDynamicValue(
-                                        PlatformHealthSources.heartRateBpm().format()
-                                    ).build(),
-                                StringLayoutConstraint
-                                    .Builder("000")
-                                    .build()
+                            LayoutElementBuilders.Text.Builder()
+                                .setText(
+                                    StringProp.Builder(PlatformHealthSources
+                                        .heartRateBpm().format().toDynamicStringByteArray()
+                                        .decodeToString())
+                                        .setDynamicValue(
+                                            PlatformHealthSources.heartRateBpm().format()
+                                        ).build()
                             ).build()
 
                         )
