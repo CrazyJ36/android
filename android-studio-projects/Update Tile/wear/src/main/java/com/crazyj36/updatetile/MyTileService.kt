@@ -17,7 +17,7 @@ import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.Text
 import androidx.wear.protolayout.material.layouts.PrimaryLayout
 import androidx.wear.tiles.RequestBuilders
-import androidx.wear.tiles.TileBuilders
+import androidx.wear.tiles.TileBuilders.Tile
 import androidx.wear.tiles.TileService
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
@@ -41,50 +41,45 @@ class MyTileService: TileService() {
         }, 0, 2000)
     }
 
-    override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
-        val text = LayoutElementBuilders.Text.Builder()
-            .setMaxLines(5)
-            .setText(DynamicBuilders.DynamicInstant
-                .platformTimeWithSecondsPrecision().toString() +
-            "\nend of text")
-            .build()
-        val button = CompactChip.Builder(
-            this,
-            "",
-            ModifiersBuilders.Clickable.Builder()
-                .setOnClick(LoadAction.Builder().build())
-                .build(),
-            requestParams.deviceConfiguration)
-            .setIconContent("button_icon")
-        val primaryLayout = PrimaryLayout
-            .Builder(requestParams.deviceConfiguration)
-            .setPrimaryLabelTextContent(text)
-            .setPrimaryChipContent(
-                button.build())
-            .build()
+    override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<Tile> {
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            Futures.immediateFuture(TileBuilders.
-            Tile.Builder()
-                .setTileTimeline(TimelineBuilders.
-                Timeline.fromLayoutElement(
-                    LayoutElementBuilders.Text.Builder()
-                        .setText("permission needed.")
-                        .build()
-                    )
-                ).build())
+            Futures.immediateFuture(
+                Tile.Builder()
+                    .setResourcesVersion(RESOURCES_VERSION)
+                    .setTileTimeline(TimelineBuilders
+                        .Timeline.fromLayoutElement(
+                            LayoutElementBuilders.Text.Builder()
+                                .setText("need permission")
+                                .build()
+                        )
+                    ).build()
+
+            )
         } else {
             Futures.immediateFuture(
-                TileBuilders.Tile.Builder()
-                    .setResourcesVersion(RESOURCES_VERSION)
-                    .setFreshnessIntervalMillis(2000)
-                    .setTileTimeline(
-                        TimelineBuilders.Timeline
-                            .fromLayoutElement(primaryLayout)
+                Tile.Builder()
+                .setResourcesVersion(RESOURCES_VERSION)
+                .setFreshnessIntervalMillis(60 * 60 * 1000) // 60 minutes
+                .setTileTimeline(
+                    TimelineBuilders.Timeline.fromLayoutElement(
+                    Text.Builder(this,
+                        StringProp.Builder("--")
+                            .setDynamicValue(
+                                PlatformHealthSources.heartRateBpm()
+                                .format()
+                                .concat(DynamicBuilders.
+                                DynamicString.constant(" bpm")))
+                            .build(),
+                        StringLayoutConstraint
+                            .Builder("000")
+                            .build()
                     ).build()
+                )
+            ).build()
             )
         }
     }
