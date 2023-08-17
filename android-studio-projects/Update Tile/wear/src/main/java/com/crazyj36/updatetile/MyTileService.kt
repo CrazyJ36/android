@@ -44,7 +44,11 @@ class MyTileService: TileService() {
         val systemTime = DynamicBuilders.DynamicInstant
             .platformTimeWithSecondsPrecision()
         val text =  LayoutElementBuilders.Text.Builder()
-            .setText(PlatformHealthSources.heartRateBpm().format().toString()).build()
+            .setText(PlatformHealthSources.heartRateBpm()
+                .format()
+                .toString()
+            )
+            .setMaxLines(5).build()
         val button = CompactChip.Builder(
             this,
             "",
