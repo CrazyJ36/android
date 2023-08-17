@@ -22,11 +22,9 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
-
+    lateinit var heartRate: DynamicBuilders.DynamicString
     companion object {
         //var count = 0
-        val heartRate =
-            PlatformHealthSources.Keys.HEART_RATE_BPM
     }
 
     override fun onCreate() {
@@ -36,15 +34,22 @@ class MyTileService : TileService() {
                 count++
             }
         }, 0, 1000)*/
-        Toast.makeText(this,
-            heartRate.toString(),
-            Toast.LENGTH_SHORT).show()
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.BODY_SENSORS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            heartRate = PlatformHealthSources.heartRateBpm().format()
+        } else {
+            Toast.makeText(this, "permission", Toast.LENGTH_SHORT).show()
+        }
 
     }
 
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
+
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -76,16 +81,7 @@ class MyTileService : TileService() {
                                 this,
                                 StringProp.Builder("--")
                                     .setDynamicValue(
-                                        PlatformHealthSources
-                                            .heartRateBpm()
-                                            .format()
-                                            .concat(
-                                                DynamicBuilders
-                                                    .DynamicString
-                                                    .constant(
-                                                        " bpm"
-                                                    )
-                                            )
+                                        heartRate
                                     ).build(),
                                 StringLayoutConstraint
                                     .Builder("000")
