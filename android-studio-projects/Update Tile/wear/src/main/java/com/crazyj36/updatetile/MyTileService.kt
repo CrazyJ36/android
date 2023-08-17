@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.ActionBuilders.LoadAction
+import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ModifiersBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
@@ -43,15 +44,11 @@ class MyTileService: TileService() {
         val systemTime = DynamicBuilders.DynamicInstant
             .platformTimeWithSecondsPrecision()
             .toDynamicInstantByteArray()
-        val text =  Text.Builder(
-            this,
-            TypeBuilders.StringProp.Builder(
-                PlatformHealthSources.heartRateBpm().format().toString()
-            ).build(),
-            StringLayoutConstraint.Builder(
-                "000")
-                .build()
-        ).build()
+        val text =  LayoutElementBuilders.Text.Builder()
+            .setText(TypeBuilders.StringProp.Builder(
+                PlatformHealthSources.heartRateBpm()
+                    .format().toString()).build()
+            ).build()
         val button = CompactChip.Builder(
             this,
             "",
