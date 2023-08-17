@@ -36,6 +36,7 @@ class MyTileService: TileService() {
         Timer().schedule(object: TimerTask() {
             override fun run() {
                 getUpdater(this@MyTileService).requestUpdate(MyTileService::class.java)
+                count++
             }
         }, 0, 2000)
     }
@@ -43,17 +44,10 @@ class MyTileService: TileService() {
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
         val systemTime = DynamicBuilders.DynamicInstant
             .platformTimeWithSecondsPrecision()
-        val text = Text.Builder(this,
-            StringProp.Builder("--")
-                .setDynamicValue(
-                PlatformHealthSources.dailySteps()
-                    .format()
-            ).build(),
-            StringLayoutConstraint
-                .Builder("000")
-                .build()
-        ).build()
-        LoadAction.Builder().build()
+            .toDynamicInstantByteArray()
+        val text = LayoutElementBuilders.Text.Builder()
+            .setText(systemTime.decodeToString())
+            .build()
         val button = CompactChip.Builder(
             this,
             "",
