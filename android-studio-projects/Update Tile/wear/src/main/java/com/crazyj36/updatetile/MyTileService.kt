@@ -10,6 +10,7 @@ import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.expression.DynamicBuilders
+import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.Text
@@ -41,15 +42,14 @@ class MyTileService: TileService() {
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
         val systemTime = DynamicBuilders.DynamicInstant
             .platformTimeWithSecondsPrecision()
-
+            .toDynamicInstantByteArray()
+        val testDynamicString: DynamicBuilders.DynamicString =
+            DynamicBuilders.DynamicString.fromByteArray(systemTime)
         val text =  Text.Builder(
             this,
             TypeBuilders.StringProp.Builder("--")
                 .setDynamicValue(
-                    DynamicBuilders.DynamicString.fromByteArray(
-                        systemTime.toDynamicInstantByteArray()
-                    )
-
+                    testDynamicString
                 ).build(),
             StringLayoutConstraint.Builder(
                 "000")
