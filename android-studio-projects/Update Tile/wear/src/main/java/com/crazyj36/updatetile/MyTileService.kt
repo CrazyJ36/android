@@ -46,8 +46,7 @@ class MyTileService: TileService() {
         val text =  Text.Builder(
             this,
             TypeBuilders.StringProp.Builder(
-                //systemTime.decodeToString()
-                "--"
+                PlatformHealthSources.heartRateBpm().format().toString()
             ).build(),
             StringLayoutConstraint.Builder(
                 "000")
