@@ -10,8 +10,8 @@ import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
+import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.DynamicBuilders
-import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.Text
@@ -43,12 +43,17 @@ class MyTileService: TileService() {
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
         val systemTime = DynamicBuilders.DynamicInstant
             .platformTimeWithSecondsPrecision()
-        val text =  LayoutElementBuilders.Text.Builder()
-            .setText(PlatformHealthSources.heartRateBpm()
-                .format()
-                .toString()
-            )
-            .setMaxLines(5).build()
+        val text = Text.Builder(this,
+            StringProp.Builder("--")
+                .setDynamicValue(
+                PlatformHealthSources.dailySteps()
+                    .format()
+                ).build(),
+            StringLayoutConstraint
+                .Builder("000")
+                .build()
+        ).build()
+        LoadAction.Builder().build()
         val button = CompactChip.Builder(
             this,
             "",
@@ -64,19 +69,18 @@ class MyTileService: TileService() {
                 button.build())
         return if (ActivityCompat.checkSelfPermission(
                 this,
-                Manifest.permission.BODY_SENSORS
+                Manifest.permission.ACTIVITY_RECOGNITION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             Futures.immediateFuture(TileBuilders.
             Tile.Builder()
                 .setTileTimeline(TimelineBuilders.
                 Timeline.fromLayoutElement(
-                    Text.Builder(
-                        this,
-                        "permission"
-                    ).build()
-                ))
-                .build())
+                    LayoutElementBuilders.Text.Builder()
+                        .setText("permission needed.")
+                        .build()
+                    )
+                ).build())
         } else {
             Futures.immediateFuture(
                 TileBuilders.Tile.Builder()

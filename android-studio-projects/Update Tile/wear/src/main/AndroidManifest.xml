@@ -4,7 +4,7 @@
 
     <uses-feature android:name="android.hardware.type.watch"/>
 
-    <uses-permission android:name="android.permission.BODY_SENSORS" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -13,7 +13,6 @@
         <meta-data
             android:name="com.google.android.wearable.standalone"
             android:value="true"/>
-
         <service
             android:name=".MyTileService"
             android:description="@string/tileDescription"
