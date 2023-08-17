@@ -3,6 +3,7 @@ package com.crazyj36.updatetile
 import android.Manifest
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
+import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.StateBuilders
@@ -19,15 +20,19 @@ import androidx.wear.tiles.TileBuilders.Tile
 import androidx.wear.tiles.TileService
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.Timer
 import java.util.TimerTask
 
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
-    private val state = StateBuilders.State.Builder()
+
     companion object {
         var count = 0
+        val state = StateBuilders.State.Builder()
         val TEXT = AppDataKey<DynamicBuilders.DynamicString>("text")
     }
 
@@ -39,13 +44,20 @@ class MyTileService : TileService() {
                 val systemTime = DynamicBuilders.DynamicInstant
                     .platformTimeWithSecondsPrecision()
                     .toDynamicInstantByteArray()
-                state.addKeyToValueMapping(
-                    TEXT,
-                    DynamicDataBuilders.DynamicDataValue
-                        .fromString(systemTime.decodeToString())
-                )
-                getUpdater(this@MyTileService)
-                    .requestUpdate(MyTileService::class.java)
+                if (ActivityCompat.checkSelfPermission(
+                        this@MyTileService,
+                        Manifest.permission.BODY_SENSORS
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    state.addKeyToValueMapping(
+                        TEXT,
+                        DynamicDataBuilders.DynamicDataValue
+                            .fromString(
+                                count.toString() + "\n" +
+                                        PlatformHealthSources.heartRateBpm().format()
+                            )
+                    )
+                }
             }
         }, 0, 1000)
     }
@@ -53,6 +65,18 @@ class MyTileService : TileService() {
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
+        for (i in 0..5) {
+            state.addKeyToValueMapping(TEXT,
+                DynamicDataBuilders.
+                DynamicDataValue.fromString(
+                    count.toString()
+                )
+            )
+            MainScope().launch {
+                delay(1000)
+            }
+            LoadAction.Builder().build()
+        }
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
