@@ -46,7 +46,8 @@ class MyTileService: TileService() {
         val text =  Text.Builder(
             this,
             TypeBuilders.StringProp.Builder(
-                systemTime.decodeToString()
+                //systemTime.decodeToString()
+                "--"
             ).build(),
             StringLayoutConstraint.Builder(
                 "000")
