@@ -43,14 +43,11 @@ class MyTileService: TileService() {
         val systemTime = DynamicBuilders.DynamicInstant
             .platformTimeWithSecondsPrecision()
             .toDynamicInstantByteArray()
-        val testDynamicString: DynamicBuilders.DynamicString =
-            DynamicBuilders.DynamicString.fromByteArray(systemTime)
         val text =  Text.Builder(
             this,
-            TypeBuilders.StringProp.Builder("--")
-                .setDynamicValue(
-                    testDynamicString
-                ).build(),
+            TypeBuilders.StringProp.Builder(
+                systemTime.decodeToString()
+            ).build(),
             StringLayoutConstraint.Builder(
                 "000")
                 .build()
