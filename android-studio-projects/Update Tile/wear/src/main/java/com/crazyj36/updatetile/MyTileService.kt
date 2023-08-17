@@ -42,12 +42,11 @@ class MyTileService: TileService() {
     }
 
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
-        val systemTime = DynamicBuilders.DynamicInstant
-            .platformTimeWithSecondsPrecision()
-            .toDynamicInstantByteArray()
         val text = LayoutElementBuilders.Text.Builder()
             .setMaxLines(5)
-            .setText(systemTime.decodeToString() + "test")
+            .setText(DynamicBuilders.DynamicInstant
+                .platformTimeWithSecondsPrecision().toString() +
+            "\nend of text")
             .build()
         val button = CompactChip.Builder(
             this,
@@ -62,9 +61,10 @@ class MyTileService: TileService() {
             .setPrimaryLabelTextContent(text)
             .setPrimaryChipContent(
                 button.build())
+            .build()
         return if (ActivityCompat.checkSelfPermission(
                 this,
-                Manifest.permission.ACTIVITY_RECOGNITION
+                Manifest.permission.BODY_SENSORS
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             Futures.immediateFuture(TileBuilders.
@@ -82,9 +82,8 @@ class MyTileService: TileService() {
                     .setResourcesVersion(RESOURCES_VERSION)
                     .setFreshnessIntervalMillis(2000)
                     .setTileTimeline(
-                        TimelineBuilders.Timeline.fromLayoutElement(
-                            primaryLayout.build()
-                        )
+                        TimelineBuilders.Timeline
+                            .fromLayoutElement(primaryLayout)
                     ).build()
             )
         }
