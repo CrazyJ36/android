@@ -2,13 +2,11 @@ package com.crazyj36.updatetile
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
-import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.Text
 import androidx.wear.tiles.RequestBuilders
@@ -22,7 +20,6 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
-    lateinit var heartRate: DynamicBuilders.DynamicString
     companion object {
         //var count = 0
     }
@@ -34,16 +31,6 @@ class MyTileService : TileService() {
                 count++
             }
         }, 0, 1000)*/
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.BODY_SENSORS
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            heartRate = PlatformHealthSources.heartRateBpm().format()
-        } else {
-            Toast.makeText(this, "permission", Toast.LENGTH_SHORT).show()
-        }
-
     }
 
     override fun onTileRequest(
@@ -79,9 +66,11 @@ class MyTileService : TileService() {
                         TimelineBuilders.Timeline.fromLayoutElement(
                             Text.Builder(
                                 this,
-                                StringProp.Builder("--")
+                                StringProp.Builder(PlatformHealthSources
+                                    .heartRateBpm().format().toDynamicStringByteArray()
+                                    .decodeToString())
                                     .setDynamicValue(
-                                        heartRate
+                                        PlatformHealthSources.heartRateBpm().format()
                                     ).build(),
                                 StringLayoutConstraint
                                     .Builder("000")
