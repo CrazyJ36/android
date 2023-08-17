@@ -13,6 +13,7 @@ import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicDataBuilders
+import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders.Tile
 import androidx.wear.tiles.TileService
@@ -36,13 +37,24 @@ class MyTileService : TileService() {
         Timer().schedule(object : TimerTask() {
             override fun run() {
                 count++
+                if (ActivityCompat.checkSelfPermission(
+                        this@MyTileService,
+                        Manifest.permission.BODY_SENSORS
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
                 state.addKeyToValueMapping(
                     TEXT,
-                    DynamicDataBuilders.DynamicDataValue.fromString(
-                        count++.toString()
-                    )
+                    /*DynamicDataBuilders.DynamicDataValue.fromString(
+                        count.toString()*/
+                    DynamicDataBuilders.DynamicDataValue
+                        .fromString(
+                            PlatformHealthSources
+                                .heartRateBpm()
+                                .format()
+                                .toString()
+                        )
                 )
-                LoadAction.Builder().build()
+                }
             }
         }, 0, 1000)
     }
@@ -50,51 +62,31 @@ class MyTileService : TileService() {
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-        return if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.BODY_SENSORS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            Futures.immediateFuture(
-                Tile.Builder()
-                    .setResourcesVersion(RESOURCES_VERSION)
-                    .setTileTimeline(
-                        TimelineBuilders
-                            .Timeline.fromLayoutElement(
-                                LayoutElementBuilders.Text.Builder()
-                                    .setText("need permission")
-                                    .build()
-                            )
-                    ).build()
-            )
-        } else {
-            Futures.immediateFuture(
-                Tile.Builder()
-                    .setResourcesVersion(RESOURCES_VERSION)
-                    .setFreshnessIntervalMillis(1000)
-                    .setState(state.build())
-                    .setTileTimeline(
-                        TimelineBuilders.Timeline.
-                        fromLayoutElement(
-                            LayoutElementBuilders
-                                .Text.Builder()
-                                .setText(
-                                    StringProp.Builder("--")
-                                        .setDynamicValue(
-                                            DynamicBuilders
-                                                .DynamicString
-                                                .from(TEXT)
+        return Futures.immediateFuture(
+            Tile.Builder()
+                .setResourcesVersion(RESOURCES_VERSION)
+                .setFreshnessIntervalMillis(1000)
+                .setTileTimeline(
+                    TimelineBuilders.Timeline.fromLayoutElement(
+                        LayoutElementBuilders
+                            .Text.Builder()
+                            .setText(
+                                StringProp.Builder("--")
+                                    .setDynamicValue(
+                                        DynamicBuilders
+                                            .DynamicString
+                                            .from(TEXT)
                                     ).build()
-                                ).setLayoutConstraintsForDynamicText(
-                                    StringLayoutConstraint
-                                        .Builder("000")
-                                        .build()
-                                )
-                                .build()
-                            )
-                        ).build()
+                            ).setLayoutConstraintsForDynamicText(
+                                StringLayoutConstraint
+                                    .Builder("000")
+                                    .build()
+                            ).build()
                     )
-        }
+                )
+                .setState(state.build())
+                .build()
+        )
     }
 
     override fun onTileResourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ListenableFuture<ResourceBuilders.Resources> =
