@@ -2,52 +2,26 @@ package com.crazyj36.updatetile
 
 import android.Manifest
 import android.content.pm.PackageManager
-import androidx.compose.ui.layout.Layout
 import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ResourceBuilders
-import androidx.wear.protolayout.StateBuilders
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
-import androidx.wear.protolayout.expression.AppDataKey
-import androidx.wear.protolayout.expression.DynamicBuilders
-import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
-import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders.Tile
 import androidx.wear.tiles.TileService
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
-import java.util.Timer
-import java.util.TimerTask
 
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
-    private var state = StateBuilders.State.Builder()
-    companion object {
-        var count = 0
-        var TEXT = AppDataKey<DynamicString>(
-            "text")
-    }
 
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-        Timer().schedule(object: TimerTask() {
-            override fun run() {
-                state = StateBuilders.State.Builder()
-                    .addKeyToValueMapping(TEXT,
-                        DynamicDataBuilders
-                            .DynamicDataValue
-                            .fromString(count++.toString())
-                    )
-                getUpdater(this@MyTileService)
-                    .requestUpdate(MyTileService::class.java)
-            }
-        }, 0, 1000)
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -77,10 +51,9 @@ class MyTileService : TileService() {
                                     StringProp
                                         .Builder("--")
                                         .setDynamicValue(
-                                                DynamicString
-                                                .from(
-                                                    TEXT
-                                            )
+                                            PlatformHealthSources
+                                                .heartRateBpm()
+                                                .format()
                                         ).build()
                                 )
                                 .setLayoutConstraintsForDynamicText(
@@ -90,7 +63,6 @@ class MyTileService : TileService() {
                                 .build()
                         )
                     )
-                    .setState(state.build())
                     .build()
             )
         }
