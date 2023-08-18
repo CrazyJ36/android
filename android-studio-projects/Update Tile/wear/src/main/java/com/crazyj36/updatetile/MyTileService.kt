@@ -2,8 +2,8 @@ package com.crazyj36.updatetile
 
 import android.Manifest
 import android.content.pm.PackageManager
+import androidx.compose.ui.layout.Layout
 import androidx.core.app.ActivityCompat
-import androidx.wear.protolayout.ActionBuilders
 import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.StateBuilders
@@ -12,9 +12,9 @@ import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders
+import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
 import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
-import androidx.wear.tiles.EventBuilders
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders.Tile
 import androidx.wear.tiles.TileService
@@ -27,35 +27,23 @@ const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
     companion object {
-        var count = 0
-        val state = StateBuilders.State.Builder()
         var TEXT = AppDataKey<DynamicBuilders.DynamicString>(
             "text")
     }
 
-    override fun onTileLeaveEvent(requestParams:
-                                  EventBuilders.TileLeaveEvent) {
-        super.onTileLeaveEvent(requestParams)
-        Timer().purge()
-    }
-
-    override fun onTileEnterEvent(requestParams:
-                                  EventBuilders.TileEnterEvent) {
-        super.onTileEnterEvent(requestParams)
-        count = 0
-    }
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-        Timer().schedule(object: TimerTask() {
-            override fun run() {
-                state.addKeyToValueMapping(TEXT,
-                    DynamicDataBuilders.DynamicDataValue.fromString(
-                        count++.toString()
-                    ))
-                ActionBuilders.LoadAction.Builder().build()
-            }
-        }, 0, 1000)
+        val state = StateBuilders.State.Builder()
+            .addKeyToValueMapping(TEXT,
+                DynamicDataBuilders
+                    .DynamicDataValue
+                    .fromString("old text"))
+            .addKeyToValueMapping(TEXT,
+                DynamicDataBuilders
+                    .DynamicDataValue
+                    .fromString("new state")
+            )
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -67,7 +55,7 @@ class MyTileService : TileService() {
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                             LayoutElementBuilders.Text.Builder()
-                                .setMaxLines(3)
+                                .setMaxLines(2)
                                 .setText("Permission required")
                                 .build()
                         )
@@ -77,6 +65,7 @@ class MyTileService : TileService() {
             Futures.immediateFuture(
                 Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
+                    .setFreshnessIntervalMillis(1000)
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                             LayoutElementBuilders.Text.Builder()
@@ -87,7 +76,9 @@ class MyTileService : TileService() {
                                         .setDynamicValue(
                                             DynamicBuilders
                                                 .DynamicString
-                                                .from(TEXT)
+                                                .from(
+                                                    TEXT
+                                            )
                                         ).build()
                                 )
                                 .setLayoutConstraintsForDynamicText(
