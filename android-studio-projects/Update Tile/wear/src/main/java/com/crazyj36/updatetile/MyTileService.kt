@@ -2,10 +2,13 @@ package com.crazyj36.updatetile
 
 import android.Manifest
 import android.content.pm.PackageManager
+import androidx.compose.ui.layout.Layout
 import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
+import androidx.wear.protolayout.TimelineBuilders.TimeInterval
+import androidx.wear.protolayout.TimelineBuilders.TimelineEntry
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.PlatformHealthSources
@@ -22,50 +25,24 @@ class MyTileService : TileService() {
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-        return if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.BODY_SENSORS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            Futures.immediateFuture(
-                Tile.Builder()
-                    .setResourcesVersion(RESOURCES_VERSION)
-                    .setTileTimeline(
-                        TimelineBuilders.Timeline.fromLayoutElement(
-                            LayoutElementBuilders.Text.Builder()
-                                .setMaxLines(2)
-                                .setText("Permission required")
-                                .build()
-                        )
-                    ).build()
-            )
-        } else {
-            Futures.immediateFuture(
-                Tile.Builder()
-                    .setResourcesVersion(RESOURCES_VERSION)
-                    .setTileTimeline(
-                        TimelineBuilders.Timeline.fromLayoutElement(
-                            LayoutElementBuilders.Text.Builder()
-                                .setMaxLines(5)
-                                .setText(
-                                    StringProp
-                                        .Builder("--")
-                                        .setDynamicValue(
-                                            PlatformHealthSources
-                                                .heartRateBpm()
-                                                .format()
-                                        ).build()
-                                )
-                                .setLayoutConstraintsForDynamicText(
-                                    StringLayoutConstraint.Builder(
-                                        "000")
-                                        .build())
-                                .build()
-                        )
-                    )
-                    .build()
-            )
-        }
+        val timeline = TimelineBuilders.Timeline.Builder()
+        val text = LayoutElementBuilders.Text.Builder()
+            .setText("test")
+            .build()
+        val layout = LayoutElementBuilders.Layout.Builder()
+            .setRoot(text)
+
+        timeline.addTimelineEntry(
+            TimelineEntry.Builder()
+                .setLayout(layout.build())
+                .setValidity(TimeInterval.Builder()
+                    .setEndMillis(5000).build()
+                ).build()
+        )
+        val tile = Tile.Builder()
+            .setResourcesVersion(RESOURCES_VERSION)
+            .setTileTimeline(timeline.build())
+        return Futures.immediateFuture(tile.build())
     }
 
     override fun onTileResourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ListenableFuture<ResourceBuilders.Resources> =
