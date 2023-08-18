@@ -96,7 +96,7 @@ class MyTileService : TileService() {
                                             DynamicBuilders
                                                 .DynamicString
                                                 .from(TEXT)
-                                        ).build().toString()
+                                        ).build()
                                 ).setLayoutConstraintsForDynamicText(
                                     StringLayoutConstraint.Builder(
                                         "000")
