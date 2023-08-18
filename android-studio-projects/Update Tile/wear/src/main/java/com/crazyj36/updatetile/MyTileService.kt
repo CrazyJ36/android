@@ -40,6 +40,7 @@ class MyTileService : TileService() {
         Timer().schedule(object: TimerTask() {
             override fun run() {
                 systemTime = DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
+                val heartRate = PlatformHealthSources.heartRateBpm().toString()
                 count++
                 if (ActivityCompat.checkSelfPermission(
                         this@MyTileService,
@@ -49,7 +50,7 @@ class MyTileService : TileService() {
                     state.addKeyToValueMapping(
                         TEXT,
                         DynamicDataValue.fromString(
-                            PlatformHealthSources.heartRateBpm().format().toString()
+                            heartRate
                         )
                     )
                 }
