@@ -76,6 +76,7 @@ class MyTileService : TileService() {
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                             LayoutElementBuilders.Text.Builder()
+                                .setMaxLines(5)
                                 .setText(
                                     StringProp.Builder("text")
                                         .setDynamicValue(
