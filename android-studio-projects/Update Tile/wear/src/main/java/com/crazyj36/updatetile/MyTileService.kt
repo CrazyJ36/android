@@ -26,6 +26,7 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
+    private var state = StateBuilders.State.Builder()
     companion object {
         var TEXT = AppDataKey<DynamicBuilders.DynamicString>(
             "text")
@@ -34,11 +35,13 @@ class MyTileService : TileService() {
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-        val state = StateBuilders.State.Builder()
+        state = StateBuilders.State.Builder()
             .addKeyToValueMapping(TEXT,
                 DynamicDataBuilders
                     .DynamicDataValue
-                    .fromString("old text"))
+                    .fromString("old text")
+            )
+        state = StateBuilders.State.Builder()
             .addKeyToValueMapping(TEXT,
                 DynamicDataBuilders
                     .DynamicDataValue
