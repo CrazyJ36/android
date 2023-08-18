@@ -21,17 +21,33 @@ import androidx.wear.tiles.TileBuilders.Tile
 import androidx.wear.tiles.TileService
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
+import java.util.Timer
+import java.util.TimerTask
 
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
 
+    companion object {
+        var count = 0
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        Timer().schedule(object: TimerTask() {
+            override fun run() {
+                getUpdater(this@MyTileService)
+                    .requestUpdate(MyTileService::class.java)
+            }
+
+        }, 0, 21000)
+    }
     @SuppressLint("MissingPermission")
     public override fun onTileRequest(requestParams: RequestBuilders.TileRequest) =
         Futures.immediateFuture(
             Tile.Builder()
                 .setResourcesVersion(RESOURCES_VERSION)
-                .setFreshnessIntervalMillis(21000) // 60 minutes
+                .setFreshnessIntervalMillis(21000)
                 .setTileTimeline(
                     TimelineBuilders.Timeline.fromLayoutElement(
                         Text.Builder(
@@ -40,10 +56,13 @@ class MyTileService : TileService() {
                                 .setDynamicValue(
                                     PlatformHealthSources.heartRateBpm()
                                         .format()
-                                        .concat(DynamicBuilders.DynamicString.constant(" bpm"))
+                                        .concat(DynamicBuilders
+                                            .DynamicString
+                                            .constant(" bpm"))
                                 )
                                 .build(),
-                            StringLayoutConstraint.Builder("000")
+                            StringLayoutConstraint
+                                .Builder("000")
                                 .build()
                         ).build()
                     )
