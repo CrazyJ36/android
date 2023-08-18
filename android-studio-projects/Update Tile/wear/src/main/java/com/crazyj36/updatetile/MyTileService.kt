@@ -3,6 +3,7 @@ package com.crazyj36.updatetile
 import android.Manifest
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
+import androidx.wear.protolayout.ActionBuilders
 import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.StateBuilders
@@ -52,6 +53,7 @@ class MyTileService : TileService() {
                     DynamicDataBuilders.DynamicDataValue.fromString(
                         count++.toString()
                     ))
+                ActionBuilders.LoadAction.Builder().build()
             }
         }, 0, 1000)
         return if (ActivityCompat.checkSelfPermission(
