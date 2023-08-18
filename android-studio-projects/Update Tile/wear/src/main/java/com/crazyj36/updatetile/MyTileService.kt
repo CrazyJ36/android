@@ -25,6 +25,7 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
+    var systemTime = DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
     companion object {
         var count = 0
         val state = StateBuilders.State.Builder()
@@ -36,6 +37,7 @@ class MyTileService : TileService() {
         super.onTileEnterEvent(requestParams)
         Timer().schedule(object: TimerTask() {
             override fun run() {
+                systemTime = DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
                 count++
                 state.addKeyToValueMapping(TEXT,
                     DynamicDataBuilders.DynamicDataValue
@@ -81,14 +83,9 @@ class MyTileService : TileService() {
                                 .setText(
                                     StringProp.Builder("--")
                                         .setDynamicValue(
-                                            PlatformHealthSources
-                                                .heartRateBpm()
-                                                .format()
-                                                .concat(
-                                                    DynamicBuilders
-                                                        .DynamicString
-                                                        .from(TEXT)
-                                                )
+                                            DynamicBuilders
+                                                .DynamicString
+                                                .from(TEXT)
                                         ).build()
                                 ).setLayoutConstraintsForDynamicText(
                                     StringLayoutConstraint.Builder(
