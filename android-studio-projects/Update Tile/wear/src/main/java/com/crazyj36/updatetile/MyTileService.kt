@@ -28,25 +28,26 @@ const val RESOURCES_VERSION = "1"
 class MyTileService : TileService() {
     private var state = StateBuilders.State.Builder()
     companion object {
-        var TEXT = AppDataKey<DynamicBuilders.DynamicString>(
+        var count = 0
+        var TEXT = AppDataKey<DynamicString>(
             "text")
     }
 
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-        state = StateBuilders.State.Builder()
-            .addKeyToValueMapping(TEXT,
-                DynamicDataBuilders
-                    .DynamicDataValue
-                    .fromString("old text")
-            )
-        state = StateBuilders.State.Builder()
-            .addKeyToValueMapping(TEXT,
-                DynamicDataBuilders
-                    .DynamicDataValue
-                    .fromString("new state")
-            )
+        Timer().schedule(object: TimerTask() {
+            override fun run() {
+                state = StateBuilders.State.Builder()
+                    .addKeyToValueMapping(TEXT,
+                        DynamicDataBuilders
+                            .DynamicDataValue
+                            .fromString(count++.toString())
+                    )
+                getUpdater(this@MyTileService)
+                    .requestUpdate(MyTileService::class.java)
+            }
+        }, 0, 1000)
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -68,7 +69,6 @@ class MyTileService : TileService() {
             Futures.immediateFuture(
                 Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
-                    .setFreshnessIntervalMillis(1000)
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                             LayoutElementBuilders.Text.Builder()
@@ -77,8 +77,7 @@ class MyTileService : TileService() {
                                     StringProp
                                         .Builder("--")
                                         .setDynamicValue(
-                                            DynamicBuilders
-                                                .DynamicString
+                                                DynamicString
                                                 .from(
                                                     TEXT
                                             )
