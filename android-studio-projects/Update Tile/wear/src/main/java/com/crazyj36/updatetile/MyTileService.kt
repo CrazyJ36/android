@@ -2,20 +2,17 @@ package com.crazyj36.updatetile
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.StateBuilders
 import androidx.wear.protolayout.TimelineBuilders
-import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
-import androidx.wear.protolayout.material.Text
 import androidx.wear.tiles.EventBuilders
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders.Tile
@@ -39,12 +36,19 @@ class MyTileService : TileService() {
         super.onTileEnterEvent(requestParams)
         Timer().schedule(object: TimerTask() {
             override fun run() {
+                count++
                 state.addKeyToValueMapping(TEXT,
                     DynamicDataBuilders.DynamicDataValue
-                            .fromString(count++.toString()))
+                            .fromString(count.toString()))
+                getUpdater(this@MyTileService).requestUpdate(MyTileService::class.java)
             }
 
         }, 0, 2000)
+    }
+
+    override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
+        super.onTileLeaveEvent(requestParams)
+        count = 0
     }
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
@@ -75,11 +79,16 @@ class MyTileService : TileService() {
                             LayoutElementBuilders.Text.Builder()
                                 .setMaxLines(5)
                                 .setText(
-                                    StringProp.Builder("text")
+                                    StringProp.Builder("--")
                                         .setDynamicValue(
-                                            DynamicBuilders
-                                                .DynamicString
-                                                .from(TEXT)
+                                            PlatformHealthSources
+                                                .heartRateBpm()
+                                                .format()
+                                                .concat(
+                                                    DynamicBuilders
+                                                        .DynamicString
+                                                        .from(TEXT)
+                                                )
                                         ).build()
                                 ).setLayoutConstraintsForDynamicText(
                                     StringLayoutConstraint.Builder(
