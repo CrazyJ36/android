@@ -53,7 +53,7 @@ class MyTileService : TileService() {
         }
         return if (ActivityCompat.checkSelfPermission(
                 this,
-                Manifest.permission.ACTIVITY_RECOGNITION
+                Manifest.permission.BODY_SENSORS
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             Futures.immediateFuture(
