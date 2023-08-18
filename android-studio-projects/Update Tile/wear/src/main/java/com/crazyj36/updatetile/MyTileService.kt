@@ -1,16 +1,8 @@
 package com.crazyj36.updatetile
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
-import androidx.compose.ui.layout.Layout
-import androidx.core.app.ActivityCompat
-import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
-import androidx.wear.protolayout.TimelineBuilders.TimeInterval
-import androidx.wear.protolayout.TimelineBuilders.TimelineEntry
-import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.DynamicBuilders
@@ -28,10 +20,6 @@ const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
 
-    companion object {
-        var count = 0
-    }
-
     override fun onCreate() {
         super.onCreate()
         Timer().schedule(object: TimerTask() {
@@ -43,7 +31,7 @@ class MyTileService : TileService() {
         }, 0, 21000)
     }
     @SuppressLint("MissingPermission")
-    public override fun onTileRequest(requestParams: RequestBuilders.TileRequest) =
+    public override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<Tile> =
         Futures.immediateFuture(
             Tile.Builder()
                 .setResourcesVersion(RESOURCES_VERSION)
@@ -54,8 +42,8 @@ class MyTileService : TileService() {
                             this,
                             StringProp.Builder("--")
                                 .setDynamicValue(
-                                    PlatformHealthSources.heartRateBpm()
-                                        .format()
+                                    PlatformHealthSources
+                                        .dailySteps().format()
                                         .concat(DynamicBuilders
                                             .DynamicString
                                             .constant(" bpm"))
