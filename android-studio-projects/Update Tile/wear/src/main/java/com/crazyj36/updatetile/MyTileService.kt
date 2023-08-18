@@ -12,6 +12,7 @@ import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders
+import androidx.wear.protolayout.expression.DynamicBuilders.DynamicInstant
 import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.DynamicDataBuilders.DynamicDataValue
 import androidx.wear.protolayout.expression.PlatformHealthSources
@@ -27,7 +28,6 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
-    var systemTime = DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
     companion object {
         var count = 0
         val state = StateBuilders.State.Builder()
@@ -39,25 +39,17 @@ class MyTileService : TileService() {
         super.onTileEnterEvent(requestParams)
         Timer().schedule(object: TimerTask() {
             override fun run() {
-                systemTime = DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
-                val heartRate = PlatformHealthSources.heartRateBpm().toString()
                 count++
-                if (ActivityCompat.checkSelfPermission(
-                        this@MyTileService,
-                        Manifest.permission.BODY_SENSORS
-                    ) == PackageManager.PERMISSION_GRANTED
-                ) {
-                    state.addKeyToValueMapping(
-                        TEXT,
-                        DynamicDataValue.fromString(
-                            heartRate
-                        )
+                state.addKeyToValueMapping(
+                    TEXT,
+                    DynamicDataValue.fromString(
+                        DynamicInstant.platformTimeWithSecondsPrecision().toString()
                     )
-                }
+                )
                 getUpdater(this@MyTileService).requestUpdate(MyTileService::class.java)
             }
 
-        }, 0, 2000)
+        }, 0, 1000)
     }
 
     override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
@@ -87,7 +79,6 @@ class MyTileService : TileService() {
             Futures.immediateFuture(
                 Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
-                    .setFreshnessIntervalMillis(2000)
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                             LayoutElementBuilders.Text.Builder()
