@@ -16,6 +16,7 @@ import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.Text
+import androidx.wear.tiles.EventBuilders
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders.Tile
 import androidx.wear.tiles.TileService
@@ -28,11 +29,23 @@ const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
     companion object {
+        var count = 0
         val state = StateBuilders.State.Builder()
         var TEXT = AppDataKey<DynamicBuilders.DynamicString>(
             "text")
     }
 
+    override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
+        super.onTileEnterEvent(requestParams)
+        Timer().schedule(object: TimerTask() {
+            override fun run() {
+                state.addKeyToValueMapping(TEXT,
+                    DynamicDataBuilders.DynamicDataValue
+                            .fromString(count++.toString()))
+            }
+
+        }, 0, 2000)
+    }
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
