@@ -2,6 +2,7 @@ package com.crazyj36.updatetile
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.media.MediaDrm.PlaybackComponent
 import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ResourceBuilders
@@ -12,6 +13,7 @@ import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicDataBuilders
+import androidx.wear.protolayout.expression.DynamicDataBuilders.DynamicDataValue
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.tiles.EventBuilders
 import androidx.wear.tiles.RequestBuilders
@@ -39,9 +41,18 @@ class MyTileService : TileService() {
             override fun run() {
                 systemTime = DynamicBuilders.DynamicInstant.platformTimeWithSecondsPrecision()
                 count++
-                state.addKeyToValueMapping(TEXT,
-                    DynamicDataBuilders.DynamicDataValue
-                            .fromString(count.toString()))
+                if (ActivityCompat.checkSelfPermission(
+                        this@MyTileService,
+                        Manifest.permission.BODY_SENSORS
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    state.addKeyToValueMapping(
+                        TEXT,
+                        DynamicDataValue.fromString(
+                            PlatformHealthSources.heartRateBpm().format().toString()
+                        )
+                    )
+                }
                 getUpdater(this@MyTileService).requestUpdate(MyTileService::class.java)
             }
 
