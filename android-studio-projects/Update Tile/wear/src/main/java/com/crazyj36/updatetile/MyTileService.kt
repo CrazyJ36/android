@@ -2,7 +2,6 @@ package com.crazyj36.updatetile
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.media.MediaDrm.PlaybackComponent
 import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ResourceBuilders
@@ -12,9 +11,7 @@ import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders
-import androidx.wear.protolayout.expression.DynamicBuilders.DynamicInstant
 import androidx.wear.protolayout.expression.DynamicDataBuilders
-import androidx.wear.protolayout.expression.DynamicDataBuilders.DynamicDataValue
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.tiles.EventBuilders
 import androidx.wear.tiles.RequestBuilders
@@ -35,30 +32,28 @@ class MyTileService : TileService() {
             "text")
     }
 
-    override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
-        super.onTileEnterEvent(requestParams)
-        Timer().schedule(object: TimerTask() {
-            override fun run() {
-                count++
-                state.addKeyToValueMapping(
-                    TEXT,
-                    DynamicDataValue.fromString(
-                        DynamicInstant.platformTimeWithSecondsPrecision().toString()
-                    )
-                )
-                getUpdater(this@MyTileService).requestUpdate(MyTileService::class.java)
-            }
-
-        }, 0, 1000)
+    override fun onTileLeaveEvent(requestParams:
+                                  EventBuilders.TileLeaveEvent) {
+        super.onTileLeaveEvent(requestParams)
+        Timer().purge()
     }
 
-    override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
-        super.onTileLeaveEvent(requestParams)
+    override fun onTileEnterEvent(requestParams:
+                                  EventBuilders.TileEnterEvent) {
+        super.onTileEnterEvent(requestParams)
         count = 0
     }
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
+        Timer().schedule(object: TimerTask() {
+            override fun run() {
+                state.addKeyToValueMapping(TEXT,
+                    DynamicDataBuilders.DynamicDataValue.fromString(
+                        count++.toString()
+                    ))
+            }
+        }, 0, 1000)
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -70,8 +65,9 @@ class MyTileService : TileService() {
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                             LayoutElementBuilders.Text.Builder()
-                                .setMaxLines(5)
-                                .setText("permission required").build()
+                                .setMaxLines(3)
+                                .setText("Permission required")
+                                .build()
                         )
                     ).build()
             )
@@ -84,13 +80,15 @@ class MyTileService : TileService() {
                             LayoutElementBuilders.Text.Builder()
                                 .setMaxLines(5)
                                 .setText(
-                                    StringProp.Builder("--")
+                                    StringProp
+                                        .Builder("--")
                                         .setDynamicValue(
                                             DynamicBuilders
                                                 .DynamicString
                                                 .from(TEXT)
                                         ).build()
-                                ).setLayoutConstraintsForDynamicText(
+                                )
+                                .setLayoutConstraintsForDynamicText(
                                     StringLayoutConstraint.Builder(
                                         "000")
                                         .build())
