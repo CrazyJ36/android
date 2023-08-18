@@ -6,11 +6,14 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ResourceBuilders
+import androidx.wear.protolayout.StateBuilders
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
+import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders
+import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.Text
 import androidx.wear.tiles.RequestBuilders
@@ -25,22 +28,29 @@ const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
     companion object {
-        var count = 0
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-        Timer().schedule(object : TimerTask() {
-            override fun run() {
-                count++
-            }
-        }, 0, 1000)
-
+        val state = StateBuilders.State.Builder()
+        var TEXT = AppDataKey<DynamicBuilders.DynamicString>(
+            "text")
     }
 
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
+
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.BODY_SENSORS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            state.addKeyToValueMapping(
+                TEXT, DynamicDataBuilders.DynamicDataValue
+                    .fromString(
+                        PlatformHealthSources
+                            .heartRateBpm()
+                            .toString()
+                    )
+            )
+        }
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACTIVITY_RECOGNITION
@@ -62,17 +72,18 @@ class MyTileService : TileService() {
                 Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
                     .setFreshnessIntervalMillis(2000)
+                    .setState(state.build())
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                             LayoutElementBuilders.Text.Builder()
                                 .setText(
-                                    StringProp.Builder("--")
+                                    StringProp.Builder("text")
                                         .setDynamicValue(
-                                            PlatformHealthSources
-                                                .dailySteps()
-                                                .format()
-                                        ).build()
-                            ).setLayoutConstraintsForDynamicText(
+                                            DynamicBuilders
+                                                .DynamicString
+                                                .from(TEXT)
+                                        ).build().toString()
+                                ).setLayoutConstraintsForDynamicText(
                                     StringLayoutConstraint.Builder(
                                         "000")
                                         .build())
