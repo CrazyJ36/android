@@ -49,21 +49,6 @@ class MyTileService : TileService() {
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.BODY_SENSORS
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            state.addKeyToValueMapping(
-                TEXT, DynamicDataBuilders.DynamicDataValue
-                    .fromString(
-                        PlatformHealthSources
-                            .heartRateBpm()
-                            .toString()
-                    )
-            )
-        }
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -85,7 +70,6 @@ class MyTileService : TileService() {
                 Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
                     .setFreshnessIntervalMillis(2000)
-                    .setState(state.build())
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                             LayoutElementBuilders.Text.Builder()
@@ -102,9 +86,10 @@ class MyTileService : TileService() {
                                         "000")
                                         .build())
                                 .build()
-
                         )
-                    ).build()
+                    )
+                    .setState(state.build())
+                    .build()
             )
         }
     }
