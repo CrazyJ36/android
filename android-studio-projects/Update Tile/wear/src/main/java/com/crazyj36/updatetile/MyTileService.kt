@@ -29,14 +29,26 @@ class MyTileService : TileService() {
         val text = LayoutElementBuilders.Text.Builder()
             .setText("test")
             .build()
+        val text2 = LayoutElementBuilders.Text.Builder()
+            .setText("test 2")
+            .build()
         val layout = LayoutElementBuilders.Layout.Builder()
             .setRoot(text)
-
+        val layout2 = LayoutElementBuilders.Layout.Builder()
+            .setRoot(text2)
         timeline.addTimelineEntry(
             TimelineEntry.Builder()
                 .setLayout(layout.build())
                 .setValidity(TimeInterval.Builder()
                     .setEndMillis(5000).build()
+                ).build()
+        )
+        timeline.addTimelineEntry(
+            TimelineEntry.Builder()
+                .setLayout(layout2.build())
+                .setValidity(
+                    TimeInterval.Builder()
+                        .setEndMillis(10000).build()
                 ).build()
         )
         val tile = Tile.Builder()
