@@ -31,7 +31,7 @@ class MyTileService : TileService() {
         Futures.immediateFuture(
             Tile.Builder()
                 .setResourcesVersion(RESOURCES_VERSION)
-                .setFreshnessIntervalMillis(60 * 60 * 1000) // 60 minutes
+                .setFreshnessIntervalMillis(21000) // 60 minutes
                 .setTileTimeline(
                     TimelineBuilders.Timeline.fromLayoutElement(
                         Text.Builder(
