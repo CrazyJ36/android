@@ -41,6 +41,9 @@ class MyTileService : TileService() {
                 state.addKeyToValueMapping(KEY_COUNT_NUMBER,
                     DynamicDataValue
                         .fromString(count.toString())).build()
+                getUpdater(this@MyTileService).requestUpdate(
+                    MyTileService::class.java
+                )
             }
 
         }, 0, 1000)
