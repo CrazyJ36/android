@@ -44,9 +44,11 @@ class MyTileService : TileService() {
                     DynamicDataValue
                         .fromString(count.toString())).build()
                 ActionBuilders.LoadAction.Builder().build()
+                getUpdater(this@MyTileService)
+                    .requestUpdate(MyTileService::class.java)
             }
 
-        }, 0, 1000)
+        }, 0, 1500)
 
     }
     @SuppressLint("MissingPermission")
@@ -56,17 +58,16 @@ class MyTileService : TileService() {
         return Futures.immediateFuture(
             Tile.Builder()
                 .setResourcesVersion(RESOURCES_VERSION)
-                .setFreshnessIntervalMillis(1000)
+                .setFreshnessIntervalMillis(1500)
                 .setTileTimeline(
                     TimelineBuilders.Timeline.fromLayoutElement(
                         Text.Builder(
                             this,
                             StringProp.Builder("--")
                                 .setDynamicValue(
-                                    PlatformHealthSources
-                                        .dailySteps()
-                                        .div(1000)
-                                        .format()
+                                    DynamicString.from(
+                                        KEY_COUNT_NUMBER
+                                    )
                                 ).build(),
                             StringLayoutConstraint
                                 .Builder("000000")
