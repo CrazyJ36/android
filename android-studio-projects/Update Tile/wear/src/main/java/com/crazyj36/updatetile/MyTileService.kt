@@ -31,7 +31,9 @@ class MyTileService : TileService() {
         }, 0, 21000)
     }
     @SuppressLint("MissingPermission")
-    public override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<Tile> =
+    public override fun onTileRequest(
+        requestParams: RequestBuilders.TileRequest):
+            ListenableFuture<Tile> =
         Futures.immediateFuture(
             Tile.Builder()
                 .setResourcesVersion(RESOURCES_VERSION)
@@ -42,13 +44,10 @@ class MyTileService : TileService() {
                             this,
                             StringProp.Builder("--")
                                 .setDynamicValue(
-                                    PlatformHealthSources
-                                        .dailySteps().format()
-                                        .concat(DynamicBuilders
-                                            .DynamicString
-                                            .constant(" bpm"))
-                                )
-                                .build(),
+                                    DynamicBuilders
+                                        .DynamicString
+                                        .constant(" bpm")
+                                ).build(),
                             StringLayoutConstraint
                                 .Builder("000")
                                 .build()
@@ -57,7 +56,9 @@ class MyTileService : TileService() {
                 ).build()
         )
 
-    override fun onTileResourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ListenableFuture<ResourceBuilders.Resources> =
+    override fun onTileResourcesRequest(
+        requestParams: RequestBuilders.ResourcesRequest):
+            ListenableFuture<ResourceBuilders.Resources> =
         Futures.immediateFuture(
             ResourceBuilders.Resources.Builder()
                 .setVersion(RESOURCES_VERSION)
