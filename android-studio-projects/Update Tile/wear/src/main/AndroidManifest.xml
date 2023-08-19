@@ -3,8 +3,6 @@
     package="com.crazyj36.updatetile">
 
     <uses-feature android:name="android.hardware.type.watch"/>
-    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
-
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -27,6 +25,7 @@
                 android:name="androidx.wear.tiles.PREVIEW"
                 android:resource="@mipmap/tile_preview" />
         </service>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
