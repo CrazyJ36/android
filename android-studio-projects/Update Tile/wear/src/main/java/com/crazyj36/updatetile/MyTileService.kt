@@ -26,7 +26,7 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
-    val state = StateBuilders.State.Builder()
+    var state = StateBuilders.State.Builder()
     companion object {
         var count = 0
         val KEY_COUNT_NUMBER =
@@ -43,12 +43,14 @@ class MyTileService : TileService() {
         Timer().schedule(object: TimerTask() {
             override fun run() {
                 count++
+                state = StateBuilders.State.Builder()
                 state.addKeyToValueMapping(KEY_COUNT_NUMBER,
                     DynamicDataValue
                         .fromString(count.toString())).build()
                 getUpdater(this@MyTileService).requestUpdate(
                     MyTileService::class.java
                 )
+
             }
 
         }, 0, 1000)
