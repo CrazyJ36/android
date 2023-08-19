@@ -64,7 +64,8 @@ class MyTileService : TileService() {
                             StringProp.Builder("--")
                                 .setDynamicValue(
                                     PlatformHealthSources
-                                        .dailyCalories()
+                                        .dailySteps()
+                                        .div(1000)
                                         .format()
                                 ).build(),
                             StringLayoutConstraint
