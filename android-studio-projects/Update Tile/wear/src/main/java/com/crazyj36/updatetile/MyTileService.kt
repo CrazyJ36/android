@@ -41,8 +41,6 @@ class MyTileService : TileService() {
                 state.addKeyToValueMapping(KEY_COUNT_NUMBER,
                     DynamicDataValue
                         .fromString(count.toString())).build()
-                getUpdater(this@MyTileService)
-                    .requestUpdate(MyTileService::class.java)
             }
 
         }, 0, 1000)
@@ -54,7 +52,7 @@ class MyTileService : TileService() {
         Futures.immediateFuture(
             Tile.Builder()
                 .setResourcesVersion(RESOURCES_VERSION)
-                .setFreshnessIntervalMillis(21000)
+                .setFreshnessIntervalMillis(1000)
                 .setTileTimeline(
                     TimelineBuilders.Timeline.fromLayoutElement(
                         Text.Builder(
