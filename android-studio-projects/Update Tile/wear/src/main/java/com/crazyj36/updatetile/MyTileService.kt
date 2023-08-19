@@ -1,6 +1,7 @@
 package com.crazyj36.updatetile
 
 import android.annotation.SuppressLint
+import androidx.wear.protolayout.ActionBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.StateBuilders
 import androidx.wear.protolayout.TimelineBuilders
@@ -35,11 +36,6 @@ class MyTileService : TileService() {
     }
     override fun onCreate() {
         super.onCreate()
-    }
-    @SuppressLint("MissingPermission")
-    public override fun onTileRequest(
-        requestParams: RequestBuilders.TileRequest):
-            ListenableFuture<Tile> {
         Timer().schedule(object: TimerTask() {
             override fun run() {
                 count++
@@ -47,13 +43,16 @@ class MyTileService : TileService() {
                 state.addKeyToValueMapping(KEY_COUNT_NUMBER,
                     DynamicDataValue
                         .fromString(count.toString())).build()
-                getUpdater(this@MyTileService).requestUpdate(
-                    MyTileService::class.java
-                )
-
+                ActionBuilders.LoadAction.Builder().build()
             }
 
         }, 0, 1000)
+
+    }
+    @SuppressLint("MissingPermission")
+    public override fun onTileRequest(
+        requestParams: RequestBuilders.TileRequest):
+            ListenableFuture<Tile> {
         return Futures.immediateFuture(
             Tile.Builder()
                 .setResourcesVersion(RESOURCES_VERSION)
@@ -64,8 +63,9 @@ class MyTileService : TileService() {
                             this,
                             StringProp.Builder("--")
                                 .setDynamicValue(
-                                    DynamicString
-                                        .from(KEY_COUNT_NUMBER)
+                                    PlatformHealthSources
+                                        .dailyCalories()
+                                        .format()
                                 ).build(),
                             StringLayoutConstraint
                                 .Builder("000")
