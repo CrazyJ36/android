@@ -68,7 +68,7 @@ class MyTileService : TileService() {
                                         .format()
                                 ).build(),
                             StringLayoutConstraint
-                                .Builder("000")
+                                .Builder("000000")
                                 .build()
                         ).build()
                     )
