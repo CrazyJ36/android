@@ -35,6 +35,11 @@ class MyTileService : TileService() {
     }
     override fun onCreate() {
         super.onCreate()
+    }
+    @SuppressLint("MissingPermission")
+    public override fun onTileRequest(
+        requestParams: RequestBuilders.TileRequest):
+            ListenableFuture<Tile> {
         Timer().schedule(object: TimerTask() {
             override fun run() {
                 count++
@@ -47,12 +52,7 @@ class MyTileService : TileService() {
             }
 
         }, 0, 1000)
-    }
-    @SuppressLint("MissingPermission")
-    public override fun onTileRequest(
-        requestParams: RequestBuilders.TileRequest):
-            ListenableFuture<Tile> =
-        Futures.immediateFuture(
+        return Futures.immediateFuture(
             Tile.Builder()
                 .setResourcesVersion(RESOURCES_VERSION)
                 .setFreshnessIntervalMillis(1000)
@@ -73,7 +73,7 @@ class MyTileService : TileService() {
                 ).setState(state.build())
                 .build()
         )
-
+    }
     override fun onTileResourcesRequest(
         requestParams: RequestBuilders.ResourcesRequest):
             ListenableFuture<ResourceBuilders.Resources> =
