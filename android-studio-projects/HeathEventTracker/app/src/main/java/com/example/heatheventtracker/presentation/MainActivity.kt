@@ -23,19 +23,19 @@ import androidx.wear.compose.material.Text
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (applicationContext.checkSelfPermission(
+        if ((applicationContext.checkSelfPermission(
             Manifest.permission.BODY_SENSORS) !=
-                PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(
-                arrayOf(Manifest.permission.BODY_SENSORS),
-                0)
-        }
-        if (applicationContext.checkSelfPermission(
-            Manifest.permission.ACTIVITY_RECOGNITION) !=
-                PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(
-                arrayOf(Manifest.permission.ACTIVITY_RECOGNITION),
-                1)
+                PackageManager.PERMISSION_GRANTED) ||
+            (applicationContext.checkSelfPermission(
+                Manifest.permission.ACTIVITY_RECOGNITION) !=
+                PackageManager.PERMISSION_GRANTED)) {
+                requestPermissions(
+                    arrayOf(
+                        Manifest.permission.BODY_SENSORS,
+                        Manifest.permission.ACTIVITY_RECOGNITION
+                    ),
+                    0
+                )
         }
 
         setContent {
