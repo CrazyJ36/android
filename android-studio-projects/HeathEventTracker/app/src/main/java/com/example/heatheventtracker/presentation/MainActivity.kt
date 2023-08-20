@@ -29,6 +29,7 @@ import androidx.health.services.client.data.DataPointContainer
 import androidx.health.services.client.data.DataType
 import androidx.health.services.client.data.DataTypeAvailability
 import androidx.health.services.client.data.DeltaDataType
+import androidx.health.services.client.data.MeasureCapabilities
 import androidx.lifecycle.lifecycleScope
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
@@ -88,11 +89,12 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun WearApp() {
         remember { text }
-
+        var capabilities: MeasureCapabilities? = null
+        var supportsSteps: Boolean? = null
         LaunchedEffect(null, false) {
             lifecycleScope.launch {
-                val capabilities = measureClient!!.getCapabilitiesAsync().await()
-                val supportsSteps = DataType.STEPS in capabilities.supportedDataTypesMeasure
+                capabilities = measureClient!!.getCapabilitiesAsync().await()
+                supportsSteps = DataType.STEPS in capabilities!!.supportedDataTypesMeasure
             }
         }
 
@@ -103,7 +105,7 @@ class MainActivity : ComponentActivity() {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text
+                "text: $text, supportsSteps: $supportsSteps"
             )
         }
     }
