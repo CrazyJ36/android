@@ -24,11 +24,7 @@ import androidx.health.services.client.data.MeasureCapabilities
 import androidx.health.services.client.getCapabilities
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.coroutineContext
 
 class MainActivity : ComponentActivity() {
     private val healthClient = HealthServices.getClient(this)
@@ -56,7 +52,8 @@ class MainActivity : ComponentActivity() {
         val coroutineScope = rememberCoroutineScope()
         LaunchedEffect(false) {
             coroutineScope.launch {
-                capabilities = healthClient.measureClient.getCapabilities()
+                capabilities = healthClient.measureClient
+                    .getCapabilities()
             }
         }
         Column(
