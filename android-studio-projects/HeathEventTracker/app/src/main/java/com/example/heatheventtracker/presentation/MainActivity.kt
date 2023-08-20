@@ -27,7 +27,7 @@ import androidx.wear.compose.material.Text
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-    private val healthClient = HealthServices.getClient(this)
+    private val healthClient = HealthServices.getClient(this@MainActivity)
     private var capabilities: MeasureCapabilities? = null
   
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -58,4 +58,5 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.activity:activity-compose:1.7.2")
     implementation ("androidx.health:health-services-client:1.1.0-alpha01")
+    implementation ("com.google.android.libraries.healthdata:health-data-api:1.1.0-alpha01")
 }
