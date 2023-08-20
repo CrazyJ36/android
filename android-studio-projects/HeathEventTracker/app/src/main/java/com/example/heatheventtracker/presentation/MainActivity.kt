@@ -43,46 +43,46 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (applicationContext.checkSelfPermission(
-                Manifest.permission.ACTIVITY_RECOGNITION) != 
+                Manifest.permission.BODY_SENSORS) !=
             PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(
                     arrayOf(
-                        Manifest.permission.ACTIVITY_RECOGNITION
+                        Manifest.permission.BODY_SENSORS
                     ), 0)
         }
 
         healthClient = HealthServices.getClient(applicationContext)
         measureClient = healthClient!!.measureClient
         measureClient!!.registerMeasureCallback(DataType.Companion
-            .STEPS, stepsCallback)
+            .HEART_RATE_BPM, heartRateCallback)
 
         setContent {
             WearApp()
         }
     }
 
-    private val stepsCallback = object: MeasureCallback {
+    private val heartRateCallback = object: MeasureCallback {
         override fun onAvailabilityChanged(
             dataType: DeltaDataType<*, *>,
             availability: Availability
         ) {
             if (availability is DataTypeAvailability) {
                 Toast.makeText(this@MainActivity,
-                    "steps available", Toast.LENGTH_SHORT).show()
+                    "heart rate available", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this@MainActivity,
-                    "can't get steps at the moment", Toast.LENGTH_SHORT).show()
+                    "can't get heart rate at the moment", Toast.LENGTH_SHORT).show()
             }
         }
 
         override fun onDataReceived(data: DataPointContainer) {
-            text = data.toString()
+            text = data.getData(DataType.HEART_RATE_BPM).toString()
         }
     }
     override fun onDestroy() {
         super.onDestroy()
         measureClient!!.unregisterMeasureCallbackAsync(DataType
-            .Companion.STEPS, stepsCallback)
+            .Companion.HEART_RATE_BPM, heartRateCallback)
 
     }
 
@@ -90,11 +90,11 @@ class MainActivity : ComponentActivity() {
     fun WearApp() {
         remember { text }
         var capabilities: MeasureCapabilities? = null
-        var supportsSteps: Boolean? = null
+        var supportsHeartRate: Boolean? = null
         LaunchedEffect(null, false) {
             lifecycleScope.launch {
                 capabilities = measureClient!!.getCapabilitiesAsync().await()
-                supportsSteps = DataType.STEPS in capabilities!!.supportedDataTypesMeasure
+                supportsHeartRate = DataType.HEART_RATE_BPM in capabilities!!.supportedDataTypesMeasure
             }
         }
 
@@ -105,7 +105,7 @@ class MainActivity : ComponentActivity() {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                "text: $text, supportsSteps: $supportsSteps"
+                "capabillities: ${capabilities!!.supportedDataTypesMeasure},\nheartRate: $text,\nsupportsHeartRate: $supportsHeartRate"
             )
         }
     }
