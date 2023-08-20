@@ -36,20 +36,20 @@ class MainActivity : ComponentActivity() {
             PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(
                     arrayOf(
-                        Manifest.permission.BODY_SENSORS
+                        Manifest.permission.ACTIVITY_RECOGNITION
                     ), 0)
-        } else {
-            healthClient = HealthServices.getClient(applicationContext)
+        }
 
-            setContent {
-                WearApp()
-            }
+
+        setContent {
+            WearApp()
         }
     }
 
 
     @Composable
     fun WearApp() {
+        healthClient = HealthServices.getClient(applicationContext)
         LaunchedEffect(false) {
             capabilities = healthClient!!.measureClient
                 .getCapabilities()
