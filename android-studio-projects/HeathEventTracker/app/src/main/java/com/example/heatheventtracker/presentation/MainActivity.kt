@@ -38,11 +38,12 @@ class MainActivity : ComponentActivity() {
                     arrayOf(
                         Manifest.permission.BODY_SENSORS
                     ), 0)
-        }
-        healthClient = HealthServices.getClient(applicationContext)
+        } else {
+            healthClient = HealthServices.getClient(applicationContext)
 
-        setContent {
-            WearApp()
+            setContent {
+                WearApp()
+            }
         }
     }
 
