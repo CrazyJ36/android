@@ -105,7 +105,7 @@ class MainActivity : ComponentActivity() {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                "capabillities: ${capabilities!!.supportedDataTypesMeasure},\nheartRate: $text,\nsupportsHeartRate: $supportsHeartRate"
+                "heartRate: $text,\nsupportsHeartRate: $supportsHeartRate"
             )
         }
     }
