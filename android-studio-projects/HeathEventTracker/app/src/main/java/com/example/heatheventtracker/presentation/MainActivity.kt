@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.health.services.client.HealthServices
 import androidx.health.services.client.HealthServicesClient
@@ -25,7 +24,6 @@ import androidx.health.services.client.data.MeasureCapabilities
 import androidx.health.services.client.getCapabilities
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
-import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     private var healthClient: HealthServicesClient? = null
@@ -43,7 +41,6 @@ class MainActivity : ComponentActivity() {
         }
         healthClient = HealthServices.getClient(applicationContext)
 
-
         setContent {
             WearApp()
         }
@@ -52,7 +49,6 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun WearApp() {
-        //val coroutineScope = rememberCoroutineScope()
         LaunchedEffect(false) {
             capabilities = healthClient!!.measureClient
                 .getCapabilities()
