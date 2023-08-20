@@ -20,6 +20,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.health.services.client.HealthServices
+import androidx.health.services.client.HealthServicesClient
 import androidx.health.services.client.data.MeasureCapabilities
 import androidx.health.services.client.getCapabilities
 import androidx.wear.compose.material.MaterialTheme
@@ -27,7 +28,7 @@ import androidx.wear.compose.material.Text
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-    private val healthClient = HealthServices.getClient(this@MainActivity)
+    private var healthClient: HealthServicesClient? = null
     private var capabilities: MeasureCapabilities? = null
   
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +41,8 @@ class MainActivity : ComponentActivity() {
                         Manifest.permission.BODY_SENSORS
                     ), 0)
         }
+        healthClient = HealthServices.getClient(applicationContext)
+
 
         setContent {
             WearApp()
@@ -49,13 +52,12 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun WearApp() {
-        val coroutineScope = rememberCoroutineScope()
+        //val coroutineScope = rememberCoroutineScope()
         LaunchedEffect(false) {
-            coroutineScope.launch {
-                capabilities = healthClient.measureClient
-                    .getCapabilities()
-            }
+            capabilities = healthClient!!.measureClient
+                .getCapabilities()
         }
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
