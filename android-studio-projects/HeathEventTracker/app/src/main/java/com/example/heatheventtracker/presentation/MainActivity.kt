@@ -18,33 +18,26 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.health.services.client.HealthServices
 import androidx.health.services.client.HealthServicesClient
 import androidx.health.services.client.MeasureCallback
+import androidx.health.services.client.MeasureClient
 import androidx.health.services.client.data.Availability
 import androidx.health.services.client.data.DataPointContainer
 import androidx.health.services.client.data.DataType
 import androidx.health.services.client.data.DataTypeAvailability
 import androidx.health.services.client.data.DeltaDataType
-import androidx.health.services.client.data.MeasureCapabilities
-import androidx.health.services.client.getCapabilities
 import androidx.lifecycle.lifecycleScope
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
-import com.google.common.util.concurrent.ListenableFuture
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class MainActivity : ComponentActivity() {
-    val healthClient = HealthServices.getClient(applicationContext)
-    val measureClient = healthClient.measureClient
+    var healthClient: HealthServicesClient? = null
+    var measureClient: MeasureClient? = null
     var text = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +49,10 @@ class MainActivity : ComponentActivity() {
                         Manifest.permission.ACTIVITY_RECOGNITION
                     ), 0)
         }
-        measureClient.registerMeasureCallback(DataType.Companion
+
+        healthClient = HealthServices.getClient(applicationContext)
+        measureClient = healthClient!!.measureClient
+        measureClient!!.registerMeasureCallback(DataType.Companion
             .STEPS, stepsCallback)
 
         setContent {
@@ -84,7 +80,7 @@ class MainActivity : ComponentActivity() {
     }
     override fun onDestroy() {
         super.onDestroy()
-        measureClient.unregisterMeasureCallbackAsync(DataType
+        measureClient!!.unregisterMeasureCallbackAsync(DataType
             .Companion.STEPS, stepsCallback)
 
     }
@@ -95,7 +91,7 @@ class MainActivity : ComponentActivity() {
 
         LaunchedEffect(null, false) {
             lifecycleScope.launch {
-                val capabilities = measureClient.getCapabilitiesAsync().await()
+                val capabilities = measureClient!!.getCapabilitiesAsync().await()
                 val supportsSteps = DataType.STEPS in capabilities.supportedDataTypesMeasure
             }
         }
