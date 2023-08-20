@@ -16,44 +16,58 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.health.services.client.HealthServices
+import androidx.health.services.client.data.MeasureCapabilities
+import androidx.health.services.client.getCapabilities
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.coroutineContext
 
 class MainActivity : ComponentActivity() {
+    private val healthClient = HealthServices.getClient(this)
+    private var capabilities: MeasureCapabilities? = null
+  
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if ((applicationContext.checkSelfPermission(
-            Manifest.permission.BODY_SENSORS) !=
-                PackageManager.PERMISSION_GRANTED) ||
-            (applicationContext.checkSelfPermission(
-                Manifest.permission.ACTIVITY_RECOGNITION) !=
-                PackageManager.PERMISSION_GRANTED)) {
+        if (applicationContext.checkSelfPermission(
+                Manifest.permission.ACTIVITY_RECOGNITION) != 
+            PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(
                     arrayOf(
-                        Manifest.permission.BODY_SENSORS,
-                        Manifest.permission.ACTIVITY_RECOGNITION
-                    ),
-                    0
-                )
+                        Manifest.permission.BODY_SENSORS
+                    ), 0)
         }
 
         setContent {
             WearApp()
         }
     }
-}
 
-@Composable
-fun WearApp() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colors.background),
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            "test"
-        )
+
+    @Composable
+    fun WearApp() {
+        val coroutineScope = rememberCoroutineScope()
+        LaunchedEffect(false) {
+            coroutineScope.launch {
+                capabilities = healthClient.measureClient.getCapabilities()
+            }
+        }
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colors.background),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                capabilities.toString()
+            )
+        }
     }
 }
