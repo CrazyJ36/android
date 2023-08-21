@@ -58,7 +58,11 @@ class MyTileService : TileService() {
                 } else {
                     Log.d("UPDATETILE",
                         "HEART RATE: " +
-                                (PlatformHealthSources.heartRateBpm() to String)
+                                StringProp.Builder("waiting")
+                                    .setDynamicValue(
+                                        PlatformHealthSources
+                                            .heartRateBpm().format()
+                                    ).build()
                     )
                 }
             }
@@ -89,10 +93,10 @@ class MyTileService : TileService() {
                 StringProp.Builder("--")
                     .setDynamicValue(
                         PlatformHealthSources
-                            .heartRateBpm().animate().format()
+                            .heartRateBpm().format()
                     ).build(),
                 StringLayoutConstraint
-                    .Builder("000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000")
+                    .Builder("000")
                     .build()
             ).build()
         val primaryLayout = PrimaryLayout.Builder(requestParams
