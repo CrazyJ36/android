@@ -2,6 +2,7 @@ package com.crazyj36.updatetile
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.ui.layout.Layout
 import androidx.core.app.ActivityCompat
@@ -45,7 +46,15 @@ class MyTileService : TileService() {
         super.onCreate()
         Timer().schedule(object : TimerTask() {
             override fun run() {
-
+                if (ActivityCompat.checkSelfPermission(
+                        this@MyTileService,
+                        Manifest.permission.BODY_SENSORS
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    Log.d("UPDATETILE", "need body sensor permission")
+                } else {
+                    Log.d("UPDATETILE", PlatformHealthSources.heartRateBpm().format().toString())
+                }
             }
 
         }, 0, 1500)
