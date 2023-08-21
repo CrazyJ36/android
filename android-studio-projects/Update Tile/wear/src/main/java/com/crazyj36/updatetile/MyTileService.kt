@@ -3,34 +3,16 @@ package com.crazyj36.updatetile
 import android.Manifest
 import android.content.pm.PackageManager
 import android.util.Log
-import android.widget.Toast
-import androidx.compose.ui.layout.Layout
 import androidx.core.app.ActivityCompat
-import androidx.health.services.client.MeasureCallback
-import androidx.health.services.client.MeasureClient
-import androidx.health.services.client.data.Availability
-import androidx.health.services.client.data.DataPointContainer
-import androidx.health.services.client.data.DataType
-import androidx.health.services.client.data.DataTypeAvailability
-import androidx.health.services.client.data.DeltaDataType
-import androidx.wear.protolayout.ActionBuilders
 import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ModifiersBuilders
 import androidx.wear.protolayout.ResourceBuilders
-import androidx.wear.protolayout.StateBuilders
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
-import androidx.wear.protolayout.expression.AppDataKey
-import androidx.wear.protolayout.expression.DynamicBuilders
-import androidx.wear.protolayout.expression.DynamicBuilders.DynamicFloat
-import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
-import androidx.wear.protolayout.expression.DynamicDataBuilders
-import androidx.wear.protolayout.expression.DynamicDataBuilders.DynamicDataValue
 import androidx.wear.protolayout.expression.PlatformHealthSources
-import androidx.wear.protolayout.material.Chip
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.Text
 import androidx.wear.protolayout.material.layouts.PrimaryLayout
@@ -42,7 +24,6 @@ import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
 import java.util.Timer
 import java.util.TimerTask
-import kotlin.math.absoluteValue
 
 const val RESOURCES_VERSION = "1"
 
@@ -65,7 +46,7 @@ class MyTileService : TileService() {
                     Log.d("UPDATETILE",
                         "need body sensor permission")
                 } else {
-                    val out = arrayOf(myData.dynamicValue).last()
+                    val out = arrayOf(myData.dynamicValue).last()!!.asInt().hashCode()
                     Log.d("UPDATETILE", "HEART RATE: $out")
                 }
             }
