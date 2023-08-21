@@ -9,7 +9,6 @@ import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ModifiersBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
-import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.PlatformHealthSources
@@ -28,9 +27,11 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
-    val timer = Timer()
+    lateinit  var timer: Timer
+    lateinit var heartRate: StringProp
     override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
         super.onTileEnterEvent(requestParams)
+        timer = Timer()
         timer.schedule(object : TimerTask() {
             override fun run() {
                 if (ActivityCompat.checkSelfPermission(
@@ -41,13 +42,13 @@ class MyTileService : TileService() {
                     Log.d("UPDATETILE",
                         "need body sensor permission")
                 } else {
-                    val myData = StringProp.Builder("--")
+                    heartRate = StringProp.Builder("--")
                         .setDynamicValue(
                             PlatformHealthSources
                                 .heartRateBpm()
                                 .format()
                         ).build()
-                    Log.d("UPDATETILE", "HEART RATE: $myData")
+                    Log.d("UPDATETILE", "HEART RATE: ${heartRate.dynamicValue}")
                 }
             }
 
