@@ -55,23 +55,24 @@ class MyTileService : TileService() {
                     Log.d("UPDATETILE",
                         "need body sensor permission")
                 } else {
+                    val heartRate: String =
+                        PlatformHealthSources
+                            .heartRateBpm()
+                            .format()
+                            .toString()
                     Log.d("UPDATETILE",
-                        "HEART RATE: " +
-                                StringProp.Builder("--")
-                                    .setDynamicValue(
-                                    PlatformHealthSources
-                                        .heartRateBpm().format()
-                                )
+                        "HEART RATE: $heartRate"
                     )
                 }
             }
 
-        }, 0, 1500)
+        }, 0, 5000)
     }
 
     override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
         super.onTileLeaveEvent(requestParams)
         timer.cancel()
+        timer.purge()
     }
 
     public override fun onTileRequest(
@@ -94,7 +95,7 @@ class MyTileService : TileService() {
                             .heartRateBpm().animate().format()
                     ).build(),
                 StringLayoutConstraint
-                    .Builder("000")
+                    .Builder("000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000")
                     .build()
             ).build()
         val primaryLayout = PrimaryLayout.Builder(requestParams
@@ -123,7 +124,7 @@ class MyTileService : TileService() {
             Futures.immediateFuture(
                 Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
-                    .setFreshnessIntervalMillis(1500)
+                    .setFreshnessIntervalMillis(5000)
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                            primaryLayout
