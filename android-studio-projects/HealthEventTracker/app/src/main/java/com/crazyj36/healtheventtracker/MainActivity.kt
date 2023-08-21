@@ -29,8 +29,8 @@ import kotlinx.coroutines.runBlocking
 import androidx.compose.runtime.getValue
 
 class MainActivity : ComponentActivity() {
-    lateinit var measureClient: MeasureClient
-    lateinit var heartRateCallback: MeasureCallback
+    private lateinit var measureClient: MeasureClient
+    private lateinit var heartRateCallback: MeasureCallback
     var showAvailability = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,17 +99,9 @@ class MainActivity : ComponentActivity() {
                 .background(MaterialTheme.colors.background),
             verticalArrangement = Arrangement.Center
         ) {
-            if (applicationContext.checkSelfPermission(
-                    Manifest.permission.BODY_SENSORS) ==
-                PackageManager.PERMISSION_GRANTED)  {
-                Text(
-                    "heart rate: $text"
-                )
-            } else {
-                Text(
-                    "heart rate sensor permission not granted."
-                )
-            }
+            Text(
+                "heart rate: $text"
+            )
         }
     }
 }
