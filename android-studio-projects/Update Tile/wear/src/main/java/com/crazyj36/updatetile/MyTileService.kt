@@ -26,6 +26,7 @@ import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
 import androidx.wear.protolayout.expression.DynamicDataBuilders.DynamicDataValue
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.Chip
+import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.Text
 import androidx.wear.protolayout.material.layouts.PrimaryLayout
 import androidx.wear.tiles.RequestBuilders
@@ -54,13 +55,14 @@ class MyTileService : TileService() {
     public override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-        val primaryChip = Chip.Builder(
-            this@MyTileService,
+        val primaryChip = CompactChip.Builder(
+            this,
+            "Load",
             ModifiersBuilders.Clickable.Builder()
                 .setOnClick(LoadAction.Builder().build())
                 .build(),
             requestParams.deviceConfiguration
-        )
+        ).build()
         val primaryText =
             Text.Builder(
                 this,
@@ -76,10 +78,11 @@ class MyTileService : TileService() {
             ).build()
         val primaryLayout = PrimaryLayout.Builder(requestParams
             .deviceConfiguration)
-            .setPrimaryChipContent(primaryChip.build())
+            .setPrimaryChipContent(primaryChip)
             .setPrimaryLabelTextContent(primaryText)
+            .build()
         val box = LayoutElementBuilders.Box.Builder()
-            .addContent(primaryLayout.build())
+            .addContent(primaryLayout)
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
