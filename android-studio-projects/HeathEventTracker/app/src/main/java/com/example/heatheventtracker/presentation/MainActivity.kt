@@ -41,7 +41,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 
 class MainActivity : ComponentActivity() {
-    lateinit var healthClient: HealthServicesClient
     lateinit var measureClient: MeasureClient
     lateinit var heartRateCallback: MeasureCallback
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,20 +64,17 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun WearApp() {
         var text by remember { mutableStateOf("") }
-        lateinit var capabilities: MeasureCapabilities
-        var supportsHeartRate: Boolean? = null
-        heartRateCallback = object: MeasureCallback {
+        val heartRateCallback = object: MeasureCallback {
             override fun onAvailabilityChanged(
                 dataType: DeltaDataType<*, *>,
                 availability: Availability
             ) {
                 if (availability is DataTypeAvailability) {
-                    text = "heart rate available"
+                    text = "heart rate available."
                 } else {
-                    text = "can't get heart rate at the moment"
+                    text = "can't get heart rate."
                 }
             }
-
             override fun onDataReceived(data: DataPointContainer) {
                 text = data.getData(DataType.HEART_RATE_BPM)
                     .last().value.toString()
@@ -90,21 +86,13 @@ class MainActivity : ComponentActivity() {
             requestPermissions(
                 arrayOf(
                     Manifest.permission.BODY_SENSORS
-                ), 0)
+                ), 0
+            )
         }
-        healthClient = HealthServices.getClient(applicationContext)
-        measureClient = healthClient.measureClient
+        measureClient = HealthServices.getClient(
+            applicationContext).measureClient
         measureClient.registerMeasureCallback(DataType.Companion
             .HEART_RATE_BPM, heartRateCallback)
-
-
-        LaunchedEffect("launchedEffect") {
-            lifecycleScope.launch {
-                capabilities = measureClient.getCapabilitiesAsync().await()
-                supportsHeartRate = DataType.HEART_RATE_BPM in capabilities.supportedDataTypesMeasure
-            }
-        }
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -112,7 +100,7 @@ class MainActivity : ComponentActivity() {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                "heartRate: $text,\nsupportsHeartRate: $supportsHeartRate\ncapabilities: ${capabilities.supportedDataTypesMeasure.toString()}"
+                "heartRate: $text"
             )
         }
     }
