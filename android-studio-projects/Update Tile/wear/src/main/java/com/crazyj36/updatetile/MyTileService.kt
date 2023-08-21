@@ -31,10 +31,11 @@ class MyTileService : TileService() {
     val timer = Timer()
     override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
         super.onTileEnterEvent(requestParams)
-        val myData = TypeBuilders.FloatProp.Builder(0F)
+        val myData = StringProp.Builder("--")
             .setDynamicValue(
                 PlatformHealthSources
                     .heartRateBpm()
+                    .format()
             ).build()
         timer.schedule(object : TimerTask() {
             override fun run() {
@@ -46,7 +47,7 @@ class MyTileService : TileService() {
                     Log.d("UPDATETILE",
                         "need body sensor permission")
                 } else {
-                    val out = arrayOf(myData.dynamicValue).last()!!.asInt().hashCode()
+                    val out = myData.dynamicValue
                     Log.d("UPDATETILE", "HEART RATE: $out")
                 }
             }
