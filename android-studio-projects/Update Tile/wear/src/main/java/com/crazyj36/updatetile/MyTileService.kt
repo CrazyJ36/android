@@ -25,6 +25,7 @@ import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders
+import androidx.wear.protolayout.expression.DynamicBuilders.DynamicFloat
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
 import androidx.wear.protolayout.expression.DynamicDataBuilders.DynamicDataValue
 import androidx.wear.protolayout.expression.PlatformHealthSources
@@ -63,7 +64,7 @@ class MyTileService : TileService() {
                             PlatformHealthSources
                                 .heartRateBpm()
                         ).build()
-                    val heartRate = data.dynamicValue
+                    val heartRate = data.dynamicValue!!.asInt()
 
                     Log.d("UPDATETILE", "HEART RATE: $heartRate")
 
