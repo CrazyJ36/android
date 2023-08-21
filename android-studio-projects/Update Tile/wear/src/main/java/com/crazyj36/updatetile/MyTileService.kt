@@ -3,6 +3,7 @@ package com.crazyj36.updatetile
 import android.Manifest
 import android.content.pm.PackageManager
 import android.util.Log
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.LayoutElementBuilders
@@ -27,32 +28,39 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
-    lateinit  var timer: Timer
-    lateinit var heartRate: StringProp
+
+    private lateinit  var timer: Timer
+    private lateinit var heartRate: StringProp
+
     override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
         super.onTileEnterEvent(requestParams)
-        timer = Timer()
-        timer.schedule(object : TimerTask() {
-            override fun run() {
-                if (ActivityCompat.checkSelfPermission(
-                        this@MyTileService,
-                        Manifest.permission.BODY_SENSORS
-                    ) != PackageManager.PERMISSION_GRANTED
-                ) {
-                    Log.d("UPDATETILE",
-                        "need body sensor permission")
-                } else {
-                    heartRate = StringProp.Builder("--")
-                        .setDynamicValue(
-                            PlatformHealthSources
-                                .heartRateBpm()
-                                .format()
-                        ).build()
-                    Log.d("UPDATETILE", "HEART RATE: ${heartRate.dynamicValue}")
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.BODY_SENSORS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            Toast.makeText(applicationContext,
+                "Need body sensor permissions",
+                Toast.LENGTH_SHORT).show()
+        } else {
+            heartRate = StringProp.Builder("--")
+                .setDynamicValue(
+                    PlatformHealthSources
+                        .heartRateBpm()
+                        .format()
+                ).build()
+            timer = Timer()
+            timer.schedule(object : TimerTask() {
+                override fun run() {
+                    Log.d(
+                        "UPDATETILE",
+                        "HEART RATE: ${
+                            heartRate.dynamicValue
+                        }"
+                    )
                 }
-            }
-
-        }, 0, 1000)
+            }, 0, 1000)
+        }
     }
 
     override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
