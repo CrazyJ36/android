@@ -61,7 +61,7 @@ class MyTileService : TileService() {
                         DynamicDataBuilders.DynamicDataValue
                             .fromString(out.toString())
                     ).build()
-                    Log.d("UPDATETILE", "HEART RATE: ${state.build()}")
+                    Log.d("UPDATETILE", "HEART RATE: $TEXT")
                 }
             }
 
