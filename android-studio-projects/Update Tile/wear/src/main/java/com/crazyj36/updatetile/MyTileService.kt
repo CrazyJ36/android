@@ -52,13 +52,13 @@ class MyTileService : TileService() {
                     PlatformHealthSources
                         .heartRateBpm()
                 ).build()
-            val dynamicValue = prop.dynamicValue
-            if (dynamicValue != null) {
-                heartRate =  dynamicValue.asInt()
-            }
             timer = Timer()
             timer.schedule(object : TimerTask() {
                 override fun run() {
+                    val dynamicValue = prop.dynamicValue
+                    if (dynamicValue != null) {
+                        heartRate =  dynamicValue.asInt()
+                    }
                     Log.d("UPDATETILE",
                         "HEART RATE: $heartRate"
                     )
