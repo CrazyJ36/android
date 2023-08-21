@@ -51,14 +51,27 @@ class MyTileService : TileService() {
                         Manifest.permission.BODY_SENSORS
                     ) != PackageManager.PERMISSION_GRANTED
                 ) {
-                    Log.d("UPDATETILE", "need body sensor permission")
+                    Log.d("UPDATETILE",
+                        "need body sensor permission")
                 } else {
-                    Log.d("UPDATETILE", "HEART RATE: " + PlatformHealthSources.heartRateBpm().asInt())
+                    Log.d("UPDATETILE",
+                        "HEART RATE: " +
+                                StringProp.Builder("--")
+                                    .setDynamicValue(
+                                    PlatformHealthSources
+                                        .heartRateBpm().format()
+                                )
+                    )
                 }
             }
 
         }, 0, 1500)
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Timer().cancel()
     }
 
     public override fun onTileRequest(
