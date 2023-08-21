@@ -33,7 +33,7 @@ class MyTileService : TileService() {
 
     private lateinit  var timer: Timer
     private lateinit var prop: TypeBuilders.FloatProp
-    private lateinit var heartRate: DynamicBuilders.DynamicFloat
+    private lateinit var heartRate: DynamicBuilders.DynamicInt32
 
     override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
         super.onTileEnterEvent(requestParams)
@@ -52,7 +52,7 @@ class MyTileService : TileService() {
                     PlatformHealthSources
                         .heartRateBpm()
                 ).build()
-            heartRate = prop.dynamicValue!!
+            heartRate = prop.dynamicValue!!.asInt()
             timer = Timer()
             timer.schedule(object : TimerTask() {
                 override fun run() {
