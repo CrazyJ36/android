@@ -48,6 +48,12 @@ class MyTileService : TileService() {
     val timer = Timer()
     override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
         super.onTileEnterEvent(requestParams)
+        val data = TypeBuilders.FloatProp.Builder(
+            0F)
+            .setDynamicValue(
+                PlatformHealthSources
+                    .heartRateBpm()
+            )
         timer.schedule(object : TimerTask() {
             override fun run() {
                 if (ActivityCompat.checkSelfPermission(
@@ -58,13 +64,8 @@ class MyTileService : TileService() {
                     Log.d("UPDATETILE",
                         "need body sensor permission")
                 } else {
-                    val data = TypeBuilders.FloatProp.Builder(
-                        0F)
-                        .setDynamicValue(
-                            PlatformHealthSources
-                                .heartRateBpm()
-                        ).build()
-                    val heartRate = data.dynamicValue!!.asInt()
+
+                    val heartRate = data.build().dynamicValue!!.asInt()
 
                     Log.d("UPDATETILE", "HEART RATE: $heartRate")
 
