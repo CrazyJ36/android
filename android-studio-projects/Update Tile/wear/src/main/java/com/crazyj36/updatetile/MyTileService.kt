@@ -66,7 +66,7 @@ class MyTileService : TileService() {
                         "need body sensor permission")
                 } else {
                     val out = arrayOf(myData.dynamicValue)
-                    val real = out.lastIndex.absoluteValue
+                    val real = out.last()?.format().toString()
                     Log.d("UPDATETILE", "HEART RATE: $real")
                 }
             }
