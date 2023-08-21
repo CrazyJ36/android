@@ -56,7 +56,7 @@ class MyTileService : TileService() {
                         "need body sensor permission")
                 } else {
                     val heartRate: String =
-                        String.format("%.2f",PlatformHealthSources
+                        String.format("%d",PlatformHealthSources
                             .heartRateBpm())
                     Log.d("UPDATETILE",
                         "HEART RATE: $heartRate"
