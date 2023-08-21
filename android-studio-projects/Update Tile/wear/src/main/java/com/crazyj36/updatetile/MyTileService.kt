@@ -46,7 +46,7 @@ class MyTileService : TileService() {
                             PlatformHealthSources
                                 .heartRateBpm()
                         ).build()
-                    Log.d("UPDATETILE", "HEART RATE: ${myData.dynamicValue}")
+                    Log.d("UPDATETILE", "HEART RATE: ${myData.dynamicValue!!.asInt()}")
                 }
             }
 
