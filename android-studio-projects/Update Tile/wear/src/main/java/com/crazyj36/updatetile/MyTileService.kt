@@ -27,6 +27,7 @@ import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicFloat
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
+import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.DynamicDataBuilders.DynamicDataValue
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.Chip
@@ -48,13 +49,11 @@ class MyTileService : TileService() {
     val timer = Timer()
     override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
         super.onTileEnterEvent(requestParams)
-        val data = TypeBuilders.FloatProp.Builder(
-            0F)
+        val myData = TypeBuilders.FloatProp.Builder(0F)
             .setDynamicValue(
                 PlatformHealthSources
                     .heartRateBpm()
             ).build()
-        val heartRate = data.dynamicValue
         timer.schedule(object : TimerTask() {
             override fun run() {
                 if (ActivityCompat.checkSelfPermission(
@@ -65,7 +64,9 @@ class MyTileService : TileService() {
                     Log.d("UPDATETILE",
                         "need body sensor permission")
                 } else {
-                    Log.d("UPDATETILE", "HEART RATE: $heartRate")
+                    val out = arrayOf(myData.dynamicValue)
+                    val real = out.last().toString()
+                    Log.d("UPDATETILE", "HEART RATE: $real")
                 }
             }
 
