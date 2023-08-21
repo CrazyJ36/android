@@ -14,6 +14,7 @@ import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.DynamicBuilders
+import androidx.wear.protolayout.expression.DynamicBuilders.DynamicFloat
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.Text
@@ -32,7 +33,6 @@ const val RESOURCES_VERSION = "1"
 class MyTileService : TileService() {
 
     private lateinit  var timer: Timer
-    private lateinit var prop: TypeBuilders.FloatProp
     private lateinit var heartRate: DynamicBuilders.DynamicInt32
 
     override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
@@ -46,13 +46,13 @@ class MyTileService : TileService() {
                 "Need body sensor permissions",
                 Toast.LENGTH_SHORT).show()
         } else {
-            prop = TypeBuilders.FloatProp.Builder(
+            val prop = TypeBuilders.FloatProp.Builder(
                 0F)
                 .setDynamicValue(
                     PlatformHealthSources
                         .heartRateBpm()
-                ).build()
-            heartRate = prop.dynamicValue!!.asInt()
+                ).build().dynamicValue
+            heartRate = prop!!.asInt()
             timer = Timer()
             timer.schedule(object : TimerTask() {
                 override fun run() {
