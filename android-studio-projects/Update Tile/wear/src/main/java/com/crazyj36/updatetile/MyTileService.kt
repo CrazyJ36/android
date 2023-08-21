@@ -30,6 +30,7 @@ import androidx.wear.protolayout.material.Chip
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.Text
 import androidx.wear.protolayout.material.layouts.PrimaryLayout
+import androidx.wear.tiles.EventBuilders
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders.Tile
 import androidx.wear.tiles.TileService
@@ -41,10 +42,10 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
-
-    override fun onCreate() {
-        super.onCreate()
-        Timer().schedule(object : TimerTask() {
+    val timer = Timer()
+    override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
+        super.onTileEnterEvent(requestParams)
+        timer.schedule(object : TimerTask() {
             override fun run() {
                 if (ActivityCompat.checkSelfPermission(
                         this@MyTileService,
@@ -66,12 +67,11 @@ class MyTileService : TileService() {
             }
 
         }, 0, 1500)
-
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        Timer().cancel()
+    override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
+        super.onTileLeaveEvent(requestParams)
+        timer.cancel()
     }
 
     public override fun onTileRequest(
