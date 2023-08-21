@@ -53,7 +53,7 @@ class MyTileService : TileService() {
                 ) {
                     Log.d("UPDATETILE", "need body sensor permission")
                 } else {
-                    Log.d("UPDATETILE", PlatformHealthSources.heartRateBpm().format().toString())
+                    Log.d("UPDATETILE", "HEART RATE: " + PlatformHealthSources.heartRateBpm().format())
                 }
             }
 
