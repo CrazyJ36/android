@@ -37,6 +37,7 @@ import androidx.compose.runtime.getValue
 class MainActivity : ComponentActivity() {
     lateinit var measureClient: MeasureClient
     lateinit var heartRateCallback: MeasureCallback
+    var showAvailability = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -55,7 +56,6 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun WearApp() {
         var text by remember { mutableStateOf("") }
-        var showAvailability = true
         val heartRateCallback = object: MeasureCallback {
             override fun onAvailabilityChanged(
                 dataType: DeltaDataType<*, *>,
@@ -64,26 +64,25 @@ class MainActivity : ComponentActivity() {
                 if (showAvailability) {
                     showAvailability = false
                     if (availability is DataTypeAvailability) {
-                        text = "getting heart rate..."
                         Toast.makeText(
                             applicationContext,
-                            "heart rate available on device.",
+                            "Heart rate available, loading...",
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {
-                        text = "failed"
                         Toast.makeText(
                             applicationContext,
-                            "can't get heart rate from device.",
+                            "Can't get heart rate from device.",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
             }
             override fun onDataReceived(data: DataPointContainer) {
-                if (text != "failed") {
-                        text = data.getData(DataType.HEART_RATE_BPM)
-                            .last().value.toString()
+                val heartRate = data.getData(DataType.HEART_RATE_BPM)
+                    .last().value.toString()
+                if (heartRate != "0.0") {
+                    text = heartRate
                 }
             }
         }
