@@ -10,8 +10,10 @@ import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ModifiersBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
+import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
+import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.Text
@@ -30,7 +32,8 @@ const val RESOURCES_VERSION = "1"
 class MyTileService : TileService() {
 
     private lateinit  var timer: Timer
-    private lateinit var heartRate: StringProp
+    private lateinit var prop: TypeBuilders.FloatProp
+    private lateinit var heartRate: DynamicBuilders.DynamicFloat
 
     override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
         super.onTileEnterEvent(requestParams)
@@ -43,20 +46,18 @@ class MyTileService : TileService() {
                 "Need body sensor permissions",
                 Toast.LENGTH_SHORT).show()
         } else {
-            heartRate = StringProp.Builder("--")
+            prop = TypeBuilders.FloatProp.Builder(
+                0F)
                 .setDynamicValue(
                     PlatformHealthSources
                         .heartRateBpm()
-                        .format()
                 ).build()
+            heartRate = prop.dynamicValue!!
             timer = Timer()
             timer.schedule(object : TimerTask() {
                 override fun run() {
-                    Log.d(
-                        "UPDATETILE",
-                        "HEART RATE: ${
-                            heartRate.dynamicValue
-                        }"
+                    Log.d("UPDATETILE",
+                        "HEART RATE: $heartRate"
                     )
                 }
             }, 0, 1000)
