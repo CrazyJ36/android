@@ -78,7 +78,7 @@ class MainActivity : ComponentActivity() {
 
         override fun onDataReceived(data: DataPointContainer) {
             //text = data.getData(DataType.HEART_RATE_BPM).toString()
-            text = data.getData(DataType.HEART_RATE_BPM)[0].toString()
+            text = data.getData(DataType.HEART_RATE_BPM).last().value.toString()
             Toast.makeText(applicationContext,
                 text,
                 Toast.LENGTH_SHORT).show()
@@ -88,7 +88,6 @@ class MainActivity : ComponentActivity() {
         super.onDestroy()
         measureClient!!.unregisterMeasureCallbackAsync(DataType
             .Companion.HEART_RATE_BPM, heartRateCallback)
-
     }
 
     @Composable
@@ -96,7 +95,7 @@ class MainActivity : ComponentActivity() {
         remember { mutableStateOf(text) }
         var capabilities: MeasureCapabilities? = null
         var supportsHeartRate: Boolean? = null
-        LaunchedEffect(null, false) {
+        LaunchedEffect("launchedEffect") {
             lifecycleScope.launch {
                 capabilities = measureClient!!.getCapabilitiesAsync().await()
                 supportsHeartRate = DataType.HEART_RATE_BPM in capabilities!!.supportedDataTypesMeasure
