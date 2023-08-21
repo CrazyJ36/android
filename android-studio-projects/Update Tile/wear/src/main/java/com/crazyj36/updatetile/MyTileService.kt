@@ -53,7 +53,8 @@ class MyTileService : TileService() {
             .setDynamicValue(
                 PlatformHealthSources
                     .heartRateBpm()
-            )
+            ).build()
+        val heartRate = data.dynamicValue
         timer.schedule(object : TimerTask() {
             override fun run() {
                 if (ActivityCompat.checkSelfPermission(
@@ -64,11 +65,7 @@ class MyTileService : TileService() {
                     Log.d("UPDATETILE",
                         "need body sensor permission")
                 } else {
-
-                    val heartRate = data.build().dynamicValue?.format().toString()
-
                     Log.d("UPDATETILE", "HEART RATE: $heartRate")
-
                 }
             }
 
