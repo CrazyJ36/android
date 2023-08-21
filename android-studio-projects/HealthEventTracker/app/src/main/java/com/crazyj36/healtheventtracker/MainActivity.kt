@@ -99,9 +99,17 @@ class MainActivity : ComponentActivity() {
                 .background(MaterialTheme.colors.background),
             verticalArrangement = Arrangement.Center
         ) {
-            Text(
-                "heartRate: $text"
-            )
+            if (applicationContext.checkSelfPermission(
+                    Manifest.permission.BODY_SENSORS) ==
+                PackageManager.PERMISSION_GRANTED)  {
+                Text(
+                    "heart rate: $text"
+                )
+            } else {
+                Text(
+                    "heart rate sensor permission not granted."
+                )
+            }
         }
     }
 }
