@@ -83,6 +83,7 @@ class MyTileService : TileService() {
             .build()
         val box = LayoutElementBuilders.Box.Builder()
             .addContent(primaryLayout)
+            .build()
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -107,7 +108,7 @@ class MyTileService : TileService() {
                     .setFreshnessIntervalMillis(1500)
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
-                           box.build()
+                           primaryLayout
                         )
                     ).build()
             )
