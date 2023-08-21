@@ -9,7 +9,6 @@ package com.example.heatheventtracker.presentation
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -20,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.health.services.client.HealthServices
 import androidx.health.services.client.HealthServicesClient
@@ -36,69 +36,72 @@ import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 
 class MainActivity : ComponentActivity() {
-    var healthClient: HealthServicesClient? = null
-    var measureClient: MeasureClient? = null
-    var text = ""
+    lateinit var healthClient: HealthServicesClient
+    lateinit var measureClient: MeasureClient
+    lateinit var heartRateCallback: MeasureCallback
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (applicationContext.checkSelfPermission(
-                Manifest.permission.BODY_SENSORS) !=
-            PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(
-                    arrayOf(
-                        Manifest.permission.BODY_SENSORS
-                    ), 0)
-        }
-
-        healthClient = HealthServices.getClient(applicationContext)
-        measureClient = healthClient!!.measureClient
-        measureClient!!.registerMeasureCallback(DataType.Companion
-            .HEART_RATE_BPM, heartRateCallback)
-
         setContent {
             WearApp()
         }
     }
 
-    private val heartRateCallback = object: MeasureCallback {
-        override fun onAvailabilityChanged(
-            dataType: DeltaDataType<*, *>,
-            availability: Availability
-        ) {
-            if (availability is DataTypeAvailability) {
-                Toast.makeText(this@MainActivity,
-                    "heart rate available", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this@MainActivity,
-                    "can't get heart rate at the moment", Toast.LENGTH_SHORT).show()
-            }
-        }
 
-        override fun onDataReceived(data: DataPointContainer) {
-            //text = data.getData(DataType.HEART_RATE_BPM).toString()
-            text = data.getData(DataType.HEART_RATE_BPM).last().value.toString()
-            Toast.makeText(applicationContext,
-                text,
-                Toast.LENGTH_SHORT).show()
-        }
-    }
+
     override fun onDestroy() {
         super.onDestroy()
-        measureClient!!.unregisterMeasureCallbackAsync(DataType
-            .Companion.HEART_RATE_BPM, heartRateCallback)
+        runBlocking {
+            measureClient.unregisterMeasureCallbackAsync(
+                DataType
+                    .Companion.HEART_RATE_BPM, heartRateCallback
+            )
+        }
     }
-
     @Composable
     fun WearApp() {
-        remember { mutableStateOf(text) }
-        var capabilities: MeasureCapabilities? = null
+        var text by remember { mutableStateOf("") }
+        lateinit var capabilities: MeasureCapabilities
         var supportsHeartRate: Boolean? = null
+        heartRateCallback = object: MeasureCallback {
+            override fun onAvailabilityChanged(
+                dataType: DeltaDataType<*, *>,
+                availability: Availability
+            ) {
+                if (availability is DataTypeAvailability) {
+                    text = "heart rate available"
+                } else {
+                    text = "can't get heart rate at the moment"
+                }
+            }
+
+            override fun onDataReceived(data: DataPointContainer) {
+                text = data.getData(DataType.HEART_RATE_BPM)
+                    .last().value.toString()
+            }
+        }
+        if (applicationContext.checkSelfPermission(
+                Manifest.permission.BODY_SENSORS) !=
+            PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.BODY_SENSORS
+                ), 0)
+        }
+        healthClient = HealthServices.getClient(applicationContext)
+        measureClient = healthClient.measureClient
+        measureClient.registerMeasureCallback(DataType.Companion
+            .HEART_RATE_BPM, heartRateCallback)
+
+
         LaunchedEffect("launchedEffect") {
             lifecycleScope.launch {
-                capabilities = measureClient!!.getCapabilitiesAsync().await()
-                supportsHeartRate = DataType.HEART_RATE_BPM in capabilities!!.supportedDataTypesMeasure
+                capabilities = measureClient.getCapabilitiesAsync().await()
+                supportsHeartRate = DataType.HEART_RATE_BPM in capabilities.supportedDataTypesMeasure
             }
         }
 
@@ -109,7 +112,7 @@ class MainActivity : ComponentActivity() {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                "heartRate: $text,\nsupportsHeartRate: $supportsHeartRate"
+                "heartRate: $text,\nsupportsHeartRate: $supportsHeartRate\ncapabilities: ${capabilities.supportedDataTypesMeasure.toString()}"
             )
         }
     }
