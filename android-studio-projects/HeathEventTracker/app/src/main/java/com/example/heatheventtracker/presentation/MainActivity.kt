@@ -43,9 +43,6 @@ class MainActivity : ComponentActivity() {
             WearApp()
         }
     }
-
-
-
     override fun onDestroy() {
         super.onDestroy()
         runBlocking {
@@ -65,8 +62,9 @@ class MainActivity : ComponentActivity() {
                 availability: Availability
             ) {
                 if (showAvailability) {
+                    showAvailability = false
                     if (availability is DataTypeAvailability) {
-                        text = "getting heartrate..."
+                        text = "getting heart rate..."
                         Toast.makeText(
                             applicationContext,
                             "heart rate available on device.",
@@ -80,7 +78,6 @@ class MainActivity : ComponentActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                    showAvailability = false
                 }
             }
             override fun onDataReceived(data: DataPointContainer) {
