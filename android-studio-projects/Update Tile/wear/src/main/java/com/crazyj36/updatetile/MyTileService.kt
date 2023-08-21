@@ -69,8 +69,7 @@ class MyTileService : TileService() {
                 StringProp.Builder("--")
                     .setDynamicValue(
                         PlatformHealthSources
-                            .heartRateBpm()
-                            .format()
+                            .heartRateBpm().animate().format()
                     ).build(),
                 StringLayoutConstraint
                     .Builder("000")
@@ -80,9 +79,6 @@ class MyTileService : TileService() {
             .deviceConfiguration)
             .setPrimaryChipContent(primaryChip)
             .setPrimaryLabelTextContent(primaryText)
-            .build()
-        val box = LayoutElementBuilders.Box.Builder()
-            .addContent(primaryLayout)
             .build()
         return if (ActivityCompat.checkSelfPermission(
                 this,
