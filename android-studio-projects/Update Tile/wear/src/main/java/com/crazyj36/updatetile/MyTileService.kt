@@ -65,9 +65,8 @@ class MyTileService : TileService() {
                     Log.d("UPDATETILE",
                         "need body sensor permission")
                 } else {
-                    val out = arrayOf(myData.dynamicValue)
-                    val real = out.last().toString()
-                    Log.d("UPDATETILE", "HEART RATE: $real")
+                    val out = arrayOf(myData.dynamicValue).last()
+                    Log.d("UPDATETILE", "HEART RATE: $out")
                 }
             }
 
