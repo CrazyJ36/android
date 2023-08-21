@@ -65,7 +65,7 @@ class MyTileService : TileService() {
                         "need body sensor permission")
                 } else {
 
-                    val heartRate = data.build().dynamicValue!!.asInt()
+                    val heartRate = data.build().dynamicValue
 
                     Log.d("UPDATETILE", "HEART RATE: $heartRate")
 
