@@ -56,12 +56,10 @@ class MyTileService : TileService() {
                     Log.d("UPDATETILE",
                         "need body sensor permission")
                 } else {
-                    val heartRate:
-                        DynamicDataValue<DynamicString> =
-                            DynamicDataValue.fromString(
+                    val heartRate: DynamicBuilders.DynamicFloat =
                                 PlatformHealthSources
-                                    .heartRateBpm().format().toString()
-                            )
+                                    .heartRateBpm()
+
                     Log.d("UPDATETILE",
                         "HEART RATE: $heartRate"
                     )
