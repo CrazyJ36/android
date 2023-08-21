@@ -56,20 +56,17 @@ class MyTileService : TileService() {
                     Log.d("UPDATETILE",
                         "need body sensor permission")
                 } else {
-                    StringProp.Builder("waiting")
+                    val string = StringProp.Builder("waiting")
                         .setDynamicValue(
                             PlatformHealthSources
                                 .heartRateBpm().format()
-                        ).build().dynamicValue.let {
-                            Log.d("UPDATETILE",
-                                "HEART RATE: $it"
-                            )
-                        }
-
+                        ).build()
+                    val heartRate = string.dynamicValue
+                    Log.d("UPDATETILE", "HEART RATE: $heartRate")
                 }
             }
 
-        }, 0, 5000)
+        }, 0, 1000)
     }
 
     override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
@@ -127,7 +124,7 @@ class MyTileService : TileService() {
             Futures.immediateFuture(
                 Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
-                    .setFreshnessIntervalMillis(5000)
+                    .setFreshnessIntervalMillis(1000)
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                            primaryLayout
