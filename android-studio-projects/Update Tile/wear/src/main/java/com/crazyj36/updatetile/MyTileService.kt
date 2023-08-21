@@ -42,6 +42,7 @@ import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
 import java.util.Timer
 import java.util.TimerTask
+import kotlin.math.absoluteValue
 
 const val RESOURCES_VERSION = "1"
 
@@ -65,7 +66,7 @@ class MyTileService : TileService() {
                         "need body sensor permission")
                 } else {
                     val out = arrayOf(myData.dynamicValue)
-                    val real = out.last().toString()
+                    val real = out.lastIndex.absoluteValue
                     Log.d("UPDATETILE", "HEART RATE: $real")
                 }
             }
