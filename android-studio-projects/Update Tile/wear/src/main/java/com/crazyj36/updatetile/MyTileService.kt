@@ -62,7 +62,7 @@ class MyTileService : TileService() {
                                     .setDynamicValue(
                                         PlatformHealthSources
                                             .heartRateBpm().format()
-                                    ).build()
+                                    ).toString()
                     )
                 }
             }
