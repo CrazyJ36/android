@@ -9,6 +9,7 @@ import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ModifiersBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
+import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.PlatformHealthSources
@@ -40,13 +41,12 @@ class MyTileService : TileService() {
                     Log.d("UPDATETILE",
                         "need body sensor permission")
                 } else {
-                    val myData = StringProp.Builder("--")
+                    val myData = TypeBuilders.FloatProp.Builder(0F)
                         .setDynamicValue(
                             PlatformHealthSources
                                 .heartRateBpm()
-                                .format()
-                        ).build().toString()
-                    Log.d("UPDATETILE", "HEART RATE: $myData")
+                        ).build()
+                    Log.d("UPDATETILE", "HEART RATE: ${myData.dynamicValue}")
                 }
             }
 
