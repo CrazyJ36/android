@@ -78,7 +78,7 @@ class MainActivity : ComponentActivity() {
 
         override fun onDataReceived(data: DataPointContainer) {
             //text = data.getData(DataType.HEART_RATE_BPM).toString()
-            text = data.sampleDataPoints.toString()
+            text = data.getData(DataType.HEART_RATE_BPM)[0].toString()
             Toast.makeText(applicationContext,
                 text,
                 Toast.LENGTH_SHORT).show()
