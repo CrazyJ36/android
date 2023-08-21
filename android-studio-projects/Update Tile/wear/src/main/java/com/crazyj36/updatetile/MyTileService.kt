@@ -8,14 +8,9 @@ import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ModifiersBuilders
 import androidx.wear.protolayout.ResourceBuilders
-import androidx.wear.protolayout.StateBuilders
 import androidx.wear.protolayout.TimelineBuilders
-import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
-import androidx.wear.protolayout.expression.AppDataKey
-import androidx.wear.protolayout.expression.DynamicBuilders
-import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.Text
@@ -33,10 +28,6 @@ const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
     val timer = Timer()
-    val state = StateBuilders.State.Builder()
-    companion object {
-        val TEXT = AppDataKey<DynamicBuilders.DynamicString>("text")
-    }
     override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
         super.onTileEnterEvent(requestParams)
         val myData = StringProp.Builder("--")
@@ -55,13 +46,7 @@ class MyTileService : TileService() {
                     Log.d("UPDATETILE",
                         "need body sensor permission")
                 } else {
-                    val out = myData.dynamicValue
-                    state.addKeyToValueMapping(
-                        TEXT,
-                        DynamicDataBuilders.DynamicDataValue
-                            .fromString(out.toString())
-                    ).build()
-                    Log.d("UPDATETILE", "HEART RATE: $TEXT")
+                    Log.d("UPDATETILE", "HEART RATE: ${myData.dynamicValue}")
                 }
             }
 
@@ -124,7 +109,6 @@ class MyTileService : TileService() {
                 Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
                     .setFreshnessIntervalMillis(1000)
-                    .setState(state.build())
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                            primaryLayout
