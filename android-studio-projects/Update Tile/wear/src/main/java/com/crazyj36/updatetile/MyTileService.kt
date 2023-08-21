@@ -41,12 +41,15 @@ class MyTileService : TileService() {
                     Log.d("UPDATETILE",
                         "need body sensor permission")
                 } else {
-                    val myData = TypeBuilders.FloatProp.Builder(0F)
+                    val myData = TypeBuilders.StringProp.Builder("--")
                         .setDynamicValue(
                             PlatformHealthSources
                                 .heartRateBpm()
+                                .format()
                         ).build()
-                    Log.d("UPDATETILE", "HEART RATE: ${myData.dynamicValue!!.asInt()}")
+                    if (myData.dynamicValue != null) {
+                        Log.d("UPDATETILE", "HEART RATE: ${myData.dynamicValue}")
+                    }
                 }
             }
 
