@@ -46,7 +46,7 @@ class MyTileService : TileService() {
                                 .heartRateBpm()
                                 .format()
                         ).build().toString()
-                    Log.d("UPDATETILE", "HEART RATE: ${myData}")
+                    Log.d("UPDATETILE", "HEART RATE: $myData")
                 }
             }
 
