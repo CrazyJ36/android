@@ -23,6 +23,7 @@ import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
+import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
 import androidx.wear.protolayout.expression.DynamicDataBuilders.DynamicDataValue
 import androidx.wear.protolayout.expression.PlatformHealthSources
@@ -55,9 +56,12 @@ class MyTileService : TileService() {
                     Log.d("UPDATETILE",
                         "need body sensor permission")
                 } else {
-                    val heartRate: String =
-                        String.format("%d",PlatformHealthSources
-                            .heartRateBpm())
+                    val heartRate:
+                        DynamicDataValue<DynamicString> =
+                            DynamicDataValue.fromString(
+                                PlatformHealthSources
+                                    .heartRateBpm().format().toString()
+                            )
                     Log.d("UPDATETILE",
                         "HEART RATE: $heartRate"
                     )
