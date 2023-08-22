@@ -45,8 +45,13 @@ class MyTileService : TileService() {
     private lateinit var measureClient: MeasureClient
     private val timer = Timer()
     companion object {
-        val TEXT = AppDataKey<DynamicString>("TEXT")
         var heartRate: String = "heartRate"
+        var systemTime: String = "systemTime"
+        val KEY_HEART_RATE = AppDataKey<DynamicString>(
+            "KEY_HEART_RATE")
+        val KEY_SYSTEM_TIME = AppDataKey<DynamicString>(
+            "KEY_SYSTEM_TIME"
+        )
         var state = StateBuilders.State.Builder()
     }
 
@@ -83,9 +88,14 @@ class MyTileService : TileService() {
             ).last().value.toString()
             Log.d("UPDATETILE", "HEART RATE: $heartRate")
             state.addKeyToValueMapping(
-                TEXT,
+                KEY_HEART_RATE,
                 DynamicDataBuilders.DynamicDataValue
                     .fromString(heartRate)
+            )
+            state.addKeyToValueMapping(
+                KEY_SYSTEM_TIME,
+                DynamicDataBuilders.DynamicDataValue
+                    .fromString(systemTime)
             )
         }
     }
@@ -100,11 +110,12 @@ class MyTileService : TileService() {
                 .Companion.HEART_RATE_BPM, heartRateCallback
         )
 
-        val systemTime = DynamicBuilders.DynamicInstant
+        val systemTimeInstant = DynamicBuilders.DynamicInstant
             .platformTimeWithSecondsPrecision()
         timer.schedule(object: TimerTask() {
             override fun run() {
-                Log.d("UPDATETILE",  systemTime.toString())
+                systemTime = systemTimeInstant.toString()
+                Log.d("UPDATETILE", systemTime)
             }
         }, 0, 1000)
 
@@ -145,23 +156,35 @@ class MyTileService : TileService() {
                 .build(),
             requestParams.deviceConfiguration
         ).build()
-        val primaryText =
+        val heartRateText =
             Text.Builder(
                 this,
                 StringProp.Builder("Heart Rate")
-                    .setDynamicValue(DynamicString.from(TEXT))
-                    .build(),
+                    .setDynamicValue(DynamicString.from(
+                        KEY_HEART_RATE)
+                    ).build(),
                 StringLayoutConstraint
                     .Builder("00000")
                     .build()
-            ).build()
+            )
+        val systemTimeText =
+            Text.Builder(
+                this,
+                StringProp.Builder("Time")
+                    .setDynamicValue(DynamicString.from(
+                        KEY_SYSTEM_TIME)
+                    ).build(),
+                StringLayoutConstraint
+                    .Builder("00000")
+                    .build()
+            )
         val primaryLayout = PrimaryLayout.Builder(
             requestParams
                 .deviceConfiguration
         )
             .setPrimaryChipContent(primaryChip)
-            .setPrimaryLabelTextContent(primaryText)
-            .build()
+            .setPrimaryLabelTextContent(heartRateText.build())
+            .setSecondaryLabelTextContent(systemTimeText.build())
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -189,7 +212,7 @@ class MyTileService : TileService() {
                     .setState(state.build())
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
-                            primaryLayout
+                            primaryLayout.build()
                         )
                     ).build()
             )
