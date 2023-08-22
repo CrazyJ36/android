@@ -28,6 +28,7 @@ import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
 import java.util.Timer
 import java.util.TimerTask
+import androidx.wear.protolayout.proto.TypesProto.Int32Prop
 
 const val RESOURCES_VERSION = "1"
 
@@ -47,7 +48,6 @@ class MyTileService : TileService() {
                 "Need body sensor permissions",
                 Toast.LENGTH_SHORT).show()
         } else {
-            @NonNull
             val prop = TypeBuilders.FloatProp.Builder(
                 0F)
                 .setDynamicValue(
@@ -59,7 +59,7 @@ class MyTileService : TileService() {
                 override fun run() {
                     Log.d("UPDATETILE",
                         "HEART RATE: ${
-                            prop.dynamicValue to Int
+                            prop.dynamicValue.toString()
                         }"
                     )
                 }
