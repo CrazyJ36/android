@@ -43,7 +43,7 @@ const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
     private lateinit var measureClient: MeasureClient
-    private val timer = Timer()
+    private lateinit var timer: Timer
     companion object {
         var heartRate: String = "heartRate"
         var systemTime: String = "systemTime"
@@ -107,7 +107,7 @@ class MyTileService : TileService() {
             DataType
                 .Companion.HEART_RATE_BPM, heartRateCallback
         )
-
+        timer = Timer()
         timer.schedule(object: TimerTask() {
             override fun run() {
                 systemTime = systemTimeInstant.decodeToString()
@@ -115,10 +115,9 @@ class MyTileService : TileService() {
                     DynamicDataBuilders.DynamicDataValue
                         .fromString(systemTime)
                 )
-                Log.d("UPDATETILE", systemTime)
+                Log.d("UPDATETILE", "Time: $systemTime")
             }
         }, 0, 1000)
-
     }
 
     override fun onTileLeaveEvent(
