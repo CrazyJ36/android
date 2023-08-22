@@ -33,7 +33,6 @@ import androidx.wear.tiles.TileBuilders.Tile
 import androidx.wear.tiles.TileService
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
-import kotlinx.coroutines.runBlocking
 
 const val RESOURCES_VERSION = "1"
 
@@ -42,78 +41,91 @@ class MyTileService : TileService() {
 
     companion object {
         val TEXT = AppDataKey<DynamicBuilders
-            .DynamicString>("TEXT")
+        .DynamicString>("TEXT")
         var heartRate: String = "heartRate"
         var state = StateBuilders.State.Builder()
-            .addKeyToValueMapping(TEXT,
+            .addKeyToValueMapping(
+                TEXT,
                 DynamicDataBuilders.DynamicDataValue
                     .fromString(heartRate)
             )
     }
-    private val heartRateCallback = object: MeasureCallback {
+
+    override fun onCreate() {
+        super.onCreate()
+        measureClient = HealthServices
+            .getClient(this@MyTileService)
+            .measureClient
+    }
+
+    private val heartRateCallback = object : MeasureCallback {
         override fun onAvailabilityChanged(
             dataType: DeltaDataType<*, *>,
             availability: Availability
         ) {
             if (availability is DataTypeAvailability) {
-                Toast.makeText(this@MyTileService,
+                Toast.makeText(
+                    this@MyTileService,
                     "Heart rate sensor available, please wait...",
-                    Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
-                Toast.makeText(this@MyTileService,
+                Toast.makeText(
+                    this@MyTileService,
                     "Heart rate sensor unavailable.",
                     Toast.LENGTH_SHORT
                 ).show()
             }
         }
+
         override fun onDataReceived(data: DataPointContainer) {
             heartRate = data.getData(
                 DataType.HEART_RATE_BPM
             ).last().value.toString()
             Log.d("UPDATETILE", "HEART RATE: $heartRate")
-            state.addKeyToValueMapping(TEXT,
+            state.addKeyToValueMapping(
+                TEXT,
                 DynamicDataBuilders.DynamicDataValue
-                    .fromString(heartRate))
-            LoadAction.Builder().build()
+                    .fromString(heartRate)
+            )
         }
     }
 
-    override fun onTileEnterEvent(requestParams:
-                                  EventBuilders.TileEnterEvent) {
+    override fun onTileEnterEvent(
+        requestParams:
+        EventBuilders.TileEnterEvent
+    ) {
         super.onTileEnterEvent(requestParams)
-        measureClient = HealthServices
-            .getClient(this@MyTileService)
-            .measureClient
-        measureClient.registerMeasureCallback(DataType
-            .Companion.HEART_RATE_BPM, heartRateCallback)
-
+        measureClient.registerMeasureCallback(
+            DataType
+                .Companion.HEART_RATE_BPM, heartRateCallback
+        )
     }
 
     override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
         super.onTileLeaveEvent(requestParams)
-        runBlocking {
-            measureClient.unregisterMeasureCallbackAsync(
-                DataType.Companion.HEART_RATE_BPM,
-                heartRateCallback
-            )
-        }
+        measureClient.unregisterMeasureCallbackAsync(
+            DataType.Companion
+                .HEART_RATE_BPM, heartRateCallback
+        )
     }
 
     override fun onTileRemoveEvent(requestParams: EventBuilders.TileRemoveEvent) {
         super.onTileRemoveEvent(requestParams)
-        runBlocking {
-            measureClient.unregisterMeasureCallbackAsync(
-                DataType.Companion.HEART_RATE_BPM,
-                heartRateCallback
-            )
-        }
+        measureClient.unregisterMeasureCallbackAsync(
+            DataType.Companion.HEART_RATE_BPM,
+            heartRateCallback
+        )
     }
+
     public override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-        state.addKeyToValueMapping(TEXT,
+        state.addKeyToValueMapping(
+            TEXT,
             DynamicDataBuilders.DynamicDataValue
-                .fromString(heartRate))
+                .fromString(heartRate)
+        )
         Log.d("UPDATETILE", "onTileRequest()")
         val primaryChip = CompactChip.Builder(
             this,
@@ -134,8 +146,10 @@ class MyTileService : TileService() {
                     .Builder("00000")
                     .build()
             ).build()
-        val primaryLayout = PrimaryLayout.Builder(requestParams
-            .deviceConfiguration)
+        val primaryLayout = PrimaryLayout.Builder(
+            requestParams
+                .deviceConfiguration
+        )
             .setPrimaryChipContent(primaryChip)
             .setPrimaryLabelTextContent(primaryText)
             .build()
@@ -152,7 +166,8 @@ class MyTileService : TileService() {
                             .fromLayoutElement(
                                 LayoutElementBuilders.Text.Builder()
                                     .setText(
-                                        "Need body sensor permission to work.")
+                                        "Need body sensor permission to work."
+                                    )
                                     .build()
                             )
                     ).build()
@@ -165,7 +180,7 @@ class MyTileService : TileService() {
                     .setState(state.build())
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
-                           primaryLayout
+                            primaryLayout
                         )
                     ).build()
             )
@@ -175,11 +190,11 @@ class MyTileService : TileService() {
     override fun onTileResourcesRequest(
         requestParams: RequestBuilders.ResourcesRequest
     ):
-        ListenableFuture<ResourceBuilders.Resources> =
+            ListenableFuture<ResourceBuilders.Resources> =
         Futures.immediateFuture(
             ResourceBuilders.Resources.Builder()
                 .setVersion(RESOURCES_VERSION)
-            .build()
+                .build()
         )
 }
 
