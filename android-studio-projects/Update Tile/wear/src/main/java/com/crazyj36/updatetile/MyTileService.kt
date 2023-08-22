@@ -52,7 +52,9 @@ class MyTileService : TileService() {
             timer.schedule(object : TimerTask() {
                 override fun run() {
                     Log.d("UPDATETILE",
-                        "HEART RATE: $stringProp"
+                        "HEART RATE: ${stringProp.dynamicValue.let { 
+                            it.toString()
+                        }}"
                     )
                 }
             }, 0, 1000)
