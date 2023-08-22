@@ -2,10 +2,8 @@ package com.crazyj36.updatetile
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.icu.util.Measure
 import android.util.Log
 import android.widget.Toast
-import androidx.compose.runtime.Composable
 import androidx.core.app.ActivityCompat
 import androidx.health.services.client.HealthServices
 import androidx.health.services.client.MeasureCallback
@@ -26,8 +24,6 @@ import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicDataBuilders
-import androidx.wear.protolayout.expression.DynamicDataKey
-import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.Text
 import androidx.wear.protolayout.material.layouts.PrimaryLayout
@@ -83,12 +79,15 @@ class MyTileService : TileService() {
             .measureClient
         measureClient.registerMeasureCallback(DataType
             .Companion.HEART_RATE_BPM, heartRateCallback)
-        /*timer = Timer()
+        timer = Timer()
         timer.schedule(object: TimerTask() {
             override fun run() {
                 Log.d("UPDATETILE", "HEART RATE: $heartRate")
+                state.addKeyToValueMapping(TEXT,
+                    DynamicDataBuilders.DynamicDataValue
+                        .fromString(heartRate)).build()
             }
-        }, 0, 1000)*/
+        }, 0, 1000)
     }
 
     override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
