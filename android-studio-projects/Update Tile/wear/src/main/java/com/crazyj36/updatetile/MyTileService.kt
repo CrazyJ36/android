@@ -12,6 +12,8 @@ import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
+import androidx.wear.protolayout.expression.AppDataKey
+import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.Text
@@ -30,7 +32,14 @@ const val RESOURCES_VERSION = "1"
 class MyTileService : TileService() {
 
     private lateinit  var timer: Timer
-
+    private var STATE_KEY: String = "state_key"
+    private var STRING_PROP = StringProp
+        .Builder("--")
+        .setDynamicValue(
+            DynamicBuilders
+                .DynamicString
+                .from(AppDataKey(STATE_KEY))
+        ).build()
     override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
         super.onTileEnterEvent(requestParams)
         if (ActivityCompat.checkSelfPermission(
@@ -42,19 +51,11 @@ class MyTileService : TileService() {
                 "Need body sensor permissions",
                 Toast.LENGTH_SHORT).show()
         } else {
-            val prop = StringProp.Builder("--")
-                .setDynamicValue(
-                    PlatformHealthSources
-                        .heartRateBpm()
-                        .format()
-                ).build()
             timer = Timer()
             timer.schedule(object : TimerTask() {
                 override fun run() {
                     Log.d("UPDATETILE",
-                        "HEART RATE: ${
-                            prop.dynamicValue
-                        }"
+                        "HEART RATE: $STRING_PROP"
                     )
                 }
             }, 0, 1000)
