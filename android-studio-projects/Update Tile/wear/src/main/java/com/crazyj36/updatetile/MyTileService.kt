@@ -74,9 +74,6 @@ class MyTileService : TileService() {
             heartRate = data.getData(
                 DataType.HEART_RATE_BPM
             ).last().value.toString()
-            state.addKeyToValueMapping(TEXT,
-                DynamicDataBuilders.DynamicDataValue
-                    .fromString(heartRate)).build()
         }
     }
 
@@ -133,6 +130,9 @@ class MyTileService : TileService() {
     public override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
+        state.addKeyToValueMapping(TEXT,
+            DynamicDataBuilders.DynamicDataValue
+                .fromString(heartRate))
         val primaryChip = CompactChip.Builder(
             this,
             "Load",
@@ -149,7 +149,7 @@ class MyTileService : TileService() {
                         DynamicBuilders.DynamicString.from(TEXT)
                     ).build(),
                 StringLayoutConstraint
-                    .Builder("000")
+                    .Builder("00000")
                     .build()
             ).build()
         val primaryLayout = PrimaryLayout.Builder(requestParams
