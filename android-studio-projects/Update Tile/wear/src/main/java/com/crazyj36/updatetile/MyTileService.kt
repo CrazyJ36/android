@@ -113,8 +113,7 @@ class MyTileService : TileService() {
             override fun run() {
                 systemTimeInstant = DynamicInstant
                     .platformTimeWithSecondsPrecision()
-                Log.d("UPDATETILE", "timer running")
-                systemTime = String().format(systemTimeInstant)
+                systemTime = systemTimeInstant.toString()
                 Log.d("UPDATETILE", "Time: $systemTime")
                 state.addKeyToValueMapping(KEY_SYSTEM_TIME,
                     DynamicDataBuilders.DynamicDataValue
