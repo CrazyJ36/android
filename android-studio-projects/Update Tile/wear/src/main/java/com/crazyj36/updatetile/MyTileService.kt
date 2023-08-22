@@ -40,14 +40,19 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
-    private lateinit var state: StateBuilders.State.Builder
     private lateinit  var timer: Timer
     private lateinit var measureClient: MeasureClient
-    var heartRate: String = "heartRate"
+
 
     companion object {
         val TEXT = AppDataKey<DynamicBuilders
             .DynamicString>("TEXT")
+        var heartRate: String = "heartRate"
+        val state = StateBuilders.State.Builder()
+            .addKeyToValueMapping(TEXT,
+                DynamicDataBuilders.DynamicDataValue
+                    .fromString(heartRate)
+            )
     }
     private val heartRateCallback = object: MeasureCallback {
         override fun onAvailabilityChanged(
@@ -69,6 +74,10 @@ class MyTileService : TileService() {
             heartRate = data.getData(
                 DataType.HEART_RATE_BPM
             ).last().value.toString()
+            Log.d("UPDATETILE", "HEART RATE: $heartRate")
+            state.addKeyToValueMapping(TEXT,
+                DynamicDataBuilders.DynamicDataValue
+                    .fromString(heartRate)).build()
         }
     }
 
@@ -80,21 +89,11 @@ class MyTileService : TileService() {
             .measureClient
         measureClient.registerMeasureCallback(DataType
             .Companion.HEART_RATE_BPM, heartRateCallback)
-        timer = Timer()
-        timer.schedule(object: TimerTask() {
-            override fun run() {
-                Log.d("UPDATETILE", "HEART RATE: $heartRate")
-                state.addKeyToValueMapping(TEXT,
-                    DynamicDataBuilders.DynamicDataValue
-                        .fromString(heartRate))
-            }
-        }, 0, 1000)
+
     }
 
     override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
         super.onTileLeaveEvent(requestParams)
-        timer.cancel()
-        timer.purge()
         runBlocking {
             measureClient.unregisterMeasureCallbackAsync(
                 DataType.Companion.HEART_RATE_BPM,
@@ -105,8 +104,6 @@ class MyTileService : TileService() {
 
     override fun onTileRemoveEvent(requestParams: EventBuilders.TileRemoveEvent) {
         super.onTileRemoveEvent(requestParams)
-        timer.cancel()
-        timer.purge()
         runBlocking {
             measureClient.unregisterMeasureCallbackAsync(
                 DataType.Companion.HEART_RATE_BPM,
@@ -117,11 +114,7 @@ class MyTileService : TileService() {
     public override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-        state = StateBuilders.State.Builder()
-            .addKeyToValueMapping(TEXT,
-                DynamicDataBuilders.DynamicDataValue
-                    .fromString(heartRate)
-            )
+        Log.d("UPDATETILE", "onTileRequest()")
         val primaryChip = CompactChip.Builder(
             this,
             "Load",
