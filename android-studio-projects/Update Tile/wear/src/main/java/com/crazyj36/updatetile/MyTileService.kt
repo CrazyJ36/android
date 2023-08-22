@@ -46,7 +46,6 @@ const val RESOURCES_VERSION = "1"
 class MyTileService : TileService() {
 
     private lateinit  var timer: Timer
-    private var state: StateBuilders.State? = null
     private lateinit var measureClient: MeasureClient
     var heartRate: String = "heartRate"
 
@@ -74,10 +73,6 @@ class MyTileService : TileService() {
             heartRate = data.getData(
                 DataType.HEART_RATE_BPM
             ).last().value.toString()
-            state = StateBuilders.State.Builder()
-                .addKeyToValueMapping(TEXT, DynamicDataBuilders
-                    .DynamicDataValue.fromString(heartRate))
-                .build()
         }
     }
 
@@ -88,12 +83,12 @@ class MyTileService : TileService() {
             .measureClient
         measureClient.registerMeasureCallback(DataType
             .Companion.HEART_RATE_BPM, heartRateCallback)
-        timer = Timer()
+        /*timer = Timer()
         timer.schedule(object: TimerTask() {
             override fun run() {
                 Log.d("UPDATETILE", "HEART RATE: $heartRate")
             }
-        }, 0, 1000)
+        }, 0, 1000)*/
     }
 
     override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
@@ -122,6 +117,20 @@ class MyTileService : TileService() {
     public override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
+        var state = StateBuilders.State.Builder()
+            .addKeyToValueMapping(TEXT, DynamicDataBuilders
+                .DynamicDataValue.fromString(heartRate))
+            .build()
+        timer = Timer()
+        timer.schedule(object: TimerTask() {
+            override fun run() {
+                state = StateBuilders.State.Builder()
+                    .addKeyToValueMapping(TEXT,
+                        DynamicDataBuilders.DynamicDataValue
+                            .fromString(heartRate)
+                    ).build()
+            }
+        }, 0, 1000)
         val primaryChip = CompactChip.Builder(
             this,
             "Load",
@@ -169,7 +178,7 @@ class MyTileService : TileService() {
                 Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
                     .setFreshnessIntervalMillis(1000)
-                    .setState(state!!)
+                    .setState(state)
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                            primaryLayout
