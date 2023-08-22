@@ -116,7 +116,7 @@ class MyTileService : TileService() {
                 systemTimeByteArray = systemTimeInstant
                     .toDynamicInstantByteArray()
                 Log.d("UPDATETILE", "Time: ")
-                systemTime = systemTimeByteArray.decodeToString()
+                systemTime = systemTimeByteArray.toString()
                 state.addKeyToValueMapping(KEY_SYSTEM_TIME,
                     DynamicDataBuilders.DynamicDataValue
                         .fromString(systemTime)
