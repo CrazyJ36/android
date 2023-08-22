@@ -74,6 +74,9 @@ class MyTileService : TileService() {
             heartRate = data.getData(
                 DataType.HEART_RATE_BPM
             ).last().value.toString()
+            state.addKeyToValueMapping(TEXT,
+                DynamicDataBuilders.DynamicDataValue
+                    .fromString(heartRate))
         }
     }
 
