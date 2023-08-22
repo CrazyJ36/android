@@ -48,7 +48,7 @@ class MyTileService : TileService() {
             .addKeyToValueMapping(TEXT,
                 DynamicDataBuilders.DynamicDataValue
                     .fromString(heartRate)
-            ).build()
+            )
     }
     private val heartRateCallback = object: MeasureCallback {
         override fun onAvailabilityChanged(
@@ -71,10 +71,10 @@ class MyTileService : TileService() {
                 DataType.HEART_RATE_BPM
             ).last().value.toString()
             Log.d("UPDATETILE", "HEART RATE: $heartRate")
-            state = StateBuilders.State.Builder().addKeyToValueMapping(TEXT,
+            state.addKeyToValueMapping(TEXT,
                 DynamicDataBuilders.DynamicDataValue
-                    .fromString(heartRate)).build()
-            getUpdater(this@MyTileService).requestUpdate(MyTileService::class.java)
+                    .fromString(heartRate))
+            LoadAction.Builder().build()
         }
     }
 
@@ -111,9 +111,9 @@ class MyTileService : TileService() {
     public override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-        state = StateBuilders.State.Builder().addKeyToValueMapping(TEXT,
+        state.addKeyToValueMapping(TEXT,
             DynamicDataBuilders.DynamicDataValue
-                .fromString(heartRate)).build()
+                .fromString(heartRate))
         Log.d("UPDATETILE", "onTileRequest()")
         val primaryChip = CompactChip.Builder(
             this,
@@ -162,7 +162,7 @@ class MyTileService : TileService() {
                 Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
                     .setFreshnessIntervalMillis(1000)
-                    .setState(state)
+                    .setState(state.build())
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                            primaryLayout
