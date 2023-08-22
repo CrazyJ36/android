@@ -99,6 +99,9 @@ class MyTileService : TileService() {
                     Log.d("UPDATETILE",
                         "HEART RATE: $heartRate"
                     )
+                    state.addKeyToValueMapping(TEXT,
+                        DynamicDataBuilders.DynamicDataValue
+                            .fromString(heartRate))
                 }
             }, 0, 1000)
         }
@@ -130,9 +133,6 @@ class MyTileService : TileService() {
     public override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-        state.addKeyToValueMapping(TEXT,
-            DynamicDataBuilders.DynamicDataValue
-                .fromString(heartRate))
         val primaryChip = CompactChip.Builder(
             this,
             "Load",
