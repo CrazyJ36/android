@@ -23,7 +23,6 @@ import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
-import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicInstant
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
 import androidx.wear.protolayout.expression.DynamicDataBuilders
@@ -48,11 +47,12 @@ class MyTileService : TileService() {
         private lateinit var measureClient: MeasureClient
         private lateinit var timer: Timer
         lateinit var systemTimeInstant: DynamicInstant
+        lateinit var systemTimeByteArray: ByteArray
         var heartRate: String = "heartRate"
         var systemTime: String = "systemTime"
-        val KEY_HEART_RATE = AppDataKey<DynamicString>(
+        var KEY_HEART_RATE = AppDataKey<DynamicString>(
             "KEY_HEART_RATE")
-        val KEY_SYSTEM_TIME = AppDataKey<DynamicString>(
+        var KEY_SYSTEM_TIME = AppDataKey<DynamicString>(
             "KEY_SYSTEM_TIME"
         )
         var state = StateBuilders.State.Builder()
@@ -113,8 +113,9 @@ class MyTileService : TileService() {
             override fun run() {
                 systemTimeInstant = DynamicInstant
                     .platformTimeWithSecondsPrecision()
-                systemTime = systemTimeInstant.toString()
-                Log.d("UPDATETILE", "Time: $systemTime")
+                systemTimeByteArray = systemTimeInstant.toDynamicInstantByteArray()
+                Log.d("UPDATETILE", "Time: ")
+                systemTime = systemTimeByteArray.decodeToString()
                 state.addKeyToValueMapping(KEY_SYSTEM_TIME,
                     DynamicDataBuilders.DynamicDataValue
                         .fromString(systemTime)
@@ -176,8 +177,8 @@ class MyTileService : TileService() {
             Text.Builder(
                 this,
                 StringProp.Builder("Time")
-                    .setDynamicValue(DynamicString.from(
-                        KEY_SYSTEM_TIME)
+                    .setDynamicValue(
+                        DynamicString.from(KEY_SYSTEM_TIME)
                     ).build(),
                 StringLayoutConstraint
                     .Builder("00000")
