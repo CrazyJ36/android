@@ -48,11 +48,11 @@ class MyTileService : TileService() {
                 "Need body sensor permissions",
                 Toast.LENGTH_SHORT).show()
         } else {
-            val prop = TypeBuilders.FloatProp.Builder(
-                0F)
+            val prop = StringProp.Builder("--")
                 .setDynamicValue(
                     PlatformHealthSources
                         .heartRateBpm()
+                        .format()
                 ).build()
             timer = Timer()
             timer.schedule(object : TimerTask() {
@@ -73,6 +73,11 @@ class MyTileService : TileService() {
         timer.purge()
     }
 
+    override fun onTileRemoveEvent(requestParams: EventBuilders.TileRemoveEvent) {
+        super.onTileRemoveEvent(requestParams)
+        timer.cancel()
+        timer.purge()
+    }
     public override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
