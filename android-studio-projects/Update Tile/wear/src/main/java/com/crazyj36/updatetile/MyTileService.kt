@@ -88,6 +88,7 @@ class MyTileService : TileService() {
             .measureClient
         measureClient.registerMeasureCallback(DataType
             .Companion.HEART_RATE_BPM, heartRateCallback)
+        state = StateBuilders.State.Builder().build()
         timer = Timer()
         timer.schedule(object: TimerTask() {
             override fun run() {
