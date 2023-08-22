@@ -101,7 +101,7 @@ class MyTileService : TileService() {
                     )
                     state.addKeyToValueMapping(TEXT,
                         DynamicDataBuilders.DynamicDataValue
-                            .fromString(heartRate))
+                            .fromString(heartRate)).build()
                 }
             }, 0, 1000)
         }
