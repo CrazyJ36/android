@@ -23,7 +23,7 @@ import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
-import androidx.wear.protolayout.expression.DynamicBuilders
+import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
 import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.Text
@@ -42,8 +42,7 @@ class MyTileService : TileService() {
     private lateinit var measureClient: MeasureClient
 
     companion object {
-        val TEXT = AppDataKey<DynamicBuilders
-        .DynamicString>("TEXT")
+        val TEXT = AppDataKey<DynamicString>("TEXT")
         var heartRate: String = "heartRate"
         var state = StateBuilders.State.Builder()
     }
@@ -74,6 +73,7 @@ class MyTileService : TileService() {
                 ).show()
             }
         }
+
         override fun onDataReceived(data: DataPointContainer) {
             heartRate = data.getData(
                 DataType.HEART_RATE_BPM
@@ -132,10 +132,9 @@ class MyTileService : TileService() {
         val primaryText =
             Text.Builder(
                 this,
-                StringProp.Builder("--")
-                    .setDynamicValue(
-                        DynamicBuilders.DynamicString.from(TEXT)
-                    ).build(),
+                StringProp.Builder("Heart Rate")
+                    .setDynamicValue(DynamicString.from(TEXT))
+                    .build(),
                 StringLayoutConstraint
                     .Builder("00000")
                     .build()
