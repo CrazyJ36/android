@@ -46,7 +46,7 @@ const val RESOURCES_VERSION = "1"
 class MyTileService : TileService() {
 
     private lateinit  var timer: Timer
-    private lateinit var state: StateBuilders.State
+    private var state: StateBuilders.State? = null
     private lateinit var measureClient: MeasureClient
     var heartRate: String = "heartRate"
 
@@ -88,7 +88,6 @@ class MyTileService : TileService() {
             .measureClient
         measureClient.registerMeasureCallback(DataType
             .Companion.HEART_RATE_BPM, heartRateCallback)
-        state = StateBuilders.State.Builder().build()
         timer = Timer()
         timer.schedule(object: TimerTask() {
             override fun run() {
@@ -170,7 +169,7 @@ class MyTileService : TileService() {
                 Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
                     .setFreshnessIntervalMillis(1000)
-                    .setState(state)
+                    .setState(state!!)
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                            primaryLayout
