@@ -40,9 +40,7 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
-    private lateinit  var timer: Timer
     private lateinit var measureClient: MeasureClient
-
 
     companion object {
         val TEXT = AppDataKey<DynamicBuilders
@@ -77,7 +75,7 @@ class MyTileService : TileService() {
             Log.d("UPDATETILE", "HEART RATE: $heartRate")
             state.addKeyToValueMapping(TEXT,
                 DynamicDataBuilders.DynamicDataValue
-                    .fromString(heartRate)).build()
+                    .fromString(heartRate))
         }
     }
 
