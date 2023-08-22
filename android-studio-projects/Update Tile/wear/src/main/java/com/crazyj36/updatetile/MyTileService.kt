@@ -43,10 +43,11 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
-    private lateinit var measureClient: MeasureClient
-    private lateinit var timer: Timer
-    lateinit var systemTimeInstant: ByteArray
+
     companion object {
+        private lateinit var measureClient: MeasureClient
+        private lateinit var timer: Timer
+        lateinit var systemTimeInstant: DynamicInstant
         var heartRate: String = "heartRate"
         var systemTime: String = "systemTime"
         val KEY_HEART_RATE = AppDataKey<DynamicString>(
@@ -112,9 +113,8 @@ class MyTileService : TileService() {
             override fun run() {
                 systemTimeInstant = DynamicInstant
                     .platformTimeWithSecondsPrecision()
-                    .toDynamicInstantByteArray()
                 Log.d("UPDATETILE", "timer running")
-                systemTime = systemTimeInstant.decodeToString()
+                systemTime = String().format(systemTimeInstant)
                 Log.d("UPDATETILE", "Time: $systemTime")
                 state.addKeyToValueMapping(KEY_SYSTEM_TIME,
                     DynamicDataBuilders.DynamicDataValue
