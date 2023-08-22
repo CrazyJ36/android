@@ -23,8 +23,10 @@ import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
+import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicInstant
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
+import androidx.wear.protolayout.expression.DynamicBuilders.DynamicType
 import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.Text
@@ -115,10 +117,9 @@ class MyTileService : TileService() {
                     .platformTimeWithSecondsPrecision()
                 systemTimeByteArray = systemTimeInstant.toDynamicInstantByteArray()
                 Log.d("UPDATETILE", "Time: ")
-                systemTime = systemTimeByteArray.decodeToString()
+                systemTime = systemTimeByteArray.last().toString()
                 state.addKeyToValueMapping(KEY_SYSTEM_TIME,
-                    DynamicDataBuilders.DynamicDataValue
-                        .fromString(systemTime)
+                    DynamicDataBuilders.DynamicDataValue.fromString(systemTime)
                 )
             }
         }, 0, 1000)
@@ -177,8 +178,9 @@ class MyTileService : TileService() {
             Text.Builder(
                 this,
                 StringProp.Builder("Time")
-                    .setDynamicValue(
-                        DynamicString.from(KEY_SYSTEM_TIME)
+                    .setDynamicValue(DynamicString.from(
+                            KEY_SYSTEM_TIME
+                        )
                     ).build(),
                 StringLayoutConstraint
                     .Builder("00000")
