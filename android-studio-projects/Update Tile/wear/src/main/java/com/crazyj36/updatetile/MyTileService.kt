@@ -46,7 +46,6 @@ class MyTileService : TileService() {
     companion object {
         private lateinit var measureClient: MeasureClient
         private lateinit var timer: Timer
-        lateinit var systemTimeInstant: DynamicInstant
         var heartRate: String = "heartRate"
         var systemTime: String = "systemTime"
         var KEY_HEART_RATE = AppDataKey<DynamicString>(
@@ -110,10 +109,9 @@ class MyTileService : TileService() {
         timer = Timer()
         timer.schedule(object: TimerTask() {
             override fun run() {
-                systemTimeInstant = DynamicInstant
+                systemTime = DynamicInstant
                     .platformTimeWithSecondsPrecision()
-                systemTime = systemTimeInstant.toDynamicInstantByteArray()
-                    .decodeToString()
+                    .toString()
                 Log.d("UPDATETILE", "Time: $systemTime")
                 state.addKeyToValueMapping(KEY_SYSTEM_TIME,
                     DynamicDataBuilders.DynamicDataValue
