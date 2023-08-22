@@ -84,27 +84,6 @@ class MyTileService : TileService() {
             .measureClient
         measureClient.registerMeasureCallback(DataType
             .Companion.HEART_RATE_BPM, heartRateCallback)
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.BODY_SENSORS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            Toast.makeText(applicationContext,
-                "Need body sensor permissions to work",
-                Toast.LENGTH_SHORT).show()
-        } else {
-            timer = Timer()
-            timer.schedule(object : TimerTask() {
-                override fun run() {
-                    Log.d("UPDATETILE",
-                        "HEART RATE: $heartRate"
-                    )
-                    state.addKeyToValueMapping(TEXT,
-                        DynamicDataBuilders.DynamicDataValue
-                            .fromString(heartRate)).build()
-                }
-            }, 0, 1000)
-        }
     }
 
     override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
@@ -133,6 +112,17 @@ class MyTileService : TileService() {
     public override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
+        timer = Timer()
+        timer.schedule(object : TimerTask() {
+            override fun run() {
+                Log.d("UPDATETILE",
+                    "HEART RATE: $heartRate"
+                )
+                state.addKeyToValueMapping(TEXT,
+                    DynamicDataBuilders.DynamicDataValue
+                        .fromString(heartRate))
+            }
+        }, 0, 1000)
         val primaryChip = CompactChip.Builder(
             this,
             "Load",
