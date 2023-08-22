@@ -23,7 +23,6 @@ import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
-import androidx.wear.protolayout.expression.DynamicBuilders.DynamicInstant
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
 import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.material.CompactChip
@@ -37,7 +36,6 @@ import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.runBlocking
 import java.util.Calendar
-import java.util.Date
 import java.util.Timer
 import java.util.TimerTask
 
@@ -168,7 +166,7 @@ class MyTileService : TileService() {
                         KEY_HEART_RATE)
                     ).build(),
                 StringLayoutConstraint
-                    .Builder("00000")
+                    .Builder("000")
                     .build()
             )
         val systemTimeText =
@@ -180,7 +178,7 @@ class MyTileService : TileService() {
                         )
                     ).build(),
                 StringLayoutConstraint
-                    .Builder("00000")
+                    .Builder("000000000000000000000000")
                     .build()
             )
         val primaryLayout = PrimaryLayout.Builder(
@@ -188,8 +186,8 @@ class MyTileService : TileService() {
                 .deviceConfiguration
         )
             .setPrimaryChipContent(primaryChip)
-            .setPrimaryLabelTextContent(heartRateText.build())
-            .setSecondaryLabelTextContent(systemTimeText.build())
+            .setPrimaryLabelTextContent(systemTimeText.build())
+            .setSecondaryLabelTextContent(heartRateText.build())
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
