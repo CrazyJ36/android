@@ -34,8 +34,6 @@ import androidx.wear.tiles.TileService
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.runBlocking
-import java.util.Timer
-import java.util.TimerTask
 
 const val RESOURCES_VERSION = "1"
 
@@ -59,11 +57,11 @@ class MyTileService : TileService() {
         ) {
             if (availability is DataTypeAvailability) {
                 Toast.makeText(this@MyTileService,
-                    "Heart rate available, please wait.",
+                    "Heart rate sensor available, please wait...",
                     Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this@MyTileService,
-                    "Can't get heart rate on this device",
+                    "Heart rate sensor unavailable.",
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -76,6 +74,7 @@ class MyTileService : TileService() {
             state = StateBuilders.State.Builder().addKeyToValueMapping(TEXT,
                 DynamicDataBuilders.DynamicDataValue
                     .fromString(heartRate)).build()
+            getUpdater(this@MyTileService).requestUpdate(MyTileService::class.java)
         }
     }
 
