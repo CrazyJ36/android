@@ -40,6 +40,7 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
+    private val state = StateBuilders.State.Builder()
     private lateinit  var timer: Timer
     private lateinit var measureClient: MeasureClient
     var heartRate: String = "heartRate"
@@ -71,7 +72,8 @@ class MyTileService : TileService() {
         }
     }
 
-    override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
+    override fun onTileEnterEvent(requestParams:
+                                  EventBuilders.TileEnterEvent) {
         super.onTileEnterEvent(requestParams)
         measureClient = HealthServices
             .getClient(this@MyTileService)
@@ -112,8 +114,7 @@ class MyTileService : TileService() {
     public override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-        val state = StateBuilders.State.Builder()
-            .addKeyToValueMapping(TEXT,
+        state.addKeyToValueMapping(TEXT,
             DynamicDataBuilders.DynamicDataValue
                 .fromString(heartRate)).build()
         val primaryChip = CompactChip.Builder(
@@ -163,7 +164,7 @@ class MyTileService : TileService() {
                 Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
                     .setFreshnessIntervalMillis(1000)
-                    .setState(state)
+                    .setState(state.build())
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                            primaryLayout
