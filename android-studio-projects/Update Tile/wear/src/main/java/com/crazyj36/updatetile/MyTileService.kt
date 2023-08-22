@@ -110,12 +110,17 @@ class MyTileService : TileService() {
                 .Companion.HEART_RATE_BPM, heartRateCallback
         )
 
-        val systemTimeInstant = DynamicBuilders.DynamicInstant
-            .platformTimeWithSecondsPrecision()
+
         timer.schedule(object: TimerTask() {
             override fun run() {
-                systemTime = systemTimeInstant.toString()
-                Log.d("UPDATETILE", systemTime)
+                val systemTimeInstant = DynamicBuilders.DynamicInstant
+                    .platformTimeWithSecondsPrecision()
+                    .toDynamicInstantByteArray()
+                state.addKeyToValueMapping(KEY_SYSTEM_TIME,
+                    DynamicDataBuilders.DynamicDataValue
+                        .fromString(systemTimeInstant.decodeToString())
+                )
+                Log.d("UPDATETILE", systemTimeInstant.decodeToString())
             }
         }, 0, 1000)
 
