@@ -53,7 +53,9 @@ class MyTileService : TileService() {
                 override fun run() {
                     Log.d("UPDATETILE",
                         "HEART RATE: ${stringProp.dynamicValue.let { 
-                            it.toString().format()
+                            it.apply { 
+                                it.toString()
+                            }
                         }}"
                     )
                 }
