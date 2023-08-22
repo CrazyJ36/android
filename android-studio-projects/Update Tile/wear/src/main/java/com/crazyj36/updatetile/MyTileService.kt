@@ -36,6 +36,8 @@ import androidx.wear.tiles.TileService
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.runBlocking
+import java.util.Calendar
+import java.util.Date
 import java.util.Timer
 import java.util.TimerTask
 
@@ -109,9 +111,8 @@ class MyTileService : TileService() {
         timer = Timer()
         timer.schedule(object: TimerTask() {
             override fun run() {
-                systemTime = DynamicInstant
-                    .platformTimeWithSecondsPrecision()
-                    .toString().format()
+                systemTime = Calendar.getInstance()
+                    .time.toString()
                 Log.d("UPDATETILE", "Time: $systemTime")
                 state.addKeyToValueMapping(KEY_SYSTEM_TIME,
                     DynamicDataBuilders.DynamicDataValue
