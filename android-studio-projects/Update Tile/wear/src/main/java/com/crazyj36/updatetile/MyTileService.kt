@@ -36,6 +36,7 @@ import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Timer
 import java.util.TimerTask
 
@@ -54,6 +55,8 @@ class MyTileService : TileService() {
             "KEY_SYSTEM_TIME"
         )
         var state = StateBuilders.State.Builder()
+        val date = Date()
+        val simpleDateFormat = SimpleDateFormat("h:mm")
     }
 
     override fun onCreate() {
@@ -108,7 +111,7 @@ class MyTileService : TileService() {
         timer = Timer()
         timer.schedule(object: TimerTask() {
             override fun run() {
-                systemTime = SimpleDateFormat.getTimeInstance().toString()
+                systemTime = simpleDateFormat.format(date)
                 Log.d("UPDATETILE", "Time: $systemTime")
                 state.addKeyToValueMapping(KEY_SYSTEM_TIME,
                     DynamicDataBuilders.DynamicDataValue
