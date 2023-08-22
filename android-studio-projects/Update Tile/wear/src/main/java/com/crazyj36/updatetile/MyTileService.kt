@@ -93,11 +93,6 @@ class MyTileService : TileService() {
                 DynamicDataBuilders.DynamicDataValue
                     .fromString(heartRate)
             )
-            state.addKeyToValueMapping(
-                KEY_SYSTEM_TIME,
-                DynamicDataBuilders.DynamicDataValue
-                    .fromString(systemTime)
-            )
         }
     }
 
@@ -111,23 +106,24 @@ class MyTileService : TileService() {
                 .Companion.HEART_RATE_BPM, heartRateCallback
         )
 
-
         timer.schedule(object: TimerTask() {
             override fun run() {
                 systemTimeInstant = DynamicBuilders.DynamicInstant
                     .platformTimeWithSecondsPrecision()
                     .toDynamicInstantByteArray()
+                systemTime = systemTimeInstant.decodeToString()
                 state.addKeyToValueMapping(KEY_SYSTEM_TIME,
                     DynamicDataBuilders.DynamicDataValue
-                        .fromString(systemTimeInstant.decodeToString())
+                        .fromString(systemTime)
                 )
-                Log.d("UPDATETILE", systemTimeInstant.decodeToString())
+                Log.d("UPDATETILE", systemTime)
             }
         }, 0, 1000)
 
     }
 
-    override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
+    override fun onTileLeaveEvent(
+        requestParams: EventBuilders.TileLeaveEvent) {
         super.onTileLeaveEvent(requestParams)
         runBlocking {
             measureClient.unregisterMeasureCallback(
@@ -139,7 +135,8 @@ class MyTileService : TileService() {
         timer.purge()
     }
 
-    override fun onTileRemoveEvent(requestParams: EventBuilders.TileRemoveEvent) {
+    override fun onTileRemoveEvent(
+        requestParams: EventBuilders.TileRemoveEvent) {
         super.onTileRemoveEvent(requestParams)
         runBlocking {
             measureClient.unregisterMeasureCallback(
@@ -154,6 +151,7 @@ class MyTileService : TileService() {
     public override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
+        Log.d("UPDATETILE", "onTileRequest()")
         val primaryChip = CompactChip.Builder(
             this,
             "Load",
