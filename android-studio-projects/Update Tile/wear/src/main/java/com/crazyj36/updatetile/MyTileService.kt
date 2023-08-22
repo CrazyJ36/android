@@ -4,18 +4,14 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.util.Log
 import android.widget.Toast
-import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ModifiersBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
-import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
-import androidx.wear.protolayout.expression.DynamicBuilders
-import androidx.wear.protolayout.expression.DynamicBuilders.DynamicFloat
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.Text
@@ -28,14 +24,12 @@ import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
 import java.util.Timer
 import java.util.TimerTask
-import androidx.wear.protolayout.proto.TypesProto.Int32Prop
 
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
 
     private lateinit  var timer: Timer
-    private lateinit var heartRate: DynamicBuilders.DynamicInt32
 
     override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
         super.onTileEnterEvent(requestParams)
@@ -59,7 +53,7 @@ class MyTileService : TileService() {
                 override fun run() {
                     Log.d("UPDATETILE",
                         "HEART RATE: ${
-                            prop.dynamicValue.toString()
+                            prop.dynamicValue
                         }"
                     )
                 }
