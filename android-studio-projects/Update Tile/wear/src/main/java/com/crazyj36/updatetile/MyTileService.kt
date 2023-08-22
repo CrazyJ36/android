@@ -32,14 +32,6 @@ const val RESOURCES_VERSION = "1"
 class MyTileService : TileService() {
 
     private lateinit  var timer: Timer
-    private var STATE_KEY: String = "state_key"
-    private var STRING_PROP = StringProp
-        .Builder("--")
-        .setDynamicValue(
-            DynamicBuilders
-                .DynamicString
-                .from(AppDataKey(STATE_KEY))
-        ).build()
     override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
         super.onTileEnterEvent(requestParams)
         if (ActivityCompat.checkSelfPermission(
@@ -51,11 +43,16 @@ class MyTileService : TileService() {
                 "Need body sensor permissions",
                 Toast.LENGTH_SHORT).show()
         } else {
+            var stringProp = StringProp
+                .Builder("--")
+                .setDynamicValue(
+                    PlatformHealthSources.heartRateBpm().format()
+                ).build()
             timer = Timer()
             timer.schedule(object : TimerTask() {
                 override fun run() {
                     Log.d("UPDATETILE",
-                        "HEART RATE: $STRING_PROP"
+                        "HEART RATE: $stringProp"
                     )
                 }
             }, 0, 1000)
