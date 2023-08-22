@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.LayoutElementBuilders
@@ -46,6 +47,7 @@ class MyTileService : TileService() {
                 "Need body sensor permissions",
                 Toast.LENGTH_SHORT).show()
         } else {
+            @NonNull
             val prop = TypeBuilders.FloatProp.Builder(
                 0F)
                 .setDynamicValue(
@@ -55,12 +57,10 @@ class MyTileService : TileService() {
             timer = Timer()
             timer.schedule(object : TimerTask() {
                 override fun run() {
-                    val dynamicValue = prop.dynamicValue
-                    if (dynamicValue != null) {
-                        heartRate =  dynamicValue.asInt()
-                    }
                     Log.d("UPDATETILE",
-                        "HEART RATE: $heartRate"
+                        "HEART RATE: ${
+                            prop.dynamicValue?.asInt()
+                        }"
                     )
                 }
             }, 0, 1000)
