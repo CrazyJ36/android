@@ -59,7 +59,7 @@ class MyTileService : TileService() {
                 override fun run() {
                     Log.d("UPDATETILE",
                         "HEART RATE: ${
-                            prop.dynamicValue?.asInt()
+                            prop.dynamicValue to Int
                         }"
                     )
                 }
