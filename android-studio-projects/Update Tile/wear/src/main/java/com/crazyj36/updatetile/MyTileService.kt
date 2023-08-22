@@ -13,6 +13,7 @@ import androidx.health.services.client.data.DataPointContainer
 import androidx.health.services.client.data.DataType
 import androidx.health.services.client.data.DataTypeAvailability
 import androidx.health.services.client.data.DeltaDataType
+import androidx.health.services.client.unregisterMeasureCallback
 import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ModifiersBuilders
@@ -105,7 +106,7 @@ class MyTileService : TileService() {
     override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
         super.onTileLeaveEvent(requestParams)
         runBlocking {
-            measureClient.unregisterMeasureCallbackAsync(
+            measureClient.unregisterMeasureCallback(
                 DataType.Companion
                     .HEART_RATE_BPM, heartRateCallback
             )
@@ -115,7 +116,7 @@ class MyTileService : TileService() {
     override fun onTileRemoveEvent(requestParams: EventBuilders.TileRemoveEvent) {
         super.onTileRemoveEvent(requestParams)
         runBlocking {
-            measureClient.unregisterMeasureCallbackAsync(
+            measureClient.unregisterMeasureCallback(
                 DataType.Companion.HEART_RATE_BPM,
                 heartRateCallback
             )
