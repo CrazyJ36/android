@@ -24,6 +24,7 @@ import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders
+import androidx.wear.protolayout.expression.DynamicBuilders.DynamicInstant
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
 import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.material.CompactChip
@@ -44,6 +45,7 @@ const val RESOURCES_VERSION = "1"
 class MyTileService : TileService() {
     private lateinit var measureClient: MeasureClient
     private lateinit var timer: Timer
+    lateinit var systemTimeInstant: ByteArray
     companion object {
         var heartRate: String = "heartRate"
         var systemTime: String = "systemTime"
@@ -53,9 +55,7 @@ class MyTileService : TileService() {
             "KEY_SYSTEM_TIME"
         )
         var state = StateBuilders.State.Builder()
-        val systemTimeInstant = DynamicBuilders.DynamicInstant
-            .platformTimeWithSecondsPrecision()
-            .toDynamicInstantByteArray()
+
     }
 
     override fun onCreate() {
@@ -110,6 +110,9 @@ class MyTileService : TileService() {
         timer = Timer()
         timer.schedule(object: TimerTask() {
             override fun run() {
+                systemTimeInstant = DynamicInstant
+                    .platformTimeWithSecondsPrecision()
+                    .toDynamicInstantByteArray()
                 Log.d("UPDATETILE", "timer running")
                 systemTime = systemTimeInstant.decodeToString()
                 Log.d("UPDATETILE", "Time: $systemTime")
