@@ -33,6 +33,7 @@ import androidx.wear.tiles.TileBuilders.Tile
 import androidx.wear.tiles.TileService
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
+import kotlinx.coroutines.runBlocking
 
 const val RESOURCES_VERSION = "1"
 
@@ -77,7 +78,6 @@ class MyTileService : TileService() {
                 ).show()
             }
         }
-
         override fun onDataReceived(data: DataPointContainer) {
             heartRate = data.getData(
                 DataType.HEART_RATE_BPM
@@ -104,18 +104,22 @@ class MyTileService : TileService() {
 
     override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
         super.onTileLeaveEvent(requestParams)
-        measureClient.unregisterMeasureCallbackAsync(
-            DataType.Companion
-                .HEART_RATE_BPM, heartRateCallback
-        )
+        runBlocking {
+            measureClient.unregisterMeasureCallbackAsync(
+                DataType.Companion
+                    .HEART_RATE_BPM, heartRateCallback
+            )
+        }
     }
 
     override fun onTileRemoveEvent(requestParams: EventBuilders.TileRemoveEvent) {
         super.onTileRemoveEvent(requestParams)
-        measureClient.unregisterMeasureCallbackAsync(
-            DataType.Companion.HEART_RATE_BPM,
-            heartRateCallback
-        )
+        runBlocking {
+            measureClient.unregisterMeasureCallbackAsync(
+                DataType.Companion.HEART_RATE_BPM,
+                heartRateCallback
+            )
+        }
     }
 
     public override fun onTileRequest(
