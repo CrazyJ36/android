@@ -110,12 +110,13 @@ class MyTileService : TileService() {
         timer = Timer()
         timer.schedule(object: TimerTask() {
             override fun run() {
+                Log.d("UPDATETILE", "timer running")
                 systemTime = systemTimeInstant.decodeToString()
+                Log.d("UPDATETILE", "Time: $systemTime")
                 state.addKeyToValueMapping(KEY_SYSTEM_TIME,
                     DynamicDataBuilders.DynamicDataValue
                         .fromString(systemTime)
                 )
-                Log.d("UPDATETILE", "Time: $systemTime")
             }
         }, 0, 1000)
     }
