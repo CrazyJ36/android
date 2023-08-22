@@ -40,7 +40,7 @@ import java.util.TimerTask
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
-    private lateinit var state: StateBuilders.State
+    private lateinit var state: StateBuilders.State.Builder
     private lateinit  var timer: Timer
     private lateinit var measureClient: MeasureClient
     var heartRate: String = "heartRate"
@@ -84,10 +84,9 @@ class MyTileService : TileService() {
         timer.schedule(object: TimerTask() {
             override fun run() {
                 Log.d("UPDATETILE", "HEART RATE: $heartRate")
-                state = StateBuilders.State.Builder()
-                    .addKeyToValueMapping(TEXT,
+                state.addKeyToValueMapping(TEXT,
                     DynamicDataBuilders.DynamicDataValue
-                        .fromString(heartRate)).build()
+                        .fromString(heartRate))
             }
         }, 0, 1000)
     }
@@ -118,9 +117,11 @@ class MyTileService : TileService() {
     public override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-        state = StateBuilders.State.Builder().addKeyToValueMapping(TEXT,
-            DynamicDataBuilders.DynamicDataValue
-                .fromString(heartRate)).build()
+        state = StateBuilders.State.Builder()
+            .addKeyToValueMapping(TEXT,
+                DynamicDataBuilders.DynamicDataValue
+                    .fromString(heartRate)
+            )
         val primaryChip = CompactChip.Builder(
             this,
             "Load",
@@ -168,7 +169,7 @@ class MyTileService : TileService() {
                 Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
                     .setFreshnessIntervalMillis(1000)
-                    .setState(state)
+                    .setState(state.build())
                     .setTileTimeline(
                         TimelineBuilders.Timeline.fromLayoutElement(
                            primaryLayout
