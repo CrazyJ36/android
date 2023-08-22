@@ -53,7 +53,9 @@ class MyTileService : TileService() {
             "KEY_SYSTEM_TIME"
         )
         var state = StateBuilders.State.Builder()
-        lateinit var systemTimeInstant: ByteArray
+        val systemTimeInstant = DynamicBuilders.DynamicInstant
+            .platformTimeWithSecondsPrecision()
+            .toDynamicInstantByteArray()
     }
 
     override fun onCreate() {
@@ -108,9 +110,6 @@ class MyTileService : TileService() {
 
         timer.schedule(object: TimerTask() {
             override fun run() {
-                systemTimeInstant = DynamicBuilders.DynamicInstant
-                    .platformTimeWithSecondsPrecision()
-                    .toDynamicInstantByteArray()
                 systemTime = systemTimeInstant.decodeToString()
                 state.addKeyToValueMapping(KEY_SYSTEM_TIME,
                     DynamicDataBuilders.DynamicDataValue
