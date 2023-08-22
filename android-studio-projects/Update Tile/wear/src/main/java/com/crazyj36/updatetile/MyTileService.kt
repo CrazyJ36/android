@@ -23,6 +23,7 @@ import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
+import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
 import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.material.CompactChip
@@ -35,12 +36,14 @@ import androidx.wear.tiles.TileService
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.runBlocking
+import java.util.Timer
+import java.util.TimerTask
 
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
     private lateinit var measureClient: MeasureClient
-
+    private val timer = Timer()
     companion object {
         val TEXT = AppDataKey<DynamicString>("TEXT")
         var heartRate: String = "heartRate"
@@ -96,6 +99,15 @@ class MyTileService : TileService() {
             DataType
                 .Companion.HEART_RATE_BPM, heartRateCallback
         )
+
+        val systemTime = DynamicBuilders.DynamicInstant
+            .platformTimeWithSecondsPrecision()
+        timer.schedule(object: TimerTask() {
+            override fun run() {
+                Log.d("UPDATETILE",  systemTime.toString())
+            }
+        }, 0, 1000)
+
     }
 
     override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
@@ -106,6 +118,8 @@ class MyTileService : TileService() {
                     .HEART_RATE_BPM, heartRateCallback
             )
         }
+        timer.cancel()
+        timer.purge()
     }
 
     override fun onTileRemoveEvent(requestParams: EventBuilders.TileRemoveEvent) {
@@ -116,6 +130,8 @@ class MyTileService : TileService() {
                 heartRateCallback
             )
         }
+        timer.cancel()
+        timer.purge()
     }
 
     public override fun onTileRequest(
