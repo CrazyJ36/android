@@ -116,9 +116,6 @@ class MyTileService : TileService() {
     public override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-        state.addKeyToValueMapping(TEXT, DynamicDataBuilders
-                .DynamicDataValue.fromString(heartRate))
-            .build()
         val primaryChip = CompactChip.Builder(
             this,
             "Load",
