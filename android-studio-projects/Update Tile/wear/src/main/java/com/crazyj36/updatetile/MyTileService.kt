@@ -5,7 +5,9 @@ import android.content.pm.PackageManager
 import android.icu.util.Measure
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.runtime.Composable
 import androidx.core.app.ActivityCompat
+import androidx.health.services.client.HealthServices
 import androidx.health.services.client.MeasureCallback
 import androidx.health.services.client.MeasureClient
 import androidx.health.services.client.data.Availability
@@ -47,27 +49,27 @@ class MyTileService : TileService() {
     val state = StateBuilders.State.Builder()
     private lateinit var measureClient: MeasureClient
     var heartRate: String = "heartRate"
+
     companion object {
         val TEXT = AppDataKey<DynamicBuilders
-            .DynamicString>("text_key")
+            .DynamicString>("TEXT")
     }
-    val heartRateCallback = object: MeasureCallback {
+    private val heartRateCallback = object: MeasureCallback {
         override fun onAvailabilityChanged(
             dataType: DeltaDataType<*, *>,
             availability: Availability
         ) {
             if (availability is DataTypeAvailability) {
-                Toast.makeText(applicationContext,
+                Toast.makeText(this@MyTileService,
                     "Heart rate available, please wait.",
                     Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(applicationContext,
+                Toast.makeText(this@MyTileService,
                     "Can't get heart rate on this device",
                     Toast.LENGTH_SHORT
                 ).show()
             }
         }
-
         override fun onDataReceived(data: DataPointContainer) {
             heartRate = data.getData(
                 DataType.HEART_RATE_BPM
@@ -77,8 +79,12 @@ class MyTileService : TileService() {
                     .fromString(heartRate)).build()
         }
     }
+
     override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
         super.onTileEnterEvent(requestParams)
+        measureClient = HealthServices
+            .getClient(this@MyTileService)
+            .measureClient
         measureClient.registerMeasureCallback(DataType
             .Companion.HEART_RATE_BPM, heartRateCallback)
         if (ActivityCompat.checkSelfPermission(
