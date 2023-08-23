@@ -120,16 +120,11 @@ class MyTileService : TileService() {
                         Manifest.permission.BODY_SENSORS
                     ) != PackageManager.PERMISSION_GRANTED
                 ) {
-                    StringProp.Builder("need permission")
-                        .build().toString()
-
+                    "Need permission"
                 } else {
-                    StringProp.Builder("newHeartRate")
-                        .setDynamicValue(
-                            PlatformHealthSources
-                                .heartRateBpm().format()
-                        ).build().dynamicValue.toString()
+                    PlatformHealthSources.heartRateBpm().animate().format().toString()
                 }
+
                 Log.d("UPDATETILE", newHeartRate)
                 state.addKeyToValueMapping(KEY_HEART_RATE,
                     DynamicDataBuilders.
