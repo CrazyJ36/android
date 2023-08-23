@@ -69,6 +69,17 @@ class MyTileService : TileService() {
         measureClient = HealthServices
             .getClient(this@MyTileService)
             .measureClient
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.BODY_SENSORS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            stringProp = StringProp.Builder("Heart Rate")
+                .setDynamicValue(
+                    PlatformHealthSources.heartRateBpm()
+                        .format()
+                ).build()
+        }
     }
 
     private val heartRateCallback = object : MeasureCallback {
@@ -113,17 +124,7 @@ class MyTileService : TileService() {
             DataType
                 .Companion.HEART_RATE_BPM, heartRateCallback
         )
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.BODY_SENSORS
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            stringProp = StringProp.Builder("Heart Rate")
-                .setDynamicValue(
-                    PlatformHealthSources.heartRateBpm()
-                        .format()
-                ).build()
-        }
+
         timer = Timer()
         timer.schedule(object: TimerTask() {
             @SuppressLint("RestrictedApi")
@@ -133,7 +134,7 @@ class MyTileService : TileService() {
                         .fromString(stringProp
                             .dynamicValue.toString())
                 )
-                
+
                 systemTime = simpleDateFormat.format(date)
                 Log.d("UPDATETILE", "Time: $systemTime")
                 state.addKeyToValueMapping(KEY_SYSTEM_TIME,
