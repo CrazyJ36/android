@@ -113,10 +113,27 @@ class MyTileService : TileService() {
             DataType
                 .Companion.HEART_RATE_BPM, heartRateCallback
         )
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.BODY_SENSORS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            stringProp = StringProp.Builder("Heart Rate")
+                .setDynamicValue(
+                    PlatformHealthSources.heartRateBpm()
+                        .format()
+                ).build()
+        }
         timer = Timer()
         timer.schedule(object: TimerTask() {
             @SuppressLint("RestrictedApi")
-            override fun run() {
+            override fun run(){
+                state.addKeyToValueMapping(KEY_HEART_RATE,
+                    DynamicDataBuilders.DynamicDataValue
+                        .fromString(stringProp
+                            .dynamicValue.toString())
+                )
+                
                 systemTime = simpleDateFormat.format(date)
                 Log.d("UPDATETILE", "Time: $systemTime")
                 state.addKeyToValueMapping(KEY_SYSTEM_TIME,
@@ -165,17 +182,7 @@ class MyTileService : TileService() {
                 .build(),
             requestParams.deviceConfiguration
         ).build()
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.BODY_SENSORS
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            stringProp = StringProp.Builder("Heart Rate")
-                .setDynamicValue(
-                    PlatformHealthSources.heartRateBpm()
-                        .format()
-                ).build()
-        }
+
         val heartRateText =
             Text.Builder(
                 this,
@@ -184,11 +191,6 @@ class MyTileService : TileService() {
                     .Builder("000")
                     .build()
             )
-        state.addKeyToValueMapping(KEY_HEART_RATE,
-            DynamicDataBuilders.DynamicDataValue
-                .fromString(stringProp
-                    .dynamicValue.toString())
-        )
         val systemTimeText =
             Text.Builder(
                 this,
