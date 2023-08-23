@@ -25,6 +25,7 @@ import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
+import androidx.wear.protolayout.expression.DynamicBuilders.DynamicFloat
 import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.CompactChip
@@ -123,15 +124,16 @@ class MyTileService : TileService() {
                     ) == PackageManager.PERMISSION_GRANTED
                 ) {
                     newHeartRate = PlatformHealthSources
-                        .heartRateBpm()
-                        .format().toDynamicStringProto()
-                        .stateSource.sourceKey
+                        .heartRateBpm().format()
+                        .toDynamicStringByteArray()
+                        .decodeToString()
+                    Log.d("UPDATETILE", "HR: $newHeartRate")
+                    state.addKeyToValueMapping(KEY_HEART_RATE,
+                        DynamicDataBuilders
+                            .DynamicDataValue.fromString(newHeartRate)
+                    )
                 }
-                Log.d("UPDATETILE", "HR: $newHeartRate")
-                state.addKeyToValueMapping(KEY_HEART_RATE,
-                    DynamicDataBuilders.
-                    DynamicDataValue.fromString(newHeartRate)
-                )
+
 
                 systemTime = simpleDateFormat.format(date)
                 //Log.d("UPDATETILE", "Time: $systemTime")
