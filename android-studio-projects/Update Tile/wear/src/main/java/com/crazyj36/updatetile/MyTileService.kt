@@ -61,7 +61,7 @@ class MyTileService : TileService() {
         private val date = Date()
         private val simpleDateFormat = SimpleDateFormat("h:mm",
             Locale.US)
-        private lateinit var stringProp: StringProp
+        private lateinit var stringProp: StringProp.Builder
     }
 
     override fun onCreate() {
@@ -78,7 +78,7 @@ class MyTileService : TileService() {
                 .setDynamicValue(
                     PlatformHealthSources.heartRateBpm()
                         .format()
-                ).build()
+                )
         }
     }
 
@@ -129,13 +129,13 @@ class MyTileService : TileService() {
         timer.schedule(object: TimerTask() {
             @SuppressLint("RestrictedApi")
             override fun run(){
-                Log.d("UPDATETILE", stringProp
+                Log.d("UPDATETILE",
+                    stringProp.build()
                     .dynamicValue.toString()
                 )
                 state.addKeyToValueMapping(KEY_HEART_RATE,
                     DynamicDataBuilders.DynamicDataValue
-                        .fromString(stringProp
-                            .dynamicValue.toString())
+                        .fromString(stringProp.build().toString())
                 )
 
                 systemTime = simpleDateFormat.format(date)
@@ -190,7 +190,7 @@ class MyTileService : TileService() {
         val heartRateText =
             Text.Builder(
                 this,
-                stringProp,
+                stringProp.build(),
                 StringLayoutConstraint
                     .Builder("000")
                     .build()
@@ -216,7 +216,7 @@ class MyTileService : TileService() {
             .setSecondaryLabelTextContent(heartRateText.build())
         state.addKeyToValueMapping(KEY_HEART_RATE,
             DynamicDataBuilders.DynamicDataValue
-                .fromString(stringProp
+                .fromString(stringProp.build()
                     .dynamicValue.toString())
         )
         return if (ActivityCompat.checkSelfPermission(
@@ -232,7 +232,7 @@ class MyTileService : TileService() {
                             .fromLayoutElement(
                                 LayoutElementBuilders.Text.Builder()
                                     .setText(
-                                        "Need body sensor permission to work."
+                                        "Need body sensor permission."
                                     )
                                     .build()
                             )
