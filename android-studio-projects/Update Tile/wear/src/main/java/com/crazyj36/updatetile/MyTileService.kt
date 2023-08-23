@@ -1,6 +1,7 @@
 package com.crazyj36.updatetile
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.util.Log
 import android.widget.Toast
@@ -114,21 +115,18 @@ class MyTileService : TileService() {
         )
         timer = Timer()
         timer.schedule(object: TimerTask() {
+            @SuppressLint("RestrictedApi")
             override fun run() {
                 if (ActivityCompat.checkSelfPermission(
                         this@MyTileService,
                         Manifest.permission.BODY_SENSORS
                     ) == PackageManager.PERMISSION_GRANTED
                 ) {
-                    newHeartRate =
-                        PlatformHealthSources
-                            .heartRateBpm().asInt()
-                            .format().toString()
-                    /*PlatformHealthSources
+                    newHeartRate = PlatformHealthSources
                         .heartRateBpm()
-                        .toDynamicFloatProto()
-                        .int32ToFloatOperation.input
-                        .platformSource.toString()*/
+                        .format().toDynamicStringProto()
+                        .int32FormatOp.defaultInstanceForType
+                        .toString()
 
                 }
                 Log.d("UPDATETILE", "HR: $newHeartRate")
