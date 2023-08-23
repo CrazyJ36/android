@@ -25,6 +25,7 @@ import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
 import androidx.wear.protolayout.expression.DynamicDataBuilders
+import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.Text
 import androidx.wear.protolayout.material.layouts.PrimaryLayout
@@ -37,6 +38,7 @@ import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 import java.util.Timer
 import java.util.TimerTask
 
@@ -48,6 +50,7 @@ class MyTileService : TileService() {
         private lateinit var measureClient: MeasureClient
         private lateinit var timer: Timer
         var heartRate: String = "heartRate"
+        private lateinit var newHeartRate: String
         var systemTime: String = "systemTime"
         var KEY_HEART_RATE = AppDataKey<DynamicString>(
             "KEY_HEART_RATE")
@@ -56,7 +59,8 @@ class MyTileService : TileService() {
         )
         var state = StateBuilders.State.Builder()
         val date = Date()
-        val simpleDateFormat = SimpleDateFormat("h:mm")
+        val simpleDateFormat = SimpleDateFormat("h:mm",
+            Locale.US)
     }
 
     override fun onCreate() {
@@ -87,7 +91,7 @@ class MyTileService : TileService() {
         }
 
         override fun onDataReceived(data: DataPointContainer) {
-            heartRate = data.getData(
+            /*heartRate = data.getData(
                 DataType.HEART_RATE_BPM
             ).last().value.toString()
             Log.d("UPDATETILE", "HEART RATE: $heartRate")
@@ -95,7 +99,7 @@ class MyTileService : TileService() {
                 KEY_HEART_RATE,
                 DynamicDataBuilders.DynamicDataValue
                     .fromString(heartRate)
-            ).build()
+            )*/
         }
     }
 
@@ -111,12 +115,32 @@ class MyTileService : TileService() {
         timer = Timer()
         timer.schedule(object: TimerTask() {
             override fun run() {
+                newHeartRate = if (ActivityCompat.checkSelfPermission(
+                        this@MyTileService,
+                        Manifest.permission.BODY_SENSORS
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    StringProp.Builder("need permission")
+                        .build().toString()
+
+                } else {
+                    StringProp.Builder("newHeartRate")
+                        .setDynamicValue(
+                            PlatformHealthSources
+                                .heartRateBpm().format()
+                        ).toString()
+                }
+                state.addKeyToValueMapping(KEY_HEART_RATE,
+                    DynamicDataBuilders.
+                    DynamicDataValue.fromString(newHeartRate)
+                )
+
                 systemTime = simpleDateFormat.format(date)
                 Log.d("UPDATETILE", "Time: $systemTime")
                 state.addKeyToValueMapping(KEY_SYSTEM_TIME,
                     DynamicDataBuilders.DynamicDataValue
                         .fromString(systemTime)
-                ).build()
+                )
             }
         }, 0, 1000)
     }
@@ -151,6 +175,11 @@ class MyTileService : TileService() {
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
         Log.d("UPDATETILE", "onTileRequest()")
+        val dynamicHeartRate = StringProp.Builder("Heart Rate")
+            .setDynamicValue(
+                PlatformHealthSources
+                    .heartRateBpm().format()
+            ).build().dynamicValue.toString()
         val primaryChip = CompactChip.Builder(
             this,
             "Load",
@@ -163,8 +192,8 @@ class MyTileService : TileService() {
             Text.Builder(
                 this,
                 StringProp.Builder("Heart Rate")
-                    .setDynamicValue(DynamicString.from(
-                        KEY_HEART_RATE)
+                    .setDynamicValue(
+                        DynamicString.from(KEY_HEART_RATE)
                     ).build(),
                 StringLayoutConstraint
                     .Builder("000")
