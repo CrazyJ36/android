@@ -130,6 +130,7 @@ class MyTileService : TileService() {
                                 .heartRateBpm().format()
                         ).toString()
                 }
+                Log.d("UPDATETILE", newHeartRate)
                 state.addKeyToValueMapping(KEY_HEART_RATE,
                     DynamicDataBuilders.
                     DynamicDataValue.fromString(newHeartRate)
