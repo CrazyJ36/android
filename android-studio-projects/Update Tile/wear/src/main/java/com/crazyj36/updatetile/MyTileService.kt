@@ -26,6 +26,7 @@ import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
+import androidx.wear.protolayout.expression.DynamicBuilders.DynamicFloat
 import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.CompactChip
@@ -52,7 +53,7 @@ class MyTileService : TileService() {
         private lateinit var measureClient: MeasureClient
         private lateinit var timer: Timer
         private var heartRate: String = "heartRate"
-        private lateinit var newHeartRate: String
+        private lateinit var newHeartRate: DynamicFloat
         private var systemTime: String = "systemTime"
         private var KEY_HEART_RATE = AppDataKey<DynamicString>(
             "KEY_HEART_RATE")
@@ -124,10 +125,8 @@ class MyTileService : TileService() {
                     ) == PackageManager.PERMISSION_GRANTED
                 ) {
                     newHeartRate =
-                        TypeBuilders.FloatProp.Builder(0F)
-                            .setDynamicValue(PlatformHealthSources
+                        PlatformHealthSources
                                 .heartRateBpm()
-                            ).build().dynamicValue.toString()
                     /*PlatformHealthSources
                         .heartRateBpm()
                         .toDynamicFloatProto()
@@ -135,10 +134,10 @@ class MyTileService : TileService() {
                         .platformSource.toString()*/
 
                 }
-                Log.d("UPDATETILE", newHeartRate)
+                Log.d("UPDATETILE", "HR: $newHeartRate")
                 state.addKeyToValueMapping(KEY_HEART_RATE,
                     DynamicDataBuilders.
-                    DynamicDataValue.fromString(newHeartRate)
+                    DynamicDataValue.fromString("$newHeartRate")
                 )
 
                 systemTime = simpleDateFormat.format(date)
