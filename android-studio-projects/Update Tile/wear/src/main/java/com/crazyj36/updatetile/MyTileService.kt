@@ -118,24 +118,8 @@ class MyTileService : TileService() {
         timer.schedule(object: TimerTask() {
             @SuppressLint("RestrictedApi")
             override fun run() {
-                if (ActivityCompat.checkSelfPermission(
-                        this@MyTileService,
-                        Manifest.permission.BODY_SENSORS
-                    ) == PackageManager.PERMISSION_GRANTED
-                ) {
-                    newHeartRate = PlatformHealthSources
-                        .heartRateBpm().format()
-                        .toDynamicStringProto().fixed.toString()
-                    Log.d("UPDATETILE", "HR: $newHeartRate")
-                    state.addKeyToValueMapping(KEY_HEART_RATE,
-                        DynamicDataBuilders
-                            .DynamicDataValue.fromString(newHeartRate)
-                    )
-                }
-
-
                 systemTime = simpleDateFormat.format(date)
-                //Log.d("UPDATETILE", "Time: $systemTime")
+                Log.d("UPDATETILE", "Time: $systemTime")
                 state.addKeyToValueMapping(KEY_SYSTEM_TIME,
                     DynamicDataBuilders.DynamicDataValue
                         .fromString(systemTime)
@@ -182,17 +166,24 @@ class MyTileService : TileService() {
                 .build(),
             requestParams.deviceConfiguration
         ).build()
+        val stringProp = StringProp.Builder("Heart Rate")
+            .setDynamicValue(
+                //DynamicString.from(KEY_HEART_RATE)
+                PlatformHealthSources.heartRateBpm()
+                    .format()
+            ).build()
         val heartRateText =
             Text.Builder(
                 this,
-                StringProp.Builder("Heart Rate")
-                    .setDynamicValue(
-                        DynamicString.from(KEY_HEART_RATE)
-                    ).build(),
+                stringProp,
                 StringLayoutConstraint
                     .Builder("000")
                     .build()
             )
+        state.addKeyToValueMapping(KEY_HEART_RATE,
+            DynamicDataBuilders.DynamicDataValue
+                .fromString(stringProp.toString())
+        )
         val systemTimeText =
             Text.Builder(
                 this,
