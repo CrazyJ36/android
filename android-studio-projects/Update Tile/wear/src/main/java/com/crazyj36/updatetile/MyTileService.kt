@@ -95,7 +95,7 @@ class MyTileService : TileService() {
                 KEY_HEART_RATE,
                 DynamicDataBuilders.DynamicDataValue
                     .fromString(heartRate)
-            )
+            ).build()
         }
     }
 
@@ -116,7 +116,7 @@ class MyTileService : TileService() {
                 state.addKeyToValueMapping(KEY_SYSTEM_TIME,
                     DynamicDataBuilders.DynamicDataValue
                         .fromString(systemTime)
-                )
+                ).build()
             }
         }, 0, 1000)
     }
