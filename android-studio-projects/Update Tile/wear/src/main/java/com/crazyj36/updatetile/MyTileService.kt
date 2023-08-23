@@ -63,6 +63,7 @@ class MyTileService : TileService() {
         private val date = Date()
         private val simpleDateFormat = SimpleDateFormat("h:mm",
             Locale.US)
+        private lateinit var stringProp: StringProp
     }
 
     override fun onCreate() {
@@ -114,6 +115,17 @@ class MyTileService : TileService() {
             DataType
                 .Companion.HEART_RATE_BPM, heartRateCallback
         )
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.BODY_SENSORS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            stringProp = StringProp.Builder("Heart Rate")
+                .setDynamicValue(
+                    PlatformHealthSources.heartRateBpm()
+                        .format()
+                ).build()
+        }
         timer = Timer()
         timer.schedule(object: TimerTask() {
             @SuppressLint("RestrictedApi")
@@ -166,12 +178,7 @@ class MyTileService : TileService() {
                 .build(),
             requestParams.deviceConfiguration
         ).build()
-        val stringProp = StringProp.Builder("Heart Rate")
-            .setDynamicValue(
-                //DynamicString.from(KEY_HEART_RATE)
-                PlatformHealthSources.heartRateBpm()
-                    .format()
-            ).build()
+
         val heartRateText =
             Text.Builder(
                 this,
@@ -182,7 +189,8 @@ class MyTileService : TileService() {
             )
         state.addKeyToValueMapping(KEY_HEART_RATE,
             DynamicDataBuilders.DynamicDataValue
-                .fromString(stringProp.dynamicValue.toString())
+                .fromString(stringProp
+                    .dynamicValue.toString())
         )
         val systemTimeText =
             Text.Builder(
