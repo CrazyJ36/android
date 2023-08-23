@@ -182,7 +182,7 @@ class MyTileService : TileService() {
             )
         state.addKeyToValueMapping(KEY_HEART_RATE,
             DynamicDataBuilders.DynamicDataValue
-                .fromString(stringProp.toString())
+                .fromString(stringProp.dynamicValue.toString())
         )
         val systemTimeText =
             Text.Builder(
