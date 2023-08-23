@@ -214,6 +214,11 @@ class MyTileService : TileService() {
             .setPrimaryChipContent(primaryChip)
             .setPrimaryLabelTextContent(systemTimeText.build())
             .setSecondaryLabelTextContent(heartRateText.build())
+        state.addKeyToValueMapping(KEY_HEART_RATE,
+            DynamicDataBuilders.DynamicDataValue
+                .fromString(stringProp
+                    .dynamicValue.toString())
+        )
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
