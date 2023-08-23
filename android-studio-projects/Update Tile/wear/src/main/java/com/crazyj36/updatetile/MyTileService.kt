@@ -129,6 +129,9 @@ class MyTileService : TileService() {
         timer.schedule(object: TimerTask() {
             @SuppressLint("RestrictedApi")
             override fun run(){
+                Log.d("UPDATETILE", stringProp
+                    .dynamicValue.toString()
+                )
                 state.addKeyToValueMapping(KEY_HEART_RATE,
                     DynamicDataBuilders.DynamicDataValue
                         .fromString(stringProp
