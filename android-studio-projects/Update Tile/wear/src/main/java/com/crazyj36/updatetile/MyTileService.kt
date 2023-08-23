@@ -129,7 +129,7 @@ class MyTileService : TileService() {
                     PlatformHealthSources
                         .heartRateBpm()
                         .toDynamicFloatProto()
-                        .int32ToFloatOperation.input.platformSource.sourceType.number.toString()
+                        .int32ToFloatOperation.input.platformSource.toString()
 
                 }
                 Log.d("UPDATETILE", newHeartRate)
