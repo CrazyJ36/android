@@ -125,9 +125,7 @@ class MyTileService : TileService() {
                     newHeartRate = PlatformHealthSources
                         .heartRateBpm()
                         .format().toDynamicStringProto()
-                        .int32FormatOp.input.stateSource
-                        .sourceKey
-
+                        .stateSource.sourceKey
                 }
                 Log.d("UPDATETILE", "HR: $newHeartRate")
                 state.addKeyToValueMapping(KEY_HEART_RATE,
