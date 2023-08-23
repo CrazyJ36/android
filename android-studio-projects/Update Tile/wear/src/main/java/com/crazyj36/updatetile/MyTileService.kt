@@ -129,7 +129,7 @@ class MyTileService : TileService() {
                     PlatformHealthSources
                         .heartRateBpm()
                         .toDynamicFloatProto()
-                        .int32ToFloatOperation.input.toString()
+                        .int32ToFloatOperation.input.platformSource.sourceTypeValue.toString()
 
                 }
                 Log.d("UPDATETILE", newHeartRate)
@@ -178,11 +178,6 @@ class MyTileService : TileService() {
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
         Log.d("UPDATETILE", "onTileRequest()")
-        val dynamicHeartRate = StringProp.Builder("Heart Rate")
-            .setDynamicValue(
-                PlatformHealthSources
-                    .heartRateBpm().format()
-            ).build().dynamicValue.toString()
         val primaryChip = CompactChip.Builder(
             this,
             "Load",
