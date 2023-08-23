@@ -165,17 +165,6 @@ class MyTileService : TileService() {
                 .build(),
             requestParams.deviceConfiguration
         ).build()
-
-        val heartRateText =
-            Text.Builder(
-                this,
-                stringProp,
-                StringLayoutConstraint
-                    .Builder("000")
-                    .build()
-            )
-
-
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -187,7 +176,14 @@ class MyTileService : TileService() {
                         .format()
                 ).build()
         }
-
+        val heartRateText =
+            Text.Builder(
+                this,
+                stringProp,
+                StringLayoutConstraint
+                    .Builder("000")
+                    .build()
+            )
         state.addKeyToValueMapping(KEY_HEART_RATE,
             DynamicDataBuilders.DynamicDataValue
                 .fromString(stringProp
