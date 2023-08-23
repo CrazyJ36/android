@@ -25,7 +25,6 @@ import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
-import androidx.wear.protolayout.expression.DynamicBuilders.DynamicFloat
 import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.CompactChip
@@ -52,7 +51,6 @@ class MyTileService : TileService() {
         private lateinit var measureClient: MeasureClient
         private lateinit var timer: Timer
         private var heartRate: String = "heartRate"
-        private lateinit var newHeartRate: String
         private var systemTime: String = "systemTime"
         private var KEY_HEART_RATE = AppDataKey<DynamicString>(
             "KEY_HEART_RATE")
@@ -115,17 +113,6 @@ class MyTileService : TileService() {
             DataType
                 .Companion.HEART_RATE_BPM, heartRateCallback
         )
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.BODY_SENSORS
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            stringProp = StringProp.Builder("Heart Rate")
-                .setDynamicValue(
-                    PlatformHealthSources.heartRateBpm()
-                        .format()
-                ).build()
-        }
         timer = Timer()
         timer.schedule(object: TimerTask() {
             @SuppressLint("RestrictedApi")
@@ -187,6 +174,20 @@ class MyTileService : TileService() {
                     .Builder("000")
                     .build()
             )
+
+
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.BODY_SENSORS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            stringProp = StringProp.Builder("Heart Rate")
+                .setDynamicValue(
+                    PlatformHealthSources.heartRateBpm()
+                        .format()
+                ).build()
+        }
+
         state.addKeyToValueMapping(KEY_HEART_RATE,
             DynamicDataBuilders.DynamicDataValue
                 .fromString(stringProp
