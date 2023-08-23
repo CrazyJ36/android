@@ -124,8 +124,11 @@ class MyTileService : TileService() {
                 ) {
                     "Need permission"
                 } else {
-                    PlatformHealthSources.heartRateBpm()
-                        .asInt().toString()
+                    StringProp.Builder("heartRate")
+                        .setDynamicValue(
+                            PlatformHealthSources
+                                .heartRateBpm().format()
+                        ).build().toString()
                 }
                 Log.d("UPDATETILE", newHeartRate)
                 state.addKeyToValueMapping(KEY_HEART_RATE,
