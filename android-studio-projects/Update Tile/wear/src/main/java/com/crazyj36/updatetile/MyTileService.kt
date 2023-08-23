@@ -21,6 +21,7 @@ import androidx.wear.protolayout.ModifiersBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.StateBuilders
 import androidx.wear.protolayout.TimelineBuilders
+import androidx.wear.protolayout.TypeBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
@@ -42,7 +43,6 @@ import java.util.Date
 import java.util.Locale
 import java.util.Timer
 import java.util.TimerTask
-import androidx.wear.protolayout.expression.proto.DynamicDataProto
 
 const val RESOURCES_VERSION = "1"
 
@@ -51,16 +51,17 @@ class MyTileService : TileService() {
     companion object {
         private lateinit var measureClient: MeasureClient
         private lateinit var timer: Timer
-        var heartRate: String = "heartRate"
-        var systemTime: String = "systemTime"
-        var KEY_HEART_RATE = AppDataKey<DynamicString>(
+        private var heartRate: String = "heartRate"
+        private lateinit var newHeartRate: String
+        private var systemTime: String = "systemTime"
+        private var KEY_HEART_RATE = AppDataKey<DynamicString>(
             "KEY_HEART_RATE")
-        var KEY_SYSTEM_TIME = AppDataKey<DynamicString>(
+        private var KEY_SYSTEM_TIME = AppDataKey<DynamicString>(
             "KEY_SYSTEM_TIME"
         )
-        var state = StateBuilders.State.Builder()
-        val date = Date()
-        val simpleDateFormat = SimpleDateFormat("h:mm",
+        private var state = StateBuilders.State.Builder()
+        private val date = Date()
+        private val simpleDateFormat = SimpleDateFormat("h:mm",
             Locale.US)
     }
 
@@ -117,19 +118,21 @@ class MyTileService : TileService() {
         timer.schedule(object: TimerTask() {
             @SuppressLint("RestrictedApi")
             override fun run() {
-                val newHeartRate = if (ActivityCompat.checkSelfPermission(
+                if (ActivityCompat.checkSelfPermission(
                         this@MyTileService,
                         Manifest.permission.BODY_SENSORS
-                    ) != PackageManager.PERMISSION_GRANTED
+                    ) == PackageManager.PERMISSION_GRANTED
                 ) {
-                    "Need permission"
-                } else {
-                    //PlatformHealthSources
-                    //    .heartRateBpm().toDynamicFloatProto().fixed.toString()
-                    PlatformHealthSources
+                    newHeartRate =
+                        TypeBuilders.FloatProp.Builder(0F)
+                            .setDynamicValue(PlatformHealthSources
+                                .heartRateBpm()
+                            ).build().dynamicValue.toString()
+                    /*PlatformHealthSources
                         .heartRateBpm()
                         .toDynamicFloatProto()
-                        .int32ToFloatOperation.input.platformSource.toString()
+                        .int32ToFloatOperation.input
+                        .platformSource.toString()*/
 
                 }
                 Log.d("UPDATETILE", newHeartRate)
