@@ -126,7 +126,7 @@ class MyTileService : TileService() {
                     newHeartRate = PlatformHealthSources
                         .heartRateBpm().format()
                         .toDynamicStringByteArray()
-                        .decodeToString()
+                        .decodeToString().format()
                     Log.d("UPDATETILE", "HR: $newHeartRate")
                     state.addKeyToValueMapping(KEY_HEART_RATE,
                         DynamicDataBuilders
