@@ -26,6 +26,7 @@ import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.AppDataKey
 import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
 import androidx.wear.protolayout.expression.DynamicDataBuilders
+import androidx.wear.protolayout.expression.Fingerprint
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.CompactChip
 import androidx.wear.protolayout.material.Text
@@ -51,7 +52,7 @@ class MyTileService : TileService() {
         private lateinit var measureClient: MeasureClient
         private lateinit var timer: Timer
         private var heartRate: String = "heartRate"
-        private lateinit var newHeartRate: DynamicString
+        private lateinit var newHeartRate: Fingerprint
         private var systemTime: String = "systemTime"
         private var KEY_HEART_RATE = AppDataKey<DynamicString>(
             "KEY_HEART_RATE")
@@ -124,7 +125,7 @@ class MyTileService : TileService() {
                 ) {
                     newHeartRate =
                         PlatformHealthSources
-                                .heartRateBpm().format()
+                            .heartRateBpm().fingerprint!!
                     /*PlatformHealthSources
                         .heartRateBpm()
                         .toDynamicFloatProto()
