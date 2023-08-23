@@ -1,6 +1,7 @@
 package com.crazyj36.updatetile
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.util.Log
 import android.widget.Toast
@@ -41,6 +42,7 @@ import java.util.Date
 import java.util.Locale
 import java.util.Timer
 import java.util.TimerTask
+import androidx.wear.protolayout.expression.proto.DynamicDataProto
 
 const val RESOURCES_VERSION = "1"
 
@@ -50,7 +52,6 @@ class MyTileService : TileService() {
         private lateinit var measureClient: MeasureClient
         private lateinit var timer: Timer
         var heartRate: String = "heartRate"
-        private lateinit var newHeartRate: String
         var systemTime: String = "systemTime"
         var KEY_HEART_RATE = AppDataKey<DynamicString>(
             "KEY_HEART_RATE")
@@ -114,15 +115,19 @@ class MyTileService : TileService() {
         )
         timer = Timer()
         timer.schedule(object: TimerTask() {
+            @SuppressLint("RestrictedApi")
             override fun run() {
-                newHeartRate = if (ActivityCompat.checkSelfPermission(
+                val newHeartRate = if (ActivityCompat.checkSelfPermission(
                         this@MyTileService,
                         Manifest.permission.BODY_SENSORS
                     ) != PackageManager.PERMISSION_GRANTED
                 ) {
                     "Need permission"
                 } else {
-                    PlatformHealthSources.Keys.HEART_RATE_BPM.toString()
+                    PlatformHealthSources.heartRateBpm()
+                        .format().toDynamicStringProto()
+                        .floatFormatOp.toString()
+
                 }
                 Log.d("UPDATETILE", newHeartRate)
                 state.addKeyToValueMapping(KEY_HEART_RATE,
@@ -131,7 +136,7 @@ class MyTileService : TileService() {
                 )
 
                 systemTime = simpleDateFormat.format(date)
-                Log.d("UPDATETILE", "Time: $systemTime")
+                //Log.d("UPDATETILE", "Time: $systemTime")
                 state.addKeyToValueMapping(KEY_SYSTEM_TIME,
                     DynamicDataBuilders.DynamicDataValue
                         .fromString(systemTime)
