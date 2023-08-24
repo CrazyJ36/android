@@ -103,6 +103,10 @@ class MyTileService : TileService() {
                                             DynamicString.from(
                                             KEY_HEART_RATE)
                                         ).build()
+                                ).setLayoutConstraintsForDynamicText(
+                                        StringLayoutConstraint.Builder(
+                                            "000"
+                                        ).build()
                                 ).build()
                         )
                     ).setState(state.build())
