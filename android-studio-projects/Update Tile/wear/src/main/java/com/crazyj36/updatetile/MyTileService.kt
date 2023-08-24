@@ -1,89 +1,47 @@
 package com.crazyj36.updatetile
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ResourceBuilders
-import androidx.wear.protolayout.StateBuilders
 import androidx.wear.protolayout.TimelineBuilders
-import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
-import androidx.wear.protolayout.expression.AppDataKey
-import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
-import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
-import androidx.wear.protolayout.material.Text
-import androidx.wear.tiles.EventBuilders
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders.Tile
 import androidx.wear.tiles.TileService
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
-import java.util.Timer
-import java.util.TimerTask
 
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
-    companion object {
-        var count = 0
-        val state = StateBuilders.State.Builder()
-        var KEY_HEART_RATE = AppDataKey<DynamicString>(
-            "key_heart_rate"
-        )
-        val timer = Timer()
-    }
 
-    override fun onTileEnterEvent(
-        requestParams: EventBuilders.TileEnterEvent) {
-        super.onTileEnterEvent(requestParams)
-        timer.schedule(object: TimerTask() {
-            @SuppressLint("RestrictedApi")
-            override fun run() {
-                count++
-                state.addKeyToValueMapping(KEY_HEART_RATE,
-                    DynamicDataBuilders.DynamicDataValue
-                        .fromString(count.toString())
-                )
-            }
-        }, 0, 1000)
-    }
-
-    override fun onTileRemoveEvent(requestParams: EventBuilders.TileRemoveEvent) {
-        super.onTileRemoveEvent(requestParams)
-        timer.cancel()
-        timer.purge()
-    }
-
-    @SuppressLint("RestrictedApi")
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-        Log.d("UPDATETILE", "onTileRequest()")
-        state.addKeyToValueMapping(KEY_HEART_RATE,
-            DynamicDataBuilders.DynamicDataValue
-                .fromString(count.toString())
-        )
-
         return if (ActivityCompat.checkSelfPermission(
                 this,
-                Manifest.permission.BODY_SENSORS
-            ) != PackageManager.PERMISSION_GRANTED
+                Manifest.permission.ACTIVITY_RECOGNITION
+            ) == PackageManager.PERMISSION_GRANTED
         ) {
             Futures.immediateFuture(
                 Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
+                    .setFreshnessIntervalMillis(1000)
                     .setTileTimeline(
-                        TimelineBuilders.Timeline
-                            .fromLayoutElement(
+                        TimelineBuilders
+                            .Timeline.fromLayoutElement(
                                 LayoutElementBuilders.Text.Builder()
                                     .setText(
-                                        "Need body sensor permission."
-                                    )
-                                    .build()
+                                        StringProp.Builder("Daily Distance")
+                                            .setDynamicValue(
+                                                PlatformHealthSources
+                                                    .dailyDistanceMeters()
+                                                    .format()
+                                            ).build()
+                                    ).build()
                             )
                     ).build()
             )
@@ -91,26 +49,14 @@ class MyTileService : TileService() {
             Futures.immediateFuture(
                 Tile.Builder()
                     .setResourcesVersion(RESOURCES_VERSION)
-                    .setFreshnessIntervalMillis(1000)
                     .setTileTimeline(
                         TimelineBuilders.Timeline
                             .fromLayoutElement(
                                 LayoutElementBuilders.Text.Builder()
-                                    .setText(
-                                        StringProp.Builder(
-                                            "string"
-                                        ).setDynamicValue(
-                                            DynamicString.from(
-                                            KEY_HEART_RATE)
-                                        ).build()
-                                ).setLayoutConstraintsForDynamicText(
-                                        StringLayoutConstraint.Builder(
-                                            "000"
-                                        ).build()
-                                ).build()
-                        )
-                    ).setState(state.build())
-                    .build()
+                                    .setText("Need permission")
+                                    .build()
+                            )
+                    ).build()
             )
         }
     }
