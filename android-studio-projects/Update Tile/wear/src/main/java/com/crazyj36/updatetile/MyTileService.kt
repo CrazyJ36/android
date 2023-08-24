@@ -32,7 +32,7 @@ class MyTileService : TileService() {
         var count = 0
         val state = StateBuilders.State.Builder()
         var KEY_HEART_RATE = AppDataKey<DynamicString>(
-            count.toString()
+            "key_heart_rate"
         )
         val timer = Timer()
     }
@@ -48,13 +48,6 @@ class MyTileService : TileService() {
                     DynamicDataBuilders.DynamicDataValue
                         .fromString(count.toString())
                 )
-                KEY_HEART_RATE = AppDataKey<DynamicString>(
-                    count.toString()
-                )
-                Log.d("UPDATETILE", DynamicString.from(
-                    KEY_HEART_RATE).toDynamicStringProto()
-                    .stateSource.sourceKey
-                )
             }
         }, 0, 1000)
     }
@@ -69,9 +62,10 @@ class MyTileService : TileService() {
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
+        Log.d("UPDATETILE", "onTileRequest()")
         state.addKeyToValueMapping(KEY_HEART_RATE,
             DynamicDataBuilders.DynamicDataValue
-                .fromString("state")
+                .fromString(count.toString())
         )
 
         return if (ActivityCompat.checkSelfPermission(
@@ -103,10 +97,12 @@ class MyTileService : TileService() {
                             .fromLayoutElement(
                                 LayoutElementBuilders.Text.Builder()
                                     .setText(
-                                        DynamicString.from(
+                                        StringProp.Builder(
+                                            "string"
+                                        ).setDynamicValue(
+                                            DynamicString.from(
                                             KEY_HEART_RATE)
-                                            .toDynamicStringProto()
-                                            .stateSource.sourceKey
+                                        ).build()
                                 ).build()
                         )
                     ).setState(state.build())
