@@ -24,23 +24,10 @@ import com.google.common.util.concurrent.ListenableFuture
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
-    companion object {
-        val KEY_HEART_RATE =
-            AppDataKey<DynamicString>("key_heart_rate")
-    }
     public override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
         Log.d("UPDATETILE", "onTileRequest()")
-        val state = StateBuilders.State.Builder()
-            .addKeyToValueMapping(KEY_HEART_RATE,
-                DynamicDataBuilders.DynamicDataValue
-                    .fromString("new")
-            ).build()
-
-        Log.d("UPDATETILE", DynamicString
-            .from(KEY_HEART_RATE).toString()
-        )
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -81,9 +68,7 @@ class MyTileService : TileService() {
                                     .build()
                             ).build()
                         )
-                    )
-                    .setState(state)
-                    .build()
+                    ).build()
             )
         }
     }
