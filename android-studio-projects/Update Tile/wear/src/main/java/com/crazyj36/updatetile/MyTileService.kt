@@ -3,7 +3,10 @@ package com.crazyj36.updatetile
 import android.Manifest
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
+import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.LayoutElementBuilders
+import androidx.wear.protolayout.ModifiersBuilders
+import androidx.wear.protolayout.ModifiersBuilders.Clickable
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
@@ -35,6 +38,18 @@ class MyTileService : TileService() {
                         TimelineBuilders
                             .Timeline.fromLayoutElement(
                                 LayoutElementBuilders.Text.Builder()
+                                    .setModifiers(
+                                        ModifiersBuilders
+                                            .Modifiers
+                                            .Builder()
+                                            .setClickable(
+                                                Clickable.Builder()
+                                                    .setOnClick(LoadAction
+                                                        .Builder()
+                                                        .build()
+                                                    ).build()
+                                            ).build()
+                                    )
                                     .setText(
                                         StringProp.Builder("Daily Distance")
                                             .setDynamicValue(
