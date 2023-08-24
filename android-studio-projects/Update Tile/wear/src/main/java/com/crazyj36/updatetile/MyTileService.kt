@@ -15,19 +15,47 @@ import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
 import androidx.wear.protolayout.expression.DynamicDataBuilders
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.material.Text
+import androidx.wear.tiles.EventBuilders
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders.Tile
 import androidx.wear.tiles.TileService
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
+import java.util.Timer
+import java.util.TimerTask
 
 const val RESOURCES_VERSION = "1"
 
 class MyTileService : TileService() {
-    public override fun onTileRequest(
+    companion object {
+        var count = 0
+        val state = StateBuilders.State.Builder()
+        val KEY_HEART_RATE = AppDataKey<DynamicString>(
+            "key_heart_rate"
+        )
+    }
+
+    override fun onTileEnterEvent(
+        requestParams: EventBuilders.TileEnterEvent) {
+        super.onTileEnterEvent(requestParams)
+        Timer().schedule(object: TimerTask() {
+            override fun run() {
+                count++
+                state.addKeyToValueMapping(KEY_HEART_RATE,
+                    DynamicDataBuilders.DynamicDataValue
+                        .fromString(count.toString())
+                )
+            }
+        }, 0, 1000)
+    }
+    override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
-        Log.d("UPDATETILE", "onTileRequest()")
+        state.addKeyToValueMapping(KEY_HEART_RATE,
+            DynamicDataBuilders.DynamicDataValue
+                .fromString("state")
+        )
+
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.BODY_SENSORS
@@ -53,22 +81,17 @@ class MyTileService : TileService() {
                     .setResourcesVersion(RESOURCES_VERSION)
                     .setFreshnessIntervalMillis(1000)
                     .setTileTimeline(
-                        TimelineBuilders.Timeline.fromLayoutElement(
-                            Text.Builder(
-                                this,
-                                StringProp
-                                    .Builder("Heart Rate")
-                                    .setDynamicValue(
-                                        PlatformHealthSources
-                                            .heartRateBpm()
-                                            .format()
-                                    ).build(),
-                                StringLayoutConstraint
-                                    .Builder("000")
-                                    .build()
-                            ).build()
+                        TimelineBuilders.Timeline
+                            .fromLayoutElement(
+                                LayoutElementBuilders.Text.Builder()
+                                    .setText(
+                                        DynamicString.from(
+                                            KEY_HEART_RATE
+                                        ).toString()
+                                ).build()
                         )
-                    ).build()
+                    ).setState(state.build())
+                    .build()
             )
         }
     }
