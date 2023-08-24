@@ -33,21 +33,32 @@ class MyTileService : TileService() {
         val KEY_HEART_RATE = AppDataKey<DynamicString>(
             "key_heart_rate"
         )
+        val timer = Timer()
     }
 
     override fun onTileEnterEvent(
         requestParams: EventBuilders.TileEnterEvent) {
         super.onTileEnterEvent(requestParams)
-        Timer().schedule(object: TimerTask() {
+        timer.schedule(object: TimerTask() {
             override fun run() {
                 count++
                 state.addKeyToValueMapping(KEY_HEART_RATE,
                     DynamicDataBuilders.DynamicDataValue
                         .fromString(count.toString())
                 )
+                Log.d("UPDATETILE", DynamicString.from(
+                    KEY_HEART_RATE
+                ).toString())
             }
         }, 0, 1000)
     }
+
+    override fun onTileRemoveEvent(requestParams: EventBuilders.TileRemoveEvent) {
+        super.onTileRemoveEvent(requestParams)
+        timer.cancel()
+        timer.purge()
+    }
+
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
