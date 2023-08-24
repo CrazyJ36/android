@@ -1,6 +1,7 @@
 package com.crazyj36.updatetile
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.util.Log
 import androidx.core.app.ActivityCompat
@@ -30,8 +31,8 @@ class MyTileService : TileService() {
     companion object {
         var count = 0
         val state = StateBuilders.State.Builder()
-        val KEY_HEART_RATE = AppDataKey<DynamicString>(
-            "key_heart_rate"
+        var KEY_HEART_RATE = AppDataKey<DynamicString>(
+            count.toString()
         )
         val timer = Timer()
     }
@@ -40,15 +41,20 @@ class MyTileService : TileService() {
         requestParams: EventBuilders.TileEnterEvent) {
         super.onTileEnterEvent(requestParams)
         timer.schedule(object: TimerTask() {
+            @SuppressLint("RestrictedApi")
             override fun run() {
                 count++
                 state.addKeyToValueMapping(KEY_HEART_RATE,
                     DynamicDataBuilders.DynamicDataValue
                         .fromString(count.toString())
                 )
+                KEY_HEART_RATE = AppDataKey<DynamicString>(
+                    count.toString()
+                )
                 Log.d("UPDATETILE", DynamicString.from(
-                    KEY_HEART_RATE
-                ).toString())
+                    KEY_HEART_RATE).toDynamicStringProto()
+                    .stateSource.sourceKey
+                )
             }
         }, 0, 1000)
     }
@@ -59,6 +65,7 @@ class MyTileService : TileService() {
         timer.purge()
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
@@ -97,8 +104,9 @@ class MyTileService : TileService() {
                                 LayoutElementBuilders.Text.Builder()
                                     .setText(
                                         DynamicString.from(
-                                            KEY_HEART_RATE
-                                        ).toString()
+                                            KEY_HEART_RATE)
+                                            .toDynamicStringProto()
+                                            .stateSource.sourceKey
                                 ).build()
                         )
                     ).setState(state.build())
