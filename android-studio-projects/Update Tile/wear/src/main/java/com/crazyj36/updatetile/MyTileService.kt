@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.LayoutElementBuilders
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
+import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.tiles.RequestBuilders
@@ -41,7 +42,13 @@ class MyTileService : TileService() {
                                                     .dailyDistanceMeters()
                                                     .format()
                                             ).build()
-                                    ).build()
+                                    )
+                                    .setLayoutConstraintsForDynamicText(
+                                        StringLayoutConstraint
+                                            .Builder("00000")
+                                            .build()
+                                    )
+                                    .build()
                             )
                     ).build()
             )
@@ -63,8 +70,7 @@ class MyTileService : TileService() {
 
     override fun onTileResourcesRequest(
         requestParams: RequestBuilders.ResourcesRequest
-    ):
-            ListenableFuture<ResourceBuilders.Resources> =
+    ): ListenableFuture<ResourceBuilders.Resources> =
         Futures.immediateFuture(
             ResourceBuilders.Resources.Builder()
                 .setVersion(RESOURCES_VERSION)
