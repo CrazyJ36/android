@@ -2,6 +2,7 @@ package com.crazyj36.updatetile
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.wear.protolayout.ActionBuilders.LoadAction
 import androidx.wear.protolayout.LayoutElementBuilders
@@ -12,6 +13,12 @@ import androidx.wear.protolayout.TypeBuilders.StringLayoutConstraint
 import androidx.wear.protolayout.TypeBuilders.StringProp
 import androidx.wear.protolayout.expression.PlatformHealthSources
 import androidx.wear.protolayout.TimelineBuilders.Timeline
+import androidx.wear.protolayout.expression.DynamicBuilders
+import androidx.wear.protolayout.expression.DynamicBuilders.DynamicString
+import androidx.wear.protolayout.expression.DynamicDataBuilders.DynamicDataValue
+import androidx.wear.protolayout.expression.DynamicDataKey
+import androidx.wear.protolayout.expression.PlatformDataKey
+import androidx.wear.protolayout.expression.PlatformDataValues
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders.Tile
 import androidx.wear.tiles.TileService
@@ -26,6 +33,8 @@ class MyTileService : TileService() {
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
+        val key = PlatformHealthSources.Keys.DAILY_DISTANCE_METERS
+        Log.d("UPDATETILE", key.toString())
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACTIVITY_RECOGNITION
