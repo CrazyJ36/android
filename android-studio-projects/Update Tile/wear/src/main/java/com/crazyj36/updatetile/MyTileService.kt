@@ -34,7 +34,7 @@ class MyTileService : TileService() {
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
         val key = PlatformHealthSources.Keys.DAILY_DISTANCE_METERS
-        val value = PlatformHealthSources.Keys.DAILY_DISTANCE_METERS.key.last()
+        val value = key.key[0]
         Log.d("UPDATETILE", value.toString())
         return if (ActivityCompat.checkSelfPermission(
                 this,
