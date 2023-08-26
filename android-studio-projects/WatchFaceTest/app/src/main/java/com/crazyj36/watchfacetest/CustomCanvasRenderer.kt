@@ -1,6 +1,7 @@
 package com.crazyj36.watchfacetest
 
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
@@ -65,6 +66,7 @@ class CustomCanvasRenderer(
         .seconds
     private val secondsPerMinuteHandRotation = Duration.ofHours(1)
         .seconds
+    val index = BitmapFactory.decodeResource(context.resources, R.drawable.index_modern2)
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
@@ -152,11 +154,10 @@ class CustomCanvasRenderer(
             0.03738F
         )
         canvas.drawBitmap(
-            context.resources.getDrawable(
-                R.drawable.index_modern2, null).toBitmap(),
-            0F,
-            height.toFloat(),
-            darkPaint
+            index,
+            (width / 2).toFloat(),
+            (height / 2).toFloat(),
+            null
         )
     }
     private fun drawNumberStyleOuterElement(
