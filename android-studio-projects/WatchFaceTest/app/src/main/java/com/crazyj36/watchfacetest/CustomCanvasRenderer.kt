@@ -89,7 +89,29 @@ class CustomCanvasRenderer(
             radius / 10,
             darkPaint
         )*/
-
+        if (renderParameters.drawMode == DrawMode.INTERACTIVE) {
+            val rect = RectF(
+                (width / 6).toFloat(),
+                (height - (height / 3)).toFloat(),
+                (width - (width / 6)).toFloat(),
+                (height - (height / 6)).toFloat()
+            )
+            canvas.drawRoundRect(rect, 14F, 14F, darkPaint)
+            count++
+            canvas.drawText(
+                count.toString(),
+                (width / 2).toFloat(),
+                (height - (height / 4)).toFloat(),
+                textPaint
+            )
+        } else if (renderParameters.drawMode == DrawMode.AMBIENT) {
+            canvas.drawText(
+                context.resources.getString(R.string.inAmbientText),
+                (width / 2).toFloat(),
+                (height - (height / 4)).toFloat(),
+                textPaint
+            )
+        }
         canvas.drawBitmap(
             Bitmap.createScaledBitmap(index, width, height, false),
             0F,
@@ -131,29 +153,6 @@ class CustomCanvasRenderer(
             bounds.exactCenterY()
         ) {
             drawPath(minuteHandBorder, minutesHandPaint)
-        }
-        if (renderParameters.drawMode == DrawMode.INTERACTIVE) {
-            val rect = RectF(
-                (width / 6).toFloat(),
-                (height - (height / 3)).toFloat(),
-                (width - (width / 6)).toFloat(),
-                (height - (height / 6)).toFloat()
-            )
-            canvas.drawRoundRect(rect, 14F, 14F, darkPaint)
-            count++
-            canvas.drawText(
-                count.toString(),
-                (width / 2).toFloat(),
-                (height - (height / 4)).toFloat(),
-                textPaint
-            )
-        } else if (renderParameters.drawMode == DrawMode.AMBIENT) {
-            canvas.drawText(
-                context.resources.getString(R.string.inAmbientText),
-                (width / 2).toFloat(),
-                (height - (height / 4)).toFloat(),
-                textPaint
-            )
         }
     }
 
