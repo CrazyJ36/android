@@ -69,7 +69,12 @@ class CustomCanvasRenderer(
             (height / 2).toFloat(),
             lightPaint
         )
-        if (!myWatchState.isAmbient.value!!) count++
+        if (!myWatchState.isAmbient.value!!) {
+            count++
+            Log.d("WATCHFACETEST", "not ambient")
+        } else {
+            Log.d("WATCHFACETEST", "ambient")
+        }
     }
 
     class MySharedAssets : SharedAssets {
