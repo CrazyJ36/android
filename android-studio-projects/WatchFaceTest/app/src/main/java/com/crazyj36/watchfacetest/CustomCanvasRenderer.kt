@@ -10,6 +10,8 @@ import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.ZonedDateTime
+import java.util.Timer
+import java.util.TimerTask
 import kotlin.math.min
 
 class CustomCanvasRenderer(
@@ -27,7 +29,8 @@ class CustomCanvasRenderer(
     interactiveDrawModeUpdateDelayMillis = 16L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
-
+    var count = 0
+    val timer = Timer()
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
@@ -46,25 +49,39 @@ class CustomCanvasRenderer(
         val height = bounds.height()
         val radius = min(width, height).toFloat()
         val darkPaint = Paint().apply {
-            setARGB(225, 150, 150, 150)
+            setARGB(225, 50, 50, 50)
         }
         val lightPaint = Paint().apply{
             setARGB(255, 230, 230, 230)
+            textSize = 14F
         }
-
         canvas.drawCircle(
             (width / 2).toFloat(),
             (height / 2).toFloat(),
             radius / 10,
             darkPaint
         )
-        canvas.drawText(WatchFaceServiceTest.count.toString(),
-            (width / 2).toFloat(),
-            (height / 2).toFloat(),
-            lightPaint)
-        //invalidate()
+
+        timer.schedule(object: TimerTask() {
+            override fun run() {
+                if (count == 10) count = 0
+                canvas.drawText(count.toString(),
+                    (width / 2).toFloat(),
+                    (height / 2).toFloat(),
+                    lightPaint)
+                count++
+                postInvalidate()
+            }
+        }, 0, 1000)
+
+
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        timer.cancel()
+        timer.purge()
+    }
     class MySharedAssets : SharedAssets {
         override fun onDestroy() {
         }
