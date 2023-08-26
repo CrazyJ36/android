@@ -132,14 +132,14 @@ class CustomCanvasRenderer(
         ) {
             drawPath(minuteHandBorder, minutesHandPaint)
         }
-        val rect = RectF(
-            (width / 6).toFloat(),
-            (height - (height / 4)).toFloat(),
-            (width - (width / 6)).toFloat(),
-            (height - (height / 6)).toFloat()
-        )
-        canvas.drawRoundRect(rect, 8F, 8F, darkPaint)
         if (renderParameters.drawMode == DrawMode.INTERACTIVE) {
+            val rect = RectF(
+                (width / 6).toFloat(),
+                (height - (height / 3)).toFloat(),
+                (width - (width / 6)).toFloat(),
+                (height - (height / 6)).toFloat()
+            )
+            canvas.drawRoundRect(rect, 14F, 14F, darkPaint)
             count++
             canvas.drawText(
                 count.toString(),
