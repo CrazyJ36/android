@@ -155,8 +155,8 @@ class CustomCanvasRenderer(
         )
         canvas.drawBitmap(
             index,
-            (width / 2).toFloat(),
-            (height / 2).toFloat(),
+            0F,
+            0F,
             lightPaint
         )
     }
