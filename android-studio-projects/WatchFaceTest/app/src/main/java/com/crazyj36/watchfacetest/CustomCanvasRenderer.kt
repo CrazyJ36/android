@@ -31,6 +31,19 @@ class CustomCanvasRenderer(
 ) {
     var count = 0
     val timer = Timer()
+    var runTimer = true
+    lateinit var canvas: Canvas
+    var width: Int = 0
+    var height: Int = 0
+    var radius = min(width, height).toFloat()
+    val darkPaint = Paint().apply {
+        setARGB(225, 50, 50, 50)
+    }
+    val lightPaint = Paint().apply{
+        setARGB(255, 230, 230, 230)
+        textSize = 24F
+    }
+
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
@@ -45,36 +58,32 @@ class CustomCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        val width = bounds.width()
-        val height = bounds.height()
-        val radius = min(width, height).toFloat()
-        val darkPaint = Paint().apply {
-            setARGB(225, 50, 50, 50)
-        }
-        val lightPaint = Paint().apply{
-            setARGB(255, 230, 230, 230)
-            textSize = 14F
-        }
+        this.canvas = canvas
+        width = bounds.width()
+        height = bounds.height()
+        radius = min(width, height).toFloat()
+
         canvas.drawCircle(
             (width / 2).toFloat(),
             (height / 2).toFloat(),
             radius / 10,
             darkPaint
         )
-
-        timer.schedule(object: TimerTask() {
-            override fun run() {
-                if (count == 10) count = 0
-                canvas.drawText(count.toString(),
-                    (width / 2).toFloat(),
-                    (height / 2).toFloat(),
-                    lightPaint)
-                count++
-                //postInvalidate()
-            }
-        }, 0, 1000)
-
-
+        if (runTimer) {
+            runTimer = false
+            timer.schedule(object : TimerTask() {
+                override fun run() {
+                    count++
+                    if (count == 11) count = 0
+                    canvas.drawText(
+                        count.toString(),
+                        (width / 2).toFloat(),
+                        (height / 2).toFloat(),
+                        lightPaint
+                    )
+                }
+            }, 1000, 1000)
+        }
     }
 
     override fun onDestroy() {
