@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
+import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
@@ -32,14 +33,6 @@ class CustomCanvasRenderer(
     var count = 0
     val timer = Timer()
     var runTimer = true
-    val darkPaint = Paint().apply {
-        setARGB(225, 50, 50, 50)
-    }
-    val lightPaint = Paint().apply{
-        setARGB(255, 230, 230, 230)
-        textSize = 24F
-    }
-
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
@@ -54,6 +47,14 @@ class CustomCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
+        Log.d("WATCHFACESERVICETEST", "rendering")
+        val darkPaint = Paint().apply {
+            setARGB(225, 50, 50, 50)
+        }
+        val lightPaint = Paint().apply{
+            setARGB(255, 230, 230, 230)
+            textSize = 24F
+        }
         val width =  bounds.width()
         val height = bounds.height()
         val radius = min(width, height).toFloat()
@@ -64,7 +65,6 @@ class CustomCanvasRenderer(
             darkPaint
         )
         if (runTimer) {
-            runTimer = false
             timer.schedule(object : TimerTask() {
                 override fun run() {
                     count++
@@ -75,8 +75,10 @@ class CustomCanvasRenderer(
                         (height / 2).toFloat(),
                         lightPaint
                     )
+                    postInvalidate()
                 }
             }, 1000, 1000)
+            runTimer = false
         }
     }
 
