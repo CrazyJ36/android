@@ -44,17 +44,16 @@ class CustomCanvasRenderer(
     ) {
         val width = bounds.width()
         val height = bounds.height()
-        val radius = min(width, height)
-            .toFloat() / 2f
-        val redPaint = Paint().apply {
-            setARGB(225, 225, 0, 0)
+        val radius = min(width, height).toFloat()
+        val greyPaint = Paint().apply {
+            setARGB(225, 105, 105, 105)
         }
 
         canvas.drawCircle(
-            (bounds.width() / 2).toFloat(),
-            (bounds.height() / 2).toFloat(),
+            (width / 2).toFloat(),
+            (height / 2).toFloat(),
             radius,
-            redPaint
+            greyPaint
         )
     }
 
