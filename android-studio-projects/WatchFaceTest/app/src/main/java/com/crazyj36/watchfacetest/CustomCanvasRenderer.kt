@@ -106,7 +106,7 @@ class CustomCanvasRenderer(
             )
         }
         canvas.drawBitmap(
-            Bitmap.createScaledBitmap(index, bounds.right, bounds.bottom, false),
+            Bitmap.createScaledBitmap(index, width + 16, height + 16, false),
             0F,
             0F,
             null
