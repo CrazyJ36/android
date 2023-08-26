@@ -8,10 +8,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.Rect
-import android.graphics.RectF
-import android.util.Log
 import android.view.SurfaceHolder
-import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.withRotation
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
@@ -20,9 +17,6 @@ import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.Duration
 import java.time.ZonedDateTime
-import kotlin.math.cos
-import kotlin.math.min
-import kotlin.math.sin
 
 class CustomCanvasRenderer(
     private val context: Context,
@@ -43,6 +37,7 @@ class CustomCanvasRenderer(
     private val darkPaint = Paint().apply {
         isAntiAlias = true
         setARGB(225, 30, 30, 30)
+        textAlign = Paint.Align.CENTER
     }
     private val textPaint = Paint().apply{
         isAntiAlias = true
@@ -90,13 +85,15 @@ class CustomCanvasRenderer(
                 textPaint
             )
         } else {
-            val rect = RectF(
+            canvas.drawRoundRect(
                 (width / 6).toFloat(),
                 (height - (height / 3)).toFloat(),
                 (width - (width / 6)).toFloat(),
-                (height - (height / 6)).toFloat()
+                (height - (height / 6)).toFloat(),
+                14F,
+                14F,
+                darkPaint
             )
-            canvas.drawRoundRect(rect, 14F, 14F, darkPaint)
             count++
             canvas.drawText(
                 count.toString(),
@@ -106,7 +103,7 @@ class CustomCanvasRenderer(
             )
         }
         canvas.drawBitmap(
-            Bitmap.createScaledBitmap(index, width + 16, height + 16, false),
+            Bitmap.createScaledBitmap(index, width, height, false),
             0F,
             0F,
             null
