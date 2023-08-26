@@ -7,9 +7,11 @@ import android.graphics.Rect
 import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
+import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.style.CurrentUserStyleRepository
+import kotlinx.coroutines.flow.StateFlow
 import java.time.ZonedDateTime
 import kotlin.math.min
 
@@ -28,6 +30,7 @@ class CustomCanvasRenderer(
     interactiveDrawModeUpdateDelayMillis = 1000L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
+    val myWatchState = watchState
     var count = 0
     val darkPaint = Paint().apply {
         setARGB(225, 50, 50, 50)
@@ -66,7 +69,7 @@ class CustomCanvasRenderer(
             (height / 2).toFloat(),
             lightPaint
         )
-        count++
+        if (!myWatchState.isAmbient.value!!) count++
     }
 
     class MySharedAssets : SharedAssets {
