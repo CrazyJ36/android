@@ -7,12 +7,12 @@ import android.graphics.Rect
 import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
-import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.style.CurrentUserStyleRepository
-import kotlinx.coroutines.flow.StateFlow
 import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 import kotlin.math.min
 
 class CustomCanvasRenderer(
@@ -30,14 +30,18 @@ class CustomCanvasRenderer(
     interactiveDrawModeUpdateDelayMillis = 1000L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
-    val myWatchState = watchState
-    var count = 0
-    val darkPaint = Paint().apply {
+    private val myWatchState = watchState
+    private var count = 0
+    private val darkPaint = Paint().apply {
         setARGB(225, 50, 50, 50)
     }
-    val lightPaint = Paint().apply{
+    private val lightPaint = Paint().apply{
         setARGB(255, 230, 230, 230)
         textSize = 24F
+    }
+    private val timePaint = Paint().apply {
+        setARGB(255, 230, 230, 230)
+        textSize = 48F
     }
     override fun renderHighlightLayer(
         canvas: Canvas,
@@ -57,6 +61,13 @@ class CustomCanvasRenderer(
         val width =  bounds.width()
         val height = bounds.height()
         val radius = min(width, height).toFloat()
+        canvas.drawText(zonedDateTime.format(
+                DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)
+            ),
+            (width / 4).toFloat(),
+            (height / 7).toFloat(),
+            timePaint
+        )
         canvas.drawCircle(
             (width / 2).toFloat(),
             (height / 2).toFloat(),
@@ -69,12 +80,8 @@ class CustomCanvasRenderer(
             (height / 2).toFloat(),
             lightPaint
         )
-        if (!myWatchState.isAmbient.value!!) {
-            count++
-            Log.d("WATCHFACETEST", "not ambient")
-        } else {
-            Log.d("WATCHFACETEST", "ambient")
-        }
+        if (!myWatchState.isAmbient.value!!) count++
+
     }
 
     class MySharedAssets : SharedAssets {
