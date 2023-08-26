@@ -45,16 +45,24 @@ class CustomCanvasRenderer(
         val width = bounds.width()
         val height = bounds.height()
         val radius = min(width, height).toFloat()
-        val greyPaint = Paint().apply {
-            setARGB(225, 105, 105, 105)
+        val darkPaint = Paint().apply {
+            setARGB(225, 150, 150, 150)
+        }
+        val lightPaint = Paint().apply{
+            setARGB(255, 230, 230, 230)
         }
 
         canvas.drawCircle(
             (width / 2).toFloat(),
             (height / 2).toFloat(),
             radius / 10,
-            greyPaint
+            darkPaint
         )
+        canvas.drawText(WatchFaceServiceTest.count.toString(),
+            (width / 2).toFloat(),
+            (height / 2).toFloat(),
+            lightPaint)
+        //invalidate()
     }
 
     class MySharedAssets : SharedAssets {
