@@ -3,16 +3,18 @@ package com.crazyj36.watchfacetest
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Path
 import android.graphics.Rect
 import android.util.Log
 import android.view.SurfaceHolder
+import androidx.core.graphics.withRotation
 import androidx.wear.watchface.ComplicationSlotsManager
+import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.style.CurrentUserStyleRepository
+import java.time.Duration
 import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 import kotlin.math.min
 
 class CustomCanvasRenderer(
@@ -30,7 +32,6 @@ class CustomCanvasRenderer(
     interactiveDrawModeUpdateDelayMillis = 1000L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
-    private val myWatchState = watchState
     private var count = 0
     private val darkPaint = Paint().apply {
         setARGB(225, 50, 50, 50)
@@ -39,9 +40,13 @@ class CustomCanvasRenderer(
         setARGB(255, 230, 230, 230)
         textSize = 24F
     }
-    private val timePaint = Paint().apply {
+    private val hourHandsPaint = Paint().apply {
         setARGB(255, 230, 230, 230)
-        textSize = 48F
+        strokeWidth = 6F
+    }
+    private var minutesHandPaint = Paint().apply {
+        setARGB(255, 230, 230, 230)
+        strokeWidth = 3F
     }
     override fun renderHighlightLayer(
         canvas: Canvas,
@@ -61,13 +66,7 @@ class CustomCanvasRenderer(
         val width =  bounds.width()
         val height = bounds.height()
         val radius = min(width, height).toFloat()
-        canvas.drawText(zonedDateTime.format(
-                DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)
-            ),
-            (width / 4).toFloat(),
-            (height / 7).toFloat(),
-            timePaint
-        )
+
         canvas.drawCircle(
             (width / 2).toFloat(),
             (height / 2).toFloat(),
@@ -80,10 +79,92 @@ class CustomCanvasRenderer(
             (height / 2).toFloat(),
             lightPaint
         )
-        if (!myWatchState.isAmbient.value!!) count++
 
+        val secondsPerHourHandRotation = Duration.ofHours(12)
+            .seconds
+        val secondsPerMinuteHandRotation = Duration.ofHours(1)
+            .seconds
+        val hourRotation: Float = zonedDateTime.toLocalTime()
+            .toSecondOfDay().rem(secondsPerHourHandRotation) * 360.0F /
+                secondsPerHourHandRotation
+        val minuteRotation: Float = zonedDateTime.toLocalTime()
+            .toSecondOfDay().rem(secondsPerMinuteHandRotation) * 360.0F /
+                secondsPerMinuteHandRotation
+
+
+        val hourHandBorder: Path = createClockHand(
+            bounds,
+            0.21028f,
+            0.02336f,
+            0.01869f + 0.03738f / 2.0f,
+            1.5F,
+            1.5F
+        )
+        val minuteHandBorder: Path = createClockHand(
+            bounds,
+            0.3783F,
+            0.0163f,
+            0.01869f + 0.03738f / 2.0f,
+            1.5F,
+            1.5F
+        )
+        canvas.withRotation(hourRotation,
+            bounds.exactCenterX(),
+            bounds.exactCenterY()) {
+            drawPath(hourHandBorder, hourHandsPaint)
+        }
+
+        canvas.withRotation(minuteRotation,
+            bounds.exactCenterX(),
+            bounds.exactCenterY()) {
+            drawPath(minuteHandBorder, minutesHandPaint)
+        }
+
+        if (renderParameters.drawMode == DrawMode.AMBIENT) {
+
+        } else {
+            count++
+        }
     }
 
+    private fun createClockHand(
+        bounds: Rect,
+        length: Float,
+        thickness: Float,
+        gapBetweenHandAndCenter: Float,
+        roundedCornerXRadius: Float,
+        roundedCornerYRadius: Float
+    ): Path {
+        val width = bounds.width()
+        val centerX = bounds.exactCenterX()
+        val centerY = bounds.exactCenterY()
+        val left = centerX - thickness / 2 * width
+        val top = centerY - (gapBetweenHandAndCenter + length) * width
+        val right = centerX + thickness / 2 * width
+        val bottom = centerY - gapBetweenHandAndCenter * width
+        val path = Path()
+
+        if (roundedCornerXRadius != 0.0f || roundedCornerYRadius != 0.0f) {
+            path.addRoundRect(
+                left,
+                top,
+                right,
+                bottom,
+                roundedCornerXRadius,
+                roundedCornerYRadius,
+                Path.Direction.CW
+            )
+        } else {
+            path.addRect(
+                left,
+                top,
+                right,
+                bottom,
+                Path.Direction.CW
+            )
+        }
+        return path
+    }
     class MySharedAssets : SharedAssets {
         override fun onDestroy() {
         }
