@@ -106,9 +106,9 @@ class CustomCanvasRenderer(
             )
         }
         canvas.drawBitmap(
-            Bitmap.createScaledBitmap(index, width + 4, height + 4, false),
-            0F,
-            0F,
+            Bitmap.createScaledBitmap(index, width, height, false),
+            -5F,
+            -5F,
             null
         )
         val hourRotation: Float = zonedDateTime.toLocalTime()
