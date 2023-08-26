@@ -10,6 +10,7 @@ import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.ZonedDateTime
+import kotlin.math.min
 
 class CustomCanvasRenderer(
     private val context: Context,
@@ -33,7 +34,6 @@ class CustomCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-
     }
 
     override fun render(
@@ -44,7 +44,7 @@ class CustomCanvasRenderer(
     ) {
         val width = bounds.width()
         val height = bounds.height()
-        val radius = Math.min(width, height)
+        val radius = min(width, height)
             .toFloat() / 2f
         val redPaint = Paint().apply {
             setARGB(225, 225, 0, 0)
