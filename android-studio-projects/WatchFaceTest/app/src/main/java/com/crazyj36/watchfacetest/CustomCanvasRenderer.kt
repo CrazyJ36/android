@@ -27,7 +27,7 @@ class CustomCanvasRenderer(
     currentUserStyleRepository = currentUserStyleRepository,
     watchState = watchState,
     canvasType = canvasType,
-    interactiveDrawModeUpdateDelayMillis = 16L,
+    interactiveDrawModeUpdateDelayMillis = 1000L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
     var count = 0
@@ -47,7 +47,6 @@ class CustomCanvasRenderer(
         sharedAssets: MySharedAssets
     ) {
     }
-
     override fun render(
         canvas: Canvas,
         bounds: Rect,
