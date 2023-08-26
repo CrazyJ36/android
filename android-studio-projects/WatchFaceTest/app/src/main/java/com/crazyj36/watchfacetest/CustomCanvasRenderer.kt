@@ -32,10 +32,6 @@ class CustomCanvasRenderer(
     var count = 0
     val timer = Timer()
     var runTimer = true
-    lateinit var canvas: Canvas
-    var width: Int = 0
-    var height: Int = 0
-    var radius = min(width, height).toFloat()
     val darkPaint = Paint().apply {
         setARGB(225, 50, 50, 50)
     }
@@ -58,11 +54,9 @@ class CustomCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        this.canvas = canvas
-        width = bounds.width()
-        height = bounds.height()
-        radius = min(width, height).toFloat()
-
+        val width =  bounds.width()
+        val height = bounds.height()
+        val radius = min(width, height).toFloat()
         canvas.drawCircle(
             (width / 2).toFloat(),
             (height / 2).toFloat(),
