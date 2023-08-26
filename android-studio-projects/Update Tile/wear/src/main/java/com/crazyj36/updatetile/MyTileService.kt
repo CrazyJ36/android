@@ -26,43 +26,6 @@ class MyTileService : TileService() {
     namespace = "protolayout"
     key = "Daily Distance"
     */
-    private val timer = Timer()
-    override fun onTileEnterEvent(requestParams: EventBuilders.TileEnterEvent) {
-        super.onTileEnterEvent(requestParams)
-        timer.schedule(object: TimerTask() {
-            override fun run() {
-                if (ActivityCompat.checkSelfPermission(
-                        this@MyTileService,
-                        Manifest.permission.ACTIVITY_RECOGNITION
-                    ) == PackageManager.PERMISSION_GRANTED
-                ) {
-                    val actualPlatformHealthSourceValue: String =
-                        GetValueOfDynamicString().getValueOfDynamicString(
-                            PlatformHealthSources
-                                .dailyDistanceMeters()
-                                .format()
-                        )
-                    Log.d("UPDATETILE",
-                        "value: $actualPlatformHealthSourceValue"
-                    )
-                }
-
-            }
-        }, 0, 1000)
-    }
-
-    override fun onTileLeaveEvent(requestParams: EventBuilders.TileLeaveEvent) {
-        super.onTileLeaveEvent(requestParams)
-        timer.cancel()
-        timer.purge()
-    }
-
-    override fun onTileRemoveEvent(requestParams: EventBuilders.TileRemoveEvent) {
-        super.onTileRemoveEvent(requestParams)
-        timer.cancel()
-        timer.purge()
-    }
-
     override fun onTileRequest(
         requestParams: RequestBuilders.TileRequest
     ): ListenableFuture<Tile> {
