@@ -89,13 +89,13 @@ class CustomCanvasRenderer(
             radius / 10,
             darkPaint
         )*/
-        val rect = RectF(
-            (width / 8).toFloat(),
-            (height / 8).toFloat(),
-            (width - (width / 8)).toFloat(),
-            (height - (height / 8)).toFloat()
+
+        canvas.drawBitmap(
+            Bitmap.createScaledBitmap(index, width, height, false),
+            0F,
+            0F,
+            null
         )
-        canvas.drawRoundRect(rect, 8F, 8F, darkPaint)
         val hourRotation: Float = zonedDateTime.toLocalTime()
             .toSecondOfDay().rem(secondsPerHourHandRotation) * 360.0F /
                 secondsPerHourHandRotation
@@ -132,7 +132,13 @@ class CustomCanvasRenderer(
         ) {
             drawPath(minuteHandBorder, minutesHandPaint)
         }
-
+        val rect = RectF(
+            (width / 6).toFloat(),
+            (height - (height / 4)).toFloat(),
+            (width - (width / 6)).toFloat(),
+            (height - (height / 6)).toFloat()
+        )
+        canvas.drawRoundRect(rect, 8F, 8F, darkPaint)
         if (renderParameters.drawMode == DrawMode.INTERACTIVE) {
             count++
             canvas.drawText(
@@ -149,12 +155,6 @@ class CustomCanvasRenderer(
                 textPaint
             )
         }
-        canvas.drawBitmap(
-            Bitmap.createScaledBitmap(index, width, height, false),
-            0F,
-            0F,
-            null
-        )
     }
 
     private fun createClockHand(
