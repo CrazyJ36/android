@@ -50,9 +50,9 @@ class CustomCanvasRenderer(
         }
 
         canvas.drawCircle(
-            (width / 2).toFloat(),
-            (height / 2).toFloat(),
-            radius,
+            (width / 2F).toFloat(),
+            (height / 2F).toFloat(),
+            radius / 2,
             greyPaint
         )
     }
