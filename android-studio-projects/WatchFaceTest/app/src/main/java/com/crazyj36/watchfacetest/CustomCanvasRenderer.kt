@@ -48,6 +48,10 @@ class CustomCanvasRenderer(
         setARGB(255, 230, 230, 230)
         strokeWidth = 3F
     }
+    private val secondsPerHourHandRotation = Duration.ofHours(12)
+        .seconds
+    private val secondsPerMinuteHandRotation = Duration.ofHours(1)
+        .seconds
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
@@ -72,11 +76,6 @@ class CustomCanvasRenderer(
             radius / 10,
             darkPaint
         )
-
-        val secondsPerHourHandRotation = Duration.ofHours(12)
-            .seconds
-        val secondsPerMinuteHandRotation = Duration.ofHours(1)
-            .seconds
         val hourRotation: Float = zonedDateTime.toLocalTime()
             .toSecondOfDay().rem(secondsPerHourHandRotation) * 360.0F /
                 secondsPerHourHandRotation
@@ -110,15 +109,16 @@ class CustomCanvasRenderer(
             drawPath(minuteHandBorder, minutesHandPaint)
         }
 
-        if (renderParameters.drawMode == DrawMode.AMBIENT) {
+        if (renderParameters.drawMode == DrawMode.INTERACTIVE) {
+            count++
             canvas.drawText(
-                context.getString(R.string.inAmbientText),
+                count.toString(),
                 (width / 2).toFloat(),
                 (height / 2).toFloat(),
                 lightPaint
             )
-        } else {
-            count++
+        } else if (renderParameters.drawMode == DrawMode.AMBIENT) {
+            count += 5
             canvas.drawText(
                 count.toString(),
                 (width / 2).toFloat(),
