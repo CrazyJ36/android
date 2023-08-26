@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.Rect
@@ -85,10 +86,10 @@ class CustomCanvasRenderer(
         val width = bounds.width()
         val height = bounds.height()
         val radius = min(width, height).toFloat()
-
+        canvas.drawColor(Color.BLACK)
         canvas.drawCircle(
             (width / 2).toFloat(),
-            (height / 2).toFloat(),
+            (height / 4).toFloat(),
             radius / 10,
             darkPaint
         )
@@ -145,45 +146,12 @@ class CustomCanvasRenderer(
                 lightPaint
             )
         }
-        drawNumberStyleOuterElement(
-            canvas,
-            bounds,
-            0.45F,
-            0.00584F,
-            ticksPaint.color,
-            0.00584F,
-            0.03738F
-        )
         canvas.drawBitmap(
             Bitmap.createScaledBitmap(index, width, height, false),
             0F,
             0F,
             null
         )
-    }
-    private fun drawNumberStyleOuterElement(
-        canvas: Canvas,
-        bounds: Rect,
-        numberRadiusFraction: Float,
-        outerCircleStokeWidthFraction: Float,
-        outerElementColor: Int,
-        numberStyleOuterCircleRadiusFraction: Float,
-        gapBetweenOuterCircleAndBorderFraction: Float
-    ) {
-        val textBounds = Rect()
-        ticksPaint.color = outerElementColor
-        for (i in 0 until 4) {
-            val rotation = 0.5f * (i + 1).toFloat() * Math.PI
-            val dx = sin(rotation).toFloat() * numberRadiusFraction * bounds.width().toFloat()
-            val dy = -cos(rotation).toFloat() * numberRadiusFraction * bounds.width().toFloat()
-            ticksPaint.getTextBounds(ticksHours[i], 0, ticksHours[i].length, textBounds)
-            canvas.drawText(
-                ticksHours[i],
-                bounds.exactCenterX() + dx - textBounds.width() / 2.0f,
-                bounds.exactCenterY() + dy + textBounds.height() / 2.0f,
-                ticksPaint
-            )
-        }
     }
 
     private fun createClockHand(
