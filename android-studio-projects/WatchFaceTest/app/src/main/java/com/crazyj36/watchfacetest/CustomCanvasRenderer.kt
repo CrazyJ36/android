@@ -157,7 +157,7 @@ class CustomCanvasRenderer(
             index,
             (width / 2).toFloat(),
             (height / 2).toFloat(),
-            null
+            lightPaint
         )
     }
     private fun drawNumberStyleOuterElement(
