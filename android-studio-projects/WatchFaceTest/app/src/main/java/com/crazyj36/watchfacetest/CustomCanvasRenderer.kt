@@ -42,7 +42,7 @@ class CustomCanvasRenderer(
     private var count = 0
     private val darkPaint = Paint().apply {
         isAntiAlias = true
-        setARGB(225, 50, 50, 50)
+        setARGB(225, 30, 30, 30)
     }
     private val textPaint = Paint().apply{
         isAntiAlias = true
@@ -106,7 +106,7 @@ class CustomCanvasRenderer(
             )
         }
         canvas.drawBitmap(
-            Bitmap.createScaledBitmap(index, width, height, false),
+            Bitmap.createScaledBitmap(index, width + 4, height + 4, false),
             0F,
             0F,
             null
