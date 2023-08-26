@@ -15,7 +15,9 @@ import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.Duration
 import java.time.ZonedDateTime
+import kotlin.math.cos
 import kotlin.math.min
+import kotlin.math.sin
 
 class CustomCanvasRenderer(
     private val context: Context,
@@ -34,20 +36,30 @@ class CustomCanvasRenderer(
 ) {
     private var count = 0
     private val darkPaint = Paint().apply {
+        isAntiAlias = true
         setARGB(225, 50, 50, 50)
     }
     private val lightPaint = Paint().apply{
+        isAntiAlias = true
         setARGB(255, 230, 230, 230)
         textSize = 24F
     }
     private val hourHandsPaint = Paint().apply {
+        isAntiAlias = true
         setARGB(255, 230, 230, 230)
         strokeWidth = 6F
     }
-    private var minutesHandPaint = Paint().apply {
+    private val minutesHandPaint = Paint().apply {
+        isAntiAlias = true
         setARGB(255, 230, 230, 230)
         strokeWidth = 3F
     }
+    private val ticksPaint = Paint().apply {
+        isAntiAlias = true
+        setARGB(255, 100, 100, 100)
+        textSize = 18F
+    }
+    private val ticksHours = arrayOf("3", "6", "9", "12")
     private val secondsPerHourHandRotation = Duration.ofHours(12)
         .seconds
     private val secondsPerMinuteHandRotation = Duration.ofHours(1)
@@ -66,7 +78,7 @@ class CustomCanvasRenderer(
         sharedAssets: MySharedAssets
     ) {
         if (count > 99) count = 0
-        val width =  bounds.width()
+        val width = bounds.width()
         val height = bounds.height()
         val radius = min(width, height).toFloat()
 
@@ -98,14 +110,18 @@ class CustomCanvasRenderer(
             1.5F,
             1.5F
         )
-        canvas.withRotation(hourRotation,
+        canvas.withRotation(
+            hourRotation,
             bounds.exactCenterX(),
-            bounds.exactCenterY()) {
+            bounds.exactCenterY()
+        ) {
             drawPath(hourHandBorder, hourHandsPaint)
         }
-        canvas.withRotation(minuteRotation,
+        canvas.withRotation(
+            minuteRotation,
             bounds.exactCenterX(),
-            bounds.exactCenterY()) {
+            bounds.exactCenterY()
+        ) {
             drawPath(minuteHandBorder, minutesHandPaint)
         }
 
@@ -118,12 +134,45 @@ class CustomCanvasRenderer(
                 lightPaint
             )
         } else if (renderParameters.drawMode == DrawMode.AMBIENT) {
-            count += 5
             canvas.drawText(
-                count.toString(),
+                context.resources.getString(R.string.inAmbientText),
                 (width / 2).toFloat(),
                 (height / 2).toFloat(),
                 lightPaint
+            )
+        }
+        drawNumberStyleOuterElement(
+            canvas,
+            bounds,
+            0.45F,
+            0.00584F,
+            ticksPaint.color,
+            0.00584F,
+            0.03738F
+        )
+    }
+    private fun drawNumberStyleOuterElement(
+        canvas: Canvas,
+        bounds: Rect,
+        numberRadiusFraction: Float,
+        outerCircleStokeWidthFraction: Float,
+        outerElementColor: Int,
+        numberStyleOuterCircleRadiusFraction: Float,
+        gapBetweenOuterCircleAndBorderFraction: Float
+    ) {
+        // Draws text hour indicators (12, 3, 6, and 9).
+        val textBounds = Rect()
+        ticksPaint.color = outerElementColor
+        for (i in 0 until 4) {
+            val rotation = 0.5f * (i + 1).toFloat() * Math.PI
+            val dx = sin(rotation).toFloat() * numberRadiusFraction * bounds.width().toFloat()
+            val dy = -cos(rotation).toFloat() * numberRadiusFraction * bounds.width().toFloat()
+            ticksPaint.getTextBounds(ticksHours[i], 0, ticksHours[i].length, textBounds)
+            canvas.drawText(
+                ticksHours[i],
+                bounds.exactCenterX() + dx - textBounds.width() / 2.0f,
+                bounds.exactCenterY() + dy + textBounds.height() / 2.0f,
+                ticksPaint
             )
         }
     }
