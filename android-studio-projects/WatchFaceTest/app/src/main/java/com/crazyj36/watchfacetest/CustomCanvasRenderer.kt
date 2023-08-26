@@ -7,6 +7,7 @@ import android.graphics.Path
 import android.graphics.Rect
 import android.util.Log
 import android.view.SurfaceHolder
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.withRotation
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
@@ -150,6 +151,13 @@ class CustomCanvasRenderer(
             0.00584F,
             0.03738F
         )
+        canvas.drawBitmap(
+            context.resources.getDrawable(
+                R.drawable.index_modern2, null).toBitmap(),
+            0F,
+            height.toFloat(),
+            darkPaint
+        )
     }
     private fun drawNumberStyleOuterElement(
         canvas: Canvas,
@@ -160,7 +168,6 @@ class CustomCanvasRenderer(
         numberStyleOuterCircleRadiusFraction: Float,
         gapBetweenOuterCircleAndBorderFraction: Float
     ) {
-        // Draws text hour indicators (12, 3, 6, and 9).
         val textBounds = Rect()
         ticksPaint.color = outerElementColor
         for (i in 0 until 4) {
