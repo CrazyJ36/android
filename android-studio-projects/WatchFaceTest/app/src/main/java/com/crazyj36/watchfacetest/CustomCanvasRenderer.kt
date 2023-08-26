@@ -1,6 +1,7 @@
 package com.crazyj36.watchfacetest
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -154,10 +155,10 @@ class CustomCanvasRenderer(
             0.03738F
         )
         canvas.drawBitmap(
-            index,
+            Bitmap.createScaledBitmap(index, width, height, false),
             0F,
             0F,
-            lightPaint
+            null
         )
     }
     private fun drawNumberStyleOuterElement(
