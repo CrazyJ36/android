@@ -64,22 +64,23 @@ class CustomCanvasRenderer(
             radius / 10,
             darkPaint
         )
-        if (runTimer) {
+        canvas.drawText(
+            count.toString(),
+            (width / 2).toFloat(),
+            (height / 2).toFloat(),
+            lightPaint
+        )
+        /*if (runTimer) {
             timer.schedule(object : TimerTask() {
                 override fun run() {
                     count++
                     if (count == 11) count = 0
-                    canvas.drawText(
-                        count.toString(),
-                        (width / 2).toFloat(),
-                        (height / 2).toFloat(),
-                        lightPaint
-                    )
+
                     postInvalidate()
                 }
             }, 1000, 1000)
             runTimer = false
-        }
+        }*/
     }
 
     override fun onDestroy() {
