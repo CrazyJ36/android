@@ -61,7 +61,6 @@ class CustomCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        Log.d("WATCHFACESERVICETEST", "rendering")
         if (count > 99) count = 0
         val width =  bounds.width()
         val height = bounds.height()
@@ -72,12 +71,6 @@ class CustomCanvasRenderer(
             (height / 2).toFloat(),
             radius / 10,
             darkPaint
-        )
-        canvas.drawText(
-            count.toString(),
-            (width / 2).toFloat(),
-            (height / 2).toFloat(),
-            lightPaint
         )
 
         val secondsPerHourHandRotation = Duration.ofHours(12)
@@ -90,8 +83,6 @@ class CustomCanvasRenderer(
         val minuteRotation: Float = zonedDateTime.toLocalTime()
             .toSecondOfDay().rem(secondsPerMinuteHandRotation) * 360.0F /
                 secondsPerMinuteHandRotation
-
-
         val hourHandBorder: Path = createClockHand(
             bounds,
             0.21028f,
@@ -113,7 +104,6 @@ class CustomCanvasRenderer(
             bounds.exactCenterY()) {
             drawPath(hourHandBorder, hourHandsPaint)
         }
-
         canvas.withRotation(minuteRotation,
             bounds.exactCenterX(),
             bounds.exactCenterY()) {
@@ -121,9 +111,20 @@ class CustomCanvasRenderer(
         }
 
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
-
+            canvas.drawText(
+                context.getString(R.string.inAmbientText),
+                (width / 2).toFloat(),
+                (height / 2).toFloat(),
+                lightPaint
+            )
         } else {
             count++
+            canvas.drawText(
+                count.toString(),
+                (width / 2).toFloat(),
+                (height / 2).toFloat(),
+                lightPaint
+            )
         }
     }
 
