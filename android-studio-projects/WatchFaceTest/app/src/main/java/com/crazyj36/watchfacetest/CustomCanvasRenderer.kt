@@ -90,10 +90,10 @@ class CustomCanvasRenderer(
             darkPaint
         )*/
         val rect = RectF(
-            (width - (width / 16)).toFloat(),
-            (height - (height / 8)).toFloat(),
-            (width - (width / 8)).toFloat(),
-            (height - (height / 16)).toFloat()
+            (width - 200).toFloat(),
+            (height - 200).toFloat(),
+            (width - 20).toFloat(),
+            (height - 20).toFloat()
         )
         canvas.drawRoundRect(rect, 8F, 8F, darkPaint)
         val hourRotation: Float = zonedDateTime.toLocalTime()
