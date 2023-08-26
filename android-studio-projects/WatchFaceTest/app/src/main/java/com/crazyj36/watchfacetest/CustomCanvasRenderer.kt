@@ -89,7 +89,7 @@ class CustomCanvasRenderer(
         canvas.drawColor(Color.BLACK)
         canvas.drawCircle(
             (width / 2).toFloat(),
-            (height / 4).toFloat(),
+            (height - (height / 4)).toFloat(),
             radius / 10,
             darkPaint
         )
@@ -135,7 +135,7 @@ class CustomCanvasRenderer(
             canvas.drawText(
                 count.toString(),
                 (width / 2).toFloat(),
-                (height / 2).toFloat(),
+                (height - (height / 4)).toFloat(),
                 lightPaint
             )
         } else if (renderParameters.drawMode == DrawMode.AMBIENT) {
