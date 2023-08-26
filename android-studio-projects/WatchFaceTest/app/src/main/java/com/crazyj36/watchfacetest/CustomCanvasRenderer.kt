@@ -90,7 +90,7 @@ class CustomCanvasRenderer(
             darkPaint
         )*/
         val rect = RectF(
-            (width - 200).toFloat(),
+            (width - width / 4).toFloat(),
             (height - 200).toFloat(),
             (width - 20).toFloat(),
             (height - 20).toFloat()
