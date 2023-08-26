@@ -81,15 +81,15 @@ class CustomCanvasRenderer(
         if (count > 99) count = 0
         val width = bounds.width()
         val height = bounds.height()
-        val radius = min(width, height).toFloat()
         canvas.drawColor(Color.BLACK)
-        /*canvas.drawCircle(
-            (width / 2).toFloat(),
-            (height - (height / 4)).toFloat(),
-            radius / 10,
-            darkPaint
-        )*/
-        if (renderParameters.drawMode == DrawMode.INTERACTIVE) {
+        if (renderParameters.drawMode == DrawMode.AMBIENT) {
+            canvas.drawText(
+                context.resources.getString(R.string.inAmbientText),
+                (width / 2).toFloat(),
+                (height - (height / 4)).toFloat(),
+                textPaint
+            )
+        } else {
             val rect = RectF(
                 (width / 6).toFloat(),
                 (height - (height / 3)).toFloat(),
@@ -100,13 +100,6 @@ class CustomCanvasRenderer(
             count++
             canvas.drawText(
                 count.toString(),
-                (width / 2).toFloat(),
-                (height - (height / 4)).toFloat(),
-                textPaint
-            )
-        } else if (renderParameters.drawMode == DrawMode.AMBIENT) {
-            canvas.drawText(
-                context.resources.getString(R.string.inAmbientText),
                 (width / 2).toFloat(),
                 (height - (height / 4)).toFloat(),
                 textPaint
