@@ -70,7 +70,7 @@ class CustomCanvasRenderer(
                     (height / 2).toFloat(),
                     lightPaint)
                 count++
-                postInvalidate()
+                //postInvalidate()
             }
         }, 0, 1000)
 
