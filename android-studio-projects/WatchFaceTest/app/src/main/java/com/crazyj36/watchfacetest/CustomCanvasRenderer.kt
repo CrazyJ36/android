@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.Rect
+import android.graphics.RectF
 import android.util.Log
 import android.view.SurfaceHolder
 import androidx.core.graphics.drawable.toBitmap
@@ -43,10 +44,11 @@ class CustomCanvasRenderer(
         isAntiAlias = true
         setARGB(225, 50, 50, 50)
     }
-    private val lightPaint = Paint().apply{
+    private val textPaint = Paint().apply{
         isAntiAlias = true
         setARGB(255, 230, 230, 230)
         textSize = 24F
+        textAlign = Paint.Align.CENTER
     }
     private val hourHandsPaint = Paint().apply {
         isAntiAlias = true
@@ -58,12 +60,6 @@ class CustomCanvasRenderer(
         setARGB(255, 230, 230, 230)
         strokeWidth = 3F
     }
-    private val ticksPaint = Paint().apply {
-        isAntiAlias = true
-        setARGB(255, 100, 100, 100)
-        textSize = 18F
-    }
-    private val ticksHours = arrayOf("3", "6", "9", "12")
     private val secondsPerHourHandRotation = Duration.ofHours(12)
         .seconds
     private val secondsPerMinuteHandRotation = Duration.ofHours(1)
@@ -87,12 +83,19 @@ class CustomCanvasRenderer(
         val height = bounds.height()
         val radius = min(width, height).toFloat()
         canvas.drawColor(Color.BLACK)
-        canvas.drawCircle(
+        /*canvas.drawCircle(
             (width / 2).toFloat(),
             (height - (height / 4)).toFloat(),
             radius / 10,
             darkPaint
+        )*/
+        val rect = RectF(
+            (width / 6).toFloat(),
+            (height / 4).toFloat(),
+            (width / 6).toFloat(),
+            (height / 4).toFloat()
         )
+        canvas.drawRoundRect(rect, 8F, 8F, darkPaint)
         val hourRotation: Float = zonedDateTime.toLocalTime()
             .toSecondOfDay().rem(secondsPerHourHandRotation) * 360.0F /
                 secondsPerHourHandRotation
@@ -136,14 +139,14 @@ class CustomCanvasRenderer(
                 count.toString(),
                 (width / 2).toFloat(),
                 (height - (height / 4)).toFloat(),
-                lightPaint
+                textPaint
             )
         } else if (renderParameters.drawMode == DrawMode.AMBIENT) {
             canvas.drawText(
                 context.resources.getString(R.string.inAmbientText),
                 (width / 2).toFloat(),
-                (height / 2).toFloat(),
-                lightPaint
+                (height - (height / 4)).toFloat(),
+                textPaint
             )
         }
         canvas.drawBitmap(
