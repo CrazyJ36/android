@@ -24,8 +24,6 @@ class WatchFaceServiceTest: WatchFaceService() {
             complicationSlotsManager = complicationSlotsManager,
             currentUserStyleRepository = currentUserStyleRepository,
             canvasType = CanvasType.HARDWARE,
-            clearWithBackgroundTintBeforeRenderingHighlightLayer =
-              false
         )
         return WatchFace(watchFaceType = WatchFaceType.ANALOG,
             renderer = renderer)

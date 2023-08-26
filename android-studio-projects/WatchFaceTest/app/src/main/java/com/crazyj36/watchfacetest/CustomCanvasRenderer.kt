@@ -17,32 +17,30 @@ class CustomCanvasRenderer(
     watchState: WatchState,
     private val complicationSlotsManager: ComplicationSlotsManager,
     currentUserStyleRepository: CurrentUserStyleRepository,
-    canvasType: Int, clearWithBackgroundTintBeforeRenderingHighlightLayer: Boolean
-) : Renderer.CanvasRenderer2<Renderer.SharedAssets>(
-        surfaceHolder = surfaceHolder,
-        currentUserStyleRepository = currentUserStyleRepository,
-        watchState = watchState,
-        canvasType = canvasType,
-        interactiveDrawModeUpdateDelayMillis = 16L,
+    canvasType: Int
+) : Renderer.CanvasRenderer2<CustomCanvasRenderer.MySharedAssets>(
+    surfaceHolder = surfaceHolder,
+    currentUserStyleRepository = currentUserStyleRepository,
+    watchState = watchState,
+    canvasType = canvasType,
+    interactiveDrawModeUpdateDelayMillis = 16L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
-    override suspend fun createSharedAssets(): SharedAssets {
-        TODO("Not yet implemented")
-    }
 
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
         zonedDateTime: ZonedDateTime,
-        sharedAssets: SharedAssets
+        sharedAssets: MySharedAssets
     ) {
+
     }
 
     override fun render(
         canvas: Canvas,
         bounds: Rect,
         zonedDateTime: ZonedDateTime,
-        sharedAssets: SharedAssets
+        sharedAssets: MySharedAssets
     ) {
         val width = bounds.width()
         val height = bounds.height()
@@ -51,11 +49,21 @@ class CustomCanvasRenderer(
         val redPaint = Paint().apply {
             setARGB(225, 225, 0, 0)
         }
+
         canvas.drawCircle(
             (bounds.width() / 2).toFloat(),
             (bounds.height() / 2).toFloat(),
             radius,
             redPaint
         )
+    }
+
+    class MySharedAssets : SharedAssets {
+        override fun onDestroy() {
+        }
+    }
+
+    override suspend fun createSharedAssets(): MySharedAssets {
+        return MySharedAssets()
     }
 }
