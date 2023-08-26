@@ -11,8 +11,6 @@ import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.ZonedDateTime
-import java.util.Timer
-import java.util.TimerTask
 import kotlin.math.min
 
 class CustomCanvasRenderer(
@@ -31,8 +29,6 @@ class CustomCanvasRenderer(
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
     var count = 0
-    val timer = Timer()
-    var runTimer = true
     val darkPaint = Paint().apply {
         setARGB(225, 50, 50, 50)
     }
@@ -54,6 +50,7 @@ class CustomCanvasRenderer(
         sharedAssets: MySharedAssets
     ) {
         Log.d("WATCHFACESERVICETEST", "rendering")
+        if (count > 99) count = 0
         val width =  bounds.width()
         val height = bounds.height()
         val radius = min(width, height).toFloat()
@@ -69,24 +66,9 @@ class CustomCanvasRenderer(
             (height / 2).toFloat(),
             lightPaint
         )
-        /*if (runTimer) {
-            timer.schedule(object : TimerTask() {
-                override fun run() {
-                    count++
-                    if (count == 11) count = 0
-
-                    postInvalidate()
-                }
-            }, 1000, 1000)
-            runTimer = false
-        }*/
+        count++
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        timer.cancel()
-        timer.purge()
-    }
     class MySharedAssets : SharedAssets {
         override fun onDestroy() {
         }
