@@ -112,17 +112,17 @@ class CustomCanvasRenderer(
             bounds,
             0.21028f,
             0.02336f,
-            0.01869f + 0.03738f / 2.0f,
-            8F, // 1.5F
-            8F
+            0f, // 0.01869f + 0.03738f / 2.0f
+            8f, // 1.5f
+            8f
         )
         val minuteHandBorder: Path = createClockHand(
             bounds,
-            0.3783F,
+            0.3783f,
             0.0120f, // 0.0163f
-            0.01869f + 0.03738f / 2.0f,
-            4F,
-            4F
+            0f, // 0.01869f + 0.03738f / 2.0f
+            4f,
+            4f
         )
         canvas.withRotation(
             zonedDateTime.toLocalTime()
