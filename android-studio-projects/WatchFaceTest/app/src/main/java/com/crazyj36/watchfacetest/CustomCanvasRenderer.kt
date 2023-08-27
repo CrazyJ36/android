@@ -139,8 +139,8 @@ class CustomCanvasRenderer(
                 Bitmap.createScaledBitmap(
                     BitmapFactory.decodeResource(context.resources,
                         R.drawable.watch_hour_modern),
-                    16,
-                    56,
+                    width / 10,
+                     height / 2,
                     false
                 ),
                 (width / 2).toFloat(),
