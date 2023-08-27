@@ -87,9 +87,9 @@ class CustomCanvasRenderer(
         } else {
             canvas.drawRoundRect(
                 (width / 5).toFloat(),
-                (height - (height / 3)).toFloat(),
+                (height - (height / 2.5)).toFloat(),
                 (width - (width / 5)).toFloat(),
-                (height - (height / 6)).toFloat(),
+                (height - (height / 5.5)).toFloat(),
                 14F,
                 14F,
                 textBackgroundPaint
