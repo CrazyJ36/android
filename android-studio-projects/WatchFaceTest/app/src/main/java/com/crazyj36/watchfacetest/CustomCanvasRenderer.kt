@@ -108,9 +108,6 @@ class CustomCanvasRenderer(
             0F,
             null
         )
-        val minuteRotation: Float = zonedDateTime.toLocalTime()
-            .toSecondOfDay().rem(secondsPerMinuteHandRotation) * 360.0F /
-                secondsPerMinuteHandRotation
         val hourHandBorder: Path = createClockHand(
             bounds,
             0.21028f,
@@ -122,10 +119,10 @@ class CustomCanvasRenderer(
         val minuteHandBorder: Path = createClockHand(
             bounds,
             0.3783F,
-            0.0163f,
+            0.0120f, // 0.0163f
             0.01869f + 0.03738f / 2.0f,
-            1.5F,
-            1.5F
+            4F,
+            4F
         )
         canvas.withRotation(
             zonedDateTime.toLocalTime()
@@ -138,7 +135,9 @@ class CustomCanvasRenderer(
             drawPath(hourHandBorder, hourHandsPaint)
         }
         canvas.withRotation(
-            minuteRotation,
+            zonedDateTime.toLocalTime()
+                .toSecondOfDay().rem(secondsPerMinuteHandRotation) * 360.0F /
+                    secondsPerMinuteHandRotation,
             bounds.exactCenterX(),
             bounds.exactCenterY()
         ) {
