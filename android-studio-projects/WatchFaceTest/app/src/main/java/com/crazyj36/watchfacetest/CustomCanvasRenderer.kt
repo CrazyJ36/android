@@ -140,8 +140,8 @@ class CustomCanvasRenderer(
                     context.resources,
                     R.drawable.watch_hour_modern
                 ),
-                (width / 2).toFloat(),
-                (height / 2).toFloat(),
+                0F,
+                0F,
                 hourHandsPaint
             )
         //drawPath(hourHandBorder, hourHandsPaint)
