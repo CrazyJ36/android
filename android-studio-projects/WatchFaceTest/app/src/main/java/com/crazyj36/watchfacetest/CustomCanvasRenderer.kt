@@ -98,7 +98,7 @@ class CustomCanvasRenderer(
             canvas.drawText(
                 count.toString(),
                 (width / 2).toFloat(),
-                (height - (height / 4)).toFloat(),
+                (height - (height / 3.5)).toFloat(),
                 textPaint
             )
         }
