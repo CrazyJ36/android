@@ -135,10 +135,13 @@ class CustomCanvasRenderer(
             bounds.exactCenterX(),
             bounds.exactCenterY()
         ) {
-            canvas.drawBitmap(BitmapFactory
-                .decodeResource(
-                    context.resources,
-                    R.drawable.watch_hour_modern
+            canvas.drawBitmap(
+                Bitmap.createScaledBitmap(
+                    BitmapFactory.decodeResource(context.resources,
+                        R.drawable.watch_hour_modern),
+                    width / 2,
+                    height / 2,
+                    false
                 ),
                 0F,
                 0F,
