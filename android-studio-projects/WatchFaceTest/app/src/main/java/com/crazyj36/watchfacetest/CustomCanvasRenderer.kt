@@ -112,7 +112,7 @@ class CustomCanvasRenderer(
             bounds,
             0.21028f,
             0.02336f,
-            0f, // 0.01869f + 0.03738f / 2.0f
+            0.01f, // 0.01869f + 0.03738f / 2.0f
             8f, // 1.5f
             8f
         )
@@ -120,7 +120,7 @@ class CustomCanvasRenderer(
             bounds,
             0.3783f,
             0.0120f, // 0.0163f
-            0f, // 0.01869f + 0.03738f / 2.0f
+            0.01f, // 0.01869f + 0.03738f / 2.0f
             4f,
             4f
         )
