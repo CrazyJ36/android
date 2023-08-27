@@ -98,7 +98,7 @@ class CustomCanvasRenderer(
             canvas.drawText(
                 count.toString(),
                 (width / 2).toFloat(),
-                (height - (height / 3.5)).toFloat(),
+                (height - (height / 3)).toFloat(),
                 textPaint
             )
         }
@@ -108,9 +108,6 @@ class CustomCanvasRenderer(
             0F,
             null
         )
-        val hourRotation: Float = zonedDateTime.toLocalTime()
-            .toSecondOfDay().rem(secondsPerHourHandRotation) * 360.0F /
-                secondsPerHourHandRotation
         val minuteRotation: Float = zonedDateTime.toLocalTime()
             .toSecondOfDay().rem(secondsPerMinuteHandRotation) * 360.0F /
                 secondsPerMinuteHandRotation
@@ -131,11 +128,23 @@ class CustomCanvasRenderer(
             1.5F
         )
         canvas.withRotation(
-            hourRotation,
+            zonedDateTime.toLocalTime()
+                .toSecondOfDay()
+                .rem(secondsPerHourHandRotation) * 360.0F /
+                    secondsPerHourHandRotation,
             bounds.exactCenterX(),
             bounds.exactCenterY()
         ) {
-            drawPath(hourHandBorder, hourHandsPaint)
+            canvas.drawBitmap(BitmapFactory
+                .decodeResource(
+                    context.resources,
+                    R.drawable.watch_hour_modern
+                ),
+                (width / 2).toFloat(),
+                (height / 2).toFloat(),
+                hourHandsPaint
+            )
+        //drawPath(hourHandBorder, hourHandsPaint)
         }
         canvas.withRotation(
             minuteRotation,
