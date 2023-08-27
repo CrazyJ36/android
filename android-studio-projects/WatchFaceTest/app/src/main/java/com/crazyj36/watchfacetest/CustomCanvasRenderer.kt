@@ -139,8 +139,8 @@ class CustomCanvasRenderer(
                 Bitmap.createScaledBitmap(
                     BitmapFactory.decodeResource(context.resources,
                         R.drawable.watch_hour_modern),
-                    4,
-                    8,
+                    16,
+                    56,
                     false
                 ),
                 (width / 2).toFloat(),
@@ -157,7 +157,6 @@ class CustomCanvasRenderer(
             drawPath(minuteHandBorder, minutesHandPaint)
         }
     }
-
     private fun createClockHand(
         bounds: Rect,
         length: Float,
