@@ -143,8 +143,8 @@ class CustomCanvasRenderer(
                     height / 2,
                     false
                 ),
-                0F,
-                0F,
+                (width / 2).toFloat(),
+                (height / 2).toFloat(),
                 hourHandsPaint
             )
         //drawPath(hourHandBorder, hourHandsPaint)
