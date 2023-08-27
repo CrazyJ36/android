@@ -116,8 +116,8 @@ class CustomCanvasRenderer(
             0.21028f,
             0.02336f,
             0.01869f + 0.03738f / 2.0f,
-            1.5F,
-            1.5F
+            8F, // 1.5F
+            8F
         )
         val minuteHandBorder: Path = createClockHand(
             bounds,
@@ -135,19 +135,7 @@ class CustomCanvasRenderer(
             bounds.exactCenterX(),
             bounds.exactCenterY()
         ) {
-            canvas.drawBitmap(
-                Bitmap.createScaledBitmap(
-                    BitmapFactory.decodeResource(context.resources,
-                        R.drawable.watch_hour_modern),
-                    width / 10,
-                     height / 2,
-                    false
-                ),
-                (width / 2).toFloat(),
-                (height / 2).toFloat(),
-                hourHandsPaint
-            )
-        //drawPath(hourHandBorder, hourHandsPaint)
+            drawPath(hourHandBorder, hourHandsPaint)
         }
         canvas.withRotation(
             minuteRotation,
