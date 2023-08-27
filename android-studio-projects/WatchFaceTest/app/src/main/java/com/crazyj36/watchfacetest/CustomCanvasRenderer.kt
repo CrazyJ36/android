@@ -34,7 +34,7 @@ class CustomCanvasRenderer(
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
     private var count = 0
-    private val darkPaint = Paint().apply {
+    private val textBackgroundPaint = Paint().apply {
         isAntiAlias = true
         setARGB(225, 30, 30, 30)
         textAlign = Paint.Align.CENTER
@@ -47,7 +47,7 @@ class CustomCanvasRenderer(
     }
     private val hourHandsPaint = Paint().apply {
         isAntiAlias = true
-        setARGB(255, 230, 230, 230)
+        setARGB(255, 200, 200, 200)
         strokeWidth = 6F
     }
     private val minutesHandPaint = Paint().apply {
@@ -86,13 +86,13 @@ class CustomCanvasRenderer(
             )
         } else {
             canvas.drawRoundRect(
-                (width / 6).toFloat(),
+                (width / 5).toFloat(),
                 (height - (height / 3)).toFloat(),
-                (width - (width / 6)).toFloat(),
+                (width - (width / 5)).toFloat(),
                 (height - (height / 6)).toFloat(),
                 14F,
                 14F,
-                darkPaint
+                textBackgroundPaint
             )
             count++
             canvas.drawText(
