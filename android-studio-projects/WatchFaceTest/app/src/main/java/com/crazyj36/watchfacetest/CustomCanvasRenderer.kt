@@ -152,10 +152,10 @@ class CustomCanvasRenderer(
         ) {
             drawPath(minuteHandBorder, minutesHandPaint)
         }
-        /*for ((_, complication) in complicationSlotsManager
+        for ((_, complication) in complicationSlotsManager
             .complicationSlots) {
             complication.render(canvas, zonedDateTime, renderParameters)
-        }*/
+        }
     }
 
     private fun createClockHand(
