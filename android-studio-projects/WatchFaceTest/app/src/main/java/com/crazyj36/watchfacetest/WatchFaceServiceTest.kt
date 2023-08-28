@@ -66,7 +66,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                 ),
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
                     SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
-                    ComplicationType.SHORT_TEXT,
+                    ComplicationType.MONOCHROMATIC_IMAGE,
                 ),
                 bounds = ComplicationSlotBounds(
                     RectF(0.2f, 0.4f, 0.4f, 0.6f),
