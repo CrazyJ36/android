@@ -67,10 +67,10 @@ class WatchFaceServiceTest: WatchFaceService() {
                 defaultDataSourcePolicy =
                     DefaultComplicationDataSourcePolicy(
                         SystemDataSources.DATA_SOURCE_DATE,
-                        ComplicationType.MONOCHROMATIC_IMAGE
+                        ComplicationType.SHORT_TEXT
                     ),
                 bounds = ComplicationSlotBounds(
-                    RectF(100f, 100f, 200f, 300f)
+                    RectF(0.2f, 0.2f, 0.4f, 0.6f)
                 ),
             ).build()
         val middleLeftComplicationSlot = ComplicationSlot
@@ -87,10 +87,10 @@ class WatchFaceServiceTest: WatchFaceService() {
                 defaultDataSourcePolicy =
                 DefaultComplicationDataSourcePolicy(
                     SystemDataSources.DATA_SOURCE_DATE,
-                    ComplicationType.MONOCHROMATIC_IMAGE
+                    ComplicationType.SHORT_TEXT
                 ),
                 bounds = ComplicationSlotBounds(
-                    RectF(100f, 200f, 200f, 400f)
+                    RectF(0.4f, 0.4f, 0.6f, 0.8f)
                 ),
             ).build()
         return ComplicationSlotsManager(
