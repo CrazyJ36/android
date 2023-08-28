@@ -67,7 +67,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                     ComplicationType.MONOCHROMATIC_IMAGE
                 ),
                 bounds = ComplicationSlotBounds(
-                    RectF(100f, 100f, 200f, 300f)
+                    RectF(0.2f, 0.4f, 0.4f, 0.5f)
                 ),
             ).build()
         return ComplicationSlotsManager(
