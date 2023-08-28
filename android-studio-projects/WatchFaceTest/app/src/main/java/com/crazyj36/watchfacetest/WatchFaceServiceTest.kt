@@ -65,7 +65,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                     ComplicationType.LONG_TEXT
                 ),
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                    SystemDataSources.DATA_SOURCE_DATE,
+                    SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
                     ComplicationType.SHORT_TEXT,
                 ),
                 bounds = ComplicationSlotBounds(
