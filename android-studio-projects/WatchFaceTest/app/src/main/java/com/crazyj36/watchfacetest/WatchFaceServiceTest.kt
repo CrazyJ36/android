@@ -48,7 +48,7 @@ class WatchFaceServiceTest: WatchFaceService() {
     private fun createComplicationSlot(
         context: Context,
         currentUserStyleRepository: CurrentUserStyleRepository,
-        drawableId: Int = R.drawable.watchface_preview
+        drawableId: Int = R.drawable.complication_red_style
     ): ComplicationSlotsManager {
         val defaultCanvasComplicationFactory =
             CanvasComplicationFactory { watchState, listener ->
