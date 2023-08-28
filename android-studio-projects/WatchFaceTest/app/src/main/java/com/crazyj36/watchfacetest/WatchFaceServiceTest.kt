@@ -38,13 +38,11 @@ class WatchFaceServiceTest: WatchFaceService() {
         return WatchFace(watchFaceType = WatchFaceType.ANALOG,
             renderer = renderer)
     }
-    // developer.android.com way
+
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
-        val complicationDrawable = ComplicationDrawable(
-            applicationContext
-        )
+        val complicationDrawable = ComplicationDrawable(applicationContext)
         complicationDrawable.activeStyle.backgroundColor = Color.DKGRAY
         complicationDrawable.activeStyle.textColor = Color.WHITE
         val defaultCanvasComplicationFactory =
@@ -77,7 +75,7 @@ class WatchFaceServiceTest: WatchFaceService() {
             ).build()
         val middleLeftComplicationSlot = ComplicationSlot
             .createRoundRectComplicationSlotBuilder(
-                id = 0,
+                id = 1,
                 canvasComplicationFactory =
                 defaultCanvasComplicationFactory,
                 supportedTypes = listOf(
