@@ -86,6 +86,7 @@ class CustomCanvasRenderer(
         val width = bounds.width()
         val height = bounds.height()
         canvas.drawColor(Color.BLACK)
+        drawComplications(canvas, zonedDateTime)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             canvas.drawText(
                 context.resources.getString(R.string.inAmbientText),
@@ -152,12 +153,13 @@ class CustomCanvasRenderer(
         ) {
             drawPath(minuteHandBorder, minutesHandPaint)
         }
+    }
+    private fun drawComplications(canvas: Canvas, zonedDateTime: ZonedDateTime) {
         for ((_, complication) in complicationSlotsManager
             .complicationSlots) {
             complication.render(canvas, zonedDateTime, renderParameters)
         }
     }
-
     private fun createClockHand(
         bounds: Rect,
         length: Float,
