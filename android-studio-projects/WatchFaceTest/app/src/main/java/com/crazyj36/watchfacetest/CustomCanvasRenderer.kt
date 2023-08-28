@@ -38,7 +38,7 @@ class CustomCanvasRenderer(
     private var count = 0
     private val textBackgroundPaint = Paint().apply {
         isAntiAlias = true
-        setARGB(225, 30, 30, 30)
+        setARGB(255, 15, 15, 15)
         textAlign = Paint.Align.CENTER
     }
     private val textPaint = Paint().apply{
@@ -86,20 +86,8 @@ class CustomCanvasRenderer(
         val width = bounds.width()
         val height = bounds.height()
         canvas.drawColor(Color.BLACK)
-        for ((_, complication) in complicationSlotsManager
-            .complicationSlots) {
-            complication.render(canvas, zonedDateTime, renderParameters)
-        }
-        if (renderParameters.drawMode == DrawMode.AMBIENT) {
-            count++
-            canvas.drawText(
-                count.toString(),
-                (width / 2).toFloat(),
-                (height - (height / 4)).toFloat(),
-                textPaint
-            )
-        } else {
-            /*canvas.drawRoundRect(
+        if (renderParameters.drawMode != DrawMode.AMBIENT) {
+            canvas.drawRoundRect(
                 (width / 5).toFloat(),
                 (height - (height / 2.5)).toFloat(),
                 (width - (width / 5)).toFloat(),
@@ -107,7 +95,7 @@ class CustomCanvasRenderer(
                 14F,
                 14F,
                 textBackgroundPaint
-            )*/
+            )
             count++
             canvas.drawText(
                 count.toString(),
@@ -115,6 +103,10 @@ class CustomCanvasRenderer(
                 (height - (height / 3)).toFloat(),
                 textPaint
             )
+            for ((_, complication) in complicationSlotsManager
+                .complicationSlots) {
+                complication.render(canvas, zonedDateTime, renderParameters)
+            }
         }
         canvas.drawBitmap(
             Bitmap.createScaledBitmap(index, width, height, false),
@@ -124,17 +116,17 @@ class CustomCanvasRenderer(
         )
         val hourHandBorder: Path = createClockHand(
             bounds,
-            0.21028f,
-            0.02336f,
-            0.01f, // 0.01869f + 0.03738f / 2.0f
-            8f, // 1.5f
-            8f
+            0.22028f,
+            0.01500f,
+            0f,
+            6f,
+            6f
         )
         val minuteHandBorder: Path = createClockHand(
             bounds,
             0.3783f,
-            0.0120f, // 0.0163f
-            0.01f, // 0.01869f + 0.03738f / 2.0f
+            0.0100f,
+            0f,
             4f,
             4f
         )
