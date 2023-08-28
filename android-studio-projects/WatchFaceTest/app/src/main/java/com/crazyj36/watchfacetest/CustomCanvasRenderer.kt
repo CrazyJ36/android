@@ -145,7 +145,8 @@ class CustomCanvasRenderer(
         ) {
             drawPath(minuteHandBorder, minutesHandPaint)
         }
-        Log.d("WATCHFACETEST", complicationSlotsManager.complicationSlots.size.toString())
+        Log.d("WATCHFACETEST",
+            complicationSlotsManager.complicationSlots.size.toString())
         for ((_, complication) in complicationSlotsManager
             .complicationSlots) {
             complication.render(canvas, zonedDateTime, renderParameters)

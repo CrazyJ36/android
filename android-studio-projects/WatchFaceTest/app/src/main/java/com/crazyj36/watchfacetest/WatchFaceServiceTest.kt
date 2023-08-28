@@ -1,5 +1,6 @@
 package com.crazyj36.watchfacetest
 
+import android.graphics.Color
 import android.graphics.RectF
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
@@ -41,13 +42,15 @@ class WatchFaceServiceTest: WatchFaceService() {
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
+        val complicationDrawable = ComplicationDrawable(
+            applicationContext
+        )
+        complicationDrawable.activeStyle.backgroundColor = Color.DKGRAY
+        complicationDrawable.activeStyle.textColor = Color.WHITE
         val defaultCanvasComplicationFactory =
             CanvasComplicationFactory { watchState, listener ->
                 CanvasComplicationDrawable(
-                    ComplicationDrawable.getDrawable(
-                        applicationContext,
-                        R.drawable.watchface_preview
-                    )!!,
+                    complicationDrawable,
                     watchState,
                     listener
                 )
@@ -55,17 +58,19 @@ class WatchFaceServiceTest: WatchFaceService() {
         val topLeftComplicationSlot = ComplicationSlot
             .createRoundRectComplicationSlotBuilder(
                 id = 0,
-                canvasComplicationFactory = defaultCanvasComplicationFactory,
+                canvasComplicationFactory =
+                    defaultCanvasComplicationFactory,
                 supportedTypes = listOf(
                     ComplicationType.RANGED_VALUE,
                     ComplicationType.MONOCHROMATIC_IMAGE,
                     ComplicationType.SHORT_TEXT,
                     ComplicationType.SMALL_IMAGE
                 ),
-                defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                    SystemDataSources.DATA_SOURCE_DATE,
-                    ComplicationType.MONOCHROMATIC_IMAGE
-                ),
+                defaultDataSourcePolicy =
+                    DefaultComplicationDataSourcePolicy(
+                        SystemDataSources.DATA_SOURCE_DATE,
+                        ComplicationType.MONOCHROMATIC_IMAGE
+                    ),
                 bounds = ComplicationSlotBounds(
                     RectF(100f, 100f, 200f, 300f)
                 ),
