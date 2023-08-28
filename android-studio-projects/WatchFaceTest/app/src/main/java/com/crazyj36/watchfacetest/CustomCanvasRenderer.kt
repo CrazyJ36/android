@@ -59,7 +59,8 @@ class CustomCanvasRenderer(
         .seconds
     private val secondsPerMinuteHandRotation = Duration.ofHours(1)
         .seconds
-    val index = BitmapFactory.decodeResource(context.resources, R.drawable.index_modern2)
+    private val index = BitmapFactory.decodeResource(context.resources, R.drawable.index_modern2)
+
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
@@ -144,6 +145,7 @@ class CustomCanvasRenderer(
             drawPath(minuteHandBorder, minutesHandPaint)
         }
     }
+
     private fun createClockHand(
         bounds: Rect,
         length: Float,

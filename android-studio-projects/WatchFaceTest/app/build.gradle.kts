@@ -38,4 +38,5 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.3.1")
     implementation("androidx.wear.watchface:watchface:1.1.1")
+    implementation("androidx.wear.watchface:watchface-complications-rendering:1.1.1")
 }
