@@ -76,7 +76,7 @@ class WatchFaceServiceTest: WatchFaceService() {
         )
     }
     // sample way
-    /*fun createComplicationSlotManager(
+    /*override fun createComplicationSlotManager(
         context: Context,
         currentUserStyleRepository: CurrentUserStyleRepository,
         drawableId: Int = DEFAULT_COMPLICATION_STYLE_DRAWABLE_ID
