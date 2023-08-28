@@ -91,8 +91,9 @@ class CustomCanvasRenderer(
             complication.render(canvas, zonedDateTime, renderParameters)
         }
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
+            count++
             canvas.drawText(
-                context.resources.getString(R.string.inAmbientText),
+                count.toString(),
                 (width / 2).toFloat(),
                 (height - (height / 4)).toFloat(),
                 textPaint
