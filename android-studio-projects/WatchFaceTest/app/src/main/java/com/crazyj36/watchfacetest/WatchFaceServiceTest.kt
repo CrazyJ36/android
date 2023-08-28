@@ -46,7 +46,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                 CanvasComplicationDrawable(
                     ComplicationDrawable.getDrawable(
                         applicationContext,
-                        R.drawable.complication_blue_style
+                        R.drawable.complication_red_style
                     )!!,
                     watchState,
                     listener
@@ -68,7 +68,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                 ),
                 bounds = ComplicationSlotBounds(
                     RectF(0.2f, 0.4f, 0.4f, 0.5f)
-                ),
+                )
             ).build()
         return ComplicationSlotsManager(
             listOf(topLeftComplicationSlot),
