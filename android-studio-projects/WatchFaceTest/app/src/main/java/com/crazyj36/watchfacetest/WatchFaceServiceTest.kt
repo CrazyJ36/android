@@ -75,8 +75,28 @@ class WatchFaceServiceTest: WatchFaceService() {
                     RectF(100f, 100f, 200f, 300f)
                 ),
             ).build()
+        val middleLeftComplicationSlot = ComplicationSlot
+            .createRoundRectComplicationSlotBuilder(
+                id = 0,
+                canvasComplicationFactory =
+                defaultCanvasComplicationFactory,
+                supportedTypes = listOf(
+                    ComplicationType.RANGED_VALUE,
+                    ComplicationType.MONOCHROMATIC_IMAGE,
+                    ComplicationType.SHORT_TEXT,
+                    ComplicationType.SMALL_IMAGE
+                ),
+                defaultDataSourcePolicy =
+                DefaultComplicationDataSourcePolicy(
+                    SystemDataSources.DATA_SOURCE_DATE,
+                    ComplicationType.MONOCHROMATIC_IMAGE
+                ),
+                bounds = ComplicationSlotBounds(
+                    RectF(100f, 200f, 200f, 400f)
+                ),
+            ).build()
         return ComplicationSlotsManager(
-            listOf(topLeftComplicationSlot),
+            listOf(topLeftComplicationSlot, middleLeftComplicationSlot),
             currentUserStyleRepository
         )
     }
