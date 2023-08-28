@@ -19,7 +19,7 @@
             android:name=".WatchFaceServiceTest"
             android:label="@string/watchFaceTestServiceLabel"
             android:exported="true"
-            android:permission="android.permission.BIND_WALLPAPER" >
+            android:permission="android.permission.BIND_WALLPAPER">
             <meta-data
                 android:name="android.service.wallpaper"
                 android:resource="@xml/watchface_wallpaper" />
