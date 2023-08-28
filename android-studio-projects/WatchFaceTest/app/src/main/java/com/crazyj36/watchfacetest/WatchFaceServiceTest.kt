@@ -2,6 +2,7 @@ package com.crazyj36.watchfacetest
 
 import android.graphics.Color
 import android.graphics.RectF
+import android.support.wearable.complications.ComplicationProviderInfo
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
@@ -20,7 +21,6 @@ import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class WatchFaceServiceTest: WatchFaceService() {
-
     override suspend fun createWatchFace(
         surfaceHolder: SurfaceHolder,
         watchState: WatchState,
@@ -86,7 +86,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                 ),
                 defaultDataSourcePolicy =
                 DefaultComplicationDataSourcePolicy(
-                    SystemDataSources.DATA_SOURCE_DATE,
+                    SystemDataSources.DATA_SOURCE_DAY_OF_WEEK,
                     ComplicationType.SHORT_TEXT
                 ),
                 bounds = ComplicationSlotBounds(
@@ -98,5 +98,4 @@ class WatchFaceServiceTest: WatchFaceService() {
             currentUserStyleRepository
         )
     }
-
 }
