@@ -85,7 +85,6 @@ class CustomCanvasRenderer(
         val width = bounds.width()
         val height = bounds.height()
         canvas.drawColor(Color.BLACK)
-        drawComplications(canvas, zonedDateTime)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             canvas.drawText(
                 context.resources.getString(R.string.inAmbientText),
@@ -152,6 +151,8 @@ class CustomCanvasRenderer(
         ) {
             drawPath(minuteHandBorder, minutesHandPaint)
         }
+
+        drawComplications(canvas, zonedDateTime)
     }
     private fun drawComplications(
         canvas: Canvas, zonedDateTime: ZonedDateTime) {
