@@ -8,12 +8,14 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.Rect
+import android.graphics.RectF
 import android.view.SurfaceHolder
 import androidx.core.graphics.withRotation
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
+import androidx.wear.watchface.complications.ComplicationSlotBounds
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.Duration
@@ -145,12 +147,10 @@ class CustomCanvasRenderer(
         ) {
             drawPath(minuteHandBorder, minutesHandPaint)
         }
-        /*for ((_, complication) in complicationSlotsManager
+        for ((_, complication) in complicationSlotsManager
             .complicationSlots) {
             complication.render(canvas, zonedDateTime, renderParameters)
-        }*/
-        ComplicationDrawable.getDrawable(context, 0)!!.draw(canvas)
-        ComplicationDrawable.getDrawable(context, 1)!!.draw(canvas)
+        }
     }
 
     private fun createClockHand(
