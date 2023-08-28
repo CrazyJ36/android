@@ -11,6 +11,7 @@ import android.graphics.Rect
 import android.graphics.RectF
 import android.util.Log
 import android.view.SurfaceHolder
+import android.widget.Toast
 import androidx.core.graphics.withRotation
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
@@ -69,12 +70,11 @@ class CustomCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
+        Toast.makeText(context,
+            "renderHighlightLayer() triggered, drawing black.",
+            Toast.LENGTH_SHORT
+        ).show()
         canvas.drawColor(Color.BLACK)
-        /*for ((_, complication) in complicationSlotsManager.complicationSlots) {
-            if (complication.enabled) {
-                complication.renderHighlightLayer(canvas, zonedDateTime, renderParameters)
-            }
-        }*/
     }
     override fun render(
         canvas: Canvas,

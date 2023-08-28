@@ -46,7 +46,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                 CanvasComplicationDrawable(
                     ComplicationDrawable.getDrawable(
                         applicationContext,
-                        R.drawable.complication_red_style
+                        R.drawable.complication_style
                     )!!,
                     watchState,
                     listener
