@@ -68,12 +68,6 @@ class CustomCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        canvas.drawColor(Color.BLACK)
-        for ((_, complication) in complicationSlotsManager.complicationSlots) {
-            if (complication.enabled) {
-                complication.renderHighlightLayer(canvas, zonedDateTime, renderParameters)
-            }
-        }
     }
     override fun render(
         canvas: Canvas,
@@ -151,17 +145,11 @@ class CustomCanvasRenderer(
         ) {
             drawPath(minuteHandBorder, minutesHandPaint)
         }
-
-        drawComplications(canvas, zonedDateTime)
-    }
-    private fun drawComplications(
-        canvas: Canvas, zonedDateTime: ZonedDateTime) {
-        for ((_, complication) in
-            complicationSlotsManager.complicationSlots) {
-            Log.d("WATCHFACETEST", "drawingComplications")
-                complication.render(canvas, zonedDateTime, renderParameters)
+        Log.d("WATCHFACETEST", complicationSlotsManager.complicationSlots.size.toString())
+        for ((_, complication) in complicationSlotsManager
+            .complicationSlots) {
+            complication.render(canvas, zonedDateTime, renderParameters)
         }
-
     }
 
     private fun createClockHand(

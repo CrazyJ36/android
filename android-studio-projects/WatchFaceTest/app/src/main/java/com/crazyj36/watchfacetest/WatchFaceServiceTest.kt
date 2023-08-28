@@ -46,7 +46,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                 CanvasComplicationDrawable(
                     ComplicationDrawable.getDrawable(
                         applicationContext,
-                        R.drawable.complication_red_style
+                        R.drawable.watchface_preview
                     )!!,
                     watchState,
                     listener
@@ -67,51 +67,13 @@ class WatchFaceServiceTest: WatchFaceService() {
                     ComplicationType.MONOCHROMATIC_IMAGE
                 ),
                 bounds = ComplicationSlotBounds(
-                    RectF(0.2f, 0.4f, 0.4f, 0.5f)
-                )
+                    RectF(100f, 100f, 200f, 300f)
+                ),
             ).build()
         return ComplicationSlotsManager(
             listOf(topLeftComplicationSlot),
             currentUserStyleRepository
         )
     }
-    // sample way
-    /*override fun createComplicationSlotManager(
-        context: Context,
-        currentUserStyleRepository: CurrentUserStyleRepository,
-        drawableId: Int = DEFAULT_COMPLICATION_STYLE_DRAWABLE_ID
-    ): ComplicationSlotsManager {
-        val defaultCanvasComplicationFactory =
-            CanvasComplicationFactory { watchState, listener ->
-                CanvasComplicationDrawable(
-                    ComplicationDrawable.getDrawable(
-                        applicationContext,
-                        drawableId)!!,
-                    watchState,
-                    listener
-                    )
-                )
-            }
-        val topLeftComplicationSlot = ComplicationSlot
-            .createRoundRectComplicationSlotBuilder(
-                id = 0,
-                canvasComplicationFactory =
-                    defaultCanvasComplicationFactory,
-                defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                    SystemDataSources.DATA_SOURCE_DATE,
-                    ComplicationType.LONG_TEXT
-                ),
-                bounds = ComplicationSlotBounds(
-                    RectF(0.2f, 0.4f, 0.4f, 0.6f)
-                ),
-                supportedTypes = listOf(
-                    ComplicationType.NOT_CONFIGURED
-                )
-            ).build()
 
-        return ComplicationSlotsManager(
-            listOf(topLeftComplicationSlot),
-            currentUserStyleRepository
-        )
-    }*/
 }
