@@ -69,7 +69,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                 bounds = ComplicationSlotBounds(
                     RectF(0.2f, 0.4f, 0.4f, 0.6f),
                 )
-            ).build()
+            ).setEnabled(true).build()
         return ComplicationSlotsManager(
             listOf(leftTopComplication),
             currentUserStyleRepository
