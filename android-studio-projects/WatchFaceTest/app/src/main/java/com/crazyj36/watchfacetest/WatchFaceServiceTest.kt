@@ -64,7 +64,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                     ComplicationType.SMALL_IMAGE
                 ),
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                    SystemDataSources.DATA_SOURCE_DATE,
+                    SystemDataSources.DATA_SOURCE_STEP_COUNT,
                     ComplicationType.SHORT_TEXT
                 ),
                 bounds = ComplicationSlotBounds(
@@ -72,8 +72,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                         0.2f, 0.4f, 0.4f, 0.6f
                     )
                 )
-            ).setDefaultDataSourceType(ComplicationType.SHORT_TEXT)
-            .build()
+            ).build()
         return ComplicationSlotsManager(
             listOf(leftTopComplication),
             currentUserStyleRepository
