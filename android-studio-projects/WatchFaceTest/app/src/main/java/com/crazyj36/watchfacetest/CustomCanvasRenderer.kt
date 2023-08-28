@@ -9,6 +9,7 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.Rect
 import android.graphics.RectF
+import android.util.Log
 import android.view.SurfaceHolder
 import androidx.core.graphics.withRotation
 import androidx.wear.watchface.ComplicationSlotsManager
@@ -158,6 +159,7 @@ class CustomCanvasRenderer(
         }
         for ((_, complication) in complicationSlotsManager
             .complicationSlots) {
+            Log.d("WATCHFACETEST", "drawing: $complication")
             complication.render(canvas, zonedDateTime, renderParameters)
         }
     }
