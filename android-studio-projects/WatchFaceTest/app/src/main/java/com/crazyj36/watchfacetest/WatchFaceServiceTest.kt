@@ -61,7 +61,8 @@ class WatchFaceServiceTest: WatchFaceService() {
                     ComplicationType.MONOCHROMATIC_IMAGE,
                     ComplicationType.SHORT_TEXT,
                     ComplicationType.SMALL_IMAGE,
-                    ComplicationType.NO_DATA
+                    ComplicationType.NO_DATA,
+                    ComplicationType.LONG_TEXT
                 ),
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
                     SystemDataSources.DATA_SOURCE_DATE,

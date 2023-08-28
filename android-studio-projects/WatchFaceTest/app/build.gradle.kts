@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.crazyj36.watchfacetest"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.crazyj36.watchfacetest"
         minSdk = 30
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -33,10 +33,10 @@ android {
 dependencies {
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("com.google.android.gms:play-services-wearable:18.0.0")
-    implementation("androidx.wear.watchface:watchface:1.1.1")
-    implementation("androidx.wear.watchface:watchface-complications:1.1.1")
-    implementation("androidx.wear.watchface:watchface-editor:1.1.1")
-    implementation("androidx.wear.watchface:watchface-complications-data-source:1.1.1")
-    implementation("androidx.wear.watchface:watchface-complications-data-source-ktx:1.1.1")
-    implementation("androidx.wear.watchface:watchface-complications-rendering:1.1.1")
+    implementation("androidx.wear.watchface:watchface:1.2.0-beta01")
+    implementation("androidx.wear.watchface:watchface-complications:1.2.0-beta01")
+    implementation("androidx.wear.watchface:watchface-editor:1.2.0-beta01")
+    implementation("androidx.wear.watchface:watchface-complications-data-source:1.2.0-beta01")
+    implementation("androidx.wear.watchface:watchface-complications-data-source-ktx:1.2.0-beta01")
+    implementation("androidx.wear.watchface:watchface-complications-rendering:1.2.0-beta01")
 }
