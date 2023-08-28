@@ -39,6 +39,8 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.3.1")
     implementation("androidx.wear.watchface:watchface:1.1.1")
     implementation("androidx.wear.watchface:watchface-complications:1.1.1")
+    implementation("androidx.wear.watchface:watchface-editor:1.1.1")
+    implementation("androidx.wear.watchface:watchface-complications-data-source:1.1.1")
     implementation("androidx.wear.watchface:watchface-complications-data-source-ktx:1.1.1")
     implementation("androidx.wear.watchface:watchface-complications-rendering:1.1.1")
 }
