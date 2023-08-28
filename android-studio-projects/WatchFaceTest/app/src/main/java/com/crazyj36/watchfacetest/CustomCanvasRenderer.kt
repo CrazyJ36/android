@@ -89,7 +89,7 @@ class CustomCanvasRenderer(
                 textPaint
             )
         } else {
-            canvas.drawRoundRect(
+            /*canvas.drawRoundRect(
                 (width / 5).toFloat(),
                 (height - (height / 2.5)).toFloat(),
                 (width - (width / 5)).toFloat(),
@@ -97,7 +97,7 @@ class CustomCanvasRenderer(
                 14F,
                 14F,
                 textBackgroundPaint
-            )
+            )*/
             count++
             canvas.drawText(
                 count.toString(),
