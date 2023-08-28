@@ -17,7 +17,6 @@ import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
-import androidx.wear.watchface.style.UserStyleSchema
 
 class WatchFaceServiceTest: WatchFaceService() {
 
@@ -68,18 +67,12 @@ class WatchFaceServiceTest: WatchFaceService() {
                     ComplicationType.SHORT_TEXT
                 ),
                 bounds = ComplicationSlotBounds(
-                    RectF(
-                        0.2f, 0.4f, 0.4f, 0.6f
-                    )
+                    RectF(0.2f, 0.4f, 0.4f, 0.6f),
                 )
             ).build()
         return ComplicationSlotsManager(
             listOf(leftTopComplication),
             currentUserStyleRepository
         )
-    }
-
-    override fun createUserStyleSchema(): UserStyleSchema {
-        return super.createUserStyleSchema()
     }
 }
