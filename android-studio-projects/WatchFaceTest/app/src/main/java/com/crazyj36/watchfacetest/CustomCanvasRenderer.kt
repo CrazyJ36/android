@@ -150,7 +150,7 @@ class CustomCanvasRenderer(
         }
         for ((_, complication) in complicationSlotsManager
             .complicationSlots) {
-            ComplicationDrawable.getDrawable(context, 0)?.let {
+            ComplicationDrawable.getDrawable(context, R.drawable.complication_red_style)?.let {
                 it.draw(canvas)
             }
             complication.render(canvas, zonedDateTime, renderParameters)
