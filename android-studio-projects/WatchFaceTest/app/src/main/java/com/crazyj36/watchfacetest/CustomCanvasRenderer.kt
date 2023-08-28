@@ -159,7 +159,6 @@ class CustomCanvasRenderer(
         }
         for ((_, complication) in complicationSlotsManager
             .complicationSlots) {
-            Log.d("WATCHFACETEST", "drawing: $complication")
             complication.render(canvas, zonedDateTime, renderParameters)
         }
     }

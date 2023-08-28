@@ -1,6 +1,5 @@
 package com.crazyj36.watchfacetest
 
-import android.content.Context
 import android.graphics.RectF
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
