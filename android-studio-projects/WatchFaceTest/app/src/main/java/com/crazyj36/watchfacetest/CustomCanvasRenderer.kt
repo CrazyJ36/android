@@ -196,6 +196,7 @@ class CustomCanvasRenderer(
         }
         return path
     }
+
     class MySharedAssets : SharedAssets {
         override fun onDestroy() {
         }

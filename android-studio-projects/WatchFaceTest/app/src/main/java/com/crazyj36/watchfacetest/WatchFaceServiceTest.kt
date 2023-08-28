@@ -60,11 +60,12 @@ class WatchFaceServiceTest: WatchFaceService() {
                     ComplicationType.RANGED_VALUE,
                     ComplicationType.MONOCHROMATIC_IMAGE,
                     ComplicationType.SHORT_TEXT,
-                    ComplicationType.SMALL_IMAGE
+                    ComplicationType.SMALL_IMAGE,
+                    ComplicationType.NO_DATA
                 ),
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
                     SystemDataSources.DATA_SOURCE_STEP_COUNT,
-                    ComplicationType.SHORT_TEXT
+                    ComplicationType.MONOCHROMATIC_IMAGE
                 ),
                 bounds = ComplicationSlotBounds(
                     RectF(0.2f, 0.4f, 0.4f, 0.6f),
