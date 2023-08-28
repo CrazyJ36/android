@@ -17,6 +17,7 @@ import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.complications.ComplicationSlotBounds
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
+import androidx.wear.watchface.editor.EditorService
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.Duration
 import java.time.ZonedDateTime
@@ -149,6 +150,9 @@ class CustomCanvasRenderer(
         }
         for ((_, complication) in complicationSlotsManager
             .complicationSlots) {
+            ComplicationDrawable.getDrawable(context, 0)?.let {
+                it.draw(canvas)
+            }
             complication.render(canvas, zonedDateTime, renderParameters)
         }
     }
