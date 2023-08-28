@@ -65,11 +65,11 @@ class WatchFaceServiceTest: WatchFaceService() {
                     ComplicationType.LONG_TEXT
                 ),
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                    SystemDataSources.DATA_SOURCE_STEP_COUNT,
+                    SystemDataSources.DATA_SOURCE_DATE,
                     ComplicationType.SHORT_TEXT,
                 ),
                 bounds = ComplicationSlotBounds(
-                    RectF(0.2f, 0.4f, 0.4f, 0.6f),
+                    RectF(0.2f, 0.1f, 0.3f, 0.2f),
                 )
             ).setEnabled(true).build()
         return ComplicationSlotsManager(

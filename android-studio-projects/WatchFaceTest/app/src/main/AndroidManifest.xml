@@ -34,7 +34,7 @@
             </intent-filter>
             <meta-data
                 android:name="android.service.wallpaper.square_mode"
-                android:value="false" />
+                android:value="true" />
         </service>
     </application>
 
