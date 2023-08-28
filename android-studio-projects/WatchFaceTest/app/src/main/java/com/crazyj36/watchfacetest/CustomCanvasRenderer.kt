@@ -71,6 +71,14 @@ class CustomCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
+        canvas.drawColor(Color.BLACK)
+        canvas.drawColor(renderParameters.highlightLayer!!.backgroundTint)
+
+        for ((_, complication) in complicationSlotsManager.complicationSlots) {
+            if (complication.enabled) {
+                complication.renderHighlightLayer(canvas, zonedDateTime, renderParameters)
+            }
+        }
     }
     override fun render(
         canvas: Canvas,
@@ -150,9 +158,6 @@ class CustomCanvasRenderer(
         }
         for ((_, complication) in complicationSlotsManager
             .complicationSlots) {
-            ComplicationDrawable.getDrawable(context, R.drawable.complication_red_style)?.let {
-                it.draw(canvas)
-            }
             complication.render(canvas, zonedDateTime, renderParameters)
         }
     }

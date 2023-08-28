@@ -18,8 +18,10 @@ import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
+import androidx.wear.watchface.style.UserStyleSchema
 
 class WatchFaceServiceTest: WatchFaceService() {
+
     override suspend fun createWatchFace(
         surfaceHolder: SurfaceHolder,
         watchState: WatchState,
@@ -40,50 +42,45 @@ class WatchFaceServiceTest: WatchFaceService() {
 
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
-    ): ComplicationSlotsManager =
-        createComplicationSlot(
-            applicationContext,
-            currentUserStyleRepository
-        )
-    private fun createComplicationSlot(
-        context: Context,
-        currentUserStyleRepository: CurrentUserStyleRepository,
-        drawableId: Int = R.drawable.complication_red_style
     ): ComplicationSlotsManager {
         val defaultCanvasComplicationFactory =
             CanvasComplicationFactory { watchState, listener ->
                 CanvasComplicationDrawable(
-                    ComplicationDrawable.getDrawable(context, drawableId)!!,
+                    ComplicationDrawable.getDrawable(
+                        applicationContext,
+                        R.drawable.complication_red_style
+                    )!!,
                     watchState,
                     listener
                 )
             }
-
-        val leftComplication = ComplicationSlot.createRoundRectComplicationSlotBuilder(
-            id = 0,
-            canvasComplicationFactory = defaultCanvasComplicationFactory,
-            supportedTypes = listOf(
-                ComplicationType.RANGED_VALUE,
-                ComplicationType.MONOCHROMATIC_IMAGE,
-                ComplicationType.SHORT_TEXT,
-                ComplicationType.SMALL_IMAGE
-            ),
-            defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                SystemDataSources.DATA_SOURCE_DAY_OF_WEEK,
-                ComplicationType.SHORT_TEXT
-            ),
-            bounds = ComplicationSlotBounds(
-                RectF(
-                    0.2f,
-                    0.2f,
-                    0.4f,
-                    0.6f
+        val leftTopComplication = ComplicationSlot
+            .createRoundRectComplicationSlotBuilder(
+                id = 0,
+                canvasComplicationFactory = defaultCanvasComplicationFactory,
+                supportedTypes = listOf(
+                    ComplicationType.RANGED_VALUE,
+                    ComplicationType.MONOCHROMATIC_IMAGE,
+                    ComplicationType.SHORT_TEXT,
+                    ComplicationType.SMALL_IMAGE
+                ),
+                defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+                    SystemDataSources.DATA_SOURCE_DATE,
+                    ComplicationType.SHORT_TEXT
+                ),
+                bounds = ComplicationSlotBounds(
+                    RectF(
+                        0.2f, 0.4f, 0.4f, 0.6f
+                    )
                 )
-            )
-        ).build()
+            ).build()
         return ComplicationSlotsManager(
-            listOf(leftComplication),
+            listOf(leftTopComplication),
             currentUserStyleRepository
         )
+    }
+
+    override fun createUserStyleSchema(): UserStyleSchema {
+        return super.createUserStyleSchema()
     }
 }
