@@ -72,7 +72,8 @@ class WatchFaceServiceTest: WatchFaceService() {
                         0.2f, 0.4f, 0.4f, 0.6f
                     )
                 )
-            ).build()
+            ).setDefaultDataSourceType(ComplicationType.SHORT_TEXT)
+            .build()
         return ComplicationSlotsManager(
             listOf(leftTopComplication),
             currentUserStyleRepository
