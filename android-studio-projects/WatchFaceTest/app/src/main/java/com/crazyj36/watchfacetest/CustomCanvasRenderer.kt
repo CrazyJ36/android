@@ -35,9 +35,9 @@ class CustomCanvasRenderer(
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
     private var count = 0
-    private val textBackgroundPaint = Paint().apply {
+    private val textSeparatorPaint = Paint().apply {
         isAntiAlias = true
-        setARGB(255, 15, 15, 15)
+        setARGB(255, 30, 30, 30)
         textAlign = Paint.Align.CENTER
     }
     private val textPaint = Paint().apply{
@@ -109,7 +109,6 @@ class CustomCanvasRenderer(
             )
         }
         // draw dots where other hours are.
-        //canvas.save()
         for (i in 0 until 12) {
             if (i % 3 != 0) {
                 //textPaint.style = Paint.Style.FILL_AND_STROKE
@@ -122,7 +121,6 @@ class CustomCanvasRenderer(
             }
             canvas.rotate(360.0f / 12.0f, bounds.exactCenterX(), bounds.exactCenterY())
         }
-        //canvas.restore()
 
         if (renderParameters.drawMode != DrawMode.AMBIENT) {
             /*canvas.drawRoundRect(
@@ -134,6 +132,13 @@ class CustomCanvasRenderer(
                 14F,
                 textBackgroundPaint
             )*/
+            canvas.drawLine(
+                (width / 5).toFloat(),
+                (height - (height / 2.5)).toFloat(),
+                (width - (width / 5)).toFloat(),
+                (height - (height / 2.5)).toFloat(),
+                textSeparatorPaint
+            )
             count++
             canvas.drawText(
                 count.toString(),
