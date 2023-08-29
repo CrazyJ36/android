@@ -49,7 +49,7 @@ class CustomCanvasRenderer(
     private val indexHoursPaint = Paint().apply {
         isAntiAlias = true
         setARGB(255, 170, 170, 170)
-        textSize = 22f
+        textSize = 24f
     }
     private val indexDotsPaint = Paint().apply {
         isAntiAlias = true
@@ -109,7 +109,7 @@ class CustomCanvasRenderer(
             )
         }
         // draw dots where other hours are.
-        canvas.save()
+        //canvas.save()
         for (i in 0 until 12) {
             if (i % 3 != 0) {
                 //textPaint.style = Paint.Style.FILL_AND_STROKE
@@ -122,10 +122,10 @@ class CustomCanvasRenderer(
             }
             canvas.rotate(360.0f / 12.0f, bounds.exactCenterX(), bounds.exactCenterY())
         }
-        canvas.restore()
+        //canvas.restore()
 
         if (renderParameters.drawMode != DrawMode.AMBIENT) {
-            canvas.drawRoundRect(
+            /*canvas.drawRoundRect(
                 (width / 5).toFloat(),
                 (height - (height / 2.5)).toFloat(),
                 (width - (width / 5)).toFloat(),
@@ -133,7 +133,7 @@ class CustomCanvasRenderer(
                 14F,
                 14F,
                 textBackgroundPaint
-            )
+            )*/
             count++
             canvas.drawText(
                 count.toString(),

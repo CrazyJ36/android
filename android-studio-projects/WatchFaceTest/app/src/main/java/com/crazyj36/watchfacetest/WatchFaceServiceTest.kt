@@ -66,14 +66,34 @@ class WatchFaceServiceTest: WatchFaceService() {
                 ),
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
                     SystemDataSources.DATA_SOURCE_DATE,
-                    ComplicationType.SHORT_TEXT,
+                    ComplicationType.SHORT_TEXT
                 ),
                 bounds = ComplicationSlotBounds(
-                    RectF(0.3f, 0.2f, 0.40f, 0.30f),
+                    RectF(0.3f, 0.2f, 0.4f, 0.3f),
+                )
+            ).build()
+        val leftMiddleComplication = ComplicationSlot
+            .createRoundRectComplicationSlotBuilder(
+                id = 1,
+                canvasComplicationFactory = defaultCanvasComplicationFactory,
+                supportedTypes = listOf(
+                    ComplicationType.RANGED_VALUE,
+                    ComplicationType.MONOCHROMATIC_IMAGE,
+                    ComplicationType.SHORT_TEXT,
+                    ComplicationType.SMALL_IMAGE,
+                    ComplicationType.NO_DATA,
+                    ComplicationType.LONG_TEXT
+                ),
+                defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+                    SystemDataSources.DATA_SOURCE_WEATHER,
+                    ComplicationType.SHORT_TEXT
+                ),
+                bounds = ComplicationSlotBounds(
+                    RectF(0.3f, 0.3f, 0.4f, 0.4f)
                 )
             ).build()
         return ComplicationSlotsManager(
-            listOf(leftTopComplication),
+            listOf(leftTopComplication, leftMiddleComplication),
             currentUserStyleRepository
         )
     }
