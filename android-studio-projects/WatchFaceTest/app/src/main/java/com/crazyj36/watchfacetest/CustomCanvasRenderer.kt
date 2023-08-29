@@ -49,6 +49,7 @@ class CustomCanvasRenderer(
     private val indexPaint = Paint().apply {
         isAntiAlias = true
         setARGB(255, 170, 170, 170)
+        textSize = 16f
     }
     private val hourMarks = arrayOf("3", "6", "9", "12")
     private val hourHandsPaint = Paint().apply {
@@ -106,7 +107,7 @@ class CustomCanvasRenderer(
         canvas.save()
         for (i in 0 until 12) {
             if (i % 3 != 0) {
-                //textPaint.style = Paint.Style.FILL_AND_STROKE
+                textPaint.style = Paint.Style.FILL_AND_STROKE
                 canvas.drawCircle(
                     0.5f * bounds.width().toFloat(),
                     bounds.width() * (0.03738f + 0.00584f),
@@ -119,15 +120,6 @@ class CustomCanvasRenderer(
         canvas.restore()
 
         if (renderParameters.drawMode != DrawMode.AMBIENT) {
-            /*drawNumberStyleOuterElement(
-                canvas,
-                bounds,
-                0.45f,
-                0.00584f,
-                Color.DKGRAY, null,
-                0.00584f,
-                0.03730f
-            )*/
             canvas.drawRoundRect(
                 (width / 5).toFloat(),
                 (height - (height / 2.5)).toFloat(),
@@ -162,7 +154,7 @@ class CustomCanvasRenderer(
         val minuteHandBorder: Path = createClockHand(
             bounds,
             0.3800f,
-            0.070f,
+            0.00900f,
             0f,
             4f,
             4f
