@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.Rect
+import android.util.Log
 import android.view.SurfaceHolder
 import android.widget.Toast
 import androidx.core.graphics.withRotation
@@ -150,6 +151,8 @@ class CustomCanvasRenderer(
                 .complicationSlots) {
                 complication.render(canvas, zonedDateTime, renderParameters)
             }
+            Log.d("WATCHFACETEST", complicationSlotsManager
+                .complicationSlots.size.toString())
 
         }
 
