@@ -151,9 +151,6 @@ class CustomCanvasRenderer(
                 .complicationSlots) {
                 complication.render(canvas, zonedDateTime, renderParameters)
             }
-            Log.d("WATCHFACETEST", complicationSlotsManager
-                .complicationSlots.size.toString())
-
         }
 
         val hourHandBorder: Path = createClockHand(
