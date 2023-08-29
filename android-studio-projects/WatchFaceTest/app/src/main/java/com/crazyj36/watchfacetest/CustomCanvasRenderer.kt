@@ -1,15 +1,11 @@
 package com.crazyj36.watchfacetest
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.Rect
-import android.graphics.RectF
-import android.util.Log
 import android.view.SurfaceHolder
 import android.widget.Toast
 import androidx.core.graphics.withRotation
@@ -50,7 +46,7 @@ class CustomCanvasRenderer(
         textSize = 24F
         textAlign = Paint.Align.CENTER
     }
-    private val HOUR_MARKS = arrayOf("3", "6", "9", "12")
+    private val hourMarks = arrayOf("3", "6", "9", "12")
     private val hourHandsPaint = Paint().apply {
         isAntiAlias = true
         setARGB(255, 200, 200, 200)
@@ -65,6 +61,7 @@ class CustomCanvasRenderer(
         .seconds
     private val secondsPerMinuteHandRotation = Duration.ofHours(1)
         .seconds
+    private val textBounds = Rect()
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
@@ -87,6 +84,47 @@ class CustomCanvasRenderer(
         val width = bounds.width()
         val height = bounds.height()
         canvas.drawColor(Color.BLACK)
+
+        // index hour numbers
+        for (i in 0 until 4) {
+            val rotation = 0.5f * (i + 1).toFloat() * Math.PI
+            val dx = sin(rotation).toFloat() * 0.45f * bounds.width().toFloat()
+            val dy = -cos(rotation).toFloat() * 0.45f * bounds.width().toFloat()
+            textPaint.getTextBounds(hourMarks[i], 0, hourMarks[i].length, textBounds)
+            canvas.drawText(
+                hourMarks[i],
+                bounds.exactCenterX() + dx - textBounds.width() / 2.0f,
+                bounds.exactCenterY() + dy + textBounds.height() / 2.0f,
+                textPaint
+            )
+        }
+        // draw dots where other hours are.
+        canvas.save()
+        for (i in 0 until 12) {
+            if (i % 3 != 0) {
+                /*drawTopMiddleCircle(
+                    canvas, bounds, 0.00584f, 0.03738f)*/
+                //private fun drawTopMiddleCircle(
+                //    canvas: Canvas,
+                //    bounds: Rect,
+                 //   radiusFraction: Float,
+                 //   gapBetweenOuterCircleAndBorderFraction: Float
+                //) {
+                    textPaint.style = Paint.Style.FILL_AND_STROKE
+                    val centerX = 0.5f * bounds.width().toFloat()
+                    val centerY = bounds.width() * (0.03738f + 0.00584f)
+                    canvas.drawCircle(
+                        centerX,
+                        centerY,
+                        0.00584f * bounds.width(),
+                        textPaint
+                    )
+                //}
+            }
+            canvas.rotate(360.0f / 12.0f, bounds.exactCenterX(), bounds.exactCenterY())
+        }
+        canvas.restore()
+
         if (renderParameters.drawMode != DrawMode.AMBIENT) {
             /*drawNumberStyleOuterElement(
                 canvas,
@@ -97,30 +135,6 @@ class CustomCanvasRenderer(
                 0.00584f,
                 0.03730f
             )*/
-            val textBounds = Rect()
-            // index hour numbers
-            for (i in 0 until 4) {
-                val rotation = 0.5f * (i + 1).toFloat() * Math.PI
-                val dx = sin(rotation).toFloat() * 0.45f * bounds.width().toFloat()
-                val dy = -cos(rotation).toFloat() * 0.45f * bounds.width().toFloat()
-                textPaint.getTextBounds(HOUR_MARKS[i], 0, HOUR_MARKS[i].length, textBounds)
-                canvas.drawText(
-                    HOUR_MARKS[i],
-                    bounds.exactCenterX() + dx - textBounds.width() / 2.0f,
-                    bounds.exactCenterY() + dy + textBounds.height() / 2.0f,
-                    textPaint
-                )
-            }
-            // draw dots where other hours are.
-            canvas.save()
-            for (i in 0 until 12) {
-                if (i % 3 != 0) {
-                    drawTopMiddleCircle(
-                        canvas, bounds, 0.00584f, 0.03738f                    )
-                }
-                canvas.rotate(360.0f / 12.0f, bounds.exactCenterX(), bounds.exactCenterY())
-            }
-            canvas.restore()
             canvas.drawRoundRect(
                 (width / 5).toFloat(),
                 (height - (height / 2.5)).toFloat(),
@@ -218,25 +232,6 @@ class CustomCanvasRenderer(
             )
         }
         return path
-    }
-    private fun drawTopMiddleCircle(
-        canvas: Canvas,
-        bounds: Rect,
-        radiusFraction: Float,
-        gapBetweenOuterCircleAndBorderFraction: Float
-    ) {
-        textPaint.style = Paint.Style.FILL_AND_STROKE
-
-        // X and Y coordinates of the center of the circle.
-        val centerX = 0.5f * bounds.width().toFloat()
-        val centerY = bounds.width() * (gapBetweenOuterCircleAndBorderFraction + radiusFraction)
-
-        canvas.drawCircle(
-            centerX,
-            centerY,
-            radiusFraction * bounds.width(),
-            textPaint
-        )
     }
 
     class MySharedAssets : SharedAssets {
