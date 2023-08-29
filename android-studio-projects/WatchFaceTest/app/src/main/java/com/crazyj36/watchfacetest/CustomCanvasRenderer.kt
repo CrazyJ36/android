@@ -98,6 +98,7 @@ class CustomCanvasRenderer(
                 0.03730f
             )*/
             val textBounds = Rect()
+            // index hour numbers
             for (i in 0 until 4) {
                 val rotation = 0.5f * (i + 1).toFloat() * Math.PI
                 val dx = sin(rotation).toFloat() * 0.45f * bounds.width().toFloat()
@@ -109,6 +110,23 @@ class CustomCanvasRenderer(
                     bounds.exactCenterY() + dy + textBounds.height() / 2.0f,
                     textPaint
                 )
+            }
+            // draw dots where other hours are.
+            for (i in 0 until 12) {
+                if (i % 3 != 0) {
+                    val centerX = 0.5f * bounds.width().toFloat()
+                    val centerY = bounds.width() * (
+                            0.00584f + 0.45
+                            )
+
+                    canvas.drawCircle(
+                        centerX,
+                        centerY.toFloat(),
+                        (0.45 * bounds.width()).toFloat(),
+                        textPaint
+                    )
+                }
+                canvas.rotate(360.0f / 12.0f, bounds.exactCenterX(), bounds.exactCenterY())
             }
             canvas.drawRoundRect(
                 (width / 5).toFloat(),
