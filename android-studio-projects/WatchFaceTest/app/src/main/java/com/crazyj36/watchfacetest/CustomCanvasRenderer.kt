@@ -37,7 +37,7 @@ class CustomCanvasRenderer(
     private var count = 0
     private val textSeparatorPaint = Paint().apply {
         isAntiAlias = true
-        setARGB(255, 30, 30, 30)
+        setARGB(255, 100, 100, 100)
         textAlign = Paint.Align.CENTER
     }
     private val textPaint = Paint().apply{
@@ -60,12 +60,12 @@ class CustomCanvasRenderer(
     private val hourHandsPaint = Paint().apply {
         isAntiAlias = true
         setARGB(255, 200, 200, 200)
-        strokeWidth = 6F
+
     }
     private val minutesHandPaint = Paint().apply {
         isAntiAlias = true
-        setARGB(255, 230, 230, 230)
-        strokeWidth = 3F
+        setARGB(255, 200, 200, 200)
+
     }
     private val secondsPerHourHandRotation = Duration.ofHours(12)
         .seconds
