@@ -86,7 +86,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                 ),
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
                     SystemDataSources.DATA_SOURCE_WEATHER,
-                    ComplicationType.SHORT_TEXT
+                    ComplicationType.MONOCHROMATIC_IMAGE,
                 ),
                 bounds = ComplicationSlotBounds(
                     RectF(0.3f, 0.3f, 0.4f, 0.4f)
