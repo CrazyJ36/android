@@ -46,10 +46,15 @@ class CustomCanvasRenderer(
         textSize = 24F
         textAlign = Paint.Align.CENTER
     }
-    private val indexPaint = Paint().apply {
+    private val indexHoursPaint = Paint().apply {
         isAntiAlias = true
         setARGB(255, 170, 170, 170)
-        textSize = 16f
+        textSize = 22f
+    }
+    private val indexDotsPaint = Paint().apply {
+        isAntiAlias = true
+        setARGB(255, 170, 170, 170)
+        textSize = 20f
     }
     private val hourMarks = arrayOf("3", "6", "9", "12")
     private val hourHandsPaint = Paint().apply {
@@ -100,19 +105,19 @@ class CustomCanvasRenderer(
                 hourMarks[i],
                 bounds.exactCenterX() + dx - textBounds.width() / 2.0f,
                 bounds.exactCenterY() + dy + textBounds.height() / 2.0f,
-                indexPaint
+                indexHoursPaint
             )
         }
         // draw dots where other hours are.
         canvas.save()
         for (i in 0 until 12) {
             if (i % 3 != 0) {
-                textPaint.style = Paint.Style.FILL_AND_STROKE
+                //textPaint.style = Paint.Style.FILL_AND_STROKE
                 canvas.drawCircle(
                     0.5f * bounds.width().toFloat(),
                     bounds.width() * (0.03738f + 0.00584f),
                     0.00584f * bounds.width(),
-                    indexPaint
+                    indexDotsPaint
                 )
             }
             canvas.rotate(360.0f / 12.0f, bounds.exactCenterX(), bounds.exactCenterY())
