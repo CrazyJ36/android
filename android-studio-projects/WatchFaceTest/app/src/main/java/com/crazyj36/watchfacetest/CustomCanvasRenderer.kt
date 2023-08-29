@@ -46,6 +46,10 @@ class CustomCanvasRenderer(
         textSize = 24F
         textAlign = Paint.Align.CENTER
     }
+    private val indexPaint = Paint().apply {
+        isAntiAlias = true
+        setARGB(255, 170, 170, 170)
+    }
     private val hourMarks = arrayOf("3", "6", "9", "12")
     private val hourHandsPaint = Paint().apply {
         isAntiAlias = true
@@ -95,31 +99,20 @@ class CustomCanvasRenderer(
                 hourMarks[i],
                 bounds.exactCenterX() + dx - textBounds.width() / 2.0f,
                 bounds.exactCenterY() + dy + textBounds.height() / 2.0f,
-                textPaint
+                indexPaint
             )
         }
         // draw dots where other hours are.
         canvas.save()
         for (i in 0 until 12) {
             if (i % 3 != 0) {
-                /*drawTopMiddleCircle(
-                    canvas, bounds, 0.00584f, 0.03738f)*/
-                //private fun drawTopMiddleCircle(
-                //    canvas: Canvas,
-                //    bounds: Rect,
-                 //   radiusFraction: Float,
-                 //   gapBetweenOuterCircleAndBorderFraction: Float
-                //) {
-                    textPaint.style = Paint.Style.FILL_AND_STROKE
-                    val centerX = 0.5f * bounds.width().toFloat()
-                    val centerY = bounds.width() * (0.03738f + 0.00584f)
-                    canvas.drawCircle(
-                        centerX,
-                        centerY,
-                        0.00584f * bounds.width(),
-                        textPaint
-                    )
-                //}
+                //textPaint.style = Paint.Style.FILL_AND_STROKE
+                canvas.drawCircle(
+                    0.5f * bounds.width().toFloat(),
+                    bounds.width() * (0.03738f + 0.00584f),
+                    0.00584f * bounds.width(),
+                    indexPaint
+                )
             }
             canvas.rotate(360.0f / 12.0f, bounds.exactCenterX(), bounds.exactCenterY())
         }
@@ -160,16 +153,16 @@ class CustomCanvasRenderer(
 
         val hourHandBorder: Path = createClockHand(
             bounds,
-            0.22028f,
-            0.01500f,
+            0.23000f,
+            0.01900f,
             0f,
             6f,
             6f
         )
         val minuteHandBorder: Path = createClockHand(
             bounds,
-            0.3783f,
-            0.0100f,
+            0.3800f,
+            0.070f,
             0f,
             4f,
             4f
