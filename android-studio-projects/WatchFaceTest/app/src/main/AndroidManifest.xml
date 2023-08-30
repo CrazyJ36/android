@@ -26,15 +26,6 @@
                 android:name="com.google.android.wearable.watchface.preview"
                 android:resource="@drawable/watchface_preview" />
             <meta-data
-                android:name="com.google.android.wearable.watchface.wearableConfigurationAction"
-                android:value="androidx.wear.watchface.editor.action.WATCH_FACE_EDITOR" />
-            <intent-filter>
-                <action android:name="android.service.wallpaper.WallpaperService" />
-                    <category
-                        android:name=
-                            "com.google.android.wearable.watchface.category.WATCH_FACE"/>
-            </intent-filter>
-            <meta-data
                 android:name="android.service.wallpaper.square_mode"
                 android:value="true" />
         </service>
