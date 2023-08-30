@@ -9,18 +9,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.wear.compose.material.CompactChip
 import androidx.wear.compose.material.Text
 import androidx.wear.watchface.editor.EditorSession
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 class WatchFaceConfigActivity: ComponentActivity() {
-    //private lateinit var editorSession: EditorSession
+    private lateinit var editorSession: EditorSession
+    private var scope = MainScope()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -44,8 +49,8 @@ class WatchFaceConfigActivity: ComponentActivity() {
             )
             CompactChip(
                 onClick = {
-                    MainScope().launch(Dispatchers.Main.immediate) {
-                        val editorSession = EditorSession.createOnWatchEditorSession(
+                    scope.launch {
+                        editorSession = EditorSession.createOnWatchEditorSession(
                             this@WatchFaceConfigActivity
                         )
                         editorSession
