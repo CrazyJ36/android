@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.Text
@@ -18,10 +19,12 @@ import androidx.wear.watchface.editor.ChosenComplicationDataSource
 import androidx.wear.watchface.editor.EditorSession
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class WatchFaceConfigActivity: ComponentActivity() {
     private lateinit var editorSession: EditorSession
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -37,9 +40,8 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 EditorSession.createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
-            val chosenComplicationDataSource = editorSession
+            editorSession
                 .openComplicationDataSourceChooser(1)
-            Log.d("WATCHFACETEST", "$chosenComplicationDataSource")
         }
     }
     @Composable
@@ -49,14 +51,13 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 .fillMaxSize()
                 .background(Color.Black),
             verticalArrangement =
-                Arrangement.Center
+            Arrangement.Center
         ) {
-            Text(text = resources.getString(R.string.watchFaceConfigurationActivityText))
+            Text(
+                text = resources.getString(
+                    R.string.watchFaceConfigurationActivityText
+                )
+            )
         }
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
 }
