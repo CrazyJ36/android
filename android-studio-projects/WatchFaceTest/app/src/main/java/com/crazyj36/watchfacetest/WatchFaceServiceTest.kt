@@ -30,7 +30,7 @@ class WatchFaceServiceTest: WatchFaceService() {
             getSharedPreferences("file_show_weather_complication_warning",
                 Context.MODE_PRIVATE).getBoolean("showWeatherComplicationWarning", true)
         if (showWeatherComplicationWarning) {
-            Looper.getMainLooper().apply {
+            mainLooper.apply {
                 Toast.makeText(
                     applicationContext,
                     resources.getString(R.string.watchFaceConfigurationToastText),
