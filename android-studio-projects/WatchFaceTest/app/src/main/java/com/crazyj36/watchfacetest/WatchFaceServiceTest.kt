@@ -73,52 +73,27 @@ class WatchFaceServiceTest: WatchFaceService() {
                     RectF(0.3f, 0.2f, 0.43f, 0.33f),
                 )
             ).build()
-        val leftMiddleComplication: ComplicationSlot
-        if (Build.VERSION.SDK_INT >= 34) {
-            leftMiddleComplication = ComplicationSlot
-                .createRoundRectComplicationSlotBuilder(
-                    id = 1,
-                    canvasComplicationFactory =
-                        defaultCanvasComplicationFactory,
-                    supportedTypes = listOf(
-                        ComplicationType.RANGED_VALUE,
-                        ComplicationType.MONOCHROMATIC_IMAGE,
-                        ComplicationType.SHORT_TEXT,
-                        ComplicationType.SMALL_IMAGE,
-                        ComplicationType.NO_DATA,
-                        ComplicationType.LONG_TEXT
-                    ),
-                    defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                        SystemDataSources.DATA_SOURCE_WEATHER,
-                        ComplicationType.SHORT_TEXT
-                    ),
-                    bounds = ComplicationSlotBounds(
-                        RectF(0.3f, 0.34f, 0.43f, 0.47f)
-                    )
-                ).build()
-        } else {
-            leftMiddleComplication = ComplicationSlot
-                .createRoundRectComplicationSlotBuilder(
-                    id = 1,
-                    canvasComplicationFactory =
-                        defaultCanvasComplicationFactory,
-                    supportedTypes = listOf(
-                        ComplicationType.RANGED_VALUE,
-                        ComplicationType.MONOCHROMATIC_IMAGE,
-                        ComplicationType.SHORT_TEXT,
-                        ComplicationType.SMALL_IMAGE,
-                        ComplicationType.NO_DATA,
-                        ComplicationType.LONG_TEXT
-                    ),
-                    defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                        SystemDataSources.NO_DATA_SOURCE,
-                        ComplicationType.SHORT_TEXT
-                    ),
-                    bounds = ComplicationSlotBounds(
-                        RectF(0.3f, 0.34f, 0.43f, 0.47f)
-                    )
-                ).build()
-        }
+        val leftMiddleComplication = ComplicationSlot
+            .createRoundRectComplicationSlotBuilder(
+                id = 1,
+                canvasComplicationFactory =
+                    defaultCanvasComplicationFactory,
+                supportedTypes = listOf(
+                    ComplicationType.RANGED_VALUE,
+                    ComplicationType.MONOCHROMATIC_IMAGE,
+                    ComplicationType.SHORT_TEXT,
+                    ComplicationType.SMALL_IMAGE,
+                    ComplicationType.NO_DATA,
+                    ComplicationType.LONG_TEXT
+                ),
+                defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+                    SystemDataSources.NO_DATA_SOURCE,
+                    ComplicationType.SHORT_TEXT
+                ),
+                bounds = ComplicationSlotBounds(
+                    RectF(0.3f, 0.34f, 0.43f, 0.47f)
+                )
+            ).build()
         return ComplicationSlotsManager(
             listOf(leftTopComplication, leftMiddleComplication),
             currentUserStyleRepository

@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
-import androidx.wear.compose.material.CompactChip
 import androidx.wear.compose.material.Text
 import androidx.wear.watchface.editor.EditorSession
 import kotlinx.coroutines.Dispatchers
@@ -27,17 +26,20 @@ class WatchFaceConfigActivity: ComponentActivity() {
         setContent {
             WearApp()
         }
-        Toast.makeText(
-            this@WatchFaceConfigActivity,
-            resources.getString(R.string.watchFaceConfigurationToastText),
-            Toast.LENGTH_LONG
-        ).show()
         MainScope().launch(Dispatchers.Main.immediate) {
             editorSession =
                 EditorSession.createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
+            editorSession
+                .openComplicationDataSourceChooser(1)
         }
+        Toast.makeText(
+            this@WatchFaceConfigActivity,
+            resources.getString(R.string.watchFaceConfigurationToastText),
+            Toast.LENGTH_LONG
+        ).show()
+        finish()
     }
     @Composable
     fun WearApp() {
@@ -52,17 +54,6 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 text = resources.getString(
                     R.string.watchFaceConfigurationActivityText
                 )
-            )
-            CompactChip(
-                label = {
-                    resources.getString(R.string.complicationChooserButtonText)
-                },
-                onClick = {
-                    MainScope().launch {
-                        editorSession.openComplicationDataSourceChooser(1)
-                    }
-                    finish()
-                }
             )
         }
     }
