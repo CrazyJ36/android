@@ -23,11 +23,9 @@ class WatchFaceConfigActivity: ComponentActivity() {
     private lateinit var editorSession: EditorSession
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
             WearApp()
         }
-
     }
     @Composable
     fun WearApp() {
@@ -45,23 +43,22 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 textAlign = TextAlign.Center
             )
             CompactChip(
-                onClick = { launchComplicationChooser() },
+                onClick = {
+                    MainScope().launch {
+                        editorSession = EditorSession.createOnWatchEditorSession(
+                            this@WatchFaceConfigActivity
+                        )
+                        editorSession
+                            .openComplicationDataSourceChooser(1)
+                        finish()
+                    }
+                },
                 label = {
                     Text(text = resources.getString(
                         R.string.watchFaceConfigurationActivityButtonText
                     ))
                 }
             )
-        }
-    }
-    private fun launchComplicationChooser() {
-        MainScope().launch(Dispatchers.Main.immediate) {
-            editorSession = EditorSession.createOnWatchEditorSession(
-                this@WatchFaceConfigActivity
-            )
-            editorSession
-                .openComplicationDataSourceChooser(1)
-            finish()
         }
     }
 }
