@@ -1,7 +1,6 @@
 package com.crazyj36.watchfacetest
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,8 +17,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 class WatchFaceConfigActivity: ComponentActivity() {
-    //private lateinit var scope : CoroutineScope
-    //lateinit var editorSession: EditorSession
+    private lateinit var scope : CoroutineScope
+    private lateinit var editorSession: EditorSession
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,14 +26,14 @@ class WatchFaceConfigActivity: ComponentActivity() {
         setContent {
             wearApp()
         }
-       /* scope.launch(Dispatchers.Main.immediate) {
+        scope.launch(Dispatchers.Main.immediate) {
             editorSession =
                 EditorSession.createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
             editorSession
                 .openComplicationDataSourceChooser(1)
-        }*/
+        }
 
     }
     @Composable
