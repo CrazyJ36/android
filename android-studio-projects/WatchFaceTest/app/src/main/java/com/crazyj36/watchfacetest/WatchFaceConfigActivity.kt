@@ -40,8 +40,8 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 EditorSession.createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
-            editorSession
-                .openComplicationDataSourceChooser(1)
+            //editorSession
+            //    .openComplicationDataSourceChooser(1)
         }
     }
     @Composable
