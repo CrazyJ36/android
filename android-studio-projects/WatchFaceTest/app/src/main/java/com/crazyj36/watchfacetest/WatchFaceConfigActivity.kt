@@ -27,11 +27,10 @@ class WatchFaceConfigActivity: ComponentActivity() {
             WearApp()
         }
         MainScope().launch(Dispatchers.Main.immediate) {
-            delay(3000)
+            delay(2000)
             editorSession = EditorSession.createOnWatchEditorSession(
                 this@WatchFaceConfigActivity
             )
-            delay(3000)
             editorSession
                 .openComplicationDataSourceChooser(1)
             finish()
