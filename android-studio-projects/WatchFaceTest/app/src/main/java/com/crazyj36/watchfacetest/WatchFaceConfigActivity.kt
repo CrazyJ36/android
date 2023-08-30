@@ -23,15 +23,15 @@ class WatchFaceConfigActivity: ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Toast.makeText(
-            this@WatchFaceConfigActivity,
-            resources.getString(R.string.watchFaceConfigurationToastText),
-            Toast.LENGTH_LONG
-        ).show()
         setContent {
             WearApp()
         }
         MainScope().launch(Dispatchers.Main.immediate) {
+            Toast.makeText(
+                this@WatchFaceConfigActivity,
+                resources.getString(R.string.watchFaceConfigurationToastText),
+                Toast.LENGTH_LONG
+            ).show()
             EditorSession.createOnWatchEditorSession(
                 this@WatchFaceConfigActivity
             )
@@ -47,14 +47,14 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 .fillMaxSize()
                 .background(Color.Black),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .fillMaxSize()
+                    .align(alignment = Alignment.CenterHorizontally),
                 text = resources.getString(
                     R.string.watchFaceConfigurationActivityText
-                )
+                ),
             )
         }
     }
