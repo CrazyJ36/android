@@ -47,4 +47,5 @@ dependencies {
     implementation("androidx.wear.watchface:watchface-editor:1.2.0-beta01")
     implementation("androidx.wear.watchface:watchface-complications-data-source-ktx:1.2.0-beta01")
     implementation("androidx.wear.watchface:watchface-complications-rendering:1.2.0-beta01")
+    implementation("androidx.wear.protolayout:protolayout-material:1.0.0")
 }

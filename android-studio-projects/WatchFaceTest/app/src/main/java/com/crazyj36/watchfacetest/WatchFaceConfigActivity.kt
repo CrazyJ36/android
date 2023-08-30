@@ -7,7 +7,6 @@ import androidx.compose.foundation.background
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
@@ -24,33 +23,35 @@ class WatchFaceConfigActivity: ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WearApp()
-        }
-    }
-    @Composable
-    fun WearApp() {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Black),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = resources.getString(
-                    R.string.watchFaceConfigurationActivityText
-                ),
-                textAlign = TextAlign.Center
-            )
-            CompactChip(onClick = {
-                MainScope().launch(Dispatchers.Main.immediate) {
-                    editorSession = EditorSession.createOnWatchEditorSession(
-                        this@WatchFaceConfigActivity
-                    )
-                    editorSession
-                        .openComplicationDataSourceChooser(1)
-                    finish()
-                }
-            })
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = resources.getString(
+                        R.string.watchFaceConfigurationActivityText
+                    ),
+                    textAlign = TextAlign.Center
+                )
+                CompactChip(onClick = {
+                    MainScope().launch(Dispatchers.Main.immediate) {
+                        editorSession = EditorSession.createOnWatchEditorSession(
+                            this@WatchFaceConfigActivity
+                        )
+                        editorSession
+                            .openComplicationDataSourceChooser(1)
+                        finish()
+                    }
+                },
+                    label = {
+                        resources.getString(
+                            R.string.watchFaceConfigurationActivityButtonText
+                        )
+                    }
+                )
+            }
         }
     }
 }
