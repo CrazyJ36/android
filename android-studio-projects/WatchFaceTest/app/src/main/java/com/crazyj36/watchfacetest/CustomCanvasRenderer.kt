@@ -143,7 +143,6 @@ class CustomCanvasRenderer(
                 complication.render(canvas, zonedDateTime, renderParameters)
             }
         }
-
         val hourHandBorder: Path = createClockHand(
             bounds,
             0.23000f,
@@ -160,6 +159,7 @@ class CustomCanvasRenderer(
             4f,
             4f
         )
+
         canvas.withRotation(
             zonedDateTime.toLocalTime()
                 .toSecondOfDay()

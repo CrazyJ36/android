@@ -2,5 +2,6 @@
     <string name="app_name">Watch Face Test</string>
     <string name="watchFaceTestServiceLabel">Watch Face Test Label</string>
     <string name="watchfacetestConfigurationActivityName">Configure Watchface Test</string>
-    <string name="watchFaceTestConfigurationText">Please select Weather or other preferred complication.</string>
+    <string name="watchFaceConfigurationToastText">Please select Weather.</string>
+    <string name="watchFaceConfigurationActivityText">Swipe back when done.</string>
 </resources>

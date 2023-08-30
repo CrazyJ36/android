@@ -1,6 +1,7 @@
 package com.crazyj36.watchfacetest
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.Text
 import androidx.wear.watchface.editor.EditorSession
 import kotlinx.coroutines.Dispatchers
@@ -18,13 +20,18 @@ import kotlinx.coroutines.launch
 
 class WatchFaceConfigActivity: ComponentActivity() {
     private lateinit var editorSession: EditorSession
-
+    private val scope = MainScope()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             WearApp()
         }
-        MainScope().launch(Dispatchers.Main.immediate) {
+        Toast.makeText(
+            this@WatchFaceConfigActivity,
+            resources.getString(R.string.watchFaceConfigurationToastText),
+            Toast.LENGTH_LONG
+        ).show()
+        scope.launch(Dispatchers.Main.immediate) {
             editorSession =
                 EditorSession.createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
@@ -32,7 +39,6 @@ class WatchFaceConfigActivity: ComponentActivity() {
             editorSession
                 .openComplicationDataSourceChooser(1)
         }
-
     }
     @Composable
     fun WearApp() {
@@ -43,7 +49,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
             verticalArrangement =
                 Arrangement.Center
         ) {
-            Text(text = resources.getString(R.string.watchFaceTestConfigurationText))
+            Text(text = resources.getString(R.string.watchFaceConfigurationActivityText))
         }
     }
 
