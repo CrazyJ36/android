@@ -2,6 +2,7 @@ package com.crazyj36.watchfacetest
 
 import android.content.Context
 import android.graphics.RectF
+import android.os.Handler
 import android.os.Looper
 import android.view.SurfaceHolder
 import android.widget.Toast
@@ -22,6 +23,7 @@ import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import kotlinx.coroutines.MainScope
 import java.util.concurrent.Executor
+import java.util.concurrent.Executors
 
 class WatchFaceServiceTest: WatchFaceService() {
     override fun onCreate() {
@@ -30,7 +32,7 @@ class WatchFaceServiceTest: WatchFaceService() {
             getSharedPreferences("file_show_weather_complication_warning",
                 Context.MODE_PRIVATE).getBoolean("showWeatherComplicationWarning", true)
         if (showWeatherComplicationWarning) {
-            mainLooper.apply {
+            Looper.getMainLooper().run {
                 Toast.makeText(
                     applicationContext,
                     resources.getString(R.string.watchFaceConfigurationToastText),
