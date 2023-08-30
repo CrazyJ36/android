@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Watch Face Test</string>
-    <string name="watchFaceTestServiceLabel">Watch Face Test</string>
-    <string name="watchFaceConfigurationToastText">Customize Watch Face for Weather complication.</string>
-    <string name="watchFaceConfigurationActivityText">The Weather complication is not available to watch faces by default.\nClick below to manually set it for the left middle complication.</string>
-    <string name="watchFaceConfigurationActivityButtonText">Choose</string>
+    <string name="watchFaceConfigurationToastText">Customize Watch Face for missing complication.</string>
+    <string name="watchFaceConfigurationActivityText">Loading left bottom complication chooser…</string>
 </resources>

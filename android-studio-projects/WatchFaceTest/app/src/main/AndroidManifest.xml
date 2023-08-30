@@ -17,8 +17,7 @@
             android:value="true" />
         <service
             android:name=".WatchFaceServiceTest"
-            android:label="@string/watchFaceTestServiceLabel"
-            android:exported="true"
+            android:exported="false"
             android:permission="android.permission.BIND_WALLPAPER">
             <meta-data
                 android:name="android.service.wallpaper"

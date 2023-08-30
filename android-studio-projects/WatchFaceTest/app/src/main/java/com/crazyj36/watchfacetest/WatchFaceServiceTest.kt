@@ -96,7 +96,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                     RectF(0.3f, 0.2f, 0.43f, 0.33f),
                 )
             ).build()
-        val leftMiddleComplication = ComplicationSlot
+        val leftBottomComplication = ComplicationSlot
             .createRoundRectComplicationSlotBuilder(
                 id = 1,
                 canvasComplicationFactory =
@@ -118,7 +118,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                 )
             ).build()
         return ComplicationSlotsManager(
-            listOf(leftTopComplication, leftMiddleComplication),
+            listOf(leftTopComplication, leftBottomComplication),
             currentUserStyleRepository
         )
     }
