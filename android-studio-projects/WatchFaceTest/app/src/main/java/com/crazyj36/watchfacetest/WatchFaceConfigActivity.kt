@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.fragment.app.FragmentActivity
 import androidx.wear.compose.material.CompactChip
 import androidx.wear.compose.material.Text
 import androidx.wear.watchface.editor.EditorSession
@@ -20,7 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
-class WatchFaceConfigActivity: FragmentActivity() {
+class WatchFaceConfigActivity: ComponentActivity() {
     private lateinit var editorSession: EditorSession
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,22 +45,23 @@ class WatchFaceConfigActivity: FragmentActivity() {
                 textAlign = TextAlign.Center
             )
             CompactChip(
-                onClick = {
-                MainScope().launch(Dispatchers.Main.immediate) {
-                    editorSession = EditorSession.createOnWatchEditorSession(
-                        this@WatchFaceConfigActivity
-                    )
-                    editorSession
-                        .openComplicationDataSourceChooser(1)
-                    finish()
-                }
-            },
+                onClick = { launchComplicationChooser() },
                 label = {
                     Text(text = resources.getString(
                         R.string.watchFaceConfigurationActivityButtonText
                     ))
                 }
             )
+        }
+    }
+    private fun launchComplicationChooser() {
+        MainScope().launch(Dispatchers.Main.immediate) {
+            editorSession = EditorSession.createOnWatchEditorSession(
+                this@WatchFaceConfigActivity
+            )
+            editorSession
+                .openComplicationDataSourceChooser(1)
+            finish()
         }
     }
 }
