@@ -22,7 +22,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            wearApp()
+            WearApp()
         }
         MainScope().launch(Dispatchers.Main.immediate) {
             editorSession =
@@ -32,11 +32,10 @@ class WatchFaceConfigActivity: ComponentActivity() {
             editorSession
                 .openComplicationDataSourceChooser(1)
         }
-        editorSession.commitChangesOnClose
 
     }
     @Composable
-    fun wearApp() {
+    fun WearApp() {
         Column(
             modifier = Modifier
                 .fillMaxSize()

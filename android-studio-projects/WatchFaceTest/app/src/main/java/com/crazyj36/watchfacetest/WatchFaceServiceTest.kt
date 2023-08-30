@@ -93,7 +93,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                         ComplicationType.SHORT_TEXT
                     ),
                     bounds = ComplicationSlotBounds(
-                        RectF(0.3f, 0.34f, 0.43f, 0.43f)
+                        RectF(0.3f, 0.34f, 0.43f, 0.46f)
                     )
                 ).build()
         } else {
@@ -115,7 +115,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                         ComplicationType.SMALL_IMAGE
                     ),
                     bounds = ComplicationSlotBounds(
-                        RectF(0.3f, 0.34f, 0.43f, 0.43f)
+                        RectF(0.3f, 0.34f, 0.43f, 0.46f)
                     )
                 ).build()
         }
