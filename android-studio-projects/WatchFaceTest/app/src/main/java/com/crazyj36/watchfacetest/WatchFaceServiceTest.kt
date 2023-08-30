@@ -1,6 +1,7 @@
 package com.crazyj36.watchfacetest
 
 import android.graphics.RectF
+import android.os.Build
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
@@ -72,26 +73,52 @@ class WatchFaceServiceTest: WatchFaceService() {
                     RectF(0.3f, 0.2f, 0.4f, 0.3f),
                 )
             ).build()
-        val leftMiddleComplication = ComplicationSlot
-            .createRoundRectComplicationSlotBuilder(
-                id = 1,
-                canvasComplicationFactory = defaultCanvasComplicationFactory,
-                supportedTypes = listOf(
-                    ComplicationType.RANGED_VALUE,
-                    ComplicationType.MONOCHROMATIC_IMAGE,
-                    ComplicationType.SHORT_TEXT,
-                    ComplicationType.SMALL_IMAGE,
-                    ComplicationType.NO_DATA,
-                    ComplicationType.LONG_TEXT
-                ),
-                defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                    SystemDataSources.DATA_SOURCE_WEATHER,
-                    ComplicationType.LONG_TEXT,
-                ),
-                bounds = ComplicationSlotBounds(
-                    RectF(0.3f, 0.3f, 0.4f, 0.4f)
-                )
-            ).build()
+        val leftMiddleComplication: ComplicationSlot
+        if (Build.VERSION.SDK_INT >= 34) {
+            leftMiddleComplication = ComplicationSlot
+                .createRoundRectComplicationSlotBuilder(
+                    id = 1,
+                    canvasComplicationFactory =
+                        defaultCanvasComplicationFactory,
+                    supportedTypes = listOf(
+                        ComplicationType.RANGED_VALUE,
+                        ComplicationType.MONOCHROMATIC_IMAGE,
+                        ComplicationType.SHORT_TEXT,
+                        ComplicationType.SMALL_IMAGE,
+                        ComplicationType.NO_DATA,
+                        ComplicationType.LONG_TEXT
+                    ),
+                    defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+                        SystemDataSources.DATA_SOURCE_WEATHER,
+                        ComplicationType.SHORT_TEXT
+                    ),
+                    bounds = ComplicationSlotBounds(
+                        RectF(0.3f, 0.3f, 0.4f, 0.4f)
+                    )
+                ).build()
+        } else {
+            leftMiddleComplication = ComplicationSlot
+                .createRoundRectComplicationSlotBuilder(
+                    id = 1,
+                    canvasComplicationFactory =
+                        defaultCanvasComplicationFactory,
+                    supportedTypes = listOf(
+                        ComplicationType.RANGED_VALUE,
+                        ComplicationType.MONOCHROMATIC_IMAGE,
+                        ComplicationType.SHORT_TEXT,
+                        ComplicationType.SMALL_IMAGE,
+                        ComplicationType.NO_DATA,
+                        ComplicationType.LONG_TEXT
+                    ),
+                    defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+                        SystemDataSources.DATA_SOURCE_APP_SHORTCUT,
+                        ComplicationType.SMALL_IMAGE
+                    ),
+                    bounds = ComplicationSlotBounds(
+                        RectF(0.3f, 0.3f, 0.4f, 0.4f)
+                    )
+                ).build()
+        }
         return ComplicationSlotsManager(
             listOf(leftTopComplication, leftMiddleComplication),
             currentUserStyleRepository

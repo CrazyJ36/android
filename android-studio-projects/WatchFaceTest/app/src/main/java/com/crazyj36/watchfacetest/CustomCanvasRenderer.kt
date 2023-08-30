@@ -124,15 +124,6 @@ class CustomCanvasRenderer(
         }
 
         if (renderParameters.drawMode != DrawMode.AMBIENT) {
-            /*canvas.drawRoundRect(
-                (width / 5).toFloat(),
-                (height - (height / 2.5)).toFloat(),
-                (width - (width / 5)).toFloat(),
-                (height - (height / 5.5)).toFloat(),
-                14F,
-                14F,
-                textBackgroundPaint
-            )*/
             canvas.drawLine(
                 (width / 5).toFloat(),
                 (height - (height / 2.5)).toFloat(),
