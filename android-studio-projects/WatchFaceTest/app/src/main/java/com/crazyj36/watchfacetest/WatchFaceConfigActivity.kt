@@ -23,24 +23,24 @@ class WatchFaceConfigActivity: ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /*setContent {
+        Toast.makeText(
+            this@WatchFaceConfigActivity,
+            resources.getString(R.string.watchFaceConfigurationToastText),
+            Toast.LENGTH_LONG
+        ).show()
+        setContent {
             WearApp()
-        }*/
+        }
         MainScope().launch(Dispatchers.Main.immediate) {
             EditorSession.createOnWatchEditorSession(
                 this@WatchFaceConfigActivity
             )
-            Toast.makeText(
-                this@WatchFaceConfigActivity,
-                resources.getString(R.string.watchFaceConfigurationToastText),
-                Toast.LENGTH_LONG
-            ).show()
             editorSession
                 .openComplicationDataSourceChooser(1)
             finish()
         }
     }
-    /*@Composable
+    @Composable
     fun WearApp() {
         Column(
             modifier = Modifier
@@ -50,10 +50,12 @@ class WatchFaceConfigActivity: ComponentActivity() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
+                modifier = Modifier
+                    .fillMaxSize(),
                 text = resources.getString(
                     R.string.watchFaceConfigurationActivityText
                 )
             )
         }
-    }*/
+    }
 }

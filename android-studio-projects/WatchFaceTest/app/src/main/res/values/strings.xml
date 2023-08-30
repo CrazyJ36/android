@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Watch Face Test</string>
-    <string name="watchFaceTestServiceLabel">Watch Face Test Label</string>
+    <string name="watchFaceTestServiceLabel">Watch Face Test</string>
     <string name="watchFaceTestConfigurationActivityName">Configure Missing complication</string>
-    <string name="watchFaceConfigurationToastText">Select Weather for default.</string>
+    <string name="watchFaceConfigurationToastText">Select Weather for left middle complication.</string>
+    <string name="watchFaceConfigurationActivityText">Choosing left middle complication.</string>
 </resources>
