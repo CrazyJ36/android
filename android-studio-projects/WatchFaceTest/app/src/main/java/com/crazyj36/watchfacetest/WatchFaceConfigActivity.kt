@@ -23,25 +23,24 @@ class WatchFaceConfigActivity: ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
+        /*setContent {
             WearApp()
-        }
+        }*/
         MainScope().launch(Dispatchers.Main.immediate) {
             EditorSession.createOnWatchEditorSession(
                 this@WatchFaceConfigActivity
             )
-            /*Toast.makeText(
+            Toast.makeText(
                 this@WatchFaceConfigActivity,
                 resources.getString(R.string.watchFaceConfigurationToastText),
                 Toast.LENGTH_LONG
             ).show()
             editorSession
                 .openComplicationDataSourceChooser(1)
-            finish()*/
-
+            finish()
         }
     }
-    @Composable
+    /*@Composable
     fun WearApp() {
         Column(
             modifier = Modifier
@@ -56,5 +55,5 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 )
             )
         }
-    }
+    }*/
 }
