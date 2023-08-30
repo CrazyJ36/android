@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.FragmentActivity
 import androidx.wear.compose.material.CompactChip
 import androidx.wear.compose.material.Text
 import androidx.wear.watchface.editor.EditorSession
@@ -20,13 +20,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
-class WatchFaceConfigActivity: ComponentActivity() {
+class WatchFaceConfigActivity: FragmentActivity() {
     private lateinit var editorSession: EditorSession
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             WearApp()
         }
+
     }
     @Composable
     fun WearApp() {
@@ -45,7 +47,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
             )
             CompactChip(
                 onClick = {
-                lifecycleScope.launch(Dispatchers.Main.immediate) {
+                MainScope().launch(Dispatchers.Main.immediate) {
                     editorSession = EditorSession.createOnWatchEditorSession(
                         this@WatchFaceConfigActivity
                     )
