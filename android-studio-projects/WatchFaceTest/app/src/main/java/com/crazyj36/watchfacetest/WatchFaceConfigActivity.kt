@@ -28,15 +28,15 @@ class WatchFaceConfigActivity: ComponentActivity() {
         setContent {
             Box(modifier = Modifier.fillMaxSize())
         }
+        Toast.makeText(this@WatchFaceConfigActivity,
+            resources.getString(R.string.watchFaceConfigurationActivityToastText),
+            Toast.LENGTH_LONG).show()
         MainScope().launch(Dispatchers.Main.immediate) {
             editorSession = EditorSession.createOnWatchEditorSession(
                 this@WatchFaceConfigActivity
             )
             editorSession
                 .openComplicationDataSourceChooser(1)
-            Toast.makeText(this@WatchFaceConfigActivity,
-                resources.getString(R.string.watchFaceConfigurationActivityToastText),
-                Toast.LENGTH_LONG).show()
             finish()
         }
     }
