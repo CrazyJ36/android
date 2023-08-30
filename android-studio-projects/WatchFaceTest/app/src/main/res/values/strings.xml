@@ -2,6 +2,7 @@
     <string name="app_name">Watch Face Test</string>
     <string name="watchFaceTestServiceLabel">Watch Face Test Label</string>
     <string name="watchfacetestConfigurationActivityName">Configure Watchface Test</string>
-    <string name="watchFaceConfigurationToastText">Please select Weather.</string>
-    <string name="watchFaceConfigurationActivityText">Swipe back when done.</string>
+    <string name="watchFaceConfigurationToastText">Select Weather for default.</string>
+    <string name="watchFaceConfigurationActivityText">You can choose A custom complication in the left middle slot. Swipe back when done.</string>
+    <string name="complicationChooserButtonText">Complication</string>
 </resources>

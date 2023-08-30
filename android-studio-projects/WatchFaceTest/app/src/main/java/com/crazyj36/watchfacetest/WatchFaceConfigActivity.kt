@@ -1,7 +1,6 @@
 package com.crazyj36.watchfacetest
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,15 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
-import androidx.wear.compose.material.Button
+import androidx.wear.compose.material.CompactChip
 import androidx.wear.compose.material.Text
-import androidx.wear.watchface.editor.ChosenComplicationDataSource
 import androidx.wear.watchface.editor.EditorSession
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class WatchFaceConfigActivity: ComponentActivity() {
@@ -40,8 +36,6 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 EditorSession.createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
-            //editorSession
-            //    .openComplicationDataSourceChooser(1)
         }
     }
     @Composable
@@ -57,6 +51,16 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 text = resources.getString(
                     R.string.watchFaceConfigurationActivityText
                 )
+            )
+            CompactChip(
+                label = {
+                    resources.getString(R.string.complicationChooserButtonText)
+                },
+                onClick = {
+                    MainScope().launch {
+                        editorSession.openComplicationDataSourceChooser(1)
+                    }
+                }
             )
         }
     }
