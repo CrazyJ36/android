@@ -31,15 +31,15 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 EditorSession.createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
+            Toast.makeText(
+                this@WatchFaceConfigActivity,
+                resources.getString(R.string.watchFaceConfigurationToastText),
+                Toast.LENGTH_LONG
+            ).show()
             editorSession
                 .openComplicationDataSourceChooser(1)
+            finish()
         }
-        Toast.makeText(
-            this@WatchFaceConfigActivity,
-            resources.getString(R.string.watchFaceConfigurationToastText),
-            Toast.LENGTH_LONG
-        ).show()
-        finish()
     }
     @Composable
     fun WearApp() {
