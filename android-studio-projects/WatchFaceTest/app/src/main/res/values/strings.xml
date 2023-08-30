@@ -3,6 +3,6 @@
     <string name="watchFaceTestServiceLabel">Watch Face Test Label</string>
     <string name="watchfacetestConfigurationActivityName">Configure Watchface Test</string>
     <string name="watchFaceConfigurationToastText">Select Weather for default.</string>
-    <string name="watchFaceConfigurationActivityText">You can choose A custom complication in the left middle slot. Swipe back when done.</string>
-    <string name="complicationChooserButtonText">Complication</string>
+    <string name="watchFaceConfigurationActivityText">To get the left middle Weather complication, click below and choose \'Weather\', or choose any custom data source.\nSwipe back when done.</string>
+    <string name="complicationChooserButtonText">Choose</string>
 </resources>
