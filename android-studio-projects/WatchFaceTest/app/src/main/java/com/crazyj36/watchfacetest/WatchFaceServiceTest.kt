@@ -111,11 +111,11 @@ class WatchFaceServiceTest: WatchFaceService() {
                         ComplicationType.LONG_TEXT
                     ),
                     defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                        SystemDataSources.DATA_SOURCE_APP_SHORTCUT,
-                        ComplicationType.SMALL_IMAGE
+                        SystemDataSources.NO_DATA_SOURCE,
+                        ComplicationType.SHORT_TEXT
                     ),
                     bounds = ComplicationSlotBounds(
-                        RectF(0.3f, 0.34f, 0.43f, 0.46f)
+                        RectF(0.3f, 0.34f, 0.43f, 0.47f)
                     )
                 ).build()
         }
