@@ -1,10 +1,12 @@
 package com.crazyj36.watchfacetest
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,33 +26,18 @@ class WatchFaceConfigActivity: ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WearApp()
+            Box(modifier = Modifier.fillMaxSize())
         }
         MainScope().launch(Dispatchers.Main.immediate) {
-            delay(2000)
             editorSession = EditorSession.createOnWatchEditorSession(
                 this@WatchFaceConfigActivity
             )
-            //editorSession
-            //    .openComplicationDataSourceChooser(1)
-            //finish()
-        }
-    }
-    @Composable
-    fun WearApp() {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Black),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = resources.getString(
-                    R.string.watchFaceConfigurationActivityText
-                ),
-                textAlign = TextAlign.Center
-            )
+            editorSession
+                .openComplicationDataSourceChooser(1)
+            Toast.makeText(this@WatchFaceConfigActivity,
+                resources.getString(R.string.watchFaceConfigurationActivityToastText),
+                Toast.LENGTH_LONG).show()
+            finish()
         }
     }
 }
