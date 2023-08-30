@@ -27,18 +27,18 @@ class WatchFaceConfigActivity: ComponentActivity() {
             WearApp()
         }
         MainScope().launch(Dispatchers.Main.immediate) {
-            editorSession =
-                EditorSession.createOnWatchEditorSession(
-                    this@WatchFaceConfigActivity
-                )
-            Toast.makeText(
+            EditorSession.createOnWatchEditorSession(
+                this@WatchFaceConfigActivity
+            )
+            /*Toast.makeText(
                 this@WatchFaceConfigActivity,
                 resources.getString(R.string.watchFaceConfigurationToastText),
                 Toast.LENGTH_LONG
             ).show()
             editorSession
                 .openComplicationDataSourceChooser(1)
-            finish()
+            finish()*/
+
         }
     }
     @Composable
