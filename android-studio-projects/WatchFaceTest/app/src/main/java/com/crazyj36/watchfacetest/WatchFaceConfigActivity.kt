@@ -1,6 +1,7 @@
 package com.crazyj36.watchfacetest
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -21,7 +22,6 @@ import kotlinx.coroutines.launch
 
 class WatchFaceConfigActivity: ComponentActivity() {
     private lateinit var editorSession: EditorSession
-    private val scope = MainScope()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -32,13 +32,14 @@ class WatchFaceConfigActivity: ComponentActivity() {
             resources.getString(R.string.watchFaceConfigurationToastText),
             Toast.LENGTH_LONG
         ).show()
-        scope.launch(Dispatchers.Main.immediate) {
+        MainScope().launch(Dispatchers.Main.immediate) {
             editorSession =
                 EditorSession.createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
-            editorSession
+            val chosenComplicationDataSource = editorSession
                 .openComplicationDataSourceChooser(1)
+            Log.d("WATCHFACETEST", "$chosenComplicationDataSource")
         }
     }
     @Composable
@@ -56,7 +57,6 @@ class WatchFaceConfigActivity: ComponentActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        editorSession.close()
     }
 
 }
