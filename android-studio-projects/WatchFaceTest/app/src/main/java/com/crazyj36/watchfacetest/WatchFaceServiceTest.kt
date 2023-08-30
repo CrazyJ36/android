@@ -28,7 +28,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                 Context.MODE_PRIVATE).getBoolean("showWeatherComplicationWarning", true)
         if (showWeatherComplicationWarning) {
             Toast.makeText(
-                this@WatchFaceServiceTest,
+                applicationContext,
                 resources.getString(R.string.watchFaceConfigurationToastText),
                 Toast.LENGTH_LONG
             ).show()
