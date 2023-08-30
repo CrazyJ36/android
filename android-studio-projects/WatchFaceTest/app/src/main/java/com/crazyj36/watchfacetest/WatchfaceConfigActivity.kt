@@ -13,20 +13,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.wear.compose.material.Text
 import androidx.wear.watchface.editor.EditorSession
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+
 class WatchFaceConfigActivity: ComponentActivity() {
-    private lateinit var scope : CoroutineScope
     private lateinit var editorSession: EditorSession
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("WATCHFACETEST", "WatcchFaceConfigActivity opened")
         setContent {
             wearApp()
         }
-        scope.launch(Dispatchers.Main.immediate) {
+        MainScope().launch(Dispatchers.Main.immediate) {
             editorSession =
                 EditorSession.createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
