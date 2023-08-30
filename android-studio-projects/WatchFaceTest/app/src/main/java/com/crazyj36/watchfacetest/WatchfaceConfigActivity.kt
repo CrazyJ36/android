@@ -3,6 +3,7 @@ package com.crazyj36.watchfacetest
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.wear.watchface.editor.EditorSession
 import kotlinx.coroutines.CoroutineScope
@@ -16,7 +17,8 @@ class WatchFaceConfigActivity: ComponentActivity() {
                           persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
         Log.d("WATCHFACETEST", "WatcchFaceConfigActivity opened")
-
+        Toast.makeText(this@WatchFaceConfigActivity, "opened",
+            Toast.LENGTH_SHORT).show()
         scope.launch(Dispatchers.Main.immediate) {
             editorSession =
                 EditorSession.createOnWatchEditorSession(
