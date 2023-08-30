@@ -1,7 +1,6 @@
 package com.crazyj36.watchfacetest
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -33,6 +32,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
             editorSession
                 .openComplicationDataSourceChooser(1)
         }
+        editorSession.commitChangesOnClose
 
     }
     @Composable
@@ -44,13 +44,13 @@ class WatchFaceConfigActivity: ComponentActivity() {
             verticalArrangement =
                 Arrangement.Center
         ) {
-            Text(text = "config activity")
+            Text(text = resources.getString(R.string.watchFaceTestConfigurationText))
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        //editorSession.close()
+        editorSession.close()
     }
 
 }
