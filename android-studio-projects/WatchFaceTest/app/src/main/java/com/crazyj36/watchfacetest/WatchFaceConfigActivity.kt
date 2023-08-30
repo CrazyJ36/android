@@ -20,7 +20,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 class WatchFaceConfigActivity: ComponentActivity() {
-    private lateinit var editorSession: EditorSession
+    //private lateinit var editorSession: EditorSession
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -44,8 +44,8 @@ class WatchFaceConfigActivity: ComponentActivity() {
             )
             CompactChip(
                 onClick = {
-                    MainScope().launch {
-                        editorSession = EditorSession.createOnWatchEditorSession(
+                    MainScope().launch(Dispatchers.Main.immediate) {
+                        val editorSession = EditorSession.createOnWatchEditorSession(
                             this@WatchFaceConfigActivity
                         )
                         editorSession
