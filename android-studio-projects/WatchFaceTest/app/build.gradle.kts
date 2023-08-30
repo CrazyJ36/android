@@ -33,6 +33,7 @@ android {
 dependencies {
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("com.google.android.gms:play-services-wearable:18.0.0")
+    implementation("androidx.wear.compose:compose-material:1.2.0")
     implementation("androidx.wear.watchface:watchface:1.2.0-beta01")
     implementation("androidx.wear.watchface:watchface-complications:1.2.0-beta01")
     implementation("androidx.wear.watchface:watchface-editor:1.2.0-beta01")
