@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
@@ -24,20 +25,26 @@ class WatchFaceConfigActivity: ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Black),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = resources.getString(
-                        R.string.watchFaceConfigurationActivityText
-                    ),
-                    textAlign = TextAlign.Center
-                )
-                CompactChip(onClick = {
+            WearApp()
+        }
+    }
+    @Composable
+    fun WearApp() {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = resources.getString(
+                    R.string.watchFaceConfigurationActivityText
+                ),
+                textAlign = TextAlign.Center
+            )
+            CompactChip(onClick = {
+                run {
                     MainScope().launch(Dispatchers.Main.immediate) {
                         editorSession = EditorSession.createOnWatchEditorSession(
                             this@WatchFaceConfigActivity
@@ -46,14 +53,14 @@ class WatchFaceConfigActivity: ComponentActivity() {
                             .openComplicationDataSourceChooser(1)
                         finish()
                     }
-                },
-                    label = {
-                        resources.getString(
-                            R.string.watchFaceConfigurationActivityButtonText
-                        )
-                    }
-                )
-            }
+                }
+            },
+                label = {
+                    Text(text = resources.getString(
+                        R.string.watchFaceConfigurationActivityButtonText
+                    ))
+                }
+            )
         }
     }
 }
