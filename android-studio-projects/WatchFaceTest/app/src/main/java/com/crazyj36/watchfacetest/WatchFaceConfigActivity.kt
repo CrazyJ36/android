@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.wear.compose.material.Text
 import androidx.wear.watchface.editor.EditorSession
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -17,15 +18,14 @@ class WatchFaceConfigActivity: ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Box(modifier = Modifier.fillMaxSize())
+            Box(modifier = Modifier.fillMaxSize()) {
+                Text(text = resources.getString(
+                    R.string.watchFaceConfigurationActivityToastText
+                ))
+            }
         }
-        /*Toast.makeText(
-            this@WatchFaceConfigActivity,
-            resources.getString(R.string.watchFaceConfigurationActivityToastText),
-            Toast.LENGTH_LONG
-        ).show()*/
         MainScope().launch(Dispatchers.Main.immediate) {
-            //delay(2000)
+            delay(2000)
             val editorSession = EditorSession.createOnWatchEditorSession(
                 this@WatchFaceConfigActivity
             )

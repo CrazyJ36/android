@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Watch Face Test</string>
-    <string name="complicationWarningToastText">Customize Watch Face for missing complication.</string>
-    <string name="watchFaceConfigurationActivityToastText">Choose bottom left complication…</string>
+    <string name="complicationWarningToastText">Customize Watch Face to fix missing complication.</string>
+    <string name="watchFaceConfigurationActivityToastText">Choose \'Weather\' for default bottom left complication…</string>
 </resources>
