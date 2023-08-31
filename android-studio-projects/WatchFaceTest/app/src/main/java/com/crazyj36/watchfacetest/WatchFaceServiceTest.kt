@@ -27,7 +27,7 @@ import androidx.wear.watchface.style.CurrentUserStyleRepository
 class WatchFaceServiceTest: WatchFaceService() {
     override fun onCreate() {
         super.onCreate()
-        val showComplicationWarning: Boolean =
+        /*val showComplicationWarning: Boolean =
             getSharedPreferences("file_show_complication_warning",
                 Context.MODE_PRIVATE).getBoolean("showComplicationWarning", true)
         if (showComplicationWarning) {
@@ -42,6 +42,7 @@ class WatchFaceServiceTest: WatchFaceService() {
         getSharedPreferences("file_show_complication_warning",
             Context.MODE_PRIVATE).edit().putBoolean("showComplicationWarning", false)
             .apply()
+         */
         if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
             != PackageManager.PERMISSION_GRANTED) {
