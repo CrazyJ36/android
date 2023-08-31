@@ -18,6 +18,7 @@ import androidx.wear.compose.material.Text
 import androidx.wear.watchface.editor.EditorSession
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class WatchFaceConfigActivity: ComponentActivity() {
@@ -32,6 +33,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
             Toast.makeText(this@WatchFaceConfigActivity,
                 resources.getString(R.string.chooseWeatherText),
                 Toast.LENGTH_LONG).show()
+            lifecycleScope.launch { delay(2000) }
             MainScope().launch(Dispatchers.Main.immediate) {
                 val editorSession = EditorSession.createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
