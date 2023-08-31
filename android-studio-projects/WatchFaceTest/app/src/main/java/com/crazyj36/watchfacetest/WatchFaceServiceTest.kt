@@ -1,11 +1,9 @@
 package com.crazyj36.watchfacetest
 
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.RectF
 import android.view.SurfaceHolder
-import android.widget.Toast
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -33,24 +31,6 @@ class WatchFaceServiceTest: WatchFaceService() {
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 )
         }
-        val showWeatherComplicationWarning: Boolean =
-            getSharedPreferences("file_show_weather_complication_warning",
-                Context.MODE_PRIVATE).getBoolean("showWeatherComplicationWarning", true)
-        if (showWeatherComplicationWarning) {
-            mainExecutor.execute {
-                Toast.makeText(
-                    applicationContext,
-                    resources.getString(
-                        R.string.complicationWarningToastText),
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        }
-        getSharedPreferences(
-            "file_show_weather_complication_warning",
-            Context.MODE_PRIVATE).edit().putBoolean(
-            "showWeatherComplicationWarning", false)
-            .apply()
     }
     override suspend fun createWatchFace(
         surfaceHolder: SurfaceHolder,

@@ -30,13 +30,14 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 ) {
                     Text(
                         text = resources.getString(
-                            R.string.watchFaceConfigurationActivityText
+                            R.string.chooseWeatherText
                         ),
                         textAlign = TextAlign.Center
                     )
                 }
             }
             MainScope().launch(Dispatchers.Main.immediate) {
+                delay(2000)
                 val editorSession = EditorSession.createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
@@ -52,7 +53,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 ) {
                     Text(
                         text = resources.getString(
-                            R.string.needPermissionText
+                            R.string.stillNeedPermissionText
                         ),
                         textAlign = TextAlign.Center
                     )
@@ -65,7 +66,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
                             Text(text = resources.getString(R.string.allowText))
                         })
                 }
-
+                finish()
             }
         }
     }
