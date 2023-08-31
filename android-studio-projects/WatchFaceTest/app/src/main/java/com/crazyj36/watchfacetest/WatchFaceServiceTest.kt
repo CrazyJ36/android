@@ -48,7 +48,11 @@ class WatchFaceServiceTest: WatchFaceService() {
             != PackageManager.PERMISSION_GRANTED) {
                 startActivity(Intent(this,
                     GetComplicationPermission::class.java)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                    .setFlags(
+                        Intent.FLAG_ACTIVITY_NEW_TASK or
+                        Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+                    )
+                )
         }
     }
     override suspend fun createWatchFace(
