@@ -6,8 +6,6 @@ import android.content.pm.PackageManager
 import android.graphics.RectF
 import android.view.SurfaceHolder
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -23,9 +21,6 @@ import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class WatchFaceServiceTest: WatchFaceService() {
     override fun onCreate() {
@@ -37,7 +32,7 @@ class WatchFaceServiceTest: WatchFaceService() {
             mainExecutor.execute {
                 Toast.makeText(
                     applicationContext,
-                    resources.getString(R.string.complicationWarningToastText),
+                    resources.getString(R.string.complicationWarningText),
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -45,11 +40,9 @@ class WatchFaceServiceTest: WatchFaceService() {
         getSharedPreferences("file_show_complication_warning",
             Context.MODE_PRIVATE).edit().putBoolean("showComplicationWarning", false)
             .apply()
-
         if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
             != PackageManager.PERMISSION_GRANTED) {
-            MainScope().launch { delay(2000) }
                 startActivity(Intent(applicationContext,
                     GetComplicationPermission::class.java)
                     .setFlags(
