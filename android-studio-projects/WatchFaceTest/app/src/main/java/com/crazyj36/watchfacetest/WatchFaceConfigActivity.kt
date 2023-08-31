@@ -26,23 +26,27 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"),
             0
             )
+            mainConfig()
         } else {
-            setContent {
-                Box(modifier = Modifier.fillMaxSize())
-            }
-            Toast.makeText(
-                this@WatchFaceConfigActivity,
-                resources.getString(R.string.watchFaceConfigurationActivityToastText),
-                Toast.LENGTH_LONG
-            ).show()
-            MainScope().launch(Dispatchers.Main.immediate) {
-                editorSession = EditorSession.createOnWatchEditorSession(
-                    this@WatchFaceConfigActivity
-                )
-                editorSession
-                    .openComplicationDataSourceChooser(1)
-                finish()
-            }
+            mainConfig()
+        }
+    }
+    private fun mainConfig() {
+        setContent {
+            Box(modifier = Modifier.fillMaxSize())
+        }
+        Toast.makeText(
+            this@WatchFaceConfigActivity,
+            resources.getString(R.string.watchFaceConfigurationActivityToastText),
+            Toast.LENGTH_LONG
+        ).show()
+        MainScope().launch(Dispatchers.Main.immediate) {
+            editorSession = EditorSession.createOnWatchEditorSession(
+                this@WatchFaceConfigActivity
+            )
+            editorSession
+                .openComplicationDataSourceChooser(1)
+            finish()
         }
     }
 }
