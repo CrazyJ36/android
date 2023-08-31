@@ -1,7 +1,5 @@
 package com.crazyj36.watchfacetest
 
-import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -16,7 +14,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class WatchFaceConfigActivity: ComponentActivity() {
-    private lateinit var editorSession: EditorSession
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -29,7 +26,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
         ).show()
         MainScope().launch(Dispatchers.Main.immediate) {
             delay(2000)
-            editorSession = EditorSession.createOnWatchEditorSession(
+            val editorSession = EditorSession.createOnWatchEditorSession(
                 this@WatchFaceConfigActivity
             )
             editorSession
