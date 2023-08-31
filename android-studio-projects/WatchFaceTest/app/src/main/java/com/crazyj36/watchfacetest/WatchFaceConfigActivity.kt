@@ -19,13 +19,13 @@ class WatchFaceConfigActivity: ComponentActivity() {
         setContent {
             Box(modifier = Modifier.fillMaxSize())
         }
-        Toast.makeText(
+        /*Toast.makeText(
             this@WatchFaceConfigActivity,
             resources.getString(R.string.watchFaceConfigurationActivityToastText),
             Toast.LENGTH_LONG
-        ).show()
+        ).show()*/
         MainScope().launch(Dispatchers.Main.immediate) {
-            delay(2000)
+            //delay(2000)
             val editorSession = EditorSession.createOnWatchEditorSession(
                 this@WatchFaceConfigActivity
             )
