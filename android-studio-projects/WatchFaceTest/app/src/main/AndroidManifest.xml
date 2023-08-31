@@ -49,7 +49,8 @@
         </activity>
         <activity
             android:name=".GetComplicationPermission"
-            android:exported="false" >
+            android:exported="false"
+            android:noHistory="true">
         </activity>
     </application>
 

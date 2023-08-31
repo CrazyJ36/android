@@ -14,10 +14,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.wear.compose.material.CompactChip
 import androidx.wear.compose.material.Text
 import androidx.wear.watchface.editor.EditorSession
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class WatchFaceConfigActivity: ComponentActivity() {
@@ -27,17 +25,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
             == PackageManager.PERMISSION_GRANTED) {
             setContent {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = resources.getString(
-                            R.string.chooseWeatherText
-                        ),
-                        textAlign = TextAlign.Center
-                    )
-                }
+                Box(modifier = Modifier.fillMaxSize())
             }
             Toast.makeText(this@WatchFaceConfigActivity,
                 resources.getString(R.string.chooseWeatherText),

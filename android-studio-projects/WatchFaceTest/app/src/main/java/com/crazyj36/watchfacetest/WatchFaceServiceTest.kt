@@ -1,9 +1,13 @@
 package com.crazyj36.watchfacetest
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.RectF
 import android.view.SurfaceHolder
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -23,13 +27,27 @@ import androidx.wear.watchface.style.CurrentUserStyleRepository
 class WatchFaceServiceTest: WatchFaceService() {
     override fun onCreate() {
         super.onCreate()
+        val showComplicationWarning: Boolean =
+            getSharedPreferences("file_show_complication_warning",
+                Context.MODE_PRIVATE).getBoolean("showComplicationWarning", true)
+        if (showComplicationWarning) {
+            mainExecutor.execute {
+                Toast.makeText(
+                    applicationContext,
+                    resources.getString(R.string.complicationWarningToastText),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+        getSharedPreferences("file_show_complication_warning",
+            Context.MODE_PRIVATE).edit().putBoolean("showComplicationWarning", false)
+            .apply()
         if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
             != PackageManager.PERMISSION_GRANTED) {
                 startActivity(Intent(this,
                     GetComplicationPermission::class.java)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                )
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         }
     }
     override suspend fun createWatchFace(
