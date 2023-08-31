@@ -34,19 +34,23 @@ class WatchFaceServiceTest: WatchFaceService() {
             mainExecutor.execute {
                 Toast.makeText(
                     applicationContext,
-                    resources.getString(R.string.complicationWarningToastText),
+                    resources.getString(
+                        R.string.complicationWarningToastText),
                     Toast.LENGTH_LONG
                 ).show()
             }
         }
-        getSharedPreferences("file_show_weather_complication_warning",
-            Context.MODE_PRIVATE).edit().putBoolean("showWeatherComplicationWarning", false)
+        getSharedPreferences(
+            "file_show_weather_complication_warning",
+            Context.MODE_PRIVATE).edit().putBoolean(
+            "showWeatherComplicationWarning", false)
             .apply()
         if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
             != PackageManager.PERMISSION_GRANTED) {
                 startActivity(Intent(this,
-                    GetComplicationPermission::class.java))
+                    GetComplicationPermission::class.java)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         }
     }
     override suspend fun createWatchFace(
