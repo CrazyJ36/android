@@ -25,7 +25,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
             }
         }
         MainScope().launch(Dispatchers.Main.immediate) {
-            delay(2000)
+            delay(3000)
             val editorSession = EditorSession.createOnWatchEditorSession(
                 this@WatchFaceConfigActivity
             )

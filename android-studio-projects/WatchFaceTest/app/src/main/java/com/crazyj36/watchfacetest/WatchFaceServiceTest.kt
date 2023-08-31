@@ -1,6 +1,7 @@
 package com.crazyj36.watchfacetest
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.RectF
 import android.view.SurfaceHolder
@@ -41,6 +42,12 @@ class WatchFaceServiceTest: WatchFaceService() {
         getSharedPreferences("file_show_weather_complication_warning",
             Context.MODE_PRIVATE).edit().putBoolean("showWeatherComplicationWarning", false)
             .apply()
+        if (checkSelfPermission(
+                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
+            != PackageManager.PERMISSION_GRANTED) {
+                startActivity(Intent(this,
+                    GetComplicationPermission::class.java))
+        }
     }
     override suspend fun createWatchFace(
         surfaceHolder: SurfaceHolder,
@@ -108,7 +115,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                     ComplicationType.LONG_TEXT
                 ),
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                    SystemDataSources.NO_DATA_SOURCE,
+                    SystemDataSources.DATA_SOURCE_WEATHER,
                     ComplicationType.SHORT_TEXT
                 ),
                 bounds = ComplicationSlotBounds(
