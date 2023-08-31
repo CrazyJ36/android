@@ -1,5 +1,6 @@
 package com.crazyj36.watchfacetest
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.lifecycleScope
@@ -56,14 +58,17 @@ class WatchFaceConfigActivity: ComponentActivity() {
                         textAlign = TextAlign.Center
                     )
                     CompactChip(onClick = {
-                        requestPermissions(arrayOf(
-                            "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-                        ), 1)
-                        finish()
-                    },
+                        startActivity(
+                            Intent(applicationContext,
+                            GetComplicationPermission::class.java)
+                            .setFlags(
+                                Intent.FLAG_ACTIVITY_NEW_TASK or
+                                        Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+                        ) },
                         label = {
                             Text(text = resources.getString(R.string.allowText))
-                        })
+                        }
+                    )
                 }
             }
         }

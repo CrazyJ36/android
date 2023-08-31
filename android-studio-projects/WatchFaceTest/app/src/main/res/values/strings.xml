@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Watch Face Test</string>
     <string name="chooseWeatherText">Choose \'Weather\' for default bottom left complication…</string>
-    <string name="stillNeedPermissionText">This watch face needs permission to edit complication and to set some sources of data in complications.\nPlease allow below.</string>
+    <string name="stillNeedPermissionText">This watch face needs permission to set some data sources of complications.</string>
     <string name="allowText">Allow</string>
     <string name="complicationWarningToastText">Customize watch face to fix missing complication.</string>
 </resources>
