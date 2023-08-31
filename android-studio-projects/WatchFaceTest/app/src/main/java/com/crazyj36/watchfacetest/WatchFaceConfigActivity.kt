@@ -1,5 +1,7 @@
 package com.crazyj36.watchfacetest
 
+import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -16,19 +18,31 @@ class WatchFaceConfigActivity: ComponentActivity() {
     private lateinit var editorSession: EditorSession
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            Box(modifier = Modifier.fillMaxSize())
-        }
-        Toast.makeText(this@WatchFaceConfigActivity,
-            resources.getString(R.string.watchFaceConfigurationActivityToastText),
-            Toast.LENGTH_LONG).show()
-        MainScope().launch(Dispatchers.Main.immediate) {
-            editorSession = EditorSession.createOnWatchEditorSession(
-                this@WatchFaceConfigActivity
+        if (checkSelfPermission(
+                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
+            ) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(
+            arrayOf(
+                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"),
+            0
             )
-            editorSession
-                .openComplicationDataSourceChooser(1)
-            finish()
+        } else {
+            setContent {
+                Box(modifier = Modifier.fillMaxSize())
+            }
+            Toast.makeText(
+                this@WatchFaceConfigActivity,
+                resources.getString(R.string.watchFaceConfigurationActivityToastText),
+                Toast.LENGTH_LONG
+            ).show()
+            MainScope().launch(Dispatchers.Main.immediate) {
+                editorSession = EditorSession.createOnWatchEditorSession(
+                    this@WatchFaceConfigActivity
+                )
+                editorSession
+                    .openComplicationDataSourceChooser(1)
+                finish()
+            }
         }
     }
 }
