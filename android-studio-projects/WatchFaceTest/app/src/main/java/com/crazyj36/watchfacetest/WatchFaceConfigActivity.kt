@@ -2,7 +2,6 @@ package com.crazyj36.watchfacetest
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
@@ -26,7 +25,8 @@ class WatchFaceConfigActivity: ComponentActivity() {
             == PackageManager.PERMISSION_GRANTED) {
             setContent {
                 Box(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
                 ) {
                     Text(
                         text = resources.getString(
@@ -66,7 +66,6 @@ class WatchFaceConfigActivity: ComponentActivity() {
                             Text(text = resources.getString(R.string.allowText))
                         })
                 }
-                finish()
             }
         }
     }
