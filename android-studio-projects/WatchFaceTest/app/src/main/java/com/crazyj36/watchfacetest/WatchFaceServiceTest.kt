@@ -1,5 +1,6 @@
 package com.crazyj36.watchfacetest
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.RectF
@@ -39,10 +40,18 @@ class WatchFaceServiceTest: WatchFaceService() {
         complicationSlotsManager: ComplicationSlotsManager,
         currentUserStyleRepository: CurrentUserStyleRepository
     ): WatchFace {
-        Toast.makeText(
-            applicationContext,
-            resources.getString(R.string.complicationWarningToastText),
-            Toast.LENGTH_LONG).show()
+        if (getSharedPreferences(
+                "file_show_complication_warning",
+                Context.MODE_PRIVATE)
+                .getBoolean("showComplicationWarning", true)) {
+            Toast.makeText(
+                applicationContext,
+                resources.getString(R.string.complicationWarningToastText),
+                Toast.LENGTH_LONG
+            ).show()
+            getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
+                .edit().putBoolean("showComplicationWarning", false).apply()
+        }
         val renderer = CustomCanvasRenderer(
             applicationContext,
             surfaceHolder = surfaceHolder,
