@@ -29,22 +29,6 @@ import kotlinx.coroutines.launch
 class WatchFaceServiceTest: WatchFaceService() {
     override fun onCreate() {
         super.onCreate()
-        val showComplicationWarning: Boolean =
-            getSharedPreferences("file_show_complication_warning",
-                Context.MODE_PRIVATE).getBoolean("showComplicationWarning", true)
-        if (showComplicationWarning) {
-            mainExecutor.execute {
-                Toast.makeText(
-                    applicationContext,
-                    resources.getString(R.string.complicationWarningText),
-                    Toast.LENGTH_LONG
-                ).show()
-                Thread.sleep(2000)
-            }
-        }
-        getSharedPreferences("file_show_complication_warning",
-            Context.MODE_PRIVATE).edit().putBoolean("showComplicationWarning", false)
-            .apply()
         if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
             != PackageManager.PERMISSION_GRANTED) {
