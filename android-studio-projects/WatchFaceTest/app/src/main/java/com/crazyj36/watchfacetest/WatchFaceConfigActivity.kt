@@ -46,7 +46,8 @@ class WatchFaceConfigActivity: ComponentActivity() {
             setContent {
                 Column(
                     modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Center
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
                         text = resources.getString(
