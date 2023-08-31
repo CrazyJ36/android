@@ -10,6 +10,5 @@ class GetComplicationPermission : ComponentActivity() {
             "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"),
             0
         )
-        finish()
     }
 }
