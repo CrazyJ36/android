@@ -11,10 +11,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.style.TextAlign
-import androidx.lifecycle.lifecycleScope
 import androidx.wear.compose.material.CompactChip
 import androidx.wear.compose.material.Text
 import androidx.wear.watchface.editor.EditorSession
@@ -48,14 +47,16 @@ class WatchFaceConfigActivity: ComponentActivity() {
             setContent {
                 Column(
                     modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
+                        modifier = Modifier.fillMaxWidth(),
                         text = resources.getString(
                             R.string.stillNeedPermissionText
                         ),
-                        textAlign = TextAlign.Center
-                    )
+                        textAlign = TextAlign.Center)
+                    }
                     CompactChip(onClick = {
                         startActivity(
                             Intent(applicationContext,
@@ -72,4 +73,3 @@ class WatchFaceConfigActivity: ComponentActivity() {
             }
         }
     }
-}
