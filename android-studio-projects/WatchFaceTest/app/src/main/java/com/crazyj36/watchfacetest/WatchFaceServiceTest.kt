@@ -1,13 +1,9 @@
 package com.crazyj36.watchfacetest
 
 import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.RectF
 import android.view.SurfaceHolder
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -45,13 +41,6 @@ class WatchFaceServiceTest: WatchFaceService() {
             Context.MODE_PRIVATE).edit().putBoolean(
             "showWeatherComplicationWarning", false)
             .apply()
-        if (checkSelfPermission(
-                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
-            != PackageManager.PERMISSION_GRANTED) {
-                startActivity(Intent(this,
-                    GetComplicationPermission::class.java)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-        }
     }
     override suspend fun createWatchFace(
         surfaceHolder: SurfaceHolder,
