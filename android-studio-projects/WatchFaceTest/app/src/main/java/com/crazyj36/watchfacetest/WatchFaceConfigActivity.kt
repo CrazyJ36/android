@@ -9,9 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.style.TextAlign
+import androidx.lifecycle.lifecycleScope
 import androidx.wear.compose.material.CompactChip
 import androidx.wear.compose.material.Text
 import androidx.wear.watchface.editor.EditorSession
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -37,7 +39,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 }
             }
             MainScope().launch(Dispatchers.Main.immediate) {
-                delay(2000)
+                //delay(2000)
                 val editorSession = EditorSession.createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
