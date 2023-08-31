@@ -1,5 +1,3 @@
 <resources>
     <string name="app_name">Watch Face Test</string>
-    <string name="complicationWarningText">Customize watch face to fix missing bottom left Weather complication.</string>
-    <string name="permissionNotGrantedText">Complication data permission not granted!</string>
 </resources>

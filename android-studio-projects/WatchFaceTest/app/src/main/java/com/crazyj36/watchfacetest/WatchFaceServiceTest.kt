@@ -1,11 +1,7 @@
 package com.crazyj36.watchfacetest
 
-import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.RectF
 import android.view.SurfaceHolder
-import android.widget.Toast
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -21,26 +17,9 @@ import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class WatchFaceServiceTest: WatchFaceService() {
-    override fun onCreate() {
-        super.onCreate()
-        if (checkSelfPermission(
-                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
-            != PackageManager.PERMISSION_GRANTED) {
-                startActivity(Intent(applicationContext,
-                    GetComplicationPermission::class.java)
-                    .setFlags(
-                        Intent.FLAG_ACTIVITY_NEW_TASK or
-                        Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-                    )
-                )
-        }
-    }
+
     override suspend fun createWatchFace(
         surfaceHolder: SurfaceHolder,
         watchState: WatchState,
