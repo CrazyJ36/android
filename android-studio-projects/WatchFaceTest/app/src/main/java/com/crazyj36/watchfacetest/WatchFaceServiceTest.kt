@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.RectF
 import android.view.SurfaceHolder
+import android.widget.Toast
 import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
@@ -38,6 +39,10 @@ class WatchFaceServiceTest: WatchFaceService() {
         complicationSlotsManager: ComplicationSlotsManager,
         currentUserStyleRepository: CurrentUserStyleRepository
     ): WatchFace {
+        Toast.makeText(
+            applicationContext,
+            resources.getString(R.string.complicationWarningToastText),
+            Toast.LENGTH_LONG).show()
         val renderer = CustomCanvasRenderer(
             applicationContext,
             surfaceHolder = surfaceHolder,
