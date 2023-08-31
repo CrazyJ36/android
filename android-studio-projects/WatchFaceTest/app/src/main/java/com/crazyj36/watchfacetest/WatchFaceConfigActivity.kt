@@ -2,6 +2,7 @@ package com.crazyj36.watchfacetest
 
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
@@ -38,8 +39,10 @@ class WatchFaceConfigActivity: ComponentActivity() {
                     )
                 }
             }
-            lifecycleScope.launch {
-                delay(2000)
+            Toast.makeText(this@WatchFaceConfigActivity,
+                resources.getString(R.string.chooseWeatherText),
+                Toast.LENGTH_LONG).show()
+            MainScope().launch(Dispatchers.Main.immediate) {
                 val editorSession = EditorSession.createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
@@ -63,6 +66,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
                         requestPermissions(arrayOf(
                             "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
                         ), 1)
+                        finish()
                     },
                         label = {
                             Text(text = resources.getString(R.string.allowText))
