@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Watch Face Test</string>
+    <string name="chooseWeatherToastText">Choose \'Weather\' for default.</string>
+    <string name="permissionNotYetGrantedLayoutText">This watch face needs your permission to receive useful data(eg. Outside temperature) that comes from some complications like \'Weather\' that uses your location.\nPlease allow this below.</string>
+    <string name="allowButtonText">Allow</string>
 </resources>
