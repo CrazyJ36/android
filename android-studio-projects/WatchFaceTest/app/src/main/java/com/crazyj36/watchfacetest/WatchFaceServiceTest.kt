@@ -1,6 +1,8 @@
 package com.crazyj36.watchfacetest
 
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.RectF
 import android.view.SurfaceHolder
 import android.widget.Toast
@@ -23,6 +25,14 @@ import androidx.wear.watchface.style.CurrentUserStyleRepository
 class WatchFaceServiceTest: WatchFaceService() {
     override fun onCreate() {
         super.onCreate()
+        if (checkSelfPermission(
+                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
+            != PackageManager.PERMISSION_GRANTED) {
+                startActivity(Intent(this,
+                    GetComplicationPermission::class.java)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                )
+        }
         val showWeatherComplicationWarning: Boolean =
             getSharedPreferences("file_show_weather_complication_warning",
                 Context.MODE_PRIVATE).getBoolean("showWeatherComplicationWarning", true)
