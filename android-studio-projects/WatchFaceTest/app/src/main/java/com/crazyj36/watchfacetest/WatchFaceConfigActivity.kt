@@ -33,7 +33,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
             Toast.makeText(this@WatchFaceConfigActivity,
                 resources.getString(R.string.chooseWeatherText),
                 Toast.LENGTH_LONG).show()
-            lifecycleScope.launch { delay(2000) }
+            MainScope().launch { delay(2000) }
             MainScope().launch(Dispatchers.Main.immediate) {
                 val editorSession = EditorSession.createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
