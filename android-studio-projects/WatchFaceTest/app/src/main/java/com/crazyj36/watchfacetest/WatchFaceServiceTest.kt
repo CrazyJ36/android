@@ -21,6 +21,9 @@ import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class WatchFaceServiceTest: WatchFaceService() {
     override fun onCreate() {
@@ -40,6 +43,7 @@ class WatchFaceServiceTest: WatchFaceService() {
         getSharedPreferences("file_show_complication_warning",
             Context.MODE_PRIVATE).edit().putBoolean("showComplicationWarning", false)
             .apply()
+        MainScope().launch { delay(2000) }
         if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
             != PackageManager.PERMISSION_GRANTED) {
