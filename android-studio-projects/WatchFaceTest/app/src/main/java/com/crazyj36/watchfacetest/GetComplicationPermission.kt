@@ -8,7 +8,8 @@ class GetComplicationPermission : ComponentActivity() {
         super.onCreate(savedInstanceState)
         requestPermissions(arrayOf(
             "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"),
-            0)
+            0
+        )
         finish()
     }
 }
