@@ -5,7 +5,7 @@
     app:borderColor="@android:color/darker_gray"
     app:borderStyle="solid"
     app:borderWidth="1dp"
-    app:highlightColor="@android:color/darker_gray"
+    app:highlightColor="@android:color/holo_green_dark"
     app:iconColor="@android:color/darker_gray"
     app:rangedValuePrimaryColor="@android:color/holo_green_dark"
     app:rangedValueRingWidth="2dp"
