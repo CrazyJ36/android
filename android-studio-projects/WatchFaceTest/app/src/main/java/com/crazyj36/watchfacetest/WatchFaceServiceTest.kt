@@ -23,9 +23,6 @@ import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class WatchFaceServiceTest: WatchFaceService() {
     override fun onCreate() {
@@ -54,9 +51,6 @@ class WatchFaceServiceTest: WatchFaceService() {
                 resources.getString(R.string.complicationWarningToastText),
                 Toast.LENGTH_LONG
             ).show()
-            MainScope().launch {
-                delay(3500)
-            }
             getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
                 .edit().putBoolean("showComplicationWarning", false).apply()
         }
