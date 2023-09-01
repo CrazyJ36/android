@@ -79,11 +79,14 @@ class CustomCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        Toast.makeText(context,
+        /*Toast.makeText(
+            context,
             "renderHighlightLayer() triggered, drawing black.",
             Toast.LENGTH_SHORT
         ).show()
         canvas.drawColor(Color.BLACK)
+
+         */
     }
     override fun render(
         canvas: Canvas,
@@ -95,7 +98,6 @@ class CustomCanvasRenderer(
         val width = bounds.width()
         val height = bounds.height()
         canvas.drawColor(Color.BLACK)
-
         // index hour numbers
         for (i in 0 until 4) {
             val rotation = 0.5f * (i + 1).toFloat() * Math.PI
@@ -122,7 +124,6 @@ class CustomCanvasRenderer(
             }
             canvas.rotate(360.0f / 12.0f, bounds.exactCenterX(), bounds.exactCenterY())
         }
-
         if (renderParameters.drawMode != DrawMode.AMBIENT) {
             canvas.drawLine(
                 (width / 5).toFloat(),
@@ -159,7 +160,6 @@ class CustomCanvasRenderer(
             4f,
             4f
         )
-
         canvas.withRotation(
             zonedDateTime.toLocalTime()
                 .toSecondOfDay()
@@ -197,7 +197,6 @@ class CustomCanvasRenderer(
         val right = centerX + thickness / 2 * width
         val bottom = centerY - gapBetweenHandAndCenter * width
         val path = Path()
-
         if (roundedCornerXRadius != 0.0f || roundedCornerYRadius != 0.0f) {
             path.addRoundRect(
                 left,
