@@ -10,58 +10,60 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.FragmentActivity
 import androidx.wear.activity.ConfirmationActivity
 
-class GetComplicationPermission: FragmentActivity() {
-    private var permissionGranted: Boolean = false
+class GetComplicationPermission : FragmentActivity() {
     private val requestPermissionLauncher =
         registerForActivityResult(
             ActivityResultContracts
                 .RequestPermission()
         ) { isGranted: Boolean ->
             if (isGranted) {
-                permissionGranted = true
                 Log.d("WATCHFACETEST", "granted in activityResult")
             } else {
-                permissionGranted = false
                 Log.d("WATCHFACETEST", "not granted in activityResult.")
             }
         }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestPermissionLauncher.launch(
-            "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-        )
-        when (permissionGranted) {
-            true -> {
+        when {
+            checkSelfPermission(
+                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
+            ) == PackageManager.PERMISSION_GRANTED -> {
                 /*(if (getSharedPreferences(
                         "file_show_complication_warning",
                         Context.MODE_PRIVATE
                     ).getBoolean("showComplicationWarning", true)
                 ) {*/
-                    val intent = Intent(
-                        this,
-                        ConfirmationActivity::class.java
-                    ).apply {
-                        putExtra(
-                            ConfirmationActivity
-                                .EXTRA_ANIMATION_TYPE, ConfirmationActivity
-                                .SUCCESS_ANIMATION
-                        )
-                        putExtra(
-                            ConfirmationActivity
-                                .EXTRA_MESSAGE,
-                            resources.getString(R.string.complicationWarningText)
-                        )
-                        putExtra(
-                            ConfirmationActivity.EXTRA_ANIMATION_DURATION_MILLIS,
-                            3500
-                        )
-                    }
-                    startActivity(intent)
-                    /*getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
-                        .edit().putBoolean("showComplicationWarning", false).apply()*/
-                    Log.d("WATCHFACETEST", "granted in onCreate()")
+                val intent = Intent(
+                    this,
+                    ConfirmationActivity::class.java
+                ).apply {
+                    putExtra(
+                        ConfirmationActivity
+                            .EXTRA_ANIMATION_TYPE, ConfirmationActivity
+                            .SUCCESS_ANIMATION
+                    )
+                    putExtra(
+                        ConfirmationActivity
+                            .EXTRA_MESSAGE,
+                        resources.getString(R.string.complicationWarningText)
+                    )
+                    putExtra(
+                        ConfirmationActivity.EXTRA_ANIMATION_DURATION_MILLIS,
+                        3500
+                    )
+                }
+                startActivity(intent)
+                /*getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
+                    .edit().putBoolean("showComplicationWarning", false).apply()*/
+                Log.d("WATCHFACETEST", "granted in onCreate()")
                 //d}
-            } false -> {
+            }
+
+            else -> {
+                requestPermissionLauncher.launch(
+                    "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
+                )
                 Log.d("WATCHFACETEST", "not granted in onCreate()")
             }
         }
