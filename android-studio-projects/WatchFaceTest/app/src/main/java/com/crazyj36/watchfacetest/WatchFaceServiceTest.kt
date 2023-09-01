@@ -82,7 +82,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                 ),
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
                     SystemDataSources.DATA_SOURCE_DATE,
-                    ComplicationType.SHORT_TEXT
+                    ComplicationType.SMALL_IMAGE
                 ),
                 bounds = ComplicationSlotBounds(
                     RectF(0.3f, 0.2f, 0.43f, 0.33f),
@@ -103,7 +103,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                 ),
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
                     SystemDataSources.DATA_SOURCE_DATE,
-                    ComplicationType.SHORT_TEXT
+                    ComplicationType.SMALL_IMAGE
                 ),
                 bounds = ComplicationSlotBounds(
                     RectF(0.3f, 0.34f, 0.43f, 0.47f)
@@ -123,7 +123,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                 ),
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
                     SystemDataSources.DATA_SOURCE_DATE,
-                    ComplicationType.SHORT_TEXT
+                    ComplicationType.SMALL_IMAGE
                 ),
                 bounds = ComplicationSlotBounds(
                     RectF(0.7f, 0.2f, 0.43f, 0.33f)
@@ -143,7 +143,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                 ),
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
                     SystemDataSources.DATA_SOURCE_DATE,
-                    ComplicationType.SHORT_TEXT
+                    ComplicationType.SMALL_IMAGE
                 ),
                 bounds = ComplicationSlotBounds(
                     RectF(0.7f, 0.34f, 0.43f, 0.47f)
