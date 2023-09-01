@@ -114,7 +114,7 @@ class CustomCanvasRenderer(
         // draw dots where other hours are.
         for (i in 0 until 12) {
             if (i % 3 != 0) {
-                //textPaint.style = Paint.Style.FILL_AND_STROKE
+                textPaint.style = Paint.Style.FILL_AND_STROKE
                 canvas.drawCircle(
                     0.5f * bounds.width().toFloat(),
                     bounds.width() * (0.03738f + 0.00584f),
@@ -143,6 +143,8 @@ class CustomCanvasRenderer(
                 .complicationSlots) {
                 complication.render(canvas, zonedDateTime, renderParameters)
             }
+            // Used for measuring width between complications.
+            canvas.drawLine((width / 2).toFloat(), 0.1f, (width / 2).toFloat(), 0.9f, textPaint)
         }
         val hourHandBorder: Path = createClockHand(
             bounds,
@@ -179,7 +181,6 @@ class CustomCanvasRenderer(
         ) {
             drawPath(minuteHandBorder, minutesHandPaint)
         }
-        canvas.drawLine((width / 2).toFloat(), 0.1f, (width / 2).toFloat(), 0.9f, textPaint)
     }
 
     private fun createClockHand(
