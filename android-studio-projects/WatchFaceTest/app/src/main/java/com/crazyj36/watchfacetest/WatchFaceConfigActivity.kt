@@ -31,14 +31,17 @@ class WatchFaceConfigActivity: ComponentActivity() {
             Toast.makeText(this@WatchFaceConfigActivity,
                 resources.getString(R.string.chooseWeatherToastText),
                 Toast.LENGTH_LONG).show()
-            MainScope().launch(Dispatchers.Main.immediate) {
+            MainScope().launch {
+                EditorSession.createOnWatchEditorSession(this@WatchFaceConfigActivity)
+            }
+            /*MainScope().launch(Dispatchers.Main.immediate) {
                 val editorSession = EditorSession.createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
-                )
+                )*/
                 //editorSession
                 //    .openComplicationDataSourceChooser(1)
                 //finish()
-            }
+            //}
         } else {
             setContent {
                 LazyColumn(
