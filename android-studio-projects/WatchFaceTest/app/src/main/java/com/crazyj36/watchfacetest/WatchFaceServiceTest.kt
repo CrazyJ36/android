@@ -1,15 +1,9 @@
 package com.crazyj36.watchfacetest
 
-import android.adservices.topics.GetTopicsRequest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.RectF
 import android.view.SurfaceHolder
-import android.widget.Toast
-import androidx.compose.runtime.Composable
-import androidx.core.app.ActivityCompat
-import androidx.wear.compose.material.dialog.Confirmation
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot

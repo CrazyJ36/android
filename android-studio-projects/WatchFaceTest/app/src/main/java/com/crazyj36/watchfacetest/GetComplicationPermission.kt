@@ -3,7 +3,6 @@ package com.crazyj36.watchfacetest
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.wear.activity.ConfirmationActivity
@@ -13,9 +12,6 @@ class GetComplicationPermission : ComponentActivity() {
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
         if (isGranted) {
-            Toast.makeText(this@GetComplicationPermission,
-                "IT RUNS!",
-                Toast.LENGTH_LONG).show()
             if (getSharedPreferences(
                     "file_show_complication_warning",
                     Context.MODE_PRIVATE
@@ -41,10 +37,10 @@ class GetComplicationPermission : ComponentActivity() {
                     )*/
                 }
                 startActivity(intent)
-            getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
-                .edit().putBoolean(
-                    "showComplicationWarning", false
-                ).apply()
+                getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
+                    .edit().putBoolean(
+                        "showComplicationWarning", false
+                    ).apply()
             }
         } else {
             finish()
@@ -53,9 +49,6 @@ class GetComplicationPermission : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Toast.makeText(this@GetComplicationPermission,
-            "getComplicationPermission",
-            Toast.LENGTH_SHORT).show()
         requestPermission.launch("com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
     }
 }
