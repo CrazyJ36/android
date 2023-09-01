@@ -63,7 +63,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
                     )
                 ),
                 editorSession.previewReferenceInstant,
-                null
+                editorSession.complicationsPreviewData.value
             )
         } else {
             setContent {
