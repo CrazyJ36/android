@@ -11,8 +11,8 @@ import androidx.wear.activity.ConfirmationActivity
 class GetComplicationPermission : ComponentActivity() {
     private val requestPermission = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
-    ) { isGranted ->
-        if (isGranted) {
+    ) {
+        if (it) {
             Toast.makeText(
                 this@GetComplicationPermission,
                 "it runs!",
