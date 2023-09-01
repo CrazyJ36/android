@@ -13,11 +13,14 @@ class GetComplicationPermission : ComponentActivity() {
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
         if (isGranted) {
-            /*if (getSharedPreferences(
+            Toast.makeText(this@GetComplicationPermission,
+                "IT RUNS!",
+                Toast.LENGTH_LONG).show()
+            if (getSharedPreferences(
                     "file_show_complication_warning",
                     Context.MODE_PRIVATE
                 ).getBoolean("showComplicationWarning", true)
-            ) {*/
+            ) {
                 val intent = Intent(
                     this,
                     ConfirmationActivity::class.java
@@ -32,17 +35,17 @@ class GetComplicationPermission : ComponentActivity() {
                             .EXTRA_MESSAGE,
                         resources.getString(R.string.complicationWarningText)
                     )
-                    putExtra(
+                    /*putExtra(
                         ConfirmationActivity.EXTRA_ANIMATION_DURATION_MILLIS,
                         3500
-                    )
+                    )*/
                 }
                 startActivity(intent)
-                    /*getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
-                    .edit().putBoolean(
-                        "showComplicationWarning", false
-                    ).apply()*/
-            //}
+            getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
+                .edit().putBoolean(
+                    "showComplicationWarning", false
+                ).apply()
+            }
         } else {
             finish()
         }
@@ -50,6 +53,9 @@ class GetComplicationPermission : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Toast.makeText(this@GetComplicationPermission,
+            "getComplicationPermission",
+            Toast.LENGTH_SHORT).show()
         requestPermission.launch("com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
     }
 }
