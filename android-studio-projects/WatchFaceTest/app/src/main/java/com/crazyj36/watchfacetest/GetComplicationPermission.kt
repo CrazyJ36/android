@@ -19,13 +19,22 @@ class GetComplicationPermission: FragmentActivity() {
             ActivityResultContracts.RequestPermission()
         ) { isGranted ->
             if (isGranted) {
-                this.isGranted = true
+                GetComplicationPermission().isGranted = true
                 if (getSharedPreferences(
                         "file_show_complication_warning",
                         Context.MODE_PRIVATE
                     ).getBoolean("showComplicationWarning", true)
                 ) {
-
+                    setContent {
+                        Confirmation(onTimeout = { finish() } ) {
+                            Text(
+                                modifier = Modifier.fillMaxSize(),
+                                text = resources.getString(
+                                    R.string.complicationWarningText),
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                    }
                     getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
                         .edit().putBoolean("showComplicationWarning", false).apply()
                 }
@@ -38,22 +47,5 @@ class GetComplicationPermission: FragmentActivity() {
             requestPermissionLauncher.launch(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             )
-        when (isGranted) {
-            true -> {
-                setContent {
-                    Confirmation(onTimeout = { finish() }) {
-                        Text(
-                            modifier = Modifier.fillMaxSize(),
-                            text = resources.getString(
-                                R.string.complicationWarningText),
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-            }
-            false -> {
-                finish()
-            }
-        }
     }
 }
