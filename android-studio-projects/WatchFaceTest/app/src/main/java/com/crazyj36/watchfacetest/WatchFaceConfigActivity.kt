@@ -37,7 +37,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 )
                 //editorSession
                 //    .openComplicationDataSourceChooser(1)
-                finish()
+                //finish()
             }
         } else {
             setContent {
