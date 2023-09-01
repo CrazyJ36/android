@@ -45,9 +45,16 @@ class GetComplicationPermission: ComponentActivity() {
                 ).apply {
                     putExtra(
                         ConfirmationActivity
+                            .EXTRA_ANIMATION_TYPE, ConfirmationActivity
+                            .SUCCESS_ANIMATION
+                    )
+                    putExtra(
+                        ConfirmationActivity
                             .EXTRA_MESSAGE,
                         resources.getString(R.string.complicationWarningText)
                     )
+                    putExtra(ConfirmationActivity.EXTRA_ANIMATION_DURATION_MILLIS,
+                        3500)
                 }
                 startActivity(intent)
                 /*getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
