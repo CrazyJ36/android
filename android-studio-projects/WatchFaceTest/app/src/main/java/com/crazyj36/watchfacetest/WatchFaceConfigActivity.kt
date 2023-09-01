@@ -47,7 +47,8 @@ class WatchFaceConfigActivity: ComponentActivity() {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     item {
-                        Text(text = resources.getString(R.string.permissionNotYetGrantedLayoutText),
+                        Text(text = resources.getString(
+                            R.string.permissionNotYetGrantedLayoutText),
                             textAlign = TextAlign.Center)
                     }
                     item {
