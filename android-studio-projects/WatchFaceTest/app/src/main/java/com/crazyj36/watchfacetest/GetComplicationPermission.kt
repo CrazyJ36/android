@@ -4,11 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.ui.Modifier
 import androidx.wear.activity.ConfirmationActivity
 
 class GetComplicationPermission : ComponentActivity() {
@@ -54,9 +50,6 @@ class GetComplicationPermission : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /*setContent {
-            Box(Modifier.fillMaxSize())
-        }*/
         requestPermission.launch("com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
     }
 }

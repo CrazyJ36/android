@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Watch Face Test</string>
     <string name="chooseWeatherToastText">Choose \'Weather\' for default bottom left complication.</string>
-    <string name="complicationWarningText">Customize watch face to fix missing bottom left complication.</string>
-    <string name="permissionNotYetGrantedLayoutText">This watch face needs your permission to receive useful data(eg. Outside temperature) that comes from some complications like \'Weather\', which uses your location.\nPlease allow this below.</string>
+    <string name="complicationWarningText">Customize watch face to set bottom left complication.</string>
+    <string name="permissionNotYetGrantedLayoutText">This watch face needs your permission to receive useful data(eg. Outside temperature) that comes from some complications.\nPlease allow this below.</string>
     <string name="allowButtonText">Allow</string>
 </resources>

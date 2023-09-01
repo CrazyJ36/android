@@ -102,7 +102,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                     ComplicationType.LONG_TEXT
                 ),
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                    SystemDataSources.DATA_SOURCE_WEATHER,
+                    SystemDataSources.NO_DATA_SOURCE,
                     ComplicationType.SHORT_TEXT
                 ),
                 bounds = ComplicationSlotBounds(
