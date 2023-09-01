@@ -28,7 +28,8 @@ import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class WatchFaceServiceTest: WatchFaceService() {
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    override fun onCreate() {
+        super.onCreate()
         if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) != PackageManager.PERMISSION_GRANTED) {
@@ -36,7 +37,6 @@ class WatchFaceServiceTest: WatchFaceService() {
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or
                         Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS))
         }
-        return super.onStartCommand(intent, flags, startId)
     }
 
     override suspend fun createWatchFace(
