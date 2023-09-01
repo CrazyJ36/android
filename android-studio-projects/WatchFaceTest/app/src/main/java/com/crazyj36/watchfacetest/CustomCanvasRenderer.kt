@@ -179,7 +179,7 @@ class CustomCanvasRenderer(
         ) {
             drawPath(minuteHandBorder, minutesHandPaint)
         }
-        canvas.drawLine(width / 2f, 0f, width / 2f, 1f, textPaint)
+        canvas.drawLine((width / 2).toFloat(), 0.1f, (width / 2).toFloat(), 0.9f, textPaint)
     }
 
     private fun createClockHand(
