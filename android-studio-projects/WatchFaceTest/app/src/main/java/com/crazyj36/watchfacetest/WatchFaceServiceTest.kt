@@ -27,6 +27,7 @@ import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class WatchFaceServiceTest: WatchFaceService() {
+
     override fun onCreate() {
         super.onCreate()
         if (checkSelfPermission(
@@ -43,18 +44,6 @@ class WatchFaceServiceTest: WatchFaceService() {
         complicationSlotsManager: ComplicationSlotsManager,
         currentUserStyleRepository: CurrentUserStyleRepository
     ): WatchFace {
-        if (getSharedPreferences(
-                "file_show_complication_warning",
-                Context.MODE_PRIVATE
-            ).getBoolean("showComplicationWarning", true)
-        ) {
-            startActivity(Intent(this, ComplicationWarning::class.java)
-                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or
-                Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
-            )
-            getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
-                .edit().putBoolean("showComplicationWarning", false).apply()
-        }
         val renderer = CustomCanvasRenderer(
             applicationContext,
             surfaceHolder = surfaceHolder,
