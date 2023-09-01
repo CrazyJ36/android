@@ -84,9 +84,13 @@ class CustomCanvasRenderer(
             "renderHighlightLayer() triggered",
             Toast.LENGTH_SHORT
         ).show()
-        canvas.drawColor(Color.BLACK)
-        for ((_, complication) in complicationSlotsManager.complicationSlots) {
-            complication.renderHighlightLayer(canvas, zonedDateTime, renderParameters)
+        canvas.drawColor(
+            renderParameters.highlightLayer!!.backgroundTint)
+        for ((_, complication) in complicationSlotsManager
+            .complicationSlots) {
+            complication
+                .renderHighlightLayer(
+                    canvas, zonedDateTime, renderParameters)
         }
     }
     override fun render(

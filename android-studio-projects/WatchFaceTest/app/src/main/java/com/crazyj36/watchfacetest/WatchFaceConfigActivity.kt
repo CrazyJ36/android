@@ -1,6 +1,8 @@
 package com.crazyj36.watchfacetest
 
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -14,12 +16,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.style.TextAlign
 import androidx.wear.compose.material.CompactChip
 import androidx.wear.compose.material.Text
+import androidx.wear.watchface.DrawMode
+import androidx.wear.watchface.RenderParameters
+import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.editor.EditorSession
+import androidx.wear.watchface.style.UserStyle
+import androidx.wear.watchface.style.WatchFaceLayer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
 class WatchFaceConfigActivity: ComponentActivity() {
+    private lateinit var editorSession: EditorSession
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (checkSelfPermission(
@@ -28,20 +37,18 @@ class WatchFaceConfigActivity: ComponentActivity() {
             /*setContent {
                 Box(modifier = Modifier.fillMaxSize())
             }*/
-            Toast.makeText(this@WatchFaceConfigActivity,
+            /*Toast.makeText(this@WatchFaceConfigActivity,
                 resources.getString(R.string.chooseWeatherToastText),
-                Toast.LENGTH_LONG).show()
-            MainScope().launch {
-                EditorSession.createOnWatchEditorSession(this@WatchFaceConfigActivity)
-            }
-            /*MainScope().launch(Dispatchers.Main.immediate) {
-                val editorSession = EditorSession.createOnWatchEditorSession(
+                Toast.LENGTH_LONG).show()*/
+
+            MainScope().launch(Dispatchers.Main.immediate) {
+                editorSession = EditorSession.createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
-                )*/
+                )
                 //editorSession
                 //    .openComplicationDataSourceChooser(1)
                 //finish()
-            //}
+            }
         } else {
             setContent {
                 LazyColumn(
