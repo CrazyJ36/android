@@ -18,9 +18,6 @@ class GetComplicationPermission : ComponentActivity() {
                     Context.MODE_PRIVATE
                 ).getBoolean("showComplicationWarning", true)
             ) {*/
-            Toast.makeText(this@GetComplicationPermission,
-                "permission granted",
-                Toast.LENGTH_SHORT).show()
                 val intent = Intent(
                     this,
                     ConfirmationActivity::class.java
@@ -47,9 +44,6 @@ class GetComplicationPermission : ComponentActivity() {
                     ).apply()*/
             //}
         } else {
-            Toast.makeText(this@GetComplicationPermission,
-                "permission not granted",
-                Toast.LENGTH_SHORT).show()
             finish()
         }
     }
