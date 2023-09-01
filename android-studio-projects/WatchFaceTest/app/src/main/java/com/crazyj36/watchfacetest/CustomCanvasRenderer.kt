@@ -98,9 +98,6 @@ class CustomCanvasRenderer(
         val width = bounds.width()
         val height = bounds.height()
         canvas.drawColor(Color.BLACK)
-
-        canvas.drawLine(width / 2f, 0f, width / 2f, 1f, textPaint)
-
         // index hour numbers
         for (i in 0 until 4) {
             val rotation = 0.5f * (i + 1).toFloat() * Math.PI
@@ -182,6 +179,7 @@ class CustomCanvasRenderer(
         ) {
             drawPath(minuteHandBorder, minutesHandPaint)
         }
+        canvas.drawLine(width / 2f, 0f, width / 2f, 1f, textPaint)
     }
 
     private fun createClockHand(
