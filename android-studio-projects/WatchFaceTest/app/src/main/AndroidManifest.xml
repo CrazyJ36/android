@@ -52,11 +52,6 @@
             android:exported="false"
             android:noHistory="true">
         </activity>
-        <activity
-            android:name=".ComplicationWarning"
-            android:exported="false"
-            android:noHistory="true">
-        </activity>
     </application>
 
 </manifest>

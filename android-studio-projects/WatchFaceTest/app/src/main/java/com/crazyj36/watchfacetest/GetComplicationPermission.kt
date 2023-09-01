@@ -1,40 +1,48 @@
 package com.crazyj36.watchfacetest
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.fragment.app.FragmentActivity
+import androidx.wear.compose.material.Text
+import androidx.wear.compose.material.dialog.Confirmation
 
-class GetComplicationPermission: ComponentActivity() {
-
+class GetComplicationPermission: FragmentActivity() {
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted ->
+            if (isGranted) {
+                if (getSharedPreferences(
+                        "file_show_complication_warning",
+                        Context.MODE_PRIVATE
+                    ).getBoolean("showComplicationWarning", true)
+                ) {
+                    getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
+                        .edit().putBoolean("showComplicationWarning", false).apply()
+                    setContent {
+                        Confirmation(onTimeout = { finish() }) {
+                            Text(
+                                modifier = Modifier.fillMaxSize(),
+                                text = resources.getString(
+                                    R.string.complicationWarningText),
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                    }
+                }
+            } else {
+                finish()
+            }
+        }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-            requestPermissions(
-                arrayOf(
-                    "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-                ),
-                0
+            requestPermissionLauncher.launch(
+                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             )
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if (getSharedPreferences(
-                "file_show_complication_warning",
-                Context.MODE_PRIVATE
-            ).getBoolean("showComplicationWarning", true)
-        ) {
-            startActivity(
-                Intent(this, ComplicationWarning::class.java)
-                    .setFlags(
-                        Intent.FLAG_ACTIVITY_NEW_TASK or
-                                Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-                    )
-            )
-            getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
-                .edit().putBoolean("showComplicationWarning", false).apply()
-        }
     }
 }
