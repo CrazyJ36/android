@@ -3,7 +3,6 @@ package com.crazyj36.watchfacetest
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -38,7 +37,7 @@ class GetComplicationPermission : ComponentActivity() {
                     )
                     putExtra(
                         ConfirmationActivity.EXTRA_ANIMATION_DURATION_MILLIS,
-                        2500
+                        3500
                     )
                 }
                 startActivity(intent)
@@ -55,9 +54,9 @@ class GetComplicationPermission : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
+        /*setContent {
             Box(Modifier.fillMaxSize())
-        }
+        }*/
         requestPermission.launch("com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
     }
 }
