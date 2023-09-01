@@ -1,16 +1,14 @@
 package com.crazyj36.watchfacetest
 
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.result.ActivityResultCallback
+import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.FragmentActivity
 import androidx.wear.activity.ConfirmationActivity
 
-class GetComplicationPermission : FragmentActivity() {
+class GetComplicationPermission : ComponentActivity() {
     private val requestPermissionLauncher =
         registerForActivityResult(
             ActivityResultContracts
@@ -59,7 +57,6 @@ class GetComplicationPermission : FragmentActivity() {
                 Log.d("WATCHFACETEST", "granted in onCreate()")
                 //d}
             }
-
             else -> {
                 requestPermissionLauncher.launch(
                     "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
