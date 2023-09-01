@@ -24,11 +24,14 @@ import androidx.wear.watchface.style.UserStyle
 import androidx.wear.watchface.style.WatchFaceLayer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
+import java.time.Instant
 
 class WatchFaceConfigActivity: ComponentActivity() {
     private lateinit var editorSession: EditorSession
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (checkSelfPermission(
@@ -49,6 +52,19 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 //    .openComplicationDataSourceChooser(1)
                 //finish()
             }
+            editorSession.renderWatchFaceToBitmap(
+                RenderParameters(
+                    DrawMode.INTERACTIVE,
+                    WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
+                    RenderParameters.HighlightLayer(
+                        RenderParameters.HighlightedElement.AllComplicationSlots,
+                        Color.RED,
+                        Color.argb(128, 0, 0, 0)
+                    )
+                ),
+                editorSession.previewReferenceInstant,
+                null
+            )
         } else {
             setContent {
                 LazyColumn(
