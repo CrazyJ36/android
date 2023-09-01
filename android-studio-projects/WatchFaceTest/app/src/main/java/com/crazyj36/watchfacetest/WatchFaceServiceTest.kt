@@ -51,7 +51,10 @@ class WatchFaceServiceTest: WatchFaceService() {
                     Context.MODE_PRIVATE
                 ).getBoolean("showComplicationWarning", true)
             ) {
-                startActivity(Intent(this, ComplicationWarning::class.java))
+                startActivity(Intent(this, ComplicationWarning::class.java)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or
+                    Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+                )
                 getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
                     .edit().putBoolean("showComplicationWarning", false).apply()
             }
