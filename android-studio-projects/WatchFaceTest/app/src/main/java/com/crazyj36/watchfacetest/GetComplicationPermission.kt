@@ -31,9 +31,9 @@ class GetComplicationPermission: FragmentActivity() {
         }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //requestPermissionLauncher.launch(
-        //    "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-        //)
+        requestPermissionLauncher.launch(
+            "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
+        )
         when {
             ContextCompat.checkSelfPermission(
                 this@GetComplicationPermission,
