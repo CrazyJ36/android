@@ -28,7 +28,9 @@ class WatchFaceServiceTest: WatchFaceService() {
             ) != PackageManager.PERMISSION_GRANTED) {
             startActivity(
                 Intent(applicationContext, GetComplicationPermission::class.java)
-
+                    .setFlags(
+                        Intent.FLAG_ACTIVITY_NEW_TASK
+                    )
             )
         }
     }
