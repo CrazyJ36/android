@@ -52,6 +52,10 @@
             android:exported="false"
             android:noHistory="true">
         </activity>
+        <activity
+            android:name="androidx.wear.activity.ConfirmationActivity">
+        </activity>
+
     </application>
 
 </manifest>

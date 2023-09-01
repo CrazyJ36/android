@@ -1,6 +1,7 @@
 package com.crazyj36.watchfacetest
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -9,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.fragment.app.FragmentActivity
+import androidx.wear.activity.ConfirmationActivity
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.dialog.Confirmation
 
@@ -25,16 +27,16 @@ class GetComplicationPermission: FragmentActivity() {
                         Context.MODE_PRIVATE
                     ).getBoolean("showComplicationWarning", true)
                 ) {
-                    setContent {
-                        Confirmation(onTimeout = { finish() } ) {
-                            Text(
-                                modifier = Modifier.fillMaxSize(),
-                                text = resources.getString(
-                                    R.string.complicationWarningText),
-                                textAlign = TextAlign.Center
-                            )
-                        }
-                    }
+                    startActivity(Intent(
+                        this,
+                        ConfirmationActivity::class.java
+                    ).putExtra(ConfirmationActivity
+                        .EXTRA_ANIMATION_TYPE, ConfirmationActivity
+                        .SUCCESS_ANIMATION
+                    ).putExtra(ConfirmationActivity
+                        .EXTRA_MESSAGE,
+                        resources.getString(R.string.complicationWarningText))
+                    )
                     getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
                         .edit().putBoolean("showComplicationWarning", false).apply()
                 }
