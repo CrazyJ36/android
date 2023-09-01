@@ -1,5 +1,6 @@
 package com.crazyj36.watchfacetest
 
+import android.adservices.topics.GetTopicsRequest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -33,7 +34,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or
                     Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS))
                 */
-            ActivityCompat.requestPermissions(GetComplicationPermission(),
+            GetComplicationPermission().requestPermissions(
                 arrayOf("com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"),
                 0)
         }
