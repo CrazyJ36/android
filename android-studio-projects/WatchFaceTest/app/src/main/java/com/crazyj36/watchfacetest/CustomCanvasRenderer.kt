@@ -79,14 +79,15 @@ class CustomCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        /*Toast.makeText(
+        Toast.makeText(
             context,
-            "renderHighlightLayer() triggered, drawing black.",
+            "renderHighlightLayer() triggered",
             Toast.LENGTH_SHORT
         ).show()
         canvas.drawColor(Color.BLACK)
-
-         */
+        for ((_, complication) in complicationSlotsManager.complicationSlots) {
+            complication.renderHighlightLayer(canvas, zonedDateTime, renderParameters)
+        }
     }
     override fun render(
         canvas: Canvas,

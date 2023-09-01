@@ -35,8 +35,8 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 val editorSession = EditorSession.createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
-                editorSession
-                    .openComplicationDataSourceChooser(1)
+                //editorSession
+                //    .openComplicationDataSourceChooser(1)
                 finish()
             }
         } else {
