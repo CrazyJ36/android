@@ -3,6 +3,7 @@ package com.crazyj36.watchfacetest
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.wear.activity.ConfirmationActivity
@@ -12,6 +13,11 @@ class GetComplicationPermission : ComponentActivity() {
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
         if (isGranted) {
+            Toast.makeText(
+                this@GetComplicationPermission,
+                "it runs!",
+                Toast.LENGTH_SHORT
+            ).show()
             if (getSharedPreferences(
                     "file_show_complication_warning",
                     Context.MODE_PRIVATE
@@ -31,10 +37,10 @@ class GetComplicationPermission : ComponentActivity() {
                             .EXTRA_MESSAGE,
                         resources.getString(R.string.complicationWarningText)
                     )
-                    /*putExtra(
+                    putExtra(
                         ConfirmationActivity.EXTRA_ANIMATION_DURATION_MILLIS,
                         3500
-                    )*/
+                    )
                 }
                 startActivity(intent)
                 getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)

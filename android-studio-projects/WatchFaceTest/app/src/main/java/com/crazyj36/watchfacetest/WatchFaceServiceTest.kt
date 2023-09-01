@@ -21,7 +21,6 @@ import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class WatchFaceServiceTest: WatchFaceService() {
-
     override fun onCreate() {
         super.onCreate()
         if (checkSelfPermission(
