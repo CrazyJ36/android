@@ -25,9 +25,9 @@ class WatchFaceConfigActivity: ComponentActivity() {
         if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) == PackageManager.PERMISSION_GRANTED) {
-            setContent {
+            /*setContent {
                 Box(modifier = Modifier.fillMaxSize())
-            }
+            }*/
             Toast.makeText(this@WatchFaceConfigActivity,
                 resources.getString(R.string.chooseWeatherToastText),
                 Toast.LENGTH_LONG).show()
