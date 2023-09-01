@@ -17,11 +17,6 @@ class GetComplicationPermission : ComponentActivity() {
         ActivityResultContracts.RequestPermission()
     ) {
         if (it) {
-            Toast.makeText(
-                this@GetComplicationPermission,
-                "it runs!",
-                Toast.LENGTH_SHORT
-            ).show()
             if (getSharedPreferences(
                     "file_show_complication_warning",
                     Context.MODE_PRIVATE
@@ -43,7 +38,7 @@ class GetComplicationPermission : ComponentActivity() {
                     )
                     putExtra(
                         ConfirmationActivity.EXTRA_ANIMATION_DURATION_MILLIS,
-                        3500
+                        2500
                     )
                 }
                 startActivity(intent)
@@ -51,6 +46,7 @@ class GetComplicationPermission : ComponentActivity() {
                     .edit().putBoolean(
                         "showComplicationWarning", false
                     ).apply()
+                finish()
             }
         } else {
             finish()
