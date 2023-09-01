@@ -1,6 +1,7 @@
 package com.crazyj36.watchfacetest
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -9,10 +10,10 @@ import androidx.wear.activity.ConfirmationActivity
 
 class GetComplicationPermission : ComponentActivity() {
 
-    private val requestPermissionLauncher =
+    private val requestPermission =
         registerForActivityResult(
-            ActivityResultContracts.RequestPermission()) {
-            if (it == true) {
+            ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
                 val intent = Intent(
                     this,
                     ConfirmationActivity::class.java
@@ -43,7 +44,7 @@ class GetComplicationPermission : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestPermissionLauncher.launch(
+        requestPermission.launch(
             "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
         )
     }
