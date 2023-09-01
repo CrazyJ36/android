@@ -29,8 +29,7 @@ class WatchFaceServiceTest: WatchFaceService() {
             startActivity(
                 Intent(applicationContext, GetComplicationPermission::class.java)
                     .setFlags(
-                        Intent.FLAG_ACTIVITY_NEW_TASK or
-                        Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+                        Intent.FLAG_ACTIVITY_NEW_TASK
                     )
             )
         }
