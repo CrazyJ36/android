@@ -3,6 +3,7 @@ package com.crazyj36.watchfacetest
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.wear.activity.ConfirmationActivity
@@ -12,11 +13,14 @@ class GetComplicationPermission : ComponentActivity() {
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
         if (isGranted) {
-            if (getSharedPreferences(
+            /*if (getSharedPreferences(
                     "file_show_complication_warning",
                     Context.MODE_PRIVATE
                 ).getBoolean("showComplicationWarning", true)
-            ) {
+            ) {*/
+            Toast.makeText(this@GetComplicationPermission,
+                "permission granted",
+                Toast.LENGTH_SHORT).show()
                 val intent = Intent(
                     this,
                     ConfirmationActivity::class.java
@@ -37,12 +41,15 @@ class GetComplicationPermission : ComponentActivity() {
                     )
                 }
                 startActivity(intent)
-                getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
+                    /*getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
                     .edit().putBoolean(
                         "showComplicationWarning", false
-                    ).apply()
-            }
+                    ).apply()*/
+            //}
         } else {
+            Toast.makeText(this@GetComplicationPermission,
+                "permission not granted",
+                Toast.LENGTH_SHORT).show()
             finish()
         }
     }
