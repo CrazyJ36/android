@@ -7,7 +7,9 @@ import android.content.pm.PackageManager
 import android.graphics.RectF
 import android.view.SurfaceHolder
 import android.widget.Toast
+import androidx.compose.runtime.Composable
 import androidx.core.app.ActivityCompat
+import androidx.wear.compose.material.dialog.Confirmation
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -34,7 +36,6 @@ class WatchFaceServiceTest: WatchFaceService() {
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or
                     Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS))
         }
-
     }
     override suspend fun createWatchFace(
         surfaceHolder: SurfaceHolder,
@@ -42,17 +43,18 @@ class WatchFaceServiceTest: WatchFaceService() {
         complicationSlotsManager: ComplicationSlotsManager,
         currentUserStyleRepository: CurrentUserStyleRepository
     ): WatchFace {
-        if (getSharedPreferences(
-                "file_show_complication_warning",
-                Context.MODE_PRIVATE)
-                .getBoolean("showComplicationWarning", true)) {
-            Toast.makeText(
-                applicationContext,
-                resources.getString(R.string.complicationWarningToastText),
-                Toast.LENGTH_LONG
-            ).show()
-            getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
-                .edit().putBoolean("showComplicationWarning", false).apply()
+        if (checkSelfPermission(
+            "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
+        ) == PackageManager.PERMISSION_GRANTED) {
+            if (getSharedPreferences(
+                    "file_show_complication_warning",
+                    Context.MODE_PRIVATE
+                ).getBoolean("showComplicationWarning", true)
+            ) {
+                startActivity(Intent(this, ComplicationWarning::class.java))
+                getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
+                    .edit().putBoolean("showComplicationWarning", false).apply()
+            }
         }
         val renderer = CustomCanvasRenderer(
             applicationContext,
