@@ -48,8 +48,7 @@
         </activity>
         <activity
             android:name=".GetComplicationPermission"
-            android:exported="false"
-            android:noHistory="true">
+            android:exported="false">
         </activity>
         <activity
             android:name="androidx.wear.activity.ConfirmationActivity">
