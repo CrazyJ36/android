@@ -45,11 +45,6 @@ class GetComplicationPermission: ComponentActivity() {
                 ).apply {
                     putExtra(
                         ConfirmationActivity
-                            .EXTRA_ANIMATION_TYPE, ConfirmationActivity
-                            .SUCCESS_ANIMATION
-                    )
-                    putExtra(
-                        ConfirmationActivity
                             .EXTRA_MESSAGE,
                         resources.getString(R.string.complicationWarningText)
                     )
