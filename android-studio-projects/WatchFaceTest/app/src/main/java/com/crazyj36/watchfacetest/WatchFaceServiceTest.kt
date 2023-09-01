@@ -23,7 +23,7 @@ import androidx.wear.watchface.style.CurrentUserStyleRepository
 class WatchFaceServiceTest: WatchFaceService() {
     override fun onCreate() {
         super.onCreate()
-        if (checkSelfPermission(
+        /*if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) != PackageManager.PERMISSION_GRANTED) {
             startActivity(
@@ -33,7 +33,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                         Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
                     )
             )
-        }
+        }*/
     }
 
     override suspend fun createWatchFace(
@@ -109,8 +109,49 @@ class WatchFaceServiceTest: WatchFaceService() {
                     RectF(0.3f, 0.34f, 0.43f, 0.47f)
                 )
             ).build()
+        val rightTopComplication = ComplicationSlot
+            .createRoundRectComplicationSlotBuilder(
+                id = 2,
+                canvasComplicationFactory = defaultCanvasComplicationFactory,
+                supportedTypes = listOf(
+                    ComplicationType.RANGED_VALUE,
+                    ComplicationType.MONOCHROMATIC_IMAGE,
+                    ComplicationType.SHORT_TEXT,
+                    ComplicationType.SMALL_IMAGE,
+                    ComplicationType.NO_DATA,
+                    ComplicationType.LONG_TEXT
+                ),
+                defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+                    SystemDataSources.DATA_SOURCE_STEP_COUNT,
+                    ComplicationType.SHORT_TEXT
+                ),
+                bounds = ComplicationSlotBounds(
+                    RectF(0.7f, 0.2f, 0.43f, 0.33f)
+                )
+            ).build()
+        val rightBottomComplication = ComplicationSlot
+            .createRoundRectComplicationSlotBuilder(
+                id = 3,
+                canvasComplicationFactory = defaultCanvasComplicationFactory,
+                supportedTypes = listOf(
+                    ComplicationType.RANGED_VALUE,
+                    ComplicationType.MONOCHROMATIC_IMAGE,
+                    ComplicationType.SHORT_TEXT,
+                    ComplicationType.SMALL_IMAGE,
+                    ComplicationType.NO_DATA,
+                    ComplicationType.LONG_TEXT
+                ),
+                defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+                    SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
+                    ComplicationType.SHORT_TEXT
+                ),
+                bounds = ComplicationSlotBounds(
+                    RectF(0.7f, 0.34f, 0.43f, 0.47f)
+                )
+            ).build()
         return ComplicationSlotsManager(
-            listOf(leftTopComplication, leftBottomComplication),
+            listOf(leftTopComplication, leftBottomComplication,
+                rightTopComplication, rightBottomComplication),
             currentUserStyleRepository
         )
     }
