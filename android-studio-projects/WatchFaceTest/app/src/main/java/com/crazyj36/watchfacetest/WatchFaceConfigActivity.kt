@@ -10,6 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.text.style.TextAlign
 import androidx.wear.compose.material.CompactChip
 import androidx.wear.compose.material.Text
 import androidx.wear.watchface.editor.EditorSession
@@ -45,9 +47,14 @@ class WatchFaceConfigActivity: ComponentActivity() {
     }
     @Composable
     private fun PermissionNotYetGrantedLayout() {
-        LazyColumn {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             item {
-                Text(text = resources.getString(R.string.permissionNotYetGrantedLayoutText))
+                Text(text = resources.getString(R.string.permissionNotYetGrantedLayoutText),
+                    textAlign = TextAlign.Center)
             }
             item {
                 CompactChip(onClick = {

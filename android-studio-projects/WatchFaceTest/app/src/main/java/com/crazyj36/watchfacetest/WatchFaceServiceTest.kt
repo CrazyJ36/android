@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.graphics.RectF
 import android.view.SurfaceHolder
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -28,10 +29,15 @@ class WatchFaceServiceTest: WatchFaceService() {
         if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) != PackageManager.PERMISSION_GRANTED) {
-                startActivity(Intent(applicationContext, GetComplicationPermission::class.java)
+               /*startActivity(Intent(applicationContext, GetComplicationPermission::class.java)
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or
                     Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS))
+                */
+            ActivityCompat.requestPermissions(GetComplicationPermission(),
+                arrayOf("com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"),
+                0)
         }
+
     }
     override suspend fun createWatchFace(
         surfaceHolder: SurfaceHolder,
