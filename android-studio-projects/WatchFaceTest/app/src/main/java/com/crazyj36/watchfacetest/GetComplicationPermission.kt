@@ -14,21 +14,6 @@ class GetComplicationPermission : ComponentActivity() {
             ActivityResultContracts.RequestPermission()
         ) { isGranted: Boolean ->
             if (isGranted) {
-                Log.d("WATCHFACETEST", "granted in activityResult")
-            } else {
-                Log.d("WATCHFACETEST", "not granted in activityResult.")
-            }
-        }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        requestPermissionLauncher.launch(
-            "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-        )
-        when (PackageManager.PERMISSION_GRANTED) {
-            checkSelfPermission(
-                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-            ) -> {
                 /*(if (getSharedPreferences(
                             "file_show_complication_warning",
                             Context.MODE_PRIVATE
@@ -56,12 +41,17 @@ class GetComplicationPermission : ComponentActivity() {
                 startActivity(intent)
                 /*getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
                         .edit().putBoolean("showComplicationWarning", false).apply()*/
-                Log.d("WATCHFACETEST", "granted in onCreate()")
-                //d}
-            }
-            else -> {
-                Log.d("WATCHFACETEST", "not granted in onCreate()")
+
+                Log.d("WATCHFACETEST", "granted in activityResult")
+            } else {
+                Log.d("WATCHFACETEST", "not granted in activityResult.")
             }
         }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requestPermissionLauncher.launch(
+            "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
+        )
     }
 }
