@@ -31,6 +31,9 @@ class GetComplicationPermission: FragmentActivity() {
         }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //requestPermissionLauncher.launch(
+        //    "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
+        //)
         when {
             ContextCompat.checkSelfPermission(
                 this@GetComplicationPermission,
@@ -58,10 +61,10 @@ class GetComplicationPermission: FragmentActivity() {
                  */
                 Log.d("WATCHFACETEST", "granted in onCreate()")
             } else -> {
-            Log.d("WATCHFACETEST", "not granted in onCreate()")
-                requestPermissionLauncher.launch(
-                    "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-                )
+                Log.d("WATCHFACETEST", "not granted in onCreate()")
+                //requestPermissionLauncher.launch(
+                //    "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
+                //)
             }
         }
     }
