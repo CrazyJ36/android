@@ -11,8 +11,7 @@ import androidx.wear.activity.ConfirmationActivity
 class GetComplicationPermission : ComponentActivity() {
     private val requestPermissionLauncher =
         registerForActivityResult(
-            ActivityResultContracts
-                .RequestPermission()
+            ActivityResultContracts.RequestPermission()
         ) { isGranted: Boolean ->
             if (isGranted) {
                 Log.d("WATCHFACETEST", "granted in activityResult")
@@ -23,15 +22,18 @@ class GetComplicationPermission : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        when {
+        requestPermissionLauncher.launch(
+            "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
+        )
+        when (PackageManager.PERMISSION_GRANTED) {
             checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-            ) == PackageManager.PERMISSION_GRANTED -> {
+            ) -> {
                 /*(if (getSharedPreferences(
-                        "file_show_complication_warning",
-                        Context.MODE_PRIVATE
-                    ).getBoolean("showComplicationWarning", true)
-                ) {*/
+                            "file_show_complication_warning",
+                            Context.MODE_PRIVATE
+                        ).getBoolean("showComplicationWarning", true)
+                    ) {*/
                 val intent = Intent(
                     this,
                     ConfirmationActivity::class.java
@@ -53,14 +55,11 @@ class GetComplicationPermission : ComponentActivity() {
                 }
                 startActivity(intent)
                 /*getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
-                    .edit().putBoolean("showComplicationWarning", false).apply()*/
+                        .edit().putBoolean("showComplicationWarning", false).apply()*/
                 Log.d("WATCHFACETEST", "granted in onCreate()")
                 //d}
             }
             else -> {
-                requestPermissionLauncher.launch(
-                    "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-                )
                 Log.d("WATCHFACETEST", "not granted in onCreate()")
             }
         }
