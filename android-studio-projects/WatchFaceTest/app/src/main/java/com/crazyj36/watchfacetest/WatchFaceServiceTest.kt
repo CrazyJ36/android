@@ -23,7 +23,7 @@ import androidx.wear.watchface.style.CurrentUserStyleRepository
 class WatchFaceServiceTest: WatchFaceService() {
     override fun onCreate() {
         super.onCreate()
-        /*if (checkSelfPermission(
+        if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) != PackageManager.PERMISSION_GRANTED) {
             startActivity(
@@ -33,7 +33,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                         Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
                     )
             )
-        }*/
+        }
     }
 
     override suspend fun createWatchFace(
@@ -102,7 +102,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                     ComplicationType.LONG_TEXT
                 ),
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                    SystemDataSources.NO_DATA_SOURCE,
+                    SystemDataSources.DATA_SOURCE_WEATHER,
                     ComplicationType.SHORT_TEXT
                 ),
                 bounds = ComplicationSlotBounds(
