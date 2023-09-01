@@ -3,6 +3,7 @@ package com.crazyj36.watchfacetest
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,27 +22,31 @@ class GetComplicationPermission: FragmentActivity() {
             ActivityResultContracts.RequestPermission()
         ) { isGranted ->
             if (isGranted) {
-                GetComplicationPermission().isGranted = true
-                if (getSharedPreferences(
+                //GetComplicationPermission().isGranted = true
+                /*if (getSharedPreferences(
                         "file_show_complication_warning",
                         Context.MODE_PRIVATE
                     ).getBoolean("showComplicationWarning", true)
-                ) {
-                    startActivity(Intent(
-                        this,
-                        ConfirmationActivity::class.java
-                    ).putExtra(ConfirmationActivity
-                        .EXTRA_ANIMATION_TYPE, ConfirmationActivity
-                        .SUCCESS_ANIMATION
-                    ).putExtra(ConfirmationActivity
-                        .EXTRA_MESSAGE,
-                        resources.getString(R.string.complicationWarningText))
-                    )
-                    getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
+                ) {*/
+                val intent = Intent(this,
+                    ConfirmationActivity::class.java).apply {
+                        putExtra(ConfirmationActivity
+                            .EXTRA_ANIMATION_TYPE, ConfirmationActivity
+                            .SUCCESS_ANIMATION)
+                        putExtra(ConfirmationActivity
+                            .EXTRA_MESSAGE,
+                            resources.getString(R.string.complicationWarningText))
+                    }
+                startActivity(intent)
+                    /*getSharedPreferences("file_show_complication_warning", Context.MODE_PRIVATE)
                         .edit().putBoolean("showComplicationWarning", false).apply()
-                }
+
+                     */
+                    Log.d("WATCHFACETEST", "granted")
+                //}
             } else {
-                finish()
+                Log.d("WATCHFACETEST", "not granted.")
+                //finish()
             }
         }
     override fun onCreate(savedInstanceState: Bundle?) {
