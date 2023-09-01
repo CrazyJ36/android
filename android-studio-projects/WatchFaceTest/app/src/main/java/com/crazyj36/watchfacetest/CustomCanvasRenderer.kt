@@ -144,7 +144,7 @@ class CustomCanvasRenderer(
                 complication.render(canvas, zonedDateTime, renderParameters)
             }
             // Used for measuring width between complications.
-            canvas.drawLine((width / 2).toFloat(), 0.9f, (width / 2).toFloat(), 0.1f, textSeparatorPaint)
+            canvas.drawLine((width / 2).toFloat(), 0f, (width / 2).toFloat(), height.toFloat(), textSeparatorPaint)
         }
         val hourHandBorder: Path = createClockHand(
             bounds,
