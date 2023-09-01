@@ -4,15 +4,16 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentActivity
 import androidx.wear.activity.ConfirmationActivity
 
-class GetComplicationPermission: FragmentActivity() {
+class GetComplicationPermission: ComponentActivity() {
     private val requestPermissionLauncher =
         registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
+            ActivityResultContracts
+                .RequestPermission()
         ) { isGranted: Boolean ->
             if (isGranted) {
                 //GetComplicationPermission().isGranted = true
@@ -35,8 +36,7 @@ class GetComplicationPermission: FragmentActivity() {
             "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
         )
         when {
-            ContextCompat.checkSelfPermission(
-                this@GetComplicationPermission,
+            checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) == PackageManager.PERMISSION_GRANTED -> {
                 val intent = Intent(
