@@ -68,13 +68,25 @@ class WatchFaceServiceTest: WatchFaceService() {
                     listener
                 )
             }
+        val supportedTypesList = listOf(
+            ComplicationType.SHORT_TEXT,
+            ComplicationType.SMALL_IMAGE,
+            ComplicationType.RANGED_VALUE,
+            ComplicationType.NO_DATA,
+            ComplicationType.LONG_TEXT,
+            ComplicationType.MONOCHROMATIC_IMAGE,
+            ComplicationType.NOT_CONFIGURED,
+            ComplicationType.EMPTY,
+            ComplicationType.GOAL_PROGRESS,
+            ComplicationType.NO_PERMISSION,
+            ComplicationType.PHOTO_IMAGE,
+            ComplicationType.WEIGHTED_ELEMENTS
+        )
         val leftTopComplication = ComplicationSlot
             .createRoundRectComplicationSlotBuilder(
                 id = 0,
                 canvasComplicationFactory = defaultCanvasComplicationFactory,
-                supportedTypes = listOf(
-                    ComplicationType.SHORT_TEXT
-                ),
+                supportedTypes = supportedTypesList,
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
                     SystemDataSources.DATA_SOURCE_DATE,
                     ComplicationType.SHORT_TEXT
@@ -88,11 +100,9 @@ class WatchFaceServiceTest: WatchFaceService() {
                 id = 1,
                 canvasComplicationFactory =
                     defaultCanvasComplicationFactory,
-                supportedTypes = listOf(
-                    ComplicationType.SHORT_TEXT,
-                ),
+                supportedTypes = supportedTypesList,
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                    SystemDataSources.DATA_SOURCE_DATE,
+                    SystemDataSources.DATA_SOURCE_WEATHER,
                     ComplicationType.SHORT_TEXT
                 ),
                 bounds = ComplicationSlotBounds(
@@ -104,30 +114,26 @@ class WatchFaceServiceTest: WatchFaceService() {
                 id = 2,
                 canvasComplicationFactory =
                     defaultCanvasComplicationFactory,
-                supportedTypes = listOf(
-                    ComplicationType.SHORT_TEXT
-                ),
+                supportedTypes = supportedTypesList,
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                    SystemDataSources.DATA_SOURCE_DATE,
+                    SystemDataSources.DATA_SOURCE_STEP_COUNT,
                     ComplicationType.SHORT_TEXT
                 ),
                 bounds = ComplicationSlotBounds(
-                    RectF(0.7f, 0.2f, 0.83f, 0.33f)
+                    RectF(0.6f, 0.2f, 0.83f, 0.33f)
                 )
             ).build()
         val rightBottomComplication = ComplicationSlot
             .createRoundRectComplicationSlotBuilder(
                 id = 3,
                 canvasComplicationFactory = defaultCanvasComplicationFactory,
-                supportedTypes = listOf(
-                    ComplicationType.SHORT_TEXT
-                ),
+                supportedTypes = supportedTypesList,
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                    SystemDataSources.DATA_SOURCE_DATE,
+                    SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
                     ComplicationType.SHORT_TEXT
                 ),
                 bounds = ComplicationSlotBounds(
-                    RectF(0.7f, 0.34f, 0.83f, 0.47f)
+                    RectF(0.6f, 0.34f, 0.83f, 0.47f)
                 )
             ).build()
         return ComplicationSlotsManager(
