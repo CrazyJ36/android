@@ -120,7 +120,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                     ComplicationType.SHORT_TEXT
                 ),
                 bounds = ComplicationSlotBounds(
-                    RectF(0.6f, 0.2f, 0.83f, 0.33f)
+                    RectF(0.6f, 0.2f, 0.73f, 0.33f)
                 )
             ).build()
         val rightBottomComplication = ComplicationSlot
@@ -133,7 +133,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                     ComplicationType.SHORT_TEXT
                 ),
                 bounds = ComplicationSlotBounds(
-                    RectF(0.6f, 0.34f, 0.83f, 0.47f)
+                    RectF(0.6f, 0.34f, 0.73f, 0.47f)
                 )
             ).build()
         return ComplicationSlotsManager(
