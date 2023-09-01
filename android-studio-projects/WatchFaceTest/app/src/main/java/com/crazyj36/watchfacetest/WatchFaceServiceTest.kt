@@ -23,6 +23,7 @@ import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
+import java.time.Instant
 
 class WatchFaceServiceTest: WatchFaceService() {
     override fun onCreate() {
@@ -42,10 +43,10 @@ class WatchFaceServiceTest: WatchFaceService() {
         currentUserStyleRepository: CurrentUserStyleRepository
     ): WatchFace {
         // if bottom left complication is non-existent, then toast warning.
-        if (complicationSlotsManager.complicationSlots[1]!!.enabled) {
-            Log.d("WATCHFACETEST", "complication enabled")
+        if (complicationSlotsManager.complicationSlots[1]!!.isActiveAt(Instant.now())) {
+            Log.d("WATCHFACETEST", "complication showing")
         } else {
-            Log.d("WATCHFACETEST", "complication disabled")
+            Log.d("WATCHFACETEST", "complication not showing")
         }
         if (getSharedPreferences(
                 "file_show_complication_warning",
