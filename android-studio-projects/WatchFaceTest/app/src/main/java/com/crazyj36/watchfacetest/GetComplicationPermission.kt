@@ -5,19 +5,23 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.ComponentActivity
+import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.FragmentActivity
 import androidx.wear.activity.ConfirmationActivity
 
-class GetComplicationPermission: ComponentActivity() {
+class GetComplicationPermission: FragmentActivity() {
+    private var permissionGranted: Boolean = false
     private val requestPermissionLauncher =
         registerForActivityResult(
             ActivityResultContracts
                 .RequestPermission()
         ) { isGranted: Boolean ->
             if (isGranted) {
+                permissionGranted = true
                 Log.d("WATCHFACETEST", "granted in activityResult")
             } else {
+                permissionGranted = false
                 Log.d("WATCHFACETEST", "not granted in activityResult.")
             }
         }
@@ -26,10 +30,8 @@ class GetComplicationPermission: ComponentActivity() {
         requestPermissionLauncher.launch(
             "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
         )
-        when {
-            checkSelfPermission(
-                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-            ) == PackageManager.PERMISSION_GRANTED -> {
+        when (permissionGranted) {
+            true -> {
                 /*(if (getSharedPreferences(
                         "file_show_complication_warning",
                         Context.MODE_PRIVATE
@@ -59,7 +61,7 @@ class GetComplicationPermission: ComponentActivity() {
                         .edit().putBoolean("showComplicationWarning", false).apply()*/
                     Log.d("WATCHFACETEST", "granted in onCreate()")
                 //d}
-            } else -> {
+            } false -> {
                 Log.d("WATCHFACETEST", "not granted in onCreate()")
             }
         }
