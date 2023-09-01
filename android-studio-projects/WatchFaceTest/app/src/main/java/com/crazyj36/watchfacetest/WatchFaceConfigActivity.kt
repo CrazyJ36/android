@@ -41,28 +41,25 @@ class WatchFaceConfigActivity: ComponentActivity() {
             }
         } else {
             setContent {
-                PermissionNotYetGrantedLayout()
-            }
-        }
-    }
-    @Composable
-    private fun PermissionNotYetGrantedLayout() {
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            item {
-                Text(text = resources.getString(R.string.permissionNotYetGrantedLayoutText),
-                    textAlign = TextAlign.Center)
-            }
-            item {
-                CompactChip(onClick = {
-                    requestPermissions(arrayOf(
-                        "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"),
-                        0
-                    )
-                })
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    item {
+                        Text(text = resources.getString(R.string.permissionNotYetGrantedLayoutText),
+                            textAlign = TextAlign.Center)
+                    }
+                    item {
+                        CompactChip(onClick = {
+                            requestPermissions(arrayOf(
+                                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"),
+                                0
+                            )
+                            finish()
+                        })
+                    }
+                }
             }
         }
     }

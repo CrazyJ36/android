@@ -30,13 +30,9 @@ class WatchFaceServiceTest: WatchFaceService() {
         if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) != PackageManager.PERMISSION_GRANTED) {
-               /*startActivity(Intent(applicationContext, GetComplicationPermission::class.java)
+               startActivity(Intent(applicationContext, GetComplicationPermission::class.java)
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or
                     Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS))
-                */
-            GetComplicationPermission().requestPermissions(
-                arrayOf("com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"),
-                0)
         }
 
     }

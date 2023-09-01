@@ -7,7 +7,7 @@ import androidx.activity.ComponentActivity
 class GetComplicationPermission: ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /*if (checkSelfPermission(
+        if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
             != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(
@@ -17,6 +17,6 @@ class GetComplicationPermission: ComponentActivity() {
                 0
             )
             finish()
-        }*/
+        }
     }
 }
