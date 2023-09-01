@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.RectF
+import android.util.Log
 import android.view.SurfaceHolder
 import android.widget.Toast
 import androidx.core.app.ActivityCompat.requestPermissions
@@ -40,6 +41,12 @@ class WatchFaceServiceTest: WatchFaceService() {
         complicationSlotsManager: ComplicationSlotsManager,
         currentUserStyleRepository: CurrentUserStyleRepository
     ): WatchFace {
+        // if bottom left complication is non-existent, then toast warning.
+        if (complicationSlotsManager.complicationSlots[1]!!.enabled) {
+            Log.d("WATCHFACETEST", "complication enabled")
+        } else {
+            Log.d("WATCHFACETEST", "complication disabled")
+        }
         if (getSharedPreferences(
                 "file_show_complication_warning",
                 Context.MODE_PRIVATE)
