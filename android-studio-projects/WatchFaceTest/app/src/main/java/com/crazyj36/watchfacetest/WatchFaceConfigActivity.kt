@@ -7,12 +7,15 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.text.style.TextAlign
 import androidx.wear.compose.material.CompactChip
 import androidx.wear.compose.material.Text
@@ -37,7 +40,9 @@ import kotlinx.coroutines.yield
 
 class WatchFaceConfigActivity: ComponentActivity() {
     private lateinit var editorSession: EditorSession
-
+    companion object {
+        private lateinit var bitmap: ImageBitmap
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (checkSelfPermission(
@@ -58,7 +63,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 //    .openComplicationDataSourceChooser(1)
                 //finish()
 
-                editorSession.renderWatchFaceToBitmap(
+                bitmap = editorSession.renderWatchFaceToBitmap(
                     RenderParameters(
                         DrawMode.INTERACTIVE,
                         WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
@@ -69,8 +74,11 @@ class WatchFaceConfigActivity: ComponentActivity() {
                         )
                     ),
                     Instant.now(),
-                    slotIdToComplicationData = null
-                )
+                    editorSession.complicationsPreviewData.value
+                ).asImageBitmap()
+                setContent {
+                    Image(bitmap, "preview image")
+                }
             }
         } else {
             setContent {

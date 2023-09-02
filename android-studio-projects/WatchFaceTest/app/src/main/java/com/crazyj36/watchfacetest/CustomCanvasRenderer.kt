@@ -79,13 +79,14 @@ class CustomCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        Toast.makeText(
+        /*Toast.makeText(
             context,
             "renderHighlightLayer() triggered",
             Toast.LENGTH_SHORT
         ).show()
-        canvas.drawColor(
-            renderParameters.highlightLayer!!.backgroundTint)
+        canvas.drawLine((bounds.width() / 2).toFloat(), 0f,
+            (bounds.width() / 2).toFloat(),
+            bounds.height().toFloat(), textSeparatorPaint)*/
         for ((_, complication) in complicationSlotsManager
             .complicationSlots) {
             complication
@@ -149,7 +150,7 @@ class CustomCanvasRenderer(
                 complication.render(canvas, zonedDateTime, renderParameters)
             }
             // Used for measuring width between complications.
-            canvas.drawLine((width / 2).toFloat(), 0f, (width / 2).toFloat(), height.toFloat(), textSeparatorPaint)
+            //canvas.drawLine((width / 2).toFloat(), 0f, (width / 2).toFloat(), height.toFloat(), textSeparatorPaint)
         }
         val hourHandBorder: Path = createClockHand(
             bounds,
