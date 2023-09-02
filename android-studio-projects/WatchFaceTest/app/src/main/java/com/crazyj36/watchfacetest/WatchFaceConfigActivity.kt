@@ -52,7 +52,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 //    .openComplicationDataSourceChooser(1)
                 //finish()
             }
-            editorSession.renderWatchFaceToBitmap(
+            /*editorSession.renderWatchFaceToBitmap(
                 RenderParameters(
                     DrawMode.INTERACTIVE,
                     WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
@@ -64,7 +64,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 ),
                 editorSession.previewReferenceInstant,
                 editorSession.complicationsPreviewData.value
-            )
+            )*/
         } else {
             setContent {
                 LazyColumn(
