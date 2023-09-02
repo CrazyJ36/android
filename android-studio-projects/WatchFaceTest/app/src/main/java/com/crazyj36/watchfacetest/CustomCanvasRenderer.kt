@@ -83,6 +83,7 @@ class CustomCanvasRenderer(
             "renderHighlightLayer() triggered",
             Toast.LENGTH_SHORT
         ).show()
+        canvas.drawColor(renderParameters.highlightLayer!!.backgroundTint)
         canvas.drawLine((bounds.width() / 2).toFloat(), 0f,
             (bounds.width() / 2).toFloat(),
             bounds.height().toFloat(), textSeparatorPaint)
@@ -92,7 +93,6 @@ class CustomCanvasRenderer(
                 .renderHighlightLayer(
                     canvas, zonedDateTime, renderParameters)
         }
-
     }
     override fun render(
         canvas: Canvas,
