@@ -18,16 +18,22 @@ import androidx.wear.compose.material.CompactChip
 import androidx.wear.compose.material.Text
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
+import androidx.wear.watchface.complications.SystemDataSources
 import androidx.wear.watchface.complications.data.ComplicationData
+import androidx.wear.watchface.complications.data.ComplicationType
+import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.editor.EditorSession
 import androidx.wear.watchface.style.UserStyle
 import androidx.wear.watchface.style.WatchFaceLayer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import java.time.Instant
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.yield
 
 class WatchFaceConfigActivity: ComponentActivity() {
     private lateinit var editorSession: EditorSession
@@ -51,20 +57,21 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 //editorSession
                 //    .openComplicationDataSourceChooser(1)
                 //finish()
+
+                editorSession.renderWatchFaceToBitmap(
+                    RenderParameters(
+                        DrawMode.INTERACTIVE,
+                        WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
+                        RenderParameters.HighlightLayer(
+                            RenderParameters.HighlightedElement.AllComplicationSlots,
+                            Color.RED,
+                            Color.argb(128, 0, 0, 0)
+                        )
+                    ),
+                    Instant.now(),
+                    slotIdToComplicationData = null
+                )
             }
-            /*editorSession.renderWatchFaceToBitmap(
-                RenderParameters(
-                    DrawMode.INTERACTIVE,
-                    WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
-                    RenderParameters.HighlightLayer(
-                        RenderParameters.HighlightedElement.AllComplicationSlots,
-                        Color.RED,
-                        Color.argb(128, 0, 0, 0)
-                    )
-                ),
-                editorSession.previewReferenceInstant,
-                editorSession.complicationsPreviewData.value
-            )*/
         } else {
             setContent {
                 LazyColumn(
