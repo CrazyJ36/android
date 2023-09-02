@@ -1,7 +1,6 @@
 package com.crazyj36.watchfacetest
 
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
@@ -9,48 +8,31 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.text.style.TextAlign
 import androidx.wear.compose.material.CompactChip
 import androidx.wear.compose.material.Text
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
-import androidx.wear.watchface.complications.SystemDataSources
-import androidx.wear.watchface.complications.data.ComplicationData
-import androidx.wear.watchface.complications.data.ComplicationType
-import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.editor.EditorSession
-import androidx.wear.watchface.style.UserStyle
 import androidx.wear.watchface.style.WatchFaceLayer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import java.time.Instant
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.yield
+
 
 class WatchFaceConfigActivity: ComponentActivity() {
     private lateinit var editorSession: EditorSession
-    companion object {
-        private lateinit var bitmap: ImageBitmap
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) == PackageManager.PERMISSION_GRANTED) {
-            /*setContent {
-                Box(modifier = Modifier.fillMaxSize())
-            }*/
             /*Toast.makeText(this@WatchFaceConfigActivity,
                 resources.getString(R.string.chooseWeatherToastText),
                 Toast.LENGTH_LONG).show()*/
@@ -62,14 +44,13 @@ class WatchFaceConfigActivity: ComponentActivity() {
                 //editorSession
                 //    .openComplicationDataSourceChooser(1)
                 //finish()
-
-                bitmap = editorSession.renderWatchFaceToBitmap(
+                val bitmap = editorSession.renderWatchFaceToBitmap(
                     RenderParameters(
                         DrawMode.INTERACTIVE,
                         WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
                         RenderParameters.HighlightLayer(
                             RenderParameters.HighlightedElement.AllComplicationSlots,
-                            Color.RED,
+                            Color.GREEN,
                             Color.argb(128, 0, 0, 0)
                         )
                     ),
@@ -77,7 +58,7 @@ class WatchFaceConfigActivity: ComponentActivity() {
                     editorSession.complicationsPreviewData.value
                 ).asImageBitmap()
                 setContent {
-                    Image(bitmap, "preview image")
+                    Image(bitmap, "Preview of edited complications.")
                 }
             }
         } else {

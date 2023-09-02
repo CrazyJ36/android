@@ -4,10 +4,13 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.RectF
 import android.view.SurfaceHolder
+import android.widget.Toast
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
+import androidx.wear.watchface.TapEvent
+import androidx.wear.watchface.TapType
 import androidx.wear.watchface.WatchFace
 import androidx.wear.watchface.WatchFaceService
 import androidx.wear.watchface.WatchFaceType
@@ -20,7 +23,16 @@ import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawabl
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 
-class WatchFaceServiceTest: WatchFaceService() {
+class WatchFaceServiceTest: WatchFaceService(), WatchFace.TapListener {
+    override fun onTapEvent(tapType: Int, tapEvent: TapEvent, complicationSlot: ComplicationSlot?) {
+        if (tapType == TapType.UP) {
+            Toast.makeText(
+                this@WatchFaceServiceTest,
+                "tapped",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
     override fun onCreate() {
         super.onCreate()
         if (checkSelfPermission(
@@ -35,7 +47,6 @@ class WatchFaceServiceTest: WatchFaceService() {
             )
         }
     }
-
     override suspend fun createWatchFace(
         surfaceHolder: SurfaceHolder,
         watchState: WatchState,
@@ -51,7 +62,7 @@ class WatchFaceServiceTest: WatchFaceService() {
             canvasType = CanvasType.HARDWARE,
         )
         return WatchFace(watchFaceType = WatchFaceType.ANALOG,
-            renderer = renderer)
+            renderer = renderer).setTapListener(this)
     }
 
     override fun createComplicationSlotsManager(

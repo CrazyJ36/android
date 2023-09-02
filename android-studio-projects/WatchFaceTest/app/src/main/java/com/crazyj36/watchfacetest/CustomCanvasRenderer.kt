@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.Rect
-import android.util.Log
 import android.view.SurfaceHolder
 import android.widget.Toast
 import androidx.core.graphics.withRotation
@@ -79,20 +78,21 @@ class CustomCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        /*Toast.makeText(
+        Toast.makeText(
             context,
             "renderHighlightLayer() triggered",
             Toast.LENGTH_SHORT
         ).show()
         canvas.drawLine((bounds.width() / 2).toFloat(), 0f,
             (bounds.width() / 2).toFloat(),
-            bounds.height().toFloat(), textSeparatorPaint)*/
+            bounds.height().toFloat(), textSeparatorPaint)
         for ((_, complication) in complicationSlotsManager
             .complicationSlots) {
             complication
                 .renderHighlightLayer(
                     canvas, zonedDateTime, renderParameters)
         }
+
     }
     override fun render(
         canvas: Canvas,
