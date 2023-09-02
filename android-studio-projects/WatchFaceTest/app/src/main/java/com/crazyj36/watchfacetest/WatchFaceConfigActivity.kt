@@ -16,8 +16,12 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.text.style.TextAlign
 import androidx.wear.compose.material.CompactChip
 import androidx.wear.compose.material.Text
+import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
+import androidx.wear.watchface.TapEvent
+import androidx.wear.watchface.TapType
+import androidx.wear.watchface.WatchFace
 import androidx.wear.watchface.editor.EditorSession
 import androidx.wear.watchface.style.WatchFaceLayer
 import kotlinx.coroutines.Dispatchers
@@ -26,10 +30,20 @@ import kotlinx.coroutines.launch
 import java.time.Instant
 
 
-class WatchFaceConfigActivity: ComponentActivity() {
+class WatchFaceConfigActivity: ComponentActivity(), WatchFace.TapListener {
     private lateinit var editorSession: EditorSession
+    override fun onTapEvent(tapType: Int, tapEvent: TapEvent, complicationSlot: ComplicationSlot?) {
+        if (tapType == TapType.UP) {
+            Toast.makeText(
+                this,
+                "tapped",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) == PackageManager.PERMISSION_GRANTED) {
