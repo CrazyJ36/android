@@ -7,7 +7,6 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.Rect
 import android.view.SurfaceHolder
-import android.widget.Toast
 import androidx.core.graphics.withRotation
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
@@ -78,21 +77,6 @@ class CustomCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        Toast.makeText(
-            context,
-            "renderHighlightLayer() triggered",
-            Toast.LENGTH_SHORT
-        ).show()
-        canvas.drawColor(renderParameters.highlightLayer!!.backgroundTint)
-        canvas.drawLine((bounds.width() / 2).toFloat(), 0f,
-            (bounds.width() / 2).toFloat(),
-            bounds.height().toFloat(), textSeparatorPaint)
-        for ((_, complication) in complicationSlotsManager
-            .complicationSlots) {
-            complication
-                .renderHighlightLayer(
-                    canvas, zonedDateTime, renderParameters)
-        }
     }
     override fun render(
         canvas: Canvas,
