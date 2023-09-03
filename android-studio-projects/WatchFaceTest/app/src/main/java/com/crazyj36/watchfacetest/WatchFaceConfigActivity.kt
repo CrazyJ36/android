@@ -59,10 +59,9 @@ class WatchFaceConfigActivity : ComponentActivity() {
                         this@WatchFaceConfigActivity
                     )
                 loadingTextView = findViewById(R.id.loadingTextView)
-                loadingTextView.visibility = View.VISIBLE
                 delay(1000)
-                imageView = findViewById(R.id.imageView)
                 loadingTextView.visibility = View.GONE
+                imageView = findViewById(R.id.imageView)
                 getPreview()
             }
 

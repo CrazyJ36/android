@@ -12,9 +12,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintHeight_percent="0.5"
         android:textAlignment="center"
-        android:text="@string/loadingPreviewText"
-        android:visibility="gone"/>
+        android:text="@string/loadingPreviewText" />
     <Button
         android:id="@+id/leftTopButton"
         android:layout_width="0dp"
