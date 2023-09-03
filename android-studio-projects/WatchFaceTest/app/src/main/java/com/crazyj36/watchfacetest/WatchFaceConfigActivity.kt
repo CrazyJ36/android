@@ -52,15 +52,17 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) == PackageManager.PERMISSION_GRANTED
         ) {
+            setContentView(R.layout.watch_face_preview)
             scope.launch(Dispatchers.Main.immediate) {
-                setContentView(R.layout.watch_face_preview)
                 editorSession = EditorSession
                     .createOnWatchEditorSession(
                         this@WatchFaceConfigActivity
                     )
-                //loadingTextView = findViewById(R.id.loadingTextView)
+                loadingTextView = findViewById(R.id.loadingTextView)
                 imageView = findViewById(R.id.imageView)
+                loadingTextView.visibility = View.VISIBLE
                 //delay(1000)
+                loadingTextView.visibility = View.GONE
                 getPreview()
             }
 

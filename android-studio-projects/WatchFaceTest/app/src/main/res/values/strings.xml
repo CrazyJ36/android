@@ -5,5 +5,5 @@
     <string name="permissionNotYetGrantedLayoutText">This watch face needs your permission to receive useful data(eg. Outside temperature) that comes from some complications.\nPlease allow this below.</string>
     <string name="allowButtonText">Allow</string>
     <string name="editorPreviewContentDescription">Preview of editable Watch Face.</string>
-    <string name="loadingPreviewText">Loading…</string>
+    <string name="loadingPreviewText">Loading preview…</string>
 </resources>
