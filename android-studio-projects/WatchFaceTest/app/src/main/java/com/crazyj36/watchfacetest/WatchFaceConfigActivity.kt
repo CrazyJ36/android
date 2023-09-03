@@ -49,15 +49,15 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            setContentView(R.layout.watch_face_preview)
-            imageView = findViewById(R.id.imageView)
-            getPreview()
             scope.launch(Dispatchers.Main.immediate) {
                 editorSession = EditorSession
                     .createOnWatchEditorSession(
                         this@WatchFaceConfigActivity
                     )
             }
+            setContentView(R.layout.watch_face_preview)
+            imageView = findViewById(R.id.imageView)
+            getPreview()
         } else {
             setContent {
                 LazyColumn(
