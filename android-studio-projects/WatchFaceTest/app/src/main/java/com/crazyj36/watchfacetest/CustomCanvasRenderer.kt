@@ -8,6 +8,7 @@ import android.graphics.Path
 import android.graphics.Rect
 import android.view.SurfaceHolder
 import androidx.core.graphics.withRotation
+import androidx.wear.compose.material.Button
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
@@ -77,6 +78,11 @@ class CustomCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
+        for ((_, complication) in complicationSlotsManager
+            .complicationSlots) {
+            complication.renderHighlightLayer(
+                canvas, zonedDateTime, renderParameters)
+        }
     }
     override fun render(
         canvas: Canvas,
