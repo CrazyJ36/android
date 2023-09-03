@@ -90,8 +90,8 @@ class WatchFaceServiceTest: WatchFaceService() {
                     SystemDataSources.DATA_SOURCE_DATE,
                     ComplicationType.SHORT_TEXT
                 ),
-                bounds = ComplicationSlotBounds(
-                    RectF(0.28f, 0.2f, 0.43f, 0.35f),
+                bounds = ComplicationSlotBounds( // 16 width/height
+                    RectF(0.28f, 0.20f, 0.44f, 0.36f),
                 )
             ).build()
         val leftBottomComplication = ComplicationSlot
@@ -105,7 +105,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                     ComplicationType.SHORT_TEXT
                 ),
                 bounds = ComplicationSlotBounds(
-                    RectF(0.28f, 0.40f, 0.43f, 0.55f)
+                    RectF(0.28f, 0.40f, 0.44f, 0.56f)
                 )
             ).build()
         val rightTopComplication = ComplicationSlot
@@ -119,7 +119,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                     ComplicationType.SHORT_TEXT
                 ),
                 bounds = ComplicationSlotBounds(
-                    RectF(0.57f, 0.2f, 0.72f, 0.35f)
+                    RectF(0.57f, 0.20f, 0.73f, 0.36f)
                 )
             ).build()
         val rightBottomComplication = ComplicationSlot
@@ -132,7 +132,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                     ComplicationType.SHORT_TEXT
                 ),
                 bounds = ComplicationSlotBounds(
-                    RectF(0.57f, 0.40f, 0.72f, 0.55f)
+                    RectF(0.57f, 0.40f, 0.73f, 0.56f)
                 )
             ).build()
         return ComplicationSlotsManager(

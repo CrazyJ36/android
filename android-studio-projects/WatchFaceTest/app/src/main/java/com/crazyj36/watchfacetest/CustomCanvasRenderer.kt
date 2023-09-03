@@ -78,11 +78,6 @@ class CustomCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        for ((_, complication) in complicationSlotsManager
-            .complicationSlots) {
-            complication.renderHighlightLayer(
-                canvas, zonedDateTime, renderParameters)
-        }
     }
     override fun render(
         canvas: Canvas,
@@ -130,7 +125,7 @@ class CustomCanvasRenderer(
             )
             count++
             canvas.drawText(
-                count.toString(),
+                "Update $count",
                 (width / 2).toFloat(),
                 (height - (height / 3)).toFloat(),
                 textPaint

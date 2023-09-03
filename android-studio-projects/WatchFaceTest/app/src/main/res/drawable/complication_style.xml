@@ -5,13 +5,12 @@
     app:borderColor="@android:color/darker_gray"
     app:borderStyle="solid"
     app:borderWidth="1dp"
-    app:highlightColor="@android:color/holo_green_dark"
     app:iconColor="@android:color/white"
     app:rangedValuePrimaryColor="@android:color/holo_green_dark"
     app:rangedValueRingWidth="2dp"
     app:rangedValueSecondaryColor="@android:color/black"
     app:textColor="@android:color/white"
     app:textTypeface="sans-serif-condensed"
-    app:titleColor="@android:color/darker_gray"
+    app:titleColor="@android:color/white"
     app:titleTypeface="sans-serif-condensed">
 </drawable>

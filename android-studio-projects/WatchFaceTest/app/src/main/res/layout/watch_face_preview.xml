@@ -6,7 +6,6 @@
     android:layout_height="match_parent">
 
     <Button
-        android:text="lt"
         android:id="@+id/leftTopButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -16,12 +15,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_percent="0.21"
-        app:layout_constraintHeight_percent="0.21"
-        app:layout_constraintHorizontal_bias="0.319"
-        app:layout_constraintVertical_bias="0.216"/>
+        app:layout_constraintWidth_percent="0.17"
+        app:layout_constraintHeight_percent="0.17"
+        app:layout_constraintHorizontal_bias="0.335"
+        app:layout_constraintVertical_bias="0.235" />
     <Button
-        android:text="lb"
         android:id="@+id/leftBottomButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -31,13 +29,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_percent="0.21"
-        app:layout_constraintHeight_percent="0.21"
-        app:layout_constraintHorizontal_bias="0.32"
-        app:layout_constraintVertical_bias="0.48"/>
+        app:layout_constraintWidth_percent="0.17"
+        app:layout_constraintHeight_percent="0.17"
+        app:layout_constraintHorizontal_bias="0.335"
+        app:layout_constraintVertical_bias="0.475"/>
     <Button
-        android:text="rt"
-        android:id="@+id/RightTopButton"
+        android:id="@+id/rightTopButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/circle_button"
@@ -46,12 +43,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_percent="0.21"
-        app:layout_constraintHeight_percent="0.21"
-        app:layout_constraintHorizontal_bias="0.68"
-        app:layout_constraintVertical_bias="0.20"/>
+        app:layout_constraintWidth_percent="0.17"
+        app:layout_constraintHeight_percent="0.17"
+        app:layout_constraintHorizontal_bias="0.680"
+        app:layout_constraintVertical_bias="0.235"/>
     <Button
-        android:text="rb"
         android:id="@+id/rightBottomButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -61,10 +57,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_percent="0.21"
-        app:layout_constraintHeight_percent="0.21"
+        app:layout_constraintWidth_percent="0.17"
+        app:layout_constraintHeight_percent="0.17"
         app:layout_constraintHorizontal_bias="0.68"
-        app:layout_constraintVertical_bias="0.48"/>
+        app:layout_constraintVertical_bias="0.475"/>
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"

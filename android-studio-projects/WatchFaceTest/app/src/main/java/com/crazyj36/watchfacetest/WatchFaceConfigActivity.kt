@@ -57,7 +57,6 @@ class WatchFaceConfigActivity : ComponentActivity() {
                     )
                 setContentView(R.layout.watch_face_preview)
                 imageView = findViewById(R.id.imageView)
-                delay(500)
                 getPreview()
             }
 
