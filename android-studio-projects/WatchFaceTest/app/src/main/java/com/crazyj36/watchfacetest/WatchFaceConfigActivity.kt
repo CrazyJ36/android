@@ -51,12 +51,12 @@ class WatchFaceConfigActivity : ComponentActivity() {
         ) {
             setContentView(R.layout.watch_face_preview)
             imageView = findViewById(R.id.imageView)
+            getPreview()
             scope.launch(Dispatchers.Main.immediate) {
                 editorSession = EditorSession
                     .createOnWatchEditorSession(
                         this@WatchFaceConfigActivity
                     )
-                getPreview()
             }
         } else {
             setContent {
