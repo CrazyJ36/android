@@ -54,10 +54,11 @@ class WatchFaceConfigActivity : ComponentActivity() {
                     .createOnWatchEditorSession(
                         this@WatchFaceConfigActivity
                     )
+                setContentView(R.layout.watch_face_preview)
+                imageView = findViewById(R.id.imageView)
+                getPreview()
             }
-            setContentView(R.layout.watch_face_preview)
-            imageView = findViewById(R.id.imageView)
-            getPreview()
+
         } else {
             setContent {
                 LazyColumn(
