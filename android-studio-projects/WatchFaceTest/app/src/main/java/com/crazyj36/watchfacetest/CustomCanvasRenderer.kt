@@ -8,7 +8,6 @@ import android.graphics.Path
 import android.graphics.Rect
 import android.view.SurfaceHolder
 import androidx.core.graphics.withRotation
-import androidx.wear.compose.material.Button
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
@@ -40,7 +39,7 @@ class CustomCanvasRenderer(
         setARGB(255, 100, 100, 100)
         textAlign = Paint.Align.CENTER
     }
-    private val textPaint = Paint().apply{
+    private val textPaint = Paint().apply {
         isAntiAlias = true
         setARGB(255, 230, 230, 230)
         textSize = 24F
@@ -79,6 +78,7 @@ class CustomCanvasRenderer(
         sharedAssets: MySharedAssets
     ) {
     }
+
     override fun render(
         canvas: Canvas,
         bounds: Rect,

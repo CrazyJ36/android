@@ -29,7 +29,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintWidth_percent="0.17"
         app:layout_constraintHeight_percent="0.17"
-        app:layout_constraintHorizontal_bias="0.335"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintVertical_bias="0.235" />
     <Button
         android:id="@+id/leftBottomButton"
@@ -44,8 +44,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintWidth_percent="0.17"
         app:layout_constraintHeight_percent="0.17"
-        app:layout_constraintHorizontal_bias="0.335"
-        app:layout_constraintVertical_bias="0.475"/>
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintVertical_bias="0.476"/>
     <Button
         android:id="@+id/rightTopButton"
         android:layout_width="0dp"
@@ -74,8 +74,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintWidth_percent="0.17"
         app:layout_constraintHeight_percent="0.17"
-        app:layout_constraintHorizontal_bias="0.68"
-        app:layout_constraintVertical_bias="0.475"/>
+        app:layout_constraintHorizontal_bias="0.680"
+        app:layout_constraintVertical_bias="0.476"/>
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
