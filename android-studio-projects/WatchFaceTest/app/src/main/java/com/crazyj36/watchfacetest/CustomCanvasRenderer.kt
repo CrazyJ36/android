@@ -85,7 +85,7 @@ class CustomCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        if (count > 99) count = 0
+        if (count > 16) count = 0
         val width = bounds.width()
         val height = bounds.height()
         canvas.drawColor(Color.BLACK)

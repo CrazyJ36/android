@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -43,6 +44,7 @@ import java.time.Instant
 class WatchFaceConfigActivity : ComponentActivity() {
     private lateinit var editorSession: EditorSession
     private lateinit var imageView: ImageView
+    private lateinit var loadingTextView: TextView
     private val scope = MainScope()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,12 +53,14 @@ class WatchFaceConfigActivity : ComponentActivity() {
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             scope.launch(Dispatchers.Main.immediate) {
+                setContentView(R.layout.watch_face_preview)
                 editorSession = EditorSession
                     .createOnWatchEditorSession(
                         this@WatchFaceConfigActivity
                     )
-                setContentView(R.layout.watch_face_preview)
+                //loadingTextView = findViewById(R.id.loadingTextView)
                 imageView = findViewById(R.id.imageView)
+                //delay(1000)
                 getPreview()
             }
 
