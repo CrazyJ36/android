@@ -49,12 +49,12 @@ class CustomCanvasRenderer(
     private val indexHoursPaint = Paint().apply {
         isAntiAlias = true
         setARGB(255, 170, 170, 170)
-        textSize = 24f
+        textSize = 28f
     }
     private val indexDotsPaint = Paint().apply {
         isAntiAlias = true
         setARGB(255, 170, 170, 170)
-        textSize = 20f
+        textSize = 22f
     }
     private val hourMarks = arrayOf("3", "6", "9", "12")
     private val hourHandsPaint = Paint().apply {
@@ -67,10 +67,10 @@ class CustomCanvasRenderer(
         setARGB(255, 200, 200, 200)
 
     }
-    private val secondsPerHourHandRotation = Duration.ofHours(12)
-        .seconds
-    private val secondsPerMinuteHandRotation = Duration.ofHours(1)
-        .seconds
+    private val secondsPerHourHandRotation =
+        Duration.ofHours(12).seconds
+    private val secondsPerMinuteHandRotation =
+        Duration.ofHours(1).seconds
     private val textBounds = Rect()
     override fun renderHighlightLayer(
         canvas: Canvas,
