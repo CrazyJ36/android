@@ -4,6 +4,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
@@ -61,6 +62,10 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 loadingTextView = findViewById(R.id.loadingTextView)
                 delay(1000)
                 loadingTextView.visibility = View.GONE
+                findViewById<Button>(R.id.leftTopButton).visibility = View.VISIBLE
+                findViewById<Button>(R.id.leftBottomButton).visibility = View.VISIBLE
+                findViewById<Button>(R.id.rightTopButton).visibility = View.VISIBLE
+                findViewById<Button>(R.id.rightBottomButton).visibility = View.VISIBLE
                 imageView = findViewById(R.id.imageView)
                 getPreview()
             }
