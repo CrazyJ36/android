@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.ui.Alignment
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -49,12 +50,12 @@ class WatchFaceConfigActivity : ComponentActivity() {
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             setContentView(R.layout.watch_face_preview)
+            imageView = findViewById(R.id.imageView)
             scope.launch(Dispatchers.Main.immediate) {
                 editorSession = EditorSession
                     .createOnWatchEditorSession(
                         this@WatchFaceConfigActivity
                     )
-                imageView = findViewById(R.id.imageView)
                 getPreview()
             }
         } else {
@@ -67,6 +68,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 ) {
                     item {
                         Text(
+                            modifier = Modifier.fillMaxWidth(),
                             text = resources.getString(
                                 R.string.permissionNotYetGrantedLayoutText
                             ),
@@ -98,7 +100,24 @@ class WatchFaceConfigActivity : ComponentActivity() {
             editorSession.openComplicationDataSourceChooser(0)
             getPreview()
         }
-
+    }
+    fun onClickLeftBottomComplication(view: View) {
+        scope.launch(Dispatchers.Main.immediate) {
+            editorSession.openComplicationDataSourceChooser(1)
+            getPreview()
+        }
+    }
+    fun onClickRightTopComplication(view: View) {
+        scope.launch(Dispatchers.Main.immediate) {
+            editorSession.openComplicationDataSourceChooser(2)
+            getPreview()
+        }
+    }
+    fun onClickRightBottomComplication(view: View) {
+        scope.launch(Dispatchers.Main.immediate) {
+            editorSession.openComplicationDataSourceChooser(3)
+            getPreview()
+        }
     }
     private fun getPreview() {
         imageView.setImageBitmap(editorSession.renderWatchFaceToBitmap(
@@ -115,8 +134,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 )
             ),
             Instant.now(),
-            editorSession.complicationsPreviewData.value
-        )
+            editorSession.complicationsPreviewData.value)
         )
     }
 }
