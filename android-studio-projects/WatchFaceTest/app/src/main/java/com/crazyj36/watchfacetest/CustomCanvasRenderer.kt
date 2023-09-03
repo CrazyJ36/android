@@ -80,7 +80,7 @@ class CustomCanvasRenderer(
     ) {
         for ((_, complication) in complicationSlotsManager
             .complicationSlots) {
-            complication.renderHighlightLayer(
+            complication.render(
                 canvas, zonedDateTime, renderParameters)
         }
     }
