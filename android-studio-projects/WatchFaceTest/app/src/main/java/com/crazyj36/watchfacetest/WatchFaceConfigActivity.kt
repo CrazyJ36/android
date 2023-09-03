@@ -35,6 +35,7 @@ import androidx.wear.watchface.editor.EditorSession
 import androidx.wear.watchface.style.WatchFaceLayer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.time.Instant
 
@@ -56,6 +57,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                     )
                 setContentView(R.layout.watch_face_preview)
                 imageView = findViewById(R.id.imageView)
+                delay(500)
                 getPreview()
             }
 
