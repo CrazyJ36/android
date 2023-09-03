@@ -54,10 +54,9 @@ class WatchFaceConfigActivity : ComponentActivity() {
                     .createOnWatchEditorSession(
                         this@WatchFaceConfigActivity
                     )
+                imageView = findViewById(R.id.imageView)
+                getPreview()
             }
-            imageView = findViewById(R.id.imageView)
-            imageView.setImageBitmap(getPreview())
-
         } else {
             setContent {
                 LazyColumn(
@@ -97,11 +96,12 @@ class WatchFaceConfigActivity : ComponentActivity() {
     fun onClickLeftTopComplication(view: View) {
         scope.launch(Dispatchers.Main.immediate) {
             editorSession.openComplicationDataSourceChooser(0)
+            getPreview()
         }
-        imageView.setImageBitmap(getPreview())
+
     }
-    private fun getPreview(): Bitmap {
-        return editorSession.renderWatchFaceToBitmap(
+    private fun getPreview() {
+        imageView.setImageBitmap(editorSession.renderWatchFaceToBitmap(
             RenderParameters(
                 DrawMode.INTERACTIVE,
                 WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
@@ -116,6 +116,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
             ),
             Instant.now(),
             editorSession.complicationsPreviewData.value
+        )
         )
     }
 }
