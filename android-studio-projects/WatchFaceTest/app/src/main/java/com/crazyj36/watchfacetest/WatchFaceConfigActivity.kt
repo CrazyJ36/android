@@ -77,18 +77,11 @@ class WatchFaceConfigActivity : ComponentActivity() {
                     item {
                         CompactChip(
                             onClick = {
-                                /*requestPermissions(
+                                requestPermissions(
                                     arrayOf(
                                         "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
                                     ),
                                     0
-                                )*/
-                                startActivity(
-                                    Intent(applicationContext, GetComplicationPermission::class.java)
-                                        .setFlags(
-                                            Intent.FLAG_ACTIVITY_NEW_TASK or
-                                                    Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-                                        )
                                 )
                                 finish()
                             },
