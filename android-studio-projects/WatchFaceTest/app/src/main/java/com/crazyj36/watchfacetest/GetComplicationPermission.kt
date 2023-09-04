@@ -61,7 +61,10 @@ class GetComplicationPermission : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (resources.configuration.isScreenRound) {
+        requestPermission.launch(
+            "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
+        )
+        /*if (resources.configuration.isScreenRound) {
             setContent {
                 ScalingLazyColumn(
                     modifier = Modifier
@@ -122,7 +125,6 @@ class GetComplicationPermission : ComponentActivity() {
                         )
                     }
                 }
-            }
+            }*/
         }
-    }
 }
