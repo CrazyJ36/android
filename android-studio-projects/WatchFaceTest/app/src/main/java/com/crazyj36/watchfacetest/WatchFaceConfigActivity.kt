@@ -35,7 +35,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
     private lateinit var loadingTextView: TextView
     private val scope = MainScope()
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("WATCHFACETEST", "onCreate()")
+        Log.d("WATCHFACETEST", "onCreate() config")
         super.onCreate(savedInstanceState)
         if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
@@ -58,14 +58,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 getPreview()
             }
         } else {
-            startActivity(
-                Intent(applicationContext, GetComplicationPermission::class.java)
-                    .setFlags(
-                        Intent.FLAG_ACTIVITY_NEW_TASK or
-                                Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-                    )
-            )
-            /*setContent {
+            setContent {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize(),
@@ -82,22 +75,30 @@ class WatchFaceConfigActivity : ComponentActivity() {
                         )
                     }
                     item {
-                        CompactChip(onClick = {
-                            requestPermissions(
-                                arrayOf(
-                                    "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-                                ),
-                                0
-                            )
-                            finish()
-                        },
+                        CompactChip(
+                            onClick = {
+                                /*requestPermissions(
+                                    arrayOf(
+                                        "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
+                                    ),
+                                    0
+                                )*/
+                                startActivity(
+                                    Intent(applicationContext, GetComplicationPermission::class.java)
+                                        .setFlags(
+                                            Intent.FLAG_ACTIVITY_NEW_TASK or
+                                                    Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+                                        )
+                                )
+                                finish()
+                            },
                             label = {
                                 Text(resources.getString(R.string.allowButtonText))
                             }
                         )
                     }
                 }
-            }*/
+            }
         }
     }
 
