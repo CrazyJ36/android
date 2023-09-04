@@ -1,5 +1,6 @@
 package com.crazyj36.watchfacetest
 
+import android.content.ComponentName
 import android.graphics.RectF
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
@@ -93,23 +94,22 @@ class WatchFaceServiceTest: WatchFaceService() {
                 )
             ).build()
         // ---------
-        var testDataSource = DefaultComplicationDataSourcePolicy(
-            SystemDataSources.DATA_SOURCE_FAVORITE_CONTACT,
+        val testDataSource = DefaultComplicationDataSourcePolicy(
+            SystemDataSources.DATA_SOURCE_WEATHER,
             ComplicationType.SMALL_IMAGE
-        )
-        if (testDataSource.primaryDataSourceDefaultType == ComplicationType.NO_PERMISSION) {
-            testDataSource = DefaultComplicationDataSourcePolicy(
-                SystemDataSources.DATA_SOURCE_APP_SHORTCUT,
-                ComplicationType.SMALL_IMAGE
-            )
-        }
+        ).primaryDataSource
         val leftBottomComplication = ComplicationSlot
             .createRoundRectComplicationSlotBuilder(
                 id = 1,
                 canvasComplicationFactory =
                     defaultCanvasComplicationFactory,
                 supportedTypes = supportedTypesList,
-                defaultDataSourcePolicy = testDataSource,
+                defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+                    testDataSource!!,
+                    ComplicationType.SMALL_IMAGE,
+                    SystemDataSources.DATA_SOURCE_NEXT_EVENT,
+                    ComplicationType.SHORT_TEXT
+                ),
                 bounds = ComplicationSlotBounds(
                     RectF(0.28f, 0.40f, 0.44f, 0.56f)
                 )
