@@ -36,11 +36,11 @@ class WatchFaceConfigActivity : ComponentActivity() {
     private val scope = MainScope()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("WATCHFACETEST", "onCreate() config")
+        /*Log.d("WATCHFACETEST", "onCreate() config")
         if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) == PackageManager.PERMISSION_GRANTED
-        ) {
+        ) {*/
             setContentView(R.layout.watch_face_preview)
             scope.launch(Dispatchers.Main.immediate) {
                 editorSession = EditorSession
@@ -57,7 +57,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 imageView = findViewById(R.id.imageView)
                 getPreview()
             }
-        } else {
+        /*} else {
             startActivity(
                 Intent(applicationContext, GetComplicationPermission::class.java)
                     .setFlags(
@@ -65,7 +65,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                                 Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
                     )
             )
-        }
+        }*/
     }
 
     fun onClickLeftTopComplication(view: View) {

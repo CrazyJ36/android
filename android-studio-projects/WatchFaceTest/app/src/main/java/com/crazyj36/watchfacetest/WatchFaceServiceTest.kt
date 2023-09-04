@@ -1,9 +1,6 @@
 package com.crazyj36.watchfacetest
 
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.RectF
-import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
@@ -24,8 +21,7 @@ import androidx.wear.watchface.style.CurrentUserStyleRepository
 class WatchFaceServiceTest: WatchFaceService() {
     override fun onCreate() {
         super.onCreate()
-        Log.d("WATCHFACETEST", "onCreate() service")
-        if (checkSelfPermission(
+        /*if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) != PackageManager.PERMISSION_GRANTED) {
             startActivity(
@@ -35,7 +31,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                         Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
                     )
             )
-        }
+        }*/
     }
     override suspend fun createWatchFace(
         surfaceHolder: SurfaceHolder,
@@ -96,20 +92,29 @@ class WatchFaceServiceTest: WatchFaceService() {
                     RectF(0.28f, 0.20f, 0.44f, 0.36f),
                 )
             ).build()
+        // ---------
+        var testDataSource = DefaultComplicationDataSourcePolicy(
+            SystemDataSources.DATA_SOURCE_FAVORITE_CONTACT,
+            ComplicationType.SMALL_IMAGE
+        )
+        if (testDataSource.primaryDataSourceDefaultType == ComplicationType.NO_PERMISSION) {
+            testDataSource = DefaultComplicationDataSourcePolicy(
+                SystemDataSources.DATA_SOURCE_APP_SHORTCUT,
+                ComplicationType.SMALL_IMAGE
+            )
+        }
         val leftBottomComplication = ComplicationSlot
             .createRoundRectComplicationSlotBuilder(
                 id = 1,
                 canvasComplicationFactory =
                     defaultCanvasComplicationFactory,
                 supportedTypes = supportedTypesList,
-                defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                    SystemDataSources.DATA_SOURCE_WEATHER,
-                    ComplicationType.SHORT_TEXT
-                ),
+                defaultDataSourcePolicy = testDataSource,
                 bounds = ComplicationSlotBounds(
                     RectF(0.28f, 0.40f, 0.44f, 0.56f)
                 )
             ).build()
+        // ----------
         val rightTopComplication = ComplicationSlot
             .createRoundRectComplicationSlotBuilder(
                 id = 2,
