@@ -96,7 +96,7 @@ class WatchFaceServiceTest: WatchFaceService() {
         // ---------
         val testDataSource = DefaultComplicationDataSourcePolicy(
             SystemDataSources.DATA_SOURCE_WEATHER,
-            ComplicationType.SMALL_IMAGE
+            ComplicationType.SHORT_TEXT
         ).primaryDataSource
         val leftBottomComplication = ComplicationSlot
             .createRoundRectComplicationSlotBuilder(
@@ -106,7 +106,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                 supportedTypes = supportedTypesList,
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
                     testDataSource!!,
-                    ComplicationType.SMALL_IMAGE,
+                    ComplicationType.SHORT_TEXT,
                     SystemDataSources.DATA_SOURCE_NEXT_EVENT,
                     ComplicationType.SHORT_TEXT
                 ),
