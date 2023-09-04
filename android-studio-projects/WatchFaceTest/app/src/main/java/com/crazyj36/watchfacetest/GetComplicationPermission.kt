@@ -4,19 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.wear.activity.ConfirmationActivity
-import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
-import androidx.wear.compose.material.Chip
-import androidx.wear.compose.material.Text
 
 class GetComplicationPermission : ComponentActivity() {
     private val requestPermission = registerForActivityResult(
@@ -64,67 +53,5 @@ class GetComplicationPermission : ComponentActivity() {
         requestPermission.launch(
             "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
         )
-        /*if (resources.configuration.isScreenRound) {
-            setContent {
-                ScalingLazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    item {
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            text = resources.getString(
-                                R.string.permissionNotYetGrantedLayoutText
-                            ),
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                    item {
-                        Chip(onClick = {
-                            requestPermission.launch(
-                                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-                            )
-                            finish()
-                        },
-                            label = {
-                                Text(resources.getString(R.string.allowButtonText))
-                            }
-                        )
-                    }
-                }
-            }
-        } else {
-            setContent {
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    item {
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            text = resources.getString(
-                                R.string.permissionNotYetGrantedLayoutText
-                            ),
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                    item {
-                        Chip(onClick = {
-                            requestPermission.launch(
-                                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-                            )
-                            finish()
-                        },
-                            label = {
-                                Text(resources.getString(R.string.allowButtonText))
-                            }
-                        )
-                    }
-                }
-            }*/
-        }
+    }
 }
