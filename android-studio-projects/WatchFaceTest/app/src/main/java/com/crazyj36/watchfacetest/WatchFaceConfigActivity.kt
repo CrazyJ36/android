@@ -1,5 +1,6 @@
 package com.crazyj36.watchfacetest
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
@@ -56,7 +57,14 @@ class WatchFaceConfigActivity : ComponentActivity() {
             }
 
         } else {
-            setContent {
+            startActivity(
+                Intent(applicationContext, GetComplicationPermission::class.java)
+                    .setFlags(
+                        Intent.FLAG_ACTIVITY_NEW_TASK or
+                                Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+                    )
+            )
+            /*setContent {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize(),
@@ -88,7 +96,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                         )
                     }
                 }
-            }
+            }*/
         }
     }
 
