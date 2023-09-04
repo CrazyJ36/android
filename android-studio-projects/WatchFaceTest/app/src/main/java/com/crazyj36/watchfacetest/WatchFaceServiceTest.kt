@@ -3,6 +3,7 @@ package com.crazyj36.watchfacetest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.RectF
+import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
@@ -23,6 +24,7 @@ import androidx.wear.watchface.style.CurrentUserStyleRepository
 class WatchFaceServiceTest: WatchFaceService() {
     override fun onCreate() {
         super.onCreate()
+        Log.d("WATCHFACETEST", "onCreate() service")
         if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) != PackageManager.PERMISSION_GRANTED) {
