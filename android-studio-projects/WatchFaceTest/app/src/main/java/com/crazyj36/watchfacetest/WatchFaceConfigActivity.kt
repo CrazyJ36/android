@@ -3,6 +3,7 @@ package com.crazyj36.watchfacetest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -34,6 +35,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
     private lateinit var loadingTextView: TextView
     private val scope = MainScope()
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("WATCHFACETEST", "onCreate()")
         super.onCreate(savedInstanceState)
         if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
@@ -56,7 +58,14 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 getPreview()
             }
         } else {
-            ddsetContent {
+            startActivity(
+                Intent(applicationContext, GetComplicationPermission::class.java)
+                    .setFlags(
+                        Intent.FLAG_ACTIVITY_NEW_TASK or
+                                Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+                    )
+            )
+            /*setContent {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize(),
@@ -88,7 +97,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                         )
                     }
                 }
-            }
+            }*/
         }
     }
 

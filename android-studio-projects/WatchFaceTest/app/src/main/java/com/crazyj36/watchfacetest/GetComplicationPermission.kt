@@ -8,7 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.wear.activity.ConfirmationActivity
 
 class GetComplicationPermission : ComponentActivity() {
-    private val requestPermission = registerForActivityResult(
+    val requestPermission = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) {
         if (it) {
