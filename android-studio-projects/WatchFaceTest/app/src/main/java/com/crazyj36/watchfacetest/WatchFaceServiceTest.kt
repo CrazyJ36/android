@@ -105,7 +105,7 @@ class WatchFaceServiceTest: WatchFaceService() {
                     defaultCanvasComplicationFactory,
                 supportedTypes = supportedTypesList,
                 defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                    testDataSource!!,
+                    testDataSource as ComponentName,
                     ComplicationType.SHORT_TEXT,
                     SystemDataSources.DATA_SOURCE_NEXT_EVENT,
                     ComplicationType.SHORT_TEXT
