@@ -32,7 +32,6 @@ class WatchFaceConfigActivity : ComponentActivity() {
     private lateinit var imageView: ImageView
     private lateinit var loadingTextView: TextView
     private val scope = MainScope()
-    private var requestCode = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (checkSelfPermission(
@@ -79,7 +78,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                                     arrayOf(
                                         "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
                                     ),
-                                    requestCode++
+                                    0
                                 )
                                 finish()
                             },
