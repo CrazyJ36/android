@@ -1,5 +1,6 @@
 package com.crazyj36.watchfacetest
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -57,40 +58,13 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 getPreview()
             }
         } else {
-            setContent {
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    item {
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            text = resources.getString(
-                                R.string.permissionNotYetGrantedLayoutText
-                            ),
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                    item {
-                        CompactChip(
-                            onClick = {
-                                requestPermissions(
-                                    arrayOf(
-                                        "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-                                    ),
-                                    0
-                                )
-                                finish()
-                            },
-                            label = {
-                                Text(resources.getString(R.string.allowButtonText))
-                            }
-                        )
-                    }
-                }
-            }
+            startActivity(
+                Intent(applicationContext, GetComplicationPermission::class.java)
+                    .setFlags(
+                        Intent.FLAG_ACTIVITY_NEW_TASK or
+                                Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+                    )
+            )
         }
     }
 
