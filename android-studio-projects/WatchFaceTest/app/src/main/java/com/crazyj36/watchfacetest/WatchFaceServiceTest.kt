@@ -101,7 +101,7 @@ class WatchFaceServiceTest: WatchFaceService() {
         )
         if (testDataSource.primaryDataSource == null) {
             testDataSource = DefaultComplicationDataSourcePolicy(
-                SystemDataSources.DATA_SOURCE_NEXT_EVENT,
+                SystemDataSources.DATA_SOURCE_DAY_OF_WEEK,
                 ComplicationType.SHORT_TEXT
             )
         }
