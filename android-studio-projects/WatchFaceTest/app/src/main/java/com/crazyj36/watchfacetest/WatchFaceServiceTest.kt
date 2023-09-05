@@ -1,9 +1,7 @@
 package com.crazyj36.watchfacetest
 
-import android.content.ComponentName
 import android.graphics.RectF
 import android.view.SurfaceHolder
-import androidx.annotation.NonNull
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -21,20 +19,6 @@ import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class WatchFaceServiceTest: WatchFaceService() {
-    override fun onCreate() {
-        super.onCreate()
-        /*if (checkSelfPermission(
-                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-            ) != PackageManager.PERMISSION_GRANTED) {
-            startActivity(
-                Intent(applicationContext, GetComplicationPermission::class.java)
-                    .setFlags(
-                        Intent.FLAG_ACTIVITY_NEW_TASK or
-                        Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-                    )
-            )
-        }*/
-    }
     override suspend fun createWatchFace(
         surfaceHolder: SurfaceHolder,
         watchState: WatchState,
@@ -94,29 +78,20 @@ class WatchFaceServiceTest: WatchFaceService() {
                     RectF(0.28f, 0.20f, 0.44f, 0.36f),
                 )
             ).build()
-        // ---------
-        var testDataSource = DefaultComplicationDataSourcePolicy(
-            SystemDataSources.DATA_SOURCE_WEATHER,
-            ComplicationType.SHORT_TEXT
-        )
-        if (testDataSource.primaryDataSource == null) {
-            testDataSource = DefaultComplicationDataSourcePolicy(
-                SystemDataSources.DATA_SOURCE_DAY_OF_WEEK,
-                ComplicationType.SHORT_TEXT
-            )
-        }
         val leftBottomComplication = ComplicationSlot
             .createRoundRectComplicationSlotBuilder(
                 id = 1,
                 canvasComplicationFactory =
                     defaultCanvasComplicationFactory,
                 supportedTypes = supportedTypesList,
-                defaultDataSourcePolicy = testDataSource,
+                defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+                    SystemDataSources.DATA_SOURCE_DAY_OF_WEEK,
+                    ComplicationType.SHORT_TEXT
+                ),
                 bounds = ComplicationSlotBounds(
                     RectF(0.28f, 0.40f, 0.44f, 0.56f)
                 )
             ).build()
-        // ----------
         val rightTopComplication = ComplicationSlot
             .createRoundRectComplicationSlotBuilder(
                 id = 2,
