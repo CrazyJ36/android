@@ -37,9 +37,9 @@ class WatchFaceConfigActivity : ComponentActivity() {
     private val scope = MainScope()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (checkSelfPermission(
+        /*if (checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
-            == PackageManager.PERMISSION_GRANTED) {
+            == PackageManager.PERMISSION_GRANTED) {*/
             setContentView(R.layout.watch_face_preview)
             scope.launch(Dispatchers.Main.immediate) {
                 editorSession = EditorSession
@@ -56,11 +56,11 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 imageView = findViewById(R.id.imageView)
                 getPreview()
             }
-        } else {
+        /*} else {
             Toast.makeText(this@WatchFaceConfigActivity,
-                "Need permission to use show app complication data.",
+                "Need permission to show complication data.",
                 Toast.LENGTH_LONG).show()
-        }
+        }*/
     }
 
     fun onClickLeftTopComplication(view: View) {
