@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:orientation="vertical" >
+
+    <LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal" >
+
+		<EditText
+			android:id="@+id/etCall"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="8"
+            android:hint="@string/etCallHint"
+			android:inputType="phone" />
+
+ 		<Button
+			android:id="@+id/btnCall"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="2"
+			android:text="@string/btnCallTxt" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal" >
+
+		<EditText
+			android:id="@+id/etWeb"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="8"
+			android:hint="@string/etWebHint"
+			android:inputType="textUri" />
+
+		<Button
+			android:id="@+id/btnWeb"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="2"
+			android:text="@string/btnWebTxt" />
+ 
+	</LinearLayout>
+
+    <LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal" >
+
+		<EditText
+			android:id="@+id/etSms"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="8"
+			android:hint="@string/etSmsHint" />		
+
+		<Button
+			android:id="@+id/btnSms"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="2"
+			android:text="@string/btnSmsTxt" />
+
+	</LinearLayout>
+
+    <!--  The '?' in ?android:attributeName gets attributes from android package.
+          for the currently applied theme(theme as in if you
+          getting textColorSecondary for @android:style/Theme.DeviceDefault.
+          'attr' from ?android:attr/textColorSecondary can be omitted.
+          and @android:functionName= sets functions from android package
+          or from your package, where @string would reference
+          an R.string(R is your packages /res resources. -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:text="@string/tvTextSizeSmallTxt" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="@string/tvTextSizeMediumTxt" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:text="@string/tvTextSizeLargeTxt" />
+
+    <AnalogClock
+        android:id="@+id/clock"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:gravity="center" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imgBtn"
+        android:src="@android:drawable/ic_media_play" />
+
+</LinearLayout>

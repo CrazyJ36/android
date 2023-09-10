@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Minimal Theme</string>
+    <string name="tvInstructionsTxt">An attempt at A minimal terminal like theme.</string>
+    <string name="btn1Txt">Button</string>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Dialogs</string>
+    <string name="tvInstructionsTxt">Demonstrates the simple use of dialogs.</string>
+    <string name="btnDialogTxt">Dialog</string>
+</resources>

@@ -1,0 +1,9 @@
+TERMUX_PKG_HOMEPAGE=http://xmlsoft.org/libxslt/
+TERMUX_PKG_DESCRIPTION="XSLT processing library"
+TERMUX_PKG_VERSION=1.1.32
+TERMUX_PKG_SHA256=526ecd0abaf4a7789041622c3950c0e7f2c4c8835471515fd77eec684a355460
+TERMUX_PKG_SRCURL=ftp://xmlsoft.org/libxslt/libxslt-${TERMUX_PKG_VERSION}.tar.gz
+TERMUX_PKG_EXTRA_CONFIGURE_ARGS="--without-python"
+TERMUX_PKG_DEPENDS="libxml2,libgcrypt"
+TERMUX_PKG_DEVPACKAGE_DEPENDS="libxml2-dev"
+TERMUX_PKG_INCLUDE_IN_DEVPACKAGE="bin/xslt-config lib/xsltConf.sh"

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Choose Activity and Start</string>
+    <string name="tvInstructionsTxt">
+    The choose button will start an activity chooser, after you choose an activity, this
+    will display A string containing the activity intent chosen, you can
+    then launch that activity from intent with the launch button.
+    </string>
+    <string name="btnChooseTxt">Choose</string>
+    <string name="tvResultTxt">Chosen activity intent will show here</string>
+    <string name="btnLaunchTxt">Launch</string>
+</resources>

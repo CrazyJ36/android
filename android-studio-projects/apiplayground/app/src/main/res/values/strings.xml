@@ -1,0 +1,98 @@
+<resources>
+    <!-- App name -->
+    <string name="app_name">API Playground</string>
+    <!-- App LOG Tag -->
+    <string name="tag">APIPLAYGROUND</string>
+    <!-- Large Stories-->
+    <string name="bigText">C is a general-purpose, imperative computer programming language, supporting structured programming, lexical variable scope and recursion</string>
+    <string name="bigText2">C is an imperative procedural language. It was designed to be compiled using a relatively straightforward compiler, to provide low-level access to memory, to provide language constructs that map efficiently to machine instructions, and to require minimal run-time support. Despite its low-level capabilities, the language was designed to encourage cross-platform programming. A standards-compliant and portable-ly written C program can be compiled for a very wide variety of computer platforms and operating systems with few changes to its source code. The language has become available on a very wide range of platforms, from embedded micro-controllers to supercomputers.</string>
+    <!-- Shortcuts -->
+    <string name="disabledLabel1Shortcut">Disabled Action</string>
+    <string name="disabledLabel2Shortcut">Disabled Action</string>
+    <string name="longLabel1Shortcut">Go to Main screen</string>
+    <string name="shortLabel1Shortcut">Main</string>
+    <string name="longLabel2Shortcut">Second Activity</string>
+    <string name="shortLabel2Shortcut">More</string>
+    <!-- Image -->
+    <string name="imageDesc">Image Representing Programming</string>
+    <!-- Activity 1 Buttons, Field Names -->
+    <string name="activityBtnTxt">Next</string>
+    <string name="dialogBtnTxt">Dialog</string>
+    <string name="toastBtnTxt">Tap/Long</string>
+    <string name="audioBtnTxt">Play</string>
+    <string name="songInfoTxt">Not Playing</string>
+    <string name="mediaPlayerReleaseTxt">Media Player Done</string>
+    <string name="mediaPlayingTxt">Audio Playing</string>
+    <string name="callBtnTxt">Call</string>
+    <string name="numFldHint">Phone Number</string>
+    <string name="urlBtnTxt">Go</string>
+    <string name="urlFldHint">Web Page</string>
+    <string name="smsBtnTxt">SMS</string>
+    <string name="smsFldHint">Message</string>
+    <string name="switchOnTxt">Switch Is On</string>
+    <string name="switchOffTxt">Switch Is Off</string>
+    <string name="chkSwitchBtnTxt">Check</string>
+    <string name="notifyBtnTxt">Notify</string>
+    <string name="grid1BtnTxt">1</string>
+    <string name="grid2BtnTxt">2</string>
+    <string name="grid3BtnTxt">3</string>
+    <string name="grid4BtnTxt">4</string>
+    <string name="randomBtnTxt">Random</string>
+    <string name="snackbarBtnTxt">SnackBar</string>
+    <string name="bottomSheetBtnTxt">Bottom Sheet</string>
+    <string name="batteryIcon">Battery Icon</string>
+    <string name="brushIcon">Brush Icon</string>
+    <string name="buildIcon">Build Icon</string>
+    <string name="bottomSheetImg1Desc">An Icon representing A battery(round)</string>
+    <string name="bottomSheetImg2Desc">A Brush icon(round)</string>
+    <string name="bottomSheetImg3Desc">An Icon representing the building of something(round)</string>
+    <string name="vibBtnTxt">Vibrate</string>
+    <string name="batBtnTxt">Battery</string>
+    <string name="goToGitTvTxt">View my git repositories</string>
+    <string name="goToGitBtnTxt">Github</string>
+    <string name="otherFuncBtnTxt">Extern. Func</string>
+    <string name="hourBtnTxt">Get Hour</string>
+    <string name="logBtnTxt">Log</string>
+    <string name="aboutDialogCopyright">CrazyJ36 2019\n</string>
+    <!-- Activity 2 Button, Field Names -->
+    <string name="dialogImgBtnTxt">Picture</string>
+    <string name="dialogImgPicDesc">Picture of Earth</string>
+    <string name="imgColorBtnDesc">A Picture Icon</string>
+    <string name="tvLongPressImgBtnReminder">You can press and long press the below image.</string>
+    <string name="btnHideStatusBarTxt">Status bar</string>
+    <string name="radioBtnColorNavBarDesc">Color NavBar</string>
+    <string name="radioBtnColorNavBar1Txt">Gray</string>
+    <string name="radioBtnColorNavBar2Txt">Green</string>
+    <string name="radioBtnColorNavBar3Txt">Red</string>
+    <string name="imgColorSwitchTxt">Move</string>
+    <string name="chkBoxDesc">Detect checked boxes</string>
+    <string name="etAccounts1Hint">Username</string>
+    <string name="etAccounts2Hint">Password</string>
+    <string name="btnAccountsTxt">Add</string>
+    <string name="btnCustomTxt">Custom</string>
+    <string name="dialogTv1Txt">Before getting started with C programming, lets get familiarized with the language first. C is a general-purpose
+programming language used for wide range of applications from Operating systems like Windows and iOS to software that is used for creating 3D movies.
+C programming is highly efficient. That’s the main reason why it’s very popular despite being more than 40 years old. Standard C programs are portable.
+The source code written in one system works in another operating system without any change. As mentioned, it’s a good language to start learning
+programming. If you know C programming, you will not just understand how your program works, but will also be able to create a mental picture
+on how a computer works.</string>
+    <string name="dialogTv2Txt">\nIf you know C, you will not only know how your program works but, you will be able to create a mental model
+on how a computer works (including memory management and allocation). You will learn to appreciate the freedom that C provides unlike Python and Java.
+Understanding C allows you to write programs that you never thought were possible before (or at the very least, you will have a broader understanding
+of computer architecture and programming as a whole).</string>
+    <string name="dialogBtn1Txt">Toast</string>
+    <string name="dialogBtn2Txt">Close</string>
+    <!-- Toolbar Titles -->
+    <string name="toolbarMenuDesc">App Options</string>
+    <string name="toolbarAboutBtn">About App</string>
+    <string name="toolbarSubmenuBtn">Options</string>
+    <string name="toolbarSub1">Show Hidden Fab</string>
+    <string name="toolbarSub2">Theme Toggle</string>
+    <string name="toolbarAboutActivity">About This Screen</string>
+    <string name="toolbarHideStatusBar">Hide status bar</string>
+    <string name="toolbarExitBtn">Exit</string>
+    <!-- App Widget Strings -->
+    <string name="widgetTvTxt">API Playground Widget</string>
+    <string name="widgetBtnTxt">Launch</string>
+
+</resources>

@@ -1,0 +1,5 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Wear App Toast</string>
+    <string name="instructionsText">Toast test.</string>
+    <string name="toastedText">Toasted</string>
+</resources>

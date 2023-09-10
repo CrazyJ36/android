@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="appname">Log Usage</string>
+    <string name="tvInstructionsTxt">Press button to send A log to the connected devices\' logcat.
+View log messages by typeing \'adb logcat\' at command prompt.
+Search for the text "LOGUSAGETAG" when reading logcat output to see that the button sent A log message.
+    </string>
+    <string name="logBtnTxt">Log</string>
+
+</resources>

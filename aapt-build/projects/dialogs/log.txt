@@ -1,0 +1,13 @@
+--------- beginning of /dev/log/system
+I/ActivityManager(  304): Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.crazyj36.dialogs/.MainActivity } from pid 471
+--------- beginning of /dev/log/main
+D/Launcher.Workspace(  471): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
+D/Launcher.Workspace(  471): [Workspace.java:2036:hideWallpaper()] Show wallpaper
+I/#LGIME  (  450): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+I/ActivityManager(  304): [ActivityRecord.java:444:windowsVisible()] Displayed com.crazyj36.dialogs/.MainActivity: +52ms
+I/#LGIME  (  450): [Glog.java:35:i()] onKeyDown: 4
+D/Launcher.Workspace(  471): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
+I/#LGIME  (  450): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0
+E/ActivityThread(  471): Failed to find provider info for call_log
+E/ActivityThread(  471): Failed to find provider info for com.lge.providers.lgemail
+E/ActivityThread(  471): Failed to find provider info for com.android.whatsnew

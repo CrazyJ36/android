@@ -1,0 +1,46 @@
+ - compare current termux-packages to linux sources to learn to port code and write for termux
+
+-dialog was made from source by copying from termux-packages: dialog and required dependencies, to a package-less 'termux-packages-master' directory then doing:
+./build-package.sh $PKG
+id have to learn how to write a patch file
+
+From Documentation:
+
+Build environment without Docker
+If you can't run Docker you can use a Ubuntu 17.10 installation (either by installing a virtual maching guest or on direct hardware) by using the below scripts:
+
+Run scripts/setup-ubuntu.sh to install required packages and setup the /data/ folder.
+
+Run scripts/setup-android-sdk.sh to install the Android SDK and NDK at $HOME/lib/android-{sdk,ndk}.
+
+There is also a Vagrantfile available as a shortcut for setting up an Ubuntu installation with the above steps applied.
+
+Building a package
+The basic build operation is to run ./build-package.sh $PKG, which:
+
+Sets up a patched stand-alone Android NDK toolchain if necessary.
+
+Reads packages/$PKG/build.sh to find out where to find the source code of the package and how to build it.
+
+Extracts the source in $HOME/.termux-build/$PKG/src.
+
+Applies all patches in packages/$PKG/*.patch.
+
+Builds the package under $HOME/.termux-build/$PKG/ (either in the build/ directory there or in the src/ directory if the package is specified to build in the src dir) and installs it to $PREFIX.
+
+Extracts modified files in $PREFIX into $HOME/.termux-build/$PKG/massage and massages the files there for distribution (removes some files, splits it up in sub-packages, modifies elf files).
+
+Creates a deb package file for distribution in debs/.
+
+Reading build-package.sh is the best way to understand what is going on.
+
+Additional utilities
+build-all.sh: used for building all packages in the correct order (using buildorder.py).
+
+clean.sh: used for doing a clean rebuild of all packages.
+
+scripts/check-pie.sh: Used for verifying that all binaries are using PIE, which is required for Android 5+.
+
+scripts/check-versions.sh: used for checking for package updates.
+
+scripts/list-packages.sh: used for listing all packages with a one-line summary.

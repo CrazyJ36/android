@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Timer</string>
+    <string name="tvInstructionsTxt">Press button, this app will count from 0 to 10 in seconds.</string>
+    <string name="btnStartTxt">Start</string>
+    <string name="tvCountTxt">Couter will appear here.</string>
+</resources>

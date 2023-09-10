@@ -1,0 +1,20 @@
+custom dialog buttons cut off on tablet
+
+change vibrater not null message for 2.3 make more important.
+
+gridlayout won't work in api 10.
+# graphics activity
+message field popup menu, select wether text is to be 
+recipient or message.
+
+picture dialog
+
+navbar like apiplayground
+
+user/pass field
+
+hide statusbar
+
+state that files is disabled when no
+files are in notes, or when there is
+no notes directory.

@@ -1,0 +1,1 @@
+# refer to ~/devlopment/linux-scripts/build-android.sh for A breakdown of all that needs goes on in case of common errors.

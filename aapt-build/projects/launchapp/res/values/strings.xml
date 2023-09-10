@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Launch App</string>
+    <string name="tvInstructionsTxt">Button launches settings app.</string>
+    <string name="btnLaunchTxt">Settings</string>
+</resources>

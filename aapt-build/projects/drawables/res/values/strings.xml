@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Drawables</string>
+    <string name="tvInstructionsTxt">Shows to ways to load A drawable.xml resource, by setting ImageView src in activity layout,
+        and programatically in java. Also shows that you can load png, even 3D art, in layout ImageView tag.</string>
+</resources>

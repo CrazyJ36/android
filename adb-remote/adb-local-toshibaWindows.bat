@@ -1,0 +1,1 @@
+java -jar C:\Users\Thomas\development\android\adb-remote\adbportforward.jar server adblocation=C:\Users\Thomas\development\android\adb-remote\platform-tools

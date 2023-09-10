@@ -1,0 +1,177 @@
+--------- beginning of main
+01-26 20:12:42.203   697   697 E thermal_src: ERROR, recvmsg expect 4, but get 2 
+01-26 20:12:43.005  1768  1768 D TeleService: PhoneInterfaceManager: [PhoneIntfMgr] mSigLevel = 3
+01-26 20:12:43.006  1374  1544 I MobileSignalController: isRoaming = false, isCdmaRoaming = false
+01-26 20:12:43.006  1374  1544 I MobileSignalController: isRoaming = false
+01-26 20:12:43.007  1374  1544 I NetworkController: onReceive: intent=Intent { act=android.intent.action.SIG_STR flg=0x10 (has extras) }
+01-26 20:12:43.208   697   697 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-26 20:12:44.071   696   696 I thermal_repeater: [recvMdThermalInfo] ret=31, strLen=127,  3, 32, -127, -22945, 32767, -1
+01-26 20:12:44.182  1030  1278 D InputDispatcher: notifyMotion - action=ACTION_DOWN(0), id=0, pressure=0.216, tooltype=1, deviceId=3, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=120757506015000, downTime=120757506015000, 
+01-26 20:12:44.183  1030  1277 D InputTransport: channel 'c6c8eee com.crazyj36.launchapp/com.crazyj36.launchapp.MainActivity (server)' : action=ACTION_DOWN(0), id=0, tooltype=1, deviceId=3, source=0x1002, flags=0x0, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=120757506015000, eventTime=120757506015000, pointerCount=1
+--------- beginning of system
+01-26 20:12:44.183 20260 20260 I ViewRootImpl: ViewRoot's Touch Event : ACTION_DOWN
+01-26 20:12:44.210   697   697 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-26 20:12:44.239  1030  1278 D InputDispatcher: notifyMotion - action=ACTION_UP(0), id=0, pressure=0.216, tooltype=1, deviceId=3, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=120757563668000, downTime=120757506015000, 
+01-26 20:12:44.240  1030  1277 D InputTransport: channel 'c6c8eee com.crazyj36.launchapp/com.crazyj36.launchapp.MainActivity (server)' : action=ACTION_UP(0), id=0, tooltype=1, deviceId=3, source=0x1002, flags=0x0, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=120757506015000, eventTime=120757563668000, pointerCount=1
+01-26 20:12:44.242 20260 20260 I ViewRootImpl: ViewRoot's Touch Event : ACTION_UP
+01-26 20:12:44.245   490   490 I DisplayDevice: [Built-in Screen (type:0)] fps:3.777056,dur:3441.83,max:3129.38,min:11.01
+01-26 20:12:44.246 20260 20260 I AudioManagerEx: AudioManagerEx created
+01-26 20:12:44.250 20260 20260 D AndroidRuntime: Shutting down VM
+--------- beginning of crash
+01-26 20:12:44.251 20260 20260 E AndroidRuntime: FATAL EXCEPTION: main
+01-26 20:12:44.251 20260 20260 E AndroidRuntime: Process: com.crazyj36.launchapp, PID: 20260
+01-26 20:12:44.251 20260 20260 E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.String android.content.Intent.toString()' on a null object reference
+01-26 20:12:44.251 20260 20260 E AndroidRuntime: 	at android.app.Instrumentation.execStartActivity(Instrumentation.java:1582)
+01-26 20:12:44.251 20260 20260 E AndroidRuntime: 	at android.app.Activity.startActivityForResult(Activity.java:4506)
+01-26 20:12:44.251 20260 20260 E AndroidRuntime: 	at android.app.Activity.startActivityForResult(Activity.java:4464)
+01-26 20:12:44.251 20260 20260 E AndroidRuntime: 	at android.app.Activity.startActivity(Activity.java:4825)
+01-26 20:12:44.251 20260 20260 E AndroidRuntime: 	at android.app.Activity.startActivity(Activity.java:4793)
+01-26 20:12:44.251 20260 20260 E AndroidRuntime: 	at com.crazyj36.launchapp.MainActivity$1.onClick(MainActivity.java:26)
+01-26 20:12:44.251 20260 20260 E AndroidRuntime: 	at android.view.View.performClick(View.java:6313)
+01-26 20:12:44.251 20260 20260 E AndroidRuntime: 	at android.view.View$PerformClick.run(View.java:24933)
+01-26 20:12:44.251 20260 20260 E AndroidRuntime: 	at android.os.Handler.handleCallback(Handler.java:790)
+01-26 20:12:44.251 20260 20260 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+01-26 20:12:44.251 20260 20260 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:164)
+01-26 20:12:44.251 20260 20260 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6651)
+01-26 20:12:44.251 20260 20260 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+01-26 20:12:44.251 20260 20260 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:438)
+01-26 20:12:44.251 20260 20260 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:810)
+01-26 20:12:44.255  1030  5683 W ActivityManager:   Force finishing activity com.crazyj36.launchapp/.MainActivity
+01-26 20:12:44.265  1030 20298 W AES     : Exception Log handling...
+01-26 20:12:44.266  1030 20298 W AES     : Skipped - do not care third party apk
+01-26 20:12:44.268  1030  1064 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 (has extras) } to com.google.android.gms/.stats.service.DropBoxEntryAddedReceiver
+01-26 20:12:44.269  1030  1064 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 (has extras) } to com.google.android.gms/.chimera.GmsIntentOperationService$PersistentTrustedReceiver
+01-26 20:12:44.273  2495  2529 D ViewRootImpl: onChangedNavigationGuardColor(), color: ffffffff
+01-26 20:12:44.280  2495  2495 D DecorView: updateNavigationGuardColor navigationGuardColor=0xffffffff
+01-26 20:12:44.305   695   733 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-26 20:12:44.305   695   733 I PowerRM : FIA lock1 locked
+01-26 20:12:44.305   695   733 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-26 20:12:44.305   695   733 I PowerRM : Window Changed
+01-26 20:12:44.305  1030  1065 D InputDispatcher: Focus left window: Window{c6c8eee u0 com.crazyj36.launchapp/com.crazyj36.launchapp.MainActivity}
+01-26 20:12:44.305  1030  1065 D InputDispatcher: Focus entered window: Window{1e83a77 u0 Application Error: com.crazyj36.launchapp}
+01-26 20:12:44.312  1030  1065 D BezellessGripSuppressionFilter: getdisplaysize, x : 1080 y : 2160
+01-26 20:12:44.312  1030  1065 I ActivityManager: Showing crash dialog for package com.crazyj36.launchapp u0
+01-26 20:12:44.342  1030  8033 I OpenGLRenderer: Initialized EGL, version 1.4
+01-26 20:12:44.344  1030  8033 D OpenGLRenderer: Swap behavior 2
+01-26 20:12:44.351  1374  1374 I NavigationThemeResource: notify navigation bar color(0x0)
+01-26 20:12:44.351  1374  1374 I NavigationThemeResource: NavigationKey Color is changed(BLACK -> WHITE_WITH_BORDER)
+01-26 20:12:44.351  1374  1374 I NavigationThemeResource:  BarMode=4, Theme=WHITE, LightBackground=false (Transparent)
+01-26 20:12:44.351  1374  1374 I NavigationThemeResource: , Keyguard show=false, IME shown=false, Bar vertical=false, Panel expanded=false
+01-26 20:12:44.351  1374  1374 D StatusBar: setSystemUiVisibility vis=8008 mask=ffffffff oldVal=8608 newVal=8008 diff=600
+01-26 20:12:44.352  2495  2529 D ViewRootImpl: onChangedNavigationGuardColor(), color: ffffffff
+01-26 20:12:44.352  2495  2495 D DecorView: updateNavigationGuardColor navigationGuardColor=0xffffffff
+01-26 20:12:44.365  1374  1394 I SystemServicesProxy: RecentApps has 1 item(s).
+01-26 20:12:44.369  1374  1394 D DDTIcon : getIconDrawableAsIconFrameTheme for com.crazyj36.launchapp@0
+01-26 20:12:44.369  1374  1394 W DDTIcon : getIconDrawableAsIconFrameTheme got null as icon. Replace it to default one for com.crazyj36.launchapp
+01-26 20:12:44.372  1374  1394 D DDTIcon : maxBgRes = 0
+01-26 20:12:44.373  1374  1394 I SystemServicesProxy: Task.thumbnail loading failed for 260
+01-26 20:12:44.397  1030  1244 I WindowManager: Window{1e83a77 u0 Application Error: com.crazyj36.launchapp} start dimming: flags=1820002 effectFlags=0, layer=111000
+01-26 20:12:44.508   668   687 D AAL     : 01-26 08:12:44.439 BL= 258,ESS= 256, 01-26 08:12:44.455 BL= 257,ESS= 256, 01-26 08:12:44.472 BL= 256,ESS= 256, 01-26 08:12:44.488 BL= 255,ESS= 256, 01-26 08:12:44.508 BL= 254,ESS= 256, 
+01-26 20:12:44.588   668   687 D AAL     : 01-26 08:12:44.521 BL= 253,ESS= 256, 01-26 08:12:44.538 BL= 252,ESS= 256, 01-26 08:12:44.554 BL= 251,ESS= 256, 01-26 08:12:44.571 BL= 250,ESS= 256, 01-26 08:12:44.588 BL= 249,ESS= 256, 
+01-26 20:12:44.408  1030  1244 I WindowManager: Window{1e83a77 u0 Application Error: com.crazyj36.launchapp} start dimming: flags=1820002 effectFlags=0, layer=111000
+01-26 20:12:44.590  1030  1081 V WallpaperManagerService: Wallpaper file change: evt=8 path=settings_secure.xml.backup sys=false lock=false imagePending=false whichPending=0x0 written=true
+01-26 20:12:44.591  1030  1081 V WallpaperManagerService: Wallpaper file change: evt=128 path=settings_secure.xml.bak sys=false lock=false imagePending=false whichPending=0x0 written=true
+01-26 20:12:44.626  1030  1081 V WallpaperManagerService: Wallpaper file change: evt=8 path=settings_secure.xml sys=false lock=false imagePending=false whichPending=0x0 written=true
+01-26 20:12:44.626  1030  1081 V WallpaperManagerService: Wallpaper file change: evt=512 path=settings_secure.xml.bak sys=false lock=false imagePending=false whichPending=0x0 written=false
+01-26 20:12:44.670   668   687 D AAL     : 01-26 08:12:44.604 BL= 248,ESS= 256, 01-26 08:12:44.621 BL= 247,ESS= 256, 01-26 08:12:44.637 BL= 246,ESS= 256, 01-26 08:12:44.654 BL= 245,ESS= 256, 01-26 08:12:44.670 BL= 244,ESS= 256, 
+01-26 20:12:44.753   668   687 D AAL     : 01-26 08:12:44.687 BL= 243,ESS= 256, 01-26 08:12:44.703 BL= 242,ESS= 256, 01-26 08:12:44.720 BL= 241,ESS= 256, 01-26 08:12:44.737 BL= 240,ESS= 256, 01-26 08:12:44.753 BL= 239,ESS= 256, 
+01-26 20:12:44.759  1030  1064 W ActivityManager: Activity pause timeout for ActivityRecord{928b343 u0 com.crazyj36.launchapp/.MainActivity t260 f}
+01-26 20:12:44.768  7384  7384 D PenService: [mActivityTriggerHandler] com.teslacoilsw.launcher/com.teslacoilsw.launcher.NovaLauncher
+01-26 20:12:44.769   695   733 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-26 20:12:44.769   475   475 W PHHandler: [PH] hint id(103) is not supported
+01-26 20:12:44.769   485   513 I vendor.mediatek.hardware.power@1.1-impl: scnEnable hdl:39, timeout:3500
+01-26 20:12:44.770   485   512 I powerd  : [powerd_req] POWER_MSG_SCN_ENABLE: hdl:39, timeout:3500
+01-26 20:12:44.770   485   512 I libPerfService: perfUserScnEnable - handle:39
+01-26 20:12:44.774   485   512 I libPerfService: 39: legacy set freq: 1001000 -1 1508000 -1
+01-26 20:12:44.781   485   512 I libPerfService: 39: legacy set: 3 -1 4 -1
+01-26 20:12:44.836   668   687 D AAL     : 01-26 08:12:44.770 BL= 238,ESS= 256, 01-26 08:12:44.786 BL= 237,ESS= 256, 01-26 08:12:44.803 BL= 236,ESS= 256, 01-26 08:12:44.819 BL= 235,ESS= 256, 01-26 08:12:44.836 BL= 234,ESS= 256, 
+01-26 20:12:44.879  1374  1394 I SystemServicesProxy: RecentApps has 1 item(s).
+01-26 20:12:44.883  1374  1394 I SystemServicesProxy: Task.thumbnail loading failed for 260
+01-26 20:12:44.907  2222  2222 I Timeline: Timeline: Activity_idle id: android.os.BinderProxy@d7cfe24 time:120758231
+01-26 20:12:44.910  1030  2218 D OverlayManager: setEnabled packageName=com.android.systemui.theme.dark enable=true userId=0
+01-26 20:12:44.919   668   687 D AAL     : 01-26 08:12:44.852 BL= 233,ESS= 256, 01-26 08:12:44.869 BL= 232,ESS= 256, 01-26 08:12:44.886 BL= 231,ESS= 256, 01-26 08:12:44.902 BL= 229,ESS= 256, 01-26 08:12:44.919 BL= 228,ESS= 256, 
+01-26 20:12:45.001   668   687 D AAL     : 01-26 08:12:44.935 BL= 227,ESS= 256, 01-26 08:12:44.952 BL= 226,ESS= 256, 01-26 08:12:44.968 BL= 225,ESS= 256, 01-26 08:12:44.985 BL= 224,ESS= 256, 01-26 08:12:45.001 BL= 223,ESS= 256, 
+01-26 20:12:45.084   668   687 D AAL     : 01-26 08:12:45.018 BL= 222,ESS= 256, 01-26 08:12:45.035 BL= 221,ESS= 256, 01-26 08:12:45.051 BL= 220,ESS= 256, 01-26 08:12:45.068 BL= 219,ESS= 256, 01-26 08:12:45.084 BL= 218,ESS= 256, 
+01-26 20:12:45.167   668   687 D AAL     : 01-26 08:12:45.101 BL= 217,ESS= 256, 01-26 08:12:45.117 BL= 216,ESS= 256, 01-26 08:12:45.134 BL= 215,ESS= 256, 01-26 08:12:45.150 BL= 214,ESS= 256, 01-26 08:12:45.167 BL= 213,ESS= 256, 
+01-26 20:12:45.214   697   697 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-26 20:12:45.250   668   687 D AAL     : 01-26 08:12:45.183 BL= 212,ESS= 256, 01-26 08:12:45.200 BL= 211,ESS= 256, 01-26 08:12:45.217 BL= 210,ESS= 256, 01-26 08:12:45.233 BL= 209,ESS= 256, 01-26 08:12:45.250 BL= 208,ESS= 256, 
+01-26 20:12:45.332   668   687 D AAL     : 01-26 08:12:45.266 BL= 207,ESS= 256, 01-26 08:12:45.283 BL= 206,ESS= 256, 01-26 08:12:45.299 BL= 205,ESS= 256, 01-26 08:12:45.316 BL= 204,ESS= 256, 01-26 08:12:45.332 BL= 203,ESS= 256, 
+01-26 20:12:45.343  1030  1040 I zygote  : NativeAlloc concurrent copying GC freed 93786(5MB) AllocSpace objects, 47(1828KB) LOS objects, 42% free, 27MB/47MB, paused 184us total 330.573ms
+01-26 20:12:45.415   668   687 D AAL     : 01-26 08:12:45.349 BL= 202,ESS= 256, 01-26 08:12:45.366 BL= 201,ESS= 256, 01-26 08:12:45.382 BL= 200,ESS= 256, 01-26 08:12:45.399 BL= 199,ESS= 256, 01-26 08:12:45.415 BL= 198,ESS= 256, 
+01-26 20:12:45.498   668   687 D AAL     : 01-26 08:12:45.432 BL= 197,ESS= 256, 01-26 08:12:45.448 BL= 196,ESS= 256, 01-26 08:12:45.465 BL= 195,ESS= 256, 01-26 08:12:45.481 BL= 194,ESS= 256, 01-26 08:12:45.498 BL= 193,ESS= 256, 
+01-26 20:12:45.507   485   513 I vendor.mediatek.hardware.power@1.1-impl: scnDisable hdl:39
+01-26 20:12:45.519   485   512 I libPerfService: 39: legacy set: -1 -1 -1 -1
+01-26 20:12:45.520   485   512 I libPerfService: 39: legacy set freq: -1 -1 -1 -1
+01-26 20:12:45.597   668   687 D AAL     : 01-26 08:12:45.514 BL= 192,ESS= 256, 01-26 08:12:45.548 BL= 191,ESS= 256, 01-26 08:12:45.564 BL= 190,ESS= 256, 01-26 08:12:45.581 BL= 189,ESS= 256, 01-26 08:12:45.597 BL= 188,ESS= 256, 
+01-26 20:12:45.680   668   687 D AAL     : 01-26 08:12:45.614 BL= 187,ESS= 256, 01-26 08:12:45.630 BL= 186,ESS= 256, 01-26 08:12:45.647 BL= 185,ESS= 256, 01-26 08:12:45.663 BL= 184,ESS= 256, 01-26 08:12:45.680 BL= 183,ESS= 256, 
+01-26 20:12:45.704  1030  1278 D InputDispatcher: notifyMotion - action=ACTION_DOWN(0), id=0, pressure=0.216, tooltype=1, deviceId=3, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=120759028567000, downTime=120759028567000, 
+01-26 20:12:45.705  1030  1277 D InputTransport: channel '1e83a77 Application Error: com.crazyj36.launchapp (server)' : action=ACTION_DOWN(0), id=0, tooltype=1, deviceId=3, source=0x1002, flags=0x0, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=120759028567000, eventTime=120759028567000, pointerCount=1
+01-26 20:12:45.706  1030  1065 I ViewRootImpl: ViewRoot's Touch Event : ACTION_DOWN
+01-26 20:12:45.763   668   687 D AAL     : 01-26 08:12:45.697 BL= 182,ESS= 256, 01-26 08:12:45.713 BL= 181,ESS= 256, 01-26 08:12:45.730 BL= 180,ESS= 256, 01-26 08:12:45.746 BL= 179,ESS= 256, 01-26 08:12:45.763 BL= 178,ESS= 256, 
+01-26 20:12:45.770  1030  1278 D InputDispatcher: notifyMotion - action=ACTION_UP(0), id=0, pressure=0.216, tooltype=1, deviceId=3, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=120759094739000, downTime=120759028567000, 
+01-26 20:12:45.771  1030  1277 D InputTransport: channel '1e83a77 Application Error: com.crazyj36.launchapp (server)' : action=ACTION_UP(0), id=0, tooltype=1, deviceId=3, source=0x1002, flags=0x0, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=120759028567000, eventTime=120759094739000, pointerCount=1
+01-26 20:12:45.771  1030  1065 I ViewRootImpl: ViewRoot's Touch Event : ACTION_UP
+01-26 20:12:46.217   697   697 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-26 20:12:46.217   697   697 E thermal_src: ERROR, recvmsg expect 4, but get 2 
+01-26 20:12:46.612   478   535 D sensors_hal_Ctx: polldata:1, count: 8, sensor:0, type:1, x:-0.356000 y:0.132000 z:9.747000
+01-26 20:12:46.678   478   535 D sensors_hal_Ctx: polldata:1, count: 7, sensor:0, type:1, x:-0.355000 y:0.122000 z:9.757000
+01-26 20:12:46.729   478   535 D sensors_hal_Ctx: polldata:1, count: 6, sensor:4, type:5, x:35.000000 y:0.000000 z:0.000000
+01-26 20:12:46.744   478   535 D sensors_hal_Ctx: polldata:1, count: 5, sensor:0, type:1, x:-0.354000 y:0.137000 z:9.756000
+01-26 20:12:46.772  1030  1278 D InputDispatcher: notifyMotion - action=ACTION_DOWN(0), id=0, pressure=0.216, tooltype=1, deviceId=3, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=120760096117000, downTime=120760096117000, 
+01-26 20:12:46.773  1030  1277 D InputTransport: channel '1e83a77 Application Error: com.crazyj36.launchapp (server)' : action=ACTION_DOWN(0), id=0, tooltype=1, deviceId=3, source=0x1002, flags=0x0, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=120760096117000, eventTime=120760096117000, pointerCount=1
+01-26 20:12:46.773  1030  1065 I ViewRootImpl: ViewRoot's Touch Event : ACTION_DOWN
+01-26 20:12:46.810   490   490 I DisplayDevice: [Built-in Screen (type:0)] fps:18.715508,dur:2564.72,max:1738.52,min:11.52
+01-26 20:12:46.810   478   535 D sensors_hal_Ctx: polldata:1, count: 4, sensor:0, type:1, x:-0.192000 y:0.129000 z:10.239000
+01-26 20:12:46.821  1030  1278 D InputDispatcher: notifyMotion - action=ACTION_UP(0), id=0, pressure=0.216, tooltype=1, deviceId=3, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=120760145542000, downTime=120760096117000, 
+01-26 20:12:46.822  1030  1277 D InputTransport: channel '1e83a77 Application Error: com.crazyj36.launchapp (server)' : action=ACTION_UP(0), id=0, tooltype=1, deviceId=3, source=0x1002, flags=0x0, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=120760096117000, eventTime=120760145542000, pointerCount=1
+01-26 20:12:46.823  1030  1065 I ViewRootImpl: ViewRoot's Touch Event : ACTION_UP
+01-26 20:12:46.826  1030  5683 W ActivityManager:   Force finishing activity com.crazyj36.launchapp/.MainActivity
+01-26 20:12:46.842  1030  5683 D InputDispatcher: Window went away: Window{c6c8eee u0 com.crazyj36.launchapp/com.crazyj36.launchapp.MainActivity}
+01-26 20:12:46.848   695   733 I PowerRM : System FW:0 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-26 20:12:46.848   695   733 I PowerRM : FIA lock1 unlocked
+01-26 20:12:46.848   695   733 I PowerRM : System FW:0 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-26 20:12:46.849   695   733 I PowerRM : Window Changed
+01-26 20:12:46.857  1030  1065 D InputDispatcher: Focus left window: Window{1e83a77 u0 Application Error: com.crazyj36.launchapp}
+01-26 20:12:46.857  1030  1065 D InputDispatcher: Focus entered window: Window{a6e958e u0 com.teslacoilsw.launcher/com.teslacoilsw.launcher.NovaLauncher}
+01-26 20:12:46.857  1030  1065 D InputDispatcher: Window went away: Window{1e83a77 u0 Application Error: com.crazyj36.launchapp}
+01-26 20:12:46.861  1030  5683 I ActivityManager: Killing 20260:com.crazyj36.launchapp/u0a456 (adj 900): crash
+01-26 20:12:46.864  1030  1066 W zygote  : kill(-20260, 9) failed: No such process
+01-26 20:12:46.868  1374  1374 I NavigationThemeResource: notify navigation bar color(0xffffffff)
+01-26 20:12:46.869  1374  1374 I NavigationThemeResource: NavigationKey Color is changed(WHITE_WITH_BORDER -> BLACK)
+01-26 20:12:46.869  1374  1374 I NavigationThemeResource:  BarMode=4, Theme=WHITE, LightBackground=true (NOT Transparent)
+01-26 20:12:46.869  1374  1374 I NavigationThemeResource: , Keyguard show=false, IME shown=false, Bar vertical=false, Panel expanded=false
+01-26 20:12:46.870  1374  1374 I NavigationThemeResource: notify navigation bar color(0xffffffff)
+01-26 20:12:46.870  1374  1374 D StatusBar: setSystemUiVisibility vis=8708 mask=ffffffff oldVal=8008 newVal=8708 diff=700
+01-26 20:12:46.876  2495  2529 D ViewRootImpl: onChangedNavigationGuardColor(), color: 0
+01-26 20:12:46.879   478   535 D sensors_hal_Ctx: polldata:1, count: 3, sensor:0, type:1, x:-0.360000 y:0.138000 z:9.844000
+01-26 20:12:46.881  1030  2217 I AppWidgetServiceImpl: startListening() 0, callbacks: com.android.internal.appwidget.IAppWidgetHost$Stub$Proxy@e073a81
+01-26 20:12:46.882  1030  2217 I AppWidgetServiceImpl: startListening() com.teslacoilsw.launcher, appWidgetIds: [I@dad6726
+01-26 20:12:46.883  1374  1374 I NavigationThemeResource: notify navigation bar color(0xffffffff)
+01-26 20:12:46.884  1374  1374 I NavigationThemeResource: notify navigation bar color(0x0)
+01-26 20:12:46.884  1374  1374 I NavigationThemeResource: NavigationKey Color is changed(BLACK -> WHITE_WITH_BORDER)
+01-26 20:12:46.884  1374  1374 I NavigationThemeResource:  BarMode=4, Theme=WHITE, LightBackground=false (Transparent)
+01-26 20:12:46.884  1374  1374 I NavigationThemeResource: , Keyguard show=false, IME shown=false, Bar vertical=false, Panel expanded=false
+01-26 20:12:46.885  2495  2495 D DecorView: updateNavigationGuardColor navigationGuardColor=0xff000000
+01-26 20:12:46.885  1030  1244 W AppOps  : Finishing op nesting under-run: uid 1000 pkg android code 24 time=0 duration=0 nesting=0
+01-26 20:12:46.887  2495  2495 I HK/LatinKbdBaseView: closing org.pocketworkstation.pckeyboard.LatinKeyboardView{802c5e2 V.ED..... ......ID 0,0-1080,675 #7f080004 app:id/LatinkeyboardBaseView}
+01-26 20:12:46.908  1030  1066 W zygote  : kill(-20260, 9) failed: No such process
+01-26 20:12:46.939  1030  1084 W ActivityManager: setHasOverlayUi called on unknown pid: 20260
+01-26 20:12:46.939   490  1677 I SurfaceFlinger: [SF client] DEL(0xb4c33760) for (1030:system_server)
+01-26 20:12:46.957  1030  1066 W zygote  : kill(-20260, 9) failed: No such process
+01-26 20:12:46.957  1030  1066 I zygote  : Successfully killed process cgroup uid 10456 pid 20260 in 95ms
+01-26 20:12:46.971   668   687 D AAL     : 01-26 08:12:46.905 BL= 178,ESS= 257, 01-26 08:12:46.922 BL= 176,ESS= 258, 01-26 08:12:46.938 BL= 174,ESS= 259, 01-26 08:12:46.954 BL= 173,ESS= 260, 01-26 08:12:46.971 BL= 171,ESS= 261, 
+01-26 20:12:47.070   668   687 D AAL     : 01-26 08:12:46.987 BL= 169,ESS= 262, 01-26 08:12:47.004 BL= 168,ESS= 263, 01-26 08:12:47.020 BL= 166,ESS= 264, 01-26 08:12:47.054 BL= 168,ESS= 264, 01-26 08:12:47.070 BL= 170,ESS= 263, 
+01-26 20:12:47.153   668   687 D AAL     : 01-26 08:12:47.087 BL= 171,ESS= 262, 01-26 08:12:47.103 BL= 173,ESS= 261, 01-26 08:12:47.120 BL= 175,ESS= 260, 01-26 08:12:47.136 BL= 176,ESS= 259, 01-26 08:12:47.153 BL= 178,ESS= 258, 
+01-26 20:12:47.220   697   697 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-26 20:12:47.220   697   697 E thermal_src: ERROR, recvmsg expect 4, but get 2 
+01-26 20:12:47.236   668   687 D AAL     : 01-26 08:12:47.170 BL= 180,ESS= 257, 01-26 08:12:47.186 BL= 182,ESS= 256, 01-26 08:12:47.203 BL= 183,ESS= 256, 01-26 08:12:47.219 BL= 184,ESS= 256, 01-26 08:12:47.236 BL= 185,ESS= 256, 
+01-26 20:12:47.319   668   687 D AAL     : 01-26 08:12:47.252 BL= 186,ESS= 256, 01-26 08:12:47.269 BL= 187,ESS= 256, 01-26 08:12:47.285 BL= 188,ESS= 256, 01-26 08:12:47.302 BL= 189,ESS= 256, 01-26 08:12:47.319 BL= 190,ESS= 256, 
+01-26 20:12:47.401   668   687 D AAL     : 01-26 08:12:47.335 BL= 191,ESS= 256, 01-26 08:12:47.352 BL= 192,ESS= 256, 01-26 08:12:47.368 BL= 193,ESS= 256, 01-26 08:12:47.385 BL= 194,ESS= 256, 01-26 08:12:47.401 BL= 195,ESS= 256, 
+01-26 20:12:47.484   668   687 D AAL     : 01-26 08:12:47.418 BL= 196,ESS= 256, 01-26 08:12:47.434 BL= 197,ESS= 256, 01-26 08:12:47.451 BL= 198,ESS= 256, 01-26 08:12:47.468 BL= 199,ESS= 256, 01-26 08:12:47.484 BL= 200,ESS= 256, 
+01-26 20:12:47.507 15139 15357 D ClClient: Not sending keepalive.  Current connection state=STOPPED
+01-26 20:12:47.567   668   687 D AAL     : 01-26 08:12:47.501 BL= 201,ESS= 256, 01-26 08:12:47.517 BL= 202,ESS= 256, 01-26 08:12:47.534 BL= 203,ESS= 256, 01-26 08:12:47.550 BL= 204,ESS= 256, 01-26 08:12:47.567 BL= 205,ESS= 256, 
+01-26 20:12:47.650   668   687 D AAL     : 01-26 08:12:47.584 BL= 206,ESS= 256, 01-26 08:12:47.600 BL= 207,ESS= 256, 01-26 08:12:47.617 BL= 208,ESS= 256, 01-26 08:12:47.633 BL= 209,ESS= 256, 01-26 08:12:47.650 BL= 210,ESS= 256, 
+01-26 20:12:47.733   668   687 D AAL     : 01-26 08:12:47.666 BL= 211,ESS= 256, 01-26 08:12:47.683 BL= 212,ESS= 256, 01-26 08:12:47.700 BL= 213,ESS= 256, 01-26 08:12:47.716 BL= 214,ESS= 256, 01-26 08:12:47.733 BL= 215,ESS= 256, 
+01-26 20:12:47.816   668   687 D AAL     : 01-26 08:12:47.749 BL= 216,ESS= 256, 01-26 08:12:47.766 BL= 217,ESS= 256, 01-26 08:12:47.782 BL= 218,ESS= 256, 01-26 08:12:47.799 BL= 219,ESS= 256, 01-26 08:12:47.815 BL= 220,ESS= 256, 
+01-26 20:12:47.898   668   687 D AAL     : 01-26 08:12:47.832 BL= 221,ESS= 256, 01-26 08:12:47.848 BL= 222,ESS= 256, 01-26 08:12:47.865 BL= 223,ESS= 256, 01-26 08:12:47.882 BL= 224,ESS= 256, 01-26 08:12:47.898 BL= 225,ESS= 256, 
+01-26 20:12:47.941   697   697 E thermal_src: ERROR, recvmsg expect 5, but get 2 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Text Size</string>
+
+    <string name="tvInstructionsTxt">
+This app demonstrates different text sizes in xml TextView, defined like:\n
+android:textAppearance=\"?android:textAppearanceLarge\"\n
+    </string>
+
+    <string name="tvSmallTxt">textAppearanceSmall</string>
+    <string name="tvMediumTxt">textAppearanceMedium</string>
+    <string name="tvLargeTxt">textAppearanceLarge</string>
+    
+</resources>

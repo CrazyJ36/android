@@ -1,0 +1,9 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+# Put this file in termux: ~/bin
+# This file enables direct ediiting
+# of files shared from other app
+# on Android.
+
+# Choose editor, the shared file is arg.
+nano $1

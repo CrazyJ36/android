@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <menu name="multi_window_example">res/menu/multi_window_example.xml</menu>
+    <menu name="multi_window_example">res/menu-v11/multi_window_example.xml</menu>
+</resources>

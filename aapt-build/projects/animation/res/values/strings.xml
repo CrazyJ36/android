@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Animation</string>
+    <string name="buttonText">Animate</string>
+</resources>

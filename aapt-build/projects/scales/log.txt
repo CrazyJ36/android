@@ -1,0 +1,178 @@
+--------- beginning of main
+01-30 19:36:08.133   696   696 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-30 19:36:08.133   696   696 E thermal_src: ERROR, recvmsg expect 4, but get 2 
+01-30 19:36:08.179  9560  9677 D ClClient: Not sending keepalive.  Current connection state=STOPPED
+01-30 19:36:09.138   696   696 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-30 19:36:09.139   696   696 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-30 19:36:09.344  1372  1372 I NetworkController.WifiSignalController: Change in state to: connected=true,enabled=true,level=2,inetCondition=1,iconGroup=IconGroup(Default Wi-Fi Icons),activityIn=true,activityOut=false,rssi=-65,lteadvancedmode=0,ssid="MySpectrumWiFid8-2G",isTransient=false,isGigaWiFi=false,isAttWifiCall=false,detailedState=CONNECTED
+01-30 19:36:09.347  1372  1372 I MobileSignalController: mobileLabel_SPCS = Boost Mobile, mobileLabel = Boost Mobile, mInService = true
+01-30 19:36:09.408   695   695 I thermal_repeater: [recvMdThermalInfo] ret=31, strLen=127,  3, 34, -127, -22945, 32767, -1
+01-30 19:36:09.537   460   460 I WifiHAL : Get link stats
+01-30 19:36:09.971  1024  1314 V WifiServerServiceExt: checkPollTimer Cnt= 0 rssi =-64 threshold=-100
+01-30 19:36:10.152   696   696 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-30 19:36:10.153   696   696 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-30 19:36:10.346  1372  1372 I NetworkController.WifiSignalController: Change in state to: connected=true,enabled=true,level=2,inetCondition=1,iconGroup=IconGroup(Default Wi-Fi Icons),activityIn=false,activityOut=false,rssi=-65,lteadvancedmode=0,ssid="MySpectrumWiFid8-2G",isTransient=false,isGigaWiFi=false,isAttWifiCall=false,detailedState=CONNECTED
+01-30 19:36:10.347  1372  1372 I MobileSignalController: mobileLabel_SPCS = Boost Mobile, mobileLabel = Boost Mobile, mInService = true
+01-30 19:36:11.115  1372  1548 I MobileSignalController: isRoaming = false, isCdmaRoaming = false
+01-30 19:36:11.115  1372  1548 I MobileSignalController: isRoaming = false
+01-30 19:36:11.124  1763  1763 D TeleService: PhoneInterfaceManager: [PhoneIntfMgr] mSigLevel = 3
+01-30 19:36:11.125  1372  1548 I NetworkController: onReceive: intent=Intent { act=android.intent.action.SIG_STR flg=0x10 (has extras) }
+01-30 19:36:11.153   696   696 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-30 19:36:11.154   696   696 E thermal_src: ERROR, recvmsg expect 4, but get 2 
+01-30 19:36:11.218  1024  1274 D InputDispatcher: notifyMotion - action=ACTION_DOWN(0), id=0, pressure=0.251, tooltype=1, deviceId=5, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=7758610190000, downTime=7758610190000, 
+01-30 19:36:11.218  1024  1273 D InputTransport: channel 'afcbe9a com.crazyj36.scales/com.crazyj36.scales.MainActivity (server)' : action=ACTION_DOWN(0), id=0, tooltype=1, deviceId=5, source=0x1002, flags=0x0, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=7758610190000, eventTime=7758610190000, pointerCount=1
+--------- beginning of system
+01-30 19:36:09.538   460   460 E android.hardware.wifi@1.0-service: Invalid radio stats in link layer stats
+01-30 19:36:11.219 15370 15370 I ViewRootImpl: ViewRoot's Touch Event : ACTION_DOWN
+01-30 19:36:11.234  1024  1274 D InputDispatcher: notifyMotion - action=ACTION_UP(0), id=0, pressure=0.251, tooltype=1, deviceId=5, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=7758626584000, downTime=7758610190000, 
+01-30 19:36:11.234  1024  1273 D InputTransport: channel 'afcbe9a com.crazyj36.scales/com.crazyj36.scales.MainActivity (server)' : action=ACTION_UP(0), id=0, tooltype=1, deviceId=5, source=0x1002, flags=0x0, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=7758610190000, eventTime=7758626584000, pointerCount=1
+01-30 19:36:11.236 15370 15370 I ViewRootImpl: ViewRoot's Touch Event : ACTION_UP
+01-30 19:36:11.254   453   576 I hwcomposer: [NOD] setSrc: usage : 0x966, ext_info.status : 0x0  
+01-30 19:36:11.254   492   492 I DisplayDevice: [Built-in Screen (type:0)] fps:1.755908,dur:7403.58,max:7156.35,min:16.36
+01-30 19:36:11.305 15370 15370 I AudioManagerEx: AudioManagerEx created
+01-30 19:36:11.309 15370 15370 D AndroidRuntime: Shutting down VM
+--------- beginning of crash
+01-30 19:36:11.309 15370 15370 E AndroidRuntime: FATAL EXCEPTION: main
+01-30 19:36:11.309 15370 15370 E AndroidRuntime: Process: com.crazyj36.scales, PID: 15370
+01-30 19:36:11.309 15370 15370 E AndroidRuntime: java.lang.ArrayIndexOutOfBoundsException: length=12; index=12
+01-30 19:36:11.309 15370 15370 E AndroidRuntime: 	at com.crazyj36.scales.MainActivity$1.onItemClick(MainActivity.java:40)
+01-30 19:36:11.309 15370 15370 E AndroidRuntime: 	at android.widget.AdapterView.performItemClick(AdapterView.java:318)
+01-30 19:36:11.309 15370 15370 E AndroidRuntime: 	at android.widget.AbsListView.performItemClick(AbsListView.java:1223)
+01-30 19:36:11.309 15370 15370 E AndroidRuntime: 	at android.widget.AbsListView$PerformClick.run(AbsListView.java:3199)
+01-30 19:36:11.309 15370 15370 E AndroidRuntime: 	at android.widget.AbsListView$3.run(AbsListView.java:4302)
+01-30 19:36:11.309 15370 15370 E AndroidRuntime: 	at android.os.Handler.handleCallback(Handler.java:790)
+01-30 19:36:11.309 15370 15370 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+01-30 19:36:11.309 15370 15370 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:164)
+01-30 19:36:11.309 15370 15370 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6651)
+01-30 19:36:11.309 15370 15370 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+01-30 19:36:11.309 15370 15370 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:438)
+01-30 19:36:11.309 15370 15370 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:810)
+01-30 19:36:11.313  1024 12181 W ActivityManager:   Force finishing activity com.crazyj36.scales/.MainActivity
+01-30 19:36:11.321  1024 15394 W AES     : Exception Log handling...
+01-30 19:36:11.322  1024 15394 W AES     : Skipped - do not care third party apk
+01-30 19:36:11.327  1024  1056 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 (has extras) } to com.google.android.gms/.stats.service.DropBoxEntryAddedReceiver
+01-30 19:36:11.328  2518 15368 D ViewRootImpl: onChangedNavigationGuardColor(), color: ffffffff
+01-30 19:36:11.328  1024  1056 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 (has extras) } to com.google.android.gms/.chimera.GmsIntentOperationService$PersistentTrustedReceiver
+01-30 19:36:11.328  2518  2518 D DecorView: updateNavigationGuardColor navigationGuardColor=0xffffffff
+01-30 19:36:11.348  1372  1372 I NetworkController.WifiSignalController: Change in state to: connected=true,enabled=true,level=2,inetCondition=1,iconGroup=IconGroup(Default Wi-Fi Icons),activityIn=true,activityOut=true,rssi=-65,lteadvancedmode=0,ssid="MySpectrumWiFid8-2G",isTransient=false,isGigaWiFi=false,isAttWifiCall=false,detailedState=CONNECTED
+01-30 19:36:11.354   668   699 D AAL     : 01-30 07:36:11.284 BL= 383,ESS= 272, 
+01-30 19:36:11.356  1372  1372 I MobileSignalController: mobileLabel_SPCS = Boost Mobile, mobileLabel = Boost Mobile, mInService = true
+01-30 19:36:11.367   694   728 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-30 19:36:11.367   694   728 I PowerRM : FIA lock1 locked
+01-30 19:36:11.367   694   728 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-30 19:36:11.370   694   728 I PowerRM : Window Changed
+01-30 19:36:11.371  1372  1372 V StatusBar: setLightsOn(true)
+01-30 19:36:11.371  1372  1372 D StatusBar: setSystemUiVisibility vis=0 mask=1 oldVal=0 newVal=0 diff=0
+01-30 19:36:11.372  1024  1057 D InputDispatcher: Focus left window: Window{afcbe9a u0 com.crazyj36.scales/com.crazyj36.scales.MainActivity}
+01-30 19:36:11.372  1024  1057 D InputDispatcher: Focus entered window: Window{b3cd3c6 u0 Application Error: com.crazyj36.scales}
+01-30 19:36:11.375  1024  1057 D BezellessGripSuppressionFilter: getdisplaysize, x : 1080 y : 2160
+01-30 19:36:11.376  1024  1057 I ActivityManager: Showing crash dialog for package com.crazyj36.scales u0
+01-30 19:36:11.406  1024  8525 I OpenGLRenderer: Initialized EGL, version 1.4
+01-30 19:36:11.407  1024  8525 D OpenGLRenderer: Swap behavior 2
+01-30 19:36:11.415  1372  1372 I NavigationThemeResource: notify navigation bar color(0x0)
+01-30 19:36:11.416  2518 15368 D ViewRootImpl: onChangedNavigationGuardColor(), color: ffffffff
+01-30 19:36:11.419  2518  2518 D DecorView: updateNavigationGuardColor navigationGuardColor=0xffffffff
+01-30 19:36:11.424  1024  1345 D WifiWatchdogStateMachine: iwlanpercheck loss=0% / volume1 / imscallstate:0 sum:0, perAvg:0
+01-30 19:36:11.427  1372  1599 I SystemServicesProxy: RecentApps has 1 item(s).
+01-30 19:36:11.433  1372  1599 D DDTIcon : getIconDrawableAsIconFrameTheme for com.crazyj36.scales@0
+01-30 19:36:11.433  1372  1599 W DDTIcon : getIconDrawableAsIconFrameTheme got null as icon. Replace it to default one for com.crazyj36.scales
+01-30 19:36:11.437  1372  1599 D DDTIcon : maxBgRes = 0
+01-30 19:36:11.438  1372  1599 I SystemServicesProxy: Task.thumbnail loading failed for 190
+01-30 19:36:11.472  1024  1240 I WindowManager: Window{b3cd3c6 u0 Application Error: com.crazyj36.scales} start dimming: flags=1820002 effectFlags=0, layer=111000
+01-30 19:36:11.582   668   699 D AAL     : 01-30 07:36:11.515 BL= 406,ESS= 266, 01-30 07:36:11.532 BL= 416,ESS= 262, 01-30 07:36:11.548 BL= 420,ESS= 259, 01-30 07:36:11.565 BL= 421,ESS= 257, 01-30 07:36:11.581 BL= 420,ESS= 256, 
+01-30 19:36:11.664   668   699 D AAL     : 01-30 07:36:11.598 BL= 419,ESS= 256, 01-30 07:36:11.614 BL= 417,ESS= 256, 01-30 07:36:11.631 BL= 415,ESS= 256, 01-30 07:36:11.647 BL= 414,ESS= 256, 01-30 07:36:11.664 BL= 412,ESS= 256, 
+01-30 19:36:11.484  1024  1240 I WindowManager: Window{b3cd3c6 u0 Application Error: com.crazyj36.scales} start dimming: flags=1820002 effectFlags=0, layer=111000
+01-30 19:36:11.670  1024  1073 V WallpaperManagerService: Wallpaper file change: evt=8 path=settings_secure.xml.backup sys=false lock=false imagePending=false whichPending=0x0 written=true
+01-30 19:36:11.671  1024  1073 V WallpaperManagerService: Wallpaper file change: evt=128 path=settings_secure.xml.bak sys=false lock=false imagePending=false whichPending=0x0 written=true
+01-30 19:36:11.696  1024  1073 V WallpaperManagerService: Wallpaper file change: evt=8 path=settings_secure.xml sys=false lock=false imagePending=false whichPending=0x0 written=true
+01-30 19:36:11.696  1024  1073 V WallpaperManagerService: Wallpaper file change: evt=512 path=settings_secure.xml.bak sys=false lock=false imagePending=false whichPending=0x0 written=false
+01-30 19:36:11.747   668   699 D AAL     : 01-30 07:36:11.681 BL= 410,ESS= 256, 01-30 07:36:11.697 BL= 409,ESS= 256, 01-30 07:36:11.714 BL= 407,ESS= 256, 01-30 07:36:11.730 BL= 405,ESS= 256, 01-30 07:36:11.747 BL= 404,ESS= 256, 
+01-30 19:36:11.817  1024  1056 W ActivityManager: Activity pause timeout for ActivityRecord{c514df4 u0 com.crazyj36.scales/.MainActivity t190 f}
+01-30 19:36:11.825   477   477 W PHHandler: [PH] hint id(103) is not supported
+01-30 19:36:11.825 13372 13372 D PenService: [mActivityTriggerHandler] com.teslacoilsw.launcher/com.teslacoilsw.launcher.NovaLauncher
+01-30 19:36:11.826   487   515 I vendor.mediatek.hardware.power@1.1-impl: scnEnable hdl:39, timeout:3500
+01-30 19:36:11.826   487   514 I powerd  : [powerd_req] POWER_MSG_SCN_ENABLE: hdl:39, timeout:3500
+01-30 19:36:11.826   487   514 I libPerfService: perfUserScnEnable - handle:39
+01-30 19:36:11.827   694   728 I PowerRM : System FW:1 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-30 19:36:11.829   487   514 I libPerfService: 39: legacy set freq: 1001000 -1 1508000 -1
+01-30 19:36:11.829   668   699 D AAL     : 01-30 07:36:11.763 BL= 402,ESS= 256, 01-30 07:36:11.780 BL= 400,ESS= 256, 01-30 07:36:11.796 BL= 399,ESS= 256, 01-30 07:36:11.813 BL= 397,ESS= 256, 01-30 07:36:11.829 BL= 395,ESS= 256, 
+01-30 19:36:11.836   487   514 I libPerfService: 39: legacy set: 3 -1 4 -1
+01-30 19:36:11.842  1372  1372 I FullScreenDialog: topPackage is changed to com.teslacoilsw.launcher, so dismiss.
+01-30 19:36:11.912   668   699 D AAL     : 01-30 07:36:11.846 BL= 394,ESS= 256, 01-30 07:36:11.863 BL= 392,ESS= 256, 01-30 07:36:11.879 BL= 390,ESS= 256, 01-30 07:36:11.896 BL= 389,ESS= 256, 01-30 07:36:11.912 BL= 387,ESS= 256, 
+01-30 19:36:11.932  1372  1659 I SystemServicesProxy: RecentApps has 1 item(s).
+01-30 19:36:11.937  1372  1659 I SystemServicesProxy: Task.thumbnail loading failed for 190
+01-30 19:36:11.943  2163  2163 I Timeline: Timeline: Activity_idle id: android.os.BinderProxy@5423399 time:7759336
+01-30 19:36:11.947  1024  9425 D OverlayManager: setEnabled packageName=com.android.systemui.theme.dark enable=true userId=0
+01-30 19:36:11.995   668   699 D AAL     : 01-30 07:36:11.929 BL= 385,ESS= 256, 01-30 07:36:11.945 BL= 384,ESS= 256, 01-30 07:36:11.962 BL= 382,ESS= 256, 01-30 07:36:11.978 BL= 380,ESS= 256, 01-30 07:36:11.995 BL= 379,ESS= 256, 
+01-30 19:36:12.000  1372  1372 D StatusBar: setSystemUiVisibility vis=8008 mask=ffffffff oldVal=0 newVal=8008 diff=8008
+01-30 19:36:12.021   453   576 I hwcomposer: [OVL] (0) Overlay input(1) was used with queue previously  
+01-30 19:36:12.021   453   576 I hwcomposer: [DBQ] (q2:0xb089f680) Buffer queue is destroyed  
+01-30 19:36:12.021   453   576 I hwcomposer: [DBQ] (q2:0xb089f680) Free Slot(0), handle=0xb19be500, 9331200 -> 0  
+01-30 19:36:12.022   453   576 I hwcomposer: [DBQ] (q2:0xb089f680) Free Slot(1), handle=0xb19be6c0, 9331200 -> 0  
+01-30 19:36:12.022   453   576 I hwcomposer: [DBQ] (q2:0xb089f680) Free Slot(2), handle=0xb19be7a0, 9331200 -> 0  
+01-30 19:36:12.035  1372  1372 I NavigationThemeResource: NavigationKey Color is changed(WHITE -> WHITE_WITH_BORDER)
+01-30 19:36:12.035  1372  1372 I NavigationThemeResource:  BarMode=4, Theme=WHITE, LightBackground=false (Transparent)
+01-30 19:36:12.035  1372  1372 I NavigationThemeResource: , Keyguard show=false, IME shown=false, Bar vertical=false, Panel expanded=false
+01-30 19:36:12.078   668   699 D AAL     : 01-30 07:36:12.011 BL= 377,ESS= 256, 01-30 07:36:12.028 BL= 375,ESS= 256, 01-30 07:36:12.044 BL= 374,ESS= 256, 01-30 07:36:12.061 BL= 372,ESS= 256, 01-30 07:36:12.077 BL= 370,ESS= 256, 
+01-30 19:36:12.156   696   696 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-30 19:36:12.157   696   696 E thermal_src: ERROR, recvmsg expect 5, but get 2 
+01-30 19:36:12.160   668   699 D AAL     : 01-30 07:36:12.094 BL= 368,ESS= 256, 01-30 07:36:12.110 BL= 367,ESS= 256, 01-30 07:36:12.127 BL= 365,ESS= 256, 01-30 07:36:12.144 BL= 363,ESS= 256, 01-30 07:36:12.160 BL= 362,ESS= 256, 
+01-30 19:36:12.201  1024  1274 D InputDispatcher: notifyMotion - action=ACTION_DOWN(0), id=0, pressure=0.216, tooltype=1, deviceId=5, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=7759593792000, downTime=7759593792000, 
+01-30 19:36:12.202  1024  1273 D InputTransport: channel 'b3cd3c6 Application Error: com.crazyj36.scales (server)' : action=ACTION_DOWN(0), id=0, tooltype=1, deviceId=5, source=0x1002, flags=0x0, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=7759593792000, eventTime=7759593792000, pointerCount=1
+01-30 19:36:12.202  1024  1057 I ViewRootImpl: ViewRoot's Touch Event : ACTION_DOWN
+01-30 19:36:12.243   668   699 D AAL     : 01-30 07:36:12.177 BL= 360,ESS= 256, 01-30 07:36:12.193 BL= 358,ESS= 256, 01-30 07:36:12.210 BL= 357,ESS= 256, 01-30 07:36:12.226 BL= 355,ESS= 256, 01-30 07:36:12.243 BL= 353,ESS= 256, 
+01-30 19:36:12.263   492   492 I DisplayDevice: [Built-in Screen (type:0)] fps:55.516861,dur:1008.70,max:99.39,min:9.27
+01-30 19:36:12.284  1024  1274 D InputDispatcher: notifyMotion - action=ACTION_UP(0), id=0, pressure=0.263, tooltype=1, deviceId=5, source=0x1002, policyFlags=0x0, flags=0x0, metaState=0x0, buttonState=0x0, edgeFlags=0x0, eventTime=7759676554000, downTime=7759593792000, 
+01-30 19:36:12.284  1024  1273 D InputTransport: channel 'b3cd3c6 Application Error: com.crazyj36.scales (server)' : action=ACTION_UP(0), id=0, tooltype=1, deviceId=5, source=0x1002, flags=0x0, edgeFlags=0x0, metaState=0x0, buttonState=0x0, downTime=7759593792000, eventTime=7759676554000, pointerCount=1
+01-30 19:36:12.285  1024  1057 I ViewRootImpl: ViewRoot's Touch Event : ACTION_UP
+01-30 19:36:12.288  1024 12181 W ActivityManager:   Force finishing activity com.crazyj36.scales/.MainActivity
+01-30 19:36:12.295  1024 12181 D InputDispatcher: Window went away: Window{afcbe9a u0 com.crazyj36.scales/com.crazyj36.scales.MainActivity}
+01-30 19:36:12.301   694   728 I PowerRM : System FW:0 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-30 19:36:12.301   694   728 I PowerRM : FIA lock1 unlocked
+01-30 19:36:12.301   694   728 I PowerRM : System FW:0 IC:0 SO:0 GT:0 CAPP:-1 APP:0
+01-30 19:36:12.301   694   728 I PowerRM : Window Changed
+01-30 19:36:12.311  1024  1057 D InputDispatcher: Focus left window: Window{b3cd3c6 u0 Application Error: com.crazyj36.scales}
+01-30 19:36:12.311  1024  1057 D InputDispatcher: Focus entered window: Window{7613588 u0 com.teslacoilsw.launcher/com.teslacoilsw.launcher.NovaLauncher}
+01-30 19:36:12.311  1024  1057 D InputDispatcher: Window went away: Window{b3cd3c6 u0 Application Error: com.crazyj36.scales}
+01-30 19:36:12.315  1024 12181 I ActivityManager: Killing 15370:com.crazyj36.scales/u0a202 (adj 900): crash
+01-30 19:36:12.316  1024  1058 W zygote  : kill(-15370, 9) failed: No such process
+01-30 19:36:12.323  1372  1372 I NavigationThemeResource: notify navigation bar color(0xffffffff)
+01-30 19:36:12.323  1372  1372 I NavigationThemeResource: NavigationKey Color is changed(WHITE_WITH_BORDER -> BLACK)
+01-30 19:36:12.323  1372  1372 I NavigationThemeResource:  BarMode=4, Theme=WHITE, LightBackground=true (NOT Transparent)
+01-30 19:36:12.323  1372  1372 I NavigationThemeResource: , Keyguard show=false, IME shown=false, Bar vertical=false, Panel expanded=false
+01-30 19:36:12.324  1372  1372 D StatusBar: setSystemUiVisibility vis=8708 mask=ffffffff oldVal=8008 newVal=8708 diff=700
+01-30 19:36:12.325   668   699 D AAL     : 01-30 07:36:12.259 BL= 352,ESS= 256, 01-30 07:36:12.276 BL= 350,ESS= 256, 01-30 07:36:12.293 BL= 348,ESS= 256, 01-30 07:36:12.309 BL= 347,ESS= 256, 01-30 07:36:12.325 BL= 345,ESS= 256, 
+01-30 19:36:12.327  1372  1372 I NavigationThemeResource: notify navigation bar color(0xffffffff)
+01-30 19:36:12.328  1372  1372 I chatty  : uid=10066(com.android.systemui) identical 1 line
+01-30 19:36:12.329  1372  1372 I NavigationThemeResource: notify navigation bar color(0xffffffff)
+01-30 19:36:12.330  2518 15368 D ViewRootImpl: onChangedNavigationGuardColor(), color: 0
+01-30 19:36:12.331  2518  2518 D DecorView: updateNavigationGuardColor navigationGuardColor=0xff000000
+01-30 19:36:12.333  1372  1372 I NavigationThemeResource: notify navigation bar color(0x0)
+01-30 19:36:12.333  1372  1372 I NavigationThemeResource: NavigationKey Color is changed(BLACK -> WHITE_WITH_BORDER)
+01-30 19:36:12.333  1372  1372 I NavigationThemeResource:  BarMode=4, Theme=WHITE, LightBackground=false (Transparent)
+01-30 19:36:12.333  1372  1372 I NavigationThemeResource: , Keyguard show=false, IME shown=false, Bar vertical=false, Panel expanded=false
+01-30 19:36:12.335  1024  1240 W AppOps  : Finishing op nesting under-run: uid 1000 pkg android code 24 time=0 duration=0 nesting=0
+01-30 19:36:12.337  2504  2591 E PBSessionCacheImpl: sessionId[11014288886032671] not persisted.
+01-30 19:36:12.343  2504 14885 I PBSessionCacheImpl: Deleted sessionId[11014288886032671] from persistence.
+01-30 19:36:12.345  2518  2518 I HK/LatinKbdBaseView: closing org.pocketworkstation.pckeyboard.LatinKeyboardView{46616f9 V.ED..... ......ID 0,0-1080,675 #7f080004 app:id/LatinkeyboardBaseView}
+01-30 19:36:12.350  1372  1372 I NetworkController.WifiSignalController: Change in state to: connected=true,enabled=true,level=2,inetCondition=1,iconGroup=IconGroup(Default Wi-Fi Icons),activityIn=false,activityOut=false,rssi=-65,lteadvancedmode=0,ssid="MySpectrumWiFid8-2G",isTransient=false,isGigaWiFi=false,isAttWifiCall=false,detailedState=CONNECTED
+01-30 19:36:12.351  1024  1578 I WifiService: getWifiEnabledState uid=10078
+01-30 19:36:12.351  1372  1372 I MobileSignalController: mobileLabel_SPCS = Boost Mobile, mobileLabel = Boost Mobile, mInService = true
+01-30 19:36:12.353   492  1278 I SurfaceFlinger: [SF client] DEL(0xae51c960) for (1024:system_server)
+01-30 19:36:12.355  1024  1076 W ActivityManager: setHasOverlayUi called on unknown pid: 15370
+01-30 19:36:12.360  1024  1058 W zygote  : kill(-15370, 9) failed: No such process
+01-30 19:36:12.361  1024  1058 I zygote  : Successfully killed process cgroup uid 10202 pid 15370 in 45ms
+01-30 19:36:12.370  1024  1034 I zygote  : NativeAlloc concurrent copying GC freed 27567(1734KB) AllocSpace objects, 13(580KB) LOS objects, 42% free, 24MB/42MB, paused 339us total 331.647ms
+01-30 19:36:12.372  1024 12181 I WifiService: getWifiEnabledState uid=10078
+01-30 19:36:12.390  2504  2591 I MicroDetectionState: Should stop hotword detection immediately - false
+01-30 19:36:12.392  2504  2591 I MicroDetectionState: Keep running hotword in interactor process
+01-30 19:36:12.408   668   699 D AAL     : 01-30 07:36:12.342 BL= 343,ESS= 256, 01-30 07:36:12.359 BL= 344,ESS= 257, 01-30 07:36:12.375 BL= 341,ESS= 258, 01-30 07:36:12.392 BL= 341,ESS= 259, 01-30 07:36:12.408 BL= 338,ESS= 260, 
+01-30 19:36:12.524   668   699 D AAL     : 01-30 07:36:12.425 BL= 335,ESS= 261, 01-30 07:36:12.441 BL= 332,ESS= 262, 01-30 07:36:12.458 BL= 332,ESS= 263, 01-30 07:36:12.474 BL= 333,ESS= 264, 01-30 07:36:12.524 BL= 336,ESS= 264, 
+01-30 19:36:12.534   487   515 I vendor.mediatek.hardware.power@1.1-impl: scnDisable hdl:39
+01-30 19:36:12.534   487   514 I libPerfService: 39: legacy set: -1 -1 -1 -1
+01-30 19:36:12.535   487   514 I libPerfService: 39: legacy set freq: -1 -1 -1 -1
+01-30 19:36:12.555   460   460 I WifiHAL : Get link stats
+01-30 19:36:12.555   460   460 E android.hardware.wifi@1.0-service: Invalid radio stats in link layer stats
+01-30 19:36:12.607   668   699 D AAL     : 01-30 07:36:12.540 BL= 339,ESS= 264, 01-30 07:36:12.557 BL= 339,ESS= 263, 01-30 07:36:12.573 BL= 342,ESS= 262, 01-30 07:36:12.591 BL= 345,ESS= 261, 01-30 07:36:12.606 BL= 348,ESS= 260, 
+01-30 19:36:12.689   668   699 D AAL     : 01-30 07:36:12.623 BL= 351,ESS= 259, 01-30 07:36:12.640 BL= 354,ESS= 258, 01-30 07:36:12.656 BL= 356,ESS= 258, 01-30 07:36:12.673 BL= 358,ESS= 258, 01-30 07:36:12.689 BL= 359,ESS= 258, 
+01-30 19:36:12.772   668   699 D AAL     : 01-30 07:36:12.706 BL= 361,ESS= 258, 01-30 07:36:12.722 BL= 363,ESS= 258, 01-30 07:36:12.739 BL= 364,ESS= 258, 01-30 07:36:12.755 BL= 366,ESS= 258, 01-30 07:36:12.772 BL= 368,ESS= 258, 

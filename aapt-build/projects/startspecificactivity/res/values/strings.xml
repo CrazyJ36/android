@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Start Specific Activity</string>
+    <string name="tvInstructionsTxt">
+    This app start A specific app activity by using Intent and ComponentName from Android API. Example:\n\n
+    yourIntent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DeviceInfoSettingsActivity"));\n\n
+    Some package.class names are different, and should be typed differently above, depending on the activity
+    you want to start. You can get names of all installed activities that you can launch with ComponentName
+    using \'Nova Launcher\' Activities shortcut, or by \'Quick Shortcut Maker\' apps.\n
+    Also some activities may not be installed on different devices, so the button may crash on some devices.\n  
+    On devices which have the activity "com.android.settings.ApplicationSettings", the button will start Settings>Applications.
+    </string>
+    <string name="btnLaunchTxt">Launch Application Settings</string>
+</resources>

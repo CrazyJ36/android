@@ -1,0 +1,35 @@
+--------- beginning of /dev/log/main
+W/dalvikvm( 1365): threadid=1: thread exiting with uncaught exception (group=0x40019560)
+--------- beginning of /dev/log/system
+I/ActivityManager(  307): Starting: Intent { act=android.intent.action.CREATE_DOCUMENT cat=[android.intent.category.OPENABLE] typ=text/plain (has extras) } from pid 1365
+E/AndroidRuntime( 1365): FATAL EXCEPTION: main
+E/AndroidRuntime( 1365): android.content.ActivityNotFoundException: No Activity found to handle Intent { act=android.intent.action.CREATE_DOCUMENT cat=[android.intent.category.OPENABLE] typ=text/plain (has extras) }
+E/AndroidRuntime( 1365): 	at android.app.Instrumentation.checkStartActivityResult(Instrumentation.java:1409)
+E/AndroidRuntime( 1365): 	at android.app.Instrumentation.execStartActivity(Instrumentation.java:1379)
+E/AndroidRuntime( 1365): 	at android.app.Activity.startActivityForResult(Activity.java:2827)
+E/AndroidRuntime( 1365): 	at com.crazyj36.apiplaygroundanysdk.MainActivity.createDocFile(MainActivity.java:735)
+E/AndroidRuntime( 1365): 	at com.crazyj36.apiplaygroundanysdk.MainActivity$11.onClick(MainActivity.java:334)
+E/AndroidRuntime( 1365): 	at android.view.View.performClick(View.java:2520)
+E/AndroidRuntime( 1365): 	at android.view.View$PerformClick.run(View.java:9157)
+E/AndroidRuntime( 1365): 	at android.os.Handler.handleCallback(Handler.java:587)
+E/AndroidRuntime( 1365): 	at android.os.Handler.dispatchMessage(Handler.java:92)
+E/AndroidRuntime( 1365): 	at android.os.Looper.loop(Looper.java:130)
+E/AndroidRuntime( 1365): 	at android.app.ActivityThread.main(ActivityThread.java:3694)
+E/AndroidRuntime( 1365): 	at java.lang.reflect.Method.invokeNative(Native Method)
+E/AndroidRuntime( 1365): 	at java.lang.reflect.Method.invoke(Method.java:507)
+E/AndroidRuntime( 1365): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:895)
+E/AndroidRuntime( 1365): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:653)
+E/AndroidRuntime( 1365): 	at dalvik.system.NativeStart.main(Native Method)
+W/ActivityManager(  307):   Force finishing activity com.crazyj36.apiplaygroundanysdk/.MainActivity
+W/ActivityManager(  307): Activity pause timeout for HistoryRecord{408a76e0 com.crazyj36.apiplaygroundanysdk/.MainActivity}
+D/Launcher.Workspace(  466): [Workspace.java:2036:hideWallpaper()] Show wallpaper
+D/Launcher.Workspace(  466): [Workspace.java:2034:hideWallpaper()] Hide wallpaper
+E/ActivityThread(  466): Failed to find provider info for call_log
+E/ActivityThread(  466): Failed to find provider info for com.lge.providers.lgemail
+E/ActivityThread(  466): Failed to find provider info for com.android.whatsnew
+I/ActivityManager(  307): Process com.crazyj36.apiplaygroundanysdk (pid 1365) has died.
+I/WindowManager(  307): WIN DEATH: Window{4085c150 com.crazyj36.apiplaygroundanysdk/com.crazyj36.apiplaygroundanysdk.MainActivity paused=false}
+E/JavaBinder(  307): Transact on 0x538bd0 in Java object 0x4085bc98 with code 3 failed
+E/JavaBinder(  307): Transact on 0x538bd0 in Java object 0x4085bc98 with code 4 failed
+W/InputManagerService(  307): Got RemoteException sending setActive(false) notification to pid 1365 uid 10093
+I/#LGIME  (  447): [Glog.java:35:i()] #### onStartInput restarting : false / inputType : 0

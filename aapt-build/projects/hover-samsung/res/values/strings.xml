@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Hover Project</string>
+    <string name="action_settings">Settings</string>
+    <string name="Instructions">Hover over the image, with stylus.</string>
+    <string name="google">http://www.music.google.com</string>
+
+</resources>

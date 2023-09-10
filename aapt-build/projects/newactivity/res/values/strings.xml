@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">New Activity</string>
+    <string name="tvInstructionsTxt">
+This is MainActivity,
+push Next for next Activity screen.
+    </string>
+    <string name="btnNewActivityTxt">Next</string>
+    <string name="tvNextActivityInstructionsTxt">This is NextActivity.</string>
+</resources>

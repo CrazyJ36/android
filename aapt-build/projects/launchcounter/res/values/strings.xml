@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Launch Counter</string>
+
+    <string name="tvInstructionsTxt">
+This app counts how many times you launch the app.\n
+It counts up when onDestroy() is called(even after exit with back button).
+It even survives an Activity.finish() call.\n
+The counter doesn\'t survive reboots or A clear from recent apps,
+count only stays as long as Android keeps the app in memory.\n
+    </string>
+
+</resources>

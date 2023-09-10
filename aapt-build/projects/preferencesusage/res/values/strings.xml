@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="appname">Preferences Usage</string>
+    <string name="tvInstructionsTxt">
+Go to preferences in menu.\n\nThis app shows how to setup A settings screen
+by adding A settings database xml file to res/xml,
+then initiating A settings activity and fragment to get settings.
+The chosen setting persists apps stop/starts.\n\n
+    </string>
+
+    <string name="preferenceTitle">Change Main Text</string>
+    <string name="preferenceSummary">Choice reflects on Main screen.</string>
+    <string name="tvResultOffTxt">Setting set to Off</string>
+    <string name="tvResultOnTxt">Setting enabled</string>
+    <string name="menuSettingsTxt">Settings</string>
+</resources>
