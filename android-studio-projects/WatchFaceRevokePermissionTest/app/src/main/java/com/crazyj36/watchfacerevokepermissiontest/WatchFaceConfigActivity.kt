@@ -39,15 +39,13 @@ class WatchFaceConfigActivity : ComponentActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.watch_face_config)
-            if (!isFinishing) {
-                MainScope().launch {
-                    editorSession = EditorSession
-                        .createOnWatchEditorSession(
-                            this@WatchFaceConfigActivity
-                        )
-                    imageView = findViewById(R.id.imageView)
-                    if (!isFinishing) getPreview()
-                }
+            MainScope().launch {
+                editorSession = EditorSession
+                    .createOnWatchEditorSession(
+                        this@WatchFaceConfigActivity
+                    )
+                imageView = findViewById(R.id.imageView)
+                getPreview()
             }
             when {
                 checkSelfPermission(
@@ -60,6 +58,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                     "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
                 )
                 -> {
+                    Toast.makeText(applicationContext, getString(R.string.grantPermissionText), Toast.LENGTH_SHORT).show()
                 }
 
                 else -> {
@@ -69,7 +68,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
         }
 
         fun onClickComplication(view: View) {
-            scope.launch {
+            MainScope().launch {
                 editorSession.openComplicationDataSourceChooser(3)
                 getPreview()
             }
