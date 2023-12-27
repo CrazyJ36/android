@@ -11,6 +11,7 @@ import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.editor.EditorSession
 import androidx.wear.watchface.style.WatchFaceLayer
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -28,7 +29,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.watch_face_config)
-        MainScope().launch {
+        MainScope().launch(Dispatchers.Main.immediate) {
             editorSession = EditorSession
                 .createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
@@ -60,7 +61,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
     }
 
     fun onClickComplication(view: View) {
-        MainScope().launch {
+        MainScope().launch(Dispatchers.Main.immediate) {
             editorSession.openComplicationDataSourceChooser(0)
             getPreview()
         }
