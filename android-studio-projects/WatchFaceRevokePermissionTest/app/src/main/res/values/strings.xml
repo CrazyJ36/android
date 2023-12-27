@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">WatchFace Revoke Permission Test</string>
+    <string name="analog_watch_face_name">Watch Face</string>
+    <string name="title_activity_watch_face_config">Complication Config</string>
+</resources>
