@@ -83,7 +83,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                         RenderParameters.HighlightLayer(
                             RenderParameters.HighlightedElement
                                 .AllComplicationSlots,
-                            android.graphics.Color.TRANSPARENT,
+                            android.graphics.Color.BLUE,
                             android.graphics.Color.argb(
                                 100, 0, 0, 0
                             )
