@@ -36,7 +36,7 @@ class MyWatchFaceService : WatchFaceService() {
             ComplicationType.SHORT_TEXT,
             ComplicationType.EMPTY
         )
-        val leftTopComplication = ComplicationSlot.createRoundRectComplicationSlotBuilder(
+        val complication = ComplicationSlot.createRoundRectComplicationSlotBuilder(
             id = 0,
             canvasComplicationFactory = defaultCanvasComplicationFactory,
             supportedTypes = supportedTypesList,
@@ -50,7 +50,7 @@ class MyWatchFaceService : WatchFaceService() {
         ).build()
         return ComplicationSlotsManager(
             listOf(
-                leftTopComplication
+                complication
             ),
             currentUserStyleRepository
         )

@@ -15,7 +15,9 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 class WatchFaceConfigActivity : ComponentActivity() {
+
     private lateinit var editorSession: EditorSession
+    private lateinit var imageView: ImageView
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) {
@@ -24,75 +26,66 @@ class WatchFaceConfigActivity : ComponentActivity() {
         }
     }
 
-    class WatchFaceConfigActivity : ComponentActivity() {
-        private lateinit var editorSession: EditorSession
-        private lateinit var imageView: ImageView
-        private val scope = MainScope()
-        private val requestPermissionLauncher = registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) {
-            if (!it) {
-                finish()
-            }
-        }
-
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.watch_face_config)
-            MainScope().launch {
-                editorSession = EditorSession
-                    .createOnWatchEditorSession(
-                        this@WatchFaceConfigActivity
-                    )
-                imageView = findViewById(R.id.imageView)
-                getPreview()
-            }
-            when {
-                checkSelfPermission(
-                    "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-                ) == PackageManager.PERMISSION_GRANTED -> {
-
-                }
-
-                shouldShowRequestPermissionRationale(
-                    "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.watch_face_config)
+        MainScope().launch {
+            editorSession = EditorSession
+                .createOnWatchEditorSession(
+                    this@WatchFaceConfigActivity
                 )
-                -> {
-                    Toast.makeText(applicationContext, getString(R.string.grantPermissionText), Toast.LENGTH_SHORT).show()
-                }
-
-                else -> {
-                    requestPermissionLauncher.launch("com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
-                }
-            }
+            imageView = findViewById(R.id.imageView)
+            getPreview()
         }
+        when {
+            checkSelfPermission(
+                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
+            ) == PackageManager.PERMISSION_GRANTED -> {
 
-        fun onClickComplication(view: View) {
-            MainScope().launch {
-                editorSession.openComplicationDataSourceChooser(3)
-                getPreview()
             }
-        }
 
-        private fun getPreview() {
-            imageView.setImageBitmap(
-                editorSession.renderWatchFaceToBitmap(
-                    RenderParameters(
-                        DrawMode.INTERACTIVE,
-                        WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
-                        RenderParameters.HighlightLayer(
-                            RenderParameters.HighlightedElement
-                                .AllComplicationSlots,
-                            android.graphics.Color.BLUE,
-                            android.graphics.Color.argb(
-                                100, 0, 0, 0
-                            )
-                        )
-                    ),
-                    EditorSession.DEFAULT_PREVIEW_INSTANT,
-                    editorSession.complicationsPreviewData.value
-                )
+            shouldShowRequestPermissionRationale(
+                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             )
+            -> {
+                Toast.makeText(
+                    applicationContext,
+                    getString(R.string.grantPermissionText),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            else -> {
+                requestPermissionLauncher.launch("com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
+            }
         }
+    }
+
+    fun onClickComplication(view: View) {
+        MainScope().launch {
+            editorSession.openComplicationDataSourceChooser(0)
+            getPreview()
+        }
+    }
+
+    private fun getPreview() {
+        imageView.setImageBitmap(
+            editorSession.renderWatchFaceToBitmap(
+                RenderParameters(
+                    DrawMode.INTERACTIVE,
+                    WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
+                    RenderParameters.HighlightLayer(
+                        RenderParameters.HighlightedElement
+                            .AllComplicationSlots,
+                        android.graphics.Color.TRANSPARENT,
+                        android.graphics.Color.argb(
+                            100, 0, 0, 0
+                        )
+                    )
+                ),
+                EditorSession.DEFAULT_PREVIEW_INSTANT,
+                editorSession.complicationsPreviewData.value
+            )
+        )
     }
 }
