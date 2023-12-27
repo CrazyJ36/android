@@ -22,7 +22,6 @@ class WatchFaceConfigActivity : ComponentActivity() {
         ActivityResultContracts.RequestPermission()
     ) {
         if (!it) {
-            finish()
         }
     }
 
@@ -43,7 +42,6 @@ class WatchFaceConfigActivity : ComponentActivity() {
             ) == PackageManager.PERMISSION_GRANTED -> {
 
             }
-
             shouldShowRequestPermissionRationale(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             )
