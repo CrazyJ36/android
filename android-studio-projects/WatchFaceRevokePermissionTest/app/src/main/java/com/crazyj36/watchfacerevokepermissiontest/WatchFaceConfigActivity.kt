@@ -38,14 +38,14 @@ class WatchFaceConfigActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val job: Job = lifecycleScope.launch {
+        val job = MainScope().launch {
             Log.d("WATCHFACEPERMISSION", "init editor")
             editorSession = EditorSession
                 .createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
         }
-        runBlocking {
+        MainScope().launch {
             Log.d("WATCHFACEPERMISSION", "join")
             job.join()
         }
