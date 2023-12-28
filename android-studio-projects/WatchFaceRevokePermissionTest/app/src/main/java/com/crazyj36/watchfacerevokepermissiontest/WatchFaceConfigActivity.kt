@@ -15,7 +15,9 @@ import androidx.wear.watchface.style.WatchFaceLayer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class WatchFaceConfigActivity : ComponentActivity() {
@@ -36,17 +38,19 @@ class WatchFaceConfigActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        GlobalScope.launch {
+        val job = CoroutineScope(Dispatchers.Default).launch {
             editorSession = EditorSession
                 .createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
-            withContext(Dispatchers.Main) {
-                setContentView(R.layout.watch_face_config)
-                imageView = findViewById(R.id.imageView)
-                getPreview()
-            }
         }
+        runBlocking {
+            job.join()
+            setContentView(R.layout.watch_face_config)
+            imageView = findViewById(R.id.imageView)
+            getPreview()
+        }
+
     }
 
     fun onClickComplication(view: View) {
