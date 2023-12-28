@@ -18,6 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class WatchFaceConfigActivity : ComponentActivity() {
     private lateinit var editorSession: EditorSession
@@ -36,17 +37,19 @@ class WatchFaceConfigActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val job: Job = lifecycleScope.launch {
-            editorSession = EditorSession
-                .createOnWatchEditorSession(
-                    this@WatchFaceConfigActivity
-                )
-        }
-        lifecycleScope.launch {
-            job.join()
-            setContentView(R.layout.watch_face_config)
-            imageView = findViewById(R.id.imageView)
-            getPreview()
+        setContentView(R.layout.watch_face_config)
+        imageView = findViewById(R.id.imageView)
+        runBlocking {
+            val job: Job = lifecycleScope.launch {
+                editorSession = EditorSession
+                    .createOnWatchEditorSession(
+                        this@WatchFaceConfigActivity
+                    )
+            }
+            MainScope().launch {
+                job.join()
+                getPreview()
+            }
         }
     }
 
