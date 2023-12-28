@@ -74,12 +74,21 @@ class MyWatchFaceService : WatchFaceService() {
             currentUserStyleRepository = currentUserStyleRepository,
             canvasType = CanvasType.HARDWARE
         )
-        MainScope().launch {
-            editorSession = EditorSession.createOnWatchEditorSession(ComponentActivity())
-        }
         return WatchFace(
             watchFaceType = WatchFaceType.ANALOG,
             renderer = renderer
         )
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        MainScope().launch {
+            editorSession = EditorSession.createOnWatchEditorSession(ComponentActivity())
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        editorSession.close()
     }
 }
