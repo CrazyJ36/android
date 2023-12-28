@@ -12,6 +12,8 @@ import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.editor.EditorSession
 import androidx.wear.watchface.style.WatchFaceLayer
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
@@ -51,7 +53,10 @@ class WatchFaceConfigActivity : ComponentActivity() {
             checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) == PackageManager.PERMISSION_GRANTED -> {
-
+                lifecycleScope.launch {
+                    editorSession.openComplicationDataSourceChooser(0)
+                    getPreview()
+                }
             }
 
             shouldShowRequestPermissionRationale(
@@ -65,30 +70,30 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 requestPermissionLauncher.launch("com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
             }
         }
-        lifecycleScope.launch {
-            editorSession.openComplicationDataSourceChooser(0)
-            getPreview()
-        }
     }
 
     private fun getPreview() {
-        imageView.setImageBitmap(
-            editorSession.renderWatchFaceToBitmap(
-                RenderParameters(
-                    DrawMode.INTERACTIVE,
-                    WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
-                    RenderParameters.HighlightLayer(
-                        RenderParameters.HighlightedElement
-                            .AllComplicationSlots,
-                        android.graphics.Color.TRANSPARENT,
-                        android.graphics.Color.argb(
-                            100, 0, 0, 0
-                        )
+        MainScope().launch(Dispatchers.Main.immediate) {
+            async {
+                imageView.setImageBitmap(
+                    editorSession.renderWatchFaceToBitmap(
+                        RenderParameters(
+                            DrawMode.INTERACTIVE,
+                            WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
+                            RenderParameters.HighlightLayer(
+                                RenderParameters.HighlightedElement
+                                    .AllComplicationSlots,
+                                android.graphics.Color.TRANSPARENT,
+                                android.graphics.Color.argb(
+                                    100, 0, 0, 0
+                                )
+                            )
+                        ),
+                        EditorSession.DEFAULT_PREVIEW_INSTANT,
+                        editorSession.complicationsPreviewData.value
                     )
-                ),
-                EditorSession.DEFAULT_PREVIEW_INSTANT,
-                editorSession.complicationsPreviewData.value
-            )
-        )
+                )
+            }.await()
+        }
     }
 }
