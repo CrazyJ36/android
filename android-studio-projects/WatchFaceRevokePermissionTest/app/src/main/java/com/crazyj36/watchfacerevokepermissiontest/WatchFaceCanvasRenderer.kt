@@ -32,6 +32,7 @@ class WatchFaceCanvasRenderer(
         canvas.drawColor(renderParameters.highlightLayer!!.backgroundTint)
         for ((_, complication) in complicationSlotsManager.complicationSlots)  {
             if (complication.enabled) {
+                complication.render(canvas, zonedDateTime, renderParameters)
                 complication.renderHighlightLayer(canvas, zonedDateTime, renderParameters)
             }
         }

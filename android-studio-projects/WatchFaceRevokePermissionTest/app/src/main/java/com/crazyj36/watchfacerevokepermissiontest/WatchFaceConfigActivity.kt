@@ -41,7 +41,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                     this@WatchFaceConfigActivity
                 )
             imageView = findViewById(R.id.imageView)
-            getPreview()
+            //getPreview()
         }
         when {
             checkSelfPermission(
