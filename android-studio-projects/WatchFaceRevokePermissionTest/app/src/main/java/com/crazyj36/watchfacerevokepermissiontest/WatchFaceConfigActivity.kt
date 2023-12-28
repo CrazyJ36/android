@@ -37,16 +37,16 @@ class WatchFaceConfigActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.watch_face_config)
+        imageView = findViewById(R.id.imageView)
         runBlocking {
-            val job: Job = lifecycleScope.launch {
+            val job: Job = launch {
                 editorSession = EditorSession
                     .createOnWatchEditorSession(
                         this@WatchFaceConfigActivity
                     )
             }
             job.join()
-            setContentView(R.layout.watch_face_config)
-            imageView = findViewById(R.id.imageView)
             getPreview()
         }
     }
