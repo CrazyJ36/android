@@ -42,9 +42,12 @@ class WatchFaceConfigActivity() : ComponentActivity() {
             checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) == PackageManager.PERMISSION_GRANTED -> {
-                MainScope().launch {
-                    MyWatchFaceService.editorSession.openComplicationDataSourceChooser(0)
-                    getPreview()
+                if (MyWatchFaceService.myVariables.editorSession != null) {
+                    MainScope().launch {
+                        MyWatchFaceService.myVariables.editorSession!!
+                            .openComplicationDataSourceChooser(0)
+                        getPreview()
+                    }
                 }
             }
 
@@ -62,23 +65,25 @@ class WatchFaceConfigActivity() : ComponentActivity() {
     }
 
     private fun getPreview() {
-        imageView.setImageBitmap(
-            MyWatchFaceService.editorSession.renderWatchFaceToBitmap(
-                RenderParameters(
-                    DrawMode.INTERACTIVE,
-                    WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
-                    RenderParameters.HighlightLayer(
-                        RenderParameters.HighlightedElement
-                            .AllComplicationSlots,
-                        android.graphics.Color.TRANSPARENT,
-                        android.graphics.Color.argb(
-                            100, 0, 0, 0
+        if (MyWatchFaceService.myVariables.editorSession != null) {
+            imageView.setImageBitmap(
+                MyWatchFaceService.myVariables.editorSession!!.renderWatchFaceToBitmap(
+                    RenderParameters(
+                        DrawMode.INTERACTIVE,
+                        WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
+                        RenderParameters.HighlightLayer(
+                            RenderParameters.HighlightedElement
+                                .AllComplicationSlots,
+                            android.graphics.Color.TRANSPARENT,
+                            android.graphics.Color.argb(
+                                100, 0, 0, 0
+                            )
                         )
-                    )
-                ),
-                EditorSession.DEFAULT_PREVIEW_INSTANT,
-                MyWatchFaceService.editorSession.complicationsPreviewData.value
+                    ),
+                    EditorSession.DEFAULT_PREVIEW_INSTANT,
+                    MyWatchFaceService.myVariables.editorSession!!.complicationsPreviewData.value
+                )
             )
-        )
+        }
     }
 }

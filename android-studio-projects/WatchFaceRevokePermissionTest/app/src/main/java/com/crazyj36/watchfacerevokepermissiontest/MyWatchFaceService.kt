@@ -23,8 +23,8 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 class MyWatchFaceService : WatchFaceService() {
-    companion object {
-        lateinit var editorSession: EditorSession
+    object myVariables {
+        var editorSession: EditorSession? = null
     }
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
@@ -83,12 +83,12 @@ class MyWatchFaceService : WatchFaceService() {
     override fun onCreate() {
         super.onCreate()
         MainScope().launch {
-            editorSession = EditorSession.createOnWatchEditorSession(ComponentActivity())
+            myVariables.editorSession = EditorSession.createOnWatchEditorSession(ComponentActivity())
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        editorSession.close()
+        myVariables.editorSession!!.close()
     }
 }
