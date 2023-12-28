@@ -2,6 +2,7 @@ package com.crazyj36.watchfacerevokepermissiontest
 
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -37,16 +38,19 @@ class WatchFaceConfigActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.watch_face_config)
-        imageView = findViewById(R.id.imageView)
         val job: Job = lifecycleScope.launch {
+            Log.d("WATCHFACEPERMISSION", "init editor")
             editorSession = EditorSession
                 .createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
         }
         CoroutineScope(Dispatchers.Main).launch {
+            Log.d("WATCHFACEPERMISSION", "join")
             job.join()
+            setContentView(R.layout.watch_face_config)
+            imageView = findViewById(R.id.imageView)
+            Log.d("WATCHFACEPERMISSION", "getPreview()")
             getPreview()
         }
     }
