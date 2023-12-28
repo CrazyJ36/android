@@ -39,7 +39,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.watch_face_config)
         imageView = findViewById(R.id.imageView)
-        val job: Job = CoroutineScope(Dispatchers.IO).launch {
+        val job: Job = lifecycleScope.launch {
             editorSession = EditorSession
                 .createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
