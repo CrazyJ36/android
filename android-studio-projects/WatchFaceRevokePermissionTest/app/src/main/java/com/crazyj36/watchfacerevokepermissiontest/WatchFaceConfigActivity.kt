@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.ComponentActivity
-import androidx.lifecycle.lifecycleScope
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.editor.EditorSession
@@ -15,15 +14,8 @@ import androidx.wear.watchface.style.WatchFaceLayer
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
-class WatchFaceConfigActivity : ComponentActivity() {
+class WatchFaceConfigActivity() : ComponentActivity() {
     private lateinit var imageView: ImageView
-    private lateinit var editorSession: EditorSession
-    init {
-        lifecycleScope.launch {
-            editorSession = EditorSession
-                .createOnWatchEditorSession(this@WatchFaceConfigActivity)
-        }
-    }
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) {
@@ -38,9 +30,11 @@ class WatchFaceConfigActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.watch_face_config)
-        imageView = findViewById(R.id.imageView)
-        getPreview()
+        MainScope().launch {
+            setContentView(R.layout.watch_face_config)
+            imageView = findViewById(R.id.imageView)
+            getPreview()
+        }
     }
 
     fun onClickComplication(view: View) {
@@ -49,7 +43,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) == PackageManager.PERMISSION_GRANTED -> {
                 MainScope().launch {
-                    editorSession.openComplicationDataSourceChooser(0)
+                    MyWatchFaceService.editorSession.openComplicationDataSourceChooser(0)
                     getPreview()
                 }
             }
@@ -69,7 +63,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
 
     private fun getPreview() {
         imageView.setImageBitmap(
-            editorSession.renderWatchFaceToBitmap(
+            MyWatchFaceService.editorSession.renderWatchFaceToBitmap(
                 RenderParameters(
                     DrawMode.INTERACTIVE,
                     WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
@@ -83,7 +77,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                     )
                 ),
                 EditorSession.DEFAULT_PREVIEW_INSTANT,
-                editorSession.complicationsPreviewData.value
+                MyWatchFaceService.editorSession.complicationsPreviewData.value
             )
         )
     }
