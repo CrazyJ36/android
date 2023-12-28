@@ -35,13 +35,13 @@ class WatchFaceConfigActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.watch_face_config)
+        imageView = findViewById(R.id.imageView)
+        getPreview()
         MainScope().launch(Dispatchers.Main.immediate) {
             editorSession = EditorSession
                 .createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
-            imageView = findViewById(R.id.imageView)
-            getPreview()
         }
         when {
             checkSelfPermission(
