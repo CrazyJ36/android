@@ -20,6 +20,7 @@ import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import kotlin.coroutines.CoroutineContext
 
 class WatchFaceConfigActivity : ComponentActivity() {
     private lateinit var editorSession: EditorSession
@@ -41,15 +42,22 @@ class WatchFaceConfigActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.watch_face_config)
         imageView = findViewById(R.id.imageView)
-        val job = lifecycleScope.launch {
+        val job = CoroutineScope(Dispatchers.Main.immediate).launch {
             editorSession = EditorSession
                 .createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
         }
-        lifecycleScope.launch {
+        CoroutineScope(Dispatchers.Main.immediate).launch {
             job.join()
-            getPreview()
+            if (job.isCompleted) {
+                Toast.makeText(
+                    this@WatchFaceConfigActivity,
+                    "job completed",
+                    Toast.LENGTH_SHORT
+                ).show()
+                getPreview()
+            }
         }
     }
 
