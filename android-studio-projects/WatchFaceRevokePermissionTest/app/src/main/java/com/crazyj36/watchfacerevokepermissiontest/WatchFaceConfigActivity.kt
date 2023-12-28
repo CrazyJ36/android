@@ -12,8 +12,6 @@ import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.editor.EditorSession
 import androidx.wear.watchface.style.WatchFaceLayer
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 class WatchFaceConfigActivity : ComponentActivity() {
@@ -39,27 +37,28 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 .createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
-        }
-        setContentView(R.layout.watch_face_config)
-        imageView = findViewById(R.id.imageView)
-        getPreview()
+            setContentView(R.layout.watch_face_config)
+            imageView = findViewById(R.id.imageView)
+            getPreview()
+            when {
+                checkSelfPermission(
+                    "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
+                ) == PackageManager.PERMISSION_GRANTED -> {
 
+                }
 
-        when {
-            checkSelfPermission(
-                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-            ) == PackageManager.PERMISSION_GRANTED -> {
+                shouldShowRequestPermissionRationale(
+                    "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
+                )
+                -> {
 
+                }
+
+                else -> {
+                    requestPermissionLauncher.launch("com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
+                }
             }
-            shouldShowRequestPermissionRationale(
-                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-            )
-            -> {
 
-            }
-            else -> {
-                requestPermissionLauncher.launch("com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
-            }
         }
     }
 
