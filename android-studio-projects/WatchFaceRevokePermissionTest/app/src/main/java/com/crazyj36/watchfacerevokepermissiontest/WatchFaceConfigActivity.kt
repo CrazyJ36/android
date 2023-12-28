@@ -13,6 +13,7 @@ import androidx.wear.watchface.editor.EditorSession
 import androidx.wear.watchface.style.WatchFaceLayer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class WatchFaceConfigActivity : ComponentActivity() {
@@ -52,13 +53,8 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             )
             -> {
-                Toast.makeText(
-                    applicationContext,
-                    getString(R.string.grantPermissionText),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
 
+            }
             else -> {
                 requestPermissionLauncher.launch("com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
             }
