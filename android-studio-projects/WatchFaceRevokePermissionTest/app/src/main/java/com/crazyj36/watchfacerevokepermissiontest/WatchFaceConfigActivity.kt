@@ -22,7 +22,6 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class WatchFaceConfigActivity : ComponentActivity() {
-
     private lateinit var editorSession: EditorSession
     private lateinit var imageView: ImageView
     private val requestPermissionLauncher = registerForActivityResult(
@@ -36,19 +35,20 @@ class WatchFaceConfigActivity : ComponentActivity() {
             ).show()
         }
     }
-    private val job = MainScope().launch {
-        editorSession = EditorSession
-            .createOnWatchEditorSession(
-                this@WatchFaceConfigActivity
-            )
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MainScope().launch {
+        setContentView(R.layout.watch_face_config)
+        imageView = findViewById(R.id.imageView)
+        val job = lifecycleScope.launch {
+            editorSession = EditorSession
+                .createOnWatchEditorSession(
+                    this@WatchFaceConfigActivity
+                )
+        }
+        lifecycleScope.launch {
             job.join()
-            setContentView(R.layout.watch_face_config)
-            imageView = findViewById(R.id.imageView)
             getPreview()
         }
     }
