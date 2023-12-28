@@ -23,6 +23,11 @@ class WatchFaceConfigActivity : ComponentActivity() {
         ActivityResultContracts.RequestPermission()
     ) {
         if (!it) {
+            Toast.makeText(
+                this@WatchFaceConfigActivity,
+                getString(R.string.grantPermissionText),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
