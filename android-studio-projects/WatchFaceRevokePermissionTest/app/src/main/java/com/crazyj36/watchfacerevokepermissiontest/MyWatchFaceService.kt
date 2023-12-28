@@ -2,7 +2,6 @@ package com.crazyj36.watchfacerevokepermissiontest
 
 import android.graphics.RectF
 import android.view.SurfaceHolder
-import androidx.activity.ComponentActivity
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -17,15 +16,9 @@ import androidx.wear.watchface.complications.SystemDataSources
 import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
-import androidx.wear.watchface.editor.EditorSession
 import androidx.wear.watchface.style.CurrentUserStyleRepository
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 
 class MyWatchFaceService : WatchFaceService() {
-    object myVariables {
-        var editorSession: EditorSession? = null
-    }
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
@@ -78,17 +71,5 @@ class MyWatchFaceService : WatchFaceService() {
             watchFaceType = WatchFaceType.ANALOG,
             renderer = renderer
         )
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-        MainScope().launch {
-            myVariables.editorSession = EditorSession.createOnWatchEditorSession(ComponentActivity())
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if (myVariables.editorSession != null) myVariables.editorSession!!.close()
     }
 }
