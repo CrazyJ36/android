@@ -44,13 +44,12 @@ class WatchFaceConfigActivity : ComponentActivity() {
                     this@WatchFaceConfigActivity
                 )
         }
-        runBlocking {
+        CoroutineScope(Dispatchers.Main.immediate).launch {
             job.join()
             setContentView(R.layout.watch_face_config)
             imageView = findViewById(R.id.imageView)
             getPreview()
         }
-
     }
 
     fun onClickComplication(view: View) {
