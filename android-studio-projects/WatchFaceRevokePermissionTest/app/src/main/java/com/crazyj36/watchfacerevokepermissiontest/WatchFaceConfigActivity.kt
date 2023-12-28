@@ -13,7 +13,8 @@ import androidx.wear.watchface.editor.EditorSession
 import androidx.wear.watchface.style.WatchFaceLayer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 class WatchFaceConfigActivity : ComponentActivity() {
@@ -34,15 +35,16 @@ class WatchFaceConfigActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.watch_face_config)
-        imageView = findViewById(R.id.imageView)
-        CoroutineScope(Dispatchers.Main.immediate).launch {
+        val job: Job = CoroutineScope(Dispatchers.Default).launch {
             editorSession = EditorSession
                 .createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
-
-            delay(1000)
+        }
+        MainScope().launch {
+            job.join()
+            setContentView(R.layout.watch_face_config)
+            imageView = findViewById(R.id.imageView)
             getPreview()
         }
     }
