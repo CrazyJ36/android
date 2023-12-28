@@ -20,6 +20,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class WatchFaceConfigActivity : ComponentActivity() {
+    private val scope = MainScope()
     private lateinit var editorSession: EditorSession
     private lateinit var imageView: ImageView
     private val requestPermissionLauncher = registerForActivityResult(
@@ -37,13 +38,15 @@ class WatchFaceConfigActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.watch_face_config)
+        imageView = findViewById(R.id.imageView)
         MainScope().launch {
             editorSession = EditorSession
                 .createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
-            setContentView(R.layout.watch_face_config)
-            imageView = findViewById(R.id.imageView)
+
+            delay(1000)
             getPreview()
         }
     }
@@ -91,8 +94,5 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 editorSession.complicationsPreviewData.value
             )
         )
-        MainScope().launch {
-            delay(1000)
-        }
     }
 }
