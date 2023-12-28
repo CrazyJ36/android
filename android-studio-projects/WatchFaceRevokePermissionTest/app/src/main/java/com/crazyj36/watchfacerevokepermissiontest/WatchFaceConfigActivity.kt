@@ -15,6 +15,8 @@ import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.editor.EditorSession
 import androidx.wear.watchface.style.UserStyle
 import androidx.wear.watchface.style.WatchFaceLayer
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -27,6 +29,7 @@ import kotlinx.coroutines.yield
 
 class WatchFaceConfigActivity : ComponentActivity() {
     private lateinit var imageView: ImageView
+    private val scope = CoroutineScope(Dispatchers.Main.immediate)
     private lateinit var editorSession: EditorSession
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -57,7 +60,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
             )
         }
             .stateIn(
-                MainScope(),
+                scope,
                 SharingStarted.Eagerly,
                 EditWatchFaceUiState.Loading("Initializing")
             )
