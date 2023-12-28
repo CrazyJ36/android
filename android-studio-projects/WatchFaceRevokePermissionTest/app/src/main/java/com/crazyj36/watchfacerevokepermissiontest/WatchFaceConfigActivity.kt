@@ -14,6 +14,7 @@ import androidx.wear.watchface.editor.EditorSession
 import androidx.wear.watchface.style.WatchFaceLayer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -35,7 +36,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        CoroutineScope(Dispatchers.Default).launch {
+        GlobalScope.launch {
             editorSession = EditorSession
                 .createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
