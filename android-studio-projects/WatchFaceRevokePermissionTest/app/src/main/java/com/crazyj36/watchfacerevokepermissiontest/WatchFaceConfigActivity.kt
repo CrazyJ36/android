@@ -35,7 +35,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val job: Job = CoroutineScope(Dispatchers.Default).launch {
+        val job: Job = MainScope().launch {
             editorSession = EditorSession
                 .createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
@@ -54,7 +54,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
             checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) == PackageManager.PERMISSION_GRANTED -> {
-                CoroutineScope(Dispatchers.Main.immediate).launch {
+                MainScope().launch {
                     editorSession.openComplicationDataSourceChooser(0)
                     getPreview()
                 }
