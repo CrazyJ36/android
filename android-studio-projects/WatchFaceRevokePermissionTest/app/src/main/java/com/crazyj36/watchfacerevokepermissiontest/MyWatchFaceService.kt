@@ -45,7 +45,7 @@ class MyWatchFaceService : WatchFaceService() {
                 ComplicationType.SHORT_TEXT
             ),
             bounds = ComplicationSlotBounds(
-                RectF(0.40f, 0.40f, 0.60f, 0.60f),
+                RectF(0.30f, 0.30f, 0.70f, 0.70f),
             )
         ).build()
         return ComplicationSlotsManager(

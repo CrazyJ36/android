@@ -29,13 +29,6 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        canvas.drawColor(renderParameters.highlightLayer!!.backgroundTint)
-        for ((_, complication) in complicationSlotsManager.complicationSlots)  {
-            if (complication.enabled) {
-                complication.render(canvas, zonedDateTime, renderParameters)
-                complication.renderHighlightLayer(canvas, zonedDateTime, renderParameters)
-            }
-        }
     }
 
     override fun render(
@@ -44,12 +37,12 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-            // render complications
-            for ((_, complication) in complicationSlotsManager
-                .complicationSlots) {
-                complication.render(canvas, zonedDateTime, renderParameters)
-            }
+        // render complications
+        for ((_, complication) in complicationSlotsManager
+            .complicationSlots) {
+            complication.render(canvas, zonedDateTime, renderParameters)
         }
+    }
 
     class MySharedAssets : SharedAssets {
         override fun onDestroy() {
