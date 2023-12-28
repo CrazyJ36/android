@@ -7,12 +7,11 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.ComponentActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.editor.EditorSession
 import androidx.wear.watchface.style.WatchFaceLayer
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -20,7 +19,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
     private lateinit var imageView: ImageView
     private lateinit var editorSession: EditorSession
     init {
-        MainScope().launch {
+        lifecycleScope.launch {
             editorSession = EditorSession
                 .createOnWatchEditorSession(this@WatchFaceConfigActivity)
         }
@@ -39,11 +38,9 @@ class WatchFaceConfigActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        CoroutineScope(Dispatchers.Main).launch {
-            setContentView(R.layout.watch_face_config)
-            imageView = findViewById(R.id.imageView)
-            getPreview()
-        }
+        setContentView(R.layout.watch_face_config)
+        imageView = findViewById(R.id.imageView)
+        getPreview()
     }
 
     fun onClickComplication(view: View) {
