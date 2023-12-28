@@ -14,17 +14,13 @@ import androidx.wear.watchface.editor.EditorSession
 import androidx.wear.watchface.style.WatchFaceLayer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.job
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
-import kotlin.coroutines.CoroutineContext
 
 class WatchFaceConfigActivity : ComponentActivity() {
     private lateinit var editorSession: EditorSession
     private lateinit var imageView: ImageView
+    private lateinit var job: Job
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) {
@@ -42,23 +38,14 @@ class WatchFaceConfigActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.watch_face_config)
         imageView = findViewById(R.id.imageView)
-        val job = CoroutineScope(Dispatchers.Main.immediate).launch {
+        CoroutineScope(Dispatchers.Main.immediate).launch {
             editorSession = EditorSession
                 .createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
+            getPreview()
         }
-        CoroutineScope(Dispatchers.Main.immediate).launch {
-            job.join()
-            if (job.isCompleted) {
-                Toast.makeText(
-                    this@WatchFaceConfigActivity,
-                    "job completed",
-                    Toast.LENGTH_SHORT
-                ).show()
-                getPreview()
-            }
-        }
+
     }
 
     fun onClickComplication(view: View) {
@@ -86,23 +73,28 @@ class WatchFaceConfigActivity : ComponentActivity() {
     }
 
     private fun getPreview() {
-        imageView.setImageBitmap(
-            editorSession.renderWatchFaceToBitmap(
-                RenderParameters(
-                    DrawMode.INTERACTIVE,
-                    WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
-                    RenderParameters.HighlightLayer(
-                        RenderParameters.HighlightedElement
-                            .AllComplicationSlots,
-                        android.graphics.Color.TRANSPARENT,
-                        android.graphics.Color.argb(
-                            100, 0, 0, 0
+        job = CoroutineScope(Dispatchers.Main.immediate).launch {
+            imageView.setImageBitmap(
+                editorSession.renderWatchFaceToBitmap(
+                    RenderParameters(
+                        DrawMode.INTERACTIVE,
+                        WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
+                        RenderParameters.HighlightLayer(
+                            RenderParameters.HighlightedElement
+                                .AllComplicationSlots,
+                            android.graphics.Color.TRANSPARENT,
+                            android.graphics.Color.argb(
+                                100, 0, 0, 0
+                            )
                         )
-                    )
-                ),
-                EditorSession.DEFAULT_PREVIEW_INSTANT,
-                editorSession.complicationsPreviewData.value
+                    ),
+                    EditorSession.DEFAULT_PREVIEW_INSTANT,
+                    editorSession.complicationsPreviewData.value
+                )
             )
-        )
+        }
+        CoroutineScope(Dispatchers.Main.immediate).launch {
+            job.join()
+        }
     }
 }
