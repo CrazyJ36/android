@@ -36,15 +36,15 @@ class WatchFaceConfigActivity : ComponentActivity() {
             ).show()
         }
     }
+    private val job = MainScope().launch {
+        editorSession = EditorSession
+            .createOnWatchEditorSession(
+                this@WatchFaceConfigActivity
+            )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val job = MainScope().launch {
-            editorSession = EditorSession
-                .createOnWatchEditorSession(
-                    this@WatchFaceConfigActivity
-                )
-        }
         MainScope().launch {
             job.join()
             setContentView(R.layout.watch_face_config)
