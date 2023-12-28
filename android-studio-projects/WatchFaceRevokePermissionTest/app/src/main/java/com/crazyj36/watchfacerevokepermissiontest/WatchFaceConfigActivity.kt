@@ -44,6 +44,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                     this@WatchFaceConfigActivity
                 )
             getPreview()
+            job.join()
         }
 
     }
