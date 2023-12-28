@@ -24,6 +24,13 @@ import kotlinx.coroutines.runBlocking
 class WatchFaceConfigActivity : ComponentActivity() {
     private lateinit var editorSession: EditorSession
     private lateinit var imageView: ImageView
+    private val job = CoroutineScope(Dispatchers.IO).launch {
+        Log.d("WATCHFACEPERMISSION", "init editor")
+        editorSession = EditorSession
+            .createOnWatchEditorSession(
+                this@WatchFaceConfigActivity
+            )
+    }
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) {
@@ -38,23 +45,14 @@ class WatchFaceConfigActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        lifecycleScope.launch {
-            val job = CoroutineScope(Dispatchers.IO).launch {
-                Log.d("WATCHFACEPERMISSION", "init editor")
-                editorSession = EditorSession
-                    .createOnWatchEditorSession(
-                        this@WatchFaceConfigActivity
-                    )
-            }
-            CoroutineScope(Dispatchers.Main).launch {
-                Log.d("WATCHFACEPERMISSION", "join")
-                job.join()
-                setContentView(R.layout.watch_face_config)
-                imageView = findViewById(R.id.imageView)
-                Log.d("WATCHFACEPERMISSION", "getPreview()")
-                getPreview()
-                Log.d("WATCHFACEPERMISSION", "done")
-            }
+        CoroutineScope(Dispatchers.Main).launch {
+            Log.d("WATCHFACEPERMISSION", "join")
+            job.join()
+            setContentView(R.layout.watch_face_config)
+            imageView = findViewById(R.id.imageView)
+            Log.d("WATCHFACEPERMISSION", "getPreview()")
+            getPreview()
+            Log.d("WATCHFACEPERMISSION", "done")
         }
     }
 
