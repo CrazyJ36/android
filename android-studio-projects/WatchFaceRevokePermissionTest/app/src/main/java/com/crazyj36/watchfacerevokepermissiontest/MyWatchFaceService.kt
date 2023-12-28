@@ -1,7 +1,6 @@
 package com.crazyj36.watchfacerevokepermissiontest
 
 import android.graphics.RectF
-import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType

@@ -12,6 +12,7 @@ import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.editor.EditorSession
 import androidx.wear.watchface.style.WatchFaceLayer
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class WatchFaceConfigActivity : ComponentActivity() {
@@ -32,35 +33,38 @@ class WatchFaceConfigActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.watch_face_config)
         lifecycleScope.launch {
-            editorSession = EditorSession
-                .createOnWatchEditorSession(
-                    this@WatchFaceConfigActivity
-                )
-            setContentView(R.layout.watch_face_config)
+            async {
+                editorSession = EditorSession
+                    .createOnWatchEditorSession(
+                        this@WatchFaceConfigActivity
+                    )
+            }.await()
             imageView = findViewById(R.id.imageView)
             getPreview()
-            when {
-                checkSelfPermission(
-                    "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-                ) == PackageManager.PERMISSION_GRANTED -> {
-
-                }
-                shouldShowRequestPermissionRationale(
-                    "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
-                )
-                -> {
-
-                }
-                else -> {
-                    requestPermissionLauncher.launch("com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
-                }
-            }
-
         }
     }
 
     fun onClickComplication(view: View) {
+        when {
+            checkSelfPermission(
+                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
+            ) == PackageManager.PERMISSION_GRANTED -> {
+
+            }
+
+            shouldShowRequestPermissionRationale(
+                "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
+            )
+            -> {
+
+            }
+
+            else -> {
+                requestPermissionLauncher.launch("com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
+            }
+        }
         lifecycleScope.launch {
             editorSession.openComplicationDataSourceChooser(0)
             getPreview()
