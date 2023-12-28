@@ -11,12 +11,12 @@ import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.editor.EditorSession
 import androidx.wear.watchface.style.WatchFaceLayer
-import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class WatchFaceConfigActivity : ComponentActivity() {
-    private val scope = MainScope()
     private lateinit var editorSession: EditorSession
     private lateinit var imageView: ImageView
     private val requestPermissionLauncher = registerForActivityResult(
@@ -36,7 +36,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.watch_face_config)
         imageView = findViewById(R.id.imageView)
-        scope.launch {
+        CoroutineScope(Dispatchers.Main.immediate).launch {
             editorSession = EditorSession
                 .createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
@@ -52,7 +52,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
             checkSelfPermission(
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             ) == PackageManager.PERMISSION_GRANTED -> {
-                scope.launch {
+                CoroutineScope(Dispatchers.Main.immediate).launch {
                     editorSession.openComplicationDataSourceChooser(0)
                     getPreview()
                 }
