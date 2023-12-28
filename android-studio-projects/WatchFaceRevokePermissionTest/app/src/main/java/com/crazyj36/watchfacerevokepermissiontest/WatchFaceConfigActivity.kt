@@ -93,8 +93,6 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 )
             )
         }
-        CoroutineScope(Dispatchers.Main.immediate).launch {
-            job.join()
-        }
+        job.start()
     }
 }
