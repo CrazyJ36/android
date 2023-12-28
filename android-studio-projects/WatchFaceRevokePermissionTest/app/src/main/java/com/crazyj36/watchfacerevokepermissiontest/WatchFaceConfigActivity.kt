@@ -45,7 +45,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                     this@WatchFaceConfigActivity
                 )
         }
-        CoroutineScope(Dispatchers.Main).launch {
+        runBlocking {
             Log.d("WATCHFACEPERMISSION", "join")
             job.join()
         }
