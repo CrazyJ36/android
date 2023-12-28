@@ -48,12 +48,12 @@ class WatchFaceConfigActivity : ComponentActivity() {
         lifecycleScope.launch {
             Log.d("WATCHFACEPERMISSION", "join")
             job.join()
+            setContentView(R.layout.watch_face_config)
+            imageView = findViewById(R.id.imageView)
+            Log.d("WATCHFACEPERMISSION", "getPreview()")
+            getPreview()
+            Log.d("WATCHFACEPERMISSION", "done")
         }
-        setContentView(R.layout.watch_face_config)
-        imageView = findViewById(R.id.imageView)
-        Log.d("WATCHFACEPERMISSION", "getPreview()")
-        getPreview()
-        Log.d("WATCHFACEPERMISSION", "done")
     }
 
     fun onClickComplication(view: View) {
