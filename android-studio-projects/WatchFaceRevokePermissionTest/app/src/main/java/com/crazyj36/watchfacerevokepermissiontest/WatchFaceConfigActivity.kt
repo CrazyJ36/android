@@ -34,15 +34,15 @@ class WatchFaceConfigActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.watch_face_config)
         lifecycleScope.launch {
             editorSession = EditorSession
                 .createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
-            imageView = findViewById(R.id.imageView)
-            getPreview()
         }
+        setContentView(R.layout.watch_face_config)
+        imageView = findViewById(R.id.imageView)
+        getPreview()
 
 
         when {
@@ -64,7 +64,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
     }
 
     fun onClickComplication(view: View) {
-        MainScope().launch(Dispatchers.Main.immediate) {
+        lifecycleScope.launch {
             editorSession.openComplicationDataSourceChooser(0)
             getPreview()
         }
