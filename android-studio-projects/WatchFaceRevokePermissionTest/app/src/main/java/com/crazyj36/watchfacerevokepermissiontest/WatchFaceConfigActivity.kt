@@ -13,13 +13,13 @@ import androidx.wear.watchface.editor.EditorSession
 import androidx.wear.watchface.style.WatchFaceLayer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class WatchFaceConfigActivity : ComponentActivity() {
 
     private lateinit var editorSession: EditorSession
     private lateinit var imageView: ImageView
+
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) {
@@ -34,14 +34,14 @@ class WatchFaceConfigActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.watch_face_config)
-        imageView = findViewById(R.id.imageView)
-        getPreview()
         MainScope().launch(Dispatchers.Main.immediate) {
             editorSession = EditorSession
                 .createOnWatchEditorSession(
                     this@WatchFaceConfigActivity
                 )
+            setContentView(R.layout.watch_face_config)
+            imageView = findViewById(R.id.imageView)
+            getPreview()
         }
         when {
             checkSelfPermission(

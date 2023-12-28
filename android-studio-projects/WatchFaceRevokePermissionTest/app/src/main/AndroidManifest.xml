@@ -49,7 +49,8 @@
             android:name=".WatchFaceConfigActivity"
             android:exported="true"
             android:label="@string/title_activity_watch_face_config"
-            android:taskAffinity=".MyWatchFaceService">
+            android:excludeFromRecents="true"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="androidx.wear.watchface.editor.action.WATCH_FACE_EDITOR" />
                 <category android:name="com.google.android.wearable.watchface.category.WEARABLE_CONFIGURATION" />
