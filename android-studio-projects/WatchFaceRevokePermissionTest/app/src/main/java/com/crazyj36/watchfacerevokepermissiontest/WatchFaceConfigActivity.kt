@@ -42,7 +42,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                     this@WatchFaceConfigActivity
                 )
         }
-        MainScope().launch {
+        lifecycleScope.launch {
             job.join()
             setContentView(R.layout.watch_face_config)
             imageView = findViewById(R.id.imageView)
