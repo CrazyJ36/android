@@ -89,6 +89,6 @@ class MyWatchFaceService : WatchFaceService() {
 
     override fun onDestroy() {
         super.onDestroy()
-        myVariables.editorSession!!.close()
+        if (myVariables.editorSession != null) myVariables.editorSession!!.close()
     }
 }
