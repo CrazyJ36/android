@@ -3,7 +3,6 @@ package com.crazyj36.watchfacerevokepermissiontest
 import android.graphics.Color
 import android.graphics.RectF
 import android.view.SurfaceHolder
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -31,7 +30,6 @@ class MyWatchFaceService : WatchFaceService() {
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
-        complicationDrawable.activeStyle.iconColor = Color.WHITE
         val defaultCanvasComplicationFactory =
             CanvasComplicationFactory { watchState, listener ->
                 CanvasComplicationDrawable(
