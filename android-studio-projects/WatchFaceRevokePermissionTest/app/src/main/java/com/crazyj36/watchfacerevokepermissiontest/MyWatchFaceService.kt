@@ -26,10 +26,12 @@ class MyWatchFaceService : WatchFaceService() {
         super.onCreate()
         complicationDrawable = ComplicationDrawable.getDrawable(
             this@MyWatchFaceService, R.drawable.complication_drawable)!!
+        complicationDrawable.activeStyle.iconColor = Color.WHITE
     }
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
+        complicationDrawable.activeStyle.iconColor = Color.WHITE
         val defaultCanvasComplicationFactory =
             CanvasComplicationFactory { watchState, listener ->
                 CanvasComplicationDrawable(
