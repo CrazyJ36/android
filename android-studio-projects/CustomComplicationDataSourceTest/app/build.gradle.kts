@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "com.crazyj36.complicationdatasourcetest"
+    namespace = "com.crazyj36.customcomplicationdatasourcetest"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.crazyj36.complicationdatasourcetest"
-        minSdk = 25
+        applicationId = "com.crazyj36.customcomplicationdatasourcetest"
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -35,6 +35,6 @@ android {
 }
 
 dependencies {
-
-    implementation("com.google.android.gms:play-services-wearable:18.0.0")
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.wear.watchface:watchface-complications-data-source-ktx:1.2.0")
 }

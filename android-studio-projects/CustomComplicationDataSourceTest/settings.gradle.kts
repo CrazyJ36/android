@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Complication Data Source Test"
+rootProject.name = "Custom Complication Data Source Test"
 include(":app")
