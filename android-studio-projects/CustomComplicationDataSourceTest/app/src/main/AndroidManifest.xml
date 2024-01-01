@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-feature android:name="android.hardware.type.watch" />
-    <uses-permission android:name="com.google.android.wearable.permission.USE_IMMEDIATE_COMPLICATION_UPDATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,10 +25,15 @@
             <meta-data
                 android:name="android.support.wearable.complications.SUPPORTED_TYPES"
                 android:value="SHORT_TEXT" />
-            <meta-data
-                android:name="androidx.wear.watchface.complications.data.source.IMMEDIATE_UPDATE_PERIOD_MILLISECONDS"
-                android:value="100" />
         </service>
-    </application>
+        <receiver
+            android:name=".ComplicationTapBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.crazyj36.customcomplicationdatasourcetest.broadcast" >
 
+                </action>
+            </intent-filter>
+        </receiver>
+    </application>
 </manifest>
