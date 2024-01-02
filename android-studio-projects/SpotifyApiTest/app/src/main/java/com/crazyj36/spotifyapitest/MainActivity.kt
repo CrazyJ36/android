@@ -17,7 +17,7 @@ class MainActivity : Activity() {
     private var timer: Timer? = null
     private lateinit var pauseButton: Button
     private lateinit var resumeButton: Button
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -73,6 +73,7 @@ class MainActivity : Activity() {
                             isPaused = it.isPaused
                         }
                 }
+
                 override fun onFailure(error: Throwable) {
                     Toast.makeText(
                         this@MainActivity,
@@ -83,24 +84,29 @@ class MainActivity : Activity() {
             }
         )
         timer = Timer()
-        timer!!.schedule(object: TimerTask() {
+        timer!!.schedule(object : TimerTask() {
             override fun run() {
-                if (isPaused != null) {
-                    if (isPaused!!) {
-                        runOnUiThread {
-                            pauseButton.isEnabled = false
-                            resumeButton.isEnabled = true
-                        }
-                    } else {
-                        runOnUiThread {
-                            pauseButton.isEnabled = true
-                            resumeButton.isEnabled = false
+                if (this@MainActivity::pauseButton.isInitialized &&
+                    this@MainActivity::resumeButton.isInitialized
+                ) {
+                    if (isPaused != null) {
+                        if (isPaused!!) {
+                            runOnUiThread {
+                                pauseButton.isEnabled = false
+                                resumeButton.isEnabled = true
+                            }
+                        } else {
+                            runOnUiThread {
+                                pauseButton.isEnabled = true
+                                resumeButton.isEnabled = false
+                            }
                         }
                     }
                 }
             }
         }, 0, 10)
     }
+
     override fun onPause() {
         super.onPause()
         if (globalSpotifyAppRemote != null) {
