@@ -35,6 +35,8 @@ class MainActivity : ComponentActivity() {
             }
         }
         try {
+            Toast.makeText(this@MainActivity,
+                "start of create", Toast.LENGTH_SHORT).show()
             val connectionParams = ConnectionParams
                 .Builder(clientId)
                 .setRedirectUri(redirectUri)
@@ -63,7 +65,7 @@ class MainActivity : ComponentActivity() {
                 }
             )
             Toast.makeText(this@MainActivity,
-                "created", Toast.LENGTH_SHORT).show()
+                "end of create", Toast.LENGTH_SHORT).show()
         } catch (exception: Exception) {
             Toast.makeText(this@MainActivity,
                 exception.localizedMessage,
