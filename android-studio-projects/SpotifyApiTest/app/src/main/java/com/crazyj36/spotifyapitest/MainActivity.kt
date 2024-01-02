@@ -21,9 +21,10 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Toast.makeText(this@MainActivity,
+            "start of create", Toast.LENGTH_SHORT).show()
         try {
-            Toast.makeText(this@MainActivity,
-                "start of create", Toast.LENGTH_SHORT).show()
+
             val connectionParams = ConnectionParams
                 .Builder(clientId)
                 .setRedirectUri(redirectUri)
