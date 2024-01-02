@@ -39,12 +39,15 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
+        Toast.makeText(this@MainActivity,
+            "onStart",
+            Toast.LENGTH_SHORT).show()
         val connectionParams = ConnectionParams
             .Builder(clientId)
             .setRedirectUri(redirectUri)
             .showAuthView(true)
             .build()
-        SpotifyAppRemote.connect(this,
+        SpotifyAppRemote.connect(this@MainActivity,
             connectionParams,
             object: Connector.ConnectionListener {
                 override fun onConnected(appRemote: SpotifyAppRemote?) {
