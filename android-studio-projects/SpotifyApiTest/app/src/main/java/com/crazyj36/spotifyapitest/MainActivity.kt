@@ -86,6 +86,7 @@ class MainActivity : Activity() {
         timer = Timer()
         timer!!.schedule(object : TimerTask() {
             override fun run() {
+                Toast.makeText(this@MainActivity, "timer running ", Toast.LENGTH_SHORT).show()
                 if (this@MainActivity::pauseButton.isInitialized &&
                     this@MainActivity::resumeButton.isInitialized
                 ) {
