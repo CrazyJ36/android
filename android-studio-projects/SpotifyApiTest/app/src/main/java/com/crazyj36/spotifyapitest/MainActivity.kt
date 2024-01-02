@@ -2,7 +2,6 @@ package com.crazyj36.spotifyapitest
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import com.spotify.android.appremote.api.ConnectionParams
@@ -127,6 +126,25 @@ class MainActivity : Activity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        if (globalSpotifyAppRemote != null) {
+            Toast.makeText(
+                this@MainActivity,
+                "Disconnecting Spotify Remote.",
+                Toast.LENGTH_SHORT
+            ).show()
+            SpotifyAppRemote.disconnect(globalSpotifyAppRemote)
+            globalSpotifyAppRemote = null
+        }
+        if (timer != null) {
+            timer!!.cancel()
+            timer!!.purge()
+            timer = null
+        }
+        if (isPaused != null) isPaused = null
+    }
+
+    override fun onStop() {
+        super.onStop()
         if (globalSpotifyAppRemote != null) {
             Toast.makeText(
                 this@MainActivity,
