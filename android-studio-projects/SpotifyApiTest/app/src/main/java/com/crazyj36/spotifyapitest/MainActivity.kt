@@ -86,21 +86,18 @@ class MainActivity : Activity() {
         timer = Timer()
         timer!!.schedule(object : TimerTask() {
             override fun run() {
-                Toast.makeText(this@MainActivity, "timer running ", Toast.LENGTH_SHORT).show()
                 if (this@MainActivity::pauseButton.isInitialized &&
                     this@MainActivity::resumeButton.isInitialized
                 ) {
-                    if (isPaused != null) {
-                        if (isPaused!!) {
-                            runOnUiThread {
-                                pauseButton.isEnabled = false
-                                resumeButton.isEnabled = true
-                            }
-                        } else {
-                            runOnUiThread {
-                                pauseButton.isEnabled = true
-                                resumeButton.isEnabled = false
-                            }
+                    if (isPaused!!) {
+                        runOnUiThread {
+                            pauseButton.isEnabled = false
+                            resumeButton.isEnabled = true
+                        }
+                    } else {
+                        runOnUiThread {
+                            pauseButton.isEnabled = true
+                            resumeButton.isEnabled = false
                         }
                     }
                 }
@@ -124,6 +121,7 @@ class MainActivity : Activity() {
             timer!!.purge()
             timer = null
         }
+        if (isPaused != null) isPaused = null
     }
 
     override fun onDestroy() {
@@ -142,5 +140,6 @@ class MainActivity : Activity() {
             timer!!.purge()
             timer = null
         }
+        if (isPaused != null) isPaused = null
     }
 }
