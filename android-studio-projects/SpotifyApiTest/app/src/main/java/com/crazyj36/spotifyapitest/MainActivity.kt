@@ -21,19 +21,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            SpotifyApiTestTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Text(
-                        text = "Spotify"
-                    )
-                }
-            }
-        }
         try {
             Toast.makeText(this@MainActivity,
                 "start of create", Toast.LENGTH_SHORT).show()
@@ -71,6 +58,19 @@ class MainActivity : ComponentActivity() {
                 exception.localizedMessage,
                 Toast.LENGTH_LONG
             ).show()
+        }
+        setContent {
+            SpotifyApiTestTheme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    Text(
+                        text = "Spotify"
+                    )
+                }
+            }
         }
     }
 
