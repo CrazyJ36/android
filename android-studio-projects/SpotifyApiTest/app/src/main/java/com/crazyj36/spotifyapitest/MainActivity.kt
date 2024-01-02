@@ -60,15 +60,16 @@ class MainActivity : ComponentActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                })
+                }
+            )
+            Toast.makeText(this@MainActivity,
+                "created", Toast.LENGTH_SHORT).show()
         } catch (exception: Exception) {
             Toast.makeText(this@MainActivity,
                 exception.localizedMessage,
                 Toast.LENGTH_LONG
             ).show()
         }
-        Toast.makeText(this@MainActivity,
-            "created", Toast.LENGTH_SHORT).show()
     }
 
     private fun connected() {
