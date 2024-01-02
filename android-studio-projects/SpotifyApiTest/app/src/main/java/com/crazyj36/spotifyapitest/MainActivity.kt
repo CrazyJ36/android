@@ -58,7 +58,7 @@ class MainActivity : Activity() {
                 override fun onConnected(connectedSpotifyAppRemote: SpotifyAppRemote) {
                     globalSpotifyAppRemote = connectedSpotifyAppRemote
                     Toast.makeText(
-                        this@MainActivity,
+                        applicationContext,
                         "Connected Spotify App Remote",
                         Toast.LENGTH_SHORT
                     ).show()
@@ -74,7 +74,7 @@ class MainActivity : Activity() {
 
                 override fun onFailure(error: Throwable) {
                     Toast.makeText(
-                        this@MainActivity,
+                        applicationContext,
                         "Failed To Connect Spotify App Remote:\n" + error.message,
                         Toast.LENGTH_SHORT
                     ).show()
@@ -109,7 +109,7 @@ class MainActivity : Activity() {
         super.onPause()
         if (globalSpotifyAppRemote != null) {
             Toast.makeText(
-                this@MainActivity,
+                applicationContext,
                 "Disconnecting Spotify Remote.",
                 Toast.LENGTH_SHORT
             ).show()
@@ -128,7 +128,7 @@ class MainActivity : Activity() {
         super.onDestroy()
         if (globalSpotifyAppRemote != null) {
             Toast.makeText(
-                this@MainActivity,
+                applicationContext,
                 "Disconnecting Spotify Remote.",
                 Toast.LENGTH_SHORT
             ).show()
@@ -147,7 +147,7 @@ class MainActivity : Activity() {
         super.onStop()
         if (globalSpotifyAppRemote != null) {
             Toast.makeText(
-                this@MainActivity,
+                applicationContext,
                 "Disconnecting Spotify Remote.",
                 Toast.LENGTH_SHORT
             ).show()
