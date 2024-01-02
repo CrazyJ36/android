@@ -85,25 +85,26 @@ class MainActivity : Activity() {
         timer = Timer()
         timer!!.schedule(object : TimerTask() {
             override fun run() {
+                Log.d("SPOTIFYAPITEST", "waiting for isPaused")
                 if (this@MainActivity::pauseButton.isInitialized &&
                     this@MainActivity::resumeButton.isInitialized
                 ) {
                     if (isPaused != null) {
                         if (isPaused!!) {
-                            if (pauseButton.isEnabled && !resumeButton.isEnabled) {
-                                runOnUiThread {
-                                    pauseButton.isEnabled = false
-                                    resumeButton.isEnabled = true
-                                }
+                            runOnUiThread {
+                                pauseButton.isEnabled = false
+                                resumeButton.isEnabled = true
                             }
                         } else {
-                            if (!pauseButton.isEnabled && resumeButton.isEnabled) {
-                                runOnUiThread {
-                                    pauseButton.isEnabled = true
-                                    resumeButton.isEnabled = false
-                                }
+                            runOnUiThread {
+                                pauseButton.isEnabled = true
+                                resumeButton.isEnabled = false
                             }
                         }
+                        this.cancel()
+                        timer!!.cancel()
+                        timer!!.purge()
+                        timer = null
                     }
                 }
             }
