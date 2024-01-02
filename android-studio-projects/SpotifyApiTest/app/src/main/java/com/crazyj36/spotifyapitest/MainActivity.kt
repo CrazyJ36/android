@@ -39,31 +39,44 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
-        val connectionParams = ConnectionParams
-            .Builder(clientId)
-            .setRedirectUri(redirectUri)
-            .showAuthView(true)
-            .build()
-        Toast.makeText(this@MainActivity,
-            "connecting to Spotify",
-            Toast.LENGTH_SHORT).show()
-        SpotifyAppRemote.connect(this,
-            connectionParams,
-            object: Connector.ConnectionListener {
-                override fun onConnected(appRemote: SpotifyAppRemote) {
-                    spotifyAppRemote = appRemote
-                    Toast.makeText(this@MainActivity,
-                        "Connected to spotify",
-                        Toast.LENGTH_SHORT).show()
-                    connected()
-                }
+        try {
+            val connectionParams = ConnectionParams
+                .Builder(clientId)
+                .setRedirectUri(redirectUri)
+                .showAuthView(true)
+                .build()
+            Toast.makeText(
+                this@MainActivity,
+                "connecting to Spotify",
+                Toast.LENGTH_SHORT
+            ).show()
+            SpotifyAppRemote.connect(this,
+                connectionParams,
+                object : Connector.ConnectionListener {
+                    override fun onConnected(appRemote: SpotifyAppRemote) {
+                        spotifyAppRemote = appRemote
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Connected to spotify",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        connected()
+                    }
 
-                override fun onFailure(throwable: Throwable) {
-                    Toast.makeText(this@MainActivity,
-                        "Failed: " + throwable.message,
-                        Toast.LENGTH_SHORT).show()
-                }
-            })
+                    override fun onFailure(throwable: Throwable) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Failed: " + throwable.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                })
+        } catch (exception: Exception) {
+            Toast.makeText(this@MainActivity,
+                exception.localizedMessage,
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 
     private fun connected() {
