@@ -1,81 +1,48 @@
 package com.crazyj36.spotifyapitest
 
+import android.app.Activity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.sp
-import androidx.lifecycle.lifecycleScope
-import com.crazyj36.spotifyapitest.ui.theme.SpotifyApiTestTheme
 import com.spotify.android.appremote.api.ConnectionParams
 import com.spotify.android.appremote.api.Connector
 import com.spotify.android.appremote.api.SpotifyAppRemote
-import kotlinx.coroutines.launch
 
-class MainActivity : ComponentActivity() {
-    private val clientId = "9730141f6f79463282864c10a0bb008d"
-    private val redirectUri =
-        "http://www.crazyj36.rocks/development/web/crazyj36-daily-spotify-streams/access-sucess-or-failure.html"
+class MainActivity : Activity() {
+
     private lateinit var spotifyAppRemote: SpotifyAppRemote
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            SpotifyApiTestTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Text(
-                        text = "CrazyJ36 on Spotify"
-                    )
-                    Text(
-                        text = "Run the Spotify app if nothing happens.",
-                        fontSize = 10.sp
-                    )
-                }
-            }
-        }
+        setContentView(R.layout.activity_main)
     }
 
     override fun onStart() {
         super.onStart()
-        Toast.makeText(
-            this@MainActivity,
-            "onStart()", Toast.LENGTH_SHORT
-        ).show()
-        lifecycleScope.launch {
-            SpotifyAppRemote.connect(
-                application,
-                ConnectionParams.Builder(clientId)
-                    .setRedirectUri(redirectUri)
-                    .showAuthView(true)
-                    .build(),
-                object : Connector.ConnectionListener {
-                    override fun onConnected(spotifyAppRemote: SpotifyAppRemote) {
-                        Toast.makeText(
-                            this@MainActivity,
-                            "Connected to spotify",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        spotifyAppRemote.playerApi.play("spotify:playlist:29Q1fd9uetB3q306eWWsK0?si=8c5024b00d4b4ed2")
-                    }
-
-                    override fun onFailure(error: Throwable) {
-                        Toast.makeText(
-                            this@MainActivity,
-                            "Failed: " + error.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+        SpotifyAppRemote.connect(
+            this,
+            ConnectionParams.Builder(
+                "9730141f6f79463282864c10a0bb008d")
+                .setRedirectUri("http://localhost:8080")
+                .showAuthView(true)
+                .build(),
+            object : Connector.ConnectionListener {
+                override fun onConnected(spotifyAppRemote: SpotifyAppRemote) {
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Connected to spotify",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    spotifyAppRemote.playerApi.play("spotify:playlist:29Q1fd9uetB3q306eWWsK0?si=8c5024b00d4b4ed2")
                 }
-            )
-        }
+                override fun onFailure(error: Throwable) {
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Failed: " + error.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        )
     }
 
     override fun onStop() {

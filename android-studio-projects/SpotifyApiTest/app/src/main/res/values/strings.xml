@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Spotify Api Test</string>
+    <string name="textView1Text">Play the best of CrazyJ36!</string>
+    <string name="textView2Text">Install/run the Spotify app if nothing happens upon launching this app.</string>
 </resources>
