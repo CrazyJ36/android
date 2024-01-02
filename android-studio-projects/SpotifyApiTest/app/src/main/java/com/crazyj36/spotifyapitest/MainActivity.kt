@@ -15,14 +15,11 @@ import com.spotify.android.appremote.api.ConnectionParams
 import com.spotify.android.appremote.api.Connector
 import com.spotify.android.appremote.api.SpotifyAppRemote
 import kotlinx.coroutines.launch
-import kotlin.coroutines.Continuation
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
 
 class MainActivity : ComponentActivity() {
     private val clientId = "9730141f6f79463282864c10a0bb008d"
-    private val redirectUri = "http://www.crazyj36.rocks/development/web/crazyj36-daily-spotify-streams/access-sucess-or-failure.html"
+    private val redirectUri =
+        "http://www.crazyj36.rocks/development/web/crazyj36-daily-spotify-streams/access-sucess-or-failure.html"
     private lateinit var spotifyAppRemote: SpotifyAppRemote
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,8 +38,13 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private suspend fun connectToAppRemote(): SpotifyAppRemote =
-        suspendCoroutine { cont: Continuation<SpotifyAppRemote> ->
+    override fun onStart() {
+        super.onStart()
+        Toast.makeText(
+            this@MainActivity,
+            "onStart()", Toast.LENGTH_SHORT
+        ).show()
+        lifecycleScope.launch {
             SpotifyAppRemote.connect(
                 application,
                 ConnectionParams.Builder(clientId)
@@ -56,26 +58,18 @@ class MainActivity : ComponentActivity() {
                             "Connected to spotify",
                             Toast.LENGTH_SHORT
                         ).show()
-                        cont.resume(spotifyAppRemote)
                     }
 
                     override fun onFailure(error: Throwable) {
                         Toast.makeText(
-                        this@MainActivity,
-                        "Failed: " + error.message,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                        cont.resumeWithException(error)
+                            this@MainActivity,
+                            "Failed: " + error.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-                })
+                }
+            )
         }
-    override fun onStart() {
-        super.onStart()
-        Toast.makeText(
-            this@MainActivity,
-            "onStart()", Toast.LENGTH_SHORT
-        ).show()
-        lifecycleScope.launch {  connectToAppRemote() }
     }
 
     override fun onDestroy() {
@@ -85,9 +79,11 @@ class MainActivity : ComponentActivity() {
                 SpotifyAppRemote.disconnect(it)
             }
         } else {
-            Toast.makeText(this@MainActivity,
+            Toast.makeText(
+                this@MainActivity,
                 "spotifyAppRemote never got initialized.",
-                Toast.LENGTH_SHORT).show()
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }
