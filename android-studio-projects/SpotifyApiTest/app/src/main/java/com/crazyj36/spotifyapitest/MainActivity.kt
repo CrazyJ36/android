@@ -34,10 +34,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
         try {
             val connectionParams = ConnectionParams
                 .Builder(clientId)
@@ -71,6 +67,8 @@ class MainActivity : ComponentActivity() {
                 Toast.LENGTH_LONG
             ).show()
         }
+        Toast.makeText(this@MainActivity,
+            "created", Toast.LENGTH_SHORT).show()
     }
 
     private fun connected() {
@@ -81,8 +79,8 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         if (this::spotifyAppRemote.isInitialized) {
             spotifyAppRemote.let {
                 SpotifyAppRemote.disconnect(it)
