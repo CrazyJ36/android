@@ -17,7 +17,7 @@ import com.spotify.protocol.types.Track
 
 class MainActivity : ComponentActivity() {
     private val clientId = "9730141f6f79463282864c10a0bb008d"
-    private val redirectUri = "http://localhost:8080"
+    private val redirectUri = "http://www.crazyj36.rocks/development/web/crazyj36-daily-spotify-streams/access-sucess-or-failure.html"
     private var spotifyAppRemote: SpotifyAppRemote? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,15 +39,15 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
-        Toast.makeText(this@MainActivity,
-            "onStart",
-            Toast.LENGTH_SHORT).show()
         val connectionParams = ConnectionParams
             .Builder(clientId)
             .setRedirectUri(redirectUri)
             .showAuthView(true)
             .build()
-        SpotifyAppRemote.connect(this@MainActivity,
+        Toast.makeText(this@MainActivity,
+            "connecting to Spotify",
+            Toast.LENGTH_SHORT).show()
+        SpotifyAppRemote.connect(applicationContext,
             connectionParams,
             object: Connector.ConnectionListener {
                 override fun onConnected(appRemote: SpotifyAppRemote?) {
@@ -60,7 +60,7 @@ class MainActivity : ComponentActivity() {
 
                 override fun onFailure(throwable: Throwable?) {
                     Toast.makeText(this@MainActivity,
-                        "Failed.",
+                        "Failed: " + throwable!!.message,
                         Toast.LENGTH_SHORT).show()
                 }
             })
@@ -69,15 +69,8 @@ class MainActivity : ComponentActivity() {
     private fun connected() {
         spotifyAppRemote?.let {
             // Play a playlist
-            val playlistURI = "spotify:playlist:37i9dQZF1DX2sUQwD7tbmL"
+            val playlistURI = "spotify:playlist:37i9dQZF1DX7K31D69s4M1"
             it.playerApi.play(playlistURI)
-            // Subscribe to PlayerState
-            it.playerApi.subscribeToPlayerState().setEventCallback {
-                val track: Track = it.track
-                Toast.makeText(this@MainActivity,
-                    track.name + " by " + track.artist.name,
-                    Toast.LENGTH_LONG).show()
-            }
         }
     }
 
