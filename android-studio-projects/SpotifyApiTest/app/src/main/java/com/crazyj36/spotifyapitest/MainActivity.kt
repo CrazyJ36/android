@@ -16,15 +16,20 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val pauseButton: Button = findViewById(R.id.pauseButton)
+        val resumeButton: Button = findViewById(R.id.resumeButton)
+
         pauseButton.setOnClickListener {
             if (this::globalSpotifyAppRemote.isInitialized) {
                 globalSpotifyAppRemote.playerApi.pause()
+                if (it.isEnabled) it.isEnabled = false
+                if (!resumeButton.isEnabled) resumeButton.isEnabled = true
             }
         }
-        val resumeButton: Button = findViewById(R.id.resumeButton)
         resumeButton.setOnClickListener {
             if (this::globalSpotifyAppRemote.isInitialized) {
                 globalSpotifyAppRemote.playerApi.resume()
+                if (it.isEnabled) it.isEnabled = false
+                if (!pauseButton.isEnabled) pauseButton.isEnabled = true
             }
         }
     }
@@ -44,7 +49,7 @@ class MainActivity : Activity() {
                     globalSpotifyAppRemote = connectedSpotifyAppRemote
                     Toast.makeText(
                         this@MainActivity,
-                        "Connected to spotify",
+                        "Connected Spotify App Remote",
                         Toast.LENGTH_SHORT
                     ).show()
                     connectedSpotifyAppRemote.playerApi.play(
@@ -54,7 +59,7 @@ class MainActivity : Activity() {
                 override fun onFailure(error: Throwable) {
                     Toast.makeText(
                         this@MainActivity,
-                        "Failed: " + error.message,
+                        "Failed To Connect Spotify App Remote:\n" + error.message,
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -64,12 +69,13 @@ class MainActivity : Activity() {
     override fun onStop() {
         super.onStop()
         Toast.makeText(this@MainActivity,
-            "onDestroy()",
-            Toast.LENGTH_SHORT).show()
+            "onStop()",
+            Toast.LENGTH_SHORT
+        ).show()
         if (this::globalSpotifyAppRemote.isInitialized) {
             Toast.makeText(
                 this@MainActivity,
-                "Disconnecting Spotify remote.",
+                "Disconnecting Spotify Remote.",
                 Toast.LENGTH_SHORT
             ).show()
             SpotifyAppRemote.disconnect(globalSpotifyAppRemote)
