@@ -59,11 +59,15 @@ class MainActivity : Activity() {
                     }
                 }
             }
-        }, 0, 100)
+        }, 0, 10)
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
+        Toast.makeText(this@MainActivity,
+            "onResume()",
+            Toast.LENGTH_SHORT
+        ).show()
         SpotifyAppRemote.connect(
             this,
             ConnectionParams.Builder(
@@ -99,10 +103,10 @@ class MainActivity : Activity() {
             }
         )
     }
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
         Toast.makeText(this@MainActivity,
-            "onStop()",
+            "onResume()",
             Toast.LENGTH_SHORT
         ).show()
         if (this::globalSpotifyAppRemote.isInitialized) {
