@@ -47,11 +47,15 @@ class MainActivity : Activity() {
             override fun run() {
                 if (isPaused != null) {
                     if (isPaused!!) {
-                        pauseButton.isEnabled = false
-                        resumeButton.isEnabled = true
+                        runOnUiThread {
+                            pauseButton.isEnabled = false
+                            resumeButton.isEnabled = true
+                        }
                     } else {
-                        pauseButton.isEnabled = true
-                        resumeButton.isEnabled = false
+                        runOnUiThread {
+                            pauseButton.isEnabled = true
+                            resumeButton.isEnabled = false
+                        }
                     }
                 }
             }
