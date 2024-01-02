@@ -107,11 +107,6 @@ class MainActivity : Activity() {
 
     override fun onPause() {
         super.onPause()
-        Toast.makeText(
-            applicationContext,
-            "onPause()",
-            Toast.LENGTH_SHORT
-        ).show()
         if (globalSpotifyAppRemote != null) {
             Toast.makeText(
                 applicationContext,
@@ -129,7 +124,7 @@ class MainActivity : Activity() {
         if (isPaused != null) isPaused = null
     }
 
-    /*override fun onDestroy() {
+    override fun onDestroy() {
         super.onDestroy()
         if (globalSpotifyAppRemote != null) {
             Toast.makeText(
@@ -147,23 +142,4 @@ class MainActivity : Activity() {
         }
         if (isPaused != null) isPaused = null
     }
-
-    override fun onStop() {
-        super.onStop()
-        if (globalSpotifyAppRemote != null) {
-            Toast.makeText(
-                applicationContext,
-                "Disconnecting Spotify Remote.",
-                Toast.LENGTH_SHORT
-            ).show()
-            SpotifyAppRemote.disconnect(globalSpotifyAppRemote)
-            globalSpotifyAppRemote = null
-        }
-        if (timer != null) {
-            timer!!.cancel()
-            timer!!.purge()
-            timer = null
-        }
-        if (isPaused != null) isPaused = null
-    }*/
 }
