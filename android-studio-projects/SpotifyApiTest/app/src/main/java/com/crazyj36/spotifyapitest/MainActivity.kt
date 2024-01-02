@@ -85,7 +85,6 @@ class MainActivity : Activity() {
         timer = Timer()
         timer!!.schedule(object : TimerTask() {
             override fun run() {
-                Log.d("SPOTIFYAPITEST", "waiting for isPaused")
                 if (this@MainActivity::pauseButton.isInitialized &&
                     this@MainActivity::resumeButton.isInitialized
                 ) {
@@ -101,10 +100,6 @@ class MainActivity : Activity() {
                                 resumeButton.isEnabled = false
                             }
                         }
-                        this.cancel()
-                        timer!!.cancel()
-                        timer!!.purge()
-                        timer = null
                     }
                 }
             }
