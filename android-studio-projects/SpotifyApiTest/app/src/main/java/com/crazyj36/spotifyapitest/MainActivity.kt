@@ -12,10 +12,12 @@ import java.util.TimerTask
 
 class MainActivity : Activity() {
 
-    private lateinit var globalSpotifyAppRemote: SpotifyAppRemote
+    private var globalSpotifyAppRemote: SpotifyAppRemote? = null
     private var isPaused: Boolean? = null
-    private val timer = Timer()
-
+    private var timer: Timer? = null
+    private lateinit var pauseButton: Button
+    private lateinit var resumeButton: Button
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,41 +27,23 @@ class MainActivity : Activity() {
         resumeButton.isEnabled = false
 
         pauseButton.setOnClickListener {
-            if (this::globalSpotifyAppRemote.isInitialized) {
+            if (globalSpotifyAppRemote != null) {
                 if (isPaused != null) {
                     if (!isPaused!!) {
-                        globalSpotifyAppRemote.playerApi.pause()
+                        globalSpotifyAppRemote!!.playerApi.pause()
                     }
                 }
             }
         }
         resumeButton.setOnClickListener {
-            if (this::globalSpotifyAppRemote.isInitialized) {
+            if (globalSpotifyAppRemote != null) {
                 if (isPaused != null) {
                     if (isPaused!!) {
-                        globalSpotifyAppRemote.playerApi.resume()
+                        globalSpotifyAppRemote!!.playerApi.resume()
                     }
                 }
             }
         }
-
-        timer.schedule(object: TimerTask() {
-            override fun run() {
-                if (isPaused != null) {
-                    if (isPaused!!) {
-                        runOnUiThread {
-                            pauseButton.isEnabled = false
-                            resumeButton.isEnabled = true
-                        }
-                    } else {
-                        runOnUiThread {
-                            pauseButton.isEnabled = true
-                            resumeButton.isEnabled = false
-                        }
-                    }
-                }
-            }
-        }, 0, 10)
     }
 
     override fun onResume() {
@@ -83,7 +67,7 @@ class MainActivity : Activity() {
                     connectedSpotifyAppRemote.playerApi.play(
                         "spotify:playlist:29Q1fd9uetB3q306eWWsK0?si=8c5024b00d4b4ed2"
                     )
-                    globalSpotifyAppRemote.playerApi
+                    globalSpotifyAppRemote!!.playerApi
                         .subscribeToPlayerState()
                         .setEventCallback {
                             isPaused = it.isPaused
@@ -98,18 +82,58 @@ class MainActivity : Activity() {
                 }
             }
         )
+        timer = Timer()
+        timer!!.schedule(object: TimerTask() {
+            override fun run() {
+                if (isPaused != null) {
+                    if (isPaused!!) {
+                        runOnUiThread {
+                            pauseButton.isEnabled = false
+                            resumeButton.isEnabled = true
+                        }
+                    } else {
+                        runOnUiThread {
+                            pauseButton.isEnabled = true
+                            resumeButton.isEnabled = false
+                        }
+                    }
+                }
+            }
+        }, 0, 10)
     }
     override fun onPause() {
         super.onPause()
-        if (this::globalSpotifyAppRemote.isInitialized) {
+        if (globalSpotifyAppRemote != null) {
             Toast.makeText(
                 this@MainActivity,
                 "Disconnecting Spotify Remote.",
                 Toast.LENGTH_SHORT
             ).show()
             SpotifyAppRemote.disconnect(globalSpotifyAppRemote)
+            globalSpotifyAppRemote = null
         }
-        timer.cancel()
-        timer.purge()
+        if (timer != null) {
+            timer!!.cancel()
+            timer!!.purge()
+            timer = null
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (globalSpotifyAppRemote != null) {
+            Toast.makeText(
+                this@MainActivity,
+                "Disconnecting Spotify Remote.",
+                Toast.LENGTH_SHORT
+            ).show()
+            SpotifyAppRemote.disconnect(globalSpotifyAppRemote)
+            globalSpotifyAppRemote = null
+        }
+        if (timer != null) {
+            timer!!.cancel()
+            timer!!.purge()
+            timer = null
+        }
     }
 }
