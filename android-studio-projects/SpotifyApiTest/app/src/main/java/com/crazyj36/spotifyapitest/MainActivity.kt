@@ -15,7 +15,22 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val pauseButton: Button = findViewById(R.id.pauseButton)
+        pauseButton.setOnClickListener {
+            if (this::globalSpotifyAppRemote.isInitialized) {
+                globalSpotifyAppRemote.playerApi.pause()
+            }
+        }
+        val resumeButton: Button = findViewById(R.id.resumeButton)
+        resumeButton.setOnClickListener {
+            if (this::globalSpotifyAppRemote.isInitialized) {
+                globalSpotifyAppRemote.playerApi.resume()
+            }
+        }
+    }
 
+    override fun onStart() {
+        super.onStart()
         SpotifyAppRemote.connect(
             this,
             ConnectionParams.Builder(
@@ -36,7 +51,6 @@ class MainActivity : Activity() {
                         "spotify:playlist:29Q1fd9uetB3q306eWWsK0?si=8c5024b00d4b4ed2"
                     )
                 }
-
                 override fun onFailure(error: Throwable) {
                     Toast.makeText(
                         this@MainActivity,
@@ -46,23 +60,9 @@ class MainActivity : Activity() {
                 }
             }
         )
-
-        val pauseButton: Button = findViewById(R.id.pauseButton)
-        pauseButton.setOnClickListener {
-            if (this::globalSpotifyAppRemote.isInitialized) {
-                globalSpotifyAppRemote.playerApi.pause()
-            }
-        }
-        val resumeButton: Button = findViewById(R.id.resumeButton)
-        resumeButton.setOnClickListener {
-            if (this::globalSpotifyAppRemote.isInitialized) {
-                globalSpotifyAppRemote.playerApi.resume()
-            }
-        }
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStop() {
+        super.onStop()
         Toast.makeText(this@MainActivity,
             "onDestroy()",
             Toast.LENGTH_SHORT).show()
