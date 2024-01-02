@@ -63,6 +63,9 @@ class MainActivity : Activity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        Toast.makeText(this@MainActivity,
+            "onDestroy()",
+            Toast.LENGTH_SHORT).show()
         if (this::globalSpotifyAppRemote.isInitialized) {
             Toast.makeText(
                 this@MainActivity,
