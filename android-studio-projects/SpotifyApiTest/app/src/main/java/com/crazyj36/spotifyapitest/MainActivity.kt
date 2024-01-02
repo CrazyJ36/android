@@ -87,6 +87,10 @@ class MainActivity : ComponentActivity() {
             spotifyAppRemote.let {
                 SpotifyAppRemote.disconnect(it)
             }
+        } else {
+            Toast.makeText(this@MainActivity,
+                "spotifyAppRemote never got initialized.",
+                Toast.LENGTH_SHORT).show()
         }
     }
 }
