@@ -9,10 +9,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.lifecycleScope
 import com.crazyj36.spotifyapitest.ui.theme.SpotifyApiTestTheme
 import com.spotify.android.appremote.api.ConnectionParams
 import com.spotify.android.appremote.api.Connector
 import com.spotify.android.appremote.api.SpotifyAppRemote
+import kotlinx.coroutines.launch
+import kotlin.coroutines.Continuation
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 class MainActivity : ComponentActivity() {
     private val clientId = "9730141f6f79463282864c10a0bb008d"
@@ -21,48 +27,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Toast.makeText(this@MainActivity,
-            "start of create", Toast.LENGTH_SHORT).show()
-        try {
-
-            val connectionParams = ConnectionParams
-                .Builder(clientId)
-                .setRedirectUri(redirectUri)
-                .showAuthView(true)
-                .build()
-            SpotifyAppRemote.connect(this,
-                connectionParams,
-                object : Connector.ConnectionListener {
-                    override fun onConnected(appRemote: SpotifyAppRemote) {
-                        spotifyAppRemote = appRemote
-                        Toast.makeText(
-                            this@MainActivity,
-                            "Connected to spotify",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        connected()
-                    }
-
-                    override fun onFailure(throwable: Throwable) {
-                        Toast.makeText(
-                            this@MainActivity,
-                            "Failed: " + throwable.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-            )
-            Toast.makeText(this@MainActivity,
-                "end of create", Toast.LENGTH_SHORT).show()
-        } catch (exception: Exception) {
-            Toast.makeText(this@MainActivity,
-                exception.localizedMessage,
-                Toast.LENGTH_LONG
-            ).show()
-        }
         setContent {
             SpotifyApiTestTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -75,12 +41,41 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun connected() {
-        spotifyAppRemote.let {
-            // Play a playlist
-            val playlistURI = "spotify:playlist:37i9dQZF1DX7K31D69s4M1"
-            it.playerApi.play(playlistURI)
+    private suspend fun connectToAppRemote(): SpotifyAppRemote =
+        suspendCoroutine { cont: Continuation<SpotifyAppRemote> ->
+            SpotifyAppRemote.connect(
+                application,
+                ConnectionParams.Builder(clientId)
+                    .setRedirectUri(redirectUri)
+                    .showAuthView(true)
+                    .build(),
+                object : Connector.ConnectionListener {
+                    override fun onConnected(spotifyAppRemote: SpotifyAppRemote) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Connected to spotify",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        cont.resume(spotifyAppRemote)
+                    }
+
+                    override fun onFailure(error: Throwable) {
+                        Toast.makeText(
+                        this@MainActivity,
+                        "Failed: " + error.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                        cont.resumeWithException(error)
+                    }
+                })
         }
+    override fun onStart() {
+        super.onStart()
+        Toast.makeText(
+            this@MainActivity,
+            "onStart()", Toast.LENGTH_SHORT
+        ).show()
+        lifecycleScope.launch {  connectToAppRemote() }
     }
 
     override fun onDestroy() {
