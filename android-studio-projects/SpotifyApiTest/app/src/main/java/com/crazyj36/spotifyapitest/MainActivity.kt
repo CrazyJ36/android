@@ -24,8 +24,6 @@ class MainActivity : Activity() {
         setContentView(R.layout.activity_main)
         pauseButton = findViewById(R.id.pauseButton)
         resumeButton = findViewById(R.id.resumeButton)
-        pauseButton.isEnabled = false
-        resumeButton.isEnabled = false
 
         pauseButton.setOnClickListener {
             if (globalSpotifyAppRemote != null) {
@@ -91,7 +89,6 @@ class MainActivity : Activity() {
                     this@MainActivity::resumeButton.isInitialized
                 ) {
                     if (isPaused != null) {
-                        Log.d("SPOTIFYAPITEST", "isPaused ! null")
                         if (isPaused!!) {
                             if (pauseButton.isEnabled && !resumeButton.isEnabled) {
                                 runOnUiThread {
