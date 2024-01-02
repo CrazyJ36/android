@@ -66,7 +66,7 @@ class MainActivity : Activity() {
         if (this::globalSpotifyAppRemote.isInitialized) {
             globalSpotifyAppRemote.let {
                 Toast.makeText(this@MainActivity,
-                    "Disconenecting Spotify remote.",
+                    "Disconnecting Spotify remote.",
                     Toast.LENGTH_SHORT).show()
                 SpotifyAppRemote.disconnect(globalSpotifyAppRemote)
             }

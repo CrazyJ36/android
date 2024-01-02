@@ -17,7 +17,9 @@
         android:layout_gravity="center_horizontal"
         android:text="@string/textView2Text"
         android:textAlignment="center"
-        android:textSize="11sp" />
+        android:textSize="11sp"
+        android:autoLink="web"
+        android:linksClickable="true"/>
 
     <LinearLayout
         android:layout_width="match_parent"
