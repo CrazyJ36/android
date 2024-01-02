@@ -13,7 +13,6 @@ import com.crazyj36.spotifyapitest.ui.theme.SpotifyApiTestTheme
 import com.spotify.android.appremote.api.ConnectionParams
 import com.spotify.android.appremote.api.Connector
 import com.spotify.android.appremote.api.SpotifyAppRemote
-import com.spotify.protocol.types.Track
 
 class MainActivity : ComponentActivity() {
     private val clientId = "9730141f6f79463282864c10a0bb008d"
@@ -45,11 +44,6 @@ class MainActivity : ComponentActivity() {
                 .setRedirectUri(redirectUri)
                 .showAuthView(true)
                 .build()
-            Toast.makeText(
-                this@MainActivity,
-                "connecting to Spotify",
-                Toast.LENGTH_SHORT
-            ).show()
             SpotifyAppRemote.connect(this,
                 connectionParams,
                 object : Connector.ConnectionListener {
@@ -89,8 +83,10 @@ class MainActivity : ComponentActivity() {
 
     override fun onStop() {
         super.onStop()
-        spotifyAppRemote.let {
-            SpotifyAppRemote.disconnect(it)
+        if (this::spotifyAppRemote.isInitialized) {
+            spotifyAppRemote.let {
+                SpotifyAppRemote.disconnect(it)
+            }
         }
     }
 }
