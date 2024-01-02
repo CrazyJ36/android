@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
         Toast.makeText(this@MainActivity,
             "connecting to Spotify",
             Toast.LENGTH_SHORT).show()
-        SpotifyAppRemote.connect(applicationContext,
+        SpotifyAppRemote.connect(this,
             connectionParams,
             object: Connector.ConnectionListener {
                 override fun onConnected(appRemote: SpotifyAppRemote?) {
