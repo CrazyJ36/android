@@ -90,8 +90,8 @@ class MainActivity : Activity() {
                 if (this@MainActivity::pauseButton.isInitialized &&
                     this@MainActivity::resumeButton.isInitialized
                 ) {
-                    Log.d("SPOTIFYAPITEST", "buttons initialized")
                     if (isPaused != null) {
+                        Log.d("SPOTIFYAPITEST", "isPaused ! null")
                         if (isPaused!!) {
                             if (pauseButton.isEnabled && !resumeButton.isEnabled) {
                                 runOnUiThread {
