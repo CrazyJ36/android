@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.lifecycleScope
 import com.crazyj36.spotifyapitest.ui.theme.SpotifyApiTestTheme
 import com.spotify.android.appremote.api.ConnectionParams
@@ -31,7 +32,11 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Text(
-                        text = "Spotify"
+                        text = "CrazyJ36 on Spotify"
+                    )
+                    Text(
+                        text = "Run the Spotify app if nothing happens.",
+                        fontSize = 10.sp
                     )
                 }
             }
@@ -58,6 +63,7 @@ class MainActivity : ComponentActivity() {
                             "Connected to spotify",
                             Toast.LENGTH_SHORT
                         ).show()
+                        spotifyAppRemote.playerApi.play("spotify:playlist:29Q1fd9uetB3q306eWWsK0?si=8c5024b00d4b4ed2")
                     }
 
                     override fun onFailure(error: Throwable) {
@@ -72,18 +78,12 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStop() {
+        super.onStop()
         if (this::spotifyAppRemote.isInitialized) {
             spotifyAppRemote.let {
                 SpotifyAppRemote.disconnect(it)
             }
-        } else {
-            Toast.makeText(
-                this@MainActivity,
-                "spotifyAppRemote never got initialized.",
-                Toast.LENGTH_SHORT
-            ).show()
         }
     }
 }
