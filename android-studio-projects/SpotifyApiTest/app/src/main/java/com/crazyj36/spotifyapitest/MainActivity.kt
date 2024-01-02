@@ -2,6 +2,7 @@ package com.crazyj36.spotifyapitest
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import com.spotify.android.appremote.api.ConnectionParams
@@ -86,6 +87,7 @@ class MainActivity : Activity() {
         timer = Timer()
         timer!!.schedule(object : TimerTask() {
             override fun run() {
+                Log.d("SPOTIFYAPITEST", "timer running")
                 if (this@MainActivity::pauseButton.isInitialized &&
                     this@MainActivity::resumeButton.isInitialized
                 ) {
