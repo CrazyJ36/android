@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Spotify Api Test</string>
     <string name="textView1Text">Play the best of CrazyJ36!</string>
-    <string name="textView2Text">Run the Spotify app if you don\'t start jammin\' upon launching this app in order to authorize this app to have access to your Spotify app so that we can actually play Music. Spotify must be installed and you must logged in to either A free or paid account. You can revoke this apps\' access to your Spotify account by going https://spotify.com/account/apps/ and clicking remove access for the \"Play CrazyJ36 on Spotify - Android\" entry.</string>
+    <string name="textView2Text">Run the Spotify app if you don\'t start jammin\' upon launching this app in order to authorize this app to have access to your Spotify app so that we can actually play Music. Spotify must be installed and you must be logged in to either A free or paid account. You can revoke this apps\' access to your Spotify account by going https://spotify.com/account/apps/ and clicking \"Remove Access\" for the \"Play CrazyJ36 on Spotify - Android\" entry.</string>
     <string name="spotifyControlButtonsDescription">Spotify controls:</string>
     <string name="pauseButtonText">Pause</string>
     <string name="resumeButtonText">Resume</string>
