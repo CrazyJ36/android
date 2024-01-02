@@ -6,9 +6,7 @@ import android.widget.Button
 import android.widget.Toast
 import com.spotify.android.appremote.api.ConnectionParams
 import com.spotify.android.appremote.api.Connector
-import com.spotify.android.appremote.api.PlayerApi
 import com.spotify.android.appremote.api.SpotifyAppRemote
-import com.spotify.protocol.types.PlayerState
 
 class MainActivity : Activity() {
 
@@ -21,7 +19,8 @@ class MainActivity : Activity() {
         SpotifyAppRemote.connect(
             this,
             ConnectionParams.Builder(
-                "9730141f6f79463282864c10a0bb008d")
+                "9730141f6f79463282864c10a0bb008d"
+            )
                 .setRedirectUri("http://localhost:8080")
                 .showAuthView(true)
                 .build(),
@@ -37,6 +36,7 @@ class MainActivity : Activity() {
                         "spotify:playlist:29Q1fd9uetB3q306eWWsK0?si=8c5024b00d4b4ed2"
                     )
                 }
+
                 override fun onFailure(error: Throwable) {
                     Toast.makeText(
                         this@MainActivity,
@@ -64,12 +64,12 @@ class MainActivity : Activity() {
     override fun onDestroy() {
         super.onDestroy()
         if (this::globalSpotifyAppRemote.isInitialized) {
-            globalSpotifyAppRemote.let {
-                Toast.makeText(this@MainActivity,
-                    "Disconnecting Spotify remote.",
-                    Toast.LENGTH_SHORT).show()
-                SpotifyAppRemote.disconnect(it)
-            }
+            Toast.makeText(
+                this@MainActivity,
+                "Disconnecting Spotify remote.",
+                Toast.LENGTH_SHORT
+            ).show()
+            SpotifyAppRemote.disconnect(globalSpotifyAppRemote)
         }
     }
 }
