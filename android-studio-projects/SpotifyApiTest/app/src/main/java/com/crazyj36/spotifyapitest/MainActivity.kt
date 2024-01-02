@@ -18,7 +18,7 @@ import com.spotify.protocol.types.Track
 class MainActivity : ComponentActivity() {
     private val clientId = "9730141f6f79463282864c10a0bb008d"
     private val redirectUri = "http://www.crazyj36.rocks/development/web/crazyj36-daily-spotify-streams/access-sucess-or-failure.html"
-    private var spotifyAppRemote: SpotifyAppRemote? = null
+    private lateinit var spotifyAppRemote: SpotifyAppRemote
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
         SpotifyAppRemote.connect(this,
             connectionParams,
             object: Connector.ConnectionListener {
-                override fun onConnected(appRemote: SpotifyAppRemote?) {
+                override fun onConnected(appRemote: SpotifyAppRemote) {
                     spotifyAppRemote = appRemote
                     Toast.makeText(this@MainActivity,
                         "Connected to spotify",
@@ -58,16 +58,16 @@ class MainActivity : ComponentActivity() {
                     connected()
                 }
 
-                override fun onFailure(throwable: Throwable?) {
+                override fun onFailure(throwable: Throwable) {
                     Toast.makeText(this@MainActivity,
-                        "Failed: " + throwable!!.message,
+                        "Failed: " + throwable.message,
                         Toast.LENGTH_SHORT).show()
                 }
             })
     }
 
     private fun connected() {
-        spotifyAppRemote?.let {
+        spotifyAppRemote.let {
             // Play a playlist
             val playlistURI = "spotify:playlist:37i9dQZF1DX7K31D69s4M1"
             it.playerApi.play(playlistURI)
@@ -76,7 +76,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onStop() {
         super.onStop()
-        spotifyAppRemote?.let {
+        spotifyAppRemote.let {
             SpotifyAppRemote.disconnect(it)
         }
     }
