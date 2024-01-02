@@ -2,7 +2,6 @@ package com.crazyj36.spotifyapitest
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import com.spotify.android.appremote.api.ConnectionParams
@@ -90,19 +89,20 @@ class MainActivity : Activity() {
                 if (this@MainActivity::pauseButton.isInitialized &&
                     this@MainActivity::resumeButton.isInitialized
                 ) {
-                    Log.d("SPOTIFYAPITEST", "buttons initialized")
-                    if (isPaused!!) {
-                        if (pauseButton.isEnabled && !resumeButton.isEnabled) {
-                            runOnUiThread {
-                                pauseButton.isEnabled = false
-                                resumeButton.isEnabled = true
+                    if (isPaused != null) {
+                        if (isPaused!!) {
+                            if (pauseButton.isEnabled && !resumeButton.isEnabled) {
+                                runOnUiThread {
+                                    pauseButton.isEnabled = false
+                                    resumeButton.isEnabled = true
+                                }
                             }
-                        }
-                    } else {
-                        if (!pauseButton.isEnabled && resumeButton.isEnabled) {
-                            runOnUiThread {
-                                pauseButton.isEnabled = true
-                                resumeButton.isEnabled = false
+                        } else {
+                            if (!pauseButton.isEnabled && resumeButton.isEnabled) {
+                                runOnUiThread {
+                                    pauseButton.isEnabled = true
+                                    resumeButton.isEnabled = false
+                                }
                             }
                         }
                     }
