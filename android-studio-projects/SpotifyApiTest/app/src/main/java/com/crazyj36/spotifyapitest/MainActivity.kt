@@ -22,8 +22,8 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val pauseButton: Button = findViewById(R.id.pauseButton)
-        val resumeButton: Button = findViewById(R.id.resumeButton)
+        pauseButton = findViewById(R.id.pauseButton)
+        resumeButton = findViewById(R.id.resumeButton)
         pauseButton.isEnabled = false
         resumeButton.isEnabled = false
 
