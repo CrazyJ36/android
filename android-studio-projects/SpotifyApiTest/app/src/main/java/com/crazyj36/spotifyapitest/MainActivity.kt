@@ -68,7 +68,7 @@ class MainActivity : Activity() {
                 Toast.makeText(this@MainActivity,
                     "Disconnecting Spotify remote.",
                     Toast.LENGTH_SHORT).show()
-                SpotifyAppRemote.disconnect(globalSpotifyAppRemote)
+                SpotifyAppRemote.disconnect(it)
             }
         }
     }
