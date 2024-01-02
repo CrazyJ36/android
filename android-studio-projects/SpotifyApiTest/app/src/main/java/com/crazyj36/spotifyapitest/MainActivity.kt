@@ -2,6 +2,7 @@ package com.crazyj36.spotifyapitest
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import com.spotify.android.appremote.api.ConnectionParams
@@ -89,6 +90,7 @@ class MainActivity : Activity() {
                 if (this@MainActivity::pauseButton.isInitialized &&
                     this@MainActivity::resumeButton.isInitialized
                 ) {
+                    Log.d("SPOTIFYAPITEST", "buttons initialized")
                     if (isPaused != null) {
                         if (isPaused!!) {
                             if (pauseButton.isEnabled && !resumeButton.isEnabled) {
