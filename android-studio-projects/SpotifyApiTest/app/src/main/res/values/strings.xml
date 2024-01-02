@@ -2,4 +2,7 @@
     <string name="app_name">Spotify Api Test</string>
     <string name="textView1Text">Play the best of CrazyJ36!</string>
     <string name="textView2Text">Run the Spotify app if nothing happens upon launching this app.\nIt must be installed and logged in.</string>
+    <string name="spotifyControlButtonsDescription">Spotify controls:</string>
+    <string name="pauseButtonText">Pause</string>
+    <string name="resumeButtonText">Resume</string>
 </resources>
