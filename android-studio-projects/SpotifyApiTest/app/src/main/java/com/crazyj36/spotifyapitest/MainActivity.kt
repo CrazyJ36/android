@@ -25,7 +25,6 @@ class MainActivity : Activity() {
     private var timer: Timer? = null
     private lateinit var pauseButton: Button
     private lateinit var resumeButton: Button
-    private lateinit var followersTextView: TextView
     private lateinit var artistInfoString: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +32,7 @@ class MainActivity : Activity() {
         setContentView(R.layout.activity_main)
         pauseButton = findViewById(R.id.pauseButton)
         resumeButton = findViewById(R.id.resumeButton)
-        followersTextView = findViewById(R.id.followersTextView)
+        val followersTextView: TextView = findViewById(R.id.followersTextView)
         val okHttpClient = OkHttpClient()
         try {
             val request = Request.Builder()
@@ -55,10 +54,6 @@ class MainActivity : Activity() {
                 Toast.LENGTH_LONG
             ).show()
         }
-
-        followersTextView = findViewById(R.id.followersTextView)
-        followersTextView.text = artistInfoString
-
         pauseButton.setOnClickListener {
             if (globalSpotifyAppRemote != null) {
                 if (isPaused != null) {
