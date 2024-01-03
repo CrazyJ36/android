@@ -33,7 +33,7 @@ class MainActivity : Activity() {
         setContentView(R.layout.activity_main)
         pauseButton = findViewById(R.id.pauseButton)
         resumeButton = findViewById(R.id.resumeButton)
-
+        followersTextView = findViewById(R.id.followersTextView)
         val okHttpClient = OkHttpClient()
         try {
             val request = Request.Builder()
