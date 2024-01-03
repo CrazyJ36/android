@@ -43,5 +43,5 @@ dependencies {
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation("androidx.compose.material3:material3")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
-    implementation(files("libs/spotify-auth-release-2.1.0.aar"))
+    implementation(files("libs/classes.jar"))
 }
