@@ -46,8 +46,8 @@ class MainActivity : Activity() {
                 while (!this@MainActivity::artistInfoString.isInitialized) {
                     delay(100)
                 }
+                followersTextView.text = artistInfoString
             }
-            followersTextView.text = artistInfoString
         } catch (exception: IOException) {
             Toast.makeText(
                 applicationContext,
