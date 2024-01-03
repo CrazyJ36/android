@@ -20,6 +20,10 @@
         android:textSize="11sp"
         android:autoLink="web"
         android:linksClickable="true"/>
+    <TextView
+        android:id="@+id/followersTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"

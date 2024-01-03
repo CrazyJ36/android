@@ -3,10 +3,18 @@ package com.crazyj36.spotifyapitest
 import android.app.Activity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import com.spotify.android.appremote.api.ConnectionParams
 import com.spotify.android.appremote.api.Connector
 import com.spotify.android.appremote.api.SpotifyAppRemote
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import java.io.IOException
 import java.util.Timer
 import java.util.TimerTask
 
@@ -17,12 +25,40 @@ class MainActivity : Activity() {
     private var timer: Timer? = null
     private lateinit var pauseButton: Button
     private lateinit var resumeButton: Button
+    private lateinit var followersTextView: TextView
+    private lateinit var artistInfoString: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         pauseButton = findViewById(R.id.pauseButton)
         resumeButton = findViewById(R.id.resumeButton)
+
+        val okHttpClient = OkHttpClient()
+
+        val request = Request.Builder()
+            .url("https://api.spotify.com/v1/artist/02UTIVsX3sxUEjvIONrzFe")
+            .addHeader("myHeader","Authorization: Bearer BQCbnwqEc7zFZ9mFfQ7v8PB3GJi79lfpzNYB8hRkZ3Q2GOqms8pN4Xa5ZADkKXSSMfHvZ4ipJLxcZklNypnQ_WIVRHfoO0ACFUbIUmnlE0ZjR0toGgU")
+            .build()
+        try {
+            artistInfoString = okHttpClient
+                .newCall(request).execute().body!!.string()
+            while (!this::artistInfoString.isInitialized) {
+                CoroutineScope(Dispatchers.Main.immediate).launch {
+                    delay(100)
+                }
+            }
+            followersTextView.text = artistInfoString
+        } catch (exception: IOException) {
+            Toast.makeText(
+                applicationContext,
+                exception.localizedMessage,
+                Toast.LENGTH_LONG
+            ).show()
+        }
+
+        followersTextView = findViewById(R.id.followersTextView)
+        followersTextView.text = artistInfoString
 
         pauseButton.setOnClickListener {
             if (globalSpotifyAppRemote != null) {

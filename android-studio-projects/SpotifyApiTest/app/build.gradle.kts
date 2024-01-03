@@ -30,6 +30,8 @@ android {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0-RC2")
     implementation(files("libs/spotify-app-remote-release-0.8.0.aar"))
     implementation("com.google.code.gson:gson:2.10")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 }
