@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -14,22 +12,54 @@ import androidx.compose.ui.Modifier
 import com.spotify.sdk.android.auth.AuthorizationClient
 import com.spotify.sdk.android.auth.AuthorizationRequest
 import com.spotify.sdk.android.auth.AuthorizationResponse
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okio.IOException
 
 
 class MainActivity : ComponentActivity() {
+    private val getTokenRequestCode = 0
+    private lateinit var token: String
 
-    private var token = ""
-    private val loginLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result: ActivityResult ->
-        token = result.data.toString()
-        Toast.makeText(
-            this@MainActivity,
-            "got result: $token",
-            Toast.LENGTH_LONG
-        ).show()
+    @Deprecated("Using old method onActivityResult()")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == getTokenRequestCode) {
+            val response =
+                AuthorizationClient.getResponse(resultCode, intent)
+            when (response.type) {
+                AuthorizationResponse.Type.TOKEN -> {
+                    Toast.makeText(
+                        applicationContext,
+                        "Got auth token. ",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    token = data.toString()
+                }
 
+                AuthorizationResponse.Type.ERROR -> {
+                    Toast.makeText(
+                        applicationContext,
+                        "Error in getting token.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                else -> {
+                    Toast.makeText(
+                        applicationContext,
+                        "Cancelled?",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
     }
+
     private lateinit var artistInfoString: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,43 +72,44 @@ class MainActivity : ComponentActivity() {
                 "http://localhost:8080"
             )
         builder.setScopes(arrayOf("streaming"))
-        val activity = AuthorizationClient.openLoginActivity(
+
+        AuthorizationClient.openLoginActivity(
             this,
-            0,
+            getTokenRequestCode,
             builder.build()
         )
-        val intent = Intent(
-            this@MainActivity,
-            activity.javaClass
-        )
-        loginLauncher.launch(intent)
 
-        /*        val okHttpClient = OkHttpClient()
-                try {
-                    val request = Request.Builder()
-                        .url("https://api.spotify.com/v1/artist/02UTIVsX3sxUEjvIONrzFe")
-                        .addHeader("myHeader","Authorization: Bearer BQCbnwqEc7zFZ9mFfQ7v8PB3GJi79lfpzNYB8hRkZ3Q2GOqms8pN4Xa5ZADkKXSSMfHvZ4ipJLxcZklNypnQ_WIVRHfoO0ACFUbIUmnlE0ZjR0toGgU")
-                        .build()
-                    CoroutineScope(Dispatchers.IO).launch {
-                        artistInfoString = okHttpClient
-                            .newCall(request).execute().body!!.string()
-                        while (!this@MainActivity::artistInfoString.isInitialized) {
-                            delay(100)
-                        }
-                    }
-                } catch (exception: IOException) {
-                    Toast.makeText(
-                        applicationContext,
-                        exception.localizedMessage,
-                        Toast.LENGTH_LONG
-                    ).show()
+        while (!this::token.isInitialized) {
+            CoroutineScope(Dispatchers.IO).launch { delay(100) }
+        }
+
+        val okHttpClient = OkHttpClient()
+        try {
+            val request = Request.Builder()
+                .url("https://api.spotify.com/v1/artist/02UTIVsX3sxUEjvIONrzFe")
+                .addHeader(
+                    "myHeader",
+                    "Authorization: Bearer $token"
+                )
+                .build()
+            CoroutineScope(Dispatchers.IO).launch {
+                artistInfoString = okHttpClient
+                    .newCall(request).execute().body!!.string()
+                while (!this@MainActivity::artistInfoString.isInitialized) {
+                    delay(100)
                 }
-        */
+            }
+        } catch (exception: IOException) {
+            Toast.makeText(
+                applicationContext,
+                exception.localizedMessage,
+                Toast.LENGTH_LONG
+            ).show()
+        }
         setContent {
             Surface(
                 modifier = Modifier.fillMaxSize()
             ) {
-                artistInfoString = "TEMPORARY!!!!"
                 Text(
                     text = artistInfoString
                 )
