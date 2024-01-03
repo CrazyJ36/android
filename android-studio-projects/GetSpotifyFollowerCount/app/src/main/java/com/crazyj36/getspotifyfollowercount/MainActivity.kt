@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
             AuthorizationRequest.Builder(
                 "19260f6162744ecc8719814edceec27e",
                 AuthorizationResponse.Type.TOKEN,
-                "http://www.example.com"
+                "http://localhost:8080"
             )
         builder.setScopes(arrayOf("streaming"))
         val activity = AuthorizationClient.openLoginActivity(
