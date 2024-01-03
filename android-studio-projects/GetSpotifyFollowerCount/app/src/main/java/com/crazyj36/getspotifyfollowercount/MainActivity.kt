@@ -8,12 +8,16 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.spotify.sdk.android.auth.AuthorizationClient
 import com.spotify.sdk.android.auth.AuthorizationRequest
 import com.spotify.sdk.android.auth.AuthorizationResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
@@ -23,7 +27,7 @@ import okio.IOException
 
 class MainActivity : ComponentActivity() {
     private val getTokenRequestCode = 0
-    private lateinit var token: String
+    private var artistInfoString = ""
 
     @Deprecated("Using old method onActivityResult()")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -38,7 +42,26 @@ class MainActivity : ComponentActivity() {
                         "Got auth token. ",
                         Toast.LENGTH_SHORT
                     ).show()
-                    token = data.toString()
+                    val okHttpClient = OkHttpClient()
+                    try {
+                        val request = Request.Builder()
+                            .url("https://api.spotify.com/v1/artist/02UTIVsX3sxUEjvIONrzFe")
+                            .addHeader(
+                                "myHeader",
+                                "Authorization: Bearer $data"
+                            )
+                            .build()
+                        CoroutineScope(Dispatchers.IO).launch {
+                            artistInfoString = okHttpClient
+                                .newCall(request).execute().body!!.string()
+                        }
+                    } catch (exception: IOException) {
+                        Toast.makeText(
+                            applicationContext,
+                            exception.localizedMessage,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
 
                 AuthorizationResponse.Type.ERROR -> {
@@ -60,8 +83,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private lateinit var artistInfoString: String
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -74,39 +95,13 @@ class MainActivity : ComponentActivity() {
         builder.setScopes(arrayOf("streaming"))
 
         AuthorizationClient.openLoginActivity(
-            this,
+            this@MainActivity,
             getTokenRequestCode,
             builder.build()
         )
 
-        while (!this::token.isInitialized) {
-            CoroutineScope(Dispatchers.IO).launch { delay(100) }
-        }
-
-        val okHttpClient = OkHttpClient()
-        try {
-            val request = Request.Builder()
-                .url("https://api.spotify.com/v1/artist/02UTIVsX3sxUEjvIONrzFe")
-                .addHeader(
-                    "myHeader",
-                    "Authorization: Bearer $token"
-                )
-                .build()
-            CoroutineScope(Dispatchers.IO).launch {
-                artistInfoString = okHttpClient
-                    .newCall(request).execute().body!!.string()
-                while (!this@MainActivity::artistInfoString.isInitialized) {
-                    delay(100)
-                }
-            }
-        } catch (exception: IOException) {
-            Toast.makeText(
-                applicationContext,
-                exception.localizedMessage,
-                Toast.LENGTH_LONG
-            ).show()
-        }
         setContent {
+            remember { mutableStateOf(artistInfoString) }
             Surface(
                 modifier = Modifier.fillMaxSize()
             ) {
