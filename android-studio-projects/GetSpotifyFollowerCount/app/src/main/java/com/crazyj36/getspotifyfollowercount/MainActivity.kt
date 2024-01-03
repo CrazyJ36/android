@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
         )
         val intent = Intent(
             this@MainActivity,
-            activity::class.java
+            activity.javaClass
         )
         loginLauncher.launch(intent)
 
