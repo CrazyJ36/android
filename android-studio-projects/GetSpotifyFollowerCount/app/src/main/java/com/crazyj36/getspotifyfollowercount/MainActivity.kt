@@ -71,7 +71,24 @@ class MainActivity : ComponentActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-
+                AuthorizationResponse.Type.CODE -> {
+                    Toast.makeText(applicationContext,
+                        "Type CODE",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                AuthorizationResponse.Type.EMPTY -> {
+                    Toast.makeText(applicationContext,
+                        "Type EMPTY",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                AuthorizationResponse.Type.UNKNOWN -> {
+                    Toast.makeText(applicationContext,
+                        "Type UNKNOWN",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
                 else -> {
                     Toast.makeText(
                         applicationContext,
@@ -86,6 +103,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setContent {
+            remember { mutableStateOf(artistInfoString) }
+            Surface(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Text(
+                    text = artistInfoString
+                )
+            }
+        }
         val builder =
             AuthorizationRequest.Builder(
                 "19260f6162744ecc8719814edceec27e",
@@ -99,16 +126,5 @@ class MainActivity : ComponentActivity() {
             getTokenRequestCode,
             builder.build()
         )
-
-        setContent {
-            remember { mutableStateOf(artistInfoString) }
-            Surface(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                Text(
-                    text = artistInfoString
-                )
-            }
-        }
     }
 }
