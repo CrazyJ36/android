@@ -35,16 +35,15 @@ class MainActivity : Activity() {
         resumeButton = findViewById(R.id.resumeButton)
 
         val okHttpClient = OkHttpClient()
-
-        val request = Request.Builder()
-            .url("https://api.spotify.com/v1/artist/02UTIVsX3sxUEjvIONrzFe")
-            .addHeader("myHeader","Authorization: Bearer BQCbnwqEc7zFZ9mFfQ7v8PB3GJi79lfpzNYB8hRkZ3Q2GOqms8pN4Xa5ZADkKXSSMfHvZ4ipJLxcZklNypnQ_WIVRHfoO0ACFUbIUmnlE0ZjR0toGgU")
-            .build()
         try {
-            artistInfoString = okHttpClient
-                .newCall(request).execute().body!!.string()
-            while (!this::artistInfoString.isInitialized) {
-                CoroutineScope(Dispatchers.Main.immediate).launch {
+            val request = Request.Builder()
+                .url("https://api.spotify.com/v1/artist/02UTIVsX3sxUEjvIONrzFe")
+                .addHeader("myHeader","Authorization: Bearer BQCbnwqEc7zFZ9mFfQ7v8PB3GJi79lfpzNYB8hRkZ3Q2GOqms8pN4Xa5ZADkKXSSMfHvZ4ipJLxcZklNypnQ_WIVRHfoO0ACFUbIUmnlE0ZjR0toGgU")
+                .build()
+            CoroutineScope(Dispatchers.IO).launch {
+                artistInfoString = okHttpClient
+                    .newCall(request).execute().body!!.string()
+                while (!this@MainActivity::artistInfoString.isInitialized) {
                     delay(100)
                 }
             }

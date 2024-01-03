@@ -1,0 +1,14 @@
+R_DEF: Internal format may change without notice
+local
+drawable circle_button
+drawable complication_drawable
+id button
+id imageView
+layout watch_face_config
+mipmap ic_launcher
+mipmap watch_face_preview
+string app_name
+string configurableComplicationText
+string grantPermissionText
+string title_activity_watch_face_config
+xml watch_face

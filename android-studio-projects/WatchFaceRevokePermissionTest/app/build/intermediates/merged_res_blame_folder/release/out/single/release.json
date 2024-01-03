@@ -1,0 +1,58 @@
+[
+    {
+        "merged": "com.crazyj36.watchfacerevokepermissiontest.app-merged_res-54:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.crazyj36.watchfacerevokepermissiontest.app-main-55:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.crazyj36.watchfacerevokepermissiontest.app-merged_res-54:/mipmap-xxxhdpi_watch_face_preview.png.flat",
+        "source": "com.crazyj36.watchfacerevokepermissiontest.app-main-55:/mipmap-xxxhdpi/watch_face_preview.png"
+    },
+    {
+        "merged": "com.crazyj36.watchfacerevokepermissiontest.app-merged_res-54:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.crazyj36.watchfacerevokepermissiontest.app-main-55:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.crazyj36.watchfacerevokepermissiontest.app-merged_res-54:/mipmap-xhdpi_watch_face_preview.png.flat",
+        "source": "com.crazyj36.watchfacerevokepermissiontest.app-main-55:/mipmap-xhdpi/watch_face_preview.png"
+    },
+    {
+        "merged": "com.crazyj36.watchfacerevokepermissiontest.app-merged_res-54:/xml_watch_face.xml.flat",
+        "source": "com.crazyj36.watchfacerevokepermissiontest.app-main-55:/xml/watch_face.xml"
+    },
+    {
+        "merged": "com.crazyj36.watchfacerevokepermissiontest.app-merged_res-54:/mipmap-hdpi_watch_face_preview.png.flat",
+        "source": "com.crazyj36.watchfacerevokepermissiontest.app-main-55:/mipmap-hdpi/watch_face_preview.png"
+    },
+    {
+        "merged": "com.crazyj36.watchfacerevokepermissiontest.app-merged_res-54:/mipmap-xxhdpi_watch_face_preview.png.flat",
+        "source": "com.crazyj36.watchfacerevokepermissiontest.app-main-55:/mipmap-xxhdpi/watch_face_preview.png"
+    },
+    {
+        "merged": "com.crazyj36.watchfacerevokepermissiontest.app-merged_res-54:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.crazyj36.watchfacerevokepermissiontest.app-main-55:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.crazyj36.watchfacerevokepermissiontest.app-merged_res-54:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.crazyj36.watchfacerevokepermissiontest.app-main-55:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.crazyj36.watchfacerevokepermissiontest.app-merged_res-54:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.crazyj36.watchfacerevokepermissiontest.app-main-55:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.crazyj36.watchfacerevokepermissiontest.app-merged_res-54:/drawable_complication_drawable.xml.flat",
+        "source": "com.crazyj36.watchfacerevokepermissiontest.app-main-55:/drawable/complication_drawable.xml"
+    },
+    {
+        "merged": "com.crazyj36.watchfacerevokepermissiontest.app-merged_res-54:/mipmap-mdpi_watch_face_preview.png.flat",
+        "source": "com.crazyj36.watchfacerevokepermissiontest.app-main-55:/mipmap-mdpi/watch_face_preview.png"
+    },
+    {
+        "merged": "com.crazyj36.watchfacerevokepermissiontest.app-merged_res-54:/layout_watch_face_config.xml.flat",
+        "source": "com.crazyj36.watchfacerevokepermissiontest.app-main-55:/layout/watch_face_config.xml"
+    },
+    {
+        "merged": "com.crazyj36.watchfacerevokepermissiontest.app-merged_res-54:/drawable_circle_button.xml.flat",
+        "source": "com.crazyj36.watchfacerevokepermissiontest.app-main-55:/drawable/circle_button.xml"
+    }
+]
