@@ -33,7 +33,6 @@ class MainActivity : ComponentActivity() {
     private val requestTokenLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
-        Toast.makeText(applicationContext, it.data!!.type, Toast.LENGTH_SHORT).show()
         if (it.data!!.type == AuthorizationResponse.Type.TOKEN.toString()) {
             val response =
                 AuthorizationClient.getResponse(it.resultCode, it.data)
