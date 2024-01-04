@@ -81,7 +81,7 @@ class MainActivity : ComponentActivity() {
             AuthorizationRequest.Builder(
                 "19260f6162744ecc8719814edceec27e",
                 AuthorizationResponse.Type.TOKEN,
-                null
+                "http://localhost:8080"
             ).setShowDialog(true)
                 .setScopes(arrayOf("user-read-email")).build()
         requestTokenLauncher.launch(
