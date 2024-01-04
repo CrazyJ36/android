@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
         val okHttpClient = OkHttpClient()
         try {
             val request = Request.Builder()
-                .url("https://api.spotify.com/v1/artist/02UTIVsX3sxUEjvIONrzFe")
+                .url("https://api.spotify.com/v1/me")
                 .addHeader(
                     "Authorization",
                     "Bearer ${response.accessToken}"
