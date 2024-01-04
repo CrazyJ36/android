@@ -44,8 +44,10 @@ class MainActivity : ComponentActivity() {
                         "Authorization",
                         "Bearer ${response.accessToken}"
                     ).build()
+                CoroutineScope(Dispatchers.IO).launch {
                     artistInfoString = okHttpClient
                         .newCall(request).execute().body!!.string()
+                }
 
             } catch (exception: IOException) {
                 Toast.makeText(
