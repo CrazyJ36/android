@@ -47,11 +47,13 @@ class MainActivity : ComponentActivity() {
             CoroutineScope(Dispatchers.IO).launch {
                 artistInfoString = okHttpClient
                     .newCall(request).execute().body!!.string()
-                Toast.makeText(
-                    applicationContext,
-                    artistInfoString,
-                    Toast.LENGTH_LONG
-                ).show()
+                runOnUiThread() {
+                    Toast.makeText(
+                        applicationContext,
+                        artistInfoString,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         } catch (exception: IOException) {
             Toast.makeText(
