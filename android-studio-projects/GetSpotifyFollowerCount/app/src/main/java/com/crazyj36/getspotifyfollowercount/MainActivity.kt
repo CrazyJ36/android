@@ -34,33 +34,32 @@ class MainActivity : ComponentActivity() {
     private val requestTokenLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
-            val response =
-                AuthorizationClient.getResponse(it.resultCode, it.data)
-            val okHttpClient = OkHttpClient()
-            try {
-                val request = Request.Builder()
-                    .url("https://api.spotify.com/v1/artist/02UTIVsX3sxUEjvIONrzFe")
-                    .addHeader(
-                        "Authorization",
-                        "Bearer ${response.accessToken}"
-                    ).build()
-                CoroutineScope(Dispatchers.IO).launch {
-                    artistInfoString = okHttpClient
-                        .newCall(request).execute().body!!.string()
-                }
-
-            } catch (exception: IOException) {
+        val response =
+            AuthorizationClient.getResponse(it.resultCode, it.data)
+        val okHttpClient = OkHttpClient()
+        try {
+            val request = Request.Builder()
+                .url("https://api.spotify.com/v1/artist/02UTIVsX3sxUEjvIONrzFe")
+                .addHeader(
+                    "Authorization",
+                    "Bearer ${response.accessToken}"
+                ).build()
+            CoroutineScope(Dispatchers.IO).launch {
+                artistInfoString = okHttpClient
+                    .newCall(request).execute().body!!.string()
                 Toast.makeText(
                     applicationContext,
-                    exception.localizedMessage,
+                    artistInfoString,
                     Toast.LENGTH_LONG
                 ).show()
             }
+        } catch (exception: IOException) {
             Toast.makeText(
                 applicationContext,
-                artistInfoString,
+                exception.localizedMessage,
                 Toast.LENGTH_LONG
             ).show()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,8 +83,8 @@ class MainActivity : ComponentActivity() {
             ).setScopes(arrayOf("user-read-email")).build()
         requestTokenLauncher.launch(
             AuthorizationClient.createLoginActivityIntent(
-            this,
-            builder
+                this,
+                builder
             )
         )
     }
