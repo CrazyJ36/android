@@ -1,6 +1,5 @@
 package com.crazyj36.getspotifyfollowercount
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
@@ -11,26 +10,23 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.spotify.sdk.android.auth.AuthorizationClient
-import com.spotify.sdk.android.auth.AuthorizationHandler
 import com.spotify.sdk.android.auth.AuthorizationRequest
 import com.spotify.sdk.android.auth.AuthorizationResponse
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import okhttp3.Call
+import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.Response
 import okio.IOException
+import org.json.JSONException
+import org.json.JSONObject
 
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), Callback {
     private var artistInfoString = mutableStateOf("waiting")
-
+    private var okHttpCall: Call? = null
     private val requestTokenLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
@@ -44,10 +40,8 @@ class MainActivity : ComponentActivity() {
                     "Authorization",
                     "Bearer ${response.accessToken}"
                 ).build()
-            CoroutineScope(Dispatchers.IO).launch {
-                artistInfoString.value = okHttpClient
-                    .newCall(request).execute().body!!.string()
-            }
+            okHttpCall = okHttpClient.newCall(request)
+            okHttpCall!!.enqueue(this)
         } catch (exception: IOException) {
             Toast.makeText(
                 applicationContext,
@@ -82,7 +76,23 @@ class MainActivity : ComponentActivity() {
         )
     }
 
+    override fun onFailure(call: Call, e: java.io.IOException) {
+
+    }
+
+    override fun onResponse(call: Call, response: Response) {
+        try {
+            val jsonObject: JSONObject =
+                JSONObject(response.body!!.string())
+            artistInfoString.value = jsonObject.toString()
+        } catch (jsonException: JSONException) {
+            Toast.makeText(applicationContext,
+                "Json Exception in response",
+                Toast.LENGTH_SHORT).show()
+        }
+    }
     override fun onDestroy() {
         super.onDestroy()
+        if (okHttpCall != null) okHttpCall!!.cancel()
     }
 }
