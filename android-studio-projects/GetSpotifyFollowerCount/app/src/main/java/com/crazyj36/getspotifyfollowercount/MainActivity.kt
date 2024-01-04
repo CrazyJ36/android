@@ -33,11 +33,6 @@ class MainActivity : ComponentActivity() {
     private val requestTokenLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
-        Toast.makeText(
-            applicationContext,
-            it.data!!.type.toString(),
-            Toast.LENGTH_SHORT
-        ).show()
         when (it.data!!.type) {
             AuthorizationResponse.Type.TOKEN.toString() -> {
                 Toast.makeText(
@@ -100,7 +95,13 @@ class MainActivity : ComponentActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-
+            null -> {
+                Toast.makeText(
+                    applicationContext,
+                    "null data type",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
             else -> {
                 Toast.makeText(
                     applicationContext,
