@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
     ) {
         Toast.makeText(
             applicationContext,
-            it.data.toString(),
+            it.data!!.type.toString(),
             Toast.LENGTH_SHORT
         ).show()
         when (it.data!!.type) {
@@ -129,13 +129,12 @@ class MainActivity : ComponentActivity() {
                 "19260f6162744ecc8719814edceec27e",
                 AuthorizationResponse.Type.TOKEN,
                 "http://localhost:8080"
-            )
-        builder.setScopes(arrayOf("streaming"))
-        builder.setShowDialog(true)
+            ).setShowDialog(true)
+                .setScopes(arrayOf("streaming")).build()
         requestTokenLauncher.launch(
             AuthorizationClient.createLoginActivityIntent(
             this,
-            builder.build()
+            builder
             )
         )
     }
