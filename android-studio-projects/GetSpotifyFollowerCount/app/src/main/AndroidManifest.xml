@@ -3,27 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <permission
-        android:name="${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-        android:protectionLevel="signature" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
-    <queries>
-        <package android:name="com.spotify.music" />
-        <package android:name="com.spotify.music.debug" />
-        <package android:name="com.spotify.music.canary" />
-        <package android:name="com.spotify.music.partners" />
-
-        <intent>
-            <action android:name="com.spotify.sso.action.START_AUTH_FLOW" />
-
-            <data android:mimeType="text/plain" />
-        </intent>
-        <intent>
-            <action android:name="android.support.customtabs.action.CustomTabsService" />
-        </intent>
-    </queries>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -33,30 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault"
-        tools:targetApi="34"
-        android:appComponentFactory="androidx.core.app.CoreComponentFactory">
+        tools:targetApi="34">
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.spotify.sdk.android.auth.LoginActivity"
-            android:exported="true"
-            android:launchMode="singleTask"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-            <intent-filter android:autoVerify="true" >
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="localhost:8080"
-                    android:scheme="http" />
             </intent-filter>
         </activity>
     </application>

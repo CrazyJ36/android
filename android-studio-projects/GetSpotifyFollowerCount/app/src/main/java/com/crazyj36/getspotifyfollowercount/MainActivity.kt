@@ -1,10 +1,7 @@
 package com.crazyj36.getspotifyfollowercount
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,16 +13,11 @@ import androidx.compose.ui.Modifier
 import com.spotify.sdk.android.auth.AuthorizationClient
 import com.spotify.sdk.android.auth.AuthorizationRequest
 import com.spotify.sdk.android.auth.AuthorizationResponse
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
-import okio.IOException
 import org.json.JSONObject
 
 
@@ -43,7 +35,7 @@ class MainActivity : ComponentActivity(), Callback {
                 .url("https://api.spotify.com/v1/artists/02UTIVsX3sxUEjvIONrzFe")
                 .addHeader(
                     "Authorization",
-                    "Bearer ${accessToken}"
+                    "Bearer $accessToken"
                 ).build()
         )
         okHttpCall!!.enqueue(this)
@@ -64,7 +56,7 @@ class MainActivity : ComponentActivity(), Callback {
             AuthorizationRequest.Builder(
                 "19260f6162744ecc8719814edceec27e",
                 AuthorizationResponse.Type.TOKEN,
-                "http://www.crazyj36.rocks/development/web/index.html"
+                "crazyj36://callback"
             ).setScopes(arrayOf("streaming"))
         requestTokenLauncher.launch(
             AuthorizationClient.createLoginActivityIntent(
@@ -80,7 +72,8 @@ class MainActivity : ComponentActivity(), Callback {
 
     override fun onResponse(call: Call, response: Response) {
         Log.d("MYLOG", "got response")
-        artistInfoString.value = JSONObject(response.body!!.string()).toString()
+        artistInfoString.value = JSONObject(
+            response.body!!.string()).getString("followers")[1].toString()
     }
     override fun onDestroy() {
         super.onDestroy()
