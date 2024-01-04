@@ -13,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.spotify.sdk.android.auth.AuthorizationClient
+import com.spotify.sdk.android.auth.AuthorizationHandler
 import com.spotify.sdk.android.auth.AuthorizationRequest
 import com.spotify.sdk.android.auth.AuthorizationResponse
 import kotlinx.coroutines.CoroutineScope
@@ -29,14 +30,19 @@ import okio.IOException
 class MainActivity : ComponentActivity() {
     private var artistInfoString = ""
 
-    val requestTokenLauncher = registerForActivityResult(
+    private val requestTokenLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
+        Toast.makeText(
+            applicationContext,
+            it.data.toString(),
+            Toast.LENGTH_SHORT
+        ).show()
         when (it.data!!.type) {
             AuthorizationResponse.Type.TOKEN.toString() -> {
                 Toast.makeText(
                     applicationContext,
-                    "Got auth token. ",
+                    "Got auth token.",
                     Toast.LENGTH_SHORT
                 ).show()
                 val okHttpClient = OkHttpClient()
@@ -132,6 +138,9 @@ class MainActivity : ComponentActivity() {
             builder.build()
             )
         )
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }
