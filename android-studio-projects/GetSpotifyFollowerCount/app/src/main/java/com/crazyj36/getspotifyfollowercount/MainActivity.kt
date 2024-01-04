@@ -76,7 +76,7 @@ class MainActivity : ComponentActivity() {
             AuthorizationRequest.Builder(
                 "19260f6162744ecc8719814edceec27e",
                 AuthorizationResponse.Type.TOKEN,
-                Uri.parse("http://www.crazyj36.rocks/development/web/index.html").toString()
+                "http://localhost:8888/callback"
             ).setScopes(arrayOf("streaming")).build()
         requestTokenLauncher.launch(
             AuthorizationClient.createLoginActivityIntent(
