@@ -1,3 +1,6 @@
+import com.android.build.gradle.internal.tasks.manifest.mergeManifests
+import com.android.xml.AndroidManifest
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -46,5 +49,5 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("androidx.browser:browser:1.7.0")
-    implementation(files("libs/spotify-auth-release-2.1.0.aar"))
+    implementation("com.spotify.android:auth:2.1.0")
 }

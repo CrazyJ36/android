@@ -28,7 +28,10 @@ class MainActivity : ComponentActivity(), Callback {
         ActivityResultContracts.StartActivityForResult()
     ) {
         Log.d("MYLOG", "started login")
-        Log.d("MYLOG", "Type: " + it.data!!.type.toString())
+        Log.d("MYLOG", "Type: " +
+                AuthorizationClient.getResponse(
+                    it.resultCode, it.data).type
+        )
         val accessToken = AuthorizationClient.getResponse(
             it.resultCode, it.data
         ).accessToken
@@ -73,14 +76,15 @@ class MainActivity : ComponentActivity(), Callback {
     }
 
     override fun onResponse(call: Call, response: Response) {
-        Log.d("MYLOG", "got response")
         if (response.isSuccessful) {
+            Log.d("MYLOG", "successful response")
             val body = JSONObject(response.body!!.string())
             val name = body.getString("name")
             val followersItem = body.getJSONObject("followers")
             val followers = followersItem.getInt("total")
             artistInfoString.value = "$name has $followers followers."
         } else {
+            Log.d("MYLOG","response unsuccessful.")
             artistInfoString.value = JSONObject(response.body!!.string()).toString()
         }
 
