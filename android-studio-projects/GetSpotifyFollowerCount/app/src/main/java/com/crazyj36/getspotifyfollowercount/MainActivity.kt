@@ -82,8 +82,10 @@ class MainActivity : ComponentActivity(), Callback {
 
     override fun onResponse(call: Call, response: Response) {
         try {
-            val jsonObject: JSONObject =
+            val jsonObject =
                 JSONObject(response.body!!.string())
+            Toast.makeText(applicationContext, jsonObject.toString(),
+                Toast.LENGTH_SHORT).show()
             artistInfoString.value = jsonObject.toString()
         } catch (jsonException: JSONException) {
             Toast.makeText(applicationContext,
