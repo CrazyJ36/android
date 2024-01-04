@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -26,76 +27,80 @@ import okio.IOException
 
 
 class MainActivity : ComponentActivity() {
-    private val getTokenRequestCode = 0
     private var artistInfoString = ""
 
-    @Deprecated("Using old method onActivityResult()")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == getTokenRequestCode) {
-            val response =
-                AuthorizationClient.getResponse(resultCode, intent)
-            when (response.type) {
-                AuthorizationResponse.Type.TOKEN -> {
-                    Toast.makeText(
-                        applicationContext,
-                        "Got auth token. ",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    val okHttpClient = OkHttpClient()
-                    try {
-                        val request = Request.Builder()
-                            .url("https://api.spotify.com/v1/artist/02UTIVsX3sxUEjvIONrzFe")
-                            .addHeader(
-                                "myHeader",
-                                "Authorization: Bearer $data"
-                            )
-                            .build()
-                        CoroutineScope(Dispatchers.IO).launch {
-                            artistInfoString = okHttpClient
-                                .newCall(request).execute().body!!.string()
-                        }
-                    } catch (exception: IOException) {
-                        Toast.makeText(
-                            applicationContext,
-                            exception.localizedMessage,
-                            Toast.LENGTH_LONG
-                        ).show()
+    val requestTokenLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        when (it.data!!.type) {
+            AuthorizationResponse.Type.TOKEN.toString() -> {
+                Toast.makeText(
+                    applicationContext,
+                    "Got auth token. ",
+                    Toast.LENGTH_SHORT
+                ).show()
+                val okHttpClient = OkHttpClient()
+                val data = it.data
+                try {
+                    val request = Request.Builder()
+                        .url("https://api.spotify.com/v1/artist/02UTIVsX3sxUEjvIONrzFe")
+                        .addHeader(
+                            "myHeader",
+                            "Authorization: Bearer $data"
+                        )
+                        .build()
+                    CoroutineScope(Dispatchers.IO).launch {
+                        artistInfoString = okHttpClient
+                            .newCall(request).execute().body!!.string()
                     }
+                } catch (exception: IOException) {
+                    Toast.makeText(
+                        applicationContext,
+                        exception.localizedMessage,
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
+            }
 
-                AuthorizationResponse.Type.ERROR -> {
-                    Toast.makeText(
-                        applicationContext,
-                        "Error in getting token.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                AuthorizationResponse.Type.CODE -> {
-                    Toast.makeText(applicationContext,
-                        "Type CODE",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                AuthorizationResponse.Type.EMPTY -> {
-                    Toast.makeText(applicationContext,
-                        "Type EMPTY",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                AuthorizationResponse.Type.UNKNOWN -> {
-                    Toast.makeText(applicationContext,
-                        "Type UNKNOWN",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                else -> {
-                    Toast.makeText(
-                        applicationContext,
-                        "Cancelled?",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+            AuthorizationResponse.Type.ERROR.toString() -> {
+                Toast.makeText(
+                    applicationContext,
+                    "Error in getting token.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            AuthorizationResponse.Type.CODE.toString() -> {
+                Toast.makeText(
+                    applicationContext,
+                    "Type CODE",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            AuthorizationResponse.Type.EMPTY.toString() -> {
+                Toast.makeText(
+                    applicationContext,
+                    "Type EMPTY",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            }
+
+            AuthorizationResponse.Type.UNKNOWN.toString() -> {
+                Toast.makeText(
+                    applicationContext,
+                    "Type UNKNOWN",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            else -> {
+                Toast.makeText(
+                    applicationContext,
+                    "Cancelled?",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -120,11 +125,13 @@ class MainActivity : ComponentActivity() {
                 "http://localhost:8080"
             )
         builder.setScopes(arrayOf("streaming"))
-
-        AuthorizationClient.openLoginActivity(
-            this@MainActivity,
-            getTokenRequestCode,
+        builder.setShowDialog(true)
+        requestTokenLauncher.launch(
+            AuthorizationClient.createLoginActivityIntent(
+            this,
             builder.build()
+            )
         )
+
     }
 }
