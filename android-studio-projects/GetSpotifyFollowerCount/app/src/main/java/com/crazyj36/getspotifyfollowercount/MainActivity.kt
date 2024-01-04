@@ -3,6 +3,7 @@ package com.crazyj36.getspotifyfollowercount
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -17,48 +18,27 @@ import com.spotify.sdk.android.auth.AuthorizationRequest
 import com.spotify.sdk.android.auth.AuthorizationResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.Call
+import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.Response
 import okio.IOException
+import org.json.JSONObject
 
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), Callback {
     private var artistInfoString = mutableStateOf("waiting")
     private var okHttpCall: Call? = null
+    private var accessToken: String? = null
     private val requestTokenLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
-        val response =
-            AuthorizationClient.getResponse(it.resultCode, it.data)
-        val okHttpClient = OkHttpClient()
-        try {
-            val request = Request.Builder()
-                .url("https://api.spotify.com/v1/artists/02UTIVsX3sxUEjvIONrzFe")
-                .addHeader(
-                    "Authorization",
-                    "Bearer ${response.accessToken}"
-                ).build()
-            CoroutineScope(Dispatchers.IO).launch {
-                artistInfoString.value =
-                    okHttpCall!!.execute().body.toString()
-                okHttpCall = okHttpClient.newCall(request)
-                runOnUiThread() {
-                    Toast.makeText(
-                        applicationContext,
-                        artistInfoString.value,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        } catch (exception: IOException) {
-            Toast.makeText(
-                applicationContext,
-                exception.localizedMessage,
-                Toast.LENGTH_LONG
-            ).show()
-        }
+        accessToken = AuthorizationClient.getResponse(
+            it.resultCode, it.data).accessToken
+        Log.d("TEST", "got token")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,14 +64,33 @@ class MainActivity : ComponentActivity() {
                 builder
             )
         )
+
+        CoroutineScope(Dispatchers.Main).launch {
+            while (accessToken == null) {
+                Log.d("TEST", "getting token")
+                delay(1000)
+            }
+        }
+        val okHttpClient = OkHttpClient()
+        val request = Request.Builder()
+            .url("https://api.spotify.com/v1/artists/02UTIVsX3sxUEjvIONrzFe")
+            .addHeader(
+                "Authorization",
+                "Bearer ${accessToken}"
+            ).build()
+        okHttpCall = okHttpClient.newCall(request)
+        okHttpCall!!.enqueue(this)
     }
 
-    override fun onResume() {
-        super.onResume()
-        artistInfoString.value = artistInfoString.value
-    }
     override fun onDestroy() {
         super.onDestroy()
         if (okHttpCall != null) okHttpCall!!.cancel()
+    }
+
+    override fun onFailure(call: Call, e: java.io.IOException) {
+    }
+
+    override fun onResponse(call: Call, response: Response) {
+        artistInfoString.value = JSONObject(response.body!!.string()).toString()
     }
 }
