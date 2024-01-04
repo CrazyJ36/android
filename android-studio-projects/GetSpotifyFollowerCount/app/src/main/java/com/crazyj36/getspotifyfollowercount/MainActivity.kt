@@ -85,6 +85,11 @@ class MainActivity : ComponentActivity() {
             )
         )
     }
+
+    override fun onResume() {
+        super.onResume()
+        artistInfoString.value = artistInfoString.value
+    }
     override fun onDestroy() {
         super.onDestroy()
         if (okHttpCall != null) okHttpCall!!.cancel()
