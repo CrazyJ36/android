@@ -34,7 +34,6 @@ class MainActivity : ComponentActivity() {
     private val requestTokenLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
-        if (it.data!!.type == AuthorizationResponse.Type.TOKEN.toString()) {
             val response =
                 AuthorizationClient.getResponse(it.resultCode, it.data)
             val okHttpClient = OkHttpClient()
@@ -45,10 +44,9 @@ class MainActivity : ComponentActivity() {
                         "Authorization",
                         "Bearer ${response.accessToken}"
                     ).build()
-                CoroutineScope(Dispatchers.IO).launch {
                     artistInfoString = okHttpClient
                         .newCall(request).execute().body!!.string()
-                }
+
             } catch (exception: IOException) {
                 Toast.makeText(
                     applicationContext,
@@ -61,7 +59,6 @@ class MainActivity : ComponentActivity() {
                 artistInfoString,
                 Toast.LENGTH_LONG
             ).show()
-        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
