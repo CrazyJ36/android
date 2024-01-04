@@ -29,7 +29,7 @@ import okio.IOException
 
 
 class MainActivity : ComponentActivity() {
-    private var artistInfoString = ""
+    private var artistInfoString = mutableStateOf("waiting")
 
     private val requestTokenLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -45,15 +45,8 @@ class MainActivity : ComponentActivity() {
                     "Bearer ${response.accessToken}"
                 ).build()
             CoroutineScope(Dispatchers.IO).launch {
-                artistInfoString = okHttpClient
+                artistInfoString.value = okHttpClient
                     .newCall(request).execute().body!!.string()
-                runOnUiThread() {
-                    Toast.makeText(
-                        applicationContext,
-                        artistInfoString,
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
             }
         } catch (exception: IOException) {
             Toast.makeText(
@@ -66,14 +59,12 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
-            remember { mutableStateOf(artistInfoString) }
             Surface(
                 modifier = Modifier.fillMaxSize()
             ) {
                 Text(
-                    text = artistInfoString
+                    text = artistInfoString.value
                 )
             }
         }
