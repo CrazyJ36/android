@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity(), Callback {
     private val requestTokenLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
-        Log.d("MYLOG", "started activity")
+        Log.d("GETSPOTIFYFOLLOWERCOUNT", "started login")
         val accessToken = AuthorizationClient.getResponse(
             it.resultCode, it.data).accessToken
         okHttpCall = OkHttpClient().newCall(
@@ -67,13 +67,19 @@ class MainActivity : ComponentActivity(), Callback {
     }
 
     override fun onFailure(call: Call, e: java.io.IOException) {
-        Log.d("MYLOG", "failed response")
+        Log.d("GETSPOTIFYFOLLOWERCOUNT", "failed to get response")
     }
 
     override fun onResponse(call: Call, response: Response) {
-        Log.d("MYLOG", "got response")
+        Log.d("GETSPOTIFYFOLLOWERCOUNT", "got response")
         artistInfoString.value = JSONObject(
-            response.body!!.string()).getString("followers")[1].toString()
+            response.body!!.string())
+            .getString("name").toString() +
+                " has " +
+                JSONObject(response.body!!.string())
+                    .getJSONObject("followers")
+                    .getInt("total").toString() +
+                " followers."
     }
     override fun onDestroy() {
         super.onDestroy()
