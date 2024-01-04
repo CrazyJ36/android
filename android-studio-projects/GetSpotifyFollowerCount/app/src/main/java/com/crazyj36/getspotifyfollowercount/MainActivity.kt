@@ -82,8 +82,7 @@ class MainActivity : ComponentActivity() {
                 "19260f6162744ecc8719814edceec27e",
                 AuthorizationResponse.Type.TOKEN,
                 Uri.parse("http://localhost:8080").toString()
-            ).setShowDialog(true)
-                .setScopes(arrayOf("user-read-email")).build()
+            ).setScopes(arrayOf("user-read-email")).build()
         requestTokenLauncher.launch(
             AuthorizationClient.createLoginActivityIntent(
             this,
