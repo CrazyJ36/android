@@ -22,14 +22,16 @@ import org.json.JSONObject
 
 
 class MainActivity : ComponentActivity(), Callback {
-    private var artistInfoString = mutableStateOf("waiting")
+    private var artistInfoString = mutableStateOf("Getting info...")
     private var okHttpCall: Call? = null
     private val requestTokenLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
-        Log.d("GETSPOTIFYFOLLOWERCOUNT", "started login")
+        Log.d("MYLOG", "started login")
+        Log.d("MYLOG", "Type: " + it.data!!.type.toString())
         val accessToken = AuthorizationClient.getResponse(
-            it.resultCode, it.data).accessToken
+            it.resultCode, it.data
+        ).accessToken
         okHttpCall = OkHttpClient().newCall(
             Request.Builder()
                 .url("https://api.spotify.com/v1/artists/02UTIVsX3sxUEjvIONrzFe")
@@ -57,30 +59,33 @@ class MainActivity : ComponentActivity(), Callback {
                 "19260f6162744ecc8719814edceec27e",
                 AuthorizationResponse.Type.TOKEN,
                 "crazyj36://callback"
-            ).setScopes(arrayOf("streaming"))
+            ).setScopes(arrayOf("streaming")).build()
         requestTokenLauncher.launch(
             AuthorizationClient.createLoginActivityIntent(
                 this,
-                builder.build()
+                builder
             )
         )
     }
 
     override fun onFailure(call: Call, e: java.io.IOException) {
-        Log.d("GETSPOTIFYFOLLOWERCOUNT", "failed to get response")
+        Log.d("MYLOG", "failed to get response")
     }
 
     override fun onResponse(call: Call, response: Response) {
-        Log.d("GETSPOTIFYFOLLOWERCOUNT", "got response")
-        artistInfoString.value = JSONObject(
-            response.body!!.string())
-            .getString("name").toString() +
-                " has " +
-                JSONObject(response.body!!.string())
-                    .getJSONObject("followers")
-                    .getInt("total").toString() +
-                " followers."
+        Log.d("MYLOG", "got response")
+        if (response.isSuccessful) {
+            val body = JSONObject(response.body!!.string())
+            val name = body.getString("name")
+            val followersItem = body.getJSONObject("followers")
+            val followers = followersItem.getInt("total")
+            artistInfoString.value = "$name has $followers followers."
+        } else {
+            artistInfoString.value = JSONObject(response.body!!.string()).toString()
+        }
+
     }
+
     override fun onDestroy() {
         super.onDestroy()
         if (okHttpCall != null) okHttpCall!!.cancel()
