@@ -1,6 +1,7 @@
 package com.crazyj36.getspotifyfollowercount
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -80,7 +81,7 @@ class MainActivity : ComponentActivity() {
             AuthorizationRequest.Builder(
                 "19260f6162744ecc8719814edceec27e",
                 AuthorizationResponse.Type.TOKEN,
-                "http://localhost:8080"
+                Uri.parse("http://localhost:8080").toString()
             ).setShowDialog(true)
                 .setScopes(arrayOf("user-read-email")).build()
         requestTokenLauncher.launch(
