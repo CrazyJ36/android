@@ -1,7 +1,7 @@
 package com.crazyj36.complicationtest
 
-import android.graphics.Color
 import android.graphics.RectF
+import android.support.wearable.complications.ComplicationData
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
@@ -20,14 +20,18 @@ import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class MyWatchFaceService : WatchFaceService() {
-
+    companion object {
+        lateinit var complicationDrawable: ComplicationDrawable
+    }
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
 
-        val complicationDrawable = ComplicationDrawable.getDrawable(
+        complicationDrawable = ComplicationDrawable.getDrawable(
             this@MyWatchFaceService, R.drawable.complication_drawable)!!
-        complicationDrawable.activeStyle.iconColor = Color.WHITE
+
+        //complicationDrawable.activeStyle.iconColor = Color.WHITE
+
 
         val defaultCanvasComplicationFactory =
             CanvasComplicationFactory { watchState, listener ->

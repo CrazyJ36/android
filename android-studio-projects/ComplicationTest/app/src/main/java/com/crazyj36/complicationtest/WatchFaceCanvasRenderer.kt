@@ -1,12 +1,14 @@
 package com.crazyj36.complicationtest
 
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Rect
 import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.style.CurrentUserStyleRepository
+import kotlinx.coroutines.flow.callbackFlow
 import java.time.ZonedDateTime
 
 class WatchFaceCanvasRenderer(
@@ -23,6 +25,7 @@ class WatchFaceCanvasRenderer(
     interactiveDrawModeUpdateDelayMillis = 16L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
+
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
@@ -37,9 +40,12 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
+        MyWatchFaceService.complicationDrawable.activeStyle.iconColor = Color.WHITE
+
         // render complications
         for ((_, complication) in complicationSlotsManager
             .complicationSlots) {
+
             complication.render(canvas, zonedDateTime, renderParameters)
         }
     }
