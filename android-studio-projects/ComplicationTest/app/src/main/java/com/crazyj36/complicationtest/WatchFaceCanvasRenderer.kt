@@ -48,6 +48,7 @@ class WatchFaceCanvasRenderer(
         for ((_, complication) in complicationSlotsManager.complicationSlots) {
             MyWatchFaceService.complicationDrawable.setContext(myContext)
             MyWatchFaceService.complicationDrawable.setTint(Color.WHITE)
+            MyWatchFaceService.complicationDrawable.activeStyle.iconColor = Color.WHITE
             MyWatchFaceService.complicationDrawable.setBounds(100, 100, 200, 200)
             MyWatchFaceService.complicationDrawable.draw(canvas)
             //complication.render(canvas, zonedDateTime, renderParameters)
