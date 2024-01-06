@@ -55,9 +55,9 @@ class WatchFaceCanvasRenderer(
             if (Build.VERSION.SDK_INT >= 29) MyWatchFaceService.complicationDrawable.setTintBlendMode(BlendMode.SRC_ATOP)
             MyWatchFaceService.complicationDrawable.setBounds(100, 100, 200, 200)
             MyWatchFaceService.complicationDrawable.draw(canvas)
-            complication.renderer.drawHighlight(canvas, Rect(100, 100, 200, 200),
+            /*complication.renderer.drawHighlight(canvas, Rect(100, 100, 200, 200),
                 ComplicationSlotBoundsType.ROUND_RECT, zonedDateTime, Color.WHITE
-                )
+                )*/
             //complication.render(canvas, zonedDateTime, renderParameters)
         }
     }
