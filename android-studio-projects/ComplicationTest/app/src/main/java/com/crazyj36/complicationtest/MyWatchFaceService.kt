@@ -14,6 +14,7 @@ import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.complications.ComplicationSlotBounds
 import androidx.wear.watchface.complications.DefaultComplicationDataSourcePolicy
 import androidx.wear.watchface.complications.SystemDataSources
+import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
@@ -27,28 +28,27 @@ class MyWatchFaceService : WatchFaceService() {
     ): ComplicationSlotsManager {
         val complicationId = 0
         val supportedTypes = listOf(
-            ComplicationType.RANGED_VALUE,
             ComplicationType.SHORT_TEXT,
             ComplicationType.EMPTY)
         val bounds = ComplicationSlotBounds(
             RectF(0.30f, 0.30f, 0.70f, 0.70f),
         )
-
         val defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
             SystemDataSources.DATA_SOURCE_DATE,
             ComplicationType.SHORT_TEXT
         )
+        val complicationDrawable = ComplicationDrawable.getDrawable(
+            this@MyWatchFaceService,
+            R.drawable.complication_drawable
+        )!!
+        complicationDrawable.apply {  this.setTint(Color.WHITE) }
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
-                ComplicationDrawable.getDrawable(
-                    this@MyWatchFaceService,
-                    R.drawable.complication_drawable
-                )!!,
+                complicationDrawable,
                 watchState,
                 listener
             )
         }
-
         return ComplicationSlotsManager(
             listOf(
                 ComplicationSlot.createRoundRectComplicationSlotBuilder(
