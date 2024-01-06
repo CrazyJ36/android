@@ -33,7 +33,7 @@ class MyWatchFaceService : WatchFaceService() {
         )
 
         try {
-            val test = defaultDataSourcePolicy.primaryDataSource!!.javaClass.canonicalName!!.toString()
+            val test = defaultDataSourcePolicy.primaryDataSource!!.toShortString()
             Log.d("MYLOG", test)
         } catch (exception: Exception) {
             Log.d("MYLOG", "Didn\'t work: ${exception.localizedMessage}")
