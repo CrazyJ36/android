@@ -2,6 +2,7 @@ package com.crazyj36.complicationtest
 
 import android.graphics.Color
 import android.graphics.ColorFilter
+import android.graphics.PorterDuff
 import android.graphics.RectF
 import android.os.Build
 import android.view.SurfaceHolder
@@ -45,7 +46,10 @@ class MyWatchFaceService : WatchFaceService() {
         )!!
         complicationDrawable.apply {
             this.setTint(Color.WHITE)
-            if (Build.VERSION.SDK_INT >= 29) this.setTintBlendMode(android.graphics.BlendMode.SRC_ATOP)
+            this.setTintMode(PorterDuff.Mode.MULTIPLY)
+            /*if (Build.VERSION.SDK_INT >= 29) {
+                this.setTintBlendMode(android.graphics.BlendMode.SRC_ATOP)
+            }*/
         }
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
