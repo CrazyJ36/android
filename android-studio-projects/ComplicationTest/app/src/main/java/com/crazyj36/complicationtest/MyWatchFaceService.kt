@@ -1,7 +1,9 @@
 package com.crazyj36.complicationtest
 
 import android.graphics.RectF
+import android.util.Log
 import android.view.SurfaceHolder
+import android.widget.Toast
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -24,6 +26,14 @@ class MyWatchFaceService : WatchFaceService() {
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
 
+        val defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+            SystemDataSources.DATA_SOURCE_DATE,
+            ComplicationType.SHORT_TEXT
+        )
+
+        val test = defaultDataSourcePolicy.primaryDataSource!!.javaClass.declaredFields.contentDeepToString()
+        Log.d("MYLOG", test)
+        
         return ComplicationSlotsManager(
             listOf(
                 ComplicationSlot.createRoundRectComplicationSlotBuilder(
@@ -41,10 +51,7 @@ class MyWatchFaceService : WatchFaceService() {
                     supportedTypes = listOf(
                         ComplicationType.SHORT_TEXT,
                         ComplicationType.EMPTY),
-                    defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                        SystemDataSources.DATA_SOURCE_DATE,
-                        ComplicationType.SHORT_TEXT
-                    ),
+                    defaultDataSourcePolicy = defaultDataSourcePolicy,
                     bounds = ComplicationSlotBounds(
                         RectF(0.30f, 0.30f, 0.70f, 0.70f),
                     )
