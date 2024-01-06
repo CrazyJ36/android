@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">WatchFace Revoke Permission Test</string>
-    <string name="configurableComplicationText">Configurable complication.</string>
-    <string name="grantPermissionText">Please grant permission to set complication.</string>
-    <string name="title_activity_watch_face_config">Complication Config</string>
-</resources>
