@@ -1,12 +1,7 @@
 package com.crazyj36.complicationtest
 
-import android.content.res.Resources.Theme
 import android.graphics.RectF
-import android.support.wearable.complications.ComplicationData
-import android.util.Xml
 import android.view.SurfaceHolder
-import android.widget.Toast
-import androidx.compose.ui.graphics.Color
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -24,31 +19,29 @@ import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class MyWatchFaceService : WatchFaceService() {
-    companion object {
-        lateinit var complicationDrawable: ComplicationDrawable
-    }
+
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
-        complicationDrawable = ComplicationDrawable.getDrawable(
-            this@MyWatchFaceService, R.drawable.complication_drawable)!!
-        complicationDrawable.activeStyle.iconColor = android.graphics.Color.WHITE
-        val defaultCanvasComplicationFactory =
-            CanvasComplicationFactory { watchState, listener ->
-                CanvasComplicationDrawable(
-                    complicationDrawable,
-                    watchState,
-                    listener
-                )
-            }
-        val supportedTypesList = listOf(
-            ComplicationType.SHORT_TEXT,
-            ComplicationType.EMPTY
-        )
+
+
         val complication = ComplicationSlot.createRoundRectComplicationSlotBuilder(
             id = 0,
-            canvasComplicationFactory = defaultCanvasComplicationFactory,
-            supportedTypes = supportedTypesList,
+            canvasComplicationFactory = { watchState, listener ->
+                CanvasComplicationDrawable(
+                    ComplicationDrawable.getDrawable(
+                        this@MyWatchFaceService,
+                        R.drawable.complication_drawable
+                    )!!,
+                    watchState,
+                    listener
+                ).apply {
+                    this.drawable.activeStyle.iconColor = android.graphics.Color.WHITE
+                }
+            },
+            supportedTypes = listOf(
+                ComplicationType.SHORT_TEXT,
+                ComplicationType.EMPTY),
             defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
                 SystemDataSources.DATA_SOURCE_DATE,
                 ComplicationType.SHORT_TEXT
@@ -56,10 +49,11 @@ class MyWatchFaceService : WatchFaceService() {
             bounds = ComplicationSlotBounds(
                 RectF(0.30f, 0.30f, 0.70f, 0.70f),
             )
-        ).build()
+        ).setFixedComplicationDataSource(false)
+
         return ComplicationSlotsManager(
             listOf(
-                complication
+                complication.build()
             ),
             currentUserStyleRepository
         )

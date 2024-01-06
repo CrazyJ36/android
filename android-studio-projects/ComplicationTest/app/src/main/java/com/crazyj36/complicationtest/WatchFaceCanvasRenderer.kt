@@ -1,5 +1,6 @@
 package com.crazyj36.complicationtest
 
+import android.content.ComponentName
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -51,16 +52,6 @@ class WatchFaceCanvasRenderer(
         // render complications
         for ((_, complication) in complicationSlotsManager
             .complicationSlots) {
-
-            val complicationDrawable = ComplicationDrawable.getDrawable(
-                context = myContext,
-                R.drawable.complication_drawable
-            )
-
-            complication.canvasComplicationFactory
-                .apply {
-                complicationDrawable!!.activeStyle.iconColor = Color.WHITE
-            }
             complication.render(canvas, zonedDateTime, renderParameters)
         }
     }
