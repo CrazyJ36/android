@@ -1,5 +1,6 @@
 package com.crazyj36.complicationtest
 
+import android.graphics.Color
 import android.graphics.RectF
 import android.util.Log
 import android.view.SurfaceHolder
@@ -33,8 +34,8 @@ class MyWatchFaceService : WatchFaceService() {
         )
 
         try {
-            val test = defaultDataSourcePolicy.primaryDataSourceDefaultType.toString()
-            Log.d("MYLOG", test)
+            val test = defaultDataSourcePolicy.secondaryDataSource.toString()
+            Log.d("MYLOG", "Worked: $test")
         } catch (exception: Exception) {
             Log.d("MYLOG", "Didn\'t work: ${exception.localizedMessage}")
         }
@@ -48,7 +49,7 @@ class MyWatchFaceService : WatchFaceService() {
                             ComplicationDrawable.getDrawable(
                                 this@MyWatchFaceService,
                                 R.drawable.complication_drawable
-                            )!!,
+                            )!!.apply{ this.activeStyle.backgroundColor = Color.WHITE },
                             watchState,
                             listener
                         )
