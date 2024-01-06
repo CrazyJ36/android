@@ -24,11 +24,13 @@ import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class MyWatchFaceService : WatchFaceService() {
+    companion object {
+        lateinit var complicationDrawable: ComplicationDrawable
+    }
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
-
-        val complicationDrawable = ComplicationDrawable.getDrawable(
+        complicationDrawable = ComplicationDrawable.getDrawable(
             this@MyWatchFaceService, R.drawable.complication_drawable)!!
         complicationDrawable.activeStyle.iconColor = android.graphics.Color.WHITE
         val defaultCanvasComplicationFactory =

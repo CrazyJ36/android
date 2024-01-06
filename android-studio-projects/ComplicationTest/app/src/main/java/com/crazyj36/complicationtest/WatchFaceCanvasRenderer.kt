@@ -56,9 +56,11 @@ class WatchFaceCanvasRenderer(
                 context = myContext,
                 R.drawable.complication_drawable
             )
-            complicationDrawable!!.activeStyle.iconColor = Color.WHITE
 
-            complication.renderer.loadData(complication.complicationData.value, true).apply { complicationDrawable.activeStyle.iconColor = Color.WHITE }
+            complication.canvasComplicationFactory
+                .apply {
+                complicationDrawable!!.activeStyle.iconColor = Color.WHITE
+            }
             complication.render(canvas, zonedDateTime, renderParameters)
         }
     }
