@@ -31,9 +31,9 @@ class MyWatchFaceService : WatchFaceService() {
             ComplicationType.SHORT_TEXT
         )
 
-        val test = defaultDataSourcePolicy.primaryDataSource!!.javaClass.declaredFields.contentDeepToString()
-        Log.d("MYLOG", test)
-        
+        val test = defaultDataSourcePolicy.primaryDataSource!!.javaClass.canonicalName
+        Log.d("MYLOG", test!!)
+
         return ComplicationSlotsManager(
             listOf(
                 ComplicationSlot.createRoundRectComplicationSlotBuilder(
