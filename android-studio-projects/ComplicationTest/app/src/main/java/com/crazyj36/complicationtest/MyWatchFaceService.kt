@@ -2,10 +2,7 @@ package com.crazyj36.complicationtest
 
 import android.graphics.Color
 import android.graphics.RectF
-import android.util.Log
 import android.view.SurfaceHolder
-import android.widget.Toast
-import androidx.wear.watchface.CanvasComplication
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -46,7 +43,7 @@ class MyWatchFaceService : WatchFaceService() {
                 ComplicationDrawable.getDrawable(
                     this@MyWatchFaceService,
                     R.drawable.complication_drawable
-                )!!.apply{ this.activeStyle.iconColor = Color.WHITE },
+                )!!,
                 watchState,
                 listener
             )
