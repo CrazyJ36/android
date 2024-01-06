@@ -19,6 +19,7 @@ import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
+import java.lang.Exception
 
 class MyWatchFaceService : WatchFaceService() {
 
@@ -31,8 +32,12 @@ class MyWatchFaceService : WatchFaceService() {
             ComplicationType.SHORT_TEXT
         )
 
-        val test = defaultDataSourcePolicy.primaryDataSource!!.javaClass.canonicalName
-        Log.d("MYLOG", test!!)
+        try {
+            val test = defaultDataSourcePolicy.primaryDataSource!!.javaClass.canonicalName!!.toString()
+            Log.d("MYLOG", test)
+        } catch (exception: Exception) {
+            Log.d("MYLOG", "Didn\'t work: ${exception.localizedMessage}")
+        }
 
         return ComplicationSlotsManager(
             listOf(
