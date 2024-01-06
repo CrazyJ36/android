@@ -40,7 +40,7 @@ class MyWatchFaceService : WatchFaceService() {
             ComplicationType.SHORT_TEXT
         )
         val bounds = ComplicationSlotBounds(
-            RectF(0.30f, 0.30f, 0.70f, 0.70f),
+            RectF(0.30f, 0.30f, 0.70f, 0.70f)
         )
         val defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
             SystemDataSources.DATA_SOURCE_DATE,
