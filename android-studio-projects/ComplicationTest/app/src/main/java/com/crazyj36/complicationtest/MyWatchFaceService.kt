@@ -24,36 +24,31 @@ class MyWatchFaceService : WatchFaceService() {
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
 
-
-        val complication = ComplicationSlot.createRoundRectComplicationSlotBuilder(
-            id = 0,
-            canvasComplicationFactory = { watchState, listener ->
-                CanvasComplicationDrawable(
-                    ComplicationDrawable.getDrawable(
-                        this@MyWatchFaceService,
-                        R.drawable.complication_drawable
-                    )!!,
-                    watchState,
-                    listener
-                ).apply {
-                    this.drawable.activeStyle.iconColor = android.graphics.Color.WHITE
-                }
-            },
-            supportedTypes = listOf(
-                ComplicationType.SHORT_TEXT,
-                ComplicationType.EMPTY),
-            defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                SystemDataSources.DATA_SOURCE_DATE,
-                ComplicationType.SHORT_TEXT
-            ),
-            bounds = ComplicationSlotBounds(
-                RectF(0.30f, 0.30f, 0.70f, 0.70f),
-            )
-        ).setFixedComplicationDataSource(false)
-
         return ComplicationSlotsManager(
             listOf(
-                complication.build()
+                ComplicationSlot.createRoundRectComplicationSlotBuilder(
+                    id = 0,
+                    canvasComplicationFactory = { watchState, listener ->
+                        CanvasComplicationDrawable(
+                            ComplicationDrawable.getDrawable(
+                                this@MyWatchFaceService,
+                                R.drawable.complication_drawable
+                            )!!,
+                            watchState,
+                            listener
+                        )
+                    },
+                    supportedTypes = listOf(
+                        ComplicationType.SHORT_TEXT,
+                        ComplicationType.EMPTY),
+                    defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+                        SystemDataSources.DATA_SOURCE_DATE,
+                        ComplicationType.SHORT_TEXT
+                    ),
+                    bounds = ComplicationSlotBounds(
+                        RectF(0.30f, 0.30f, 0.70f, 0.70f),
+                    )
+                ).build()
             ),
             currentUserStyleRepository
         )

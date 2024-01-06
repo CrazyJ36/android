@@ -5,7 +5,9 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Rect
+import android.util.Log
 import android.view.SurfaceHolder
+import android.widget.Toast
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
@@ -50,8 +52,8 @@ class WatchFaceCanvasRenderer(
     ) {
 
         // render complications
-        for ((_, complication) in complicationSlotsManager
-            .complicationSlots) {
+        for ((_, complication) in complicationSlotsManager.complicationSlots) {
+            Log.d("MYLOG", complication.complicationData.value.dataSource!!.javaClass.declaredMethods.toString() )
             complication.render(canvas, zonedDateTime, renderParameters)
         }
     }
