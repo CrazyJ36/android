@@ -1,15 +1,10 @@
 package com.crazyj36.complicationtest
 
+import android.graphics.BlendMode
 import android.graphics.Color
-import android.graphics.ColorFilter
-import android.graphics.PorterDuff
 import android.graphics.RectF
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.SurfaceHolder
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.compose.ui.graphics.BlendMode
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -21,12 +16,10 @@ import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.complications.ComplicationSlotBounds
 import androidx.wear.watchface.complications.DefaultComplicationDataSourcePolicy
 import androidx.wear.watchface.complications.SystemDataSources
-import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
-import java.lang.Exception
 
 class MyWatchFaceService : WatchFaceService() {
     companion object {
@@ -40,7 +33,7 @@ class MyWatchFaceService : WatchFaceService() {
             ComplicationType.SHORT_TEXT
         )
         val bounds = ComplicationSlotBounds(
-            RectF(0.30f, 0.30f, 0.70f, 0.70f)
+            RectF(0.40f, 0.40f, 0.60f, 0.60f)
         )
         val defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
             SystemDataSources.DATA_SOURCE_DATE,
@@ -51,6 +44,9 @@ class MyWatchFaceService : WatchFaceService() {
             this@MyWatchFaceService,
             R.drawable.complication_drawable
         )!!
+        complicationDrawable.setTint(Color.WHITE)
+        if (Build.VERSION.SDK_INT >= 29)
+            complicationDrawable.setTintBlendMode(BlendMode.MULTIPLY)
 
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
@@ -80,7 +76,6 @@ class MyWatchFaceService : WatchFaceService() {
         currentUserStyleRepository: CurrentUserStyleRepository
     ): WatchFace {
         val renderer = WatchFaceCanvasRenderer(
-            context = applicationContext,
             surfaceHolder = surfaceHolder,
             watchState = watchState,
             complicationSlotsManager = complicationSlotsManager,
