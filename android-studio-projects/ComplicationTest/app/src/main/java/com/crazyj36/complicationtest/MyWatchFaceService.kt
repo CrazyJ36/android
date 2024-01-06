@@ -4,9 +4,12 @@ import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.graphics.RectF
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.SurfaceHolder
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.ui.graphics.BlendMode
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -26,13 +29,16 @@ import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.lang.Exception
 
 class MyWatchFaceService : WatchFaceService() {
-
+    companion object {
+        lateinit var complicationDrawable: ComplicationDrawable
+    }
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
         val complicationId = 0
         val supportedTypes = listOf(
-            ComplicationType.SHORT_TEXT)
+            ComplicationType.SHORT_TEXT
+        )
         val bounds = ComplicationSlotBounds(
             RectF(0.30f, 0.30f, 0.70f, 0.70f),
         )
@@ -40,16 +46,11 @@ class MyWatchFaceService : WatchFaceService() {
             SystemDataSources.DATA_SOURCE_DATE,
             ComplicationType.SHORT_TEXT
         )
-        val complicationDrawable = ComplicationDrawable.getDrawable(
+
+        complicationDrawable = ComplicationDrawable.getDrawable(
             this@MyWatchFaceService,
             R.drawable.complication_drawable
         )!!
-        complicationDrawable.setTint(Color.WHITE)
-        complicationDrawable.setTintMode(PorterDuff.Mode.MULTIPLY)
-        if (Build.VERSION.SDK_INT >= 29) {
-            complicationDrawable.setTintBlendMode(
-                android.graphics.BlendMode.SRC_ATOP)
-        }
 
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
