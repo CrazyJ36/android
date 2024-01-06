@@ -35,7 +35,7 @@ class MyWatchFaceService : WatchFaceService() {
 
         Toast.makeText(
             applicationContext,
-            complicationDrawable.complicationData.dataSource!!.javaClass.getDeclaredField("iconColor").toString(),
+            complicationDrawable.complicationData.dataSource!!.toString(),
             Toast.LENGTH_SHORT
         ).show()
 
