@@ -28,7 +28,9 @@ class MyWatchFaceService : WatchFaceService() {
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
+        val complicationId = 0
         val supportedTypes = listOf(
+            ComplicationType.RANGED_VALUE,
             ComplicationType.SHORT_TEXT,
             ComplicationType.EMPTY)
         val bounds = ComplicationSlotBounds(
@@ -53,7 +55,7 @@ class MyWatchFaceService : WatchFaceService() {
         return ComplicationSlotsManager(
             listOf(
                 ComplicationSlot.createRoundRectComplicationSlotBuilder(
-                    id = 0,
+                    id = complicationId,
                     canvasComplicationFactory = canvasComplicationFactory,
                     supportedTypes = supportedTypes,
                     defaultDataSourcePolicy = defaultDataSourcePolicy,
