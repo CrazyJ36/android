@@ -33,12 +33,6 @@ class MyWatchFaceService : WatchFaceService() {
 
         //complicationDrawable.activeStyle.iconColor = Color.WHITE
 
-        Toast.makeText(
-            applicationContext,
-            complicationDrawable.complicationData.dataSource!!.toString(),
-            Toast.LENGTH_SHORT
-        ).show()
-
         val defaultCanvasComplicationFactory =
             CanvasComplicationFactory { watchState, listener ->
                 CanvasComplicationDrawable(
