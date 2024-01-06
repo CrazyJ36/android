@@ -3,6 +3,7 @@ package com.crazyj36.complicationtest
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.Rect
 import android.graphics.RectF
 import android.view.SurfaceHolder
@@ -48,7 +49,7 @@ class WatchFaceCanvasRenderer(
         for ((_, complication) in complicationSlotsManager.complicationSlots) {
             MyWatchFaceService.complicationDrawable.setContext(myContext)
             MyWatchFaceService.complicationDrawable.setTint(Color.WHITE)
-            MyWatchFaceService.complicationDrawable.activeStyle.iconColor = Color.WHITE
+            MyWatchFaceService.complicationDrawable.setTintMode(PorterDuff.Mode.MULTIPLY)
             MyWatchFaceService.complicationDrawable.setBounds(100, 100, 200, 200)
             MyWatchFaceService.complicationDrawable.draw(canvas)
             //complication.render(canvas, zonedDateTime, renderParameters)
