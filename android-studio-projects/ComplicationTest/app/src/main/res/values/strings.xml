@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Complication Test</string>
+    <string name="grantPermissionText">Please grant permission to change complication.</string>
+    <string name="configurableComplicationText">Configurable complication.</string>
+</resources>
