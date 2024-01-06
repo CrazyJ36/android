@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.example.android.wearable.alpha",
+  "applicationId": "com.crazyj36.customcomplicationdatasourcetest",
   "variantName": "release",
   "elements": [
     {
