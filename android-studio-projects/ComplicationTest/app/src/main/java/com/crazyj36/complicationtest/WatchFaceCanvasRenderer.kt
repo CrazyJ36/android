@@ -55,7 +55,7 @@ class WatchFaceCanvasRenderer(
         // render complications
         for ((_, complication) in complicationSlotsManager.complicationSlots) {
             if (!stop) {
-                Log.d("MYLOG", complication.complicationData.value.dataSource!!.javaClass.declaredFields.contentDeepToString())
+                Log.d("MYLOG", complication.complicationData.value.dataSource!!.javaClass.declaredConstructors.contentDeepToString())
                 stop = true
             }
             complication.render(canvas, zonedDateTime, renderParameters)
