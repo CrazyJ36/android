@@ -44,13 +44,13 @@ class MyWatchFaceService : WatchFaceService() {
             this@MyWatchFaceService,
             R.drawable.complication_drawable
         )!!
-        complicationDrawable.apply {
-            this.setTint(Color.WHITE)
-            this.setTintMode(PorterDuff.Mode.MULTIPLY)
-            /*if (Build.VERSION.SDK_INT >= 29) {
-                this.setTintBlendMode(android.graphics.BlendMode.SRC_ATOP)
-            }*/
+        complicationDrawable.setTint(Color.WHITE)
+        complicationDrawable.setTintMode(PorterDuff.Mode.MULTIPLY)
+        if (Build.VERSION.SDK_INT >= 29) {
+            complicationDrawable.setTintBlendMode(
+                android.graphics.BlendMode.SRC_ATOP)
         }
+
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
                 complicationDrawable,
