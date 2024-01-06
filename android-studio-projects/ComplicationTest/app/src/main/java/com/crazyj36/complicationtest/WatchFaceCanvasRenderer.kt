@@ -4,6 +4,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Rect
 import android.view.SurfaceHolder
+import android.widget.Toast
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
@@ -40,11 +41,13 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        MyWatchFaceService.complicationDrawable.activeStyle.iconColor = Color.WHITE
 
         // render complications
         for ((_, complication) in complicationSlotsManager
             .complicationSlots) {
+
+            MyWatchFaceService.complicationDrawable.activeStyle.iconColor = Color.WHITE
+
 
             complication.render(canvas, zonedDateTime, renderParameters)
         }
