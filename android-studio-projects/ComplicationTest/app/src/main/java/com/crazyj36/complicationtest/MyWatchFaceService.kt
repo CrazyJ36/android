@@ -1,8 +1,11 @@
 package com.crazyj36.complicationtest
 
 import android.graphics.Color
+import android.graphics.ColorFilter
 import android.graphics.RectF
+import android.os.Build
 import android.view.SurfaceHolder
+import androidx.compose.ui.graphics.BlendMode
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -28,8 +31,7 @@ class MyWatchFaceService : WatchFaceService() {
     ): ComplicationSlotsManager {
         val complicationId = 0
         val supportedTypes = listOf(
-            ComplicationType.SHORT_TEXT,
-            ComplicationType.EMPTY)
+            ComplicationType.SHORT_TEXT)
         val bounds = ComplicationSlotBounds(
             RectF(0.30f, 0.30f, 0.70f, 0.70f),
         )
@@ -41,7 +43,10 @@ class MyWatchFaceService : WatchFaceService() {
             this@MyWatchFaceService,
             R.drawable.complication_drawable
         )!!
-        complicationDrawable.apply {  this.setTint(Color.WHITE) }
+        complicationDrawable.apply {
+            this.setTint(Color.WHITE)
+            if (Build.VERSION.SDK_INT >= 29) this.setTintBlendMode(android.graphics.BlendMode.SRC_ATOP)
+        }
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
                 complicationDrawable,
