@@ -5,6 +5,7 @@ import android.graphics.RectF
 import android.util.Log
 import android.view.SurfaceHolder
 import android.widget.Toast
+import androidx.wear.watchface.CanvasComplication
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -27,40 +28,36 @@ class MyWatchFaceService : WatchFaceService() {
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
+        val supportedTypes = listOf(
+            ComplicationType.SHORT_TEXT,
+            ComplicationType.EMPTY)
+        val bounds = ComplicationSlotBounds(
+            RectF(0.30f, 0.30f, 0.70f, 0.70f),
+        )
 
         val defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
             SystemDataSources.DATA_SOURCE_DATE,
             ComplicationType.SHORT_TEXT
         )
-
-        try {
-            val test = defaultDataSourcePolicy.secondaryDataSource.toString()
-            Log.d("MYLOG", "Worked: $test")
-        } catch (exception: Exception) {
-            Log.d("MYLOG", "Didn\'t work: ${exception.localizedMessage}")
+        val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
+            CanvasComplicationDrawable(
+                ComplicationDrawable.getDrawable(
+                    this@MyWatchFaceService,
+                    R.drawable.complication_drawable
+                )!!.apply{ this.activeStyle.iconColor = Color.WHITE },
+                watchState,
+                listener
+            )
         }
 
         return ComplicationSlotsManager(
             listOf(
                 ComplicationSlot.createRoundRectComplicationSlotBuilder(
                     id = 0,
-                    canvasComplicationFactory = { watchState, listener ->
-                        CanvasComplicationDrawable(
-                            ComplicationDrawable.getDrawable(
-                                this@MyWatchFaceService,
-                                R.drawable.complication_drawable
-                            )!!.apply{ this.activeStyle.backgroundColor = Color.WHITE },
-                            watchState,
-                            listener
-                        )
-                    },
-                    supportedTypes = listOf(
-                        ComplicationType.SHORT_TEXT,
-                        ComplicationType.EMPTY),
+                    canvasComplicationFactory = canvasComplicationFactory,
+                    supportedTypes = supportedTypes,
                     defaultDataSourcePolicy = defaultDataSourcePolicy,
-                    bounds = ComplicationSlotBounds(
-                        RectF(0.30f, 0.30f, 0.70f, 0.70f),
-                    )
+                    bounds = bounds
                 ).build()
             ),
             currentUserStyleRepository
