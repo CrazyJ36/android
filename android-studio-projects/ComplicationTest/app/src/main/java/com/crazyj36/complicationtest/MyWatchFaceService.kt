@@ -1,9 +1,12 @@
 package com.crazyj36.complicationtest
 
+import android.content.res.Resources.Theme
 import android.graphics.RectF
 import android.support.wearable.complications.ComplicationData
+import android.util.Xml
 import android.view.SurfaceHolder
 import android.widget.Toast
+import androidx.compose.ui.graphics.Color
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -21,18 +24,13 @@ import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class MyWatchFaceService : WatchFaceService() {
-    companion object {
-        lateinit var complicationDrawable: ComplicationDrawable
-    }
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
 
-        complicationDrawable = ComplicationDrawable.getDrawable(
+        val complicationDrawable = ComplicationDrawable.getDrawable(
             this@MyWatchFaceService, R.drawable.complication_drawable)!!
-
-        //complicationDrawable.activeStyle.iconColor = Color.WHITE
-
+        complicationDrawable.activeStyle.iconColor = android.graphics.Color.WHITE
         val defaultCanvasComplicationFactory =
             CanvasComplicationFactory { watchState, listener ->
                 CanvasComplicationDrawable(
@@ -72,6 +70,7 @@ class MyWatchFaceService : WatchFaceService() {
         currentUserStyleRepository: CurrentUserStyleRepository
     ): WatchFace {
         val renderer = WatchFaceCanvasRenderer(
+            context = applicationContext,
             surfaceHolder = surfaceHolder,
             watchState = watchState,
             complicationSlotsManager = complicationSlotsManager,

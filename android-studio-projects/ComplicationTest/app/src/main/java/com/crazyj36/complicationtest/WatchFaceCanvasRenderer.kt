@@ -1,18 +1,22 @@
 package com.crazyj36.complicationtest
 
+import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Rect
 import android.view.SurfaceHolder
-import android.widget.Toast
+import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
+import androidx.wear.watchface.complications.DefaultComplicationDataSourcePolicy
+import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
+import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
-import kotlinx.coroutines.flow.callbackFlow
 import java.time.ZonedDateTime
 
 class WatchFaceCanvasRenderer(
+    context: Context,
     surfaceHolder: SurfaceHolder,
     watchState: WatchState,
     var complicationSlotsManager: ComplicationSlotsManager,
@@ -26,13 +30,15 @@ class WatchFaceCanvasRenderer(
     interactiveDrawModeUpdateDelayMillis = 16L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
-
+    val myWatchState = watchState
+    val myContext = context
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
+
     }
 
     override fun render(
@@ -46,9 +52,13 @@ class WatchFaceCanvasRenderer(
         for ((_, complication) in complicationSlotsManager
             .complicationSlots) {
 
-            MyWatchFaceService.complicationDrawable.activeStyle.iconColor = Color.WHITE
+            val complicationDrawable = ComplicationDrawable.getDrawable(
+                context = myContext,
+                R.drawable.complication_drawable
+            )
+            complicationDrawable!!.activeStyle.iconColor = Color.WHITE
 
-
+            complication.renderer.loadData(complication.complicationData.value, true).apply { complicationDrawable.activeStyle.iconColor = Color.WHITE }
             complication.render(canvas, zonedDateTime, renderParameters)
         }
     }
