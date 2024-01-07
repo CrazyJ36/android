@@ -18,6 +18,8 @@ import androidx.wear.watchface.style.WatchFaceLayer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
@@ -42,8 +44,8 @@ class WatchFaceConfigActivity : ComponentActivity() {
             ).show()
         }
     }
-    private val uiState: StateFlow<EditWatchFaceUiState> =
-        flow<EditWatchFaceUiState> {
+    private val uiState: Flow<EditWatchFaceUiState> =
+        flow { this.emitAll()
             editorSession = EditorSession.createOnWatchEditorSession(
                 this@WatchFaceConfigActivity
             )
@@ -57,7 +59,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 slotIdToComplicationData = null
             )
             imageView.setImageBitmap(bitmap)
-        } as StateFlow<EditWatchFaceUiState>
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,11 +72,6 @@ class WatchFaceConfigActivity : ComponentActivity() {
         }
 
     }
-    /*private fun updateWatchFaceEditorPreview(
-        userStylesAndPreview: UserStylesAndPreview
-    ) {
-        imageView.setImageBitmap(userStylesAndPreview.previewImage)
-    }*/
 
     fun onClickComplication(view: View) {
         when {
