@@ -79,7 +79,7 @@ class MyWatchFaceService : WatchFaceService() {
     private fun getWireComplicationData(complicationDrawable: ComplicationDrawable, myIcon: Icon): ComplicationData {
         val wireComplicationData = complicationDrawable.complicationData
             .asWireComplicationData()
-        wireComplicationData.icon.let { myIcon }
+        wireComplicationData.icon.apply { myIcon }
         return wireComplicationData.toApiComplicationData()
     }
 
