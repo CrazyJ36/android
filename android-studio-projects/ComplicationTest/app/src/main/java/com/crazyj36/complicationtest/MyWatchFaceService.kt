@@ -44,10 +44,8 @@ class MyWatchFaceService : WatchFaceService(), CanvasComplication.InvalidateCall
             R.drawable.complication_drawable
         )!!*/
         val complicationDrawable = ComplicationDrawable(this@MyWatchFaceService)
-        if (Build.VERSION.SDK_INT >= 29) {
-            complicationDrawable.colorFilter =
-                BlendModeColorFilter(Color.BLUE, BlendMode.MULTIPLY)
-        }
+        complicationDrawable.activeStyle.iconColor = Color.BLUE
+        complicationDrawable.setContext(this@MyWatchFaceService)
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
                 complicationDrawable,
