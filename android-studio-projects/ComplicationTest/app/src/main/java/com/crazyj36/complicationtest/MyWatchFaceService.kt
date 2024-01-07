@@ -69,7 +69,6 @@ class MyWatchFaceService : WatchFaceService() {
             bounds = bounds
         )
         getWireComplicationData(complicationDrawable!!, myIcon!!)
-
         return ComplicationSlotsManager(
             listOf(
                 complicationSlotBuilder.build()
@@ -79,7 +78,7 @@ class MyWatchFaceService : WatchFaceService() {
     }
 
     @SuppressLint("RestrictedApi")
-    fun getWireComplicationData(complicationDrawable: ComplicationDrawable, myIcon: Icon){
+    fun getWireComplicationData(complicationDrawable: ComplicationDrawable, myIcon: Icon) {
         Log.d("MYLOG", complicationDrawable.complicationData.toString())
         val wireComplicationData = complicationDrawable.complicationData
             .asWireComplicationData()
