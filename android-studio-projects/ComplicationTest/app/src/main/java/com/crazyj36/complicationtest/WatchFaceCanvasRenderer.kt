@@ -1,23 +1,12 @@
 package com.crazyj36.complicationtest
 
 import android.annotation.SuppressLint
-import android.graphics.BlendMode
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Rect
-import android.os.Build
-import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
-import androidx.wear.watchface.complications.DefaultComplicationDataSourcePolicy
-import androidx.wear.watchface.complications.SystemDataSources
-import androidx.wear.watchface.complications.data.ComplicationText
-import androidx.wear.watchface.complications.data.ComplicationType
-import androidx.wear.watchface.complications.data.PlainComplicationText
-import androidx.wear.watchface.complications.data.ShortTextComplicationData
-import androidx.wear.watchface.complications.data.toApiComplicationData
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.ZonedDateTime
 
@@ -44,7 +33,6 @@ class WatchFaceCanvasRenderer(
 
     }
 
-    @SuppressLint("RestrictedApi")
     override fun render(
         canvas: Canvas,
         bounds: Rect,
@@ -53,14 +41,8 @@ class WatchFaceCanvasRenderer(
     ) {
         // render complications
         for ((_, complication) in complicationSlotsManager.complicationSlots) {
-            //Log.d("MYLOG", complication.complicationData.toString())
-            val wireComplicationData = complication.complicationData.value.asWireComplicationData()
-            wireComplicationData.icon?.apply {
-                setTint(Color.WHITE)
-                if (Build.VERSION.SDK_INT >= 29) setTintBlendMode(BlendMode.MULTIPLY)
-            }
-            if (Build.VERSION.SDK_INT >= 28) Log.d("MYLOG", wireComplicationData.icon?.type.toString())
-            wireComplicationData.toApiComplicationData()
+            MyWatchFaceService().getWireComplicationData(
+                MyWatchFaceService().complicationDrawable, MyWatchFaceService().myIcon)
             complication.render(canvas, zonedDateTime, renderParameters)
         }
     }

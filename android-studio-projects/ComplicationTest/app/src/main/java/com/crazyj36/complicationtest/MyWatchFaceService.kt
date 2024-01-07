@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.RectF
 import android.graphics.drawable.Icon
 import android.os.Build
+import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
@@ -27,6 +28,20 @@ import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class MyWatchFaceService : WatchFaceService() {
+    lateinit var complicationDrawable: ComplicationDrawable
+    lateinit var myIcon: Icon
+    override fun onCreate() {
+        super.onCreate()
+        complicationDrawable = ComplicationDrawable.getDrawable(
+            applicationContext,
+            R.drawable.complication_drawable
+        )!!
+
+        myIcon = Icon.createWithResource(
+            applicationContext,
+            R.drawable.ic_action_name
+        )
+    }
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
@@ -41,24 +56,16 @@ class MyWatchFaceService : WatchFaceService() {
             SystemDataSources.DATA_SOURCE_DATE,
             ComplicationType.SHORT_TEXT
         )
-        val complicationDrawable = ComplicationDrawable.getDrawable(
-            applicationContext,
-            R.drawable.complication_drawable
-        )!!
 
-        val myIcon = Icon.createWithResource(
-            applicationContext,
-            R.drawable.ic_action_name
-        )
-        //complicationDrawable.setComplicationData(getWireComplicationData(complicationDrawable, myIcon), true)
+        getWireComplicationData(complicationDrawable, myIcon)
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
-                complicationDrawable.apply { activeStyle.iconColor = Color.WHITE },
+                complicationDrawable,
                 watchState,
                 listener
             )
         }
-        complicationDrawable.setComplicationData(getWireComplicationData(complicationDrawable, myIcon), true)
+        getWireComplicationData(complicationDrawable, myIcon)
         val complicationSlotBuilder = ComplicationSlot.createRoundRectComplicationSlotBuilder(
             id = complicationId,
             canvasComplicationFactory = canvasComplicationFactory,
@@ -66,7 +73,7 @@ class MyWatchFaceService : WatchFaceService() {
             defaultDataSourcePolicy = defaultDataSourcePolicy,
             bounds = bounds
         )
-        complicationDrawable.setComplicationData(getWireComplicationData(complicationDrawable, myIcon), true)
+        getWireComplicationData(complicationDrawable, myIcon)
 
         return ComplicationSlotsManager(
             listOf(
@@ -77,14 +84,16 @@ class MyWatchFaceService : WatchFaceService() {
     }
 
     @SuppressLint("RestrictedApi")
-    fun getWireComplicationData(complicationDrawable: ComplicationDrawable, myIcon: Icon): ComplicationData {
+    fun getWireComplicationData(complicationDrawable: ComplicationDrawable, myIcon: Icon){
+        Log.d("MYLOG", complicationDrawable.complicationData.toString())
         val wireComplicationData = complicationDrawable.complicationData
             .asWireComplicationData()
         wireComplicationData.icon?.apply {
+
             setTint(Color.WHITE)
             if (Build.VERSION.SDK_INT >= 29) setTintBlendMode(BlendMode.MULTIPLY)
         }
-        return wireComplicationData.toApiComplicationData()
+        complicationDrawable.setComplicationData(wireComplicationData.toApiComplicationData(), true)
     }
 
     override suspend fun createWatchFace(
