@@ -50,12 +50,10 @@ class MyWatchFaceService : WatchFaceService() {
             applicationContext,
             R.drawable.ic_action_name
         )
-        complicationDrawable.setComplicationData(getWireComplicationData(complicationDrawable, myIcon), true)
+        //complicationDrawable.setComplicationData(getWireComplicationData(complicationDrawable, myIcon), true)
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
-                complicationDrawable.apply {
-                    activeStyle.iconColor = Color.WHITE
-                                           },
+                complicationDrawable.apply { activeStyle.iconColor = Color.WHITE },
                 watchState,
                 listener
             )
@@ -82,9 +80,9 @@ class MyWatchFaceService : WatchFaceService() {
     fun getWireComplicationData(complicationDrawable: ComplicationDrawable, myIcon: Icon): ComplicationData {
         val wireComplicationData = complicationDrawable.complicationData
             .asWireComplicationData()
-        wireComplicationData.icon.apply {
-            this!!.setTint(Color.WHITE)
-            if (Build.VERSION.SDK_INT >= 29) this.setTintBlendMode(BlendMode.MULTIPLY)
+        wireComplicationData.icon?.apply {
+            setTint(Color.WHITE)
+            if (Build.VERSION.SDK_INT >= 29) setTintBlendMode(BlendMode.MULTIPLY)
         }
         return wireComplicationData.toApiComplicationData()
     }
