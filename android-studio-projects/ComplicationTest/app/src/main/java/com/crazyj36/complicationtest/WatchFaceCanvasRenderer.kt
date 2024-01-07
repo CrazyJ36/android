@@ -49,15 +49,6 @@ class WatchFaceCanvasRenderer(
         // render complications
         for ((_, complication) in complicationSlotsManager.complicationSlots) {
             Log.d("MYLOG", complication.complicationData.value.type.toString())
-
-            val dataSource = SystemDataSources.DATA_SOURCE_STEP_COUNT
-
-            complication.renderer.loadData(ShortTextComplicationData.Builder(
-                text = PlainComplicationText.Builder(dataSource.toString()).build(),
-                contentDescription = PlainComplicationText.Builder("cotentDesc").build()
-            ).build(), true
-            )
-
             complication.render(canvas, zonedDateTime, renderParameters)
         }
     }

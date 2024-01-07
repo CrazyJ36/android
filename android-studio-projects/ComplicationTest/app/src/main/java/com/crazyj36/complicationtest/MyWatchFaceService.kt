@@ -1,13 +1,7 @@
 package com.crazyj36.complicationtest
 
-import android.graphics.BlendMode
-import android.graphics.BlendModeColorFilter
-import android.graphics.Color
-import android.graphics.ColorFilter
 import android.graphics.RectF
-import android.os.Build
 import android.view.SurfaceHolder
-import androidx.wear.watchface.CanvasComplication
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -19,16 +13,12 @@ import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.complications.ComplicationSlotBounds
 import androidx.wear.watchface.complications.DefaultComplicationDataSourcePolicy
 import androidx.wear.watchface.complications.SystemDataSources
-import androidx.wear.watchface.complications.data.ComplicationData
-import androidx.wear.watchface.complications.data.ComplicationText
 import androidx.wear.watchface.complications.data.ComplicationType
-import androidx.wear.watchface.complications.data.PlainComplicationText
-import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 
-class MyWatchFaceService : WatchFaceService(), CanvasComplication.InvalidateCallback {
+class MyWatchFaceService : WatchFaceService() {
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
@@ -47,14 +37,6 @@ class MyWatchFaceService : WatchFaceService(), CanvasComplication.InvalidateCall
             applicationContext,
             R.drawable.complication_drawable
         )!!
-        val complicationData = ShortTextComplicationData.Builder(
-            text = PlainComplicationText.Builder("text").build(),
-            contentDescription = PlainComplicationText.Builder("contentDesc").build()
-        ).build()
-        complicationDrawable.setComplicationData(
-            complicationData,
-            true
-        )
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
                 complicationDrawable,
@@ -94,9 +76,5 @@ class MyWatchFaceService : WatchFaceService(), CanvasComplication.InvalidateCall
             watchFaceType = WatchFaceType.ANALOG,
             renderer = renderer
         )
-    }
-
-    override fun onInvalidate() {
-        TODO("Not yet implemented")
     }
 }
