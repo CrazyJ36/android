@@ -45,7 +45,7 @@ class MyWatchFaceService : WatchFaceService(), CanvasComplication.InvalidateCall
         )!!*/
         val complicationDrawable = ComplicationDrawable(this@MyWatchFaceService)
         complicationDrawable.activeStyle.iconColor = Color.BLUE
-        complicationDrawable.setContext(this@MyWatchFaceService)
+        complicationDrawable.isLowBitAmbient = true
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
                 complicationDrawable,
