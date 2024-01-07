@@ -38,11 +38,10 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        MyWatchFaceService.myCanvasComplication.render(canvas, bounds, zonedDateTime, renderParameters, 0)
         // render complications
-        /*for ((_, complication) in complicationSlotsManager.complicationSlots) {
+        for ((_, complication) in complicationSlotsManager.complicationSlots) {
             complication.render(canvas, zonedDateTime, renderParameters)
-        }*/
+        }
     }
 
     class MySharedAssets : SharedAssets {

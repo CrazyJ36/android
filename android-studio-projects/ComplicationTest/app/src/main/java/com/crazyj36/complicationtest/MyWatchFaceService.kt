@@ -23,11 +23,6 @@ import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class MyWatchFaceService : WatchFaceService(), CanvasComplication.InvalidateCallback {
-    private lateinit var myWatchState: WatchState
-
-    companion object {
-        lateinit var myCanvasComplication: CanvasComplication
-    }
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
@@ -46,7 +41,7 @@ class MyWatchFaceService : WatchFaceService(), CanvasComplication.InvalidateCall
             this@MyWatchFaceService,
             R.drawable.complication_drawable
         )!!
-        complicationDrawable.setTint(Color.WHITE)
+        complicationDrawable.setTint(Color.BLUE)
         if (Build.VERSION.SDK_INT >= 29)
             complicationDrawable.setTintBlendMode(BlendMode.MULTIPLY)
 
@@ -57,7 +52,6 @@ class MyWatchFaceService : WatchFaceService(), CanvasComplication.InvalidateCall
                 listener
             )
         }
-        myCanvasComplication = canvasComplicationFactory.create(myWatchState, this)
         val complicationSlotBuilder = ComplicationSlot.createRoundRectComplicationSlotBuilder(
             id = complicationId,
             canvasComplicationFactory = canvasComplicationFactory,
@@ -79,7 +73,6 @@ class MyWatchFaceService : WatchFaceService(), CanvasComplication.InvalidateCall
         complicationSlotsManager: ComplicationSlotsManager,
         currentUserStyleRepository: CurrentUserStyleRepository
     ): WatchFace {
-        myWatchState = watchState
         val renderer = WatchFaceCanvasRenderer(
             surfaceHolder = surfaceHolder,
             watchState = watchState,
