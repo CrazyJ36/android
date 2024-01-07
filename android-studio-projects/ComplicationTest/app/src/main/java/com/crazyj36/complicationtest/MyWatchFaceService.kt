@@ -1,7 +1,10 @@
 package com.crazyj36.complicationtest
 
+import android.annotation.SuppressLint
 import android.graphics.RectF
+import android.graphics.drawable.Icon
 import android.view.SurfaceHolder
+import androidx.core.graphics.drawable.IconCompat
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -13,7 +16,10 @@ import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.complications.ComplicationSlotBounds
 import androidx.wear.watchface.complications.DefaultComplicationDataSourcePolicy
 import androidx.wear.watchface.complications.SystemDataSources
+import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
+import androidx.wear.watchface.complications.data.MonochromaticImage
+import androidx.wear.watchface.complications.data.toApiComplicationData
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
@@ -37,6 +43,7 @@ class MyWatchFaceService : WatchFaceService() {
             applicationContext,
             R.drawable.complication_drawable
         )!!
+        getWireComplicationData(complicationDrawable)
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
                 complicationDrawable,
@@ -44,6 +51,7 @@ class MyWatchFaceService : WatchFaceService() {
                 listener
             )
         }
+        getWireComplicationData(complicationDrawable)
         val complicationSlotBuilder = ComplicationSlot.createRoundRectComplicationSlotBuilder(
             id = complicationId,
             canvasComplicationFactory = canvasComplicationFactory,
@@ -57,6 +65,17 @@ class MyWatchFaceService : WatchFaceService() {
             ),
             currentUserStyleRepository
         )
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun getWireComplicationData(complicationDrawable: ComplicationDrawable) {
+        complicationDrawable.complicationData
+            .asWireComplicationData().icon.apply {
+                Icon.createWithResource(
+                    applicationContext,
+                    R.drawable.ic_action_name
+                )
+            }
     }
 
     override suspend fun createWatchFace(
