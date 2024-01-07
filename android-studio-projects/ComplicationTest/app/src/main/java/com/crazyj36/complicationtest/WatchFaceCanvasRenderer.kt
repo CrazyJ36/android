@@ -43,12 +43,6 @@ class WatchFaceCanvasRenderer(
     ) {
         // render complications
         for ((_, complication) in complicationSlotsManager.complicationSlots) {
-
-            MyWatchFaceService
-                .complicationDrawable.setTint(Color.WHITE)
-            if (Build.VERSION.SDK_INT >= 29) MyWatchFaceService
-                .complicationDrawable.setTintBlendMode(BlendMode.MULTIPLY)
-
             complication.render(canvas, zonedDateTime, renderParameters)
         }
     }

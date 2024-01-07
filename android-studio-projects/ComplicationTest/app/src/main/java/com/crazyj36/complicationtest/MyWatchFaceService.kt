@@ -22,9 +22,6 @@ import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class MyWatchFaceService : WatchFaceService() {
-    companion object {
-        lateinit var complicationDrawable: ComplicationDrawable
-    }
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
@@ -39,8 +36,7 @@ class MyWatchFaceService : WatchFaceService() {
             SystemDataSources.DATA_SOURCE_DATE,
             ComplicationType.SHORT_TEXT
         )
-
-        complicationDrawable = ComplicationDrawable.getDrawable(
+        val complicationDrawable = ComplicationDrawable.getDrawable(
             this@MyWatchFaceService,
             R.drawable.complication_drawable
         )!!
@@ -55,15 +51,16 @@ class MyWatchFaceService : WatchFaceService() {
                 listener
             )
         }
+        val complicationSlotBuilder = ComplicationSlot.createRoundRectComplicationSlotBuilder(
+            id = complicationId,
+            canvasComplicationFactory = canvasComplicationFactory,
+            supportedTypes = supportedTypes,
+            defaultDataSourcePolicy = defaultDataSourcePolicy,
+            bounds = bounds
+        )
         return ComplicationSlotsManager(
             listOf(
-                ComplicationSlot.createRoundRectComplicationSlotBuilder(
-                    id = complicationId,
-                    canvasComplicationFactory = canvasComplicationFactory,
-                    supportedTypes = supportedTypes,
-                    defaultDataSourcePolicy = defaultDataSourcePolicy,
-                    bounds = bounds
-                ).build()
+                complicationSlotBuilder.build()
             ),
             currentUserStyleRepository
         )

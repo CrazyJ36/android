@@ -29,8 +29,8 @@ import kotlinx.coroutines.yield
 
 class WatchFaceConfigActivity : ComponentActivity() {
     private lateinit var imageView: ImageView
-    private val scope = CoroutineScope(Dispatchers.Main.immediate)
     private lateinit var editorSession: EditorSession
+    private lateinit var bitmap: Bitmap
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) {
@@ -47,50 +47,34 @@ class WatchFaceConfigActivity : ComponentActivity() {
             editorSession = EditorSession.createOnWatchEditorSession(
                 this@WatchFaceConfigActivity
             )
-            emitAll(
-                combine(
-                    editorSession.userStyle,
-                    editorSession.complicationsPreviewData
-                ) { userStyle, complicationsPreviewData ->
-                    yield()
-                    EditWatchFaceUiState.Success(
-                        createWatchFacePreview(userStyle, complicationsPreviewData)
-                    )
-                }
+            val bitmap = editorSession.renderWatchFaceToBitmap(
+                RenderParameters(
+                    DrawMode.INTERACTIVE,
+                    WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
+                    null
+                ),
+                editorSession.previewReferenceInstant,
+                slotIdToComplicationData = null
             )
-        }
-            .stateIn(
-                scope,
-                SharingStarted.Eagerly,
-                EditWatchFaceUiState.Loading("Initializing")
-            )
+            imageView.setImageBitmap(bitmap)
+        } as StateFlow<EditWatchFaceUiState>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.watch_face_config)
         imageView = findViewById(R.id.imageView)
         lifecycleScope.launch {
-            uiState.collect { uiState: EditWatchFaceUiState ->
-                when (uiState) {
-                    is EditWatchFaceUiState.Loading -> {
-
-                    }
-                    is EditWatchFaceUiState.Success -> {
-                        updateWatchFaceEditorPreview(uiState.userStylesAndPreview)
-                    }
-                    is EditWatchFaceUiState.Error -> {
-
-                    }
-                }
+            uiState.collect {
+                imageView.setImageBitmap(bitmap)
             }
         }
 
     }
-    private fun updateWatchFaceEditorPreview(
+    /*private fun updateWatchFaceEditorPreview(
         userStylesAndPreview: UserStylesAndPreview
     ) {
         imageView.setImageBitmap(userStylesAndPreview.previewImage)
-    }
+    }*/
 
     fun onClickComplication(view: View) {
         when {
@@ -105,7 +89,11 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             )
             -> {
-
+                Toast.makeText(
+                    this@WatchFaceConfigActivity,
+                    getString(R.string.grantPermissionText),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             else -> {
                 requestPermissionLauncher.launch("com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
@@ -113,30 +101,11 @@ class WatchFaceConfigActivity : ComponentActivity() {
         }
     }
 
-    private fun createWatchFacePreview(
-        userStyle: UserStyle,
-        complicationsPreviewData: Map<Int, ComplicationData>
-    ): UserStylesAndPreview {
-        val bitmap = editorSession.renderWatchFaceToBitmap(
-            RenderParameters(
-                DrawMode.INTERACTIVE,
-                WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
-                null
-            ),
-            editorSession.previewReferenceInstant,
-            complicationsPreviewData
-        )
-        return UserStylesAndPreview(
-            previewImage = bitmap
-        )
-
-    }
     sealed class EditWatchFaceUiState {
-        data class Success(val userStylesAndPreview: UserStylesAndPreview): EditWatchFaceUiState()
+        data class Success(val successBitmap: Bitmap): EditWatchFaceUiState()
         data class Loading(val message: String): EditWatchFaceUiState()
-        data class Error(val exception: Throwable): EditWatchFaceUiState()
     }
-    data class UserStylesAndPreview(
+    /*data class UserStylesAndPreview(
         val previewImage: Bitmap
-    )
+    )*/
 }
