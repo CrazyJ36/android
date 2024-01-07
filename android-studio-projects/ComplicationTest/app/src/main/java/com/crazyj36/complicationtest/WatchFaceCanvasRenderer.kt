@@ -2,6 +2,7 @@ package com.crazyj36.complicationtest
 
 import android.graphics.Canvas
 import android.graphics.Rect
+import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
@@ -40,6 +41,7 @@ class WatchFaceCanvasRenderer(
     ) {
         // render complications
         for ((_, complication) in complicationSlotsManager.complicationSlots) {
+            Log.d("MYLOG", complication.complicationData.value.type.toString())
             complication.render(canvas, zonedDateTime, renderParameters)
         }
     }
