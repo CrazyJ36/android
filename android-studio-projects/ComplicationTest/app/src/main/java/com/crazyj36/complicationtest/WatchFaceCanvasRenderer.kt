@@ -59,7 +59,7 @@ class WatchFaceCanvasRenderer(
                 setTint(Color.WHITE)
                 if (Build.VERSION.SDK_INT >= 29) setTintBlendMode(BlendMode.MULTIPLY)
             }
-            if (Build.VERSION.SDK_INT >= 28) Log.d("MYLOG", wireComplicationData.icon!!.type.toString())
+            if (Build.VERSION.SDK_INT >= 28) Log.d("MYLOG", wireComplicationData.icon?.type.toString())
             wireComplicationData.toApiComplicationData()
             complication.render(canvas, zonedDateTime, renderParameters)
         }
