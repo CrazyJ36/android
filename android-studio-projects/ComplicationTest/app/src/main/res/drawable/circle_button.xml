@@ -7,8 +7,8 @@
                 android:color="@android:color/holo_blue_dark"
                 android:width="1dp" />
             <size
-                android:height="128dp"
-                android:width="128dp" />
+                android:height="48dp"
+                android:width="48dp" />
         </shape>
     </item>
     <item
@@ -18,8 +18,8 @@
                 android:color="@android:color/holo_blue_light"
                 android:width="2dp"/>
             <size
-                android:height="128dp"
-                android:width="128dp" />
+                android:height="48dp"
+                android:width="48dp" />
         </shape>
     </item>
 </selector>

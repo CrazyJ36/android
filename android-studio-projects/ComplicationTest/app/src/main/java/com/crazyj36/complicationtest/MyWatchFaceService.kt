@@ -33,7 +33,7 @@ class MyWatchFaceService : WatchFaceService(), CanvasComplication.InvalidateCall
             ComplicationType.SHORT_TEXT
         )
         val bounds = ComplicationSlotBounds(
-            RectF(0.40f, 0.40f, 0.60f, 0.60f)
+            RectF(0.35f, 0.35f, 0.65f, 0.65f)
         )
         val defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
             SystemDataSources.DATA_SOURCE_DATE,
