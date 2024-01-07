@@ -39,13 +39,10 @@ class MyWatchFaceService : WatchFaceService(), CanvasComplication.InvalidateCall
             SystemDataSources.DATA_SOURCE_DATE,
             ComplicationType.SHORT_TEXT
         )
-        /*val complicationDrawable = ComplicationDrawable.getDrawable(
-            this@MyWatchFaceService,
+        val complicationDrawable = ComplicationDrawable.getDrawable(
+            applicationContext,
             R.drawable.complication_drawable
-        )!!*/
-        val complicationDrawable = ComplicationDrawable(this@MyWatchFaceService)
-        complicationDrawable.activeStyle.iconColor = Color.BLUE
-        complicationDrawable.isLowBitAmbient = true
+        )!!
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
                 complicationDrawable,
