@@ -41,8 +41,12 @@ class WatchFaceCanvasRenderer(
     ) {
         // render complications
         for ((_, complication) in complicationSlotsManager.complicationSlots) {
-            MyWatchFaceService().getWireComplicationData(
-                MyWatchFaceService().complicationDrawable, MyWatchFaceService().myIcon)
+            if (MyWatchFaceService().complicationDrawable != null &&
+                MyWatchFaceService().myIcon != null) {
+                MyWatchFaceService().getWireComplicationData(
+                    MyWatchFaceService().complicationDrawable!!, MyWatchFaceService().myIcon!!
+                )
+            }
             complication.render(canvas, zonedDateTime, renderParameters)
         }
     }

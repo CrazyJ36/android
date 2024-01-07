@@ -19,17 +19,15 @@ import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.complications.ComplicationSlotBounds
 import androidx.wear.watchface.complications.DefaultComplicationDataSourcePolicy
 import androidx.wear.watchface.complications.SystemDataSources
-import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.data.toApiComplicationData
-import androidx.wear.watchface.complications.data.toTypedApiComplicationData
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class MyWatchFaceService : WatchFaceService() {
-    lateinit var complicationDrawable: ComplicationDrawable
-    lateinit var myIcon: Icon
+    var complicationDrawable: ComplicationDrawable? = null
+    var myIcon: Icon? = null
 
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
@@ -54,15 +52,15 @@ class MyWatchFaceService : WatchFaceService() {
             applicationContext,
             R.drawable.ic_action_name
         )
-        getWireComplicationData(complicationDrawable, myIcon)
+        getWireComplicationData(complicationDrawable!!, myIcon!!)
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
-                complicationDrawable,
+                complicationDrawable!!,
                 watchState,
                 listener
             )
         }
-        getWireComplicationData(complicationDrawable, myIcon)
+        getWireComplicationData(complicationDrawable!!, myIcon!!)
         val complicationSlotBuilder = ComplicationSlot.createRoundRectComplicationSlotBuilder(
             id = complicationId,
             canvasComplicationFactory = canvasComplicationFactory,
@@ -70,7 +68,7 @@ class MyWatchFaceService : WatchFaceService() {
             defaultDataSourcePolicy = defaultDataSourcePolicy,
             bounds = bounds
         )
-        getWireComplicationData(complicationDrawable, myIcon)
+        getWireComplicationData(complicationDrawable!!, myIcon!!)
 
         return ComplicationSlotsManager(
             listOf(
@@ -86,7 +84,7 @@ class MyWatchFaceService : WatchFaceService() {
         val wireComplicationData = complicationDrawable.complicationData
             .asWireComplicationData()
         wireComplicationData.icon?.apply {
-
+            myIcon
             setTint(Color.WHITE)
             if (Build.VERSION.SDK_INT >= 29) setTintBlendMode(BlendMode.MULTIPLY)
         }
