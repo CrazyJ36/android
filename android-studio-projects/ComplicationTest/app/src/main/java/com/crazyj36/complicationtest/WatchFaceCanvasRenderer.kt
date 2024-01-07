@@ -53,12 +53,13 @@ class WatchFaceCanvasRenderer(
     ) {
         // render complications
         for ((_, complication) in complicationSlotsManager.complicationSlots) {
-            Log.d("MYLOG", complication.complicationData.value.dataSource.toString())
+            //Log.d("MYLOG", complication.complicationData.toString())
             val wireComplicationData = complication.complicationData.value.asWireComplicationData()
-            wireComplicationData.icon.apply {
-                this!!.setTint(Color.WHITE)
-                if (Build.VERSION.SDK_INT >= 29) this.setTintBlendMode(BlendMode.MULTIPLY)
+            wireComplicationData.icon?.apply {
+                setTint(Color.WHITE)
+                if (Build.VERSION.SDK_INT >= 29) setTintBlendMode(BlendMode.MULTIPLY)
             }
+            if (Build.VERSION.SDK_INT >= 28) Log.d("MYLOG", wireComplicationData.icon!!.type.toString())
             wireComplicationData.toApiComplicationData()
             complication.render(canvas, zonedDateTime, renderParameters)
         }
