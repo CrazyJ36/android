@@ -7,6 +7,8 @@ import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
+import androidx.wear.watchface.complications.data.PlainComplicationText
+import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.ZonedDateTime
 
@@ -42,6 +44,14 @@ class WatchFaceCanvasRenderer(
         // render complications
         for ((_, complication) in complicationSlotsManager.complicationSlots) {
             Log.d("MYLOG", complication.complicationData.value.type.toString())
+
+            complication.renderer.loadData(ShortTextComplicationData.Builder(
+                text = PlainComplicationText.Builder("text").build(),
+                contentDescription = PlainComplicationText.Builder("cotentDesc").build()
+            ).build(),
+                true
+            )
+
             complication.render(canvas, zonedDateTime, renderParameters)
         }
     }
