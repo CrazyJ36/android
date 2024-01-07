@@ -45,10 +45,11 @@ class WatchFaceConfigActivity : ComponentActivity() {
         }
     }
     private val uiState: Flow<EditWatchFaceUiState> =
-        flow { this.emitAll()
+        flow {
             editorSession = EditorSession.createOnWatchEditorSession(
                 this@WatchFaceConfigActivity
             )
+            yield()
             val bitmap = editorSession.renderWatchFaceToBitmap(
                 RenderParameters(
                     DrawMode.INTERACTIVE,
@@ -66,8 +67,19 @@ class WatchFaceConfigActivity : ComponentActivity() {
         setContentView(R.layout.watch_face_config)
         imageView = findViewById(R.id.imageView)
         lifecycleScope.launch {
-            uiState.collect {
-                imageView.setImageBitmap(bitmap)
+            uiState.collect { uiState: EditWatchFaceUiState ->
+                when (uiState) {
+                    is EditWatchFaceUiState.Success -> {
+                        imageView.setImageBitmap(bitmap)
+                    }
+                    is EditWatchFaceUiState.Loading -> {
+                        Toast.makeText(
+                            this@WatchFaceConfigActivity,
+                            "Loading",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
             }
         }
 
