@@ -18,8 +18,6 @@ import androidx.wear.watchface.style.WatchFaceLayer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
@@ -31,8 +29,8 @@ import kotlinx.coroutines.yield
 
 class WatchFaceConfigActivity : ComponentActivity() {
     private lateinit var imageView: ImageView
+    private val scope = CoroutineScope(Dispatchers.Main.immediate)
     private lateinit var editorSession: EditorSession
-    private lateinit var bitmap: Bitmap
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) {
@@ -44,23 +42,28 @@ class WatchFaceConfigActivity : ComponentActivity() {
             ).show()
         }
     }
-    private val uiState: Flow<EditWatchFaceUiState> =
-        flow {
+    private val uiState: StateFlow<EditWatchFaceUiState> =
+        flow<EditWatchFaceUiState> {
             editorSession = EditorSession.createOnWatchEditorSession(
                 this@WatchFaceConfigActivity
             )
-            yield()
-            val bitmap = editorSession.renderWatchFaceToBitmap(
-                RenderParameters(
-                    DrawMode.INTERACTIVE,
-                    WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
-                    null
-                ),
-                editorSession.previewReferenceInstant,
-                slotIdToComplicationData = null
+            emitAll(
+                combine(
+                    editorSession.userStyle,
+                    editorSession.complicationsPreviewData
+                ) { userStyle, complicationsPreviewData ->
+                    yield()
+                    EditWatchFaceUiState.Success(
+                        createWatchFacePreview(userStyle, complicationsPreviewData)
+                    )
+                }
             )
-            imageView.setImageBitmap(bitmap)
         }
+            .stateIn(
+                scope,
+                SharingStarted.Eagerly,
+                EditWatchFaceUiState.Loading("Initializing")
+            )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,20 +72,24 @@ class WatchFaceConfigActivity : ComponentActivity() {
         lifecycleScope.launch {
             uiState.collect { uiState: EditWatchFaceUiState ->
                 when (uiState) {
-                    is EditWatchFaceUiState.Success -> {
-                        imageView.setImageBitmap(bitmap)
-                    }
                     is EditWatchFaceUiState.Loading -> {
-                        Toast.makeText(
-                            this@WatchFaceConfigActivity,
-                            "Loading",
-                            Toast.LENGTH_SHORT
-                        ).show()
+
+                    }
+                    is EditWatchFaceUiState.Success -> {
+                        updateWatchFaceEditorPreview(uiState.userStylesAndPreview)
+                    }
+                    is EditWatchFaceUiState.Error -> {
+
                     }
                 }
             }
         }
 
+    }
+    private fun updateWatchFaceEditorPreview(
+        userStylesAndPreview: UserStylesAndPreview
+    ) {
+        imageView.setImageBitmap(userStylesAndPreview.previewImage)
     }
 
     fun onClickComplication(view: View) {
@@ -98,11 +105,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
                 "com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"
             )
             -> {
-                Toast.makeText(
-                    this@WatchFaceConfigActivity,
-                    getString(R.string.grantPermissionText),
-                    Toast.LENGTH_SHORT
-                ).show()
+
             }
             else -> {
                 requestPermissionLauncher.launch("com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA")
@@ -110,11 +113,30 @@ class WatchFaceConfigActivity : ComponentActivity() {
         }
     }
 
-    sealed class EditWatchFaceUiState {
-        data class Success(val successBitmap: Bitmap): EditWatchFaceUiState()
-        data class Loading(val message: String): EditWatchFaceUiState()
+    private fun createWatchFacePreview(
+        userStyle: UserStyle,
+        complicationsPreviewData: Map<Int, ComplicationData>
+    ): UserStylesAndPreview {
+        val bitmap = editorSession.renderWatchFaceToBitmap(
+            RenderParameters(
+                DrawMode.INTERACTIVE,
+                WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
+                null
+            ),
+            editorSession.previewReferenceInstant,
+            complicationsPreviewData
+        )
+        return UserStylesAndPreview(
+            previewImage = bitmap
+        )
+
     }
-    /*data class UserStylesAndPreview(
+    sealed class EditWatchFaceUiState {
+        data class Success(val userStylesAndPreview: UserStylesAndPreview): EditWatchFaceUiState()
+        data class Loading(val message: String): EditWatchFaceUiState()
+        data class Error(val exception: Throwable): EditWatchFaceUiState()
+    }
+    data class UserStylesAndPreview(
         val previewImage: Bitmap
-    )*/
+    )
 }

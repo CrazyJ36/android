@@ -1,10 +1,7 @@
 package com.crazyj36.complicationtest
 
-import android.graphics.BlendMode
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Rect
-import android.os.Build
 import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
@@ -41,10 +38,11 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
+        MyWatchFaceService.myCanvasComplication.render(canvas, bounds, zonedDateTime, renderParameters, 0)
         // render complications
-        for ((_, complication) in complicationSlotsManager.complicationSlots) {
+        /*for ((_, complication) in complicationSlotsManager.complicationSlots) {
             complication.render(canvas, zonedDateTime, renderParameters)
-        }
+        }*/
     }
 
     class MySharedAssets : SharedAssets {
