@@ -49,7 +49,7 @@ class MyWatchFaceService : WatchFaceService(), CanvasComplication.InvalidateCall
         )!!
         val complicationData = ShortTextComplicationData.Builder(
             text = PlainComplicationText.Builder("text").build(),
-            contentDescription = PlainComplicationText.Builder("cotentDesc").build()
+            contentDescription = PlainComplicationText.Builder("contentDesc").build()
         ).build()
         complicationDrawable.setComplicationData(
             complicationData,
