@@ -1,9 +1,11 @@
 package com.crazyj36.complicationtest
 
 import android.annotation.SuppressLint
+import android.graphics.BlendMode
 import android.graphics.Color
 import android.graphics.RectF
 import android.graphics.drawable.Icon
+import android.os.Build
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
@@ -19,6 +21,7 @@ import androidx.wear.watchface.complications.SystemDataSources
 import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.data.toApiComplicationData
+import androidx.wear.watchface.complications.data.toTypedApiComplicationData
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
@@ -76,10 +79,13 @@ class MyWatchFaceService : WatchFaceService() {
     }
 
     @SuppressLint("RestrictedApi")
-    private fun getWireComplicationData(complicationDrawable: ComplicationDrawable, myIcon: Icon): ComplicationData {
+    fun getWireComplicationData(complicationDrawable: ComplicationDrawable, myIcon: Icon): ComplicationData {
         val wireComplicationData = complicationDrawable.complicationData
             .asWireComplicationData()
-        wireComplicationData.icon.apply { myIcon }
+        wireComplicationData.icon.apply {
+            this!!.setTint(Color.WHITE)
+            if (Build.VERSION.SDK_INT >= 29) this.setTintBlendMode(BlendMode.MULTIPLY)
+        }
         return wireComplicationData.toApiComplicationData()
     }
 
