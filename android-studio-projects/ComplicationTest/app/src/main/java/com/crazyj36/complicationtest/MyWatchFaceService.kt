@@ -19,7 +19,11 @@ import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.complications.ComplicationSlotBounds
 import androidx.wear.watchface.complications.DefaultComplicationDataSourcePolicy
 import androidx.wear.watchface.complications.SystemDataSources
+import androidx.wear.watchface.complications.data.ComplicationData
+import androidx.wear.watchface.complications.data.ComplicationText
 import androidx.wear.watchface.complications.data.ComplicationType
+import androidx.wear.watchface.complications.data.PlainComplicationText
+import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
@@ -43,6 +47,14 @@ class MyWatchFaceService : WatchFaceService(), CanvasComplication.InvalidateCall
             applicationContext,
             R.drawable.complication_drawable
         )!!
+        val complicationData = ShortTextComplicationData.Builder(
+            text = PlainComplicationText.Builder("text").build(),
+            contentDescription = PlainComplicationText.Builder("cotentDesc").build()
+        ).build()
+        complicationDrawable.setComplicationData(
+            complicationData,
+            true
+        )
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
                 complicationDrawable,

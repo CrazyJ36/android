@@ -42,5 +42,6 @@ dependencies {
     implementation("androidx.wear.watchface:watchface:1.2.0")
     implementation("androidx.wear.watchface:watchface-complications:1.2.0")
     implementation("androidx.wear.watchface:watchface-editor:1.2.0")
+    implementation("androidx.wear.watchface:watchface-complications-data:1.2.0")
     implementation("androidx.wear.watchface:watchface-complications-rendering:1.2.0")
 }
