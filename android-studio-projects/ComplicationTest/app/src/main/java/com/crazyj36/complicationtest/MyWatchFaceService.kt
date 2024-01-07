@@ -30,18 +30,7 @@ import androidx.wear.watchface.style.CurrentUserStyleRepository
 class MyWatchFaceService : WatchFaceService() {
     lateinit var complicationDrawable: ComplicationDrawable
     lateinit var myIcon: Icon
-    override fun onCreate() {
-        super.onCreate()
-        complicationDrawable = ComplicationDrawable.getDrawable(
-            applicationContext,
-            R.drawable.complication_drawable
-        )!!
 
-        myIcon = Icon.createWithResource(
-            applicationContext,
-            R.drawable.ic_action_name
-        )
-    }
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
@@ -56,7 +45,15 @@ class MyWatchFaceService : WatchFaceService() {
             SystemDataSources.DATA_SOURCE_DATE,
             ComplicationType.SHORT_TEXT
         )
+        complicationDrawable = ComplicationDrawable.getDrawable(
+            applicationContext,
+            R.drawable.complication_drawable
+        )!!
 
+        myIcon = Icon.createWithResource(
+            applicationContext,
+            R.drawable.ic_action_name
+        )
         getWireComplicationData(complicationDrawable, myIcon)
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
