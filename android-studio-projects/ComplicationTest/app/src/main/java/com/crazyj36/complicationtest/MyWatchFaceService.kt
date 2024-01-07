@@ -1,7 +1,9 @@
 package com.crazyj36.complicationtest
 
 import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
 import android.graphics.Color
+import android.graphics.ColorFilter
 import android.graphics.RectF
 import android.os.Build
 import android.view.SurfaceHolder
@@ -37,14 +39,15 @@ class MyWatchFaceService : WatchFaceService(), CanvasComplication.InvalidateCall
             SystemDataSources.DATA_SOURCE_DATE,
             ComplicationType.SHORT_TEXT
         )
-        val complicationDrawable = ComplicationDrawable.getDrawable(
+        /*val complicationDrawable = ComplicationDrawable.getDrawable(
             this@MyWatchFaceService,
             R.drawable.complication_drawable
-        )!!
-        complicationDrawable.setTint(Color.BLUE)
-        if (Build.VERSION.SDK_INT >= 29)
-            complicationDrawable.setTintBlendMode(BlendMode.MULTIPLY)
-
+        )!!*/
+        val complicationDrawable = ComplicationDrawable(this@MyWatchFaceService)
+        if (Build.VERSION.SDK_INT >= 29) {
+            complicationDrawable.colorFilter =
+                BlendModeColorFilter(Color.BLUE, BlendMode.MULTIPLY)
+        }
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
                 complicationDrawable,
