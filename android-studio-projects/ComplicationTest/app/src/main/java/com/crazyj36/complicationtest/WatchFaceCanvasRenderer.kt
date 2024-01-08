@@ -7,6 +7,7 @@ import android.graphics.BlendMode
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Rect
+import android.graphics.RectF
 import android.graphics.drawable.Icon
 import android.os.Build
 import android.util.Log
@@ -14,6 +15,7 @@ import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
+import androidx.wear.watchface.complications.ComplicationSlotBounds
 import androidx.wear.watchface.complications.DefaultComplicationDataSourcePolicy
 import androidx.wear.watchface.complications.SystemDataSources
 import androidx.wear.watchface.complications.data.ComplicationData
@@ -67,9 +69,8 @@ class WatchFaceCanvasRenderer(
                 R.drawable.complication_drawable
             )?.let {
                 (complication.renderer as CanvasComplicationDrawable).drawable = it
-                 complication.render(canvas, zonedDateTime, renderParameters)
             }
-
+            complication.render(canvas, zonedDateTime, renderParameters)
 
 
             /*var complicationText = ShortTextComplicationData.Builder(
