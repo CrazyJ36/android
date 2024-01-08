@@ -2,6 +2,7 @@ package com.crazyj36.complicationtest
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.BlendMode
 import android.graphics.Canvas
 import android.graphics.Color
@@ -15,13 +16,17 @@ import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.complications.DefaultComplicationDataSourcePolicy
 import androidx.wear.watchface.complications.SystemDataSources
+import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.toApiComplicationData
 import androidx.wear.watchface.complications.data.toApiComplicationText
+import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
+import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
+import kotlinx.coroutines.flow.transform
 import java.time.ZonedDateTime
 
 class WatchFaceCanvasRenderer(
@@ -57,24 +62,39 @@ class WatchFaceCanvasRenderer(
     ) {
         // render complications
         for ((_, complication) in complicationSlotsManager.complicationSlots) {
-            val complicationData = complicationSlotsManager.complicationSlots[0]!!
-                .complicationData.value.asWireComplicationData()
-            val complicationText = ShortTextComplicationData.Builder(
-                PlainComplicationText.Builder("test").build(),
-                PlainComplicationText.Builder("contentDesc").build()
-            ).build()
+            ComplicationDrawable.getDrawable(
+                context,
+                R.drawable.complication_drawable
+            )?.let {
+                (complication.renderer as CanvasComplicationDrawable).drawable = it
+                 complication.render(canvas, zonedDateTime, renderParameters)
+            }
 
-            complicationData.dataSource = DefaultComplicationDataSourcePolicy(
-                SystemDataSources.DATA_SOURCE_APP_SHORTCUT,
-                ComplicationType.SMALL_IMAGE
-            ).primaryDataSource
-            
-            complication.renderer.loadData(complicationData.toApiComplicationData(), true)
+
+
+            /*var complicationText = ShortTextComplicationData.Builder(
+                PlainComplicationText.Builder(
+                    SystemDataSources::class.java.methods()
+                ).build(),
+                PlainComplicationText.Builder("contentDesc").build()
+            )
+
+            val wireComplicationData = complicationSlotsManager.complicationSlots[0]!!
+                .complicationData.value.asWireComplicationData()
+
+            // Works for SHORT_TEXT dataSources only
+            if (wireComplicationData.hasShortText()) {
+                Log.d("MYLOG", "DEFAULT TEXT: " + wireComplicationData.shortText!!
+                    .getTextAt(Resources.getSystem(), zonedDateTime.toEpochSecond()))
+            } else Log.d("MYLOG", "Add A SHORT_TEXT type complication to get its text.")
+
+            complication.renderer.loadData(complicationText.build(), true)
+            //complication.renderer.loadData(wireComplicationData.toApiComplicationData(), true)
             complication.render(canvas, zonedDateTime, renderParameters)
             Log.d(
                 "MYLOG", "complication data source (WatchFaceCanvasRenderer): " +
                         complicationSlotsManager.complicationSlots[0]!!.complicationData.value
-            )
+            )*/
         }
     }
 
