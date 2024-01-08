@@ -117,6 +117,7 @@ class WatchFaceConfigActivity : ComponentActivity() {
         userStyle: UserStyle,
         complicationsPreviewData: Map<Int, ComplicationData>
     ): UserStylesAndPreview {
+
         val bitmap = editorSession.renderWatchFaceToBitmap(
             RenderParameters(
                 DrawMode.INTERACTIVE,

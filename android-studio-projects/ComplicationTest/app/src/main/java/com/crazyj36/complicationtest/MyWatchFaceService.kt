@@ -21,7 +21,7 @@ import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class MyWatchFaceService : WatchFaceService() {
 
-    public override fun createComplicationSlotsManager(
+    override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
         Log.d("MYLOG", "currentUserStyle: " + currentUserStyleRepository.userStyle.value.entries)
