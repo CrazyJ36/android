@@ -1,7 +1,6 @@
 package com.crazyj36.complicationtest
 
 import android.graphics.RectF
-import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
@@ -20,7 +19,6 @@ import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class MyWatchFaceService : WatchFaceService() {
-
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
@@ -33,16 +31,16 @@ class MyWatchFaceService : WatchFaceService() {
             RectF(0.35f, 0.35f, 0.65f, 0.65f)
         )
         val defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-            SystemDataSources.DATA_SOURCE_DATE,
+            SystemDataSources.DATA_SOURCE_STEP_COUNT,
             ComplicationType.RANGED_VALUE
         )
         val complicationDrawable = ComplicationDrawable.getDrawable(
             applicationContext,
             R.drawable.complication_drawable
-        )
+        )!!
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
-                complicationDrawable!!,
+                complicationDrawable,
                 watchState,
                 listener
             )
@@ -54,7 +52,6 @@ class MyWatchFaceService : WatchFaceService() {
             defaultDataSourcePolicy = defaultDataSourcePolicy,
             bounds = bounds
         )
-
         return ComplicationSlotsManager(
             listOf(
                 complicationSlotBuilder.build()
@@ -62,6 +59,7 @@ class MyWatchFaceService : WatchFaceService() {
             currentUserStyleRepository
         )
     }
+
 
     override suspend fun createWatchFace(
         surfaceHolder: SurfaceHolder,
