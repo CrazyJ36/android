@@ -26,6 +26,7 @@ class MyWatchFaceService : WatchFaceService() {
     ): ComplicationSlotsManager {
         val complicationId = 0
         val supportedTypes = listOf(
+            ComplicationType.RANGED_VALUE,
             ComplicationType.SHORT_TEXT
         )
         val bounds = ComplicationSlotBounds(
