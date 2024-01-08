@@ -1,6 +1,7 @@
 package com.crazyj36.complicationtest
 
 import android.graphics.RectF
+import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
@@ -19,33 +20,42 @@ import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class MyWatchFaceService : WatchFaceService() {
-    override fun createComplicationSlotsManager(
+    var complicationId = 0
+    lateinit var canvasComplicationFactory: CanvasComplicationFactory
+    lateinit var supportedTypes: List<ComplicationType>
+    lateinit var defaultDataSourcePolicy: DefaultComplicationDataSourcePolicy
+    lateinit var complicationDrawable: ComplicationDrawable
+    lateinit var bounds: ComplicationSlotBounds
+    lateinit var complicationSlotBuilder: ComplicationSlot.Builder
+    lateinit var myCurrentUserStyleRepository: CurrentUserStyleRepository
+
+    public override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
-        val complicationId = 0
-        val supportedTypes = listOf(
-            ComplicationType.RANGED_VALUE,
+        Log.d("MYLOG", "currentUserStyle: " + currentUserStyleRepository.userStyle.value.entries)
+        complicationId = 0
+        supportedTypes = listOf(
             ComplicationType.SHORT_TEXT
         )
-        val bounds = ComplicationSlotBounds(
+        bounds = ComplicationSlotBounds(
             RectF(0.35f, 0.35f, 0.65f, 0.65f)
         )
-        val defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+        defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
             SystemDataSources.DATA_SOURCE_STEP_COUNT,
-            ComplicationType.RANGED_VALUE
+            ComplicationType.SHORT_TEXT
         )
-        val complicationDrawable = ComplicationDrawable.getDrawable(
-            applicationContext,
+        complicationDrawable = ComplicationDrawable.getDrawable(
+            this@MyWatchFaceService,
             R.drawable.complication_drawable
         )!!
-        val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
+        canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
                 complicationDrawable,
                 watchState,
                 listener
             )
         }
-        val complicationSlotBuilder = ComplicationSlot.createRoundRectComplicationSlotBuilder(
+        complicationSlotBuilder = ComplicationSlot.createRoundRectComplicationSlotBuilder(
             id = complicationId,
             canvasComplicationFactory = canvasComplicationFactory,
             supportedTypes = supportedTypes,
@@ -60,7 +70,14 @@ class MyWatchFaceService : WatchFaceService() {
         )
     }
 
-
+    fun isComplicationSlotBuilderInitialized(): Boolean {
+        if (::complicationSlotBuilder.isInitialized) {
+            Log.d("MYLOG", "complicationSlotBuilder initialized in MyWatchFaceService()")
+        } else {
+            Log.d("MYLOG", "complicationSLotBuilder not initialized in MyWatchFaceService()")
+        }
+        return ::complicationSlotBuilder.isInitialized
+    }
     override suspend fun createWatchFace(
         surfaceHolder: SurfaceHolder,
         watchState: WatchState,
@@ -68,6 +85,7 @@ class MyWatchFaceService : WatchFaceService() {
         currentUserStyleRepository: CurrentUserStyleRepository
     ): WatchFace {
         val renderer = WatchFaceCanvasRenderer(
+            applicationContext,
             surfaceHolder = surfaceHolder,
             watchState = watchState,
             complicationSlotsManager = complicationSlotsManager,

@@ -1,23 +1,22 @@
 package com.crazyj36.complicationtest
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Rect
+import android.graphics.drawable.Icon
 import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
-import androidx.wear.watchface.complications.DefaultComplicationDataSourcePolicy
-import androidx.wear.watchface.complications.SystemDataSources
-import androidx.wear.watchface.complications.data.ComplicationText
-import androidx.wear.watchface.complications.data.ComplicationType
-import androidx.wear.watchface.complications.data.PlainComplicationText
-import androidx.wear.watchface.complications.data.ShortTextComplicationData
+import androidx.wear.watchface.complications.data.MonochromaticImage
+import androidx.wear.watchface.complications.data.toApiComplicationData
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.ZonedDateTime
 
 class WatchFaceCanvasRenderer(
+    val context: Context,
     surfaceHolder: SurfaceHolder,
     watchState: WatchState,
     var complicationSlotsManager: ComplicationSlotsManager,
@@ -40,15 +39,31 @@ class WatchFaceCanvasRenderer(
 
     }
 
+    @SuppressLint("RestrictedApi")
     override fun render(
         canvas: Canvas,
         bounds: Rect,
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
+        Log.d(
+            "MYLOG", "complication data source (WatchFaceCanvasRenderer): " +
+                    complicationSlotsManager.complicationSlots[0]!!.complicationData.value
+        )
+
         // render complications
         for ((_, complication) in complicationSlotsManager.complicationSlots) {
-            Log.d("MYLOG", complication.complicationData.value.type.toString())
+            val complicationData = complicationSlotsManager.complicationSlots[0]!!
+                .complicationData.value.asWireComplicationData()
+            complicationData.smallImage.let {
+                it.apply {
+                    Icon.createWithResource(context, R.drawable.ic_action_name)
+                }
+            }
+            complicationSlotsManager.complicationSlots[0]!!.renderer.loadData(
+                complicationData.toApiComplicationData(), true
+            )
+
             complication.render(canvas, zonedDateTime, renderParameters)
         }
     }
