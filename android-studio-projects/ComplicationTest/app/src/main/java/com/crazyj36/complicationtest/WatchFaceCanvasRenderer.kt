@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.Rect
 import android.os.Build
+import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
@@ -53,11 +54,13 @@ class WatchFaceCanvasRenderer(
             ComplicationDrawable.getDrawable(myContext, R.drawable.complication_drawable)?.apply {
                 activeStyle.run {
                     iconColor = Color.BLUE
+                    color
                     if (Build.VERSION.SDK_INT >= 29)
                         imageColorFilter = BlendModeColorFilter(Color.BLUE, BlendMode.SRC_ATOP)
                 }
                 (complication.renderer as CanvasComplicationDrawable).drawable = this
             }
+            Log.d("MYLOG", "complicationType: " + complication.complicationData.value.type)
             complication.render(canvas, zonedDateTime, renderParameters)
 
         }
