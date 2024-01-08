@@ -69,8 +69,15 @@ class WatchFaceCanvasRenderer(
                 R.drawable.complication_drawable
             )?.let {
                 (complication.renderer as CanvasComplicationDrawable).drawable = it
+                it.bounds = Rect(
+                    (canvas.width / 2) - 30,
+                    (canvas.height / 2) - 30,
+                    (canvas.width / 2) + 30,
+                    (canvas.height /2) + 30
+                    )
+                it.draw(canvas)
             }
-            complication.render(canvas, zonedDateTime, renderParameters)
+            //complication.render(canvas, zonedDateTime, renderParameters)
 
 
             /*var complicationText = ShortTextComplicationData.Builder(

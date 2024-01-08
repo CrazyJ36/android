@@ -71,14 +71,6 @@ class MyWatchFaceService : WatchFaceService() {
         )
     }
 
-    fun isComplicationSlotBuilderInitialized(): Boolean {
-        if (::complicationSlotBuilder.isInitialized) {
-            Log.d("MYLOG", "complicationSlotBuilder initialized in MyWatchFaceService()")
-        } else {
-            Log.d("MYLOG", "complicationSLotBuilder not initialized in MyWatchFaceService()")
-        }
-        return ::complicationSlotBuilder.isInitialized
-    }
     override suspend fun createWatchFace(
         surfaceHolder: SurfaceHolder,
         watchState: WatchState,
