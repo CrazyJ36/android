@@ -1,5 +1,6 @@
 package com.crazyj36.complicationtest
 
+import android.annotation.SuppressLint
 import android.graphics.RectF
 import android.util.Log
 import android.view.SurfaceHolder
