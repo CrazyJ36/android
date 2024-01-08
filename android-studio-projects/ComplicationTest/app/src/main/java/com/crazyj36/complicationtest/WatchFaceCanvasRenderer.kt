@@ -13,6 +13,9 @@ import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
+import androidx.wear.watchface.complications.DefaultComplicationDataSourcePolicy
+import androidx.wear.watchface.complications.SystemDataSources
+import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
@@ -56,14 +59,16 @@ class WatchFaceCanvasRenderer(
         for ((_, complication) in complicationSlotsManager.complicationSlots) {
             val complicationData = complicationSlotsManager.complicationSlots[0]!!
                 .complicationData.value.asWireComplicationData()
-            complicationData.apply {
-                ShortTextComplicationData.Builder(
-                    PlainComplicationText.Builder(
-                        "test"
-                    ).build(),
-                    PlainComplicationText.Builder("contentDesc").build()
-                )
-            }
+            val complicationText = ShortTextComplicationData.Builder(
+                PlainComplicationText.Builder("test").build(),
+                PlainComplicationText.Builder("contentDesc").build()
+            ).build()
+
+            complicationData.dataSource = DefaultComplicationDataSourcePolicy(
+                SystemDataSources.DATA_SOURCE_APP_SHORTCUT,
+                ComplicationType.SMALL_IMAGE
+            ).primaryDataSource
+            
             complication.renderer.loadData(complicationData.toApiComplicationData(), true)
             complication.render(canvas, zonedDateTime, renderParameters)
             Log.d(
