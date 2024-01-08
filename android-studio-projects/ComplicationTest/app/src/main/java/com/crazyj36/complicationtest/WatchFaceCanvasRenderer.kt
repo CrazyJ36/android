@@ -1,6 +1,5 @@
 package com.crazyj36.complicationtest
 
-import android.annotation.SuppressLint
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.view.SurfaceHolder
@@ -41,12 +40,6 @@ class WatchFaceCanvasRenderer(
     ) {
         // render complications
         for ((_, complication) in complicationSlotsManager.complicationSlots) {
-            if (MyWatchFaceService().complicationDrawable != null &&
-                MyWatchFaceService().myIcon != null) {
-                MyWatchFaceService().getWireComplicationData(
-                    MyWatchFaceService().complicationDrawable!!, MyWatchFaceService().myIcon!!
-                )
-            }
             complication.render(canvas, zonedDateTime, renderParameters)
         }
     }
