@@ -1,15 +1,24 @@
 package com.crazyj36.complicationtest
 
+import android.content.Context
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
 import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.ColorFilter
 import android.graphics.Rect
+import android.os.Build
 import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
+import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
+import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.ZonedDateTime
 
 class WatchFaceCanvasRenderer(
+    context: Context,
     surfaceHolder: SurfaceHolder,
     watchState: WatchState,
     var complicationSlotsManager: ComplicationSlotsManager,
@@ -23,6 +32,7 @@ class WatchFaceCanvasRenderer(
     interactiveDrawModeUpdateDelayMillis = 16L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
+    val myContext = context
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
@@ -40,7 +50,16 @@ class WatchFaceCanvasRenderer(
     ) {
         // render complications
         for ((_, complication) in complicationSlotsManager.complicationSlots) {
+            ComplicationDrawable.getDrawable(myContext, R.drawable.complication_drawable)?.apply {
+                activeStyle.run {
+                    iconColor = Color.BLUE
+                    if (Build.VERSION.SDK_INT >= 29)
+                        imageColorFilter = BlendModeColorFilter(Color.BLUE, BlendMode.SRC_ATOP)
+                }
+                (complication.renderer as CanvasComplicationDrawable).drawable = this
+            }
             complication.render(canvas, zonedDateTime, renderParameters)
+
         }
     }
 
