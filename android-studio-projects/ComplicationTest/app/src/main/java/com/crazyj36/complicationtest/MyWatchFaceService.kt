@@ -19,7 +19,11 @@ import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.complications.ComplicationSlotBounds
 import androidx.wear.watchface.complications.DefaultComplicationDataSourcePolicy
 import androidx.wear.watchface.complications.SystemDataSources
+import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
+import androidx.wear.watchface.complications.data.MonochromaticImage
+import androidx.wear.watchface.complications.data.ShortTextComplicationData
+import androidx.wear.watchface.complications.data.TimeRange
 import androidx.wear.watchface.complications.data.toApiComplicationData
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
@@ -52,7 +56,10 @@ class MyWatchFaceService : WatchFaceService() {
             applicationContext,
             R.drawable.ic_action_name
         )
-        getWireComplicationData(complicationDrawable!!, myIcon!!)
+
+
+        getIcon()
+        //getWireComplicationData(complicationDrawable!!, myIcon!!)
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
                 complicationDrawable!!,
@@ -60,7 +67,7 @@ class MyWatchFaceService : WatchFaceService() {
                 listener
             )
         }
-        getWireComplicationData(complicationDrawable!!, myIcon!!)
+        //getWireComplicationData(complicationDrawable!!, myIcon!!)
         val complicationSlotBuilder = ComplicationSlot.createRoundRectComplicationSlotBuilder(
             id = complicationId,
             canvasComplicationFactory = canvasComplicationFactory,
@@ -77,11 +84,22 @@ class MyWatchFaceService : WatchFaceService() {
         )
     }
 
-    @SuppressLint("RestrictedApi")
+    fun getIcon() {
+        val complicationDataClass = ShortTextComplicationData::class.java
+        Log.d("MYLOG", "methods of ShortTextComplicationData: " + complicationDataClass.methods.toString())
+        val setMonochromaticImageMethod =
+            complicationDataClass.getMethod(
+            "setMonochromaticImage"
+        )
+        setMonochromaticImageMethod.invoke(complicationDrawable,
+            MonochromaticImage.Builder(myIcon!!).build())
+
+    }
+
+    @Suppress("RestrictedApi")
     fun getWireComplicationData(complicationDrawable: ComplicationDrawable, myIcon: Icon) {
-        Log.d("MYLOG", complicationDrawable.complicationData.toString())
-        val wireComplicationData = complicationDrawable.complicationData
-            .asWireComplicationData()
+        Log.d("MYLOG", "complicationDrawable ComplicationData: " + complicationDrawable.complicationData.toString())
+        val wireComplicationData = complicationDrawable.complicationData.asWireComplicationData()
         wireComplicationData.icon?.apply {
             myIcon
             setTint(Color.WHITE)
