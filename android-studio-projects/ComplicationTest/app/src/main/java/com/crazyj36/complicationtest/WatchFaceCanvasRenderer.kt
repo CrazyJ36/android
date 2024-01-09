@@ -35,10 +35,7 @@ class WatchFaceCanvasRenderer(
 ) {
 
     private val passedContext = context
-    private val complicationDrawable = ComplicationDrawable.getDrawable(passedContext, R.drawable.complication_drawable)
-    private var dataSourceText: CharSequence = ""
-    private lateinit var newComplicationData: ShortTextComplicationData.Builder
-    
+
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
@@ -55,18 +52,24 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        val complicationWireData = complicationSlotsManager.complicationSlots[0]!!.complicationData.value.asWireComplicationData()
+        val complication = complicationSlotsManager.complicationSlots[0]
+        val complicationWireData = complication!!
+            .complicationData.value.asWireComplicationData()
         if (complicationWireData.hasShortText()) {
-            dataSourceText = complicationWireData.shortText!!.getTextAt(
+            val dataSourceText = complicationWireData.shortText!!.getTextAt(
                 Resources.getSystem(), zonedDateTime.toEpochSecond()
             )
-            newComplicationData = ShortTextComplicationData.Builder(
+            val newComplicationData = ShortTextComplicationData.Builder(
                 PlainComplicationText.Builder(dataSourceText).build(),
                 PlainComplicationText.Builder("Draw custom complication icon on watchface").build()
             ).setMonochromaticImage(
                 MonochromaticImage.Builder(
                     Icon.createWithResource(passedContext, R.drawable.ic_action_name)
                 ).build()
+            ).build()
+
+            val complicationDrawable = ComplicationDrawable.getDrawable(
+                passedContext, R.drawable.complication_drawable
             )
             complicationDrawable!!.setBounds(
                 (canvas.width / 2) - 50,
@@ -74,12 +77,15 @@ class WatchFaceCanvasRenderer(
                 (canvas.width / 2) + 50,
                 (canvas.height / 2) + 50
             )
-            complicationDrawable.setComplicationData(newComplicationData.build(), true)
+            complicationDrawable.setComplicationData(newComplicationData, false)
             complicationDrawable.draw(canvas)
             Log.d("COMPLICATION_TEST", "Drew custom complication.")
+
+            // expose newComplicationData to watchface_preview and WatchFaceConfigActivity
+            complication.renderer.loadData(newComplicationData, false)
         } else {
             Log.d("COMPLICATION_TEST", "Couldn't get dataSource text, is complicationType SHORT_TEXT?")
-            complicationSlotsManager.complicationSlots[0]!!.render(canvas, zonedDateTime, renderParameters)
+            complication.render(canvas, zonedDateTime, renderParameters)
         }
     }
 
