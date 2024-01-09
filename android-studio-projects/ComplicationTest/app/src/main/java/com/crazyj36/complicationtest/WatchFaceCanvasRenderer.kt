@@ -57,7 +57,7 @@ class WatchFaceCanvasRenderer(
             .complicationData.value.asWireComplicationData()
         if (complicationWireData.hasShortText()) {
             val dataSourceText = complicationWireData.shortText!!.getTextAt(
-                Resources.getSystem(), zonedDateTime.toEpochSecond()
+                Resources.getSystem(), zonedDateTime.toInstant().toEpochMilli()
             )
             val newComplicationData = ShortTextComplicationData.Builder(
                 PlainComplicationText.Builder(dataSourceText).build(),
