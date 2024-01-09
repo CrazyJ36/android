@@ -78,11 +78,12 @@ class WatchFaceCanvasRenderer(
                 (canvas.height / 2) + 50
             )
             complicationDrawable.setComplicationData(newComplicationData, false)
-            complicationDrawable.draw(canvas)
+            //complicationDrawable.draw(canvas)
             Log.d("COMPLICATION_TEST", "Drew custom complication.")
 
             // expose newComplicationData to watchface_preview and WatchFaceConfigActivity
             complication.renderer.loadData(newComplicationData, false)
+            complication.render(canvas, zonedDateTime, renderParameters)
         } else {
             Log.d("COMPLICATION_TEST", "Couldn't get dataSource text, is complicationType SHORT_TEXT?")
             complication.render(canvas, zonedDateTime, renderParameters)
