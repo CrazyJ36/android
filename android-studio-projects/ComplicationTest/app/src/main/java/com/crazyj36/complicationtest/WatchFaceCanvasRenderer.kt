@@ -1,17 +1,16 @@
 package com.crazyj36.complicationtest
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Rect
-import android.graphics.drawable.Icon
 import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
+import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
@@ -20,7 +19,6 @@ import java.time.LocalDateTime
 import java.time.ZonedDateTime
 
 class WatchFaceCanvasRenderer(
-    context: Context,
     surfaceHolder: SurfaceHolder,
     watchState: WatchState,
     var complicationSlotsManager: ComplicationSlotsManager,
@@ -51,18 +49,17 @@ class WatchFaceCanvasRenderer(
         sharedAssets: MySharedAssets
     ) {
         val complication = complicationSlotsManager.complicationSlots[0]
-        val complicationWireData = complication!!
-            .complicationData.value.asWireComplicationData()
-        if (complicationWireData.hasShortText()) {
+
+        try {
+            val complicationWireData = complication!!.complicationData.value.asWireComplicationData()
+
             val dataSourceText = complicationWireData.shortText!!.getTextAt(
-                Resources.getSystem(), LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
+                Resources.getSystem(),
+                LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
             )
-            Log.d("COMPLICATION_TEST", LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli().toString())
             val dataSourceTapAction = complication.complicationData.value.tapAction
             val dataSourceIcon = complicationWireData.icon
-            dataSourceIcon.apply {
-                this!!.setTint(Color.BLUE)
-            }
+            dataSourceIcon.apply { this!!.setTint(Color.BLUE) }
             val newComplicationData = ShortTextComplicationData.Builder(
                 PlainComplicationText.Builder(dataSourceText).build(),
                 PlainComplicationText.Builder("Draw custom complication icon on watchface").build()
@@ -70,14 +67,15 @@ class WatchFaceCanvasRenderer(
                 .setDataSource(complicationWireData.dataSource)
                 .setTapAction(dataSourceTapAction)
                 .setMonochromaticImage(
-                    MonochromaticImage.Builder(dataSourceIcon!!).build()
+                    MonochromaticImage.Builder(dataSourceIcon!!)
+                        .build()
                 ).build()
             complication.renderer.loadData(newComplicationData, false)
-            Log.d("COMPLICATION_TEST", "Drew custom complication.")
-        } else {
-            Log.d("COMPLICATION_TEST", "Couldn't get dataSource text, is complicationType SHORT_TEXT?")
+            Log.d("COMPLICATION_TEST", "rendering custom")
+        } catch (nullPointer: NullPointerException) {
+            Log.d("COMPLICATION_TEST", "set A short text complication")
         }
-        complication.render(canvas, zonedDateTime, renderParameters)
+        complication!!.render(canvas, zonedDateTime, renderParameters)
     }
     class MySharedAssets : SharedAssets {
         override fun onDestroy() {
