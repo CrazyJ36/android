@@ -59,7 +59,7 @@ class WatchFaceCanvasRenderer(
             )
             val dataSourceTapAction = complication.complicationData.value.tapAction
             val dataSourceIcon = complicationWireData.icon
-            dataSourceIcon.apply { this!!.setTint(Color.BLUE) }
+            dataSourceIcon?.run { this.setTint(Color.BLUE) }
             val newComplicationData = ShortTextComplicationData.Builder(
                 PlainComplicationText.Builder(dataSourceText).build(),
                 PlainComplicationText.Builder("Draw custom complication icon on watchface").build()
@@ -67,15 +67,18 @@ class WatchFaceCanvasRenderer(
                 .setDataSource(complicationWireData.dataSource)
                 .setTapAction(dataSourceTapAction)
                 .setMonochromaticImage(
-                    MonochromaticImage.Builder(dataSourceIcon!!)
-                        .build()
+                    dataSourceIcon?.let {
+                        MonochromaticImage.Builder(it)
+                            .build()
+                    }
                 ).build()
-            complication.renderer.loadData(newComplicationData, false)
+            complication.renderer.loadData(newComplicationData, true)
+            complication.render(canvas, zonedDateTime, renderParameters)
             Log.d("COMPLICATION_TEST", "rendering custom")
         } catch (nullPointer: NullPointerException) {
             Log.d("COMPLICATION_TEST", "set A short text complication")
         }
-        complication!!.render(canvas, zonedDateTime, renderParameters)
+
     }
     class MySharedAssets : SharedAssets {
         override fun onDestroy() {
