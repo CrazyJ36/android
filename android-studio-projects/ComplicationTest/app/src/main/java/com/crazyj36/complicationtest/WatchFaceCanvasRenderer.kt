@@ -16,6 +16,7 @@ import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
+import java.time.Instant
 import java.time.ZonedDateTime
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.DurationUnit
@@ -59,8 +60,9 @@ class WatchFaceCanvasRenderer(
             .complicationData.value.asWireComplicationData()
         if (complicationWireData.hasShortText()) {
             val dataSourceText = complicationWireData.shortText!!.getTextAt(
-                Resources.getSystem(), zonedDateTime.nano.toLong()
+                Resources.getSystem(), zonedDateTime.toEpochSecond().milliseconds.toLong(DurationUnit.MILLISECONDS)
             )
+            Log.d("COMPLICATION_TEST", zonedDateTime.toEpochSecond().milliseconds.toLong(DurationUnit.MILLISECONDS).toString())
             val dataSourceTapAction = complication.complicationData.value.tapAction
             val customIcon = Icon.createWithResource(passedContext, R.drawable.ic_action_name)
             val newComplicationData = ShortTextComplicationData.Builder(
