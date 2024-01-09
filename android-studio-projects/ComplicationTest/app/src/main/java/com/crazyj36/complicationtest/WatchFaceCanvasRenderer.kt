@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Rect
-import android.graphics.drawable.Icon
 import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
@@ -14,13 +14,9 @@ import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
-import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
-import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
-import kotlin.time.Duration.Companion.milliseconds
-import kotlin.time.DurationUnit
 
 class WatchFaceCanvasRenderer(
     context: Context,
@@ -37,8 +33,6 @@ class WatchFaceCanvasRenderer(
     interactiveDrawModeUpdateDelayMillis = 16L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
-
-    private val passedContext = context
 
     override fun renderHighlightLayer(
         canvas: Canvas,
@@ -65,7 +59,10 @@ class WatchFaceCanvasRenderer(
             )
             Log.d("COMPLICATION_TEST", LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli().toString())
             val dataSourceTapAction = complication.complicationData.value.tapAction
-            val customIcon = Icon.createWithResource(passedContext, R.drawable.ic_action_name)
+            val dataSourceIcon = complicationWireData.icon
+            dataSourceIcon.apply {
+                this!!.setTint(Color.WHITE)
+            }
             val newComplicationData = ShortTextComplicationData.Builder(
                 PlainComplicationText.Builder(dataSourceText).build(),
                 PlainComplicationText.Builder("Draw custom complication icon on watchface").build()
@@ -73,7 +70,7 @@ class WatchFaceCanvasRenderer(
                 .setDataSource(complicationWireData.dataSource)
                 .setTapAction(dataSourceTapAction)
                 .setMonochromaticImage(
-                MonochromaticImage.Builder(customIcon).build()
+                MonochromaticImage.Builder(dataSourceIcon!!).build()
                 ).build()
             complication.renderer.loadData(newComplicationData, false)
             Log.d("COMPLICATION_TEST", "Drew custom complication.")
