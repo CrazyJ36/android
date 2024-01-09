@@ -17,6 +17,7 @@ import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.Instant
+import java.time.LocalDateTime
 import java.time.ZonedDateTime
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.DurationUnit
@@ -60,9 +61,9 @@ class WatchFaceCanvasRenderer(
             .complicationData.value.asWireComplicationData()
         if (complicationWireData.hasShortText()) {
             val dataSourceText = complicationWireData.shortText!!.getTextAt(
-                Resources.getSystem(), zonedDateTime.toEpochSecond().milliseconds.toLong(DurationUnit.MILLISECONDS)
+                Resources.getSystem(), LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
             )
-            Log.d("COMPLICATION_TEST", zonedDateTime.toEpochSecond().milliseconds.toLong(DurationUnit.MILLISECONDS).toString())
+            Log.d("COMPLICATION_TEST", LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli().toString())
             val dataSourceTapAction = complication.complicationData.value.tapAction
             val customIcon = Icon.createWithResource(passedContext, R.drawable.ic_action_name)
             val newComplicationData = ShortTextComplicationData.Builder(
@@ -75,12 +76,11 @@ class WatchFaceCanvasRenderer(
                 MonochromaticImage.Builder(customIcon).build()
                 ).build()
             complication.renderer.loadData(newComplicationData, false)
-            complication.render(canvas, zonedDateTime, renderParameters)
             Log.d("COMPLICATION_TEST", "Drew custom complication.")
         } else {
             Log.d("COMPLICATION_TEST", "Couldn't get dataSource text, is complicationType SHORT_TEXT?")
-            complication.render(canvas, zonedDateTime, renderParameters)
         }
+        complication.render(canvas, zonedDateTime, renderParameters)
     }
 
     class MySharedAssets : SharedAssets {
