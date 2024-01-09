@@ -8,6 +8,7 @@ import android.graphics.Rect
 import android.graphics.drawable.Icon
 import android.util.Log
 import android.view.SurfaceHolder
+import androidx.compose.runtime.remember
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
@@ -15,6 +16,8 @@ import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
+import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
+import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.ZonedDateTime
 
@@ -33,7 +36,11 @@ class WatchFaceCanvasRenderer(
     interactiveDrawModeUpdateDelayMillis = 16L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
+
     private val passedContext = context
+    private val complicationDrawable = ComplicationDrawable.getDrawable(passedContext, R.drawable.complication_drawable)
+    private val dataSourceText: CharSequence? = null
+
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
@@ -50,49 +57,35 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        // render complications
-        val complication = complicationSlotsManager.complicationSlots[0]
-        complication.apply {
-        //for ((_, complication) in complicationSlotsManager.complicationSlots) {
-            //Log.d("MYLOG", complication.complicationData.value.toString())
-            val complicationWireFormat = complication!!.complicationData.value.asWireComplicationData()
 
-
-            var dataSourceTitle: CharSequence? = null
-            var dataSourceText: CharSequence? = null
-            if (complication.complicationData.value.type == ComplicationType.SHORT_TEXT &&
-                complicationWireFormat.hasShortTitle()) {
-                dataSourceTitle = complicationWireFormat.shortTitle!!.getTextAt(
-                    Resources.getSystem(), zonedDateTime.toEpochSecond()
-                )
-            }
-            if (complication.complicationData.value.type == ComplicationType.SHORT_TEXT &&
-                complicationWireFormat.hasShortText()) {
-                dataSourceText = complicationWireFormat.shortText!!.getTextAt(
-                    Resources.getSystem(), zonedDateTime.toEpochSecond()
-                )
-            }
-            if (dataSourceTitle != null && dataSourceText != null) {
-                Log.d("COMPLICATION_TEST", "$dataSourceTitle $dataSourceText")
-                val myComplicationData = ShortTextComplicationData.Builder(
+        val complicationWireData = complicationSlotsManager.complicationSlots[0]!!.complicationData.value.asWireComplicationData()
+        if (complicationWireData.hasShortText()) {
+            val dataSourceText = complicationWireData.shortText!!.getTextAt(
+                Resources.getSystem(), zonedDateTime.toEpochSecond()
+            )
+            if (dataSourceText != null) {
+                val newComplicationData = ShortTextComplicationData.Builder(
                     PlainComplicationText.Builder(dataSourceText).build(),
-                    PlainComplicationText.Builder("desc").build()
-                ).setTitle(
-                    PlainComplicationText.Builder(dataSourceTitle).build()
-                ).setMonochromaticImage(MonochromaticImage.Builder(
-                    Icon.createWithResource(passedContext, R.drawable.ic_action_name)).build()
-                ).build()
-
-                complication.renderer.loadData(
-                    myComplicationData,
-                    true
+                    PlainComplicationText.Builder("Draw custom complication icon on watchface").build()
+                ).setMonochromaticImage(
+                    MonochromaticImage.Builder(
+                        Icon.createWithResource(passedContext, R.drawable.ic_action_name)
+                    ).build()
                 )
+                complicationDrawable!!.setBounds(
+                    (canvas.width / 2) - 50,
+                    (canvas.height / 2) - 50,
+                    (canvas.width / 2) + 50,
+                    (canvas.height / 2) + 50
+                )
+                complicationDrawable.setComplicationData(newComplicationData.build(), true)
+                complicationDrawable.draw(canvas)
+                Log.d("COMPLICATION_TEST", "Drew custom complication.")
+            } else {
+                Log.d("COMPLICATION_TEST", "Couldn't get dataSource text, is complicationType SHORT_TEXT?")
             }
-            else {
-                Log.d("COMPLICATION_TEST", "Complication title and/or text are null, possibly due to the assigned complication not being Type.SHORT_TEXT")
-            }
-
-            complication.render(canvas, zonedDateTime, renderParameters)
+        } else {
+            complicationSlotsManager.complicationSlots[0]!!.render(canvas, zonedDateTime, renderParameters)
         }
     }
 
