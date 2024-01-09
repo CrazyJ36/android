@@ -1,20 +1,20 @@
 package com.crazyj36.complicationtest
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.BlendMode
-import android.graphics.BlendModeColorFilter
+import android.content.res.Resources
 import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.ColorFilter
 import android.graphics.Rect
-import android.os.Build
+import android.graphics.drawable.Icon
 import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
-import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
-import androidx.wear.watchface.complications.rendering.ComplicationDrawable
+import androidx.wear.watchface.complications.data.ComplicationType
+import androidx.wear.watchface.complications.data.MonochromaticImage
+import androidx.wear.watchface.complications.data.PlainComplicationText
+import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.ZonedDateTime
 
@@ -33,7 +33,7 @@ class WatchFaceCanvasRenderer(
     interactiveDrawModeUpdateDelayMillis = 16L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
-    val myContext = context
+    private val passedContext = context
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
@@ -43,6 +43,7 @@ class WatchFaceCanvasRenderer(
 
     }
 
+    @SuppressLint("RestrictedApi")
     override fun render(
         canvas: Canvas,
         bounds: Rect,
@@ -50,19 +51,48 @@ class WatchFaceCanvasRenderer(
         sharedAssets: MySharedAssets
     ) {
         // render complications
-        for ((_, complication) in complicationSlotsManager.complicationSlots) {
-            ComplicationDrawable.getDrawable(myContext, R.drawable.complication_drawable)?.apply {
-                activeStyle.run {
-                    iconColor = Color.BLUE
-                    color
-                    if (Build.VERSION.SDK_INT >= 29)
-                        imageColorFilter = BlendModeColorFilter(Color.BLUE, BlendMode.SRC_ATOP)
-                }
-                (complication.renderer as CanvasComplicationDrawable).drawable = this
-            }
-            Log.d("MYLOG", "complicationType: " + complication.complicationData.value.type)
-            complication.render(canvas, zonedDateTime, renderParameters)
+        val complication = complicationSlotsManager.complicationSlots[0]
+        complication.apply {
+        //for ((_, complication) in complicationSlotsManager.complicationSlots) {
+            //Log.d("MYLOG", complication.complicationData.value.toString())
+            val complicationWireFormat = complication!!.complicationData.value.asWireComplicationData()
 
+
+            var dataSourceTitle: CharSequence? = null
+            var dataSourceText: CharSequence? = null
+            if (complication.complicationData.value.type == ComplicationType.SHORT_TEXT &&
+                complicationWireFormat.hasShortTitle()) {
+                dataSourceTitle = complicationWireFormat.shortTitle!!.getTextAt(
+                    Resources.getSystem(), zonedDateTime.toEpochSecond()
+                )
+            }
+            if (complication.complicationData.value.type == ComplicationType.SHORT_TEXT &&
+                complicationWireFormat.hasShortText()) {
+                dataSourceText = complicationWireFormat.shortText!!.getTextAt(
+                    Resources.getSystem(), zonedDateTime.toEpochSecond()
+                )
+            }
+            if (dataSourceTitle != null && dataSourceText != null) {
+                Log.d("COMPLICATION_TEST", "$dataSourceTitle $dataSourceText")
+                val myComplicationData = ShortTextComplicationData.Builder(
+                    PlainComplicationText.Builder(dataSourceText).build(),
+                    PlainComplicationText.Builder("desc").build()
+                ).setTitle(
+                    PlainComplicationText.Builder(dataSourceTitle).build()
+                ).setMonochromaticImage(MonochromaticImage.Builder(
+                    Icon.createWithResource(passedContext, R.drawable.ic_action_name)).build()
+                ).build()
+
+                complication.renderer.loadData(
+                    myComplicationData,
+                    true
+                )
+            }
+            else {
+                Log.d("COMPLICATION_TEST", "Complication title and/or text are null, possibly due to the assigned complication not being Type.SHORT_TEXT")
+            }
+
+            complication.render(canvas, zonedDateTime, renderParameters)
         }
     }
 

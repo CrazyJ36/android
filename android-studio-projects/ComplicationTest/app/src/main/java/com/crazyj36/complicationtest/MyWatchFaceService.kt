@@ -24,7 +24,6 @@ class MyWatchFaceService : WatchFaceService() {
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
-        Log.d("MYLOG", "currentUserStyle: " + currentUserStyleRepository.userStyle.value.entries)
         val complicationId = 0
         val supportedTypes = listOf(
             ComplicationType.SHORT_TEXT
