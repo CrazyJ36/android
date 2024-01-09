@@ -8,15 +8,12 @@ import android.graphics.Rect
 import android.graphics.drawable.Icon
 import android.util.Log
 import android.view.SurfaceHolder
-import androidx.compose.runtime.remember
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
-import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
-import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.ZonedDateTime
@@ -39,8 +36,9 @@ class WatchFaceCanvasRenderer(
 
     private val passedContext = context
     private val complicationDrawable = ComplicationDrawable.getDrawable(passedContext, R.drawable.complication_drawable)
-    private val dataSourceText: CharSequence? = null
-
+    private var dataSourceText: CharSequence = ""
+    private lateinit var newComplicationData: ShortTextComplicationData.Builder
+    
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
@@ -57,34 +55,30 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-
         val complicationWireData = complicationSlotsManager.complicationSlots[0]!!.complicationData.value.asWireComplicationData()
         if (complicationWireData.hasShortText()) {
-            val dataSourceText = complicationWireData.shortText!!.getTextAt(
+            dataSourceText = complicationWireData.shortText!!.getTextAt(
                 Resources.getSystem(), zonedDateTime.toEpochSecond()
             )
-            if (dataSourceText != null) {
-                val newComplicationData = ShortTextComplicationData.Builder(
-                    PlainComplicationText.Builder(dataSourceText).build(),
-                    PlainComplicationText.Builder("Draw custom complication icon on watchface").build()
-                ).setMonochromaticImage(
-                    MonochromaticImage.Builder(
-                        Icon.createWithResource(passedContext, R.drawable.ic_action_name)
-                    ).build()
-                )
-                complicationDrawable!!.setBounds(
-                    (canvas.width / 2) - 50,
-                    (canvas.height / 2) - 50,
-                    (canvas.width / 2) + 50,
-                    (canvas.height / 2) + 50
-                )
-                complicationDrawable.setComplicationData(newComplicationData.build(), true)
-                complicationDrawable.draw(canvas)
-                Log.d("COMPLICATION_TEST", "Drew custom complication.")
-            } else {
-                Log.d("COMPLICATION_TEST", "Couldn't get dataSource text, is complicationType SHORT_TEXT?")
-            }
+            newComplicationData = ShortTextComplicationData.Builder(
+                PlainComplicationText.Builder(dataSourceText).build(),
+                PlainComplicationText.Builder("Draw custom complication icon on watchface").build()
+            ).setMonochromaticImage(
+                MonochromaticImage.Builder(
+                    Icon.createWithResource(passedContext, R.drawable.ic_action_name)
+                ).build()
+            )
+            complicationDrawable!!.setBounds(
+                (canvas.width / 2) - 50,
+                (canvas.height / 2) - 50,
+                (canvas.width / 2) + 50,
+                (canvas.height / 2) + 50
+            )
+            complicationDrawable.setComplicationData(newComplicationData.build(), true)
+            complicationDrawable.draw(canvas)
+            Log.d("COMPLICATION_TEST", "Drew custom complication.")
         } else {
+            Log.d("COMPLICATION_TEST", "Couldn't get dataSource text, is complicationType SHORT_TEXT?")
             complicationSlotsManager.complicationSlots[0]!!.render(canvas, zonedDateTime, renderParameters)
         }
     }
