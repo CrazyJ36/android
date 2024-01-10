@@ -17,6 +17,7 @@ import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.complications.data.MonochromaticImage
+import androidx.wear.watchface.complications.data.PhotoImageComplicationData
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
@@ -60,15 +61,16 @@ class WatchFaceCanvasRenderer(
 
         val complication = complicationSlotsManager.complicationSlots[0]
         val complicationWireData = complication!!.complicationData.value.asWireComplicationData()
-        var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
         var dataSourceDataSource: ComponentName? = null
         var dataSourceTapAction: PendingIntent? = null
         var dataSourceText: CharSequence? = null
+        var dataSourceContentDescription: CharSequence? = null
         var dataSourceTitle: CharSequence? = null
         var dataSourceIcon: Icon? = null
         var dataSourceBurnInProtectionIcon: Icon? = null
         var dataSourceSmallImage: Icon? = null
         var dataSourceBurnInProtectionSmallImage: Icon? = null
+        var dataSourceLargeImage: Icon? = null
         val paint = Paint()
 
         if (complicationWireData.dataSource != null) {
@@ -82,6 +84,13 @@ class WatchFaceCanvasRenderer(
         if (complicationWireData.hasShortText()) {
             Log.d(tag, "hasShortText")
             dataSourceText = complicationWireData.shortText!!.getTextAt(
+                Resources.getSystem(),
+                LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
+            )
+        }
+        if (complicationWireData.hasContentDescription()) {
+            Log.d(tag,"hasContentDescription")
+            dataSourceContentDescription = complicationWireData.contentDescription!!.getTextAt(
                 Resources.getSystem(),
                 LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
             )
@@ -109,72 +118,90 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "hasBurnInProtectionSmallImage")
             dataSourceBurnInProtectionSmallImage = complicationWireData.burnInProtectionSmallImage
         }
+        if (complicationWireData.hasLargeImage()) {
+            Log.d(tag, "hasLargeImage")
+            dataSourceLargeImage = complicationWireData.largeImage
+        }
         if (complicationWireData.type == ComplicationData.Companion.TYPE_SHORT_TEXT) {
-            Log.d(tag, "complication is ComplicationType.SHORT_TEXT")
-            if (dataSourceText != null) {
+            Log.d(tag, "Complication is ComplicationType.SHORT_TEXT")
+            var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
+            if (dataSourceText != null && dataSourceContentDescription != null) {
                 Log.d(tag, "Setting text")
                 shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
                     PlainComplicationText.Builder(dataSourceText).build(),
-                    PlainComplicationText.Builder(
-                        "Draw custom complication icon on watchface"
-                    ).build()
+                    PlainComplicationText.Builder(dataSourceContentDescription).build()
                 )
             }
-            if (dataSourceDataSource != null) {
-                Log.d(tag, "Setting dataSource")
-                shortTextComplicationDataBuilder!!.setDataSource(dataSourceDataSource)
+            if (shortTextComplicationDataBuilder != null) {
+                if (dataSourceDataSource != null) {
+                    Log.d(tag, "Setting dataSource")
+                    shortTextComplicationDataBuilder.setDataSource(dataSourceDataSource)
+                }
+                if (dataSourceTapAction != null) {
+                    Log.d(tag, "Setting tapAction")
+                    shortTextComplicationDataBuilder.setTapAction(dataSourceTapAction)
+                }
+                if (dataSourceTitle != null) {
+                    Log.d(tag, "Setting title")
+                    shortTextComplicationDataBuilder.setTitle(
+                        PlainComplicationText.Builder(dataSourceTitle).build()
+                    )
+                }
+                if (dataSourceIcon != null) {
+                    Log.d(tag, "Setting icon")
+                    dataSourceIcon.setTint(Color.BLUE)
+                    shortTextComplicationDataBuilder.setMonochromaticImage(
+                        MonochromaticImage.Builder(
+                            dataSourceIcon
+                        ).build()
+                    )
+                }
+                if (dataSourceBurnInProtectionIcon != null) {
+                    Log.d(tag, "Setting burnInProtectionIcon")
+                    dataSourceBurnInProtectionIcon.setTint(Color.BLUE)
+                    shortTextComplicationDataBuilder.setMonochromaticImage(
+                        MonochromaticImage.Builder(
+                            dataSourceBurnInProtectionIcon
+                        ).build()
+                    )
+                }
+                if (dataSourceSmallImage != null) {
+                    Log.d(tag, "Setting smallImage")
+                    dataSourceSmallImage.setTint(Color.BLUE)
+                    shortTextComplicationDataBuilder.setSmallImage(
+                        SmallImage.Builder(
+                            dataSourceSmallImage,
+                            SmallImageType.ICON
+                        ).build()
+                    )
+                }
+                if (dataSourceBurnInProtectionSmallImage != null) {
+                    dataSourceBurnInProtectionSmallImage.setTint(Color.BLUE)
+                    shortTextComplicationDataBuilder.setSmallImage(
+                        SmallImage.Builder(
+                            dataSourceBurnInProtectionSmallImage,
+                            SmallImageType.ICON
+                        ).build()
+                    )
+                }
+
+                complication.renderer.loadData(shortTextComplicationDataBuilder.build(), false)
             }
-            if (dataSourceTapAction != null) {
-                Log.d(tag, "Setting tapAction")
-                shortTextComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
-            }
-            if (dataSourceTitle != null) {
-                Log.d(tag, "Setting title")
-                shortTextComplicationDataBuilder!!.setTitle(
-                    PlainComplicationText.Builder(dataSourceTitle).build()
+        } else if (complicationWireData.type == ComplicationData.Companion.TYPE_LARGE_IMAGE) {
+            Log.d(tag, "Complication is ComplicationType.LARGE_IMAGE")
+            var photoImageComplicationDataBuilder: PhotoImageComplicationData.Builder? = null
+            if (dataSourceLargeImage != null && dataSourceContentDescription != null) {
+                Log.d(tag, "Setting largeImage")
+                photoImageComplicationDataBuilder = PhotoImageComplicationData.Builder(
+                    dataSourceLargeImage,
+                    PlainComplicationText.Builder(dataSourceContentDescription).build()
                 )
             }
-            if (dataSourceIcon != null) {
-                Log.d(tag, "Setting icon")
-                dataSourceIcon.setTint(Color.BLUE)
-                shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                    MonochromaticImage.Builder(
-                        dataSourceIcon
-                    ).build()
-                )
+            if (photoImageComplicationDataBuilder != null) {
+                complication.renderer.loadData(photoImageComplicationDataBuilder.build(), false)
             }
-            if (dataSourceBurnInProtectionIcon != null) {
-                Log.d(tag, "Setting burnInProtectionIcon")
-                dataSourceBurnInProtectionIcon.setTint(Color.BLUE)
-                shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                    MonochromaticImage.Builder(
-                        dataSourceBurnInProtectionIcon
-                    ).build()
-                )
-            }
-            if (dataSourceSmallImage != null) {
-                Log.d(tag, "Setting smallImage")
-                dataSourceSmallImage.setTint(Color.BLUE)
-                shortTextComplicationDataBuilder!!.setSmallImage(
-                    SmallImage.Builder(
-                        dataSourceSmallImage,
-                        SmallImageType.ICON
-                    ).build()
-                )
-            }
-            if (dataSourceBurnInProtectionSmallImage != null) {
-                dataSourceBurnInProtectionSmallImage.setTint(Color.BLUE)
-                shortTextComplicationDataBuilder!!.setSmallImage(
-                    SmallImage.Builder(
-                        dataSourceBurnInProtectionSmallImage,
-                        SmallImageType.ICON
-                    ).build()
-                )
-            }
-            complication.renderer.loadData(shortTextComplicationDataBuilder!!.build(), false)
         } else {
-            Log.d(tag, "Complication is not ComplicationType.SHORT_TEXT.\n" +
-            "Rendering default complication")
+            Log.d(tag, "Unknown complication type, rendering default.")
         }
 
         complication.render(canvas, zonedDateTime, renderParameters)
@@ -182,10 +209,11 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "Ambient")
             paint.setARGB(255, 255, 255, 255)
             paint.textAlign = Paint.Align.CENTER
+            paint.textSize = 11f
             canvas.drawText(
                 "Ambient",
                 canvas.width / 2f,
-                canvas.height - (canvas.height / 4).toFloat(),
+                canvas.height - (canvas.height / 7).toFloat(),
                 paint
             )
         }
