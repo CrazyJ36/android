@@ -4,14 +4,11 @@ import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.res.Resources
-import android.graphics.BlendMode
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.PorterDuff
 import android.graphics.Rect
 import android.graphics.drawable.Icon
-import android.os.Build
 import android.support.wearable.complications.ComplicationData
 import android.util.Log
 import android.view.SurfaceHolder
@@ -24,7 +21,6 @@ import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
 import androidx.wear.watchface.complications.data.SmallImageType
-import androidx.wear.watchface.complications.data.toApiComplicationData
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
@@ -137,16 +133,25 @@ class WatchFaceCanvasRenderer(
             }
             if (dataSourceIcon != null) {
                 Log.d(tag, "Setting icon")
-                if (Build.VERSION.SDK_INT >= 29) {
-                    shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                        MonochromaticImage.Builder(
-                            dataSourceIcon
-                        ).build()
-                    )
-                }
+                dataSourceIcon.setTint(Color.BLUE)
+                shortTextComplicationDataBuilder!!.setMonochromaticImage(
+                    MonochromaticImage.Builder(
+                        dataSourceIcon
+                    ).build()
+                )
+            }
+            if (dataSourceBurnInProtectionIcon != null) {
+                Log.d(tag, "Setting burnInProtectionIcon")
+                dataSourceBurnInProtectionIcon.setTint(Color.BLUE)
+                shortTextComplicationDataBuilder!!.setMonochromaticImage(
+                    MonochromaticImage.Builder(
+                        dataSourceBurnInProtectionIcon
+                    ).build()
+                )
             }
             if (dataSourceSmallImage != null) {
                 Log.d(tag, "Setting smallImage")
+                dataSourceSmallImage.setTint(Color.BLUE)
                 shortTextComplicationDataBuilder!!.setSmallImage(
                     SmallImage.Builder(dataSourceSmallImage, SmallImageType.PHOTO)
                         .build()
