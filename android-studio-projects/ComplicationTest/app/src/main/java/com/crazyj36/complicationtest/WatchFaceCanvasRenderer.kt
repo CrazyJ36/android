@@ -93,7 +93,7 @@ class WatchFaceCanvasRenderer(
         }
         if (complicationWireData.hasIcon()) {
             Log.d(tag, "hasIcon")
-            dataSourceIcon = complicationWireData.icon!!.setTint(Color.BLUE)
+            dataSourceIcon = complicationWireData.icon!!
         }
         if (complicationWireData.hasBurnInProtectionIcon()) {
             Log.d(tag, "hasBurnInProtectionIcon")
@@ -133,8 +133,12 @@ class WatchFaceCanvasRenderer(
             if (dataSourceIcon != null || dataSourceBurnInProtectionIcon != null) {
                 Log.d(tag, "Setting icon")
                 try {
+                    val monochromaticImage = MonochromaticImage.Builder(
+                        dataSourceIcon!!
+                    ).build().image
+                    val monochromaticImageColored = monochromaticImage.setTint(Color.BLUE)
                     shortTextComplicationData!!.setMonochromaticImage(
-                        MonochromaticImage.Builder(dataSourceIcon!!)
+                        MonochromaticImage.Builder(monochromaticImageColored)
                             .build()
                     )
                 } catch (exception: Exception) {
@@ -144,8 +148,12 @@ class WatchFaceCanvasRenderer(
                                 exception.localizedMessage +
                                 "\nUsing dataSourceBurnInProtectionIcon."
                     )
+                    val monochromaticImage = MonochromaticImage.Builder(
+                        dataSourceBurnInProtectionIcon!!
+                    ).build().image
+                    val monochromaticImageColored = monochromaticImage.setTint(Color.BLUE)
                     shortTextComplicationData!!.setMonochromaticImage(
-                        MonochromaticImage.Builder(dataSourceBurnInProtectionIcon!!)
+                        MonochromaticImage.Builder(monochromaticImageColored)
                             .build()
                     )
                 }
