@@ -187,8 +187,8 @@ class WatchFaceCanvasRenderer(
 
                 complication.renderer.loadData(shortTextComplicationDataBuilder.build(), false)
             }
-        } else if (complicationWireData.type == ComplicationData.Companion.TYPE_LARGE_IMAGE) {
-            Log.d(tag, "Complication is ComplicationType.LARGE_IMAGE")
+        } else if (complicationWireData.type == ComplicationData.Companion.TYPE_SMALL_IMAGE) {
+            Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE")
             var photoImageComplicationDataBuilder: PhotoImageComplicationData.Builder? = null
             if (dataSourceLargeImage != null && dataSourceContentDescription != null) {
                 Log.d(tag, "Setting largeImage")
