@@ -143,17 +143,13 @@ class WatchFaceCanvasRenderer(
                         .build()
                 )
             }
-            complication.renderer.loadData(shortTextComplicationDataBuilder!!.build()
-                .apply {
-                     monochromaticImage!!.image.setTint(Color.BLUE)
-                }, false)
-
+            shortTextComplicationDataBuilder!!.build().monochromaticImage!!.image.setTint(Color.BLUE)
+            complication.renderer.loadData(shortTextComplicationDataBuilder.build(), false)
         } else {
             Log.d(tag, "Complication is not ComplicationType.SHORT_TEXT.\n" +
             "Rendering default complication")
         }
         complication.render(canvas, zonedDateTime, renderParameters)
-
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
             paint.setARGB(255, 255, 255, 255)
