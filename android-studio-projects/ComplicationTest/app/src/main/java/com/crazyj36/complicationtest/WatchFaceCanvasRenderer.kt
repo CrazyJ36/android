@@ -99,7 +99,7 @@ class WatchFaceCanvasRenderer(
         }
         if (complicationWireData.hasIcon()) {
             Log.d(tag, "hasIcon")
-            dataSourceIcon = complicationWireData.icon!!
+            dataSourceIcon = complicationWireData.icon!!.setTint(Color.BLUE)
         }
         if (complicationWireData.hasBurnInProtectionIcon()) {
             Log.d(tag, "hasBurnInProtectionIcon")
@@ -140,9 +140,7 @@ class WatchFaceCanvasRenderer(
                 if (Build.VERSION.SDK_INT >= 29) {
                     shortTextComplicationDataBuilder!!.setMonochromaticImage(
                         MonochromaticImage.Builder(
-                            dataSourceIcon.setTint(Color.BLUE)
-                                .setTintMode(PorterDuff.Mode.SRC_ATOP)
-                                .setTintBlendMode(BlendMode.SRC_ATOP)
+                            dataSourceIcon
                         ).build()
                     )
                 }
