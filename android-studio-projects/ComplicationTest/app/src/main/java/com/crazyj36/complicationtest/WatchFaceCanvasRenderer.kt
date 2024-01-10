@@ -72,50 +72,37 @@ class WatchFaceCanvasRenderer(
         val complicationWireData = complication!!.complicationData.value.asWireComplicationData()
 
 
-        if (complicationWireData.dataSource != null &&
-            dataSourceDataSource != complication.complicationData.value.dataSource) {
+        if (complicationWireData.dataSource != null) {
             Log.d(tag, "hasDataSource")
             dataSourceDataSource = complication.complicationData.value.dataSource
         }
-        if (complicationWireData.hasTapAction() &&
-            dataSourceTapAction != complication.complicationData.value.tapAction) {
+        if (complicationWireData.hasTapAction()) {
             Log.d(tag, "hasTapAction")
             dataSourceTapAction = complication.complicationData.value.tapAction
         }
-        if (complicationWireData.hasShortText() &&
-            dataSourceText != complicationWireData.shortText!!.getTextAt(
-                Resources.getSystem(),
-                LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
-            )) {
+        if (complicationWireData.hasShortText()) {
             Log.d(tag, "hasShortText")
             dataSourceText = complicationWireData.shortText!!.getTextAt(
                 Resources.getSystem(),
                 LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
             )
         }
-        if (complicationWireData.hasShortTitle() &&
-            dataSourceTitle != complicationWireData.shortTitle!!.getTextAt(
-                Resources.getSystem(),
-                LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
-            )) {
+        if (complicationWireData.hasShortTitle()) {
             Log.d(tag, "hasShortTitle")
             dataSourceTitle = complicationWireData.shortTitle!!.getTextAt(
                 Resources.getSystem(),
                 LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
             )
         }
-        if (complicationWireData.hasIcon() &&
-            dataSourceIcon != complicationWireData.icon!!) {
+        if (complicationWireData.hasIcon()) {
             Log.d(tag, "hasIcon")
             dataSourceIcon = complicationWireData.icon!!
         }
-        if (complicationWireData.hasBurnInProtectionIcon() &&
-            dataSourceBurnInProtectionIcon != complicationWireData.burnInProtectionIcon!!) {
+        if (complicationWireData.hasBurnInProtectionIcon()) {
             Log.d(tag, "hasBurnInProtectionIcon")
             dataSourceBurnInProtectionIcon = complicationWireData.burnInProtectionIcon!!
         }
-        if (complicationWireData.hasSmallImage() &&
-            dataSourceSmallImage != complicationWireData.smallImage) {
+        if (complicationWireData.hasSmallImage()) {
             Log.d(tag, "hasSmallImage")
             dataSourceSmallImage = complicationWireData.smallImage
         }
