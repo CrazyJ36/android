@@ -21,6 +21,7 @@ import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
 import androidx.wear.watchface.complications.data.SmallImageType
+import androidx.wear.watchface.complications.data.toApiComplicationData
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
@@ -80,10 +81,11 @@ class WatchFaceCanvasRenderer(
         }
         if (complicationWireData.hasShortText()) {
             Log.d(tag, "hasShortText")
-            dataSourceText = complicationWireData.shortText!!.getTextAt(
+            /*dataSourceText = complicationWireData.shortText!!.getTextAt(
                 Resources.getSystem(),
                 LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
-            )
+            )*/
+            dataSourceText = "test"
         }
         if (complicationWireData.hasShortTitle()) {
             Log.d(tag, "hasShortTitle")
@@ -143,8 +145,9 @@ class WatchFaceCanvasRenderer(
                         .build()
                 )
             }
-            shortTextComplicationDataBuilder!!.build().monochromaticImage!!.image.setTint(Color.BLUE)
-            complication.renderer.loadData(shortTextComplicationDataBuilder.build(), false)
+            shortTextComplicationDataBuilder?.apply {
+                build().monochromaticImage!!.image.setTint(Color.BLUE)
+            }?.let { complication.renderer.loadData(it.build(), false) }
         } else {
             Log.d(tag, "Complication is not ComplicationType.SHORT_TEXT.\n" +
             "Rendering default complication")
