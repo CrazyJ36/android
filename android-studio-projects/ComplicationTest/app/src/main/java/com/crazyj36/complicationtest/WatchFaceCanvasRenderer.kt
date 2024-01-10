@@ -132,27 +132,12 @@ class WatchFaceCanvasRenderer(
                     PlainComplicationText.Builder(dataSourceTitle!!).build()
                 )
             }
-            if (dataSourceIcon != null || dataSourceBurnInProtectionIcon != null) {
+            if (dataSourceIcon != null) {
                 Log.d(tag, "Setting icon")
-                try {
-                    dataSourceIcon?.run {
-                        this.setTint(Color.BLUE)
-                    }
-                    shortTextComplicationDataBuilder
-                        ?.setMonochromaticImage(
-                            dataSourceIcon?.let {
-                                MonochromaticImage.Builder(it)
-                                    .build()
-                            }
-                        )
-                } catch (exception: Exception) {
-                    Log.d(
-                        "COMPLICATION_TEST",
-                        "Setting dataSourceIcon didn't work:\n" +
-                                exception.localizedMessage +
-                                "\nUsing dataSourceBurnInProtectionIcon."
-                    )
-                }
+                val dataSourceIconColored = dataSourceIcon!!.setTint(Color.BLUE)
+                val monochromaticImage = MonochromaticImage.Builder(dataSourceIconColored)
+                val monochromaticImageBuilt = monochromaticImage.build()
+                shortTextComplicationDataBuilder!!.setMonochromaticImage(monochromaticImageBuilt)
             }
             if (dataSourceSmallImage != null) {
                 Log.d(tag, "Setting smallImage")
