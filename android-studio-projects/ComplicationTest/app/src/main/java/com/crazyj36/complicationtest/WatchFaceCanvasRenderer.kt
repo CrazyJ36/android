@@ -135,32 +135,22 @@ class WatchFaceCanvasRenderer(
             if (dataSourceIcon != null || dataSourceBurnInProtectionIcon != null) {
                 Log.d(tag, "Setting icon")
                 try {
-                    val monochromaticImage = MonochromaticImage.Builder(dataSourceIcon!!)
-                    val monochromaticImageBuilt: MonochromaticImage = monochromaticImage.build()
-                    val monochromaticImageIcon: Icon = monochromaticImageBuilt.image
-                    val monochromaticImageColored: Icon = monochromaticImageIcon
-                        .setTint(Color.BLUE)
-                    shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                        MonochromaticImage.Builder(monochromaticImageColored)
-                            .build()
-                    )
+                    dataSourceIcon?.run {
+                        this.setTint(Color.BLUE)
+                    }
+                    shortTextComplicationDataBuilder
+                        ?.setMonochromaticImage(
+                            dataSourceIcon?.let {
+                                MonochromaticImage.Builder(it)
+                                    .build()
+                            }
+                        )
                 } catch (exception: Exception) {
                     Log.d(
                         "COMPLICATION_TEST",
                         "Setting dataSourceIcon didn't work:\n" +
                                 exception.localizedMessage +
                                 "\nUsing dataSourceBurnInProtectionIcon."
-                    )
-                    val monochromaticImage = MonochromaticImage.Builder(
-                        dataSourceBurnInProtectionIcon!!
-                    )
-                    val monochromaticImageBuilt = monochromaticImage.build()
-                    val monochromaticImageIcon = monochromaticImageBuilt.image
-                    val monochromaticImageColored = monochromaticImageIcon
-                        .setTint(Color.BLUE)
-                    shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                        MonochromaticImage.Builder(monochromaticImageColored)
-                            .build()
                     )
                 }
             }
