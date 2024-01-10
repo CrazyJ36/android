@@ -150,11 +150,10 @@ class WatchFaceCanvasRenderer(
                 try {
                     val monochromaticImage = MonochromaticImage.Builder(
                         dataSourceIcon!!
-                    ).build()
-                    val monochromaticImageIcon = monochromaticImage.image
-                    val monochromaticImageColored = monochromaticImageIcon.apply {
-                        setTint(Color.BLUE)
-                    }
+                    )
+                    val monochromaticImageBuilt: MonochromaticImage = monochromaticImage.build()
+                    val monochromaticImageIcon: Icon = monochromaticImageBuilt.image
+                    val monochromaticImageColored: Icon = monochromaticImageIcon.setTint(Color.BLUE)
                     shortTextComplicationDataBuilder!!.setMonochromaticImage(
                         MonochromaticImage.Builder(monochromaticImageColored)
                             .build()
