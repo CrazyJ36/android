@@ -6,6 +6,7 @@ import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Rect
+import android.graphics.drawable.Icon
 import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
@@ -34,8 +35,6 @@ class WatchFaceCanvasRenderer(
     interactiveDrawModeUpdateDelayMillis = 16L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
-    private var newShortTextComplicationData: ShortTextComplicationData.Builder? = null
-    private var dataSourceTapAction: PendingIntent? = null
 
     override fun renderHighlightLayer(
         canvas: Canvas,
@@ -55,9 +54,14 @@ class WatchFaceCanvasRenderer(
     ) {
         val complication = complicationSlotsManager.complicationSlots[0]
         val complicationWireData = complication!!.complicationData.value.asWireComplicationData()
+        val newShortTextComplicationData: ShortTextComplicationData.Builder?
+        val dataSourceTapAction: PendingIntent?
+        val dataSourceText: CharSequence?
+        val dataSourceIcon: Icon?
+        val dataSourceBurnInProtectionIcon: Icon?
 
         if (complicationWireData.hasShortText()) {
-            val dataSourceText = complicationWireData.shortText!!.getTextAt(
+            dataSourceText = complicationWireData.shortText!!.getTextAt(
                 Resources.getSystem(),
                 LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
             )
@@ -67,22 +71,24 @@ class WatchFaceCanvasRenderer(
             )
             if (complication.complicationData.value.dataSource != null) {
                 Log.d("COMPLICATION_TEST", "hasDataSource")
-                newShortTextComplicationData!!
+                newShortTextComplicationData
                     .setDataSource(complication.complicationData.value.dataSource)
             }
             if (complication.complicationData.value.tapAction != null) {
                 Log.d("COMPLICATION_TEST", "hasTapAction")
                 dataSourceTapAction = complication.complicationData.value.tapAction
-                newShortTextComplicationData!!.setTapAction(dataSourceTapAction)
+                newShortTextComplicationData.setTapAction(dataSourceTapAction)
             }
             if (complicationWireData.hasIcon()) {
                 Log.d("COMPLICATION_TEST", "hasIcon")
-                val dataSourceIcon = complicationWireData.icon!!
-                val monochromaticImage = MonochromaticImage.Builder(dataSourceIcon)
-                val monochromaticImageBuilt = monochromaticImage.build().image
-                val monochromaticImageColored = monochromaticImageBuilt.setTint(Color.BLUE)
-                newShortTextComplicationData!!.setMonochromaticImage(
-                    MonochromaticImage.Builder(monochromaticImageColored).build()
+                //val monochromaticImage = MonochromaticImage.Builder(dataSourceIcon)
+                //val monochromaticImageBuilt = monochromaticImage.build().image
+                //val monochromaticImageColored = monochromaticImageBuilt.setTint(Color.BLUE)
+                newShortTextComplicationData.setMonochromaticImage(
+                    MonochromaticImage.Builder(
+                        complicationWireData.icon!!
+                            .setTint(Color.BLUE)
+                    ).build()
                 )
             }
             if (complicationWireData.hasBurnInProtectionIcon()) {
