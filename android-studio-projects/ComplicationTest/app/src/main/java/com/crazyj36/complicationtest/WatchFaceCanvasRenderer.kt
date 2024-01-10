@@ -117,7 +117,7 @@ class WatchFaceCanvasRenderer(
                 )
             }
             if (dataSourceDataSource != null) {
-                Log.d(tag, "Settings dataSource")
+                Log.d(tag, "Setting dataSource")
                 shortTextComplicationDataBuilder!!.setDataSource(dataSourceDataSource)
             }
             if (dataSourceTapAction != null) {
@@ -146,7 +146,7 @@ class WatchFaceCanvasRenderer(
                         .build()
                 )
             }
-            complication.renderer.loadData(shortTextComplicationDataBuilder!!.build(), true)
+            complication.renderer.loadData(shortTextComplicationDataBuilder!!.build(), false)
 
         } else {
             Log.d(tag, "Complication is not ComplicationType.SHORT_TEXT.\n" +
