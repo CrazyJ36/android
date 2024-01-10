@@ -40,16 +40,6 @@ class WatchFaceCanvasRenderer(
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
     private val tag = "COMPLICATION_TEST"
-    private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
-    private var shortTextComplicationData: ShortTextComplicationData? = null
-    private var dataSourceDataSource: ComponentName? = null
-    private var dataSourceTapAction: PendingIntent? = null
-    private var dataSourceText: CharSequence? = null
-    private var dataSourceTitle: CharSequence? = null
-    private var dataSourceIcon: Icon? = null
-    private var dataSourceBurnInProtectionIcon: Icon? = null
-    private var dataSourceSmallImage: Icon? = null
-    private val paint = Paint()
 
     override fun renderHighlightLayer(
         canvas: Canvas,
@@ -70,7 +60,16 @@ class WatchFaceCanvasRenderer(
 
         val complication = complicationSlotsManager.complicationSlots[0]
         val complicationWireData = complication!!.complicationData.value.asWireComplicationData()
-
+        var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
+        var shortTextComplicationData: ShortTextComplicationData? = null
+        var dataSourceDataSource: ComponentName? = null
+        var dataSourceTapAction: PendingIntent? = null
+        var dataSourceText: CharSequence? = null
+        var dataSourceTitle: CharSequence? = null
+        var dataSourceIcon: Icon? = null
+        var dataSourceBurnInProtectionIcon: Icon? = null
+        var dataSourceSmallImage: Icon? = null
+        val paint = Paint()
 
         if (complicationWireData.dataSource != null) {
             Log.d(tag, "hasDataSource")
@@ -112,7 +111,7 @@ class WatchFaceCanvasRenderer(
             if (dataSourceText != null) {
                 Log.d(tag, "Setting text")
                 shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
-                    PlainComplicationText.Builder(dataSourceText!!).build(),
+                    PlainComplicationText.Builder(dataSourceText).build(),
                     PlainComplicationText.Builder(
                         "Draw custom complication icon on watchface"
                     ).build()
@@ -129,25 +128,24 @@ class WatchFaceCanvasRenderer(
             if (dataSourceTitle != null) {
                 Log.d(tag, "Setting title")
                 shortTextComplicationDataBuilder!!.setTitle(
-                    PlainComplicationText.Builder(dataSourceTitle!!).build()
+                    PlainComplicationText.Builder(dataSourceTitle).build()
                 )
             }
             if (dataSourceIcon != null) {
                 Log.d(tag, "Setting icon")
-                val dataSourceIconColored = dataSourceIcon!!.setTint(Color.BLUE)
-                val monochromaticImage = MonochromaticImage.Builder(dataSourceIconColored)
-                val monochromaticImageBuilt = monochromaticImage.build()
-                shortTextComplicationDataBuilder!!.setMonochromaticImage(monochromaticImageBuilt)
+                shortTextComplicationDataBuilder!!.setMonochromaticImage(
+                    MonochromaticImage.Builder(dataSourceIcon).build()
+                ).build().monochromaticImage!!.image.setTint(Color.BLUE)
             }
             if (dataSourceSmallImage != null) {
                 Log.d(tag, "Setting smallImage")
                 shortTextComplicationDataBuilder!!.setSmallImage(
-                    SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.PHOTO)
+                    SmallImage.Builder(dataSourceSmallImage, SmallImageType.PHOTO)
                         .build()
                 )
             }
             shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
-            complication.renderer.loadData(shortTextComplicationData!!, true)
+            complication.renderer.loadData(shortTextComplicationData, true)
         } else {
             Log.d(tag, "Complication is not ComplicationType.SHORT_TEXT.\n" +
             "Rendering default complication")
