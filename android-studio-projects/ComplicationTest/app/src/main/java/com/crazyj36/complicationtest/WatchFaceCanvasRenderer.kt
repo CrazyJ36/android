@@ -135,9 +135,7 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "Setting icon")
                 shortTextComplicationDataBuilder!!.setMonochromaticImage(
                     MonochromaticImage.Builder(dataSourceIcon).build()
-                ).build().run {
-                    monochromaticImage!!.image.setTint(Color.BLUE)
-                }
+                )
             }
             if (dataSourceSmallImage != null) {
                 Log.d(tag, "Setting smallImage")
@@ -148,6 +146,8 @@ class WatchFaceCanvasRenderer(
             }
             shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
             complication.renderer.loadData(shortTextComplicationData, true)
+            shortTextComplicationData.monochromaticImage!!.image.setTint(Color.BLUE)
+
         } else {
             Log.d(tag, "Complication is not ComplicationType.SHORT_TEXT.\n" +
             "Rendering default complication")
