@@ -154,7 +154,7 @@ class WatchFaceCanvasRenderer(
             }
             if (dataSourceSmallImage != null) {
                 Log.d(tag, "Setting smallImage")
-                //dataSourceSmallImage.setTint(Color.BLUE)
+                dataSourceSmallImage.setTint(Color.BLUE)
                 shortTextComplicationDataBuilder!!.setSmallImage(
                     SmallImage.Builder(
                         dataSourceSmallImage,
@@ -163,7 +163,7 @@ class WatchFaceCanvasRenderer(
                 )
             }
             if (dataSourceBurnInProtectionSmallImage != null) {
-                //dataSourceBurnInProtectionSmallImage.setTint(Color.BLUE)
+                dataSourceBurnInProtectionSmallImage.setTint(Color.BLUE)
                 shortTextComplicationDataBuilder!!.setSmallImage(
                     SmallImage.Builder(
                         dataSourceBurnInProtectionSmallImage,
