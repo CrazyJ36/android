@@ -95,7 +95,7 @@ class WatchFaceCanvasRenderer(
         }
         if (complicationWireData.hasIcon()) {
             Log.d(tag, "hasIcon")
-            dataSourceIcon = complicationWireData.icon!!
+            dataSourceIcon = complicationWireData.icon!!.setTint(Color.BLUE)
         }
         if (complicationWireData.hasBurnInProtectionIcon()) {
             Log.d(tag, "hasBurnInProtectionIcon")
@@ -132,9 +132,12 @@ class WatchFaceCanvasRenderer(
                 )
             }
             if (dataSourceIcon != null) {
+                dataSourceIcon.setTint(Color.BLUE)
                 Log.d(tag, "Setting icon")
                 shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                    MonochromaticImage.Builder(dataSourceIcon).build()
+                    MonochromaticImage.Builder(dataSourceIcon).build().apply {
+                        this.image.setTint(Color.BLUE)
+                    }
                 )
             }
             if (dataSourceSmallImage != null) {
@@ -144,9 +147,12 @@ class WatchFaceCanvasRenderer(
                         .build()
                 )
             }
-            shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
-            complication.renderer.loadData(shortTextComplicationData, true)
-            shortTextComplicationData.monochromaticImage!!.image.setTint(Color.BLUE)
+            shortTextComplicationData = shortTextComplicationDataBuilder!!.build().apply {
+                monochromaticImage!!.image.setTint(Color.BLUE)
+            }
+            complication.renderer.loadData(shortTextComplicationData.apply {
+                monochromaticImage!!.image.setTint(Color.BLUE)
+            }, true)
 
         } else {
             Log.d(tag, "Complication is not ComplicationType.SHORT_TEXT.\n" +
