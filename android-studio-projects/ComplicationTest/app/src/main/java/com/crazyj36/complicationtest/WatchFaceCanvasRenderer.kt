@@ -168,11 +168,13 @@ class WatchFaceCanvasRenderer(
         complication.render(canvas, zonedDateTime, renderParameters)
 
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
+            Log.d(tag, "Ambient")
             paint.setARGB(255, 255, 255, 255)
+            paint.textAlign = Paint.Align.CENTER
             canvas.drawText(
                 "Ambient",
-                (canvas.width / 2f),
-                canvas.height - 50f,
+                canvas.width / 2f,
+                canvas.height - (canvas.height / 4).toFloat(),
                 paint
             )
         }
