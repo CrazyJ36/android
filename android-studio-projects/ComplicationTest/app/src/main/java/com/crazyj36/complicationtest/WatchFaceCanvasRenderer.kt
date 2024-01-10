@@ -68,6 +68,7 @@ class WatchFaceCanvasRenderer(
         var dataSourceIcon: Icon? = null
         var dataSourceBurnInProtectionIcon: Icon? = null
         var dataSourceSmallImage: Icon? = null
+        var dataSourceBurnInProtectionSmallImage: Icon? = null
         val paint = Paint()
 
         if (complicationWireData.dataSource != null) {
@@ -80,11 +81,10 @@ class WatchFaceCanvasRenderer(
         }
         if (complicationWireData.hasShortText()) {
             Log.d(tag, "hasShortText")
-            /*dataSourceText = complicationWireData.shortText!!.getTextAt(
+            dataSourceText = complicationWireData.shortText!!.getTextAt(
                 Resources.getSystem(),
                 LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
-            )*/
-            dataSourceText = "test"
+            )
         }
         if (complicationWireData.hasShortTitle()) {
             Log.d(tag, "hasShortTitle")
@@ -105,7 +105,10 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "hasSmallImage")
             dataSourceSmallImage = complicationWireData.smallImage
         }
-
+        if (complicationWireData.hasBurnInProtectionSmallImage()) {
+            Log.d(tag, "hasBurnInProtectionSmallImage")
+            dataSourceBurnInProtectionSmallImage = complicationWireData.burnInProtectionSmallImage
+        }
         if (complicationWireData.type == ComplicationData.Companion.TYPE_SHORT_TEXT) {
             Log.d(tag, "complication is ComplicationType.SHORT_TEXT")
             if (dataSourceText != null) {
@@ -151,10 +154,21 @@ class WatchFaceCanvasRenderer(
             }
             if (dataSourceSmallImage != null) {
                 Log.d(tag, "Setting smallImage")
-                dataSourceSmallImage.setTint(Color.BLUE)
+                //dataSourceSmallImage.setTint(Color.BLUE)
                 shortTextComplicationDataBuilder!!.setSmallImage(
-                    SmallImage.Builder(dataSourceSmallImage, SmallImageType.PHOTO)
-                        .build()
+                    SmallImage.Builder(
+                        dataSourceSmallImage,
+                        SmallImageType.ICON
+                    ).build()
+                )
+            }
+            if (dataSourceBurnInProtectionSmallImage != null) {
+                //dataSourceBurnInProtectionSmallImage.setTint(Color.BLUE)
+                shortTextComplicationDataBuilder!!.setSmallImage(
+                    SmallImage.Builder(
+                        dataSourceBurnInProtectionSmallImage,
+                        SmallImageType.ICON
+                    ).build()
                 )
             }
             complication.renderer.loadData(shortTextComplicationDataBuilder!!.build(), false)
