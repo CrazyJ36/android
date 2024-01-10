@@ -2,14 +2,18 @@ package com.crazyj36.complicationtest
 
 import android.annotation.SuppressLint
 import android.app.PendingIntent
+import android.content.ComponentName
 import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.Icon
+import android.support.wearable.complications.ComplicationData
 import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
+import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.complications.data.MonochromaticImage
@@ -35,6 +39,8 @@ class WatchFaceCanvasRenderer(
     interactiveDrawModeUpdateDelayMillis = 16L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
+    private val tag = "COMPLICATION_TEST"
+    private val paint = Paint()
 
     override fun renderHighlightLayer(
         canvas: Canvas,
@@ -52,72 +58,124 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
+
         val complication = complicationSlotsManager.complicationSlots[0]
         val complicationWireData = complication!!.complicationData.value.asWireComplicationData()
-        val newShortTextComplicationData: ShortTextComplicationData.Builder?
-        val dataSourceTapAction: PendingIntent?
-        val dataSourceText: CharSequence?
-        val dataSourceIcon: Icon?
-        val dataSourceBurnInProtectionIcon: Icon?
+        var dataSourceDataSource: ComponentName? = null
+        var dataSourceTapAction: PendingIntent? = null
+        var dataSourceText: CharSequence? = null
+        var dataSourceTitle: CharSequence? = null
+        var dataSourceIcon: Icon? = null
+        var dataSourceBurnInProtectionIcon: Icon? = null
+        var dataSourceSmallImage: Icon? = null
 
+        if (complicationWireData.dataSource != null) {
+            Log.d(tag, "hasDataSource")
+            dataSourceDataSource = complication.complicationData.value.dataSource
+        }
+        if (complicationWireData.hasTapAction()) {
+            Log.d(tag, "hasTapAction")
+            dataSourceTapAction = complication.complicationData.value.tapAction
+        }
         if (complicationWireData.hasShortText()) {
+            Log.d(tag, "hasShortText")
             dataSourceText = complicationWireData.shortText!!.getTextAt(
                 Resources.getSystem(),
                 LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
             )
-            newShortTextComplicationData = ShortTextComplicationData.Builder(
-                PlainComplicationText.Builder(dataSourceText).build(),
-                PlainComplicationText.Builder("Draw custom complication icon on watchface").build()
+        }
+        if (complicationWireData.hasShortTitle()) {
+            Log.d(tag, "hasShortTitle")
+            dataSourceTitle = complicationWireData.shortTitle!!.getTextAt(
+                Resources.getSystem(),
+                LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
             )
-            if (complication.complicationData.value.dataSource != null) {
-                Log.d("COMPLICATION_TEST", "hasDataSource")
-                newShortTextComplicationData
-                    .setDataSource(complication.complicationData.value.dataSource)
-            }
-            if (complication.complicationData.value.tapAction != null) {
-                Log.d("COMPLICATION_TEST", "hasTapAction")
-                dataSourceTapAction = complication.complicationData.value.tapAction
-                newShortTextComplicationData.setTapAction(dataSourceTapAction)
-            }
-            if (complicationWireData.hasIcon()) {
-                Log.d("COMPLICATION_TEST", "hasIcon")
-                //val monochromaticImage = MonochromaticImage.Builder(dataSourceIcon)
-                //val monochromaticImageBuilt = monochromaticImage.build().image
-                //val monochromaticImageColored = monochromaticImageBuilt.setTint(Color.BLUE)
-                newShortTextComplicationData.setMonochromaticImage(
-                    MonochromaticImage.Builder(
-                        complicationWireData.icon!!
-                            .setTint(Color.BLUE)
+        }
+        if (complicationWireData.hasIcon()) {
+            Log.d(tag, "hasIcon")
+            dataSourceIcon = complicationWireData.icon!!.setTint(Color.BLUE)
+        }
+        if (complicationWireData.hasBurnInProtectionIcon()) {
+            Log.d(tag, "hasBurnInProtectionIcon")
+            dataSourceBurnInProtectionIcon = complicationWireData.burnInProtectionIcon!!.setTint(Color.BLUE)
+        }
+        if (complicationWireData.hasSmallImage()) {
+            Log.d(tag, "hasSmallImage")
+            dataSourceSmallImage = complicationWireData.smallImage
+        }
+
+        if (complicationWireData.type == ComplicationData.Companion.TYPE_SHORT_TEXT) {
+            Log.d(tag, "complication is ComplicationType.SHORT_TEXT")
+            var shortTextComplicationData: ShortTextComplicationData.Builder? = null
+            if (dataSourceText != null) {
+                Log.d(tag, "Setting text")
+                shortTextComplicationData = ShortTextComplicationData.Builder(
+                    PlainComplicationText.Builder(dataSourceText).build(),
+                    PlainComplicationText.Builder(
+                        "Draw custom complication icon on watchface"
                     ).build()
                 )
             }
-            if (complicationWireData.hasBurnInProtectionIcon()) {
-                Log.d("COMPLICATION_TEST", "hasBurnInProtectionIcon")
-                val dataSourceBurnInProtectionIcon = complicationWireData.icon!!
-                val monochromaticImage = MonochromaticImage.Builder(dataSourceBurnInProtectionIcon)
-                val monochromaticImageBuilt = monochromaticImage.build().image
-                val monochromaticImageColored = monochromaticImageBuilt.setTint(Color.BLUE)
-                newShortTextComplicationData!!.setMonochromaticImage(
-                    MonochromaticImage.Builder(monochromaticImageColored).build()
+            if (dataSourceDataSource != null) {
+                Log.d(tag, "Settings dataSource")
+                shortTextComplicationData!!.setDataSource(dataSourceDataSource)
+            }
+            if (dataSourceTapAction != null) {
+                Log.d(tag, "Setting tapAction")
+                shortTextComplicationData!!.setTapAction(dataSourceTapAction)
+            }
+            if (dataSourceTitle != null) {
+                Log.d(tag, "Setting title")
+                shortTextComplicationData!!.setTitle(
+                    PlainComplicationText.Builder(dataSourceTitle).build()
                 )
             }
-            if (complicationWireData.hasSmallImage()) {
-                Log.d("COMPLICATION_TEST", "hasSmallImage")
-                val dataSourceSmallImage = complicationWireData.smallImage
-                dataSourceSmallImage!!.setTint(Color.BLUE)
-                newShortTextComplicationData!!.setSmallImage(SmallImage.Builder(
-                    dataSourceSmallImage, SmallImageType.PHOTO).build())
+            if (dataSourceIcon != null || dataSourceBurnInProtectionIcon != null) {
+                Log.d(tag, "Setting icon")
+                try {
+                    shortTextComplicationData!!.setMonochromaticImage(
+                        MonochromaticImage.Builder(dataSourceIcon!!)
+                            .build()
+                    )
+                } catch (exception: Exception) {
+                    Log.d(
+                        "COMPLICATION_TEST",
+                        "Setting dataSourceIcon didn't work:\n" +
+                                exception.localizedMessage +
+                                "\nUsing dataSourceBurnInProtectionIcon."
+                    )
+                    shortTextComplicationData!!.setMonochromaticImage(
+                        MonochromaticImage.Builder(dataSourceBurnInProtectionIcon!!)
+                            .build()
+                    )
+                }
             }
-
+            if (dataSourceSmallImage != null) {
+                Log.d(tag, "Setting smallImage")
+                shortTextComplicationData!!.setSmallImage(
+                    SmallImage.Builder(dataSourceSmallImage, SmallImageType.PHOTO)
+                        .build()
+                )
+            }
             complication.renderer.loadData(
-                newShortTextComplicationData!!.build(),
+                shortTextComplicationData!!.build(),
                 false
             )
-            Log.d("COMPLICATION_TEST", "Rendering custom complication.")
         } else {
-            Log.d("COMPLICATION_TEST", "Rendering default complication.")
+            Log.d(tag, "Complication is not ComplicationType.SHORT_TEXT.\n" +
+            "Rendering default complication")
         }
         complication.render(canvas, zonedDateTime, renderParameters)
+
+        if (renderParameters.drawMode == DrawMode.AMBIENT) {
+            paint.setARGB(255, 255, 255, 255)
+            canvas.drawText(
+                "Ambient",
+                (canvas.width / 2f),
+                canvas.height - 50f,
+                paint
+            )
+        }
     }
 
     class MySharedAssets : SharedAssets {
