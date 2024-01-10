@@ -61,7 +61,6 @@ class WatchFaceCanvasRenderer(
         val complication = complicationSlotsManager.complicationSlots[0]
         val complicationWireData = complication!!.complicationData.value.asWireComplicationData()
         var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
-        var shortTextComplicationData: ShortTextComplicationData? = null
         var dataSourceDataSource: ComponentName? = null
         var dataSourceTapAction: PendingIntent? = null
         var dataSourceText: CharSequence? = null
@@ -95,7 +94,7 @@ class WatchFaceCanvasRenderer(
         }
         if (complicationWireData.hasIcon()) {
             Log.d(tag, "hasIcon")
-            dataSourceIcon = complicationWireData.icon!!.setTint(Color.BLUE)
+            dataSourceIcon = complicationWireData.icon!!
         }
         if (complicationWireData.hasBurnInProtectionIcon()) {
             Log.d(tag, "hasBurnInProtectionIcon")
@@ -132,12 +131,9 @@ class WatchFaceCanvasRenderer(
                 )
             }
             if (dataSourceIcon != null) {
-                dataSourceIcon.setTint(Color.BLUE)
                 Log.d(tag, "Setting icon")
                 shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                    MonochromaticImage.Builder(dataSourceIcon).build().apply {
-                        this.image.setTint(Color.BLUE)
-                    }
+                    MonochromaticImage.Builder(dataSourceIcon.setTint(Color.BLUE)).build()
                 )
             }
             if (dataSourceSmallImage != null) {
@@ -147,12 +143,7 @@ class WatchFaceCanvasRenderer(
                         .build()
                 )
             }
-            shortTextComplicationData = shortTextComplicationDataBuilder!!.build().apply {
-                monochromaticImage!!.image.setTint(Color.BLUE)
-            }
-            complication.renderer.loadData(shortTextComplicationData.apply {
-                monochromaticImage!!.image.setTint(Color.BLUE)
-            }, true)
+            complication.renderer.loadData(shortTextComplicationDataBuilder!!.build(), true)
 
         } else {
             Log.d(tag, "Complication is not ComplicationType.SHORT_TEXT.\n" +
