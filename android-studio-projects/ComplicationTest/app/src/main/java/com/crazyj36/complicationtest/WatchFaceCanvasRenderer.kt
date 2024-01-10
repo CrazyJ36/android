@@ -131,19 +131,11 @@ class WatchFaceCanvasRenderer(
                     PlainComplicationText.Builder(dataSourceTitle).build()
                 )
             }
-            if (dataSourceBurnInProtectionIcon != null) {
-                Log.d(tag, "Setting icon")
-                shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                    MonochromaticImage.Builder(dataSourceBurnInProtectionIcon).build()
-                ).build().apply {
-                    monochromaticImage!!.image.setTint(Color.BLUE)
-                }
-            }
             if (dataSourceIcon != null) {
                 Log.d(tag, "Setting icon")
                 shortTextComplicationDataBuilder!!.setMonochromaticImage(
                     MonochromaticImage.Builder(dataSourceIcon).build()
-                ).build().apply {
+                ).build().run {
                     monochromaticImage!!.image.setTint(Color.BLUE)
                 }
             }
