@@ -174,7 +174,7 @@ class WatchFaceCanvasRenderer(
                 )
             }
             shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
-            complication.renderer.loadData(shortTextComplicationData!!, false)
+            complication.renderer.loadData(shortTextComplicationData!!, true)
         } else {
             Log.d(tag, "Complication is not ComplicationType.SHORT_TEXT.\n" +
             "Rendering default complication")
