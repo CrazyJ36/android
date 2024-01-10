@@ -4,11 +4,14 @@ import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.res.Resources
+import android.graphics.BlendMode
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.PorterDuff
 import android.graphics.Rect
 import android.graphics.drawable.Icon
+import android.os.Build
 import android.support.wearable.complications.ComplicationData
 import android.util.Log
 import android.view.SurfaceHolder
@@ -134,9 +137,15 @@ class WatchFaceCanvasRenderer(
             }
             if (dataSourceIcon != null) {
                 Log.d(tag, "Setting icon")
-                shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                    MonochromaticImage.Builder(dataSourceIcon).build()
-                )
+                if (Build.VERSION.SDK_INT >= 29) {
+                    shortTextComplicationDataBuilder!!.setMonochromaticImage(
+                        MonochromaticImage.Builder(
+                            dataSourceIcon.setTint(Color.BLUE)
+                                .setTintMode(PorterDuff.Mode.SRC_ATOP)
+                                .setTintBlendMode(BlendMode.SRC_ATOP)
+                        ).build()
+                    )
+                }
             }
             if (dataSourceSmallImage != null) {
                 Log.d(tag, "Setting smallImage")
@@ -145,13 +154,12 @@ class WatchFaceCanvasRenderer(
                         .build()
                 )
             }
-            shortTextComplicationDataBuilder?.apply {
-                build().monochromaticImage!!.image.setTint(Color.BLUE)
-            }?.let { complication.renderer.loadData(it.build(), false) }
+            complication.renderer.loadData(shortTextComplicationDataBuilder!!.build(), false)
         } else {
             Log.d(tag, "Complication is not ComplicationType.SHORT_TEXT.\n" +
             "Rendering default complication")
         }
+
         complication.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
