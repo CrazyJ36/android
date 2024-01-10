@@ -12,15 +12,17 @@ import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
 import android.util.Log
 import android.view.SurfaceHolder
+import androidx.wear.protolayout.expression.DynamicBuilders
+import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.complications.data.MonochromaticImage
-import androidx.wear.watchface.complications.data.PhotoImageComplicationData
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
+import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.complications.data.SmallImageType
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.LocalDateTime
@@ -41,7 +43,20 @@ class WatchFaceCanvasRenderer(
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
     private val tag = "COMPLICATION_TEST"
-
+    private var complication: ComplicationSlot? = null
+    private var complicationWireData: ComplicationData? = null
+    private var dataSourceDataSource: ComponentName? = null
+    private var dataSourceTapAction: PendingIntent? = null
+    private var dataSourceText: CharSequence? = null
+    private var dataSourceContentDescription: CharSequence? = null
+    private var dataSourceTitle: CharSequence? = null
+    private var dataSourceIcon: Icon? = null
+    private var dataSourceBurnInProtectionIcon: Icon? = null
+    private var dataSourceSmallImage: Icon? = null
+    private var dataSourceBurnInProtectionSmallImage: Icon? = null
+    private var dataSourceLargeImage: Icon? = null
+    private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
+    private val paint = Paint()
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
@@ -59,20 +74,122 @@ class WatchFaceCanvasRenderer(
         sharedAssets: MySharedAssets
     ) {
 
-        val complication = complicationSlotsManager.complicationSlots[0]
-        val complicationWireData = complication!!.complicationData.value.asWireComplicationData()
-        var dataSourceDataSource: ComponentName? = null
-        var dataSourceTapAction: PendingIntent? = null
-        var dataSourceText: CharSequence? = null
-        var dataSourceContentDescription: CharSequence? = null
-        var dataSourceTitle: CharSequence? = null
-        var dataSourceIcon: Icon? = null
-        var dataSourceBurnInProtectionIcon: Icon? = null
-        var dataSourceSmallImage: Icon? = null
-        var dataSourceBurnInProtectionSmallImage: Icon? = null
-        var dataSourceLargeImage: Icon? = null
-        val paint = Paint()
+        complication = complicationSlotsManager.complicationSlots[0]
+        complicationWireData = complication!!.complicationData.value.asWireComplicationData()
+        dataSourceDataSource = null
+        dataSourceTapAction = null
+        dataSourceText = null
+        dataSourceContentDescription = null
+        dataSourceTitle = null
+        dataSourceIcon = null
+        dataSourceBurnInProtectionIcon = null
+        dataSourceSmallImage = null
+        dataSourceBurnInProtectionSmallImage = null
+        dataSourceLargeImage = null
+        dataSourceDynamicValues = null
 
+        getDataSourceInfo(complication!!, complicationWireData!!, zonedDateTime)
+
+        if (complicationWireData!!.type == ComplicationData.Companion.TYPE_SHORT_TEXT) {
+            Log.d(tag, "Complication is ComplicationType.SHORT_TEXT")
+            var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
+            if (dataSourceText != null && dataSourceContentDescription != null) {
+                Log.d(tag, "Setting text")
+                shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
+                    PlainComplicationText.Builder(dataSourceText!!).build(),
+                    PlainComplicationText.Builder(dataSourceContentDescription!!).build()
+                )
+            }
+            if (shortTextComplicationDataBuilder != null) {
+                if (dataSourceDataSource != null) {
+                    Log.d(tag, "Setting dataSource")
+                    shortTextComplicationDataBuilder.setDataSource(dataSourceDataSource)
+                }
+                if (dataSourceTapAction != null) {
+                    Log.d(tag, "Setting tapAction")
+                    shortTextComplicationDataBuilder.setTapAction(dataSourceTapAction)
+                }
+                if (dataSourceTitle != null) {
+                    Log.d(tag, "Setting title")
+                    shortTextComplicationDataBuilder.setTitle(
+                        PlainComplicationText.Builder(dataSourceTitle!!).build()
+                    )
+                }
+                if (dataSourceIcon != null) {
+                    Log.d(tag, "Setting icon")
+                    dataSourceIcon!!.setTint(Color.BLUE)
+                    shortTextComplicationDataBuilder.setMonochromaticImage(
+                        MonochromaticImage.Builder(
+                            dataSourceIcon!!
+                        ).build()
+                    )
+                }
+                if (dataSourceBurnInProtectionIcon != null) {
+                    Log.d(tag, "Setting burnInProtectionIcon")
+                    dataSourceBurnInProtectionIcon!!.setTint(Color.BLUE)
+                    shortTextComplicationDataBuilder.setMonochromaticImage(
+                        MonochromaticImage.Builder(
+                            dataSourceBurnInProtectionIcon!!
+                        ).build()
+                    )
+                }
+                complication!!.renderer.loadData(shortTextComplicationDataBuilder.build(), false)
+            }
+        } else if (complicationWireData!!.type == ComplicationData.Companion.TYPE_SMALL_IMAGE) {
+            Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE")
+            var smallImageComplicationDataBuilder: SmallImageComplicationData.Builder? = null
+            if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
+                Log.d(tag, "Setting smallImage")
+                smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
+                    SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
+                    PlainComplicationText.Builder(dataSourceContentDescription!!).build()
+                )
+            }
+            if (dataSourceBurnInProtectionSmallImage != null && dataSourceContentDescription != null) {
+                Log.d(tag, "Setting burnInProtectionSmallImage")
+                smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
+                    SmallImage.Builder(
+                        dataSourceBurnInProtectionSmallImage!!,
+                        SmallImageType.ICON
+                    ).build(),
+                    PlainComplicationText.Builder(dataSourceContentDescription!!).build()
+                )
+            }
+            if (smallImageComplicationDataBuilder != null) {
+                if (dataSourceDataSource != null) {
+                    Log.d(tag, "Setting dataSource")
+                    smallImageComplicationDataBuilder.setDataSource(dataSourceDataSource)
+                }
+                if (dataSourceTapAction != null) {
+                    Log.d(tag, "Setting tapAction")
+                    smallImageComplicationDataBuilder.setTapAction(dataSourceTapAction)
+                }
+                complication!!.renderer.loadData(smallImageComplicationDataBuilder.build(), false)
+            }
+        } else {
+            Log.d(tag, "Unknown complication type, rendering default.")
+        }
+        complication!!.render(canvas, zonedDateTime, renderParameters)
+        if (renderParameters.drawMode == DrawMode.AMBIENT) {
+            Log.d(tag, "Ambient")
+            paint.setARGB(255, 255, 255, 255)
+            paint.textAlign = Paint.Align.CENTER
+            paint.textSize = 14f
+            canvas.drawText(
+                "Ambient",
+                canvas.width / 2f,
+                canvas.height - (canvas.height / 7).toFloat(),
+                paint
+            )
+        }
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun getDataSourceInfo(
+        complication: ComplicationSlot,
+        complicationWireData: ComplicationData,
+        zonedDateTime: ZonedDateTime
+    ) {
         if (complicationWireData.dataSource != null) {
             Log.d(tag, "hasDataSource")
             dataSourceDataSource = complication.complicationData.value.dataSource
@@ -89,7 +206,7 @@ class WatchFaceCanvasRenderer(
             )
         }
         if (complicationWireData.hasContentDescription()) {
-            Log.d(tag,"hasContentDescription")
+            Log.d(tag, "hasContentDescription")
             dataSourceContentDescription = complicationWireData.contentDescription!!.getTextAt(
                 Resources.getSystem(),
                 LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
@@ -104,7 +221,7 @@ class WatchFaceCanvasRenderer(
         }
         if (complicationWireData.hasIcon()) {
             Log.d(tag, "hasIcon")
-            dataSourceIcon = complicationWireData.icon!!.setTint(Color.BLUE)
+            dataSourceIcon = complicationWireData.icon
         }
         if (complicationWireData.hasBurnInProtectionIcon()) {
             Log.d(tag, "hasBurnInProtectionIcon")
@@ -122,100 +239,9 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "hasLargeImage")
             dataSourceLargeImage = complicationWireData.largeImage
         }
-        if (complicationWireData.type == ComplicationData.Companion.TYPE_SHORT_TEXT) {
-            Log.d(tag, "Complication is ComplicationType.SHORT_TEXT")
-            var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
-            if (dataSourceText != null && dataSourceContentDescription != null) {
-                Log.d(tag, "Setting text")
-                shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
-                    PlainComplicationText.Builder(dataSourceText).build(),
-                    PlainComplicationText.Builder(dataSourceContentDescription).build()
-                )
-            }
-            if (shortTextComplicationDataBuilder != null) {
-                if (dataSourceDataSource != null) {
-                    Log.d(tag, "Setting dataSource")
-                    shortTextComplicationDataBuilder.setDataSource(dataSourceDataSource)
-                }
-                if (dataSourceTapAction != null) {
-                    Log.d(tag, "Setting tapAction")
-                    shortTextComplicationDataBuilder.setTapAction(dataSourceTapAction)
-                }
-                if (dataSourceTitle != null) {
-                    Log.d(tag, "Setting title")
-                    shortTextComplicationDataBuilder.setTitle(
-                        PlainComplicationText.Builder(dataSourceTitle).build()
-                    )
-                }
-                if (dataSourceIcon != null) {
-                    Log.d(tag, "Setting icon")
-                    dataSourceIcon.setTint(Color.BLUE)
-                    shortTextComplicationDataBuilder.setMonochromaticImage(
-                        MonochromaticImage.Builder(
-                            dataSourceIcon
-                        ).build()
-                    )
-                }
-                if (dataSourceBurnInProtectionIcon != null) {
-                    Log.d(tag, "Setting burnInProtectionIcon")
-                    dataSourceBurnInProtectionIcon.setTint(Color.BLUE)
-                    shortTextComplicationDataBuilder.setMonochromaticImage(
-                        MonochromaticImage.Builder(
-                            dataSourceBurnInProtectionIcon
-                        ).build()
-                    )
-                }
-                if (dataSourceSmallImage != null) {
-                    Log.d(tag, "Setting smallImage")
-                    dataSourceSmallImage.setTint(Color.BLUE)
-                    shortTextComplicationDataBuilder.setSmallImage(
-                        SmallImage.Builder(
-                            dataSourceSmallImage,
-                            SmallImageType.ICON
-                        ).build()
-                    )
-                }
-                if (dataSourceBurnInProtectionSmallImage != null) {
-                    dataSourceBurnInProtectionSmallImage.setTint(Color.BLUE)
-                    shortTextComplicationDataBuilder.setSmallImage(
-                        SmallImage.Builder(
-                            dataSourceBurnInProtectionSmallImage,
-                            SmallImageType.ICON
-                        ).build()
-                    )
-                }
-
-                complication.renderer.loadData(shortTextComplicationDataBuilder.build(), false)
-            }
-        } else if (complicationWireData.type == ComplicationData.Companion.TYPE_SMALL_IMAGE) {
-            Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE")
-            var photoImageComplicationDataBuilder: PhotoImageComplicationData.Builder? = null
-            if (dataSourceLargeImage != null && dataSourceContentDescription != null) {
-                Log.d(tag, "Setting largeImage")
-                photoImageComplicationDataBuilder = PhotoImageComplicationData.Builder(
-                    dataSourceLargeImage,
-                    PlainComplicationText.Builder(dataSourceContentDescription).build()
-                )
-            }
-            if (photoImageComplicationDataBuilder != null) {
-                complication.renderer.loadData(photoImageComplicationDataBuilder.build(), false)
-            }
-        } else {
-            Log.d(tag, "Unknown complication type, rendering default.")
-        }
-
-        complication.render(canvas, zonedDateTime, renderParameters)
-        if (renderParameters.drawMode == DrawMode.AMBIENT) {
-            Log.d(tag, "Ambient")
-            paint.setARGB(255, 255, 255, 255)
-            paint.textAlign = Paint.Align.CENTER
-            paint.textSize = 11f
-            canvas.drawText(
-                "Ambient",
-                canvas.width / 2f,
-                canvas.height - (canvas.height / 7).toFloat(),
-                paint
-            )
+        if (complicationWireData.hasDynamicValues()) {
+            Log.d(tag, "hasDynamicValues")
+            dataSourceDynamicValues = complicationWireData.rangedDynamicValue
         }
     }
 
