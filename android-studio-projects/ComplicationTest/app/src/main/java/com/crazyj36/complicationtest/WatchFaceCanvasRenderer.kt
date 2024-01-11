@@ -20,6 +20,7 @@ import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
+import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
@@ -151,17 +152,22 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "Setting tapAction")
                 shortTextComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
-            if (dataSourceIcon != null) {
+            if (dataSourceTitle != null) {
+                shortTextComplicationDataBuilder!!.setTitle(
+                    PlainComplicationText.Builder(dataSourceTitle!!).build()
+                )
+            }
+            if (dataSourceIcon != null) { // setting this to blue and using smallimage.builder works properly on emulator
                 Log.d(tag, "Setting icon")
-                dataSourceIcon!!.setTint(Color.BLUE)
-                shortTextComplicationDataBuilder!!.setSmallImage(
-                    SmallImage.Builder(
-                        dataSourceIcon!!,
-                        SmallImageType.ICON
+                shortTextComplicationDataBuilder!!.setMonochromaticImage(
+                    MonochromaticImage.Builder(
+                        dataSourceIcon!!
                     ).build()
                 )
             }
-            complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build(), false)
+            val shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
+            complication!!.renderer.loadData(shortTextComplicationData, false)
+            shortTextComplicationData.monochromaticImage!!.image.setTint(Color.BLUE)
         }
     }
     @SuppressLint("RestrictedApi")
@@ -172,7 +178,6 @@ class WatchFaceCanvasRenderer(
             if (Build.VERSION.SDK_INT >= 28) {
                 if (dataSourceSmallImage!!.type == SmallImageType.ICON.ordinal) {
                     Log.d(tag, "SmallImageType.ICON")
-                    dataSourceSmallImage!!.setTint(Color.BLUE)
                     smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                         SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
                         PlainComplicationText.Builder(dataSourceContentDescription!!).build()
