@@ -3,8 +3,8 @@ package com.crazyj36.complicationtest
 import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.ComponentName
+import android.content.Context
 import android.content.res.Resources
-import android.graphics.BlendMode
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -32,6 +32,7 @@ import java.time.LocalDateTime
 import java.time.ZonedDateTime
 
 class WatchFaceCanvasRenderer(
+    context: Context,
     surfaceHolder: SurfaceHolder,
     watchState: WatchState,
     var complicationSlotsManager: ComplicationSlotsManager,
@@ -46,6 +47,7 @@ class WatchFaceCanvasRenderer(
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
     private val tag = "COMPLICATION_TEST"
+    private val context = context
     private var zonedDateTime: ZonedDateTime? = null
     private var complication: ComplicationSlot? = null
     private var complicationWireData: ComplicationData? = null
@@ -163,15 +165,22 @@ class WatchFaceCanvasRenderer(
                     PlainComplicationText.Builder(dataSourceTitle!!).build()
                 )
             }
-            if (dataSourceIcon != null) { // setting this to blue and using smallimage.builder works properly on emulator
+            if (dataSourceIcon != null) { // setting this to blue and using smallImage.builder works properly on emulator
                 Log.d(tag, "Setting icon")
                 shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                    MonochromaticImage.Builder(dataSourceIcon!!).build()
+                    MonochromaticImage.Builder(
+                        dataSourceIcon!!
+                    ).build()
                 )
             }
             shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
-            if (shortTextComplicationData!!.monochromaticImage != null)
-                shortTextComplicationData!!.monochromaticImage!!.image.run  { setTint(Color.BLUE) }
+            if (shortTextComplicationData!!.monochromaticImage != null) {
+                shortTextComplicationData!!.monochromaticImage!!.image.apply {
+                    setTint(Color.BLUE)
+                }
+            } else {
+                Log.d(tag, "monochromaticImage is null, can't tint.")
+            }
             complication!!.renderer.loadData(shortTextComplicationData!!, true)
         }
     }
@@ -223,7 +232,7 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "Setting tapAction")
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
-            complication!!.renderer.loadData(smallImageComplicationDataBuilder!!.build(), false)
+            complication!!.renderer.loadData(smallImageComplicationDataBuilder!!.build(), true)
         }
     }
 
