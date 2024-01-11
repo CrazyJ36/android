@@ -166,7 +166,9 @@ class WatchFaceCanvasRenderer(
                 )
             }
             val shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
-            shortTextComplicationData.monochromaticImage!!.image.setTint(Color.BLUE)
+            if (shortTextComplicationData.monochromaticImage != null) {
+                shortTextComplicationData.monochromaticImage!!.image.setTint(Color.BLUE)
+            } else Log.d(tag, "monochromatic image is null")
             complication!!.renderer.loadData(shortTextComplicationData, false)
         }
     }
