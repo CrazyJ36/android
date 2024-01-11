@@ -45,6 +45,12 @@ class WatchFaceCanvasRenderer(
     private val tag = "COMPLICATION_TEST"
     private var complication: ComplicationSlot? = null
     private var complicationWireData: ComplicationData? = null
+
+    private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
+    private var shortTextComplicationData: ShortTextComplicationData? = null
+    private var smallImageComplicationDataBuilder: SmallImageComplicationData.Builder? = null
+    private var smallImageComplicationData: SmallImageComplicationData? = null
+
     private var dataSourceDataSource: ComponentName? = null
     private var dataSourceTapAction: PendingIntent? = null
     private var dataSourceText: CharSequence? = null
@@ -79,6 +85,10 @@ class WatchFaceCanvasRenderer(
     private fun myRendering(canvas: Canvas, zonedDateTime: ZonedDateTime) {
         complication = complicationSlotsManager.complicationSlots[0]
         complicationWireData = complication!!.complicationData.value.asWireComplicationData()
+        shortTextComplicationDataBuilder = null
+        shortTextComplicationData = null
+        smallImageComplicationDataBuilder = null
+        smallImageComplicationData = null
         dataSourceDataSource = null
         dataSourceTapAction = null
         dataSourceText = null
@@ -180,7 +190,6 @@ class WatchFaceCanvasRenderer(
     @SuppressLint("RestrictedApi")
     private fun setShortTextData() {
         Log.d(tag, "Complication is ComplicationType.SHORT_TEXT")
-        var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
         if (dataSourceText != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting text")
             shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
@@ -191,22 +200,22 @@ class WatchFaceCanvasRenderer(
         if (shortTextComplicationDataBuilder != null) {
             if (dataSourceDataSource != null) {
                 Log.d(tag, "Setting dataSource")
-                shortTextComplicationDataBuilder.setDataSource(dataSourceDataSource)
+                shortTextComplicationDataBuilder!!.setDataSource(dataSourceDataSource)
             }
             if (dataSourceTapAction != null) {
                 Log.d(tag, "Setting tapAction")
-                shortTextComplicationDataBuilder.setTapAction(dataSourceTapAction)
+                shortTextComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
             if (dataSourceTitle != null) {
                 Log.d(tag, "Setting title")
-                shortTextComplicationDataBuilder.setTitle(
+                shortTextComplicationDataBuilder!!.setTitle(
                     PlainComplicationText.Builder(dataSourceTitle!!).build()
                 )
             }
             if (dataSourceBurnInProtectionIcon != null) {
                 Log.d(tag, "Setting burnInProtectionIcon")
                 dataSourceBurnInProtectionIcon!!
-                shortTextComplicationDataBuilder.setMonochromaticImage(
+                shortTextComplicationDataBuilder!!.setMonochromaticImage(
                     MonochromaticImage.Builder(
                         dataSourceBurnInProtectionIcon!!
                     ).build()
@@ -214,8 +223,8 @@ class WatchFaceCanvasRenderer(
             }
             if (dataSourceIcon != null) {
                 Log.d(tag, "Setting icon")
-                dataSourceIcon!!.setTint(Color.BLUE)
-                shortTextComplicationDataBuilder.setMonochromaticImage(
+                dataSourceIcon!!
+                shortTextComplicationDataBuilder!!.setMonochromaticImage(
                     MonochromaticImage.Builder(
                         dataSourceIcon!!
                     ).build()
@@ -223,14 +232,21 @@ class WatchFaceCanvasRenderer(
             }
             if (dataSourceSmallImage != null) {
                 Log.d(tag, "Setting smallImage")
-                dataSourceSmallImage!!.setTint(Color.BLUE)
-                shortTextComplicationDataBuilder.setMonochromaticImage(
+                dataSourceSmallImage!!
+                shortTextComplicationDataBuilder!!.setMonochromaticImage(
                     MonochromaticImage.Builder(
                         dataSourceSmallImage!!
                     ).build()
                 )
             }
-            complication!!.renderer.loadData(shortTextComplicationDataBuilder.build(), false)
+            shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
+            complication!!.renderer.loadData(shortTextComplicationData!!, false)
+            if (shortTextComplicationData!!.monochromaticImage != null) {
+                shortTextComplicationData!!.monochromaticImage!!.image.setTint(Color.BLUE)
+            }
+            if (shortTextComplicationData!!.smallImage != null) {
+                shortTextComplicationData!!.smallImage!!.image.setTint(Color.BLUE)
+            }
         }
     }
     @SuppressLint("RestrictedApi")
