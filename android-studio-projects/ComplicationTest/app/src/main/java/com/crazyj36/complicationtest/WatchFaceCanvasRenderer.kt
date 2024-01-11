@@ -166,8 +166,8 @@ class WatchFaceCanvasRenderer(
                 )
             }
             val shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
-            complication!!.renderer.loadData(shortTextComplicationData, false)
             shortTextComplicationData.monochromaticImage!!.image.setTint(Color.BLUE)
+            complication!!.renderer.loadData(shortTextComplicationData, false)
         }
     }
     @SuppressLint("RestrictedApi")
