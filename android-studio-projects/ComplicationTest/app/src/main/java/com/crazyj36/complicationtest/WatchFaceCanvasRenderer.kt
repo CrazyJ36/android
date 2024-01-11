@@ -162,14 +162,15 @@ class WatchFaceCanvasRenderer(
             }
             if (dataSourceIcon != null) { // setting this to blue and using smallimage.builder works properly on emulator
                 Log.d(tag, "Setting icon")
-                shortTextComplicationDataBuilder!!.setSmallImage(
-                    SmallImage.Builder(
-                        MonochromaticImage.Builder(dataSourceIcon!!).build().image.setTint(Color.BLUE),
+                shortTextComplicationDataBuilder!!.setMonochromaticImage(
+                    MonochromaticImage.Builder(SmallImage.Builder(
+                        dataSourceIcon!!.setTint(Color.BLUE),
                         SmallImageType.ICON
+                    ).build().image
                     ).build()
                 )
-                shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
             }
+            shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
             complication!!.renderer.loadData(shortTextComplicationData!!, true)
         }
     }
