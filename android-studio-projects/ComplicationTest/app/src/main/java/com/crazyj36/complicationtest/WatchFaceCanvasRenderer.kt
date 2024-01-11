@@ -8,6 +8,7 @@ import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.PorterDuff
 import android.graphics.Rect
 import android.graphics.drawable.Icon
 import android.os.Build
@@ -168,20 +169,12 @@ class WatchFaceCanvasRenderer(
             if (dataSourceIcon != null) { // setting this to blue and using smallImage.builder works properly on emulator
                 Log.d(tag, "Setting icon")
                 shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                    MonochromaticImage.Builder(
-                        dataSourceIcon!!
-                    ).build()
+                    MonochromaticImage.Builder(dataSourceIcon!!).build()
                 )
             }
-            shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
-            if (shortTextComplicationData!!.monochromaticImage != null) {
-                shortTextComplicationData!!.monochromaticImage!!.image.apply {
-                    setTint(Color.BLUE)
-                }
-            } else {
-                Log.d(tag, "monochromaticImage is null, can't tint.")
-            }
-            complication!!.renderer.loadData(shortTextComplicationData!!, true)
+            complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build().apply {
+                monochromaticImage!!.image.setTint(Color.BLUE)
+            }, false)
         }
     }
     @SuppressLint("RestrictedApi")
@@ -232,7 +225,7 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "Setting tapAction")
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
-            complication!!.renderer.loadData(smallImageComplicationDataBuilder!!.build(), true)
+            complication!!.renderer.loadData(smallImageComplicationDataBuilder!!.build(), false)
         }
     }
 
