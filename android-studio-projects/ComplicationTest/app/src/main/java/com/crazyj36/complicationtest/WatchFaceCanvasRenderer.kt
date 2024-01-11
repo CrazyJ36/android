@@ -17,9 +17,9 @@ import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
+import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
-import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
@@ -44,6 +44,7 @@ class WatchFaceCanvasRenderer(
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
     private val tag = "COMPLICATION_TEST"
+    private var zonedDateTime: ZonedDateTime? = null
     private var complication: ComplicationSlot? = null
     private var complicationWireData: ComplicationData? = null
     private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
@@ -54,9 +55,7 @@ class WatchFaceCanvasRenderer(
     private var dataSourceContentDescription: CharSequence? = null
     private var dataSourceTitle: CharSequence? = null
     private var dataSourceIcon: Icon? = null
-    private var dataSourceBurnInProtectionIcon: Icon? = null
     private var dataSourceSmallImage: Icon? = null
-    private var dataSourceBurnInProtectionSmallImage: Icon? = null
     private var dataSourceLargeImage: Icon? = null
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
     private val paint = Paint()
@@ -68,7 +67,7 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        renderer(canvas, zonedDateTime)
+        renderer(canvas, zonedDateTime, renderParameters)
     }
 
     @SuppressLint("RestrictedApi")
@@ -78,10 +77,11 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        renderer(canvas, zonedDateTime)
+        renderer(canvas, zonedDateTime, renderParameters)
     }
     @SuppressLint("RestrictedApi")
-    private fun renderer(canvas: Canvas, zonedDateTime: ZonedDateTime) {
+    private fun renderer(canvas: Canvas, zonedDateTime: ZonedDateTime, renderParameters: RenderParameters) {
+        this.zonedDateTime = zonedDateTime
         complication = null
         complicationWireData = null
         complication = complicationSlotsManager.complicationSlots[0]
@@ -94,13 +94,11 @@ class WatchFaceCanvasRenderer(
         dataSourceContentDescription = null
         dataSourceTitle = null
         dataSourceIcon = null
-        dataSourceBurnInProtectionIcon = null
         dataSourceSmallImage = null
-        dataSourceBurnInProtectionSmallImage = null
         dataSourceLargeImage = null
         dataSourceDynamicValues = null
 
-        getDataSourceInfo(complication!!, complicationWireData!!, zonedDateTime)
+        getDataSourceInfo()
 
         when (complicationWireData!!.type) {
             ComplicationData.Companion.TYPE_SHORT_TEXT -> {
@@ -153,34 +151,12 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "Setting tapAction")
                 shortTextComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
-            if (dataSourceTitle != null) {
-                Log.d(tag, "Setting title")
-                shortTextComplicationDataBuilder!!.setTitle(
-                    PlainComplicationText.Builder(dataSourceTitle!!).build()
-                )
-            }
             if (dataSourceIcon != null) {
                 Log.d(tag, "Setting icon")
-                shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                    MonochromaticImage.Builder(
-                        dataSourceIcon!!
-                    ).build()
-                )
-            }
-            if (dataSourceBurnInProtectionIcon != null) {
-                Log.d(tag, "Setting burnInProtectionIcon")
-                shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                    MonochromaticImage.Builder(
-                        dataSourceBurnInProtectionIcon!!
-                    ).build()
-                )
-            }
-            if (dataSourceSmallImage != null) {
-                Log.d(tag, "Setting smallImage")
-                dataSourceSmallImage!!.setTint(Color.BLUE)
+                dataSourceIcon!!.setTint(Color.BLUE)
                 shortTextComplicationDataBuilder!!.setSmallImage(
                     SmallImage.Builder(
-                        dataSourceSmallImage!!,
+                        dataSourceIcon!!,
                         SmallImageType.ICON
                     ).build()
                 )
@@ -228,17 +204,6 @@ class WatchFaceCanvasRenderer(
                 }
             }
         }
-        if (dataSourceBurnInProtectionSmallImage != null && dataSourceContentDescription != null) {
-            Log.d(tag, "Setting burnInProtectionSmallImage")
-            dataSourceBurnInProtectionSmallImage!!.setTint(Color.BLUE)
-            smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                SmallImage.Builder(
-                    dataSourceBurnInProtectionSmallImage!!,
-                    SmallImageType.ICON
-                ).build(),
-                PlainComplicationText.Builder(dataSourceContentDescription!!).build()
-            )
-        }
         if (smallImageComplicationDataBuilder != null) {
             if (dataSourceDataSource != null) {
                 Log.d(tag, "Setting dataSource")
@@ -253,63 +218,51 @@ class WatchFaceCanvasRenderer(
     }
 
     @SuppressLint("RestrictedApi")
-    private fun getDataSourceInfo(
-        complication: ComplicationSlot,
-        complicationWireData: ComplicationData,
-        zonedDateTime: ZonedDateTime
-    ) {
-        if (complicationWireData.dataSource != null) {
+    private fun getDataSourceInfo() {
+        if (complicationWireData!!.dataSource != null) {
             Log.d(tag, "hasDataSource")
-            dataSourceDataSource = complication.complicationData.value.dataSource
+            dataSourceDataSource = complication!!.complicationData.value.dataSource
         }
-        if (complicationWireData.hasTapAction()) {
+        if (complicationWireData!!.hasTapAction()) {
             Log.d(tag, "hasTapAction")
-            dataSourceTapAction = complication.complicationData.value.tapAction
+            dataSourceTapAction = complication!!.complicationData.value.tapAction
         }
-        if (complicationWireData.hasShortText()) {
+        if (complicationWireData!!.hasShortText()) {
             Log.d(tag, "hasShortText")
-            dataSourceText = complicationWireData.shortText!!.getTextAt(
+            dataSourceText = complicationWireData!!.shortText!!.getTextAt(
                 Resources.getSystem(),
-                LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
+                LocalDateTime.now().atZone(zonedDateTime!!.zone).toInstant().toEpochMilli()
             )
         }
-        if (complicationWireData.hasContentDescription()) {
+        if (complicationWireData!!.hasContentDescription()) {
             Log.d(tag, "hasContentDescription")
-            dataSourceContentDescription = complicationWireData.contentDescription!!.getTextAt(
+            dataSourceContentDescription = complicationWireData!!.contentDescription!!.getTextAt(
                 Resources.getSystem(),
-                LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
+                LocalDateTime.now().atZone(zonedDateTime!!.zone).toInstant().toEpochMilli()
             )
         }
-        if (complicationWireData.hasShortTitle()) {
+        if (complicationWireData!!.hasShortTitle()) {
             Log.d(tag, "hasShortTitle")
-            dataSourceTitle = complicationWireData.shortTitle!!.getTextAt(
+            dataSourceTitle = complicationWireData!!.shortTitle!!.getTextAt(
                 Resources.getSystem(),
-                LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
+                LocalDateTime.now().atZone(zonedDateTime!!.zone).toInstant().toEpochMilli()
             )
         }
-        if (complicationWireData.hasIcon()) {
+        if (complicationWireData!!.hasIcon()) {
             Log.d(tag, "hasIcon")
-            dataSourceIcon = complicationWireData.icon
+            dataSourceIcon = complicationWireData!!.icon
         }
-        if (complicationWireData.hasBurnInProtectionIcon()) {
-            Log.d(tag, "hasBurnInProtectionIcon")
-            dataSourceBurnInProtectionIcon = complicationWireData.burnInProtectionIcon!!
-        }
-        if (complicationWireData.hasSmallImage()) {
+        if (complicationWireData!!.hasSmallImage()) {
             Log.d(tag, "hasSmallImage")
-            dataSourceSmallImage = complicationWireData.smallImage
+            dataSourceSmallImage = complicationWireData!!.smallImage
         }
-        if (complicationWireData.hasBurnInProtectionSmallImage()) {
-            Log.d(tag, "hasBurnInProtectionSmallImage")
-            dataSourceBurnInProtectionSmallImage = complicationWireData.burnInProtectionSmallImage
-        }
-        if (complicationWireData.hasLargeImage()) {
+        if (complicationWireData!!.hasLargeImage()) {
             Log.d(tag, "hasLargeImage")
-            dataSourceLargeImage = complicationWireData.largeImage
+            dataSourceLargeImage = complicationWireData!!.largeImage
         }
-        if (complicationWireData.hasRangedDynamicValue()) {
+        if (complicationWireData!!.hasRangedDynamicValue()) {
             Log.d(tag, "hasRangedDynamicValues")
-            dataSourceDynamicValues = complicationWireData.rangedDynamicValue
+            dataSourceDynamicValues = complicationWireData!!.rangedDynamicValue
         }
     }
     class MySharedAssets : SharedAssets {
