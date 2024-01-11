@@ -156,6 +156,7 @@ class WatchFaceCanvasRenderer(
             }
             if (dataSourceIcon != null) {
                 Log.d(tag, "Setting icon")
+                dataSourceIcon!!.setTint(Color.BLUE)
                 shortTextComplicationDataBuilder!!.setMonochromaticImage(
                     MonochromaticImage.Builder(
                         dataSourceIcon!!
@@ -164,13 +165,14 @@ class WatchFaceCanvasRenderer(
             }
             if (dataSourceBurnInProtectionIcon != null) {
                 Log.d(tag, "Setting burnInProtectionIcon")
+                dataSourceBurnInProtectionIcon!!.setTint(Color.BLUE)
                 shortTextComplicationDataBuilder!!.setMonochromaticImage(
                     MonochromaticImage.Builder(
                         dataSourceBurnInProtectionIcon!!
                     ).build()
                 )
             }
-            if (dataSourceSmallImage != null) {
+            /*if (dataSourceSmallImage != null) {
                 Log.d(tag, "Setting smallImage")
                 shortTextComplicationDataBuilder!!.setSmallImage(
                     SmallImage.Builder(
@@ -178,14 +180,9 @@ class WatchFaceCanvasRenderer(
                         SmallImageType.ICON
                     ).build()
                 )
-            }
+            }*/
             shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
-            if (shortTextComplicationData!!.monochromaticImage != null)
-                shortTextComplicationData!!.monochromaticImage!!.image.setTint(Color.BLUE)
-            if (shortTextComplicationData!!.smallImage != null)
-                shortTextComplicationData!!.smallImage!!.image.setTint(Color.BLUE)
             complication!!.renderer.loadData(shortTextComplicationData!!, false)
-
         }
     }
     @SuppressLint("RestrictedApi")
@@ -219,7 +216,8 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "Setting tapAction")
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
-            complication!!.renderer.loadData(smallImageComplicationDataBuilder!!.build(), false)
+            smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
+            complication!!.renderer.loadData(smallImageComplicationData!!, false)
         }
     }
 
