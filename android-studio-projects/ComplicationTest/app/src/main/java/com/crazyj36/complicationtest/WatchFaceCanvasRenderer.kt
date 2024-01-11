@@ -57,23 +57,26 @@ class WatchFaceCanvasRenderer(
     private var dataSourceLargeImage: Icon? = null
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
     private val paint = Paint()
+
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-
+        myRendering(canvas, zonedDateTime)
     }
 
-    @SuppressLint("RestrictedApi")
     override fun render(
         canvas: Canvas,
         bounds: Rect,
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-
+        myRendering(canvas, zonedDateTime)
+    }
+    @SuppressLint("RestrictedApi")
+    private fun myRendering(canvas: Canvas, zonedDateTime: ZonedDateTime) {
         complication = complicationSlotsManager.complicationSlots[0]
         complicationWireData = complication!!.complicationData.value.asWireComplicationData()
         dataSourceDataSource = null
@@ -114,7 +117,6 @@ class WatchFaceCanvasRenderer(
             )
         }
     }
-
     @SuppressLint("RestrictedApi")
     private fun getDataSourceInfo(
         complication: ComplicationSlot,
@@ -216,6 +218,15 @@ class WatchFaceCanvasRenderer(
                 shortTextComplicationDataBuilder.setMonochromaticImage(
                     MonochromaticImage.Builder(
                         dataSourceIcon!!
+                    ).build()
+                )
+            }
+            if (dataSourceSmallImage != null) {
+                Log.d(tag, "Setting smallImage")
+                dataSourceSmallImage!!.setTint(Color.BLUE)
+                shortTextComplicationDataBuilder.setMonochromaticImage(
+                    MonochromaticImage.Builder(
+                        dataSourceSmallImage!!
                     ).build()
                 )
             }
