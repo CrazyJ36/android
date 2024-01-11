@@ -60,6 +60,7 @@ class WatchFaceCanvasRenderer(
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
     private val paint = Paint()
 
+    @SuppressLint("RestrictedApi")
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
@@ -69,6 +70,7 @@ class WatchFaceCanvasRenderer(
         myRendering(canvas, zonedDateTime)
     }
 
+    @SuppressLint("RestrictedApi")
     override fun render(
         canvas: Canvas,
         bounds: Rect,
@@ -79,6 +81,8 @@ class WatchFaceCanvasRenderer(
     }
     @SuppressLint("RestrictedApi")
     private fun myRendering(canvas: Canvas, zonedDateTime: ZonedDateTime) {
+        complication = null
+        complicationWireData = null
         complication = complicationSlotsManager.complicationSlots[0]
         complicationWireData = complication!!.complicationData.value.asWireComplicationData()
         shortTextComplicationDataBuilder = null
