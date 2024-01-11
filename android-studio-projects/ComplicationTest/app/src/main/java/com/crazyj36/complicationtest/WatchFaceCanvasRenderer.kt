@@ -18,6 +18,7 @@ import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
+import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
@@ -45,7 +46,9 @@ class WatchFaceCanvasRenderer(
     private var complication: ComplicationSlot? = null
     private var complicationWireData: ComplicationData? = null
     private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
+    private var shortTextComplicationData: ShortTextComplicationData? = null
     private var smallImageComplicationDataBuilder: SmallImageComplicationData.Builder? = null
+    private var smallImageComplicationData: SmallImageComplicationData? = null
     private var dataSourceDataSource: ComponentName? = null
     private var dataSourceTapAction: PendingIntent? = null
     private var dataSourceText: CharSequence? = null
@@ -85,7 +88,9 @@ class WatchFaceCanvasRenderer(
         complication = complicationSlotsManager.complicationSlots[0]
         complicationWireData = complication!!.complicationData.value.asWireComplicationData()
         shortTextComplicationDataBuilder = null
+        shortTextComplicationData = null
         smallImageComplicationDataBuilder = null
+        smallImageComplicationData = null
         dataSourceDataSource = null
         dataSourceTapAction = null
         dataSourceText = null
@@ -124,6 +129,98 @@ class WatchFaceCanvasRenderer(
             )
         }
     }
+
+    @SuppressLint("RestrictedApi")
+    private fun setShortTextData() {
+        Log.d(tag, "Complication is ComplicationType.SHORT_TEXT")
+        if (dataSourceText != null && dataSourceContentDescription != null) {
+            Log.d(tag, "Setting text")
+            shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
+                PlainComplicationText.Builder(dataSourceText!!).build(),
+                PlainComplicationText.Builder(dataSourceContentDescription!!).build()
+            )
+        }
+        if (shortTextComplicationDataBuilder != null) {
+            if (dataSourceDataSource != null) {
+                Log.d(tag, "Setting dataSource")
+                shortTextComplicationDataBuilder!!.setDataSource(dataSourceDataSource)
+            }
+            if (dataSourceTapAction != null) {
+                Log.d(tag, "Setting tapAction")
+                shortTextComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
+            }
+            if (dataSourceTitle != null) {
+                Log.d(tag, "Setting title")
+                shortTextComplicationDataBuilder!!.setTitle(
+                    PlainComplicationText.Builder(dataSourceTitle!!).build()
+                )
+            }
+            if (dataSourceIcon != null) {
+                Log.d(tag, "Setting icon")
+                shortTextComplicationDataBuilder!!.setMonochromaticImage(
+                    MonochromaticImage.Builder(
+                        dataSourceIcon!!
+                    ).build()
+                )
+            }
+            if (dataSourceBurnInProtectionIcon != null) {
+                Log.d(tag, "Setting burnInProtectionIcon")
+                shortTextComplicationDataBuilder!!.setMonochromaticImage(
+                    MonochromaticImage.Builder(
+                        dataSourceBurnInProtectionIcon!!
+                    ).build()
+                )
+            } else if (dataSourceSmallImage != null) {
+                Log.d(tag, "Setting smallImage")
+                shortTextComplicationDataBuilder!!.setSmallImage(
+                    SmallImage.Builder(
+                        dataSourceSmallImage!!,
+                        SmallImageType.ICON
+                    ).build()
+                )
+            }
+            shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
+            if (shortTextComplicationData!!.monochromaticImage != null)
+                shortTextComplicationData!!.monochromaticImage!!.image.setTint(Color.BLUE)
+            if (shortTextComplicationData!!.smallImage != null)
+                shortTextComplicationData!!.smallImage!!.image.setTint(Color.BLUE)
+            complication!!.renderer.loadData(shortTextComplicationData!!, false)
+
+        }
+    }
+    @SuppressLint("RestrictedApi")
+    private fun setSmallImageData() {
+        Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE")
+        if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
+            Log.d(tag, "Setting smallImage")
+            smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
+                SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
+                PlainComplicationText.Builder(dataSourceContentDescription!!).build()
+            )
+        }
+        if (dataSourceBurnInProtectionSmallImage != null && dataSourceContentDescription != null) {
+            Log.d(tag, "Setting burnInProtectionSmallImage")
+            smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
+                SmallImage.Builder(
+                    dataSourceBurnInProtectionSmallImage!!,
+                    SmallImageType.ICON
+                ).build(),
+                PlainComplicationText.Builder(dataSourceContentDescription!!).build()
+            )
+        }
+        if (smallImageComplicationDataBuilder != null) {
+            if (dataSourceDataSource != null) {
+                Log.d(tag, "Setting dataSource")
+                smallImageComplicationDataBuilder!!. setDataSource(dataSourceDataSource)
+            }
+            if (dataSourceTapAction != null) {
+                Log.d(tag, "Setting tapAction")
+                smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
+            }
+            complication!!.renderer.loadData(smallImageComplicationDataBuilder!!.build(), false)
+        }
+    }
+
     @SuppressLint("RestrictedApi")
     private fun getDataSourceInfo(
         complication: ComplicationSlot,
@@ -182,98 +279,6 @@ class WatchFaceCanvasRenderer(
         if (complicationWireData.hasRangedDynamicValue()) {
             Log.d(tag, "hasRangedDynamicValues")
             dataSourceDynamicValues = complicationWireData.rangedDynamicValue
-        }
-    }
-    @SuppressLint("RestrictedApi")
-    private fun setShortTextData() {
-        Log.d(tag, "Complication is ComplicationType.SHORT_TEXT")
-        shortTextComplicationDataBuilder = null
-        if (dataSourceText != null && dataSourceContentDescription != null) {
-            Log.d(tag, "Setting text")
-            shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
-                PlainComplicationText.Builder(dataSourceText!!).build(),
-                PlainComplicationText.Builder(dataSourceContentDescription!!).build()
-            )
-        }
-        if (shortTextComplicationDataBuilder != null) {
-            if (dataSourceDataSource != null) {
-                Log.d(tag, "Setting dataSource")
-                shortTextComplicationDataBuilder!!.setDataSource(dataSourceDataSource)
-            }
-            if (dataSourceTapAction != null) {
-                Log.d(tag, "Setting tapAction")
-                shortTextComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
-            }
-            if (dataSourceTitle != null) {
-                Log.d(tag, "Setting title")
-                shortTextComplicationDataBuilder!!.setTitle(
-                    PlainComplicationText.Builder(dataSourceTitle!!).build()
-                )
-            }
-            if (dataSourceIcon != null) {
-                Log.d(tag, "Setting icon")
-                dataSourceIcon!!.setTint(Color.BLUE)
-                shortTextComplicationDataBuilder!!.setSmallImage(
-                    SmallImage.Builder(
-                        dataSourceIcon!!,
-                        SmallImageType.ICON
-                    ).build()
-                )
-            }
-            if (dataSourceBurnInProtectionIcon != null) {
-                Log.d(tag, "Setting burnInProtectionIcon")
-                dataSourceBurnInProtectionIcon!!.setTint(Color.BLUE)
-                shortTextComplicationDataBuilder!!.setSmallImage(
-                    SmallImage.Builder(
-                        dataSourceBurnInProtectionIcon!!,
-                        SmallImageType.ICON
-                    ).build()
-                )
-            }
-            if (dataSourceSmallImage != null) {
-                Log.d(tag, "Setting smallImage")
-                dataSourceSmallImage!!.setTint(Color.BLUE)
-                shortTextComplicationDataBuilder!!.setSmallImage(
-                    SmallImage.Builder(
-                        dataSourceSmallImage!!,
-                        SmallImageType.ICON
-                    ).build()
-                )
-            }
-            complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build(), false)
-        }
-    }
-    @SuppressLint("RestrictedApi")
-    private fun setSmallImageData() {
-        Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE")
-        smallImageComplicationDataBuilder = null
-        if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
-            Log.d(tag, "Setting smallImage")
-            smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
-                PlainComplicationText.Builder(dataSourceContentDescription!!).build()
-            )
-        }
-        if (dataSourceBurnInProtectionSmallImage != null && dataSourceContentDescription != null) {
-            Log.d(tag, "Setting burnInProtectionSmallImage")
-            smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                SmallImage.Builder(
-                    dataSourceBurnInProtectionSmallImage!!,
-                    SmallImageType.ICON
-                ).build(),
-                PlainComplicationText.Builder(dataSourceContentDescription!!).build()
-            )
-        }
-        if (smallImageComplicationDataBuilder != null) {
-            if (dataSourceDataSource != null) {
-                Log.d(tag, "Setting dataSource")
-                smallImageComplicationDataBuilder!!. setDataSource(dataSourceDataSource)
-            }
-            if (dataSourceTapAction != null) {
-                Log.d(tag, "Setting tapAction")
-                smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
-            }
-            complication!!.renderer.loadData(smallImageComplicationDataBuilder!!.build(), false)
         }
     }
     class MySharedAssets : SharedAssets {
