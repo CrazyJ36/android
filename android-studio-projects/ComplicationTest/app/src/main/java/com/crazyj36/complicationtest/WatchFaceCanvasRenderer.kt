@@ -9,6 +9,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.Icon
+import android.os.Build
 import android.support.wearable.complications.ComplicationData
 import android.util.Log
 import android.view.SurfaceHolder
@@ -46,9 +47,7 @@ class WatchFaceCanvasRenderer(
     private var complication: ComplicationSlot? = null
     private var complicationWireData: ComplicationData? = null
     private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
-    private var shortTextComplicationData: ShortTextComplicationData? = null
     private var smallImageComplicationDataBuilder: SmallImageComplicationData.Builder? = null
-    private var smallImageComplicationData: SmallImageComplicationData? = null
     private var dataSourceDataSource: ComponentName? = null
     private var dataSourceTapAction: PendingIntent? = null
     private var dataSourceText: CharSequence? = null
@@ -69,7 +68,7 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        myRendering(canvas, zonedDateTime)
+        renderer(canvas, zonedDateTime)
     }
 
     @SuppressLint("RestrictedApi")
@@ -79,14 +78,16 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        myRendering(canvas, zonedDateTime)
+        renderer(canvas, zonedDateTime)
     }
     @SuppressLint("RestrictedApi")
-    private fun myRendering(canvas: Canvas, zonedDateTime: ZonedDateTime) {
+    private fun renderer(canvas: Canvas, zonedDateTime: ZonedDateTime) {
         complication = null
         complicationWireData = null
         complication = complicationSlotsManager.complicationSlots[0]
         complicationWireData = complication!!.complicationData.value.asWireComplicationData()
+        shortTextComplicationDataBuilder = null
+        smallImageComplicationDataBuilder = null
         dataSourceDataSource = null
         dataSourceTapAction = null
         dataSourceText = null
@@ -103,10 +104,10 @@ class WatchFaceCanvasRenderer(
 
         when (complicationWireData!!.type) {
             ComplicationData.Companion.TYPE_SHORT_TEXT -> {
-                setShortTextData()
+                setShortTextComplicationData()
             }
             ComplicationData.Companion.TYPE_SMALL_IMAGE -> {
-                setSmallImageData()
+                setSmallImageComplicationData()
             }
             else -> {
                 Log.d(tag, "Unknown complication type, rendering default.")
@@ -128,15 +129,19 @@ class WatchFaceCanvasRenderer(
     }
 
     @SuppressLint("RestrictedApi")
-    private fun setShortTextData() {
+    private fun setShortTextComplicationData() {
         Log.d(tag, "Complication is ComplicationType.SHORT_TEXT")
-        shortTextComplicationDataBuilder = null
-        shortTextComplicationData = null
         if (dataSourceText != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting text")
             shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
                 PlainComplicationText.Builder(dataSourceText!!).build(),
                 PlainComplicationText.Builder(dataSourceContentDescription!!).build()
+            )
+        } else if (dataSourceText != null) {
+            Log.d(tag, "Setting text")
+            shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
+                PlainComplicationText.Builder(dataSourceText!!).build(),
+                PlainComplicationText.Builder("Content description not supplied by DataSource.").build()
             )
         }
         if (shortTextComplicationDataBuilder != null) {
@@ -156,7 +161,6 @@ class WatchFaceCanvasRenderer(
             }
             if (dataSourceIcon != null) {
                 Log.d(tag, "Setting icon")
-                dataSourceIcon!!.setTint(Color.BLUE)
                 shortTextComplicationDataBuilder!!.setMonochromaticImage(
                     MonochromaticImage.Builder(
                         dataSourceIcon!!
@@ -165,40 +169,68 @@ class WatchFaceCanvasRenderer(
             }
             if (dataSourceBurnInProtectionIcon != null) {
                 Log.d(tag, "Setting burnInProtectionIcon")
-                dataSourceBurnInProtectionIcon!!.setTint(Color.BLUE)
                 shortTextComplicationDataBuilder!!.setMonochromaticImage(
                     MonochromaticImage.Builder(
                         dataSourceBurnInProtectionIcon!!
                     ).build()
                 )
             }
-            /*if (dataSourceSmallImage != null) {
+            if (dataSourceSmallImage != null) {
                 Log.d(tag, "Setting smallImage")
+                dataSourceSmallImage!!.setTint(Color.BLUE)
                 shortTextComplicationDataBuilder!!.setSmallImage(
                     SmallImage.Builder(
                         dataSourceSmallImage!!,
                         SmallImageType.ICON
                     ).build()
                 )
-            }*/
-            shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
-            complication!!.renderer.loadData(shortTextComplicationData!!, false)
+            }
+            complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build(), false)
         }
     }
     @SuppressLint("RestrictedApi")
-    private fun setSmallImageData() {
+    private fun setSmallImageComplicationData() {
         Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE")
-        smallImageComplicationDataBuilder = null
-        smallImageComplicationData = null
         if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting smallImage")
-            smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
-                PlainComplicationText.Builder(dataSourceContentDescription!!).build()
-            )
+            if (Build.VERSION.SDK_INT >= 28) {
+                if (dataSourceSmallImage!!.type == SmallImageType.ICON.ordinal) {
+                    Log.d(tag, "SmallImageType.ICON")
+                    dataSourceSmallImage!!.setTint(Color.BLUE)
+                    smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
+                        SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
+                        PlainComplicationText.Builder(dataSourceContentDescription!!).build()
+                    )
+                } else if (dataSourceSmallImage!!.type == SmallImageType.PHOTO.ordinal) {
+                    Log.d(tag, "SmallImageType.PHOTO")
+                    smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
+                        SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.PHOTO).build(),
+                        PlainComplicationText.Builder(dataSourceContentDescription!!).build()
+                    )
+                }
+            }
+        } else if (dataSourceSmallImage != null) {
+            Log.d(tag, "Setting smallImage")
+            if (Build.VERSION.SDK_INT >= 28) {
+                if (dataSourceSmallImage!!.type == SmallImageType.ICON.ordinal) {
+                    Log.d(tag,"SmallImageType.ICON")
+                    dataSourceSmallImage!!.setTint(Color.BLUE)
+                    smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
+                        SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
+                        PlainComplicationText.Builder("Content description not provided by DataSource").build()
+                    )
+                } else if (dataSourceSmallImage!!.type == SmallImageType.PHOTO.ordinal) {
+                    Log.d(tag,"SmallImageType.PHOTO")
+                    smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
+                        SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.PHOTO).build(),
+                        PlainComplicationText.Builder("Content description not provided by DataSource").build()
+                    )
+                }
+            }
         }
         if (dataSourceBurnInProtectionSmallImage != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting burnInProtectionSmallImage")
+            dataSourceBurnInProtectionSmallImage!!.setTint(Color.BLUE)
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                 SmallImage.Builder(
                     dataSourceBurnInProtectionSmallImage!!,
@@ -216,8 +248,7 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "Setting tapAction")
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
-            smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
-            complication!!.renderer.loadData(smallImageComplicationData!!, false)
+            complication!!.renderer.loadData(smallImageComplicationDataBuilder!!.build(), false)
         }
     }
 
