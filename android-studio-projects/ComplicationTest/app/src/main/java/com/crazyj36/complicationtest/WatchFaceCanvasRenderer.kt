@@ -159,11 +159,10 @@ class WatchFaceCanvasRenderer(
             }
             if (dataSourceIcon != null) { // setting this to blue and using smallImage.builder here works properly on emulator
                 Log.d(tag, "Setting icon")
-                val monochromaticImageBuilder = MonochromaticImage.Builder(dataSourceIcon!!)
-                val monochromaticImageBuilt = monochromaticImageBuilder.build()
-                val monochromaticImageColored = monochromaticImageBuilt.image.setTint(Color.BLUE)
+                val dataSourceIconColored = dataSourceIcon!!.setTint(Color.BLUE)
+                val monochromaticImageBuilder = MonochromaticImage.Builder(dataSourceIconColored)
                     shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                    MonochromaticImage.Builder(monochromaticImageColored).build()
+                    monochromaticImageBuilder.build()
                 )
             }
             complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build(), false)
