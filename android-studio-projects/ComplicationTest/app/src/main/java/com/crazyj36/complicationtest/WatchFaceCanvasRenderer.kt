@@ -87,10 +87,6 @@ class WatchFaceCanvasRenderer(
         complicationWireData = null
         complication = complicationSlotsManager.complicationSlots[0]
         complicationWireData = complication!!.complicationData.value.asWireComplicationData()
-        shortTextComplicationDataBuilder = null
-        shortTextComplicationData = null
-        smallImageComplicationDataBuilder = null
-        smallImageComplicationData = null
         dataSourceDataSource = null
         dataSourceTapAction = null
         dataSourceText = null
@@ -104,6 +100,7 @@ class WatchFaceCanvasRenderer(
         dataSourceDynamicValues = null
 
         getDataSourceInfo(complication!!, complicationWireData!!, zonedDateTime)
+
         when (complicationWireData!!.type) {
             ComplicationData.Companion.TYPE_SHORT_TEXT -> {
                 setShortTextData()
@@ -133,6 +130,8 @@ class WatchFaceCanvasRenderer(
     @SuppressLint("RestrictedApi")
     private fun setShortTextData() {
         Log.d(tag, "Complication is ComplicationType.SHORT_TEXT")
+        shortTextComplicationDataBuilder = null
+        shortTextComplicationData = null
         if (dataSourceText != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting text")
             shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
@@ -170,7 +169,8 @@ class WatchFaceCanvasRenderer(
                         dataSourceBurnInProtectionIcon!!
                     ).build()
                 )
-            } else if (dataSourceSmallImage != null) {
+            }
+            if (dataSourceSmallImage != null) {
                 Log.d(tag, "Setting smallImage")
                 shortTextComplicationDataBuilder!!.setSmallImage(
                     SmallImage.Builder(
@@ -191,6 +191,8 @@ class WatchFaceCanvasRenderer(
     @SuppressLint("RestrictedApi")
     private fun setSmallImageData() {
         Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE")
+        smallImageComplicationDataBuilder = null
+        smallImageComplicationData = null
         if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting smallImage")
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
