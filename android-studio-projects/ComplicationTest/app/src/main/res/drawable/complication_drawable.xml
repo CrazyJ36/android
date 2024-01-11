@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.wear.watchface.complications.rendering.ComplicationDrawable
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:iconColor="#FFFFFFFF"
     app:textColor="#FFFFFFFF"
-    app:titleColor="#FFFFFFFF"
-    app:iconColor="#FFFFFFFF">
+    app:titleColor="#FFFFFFFF">
 </androidx.wear.watchface.complications.rendering.ComplicationDrawable>

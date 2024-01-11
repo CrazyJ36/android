@@ -35,13 +35,13 @@ class MyWatchFaceService : WatchFaceService() {
             SystemDataSources.DATA_SOURCE_STEP_COUNT,
             ComplicationType.SHORT_TEXT
         )
-        val complicationDrawable = ComplicationDrawable.getDrawable(
-            this@MyWatchFaceService,
-            R.drawable.complication_drawable
-        )!!
+        val complicationDrawable = (ComplicationDrawable).
+        getDrawable(this@MyWatchFaceService,
+            R.drawable.complication_drawable)
+
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
-                complicationDrawable,
+                complicationDrawable!!,
                 watchState,
                 listener
             )
@@ -68,7 +68,6 @@ class MyWatchFaceService : WatchFaceService() {
         currentUserStyleRepository: CurrentUserStyleRepository
     ): WatchFace {
         val renderer = WatchFaceCanvasRenderer(
-            context = applicationContext,
             surfaceHolder = surfaceHolder,
             watchState = watchState,
             complicationSlotsManager = complicationSlotsManager,

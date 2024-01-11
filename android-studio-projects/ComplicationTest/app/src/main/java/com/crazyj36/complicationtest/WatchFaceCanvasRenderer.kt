@@ -3,12 +3,10 @@ package com.crazyj36.complicationtest
 import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.ComponentName
-import android.content.Context
 import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.PorterDuff
 import android.graphics.Rect
 import android.graphics.drawable.Icon
 import android.os.Build
@@ -33,7 +31,6 @@ import java.time.LocalDateTime
 import java.time.ZonedDateTime
 
 class WatchFaceCanvasRenderer(
-    context: Context,
     surfaceHolder: SurfaceHolder,
     watchState: WatchState,
     var complicationSlotsManager: ComplicationSlotsManager,
@@ -48,12 +45,10 @@ class WatchFaceCanvasRenderer(
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
     private val tag = "COMPLICATION_TEST"
-    private val context = context
     private var zonedDateTime: ZonedDateTime? = null
     private var complication: ComplicationSlot? = null
     private var complicationWireData: ComplicationData? = null
     private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
-    private var shortTextComplicationData: ShortTextComplicationData? = null
     private var smallImageComplicationDataBuilder: SmallImageComplicationData.Builder? = null
     private var dataSourceDataSource: ComponentName? = null
     private var dataSourceTapAction: PendingIntent? = null
@@ -61,9 +56,6 @@ class WatchFaceCanvasRenderer(
     private var dataSourceContentDescription: CharSequence? = null
     private var dataSourceTitle: CharSequence? = null
     private var dataSourceIcon: Icon? = null
-
-    private var monochromaticImage: MonochromaticImage.Builder? = null
-
     private var dataSourceSmallImage: Icon? = null
     private var dataSourceLargeImage: Icon? = null
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
@@ -103,7 +95,6 @@ class WatchFaceCanvasRenderer(
         dataSourceContentDescription = null
         dataSourceTitle = null
         dataSourceIcon = null
-        monochromaticImage = null
         dataSourceSmallImage = null
         dataSourceLargeImage = null
         dataSourceDynamicValues = null
@@ -166,15 +157,16 @@ class WatchFaceCanvasRenderer(
                     PlainComplicationText.Builder(dataSourceTitle!!).build()
                 )
             }
-            if (dataSourceIcon != null) { // setting this to blue and using smallImage.builder works properly on emulator
+            if (dataSourceIcon != null) { // setting this to blue and using smallImage.builder here works properly on emulator
                 Log.d(tag, "Setting icon")
-                shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                    MonochromaticImage.Builder(dataSourceIcon!!).build()
+                val monochromaticImageBuilder = MonochromaticImage.Builder(dataSourceIcon!!)
+                val monochromaticImageBuilt = monochromaticImageBuilder.build()
+                val monochromaticImageColored = monochromaticImageBuilt.image.setTint(Color.BLUE)
+                    shortTextComplicationDataBuilder!!.setMonochromaticImage(
+                    MonochromaticImage.Builder(monochromaticImageColored).build()
                 )
             }
-            complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build().apply {
-                monochromaticImage!!.image.setTint(Color.BLUE)
-            }, false)
+            complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build(), false)
         }
     }
     @SuppressLint("RestrictedApi")
@@ -185,6 +177,7 @@ class WatchFaceCanvasRenderer(
             if (Build.VERSION.SDK_INT >= 28) {
                 if (dataSourceSmallImage!!.type == SmallImageType.ICON.ordinal) {
                     Log.d(tag, "SmallImageType.ICON")
+                    dataSourceSmallImage!!.setTint(Color.BLUE)
                     smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                         SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
                         PlainComplicationText.Builder(dataSourceContentDescription!!).build()
