@@ -165,12 +165,16 @@ class WatchFaceCanvasRenderer(
             }
             if (dataSourceIcon != null) { // setting color and using smallImage.builder here works properly on emulator
                 Log.d(tag, "Setting icon")
-                dataSourceIcon!!.setTint(Color.BLUE)
+                dataSourceIcon!!.setTint(Color.RED)
                 shortTextComplicationDataBuilder!!.setMonochromaticImage(
                     MonochromaticImage.Builder(dataSourceIcon!!).build()
                 )
             }
-            complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build(), false)
+
+            complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build().apply {
+                                                                                              monochromaticImage!!.image.setTint(Color.BLUE)
+            }
+                , false)
         }
     }
     @SuppressLint("RestrictedApi")
