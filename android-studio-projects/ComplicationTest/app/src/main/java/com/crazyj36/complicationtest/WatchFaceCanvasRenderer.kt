@@ -18,7 +18,6 @@ import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
-import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
@@ -214,18 +213,20 @@ class WatchFaceCanvasRenderer(
             if (dataSourceIcon != null) {
                 Log.d(tag, "Setting icon")
                 dataSourceIcon!!.setTint(Color.BLUE)
-                shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                    MonochromaticImage.Builder(
-                        dataSourceIcon!!
+                shortTextComplicationDataBuilder!!.setSmallImage(
+                    SmallImage.Builder(
+                        dataSourceIcon!!,
+                        SmallImageType.ICON
                     ).build()
                 )
             }
             if (dataSourceBurnInProtectionIcon != null) {
                 Log.d(tag, "Setting burnInProtectionIcon")
                 dataSourceBurnInProtectionIcon!!.setTint(Color.BLUE)
-                shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                    MonochromaticImage.Builder(
-                        dataSourceBurnInProtectionIcon!!
+                shortTextComplicationDataBuilder!!.setSmallImage(
+                    SmallImage.Builder(
+                        dataSourceBurnInProtectionIcon!!,
+                        SmallImageType.ICON
                     ).build()
                 )
             }
