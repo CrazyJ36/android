@@ -58,6 +58,9 @@ class WatchFaceCanvasRenderer(
     private var dataSourceContentDescription: CharSequence? = null
     private var dataSourceTitle: CharSequence? = null
     private var dataSourceIcon: Icon? = null
+
+    private var monochromaticImage: MonochromaticImage.Builder? = null
+
     private var dataSourceSmallImage: Icon? = null
     private var dataSourceLargeImage: Icon? = null
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
@@ -97,6 +100,7 @@ class WatchFaceCanvasRenderer(
         dataSourceContentDescription = null
         dataSourceTitle = null
         dataSourceIcon = null
+        monochromaticImage = null
         dataSourceSmallImage = null
         dataSourceLargeImage = null
         dataSourceDynamicValues = null
@@ -115,7 +119,6 @@ class WatchFaceCanvasRenderer(
             }
         }
         complication!!.render(canvas, zonedDateTime, renderParameters)
-
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
             paint.setARGB(255, 255, 255, 255)
@@ -163,14 +166,12 @@ class WatchFaceCanvasRenderer(
             if (dataSourceIcon != null) { // setting this to blue and using smallimage.builder works properly on emulator
                 Log.d(tag, "Setting icon")
                 shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                    MonochromaticImage.Builder(SmallImage.Builder(
-                        dataSourceIcon!!.setTint(Color.BLUE),
-                        SmallImageType.ICON
-                    ).build().image
-                    ).build()
+                    MonochromaticImage.Builder(dataSourceIcon!!).build()
                 )
             }
             shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
+            if (shortTextComplicationData!!.monochromaticImage != null)
+                shortTextComplicationData!!.monochromaticImage!!.image.run  { setTint(Color.BLUE) }
             complication!!.renderer.loadData(shortTextComplicationData!!, true)
         }
     }
