@@ -182,7 +182,7 @@ class WatchFaceCanvasRenderer(
             if (Build.VERSION.SDK_INT >= 28) {
                 if (dataSourceSmallImage!!.type == SmallImageType.ICON.ordinal) {
                     Log.d(tag, "SmallImageType.ICON")
-                    dataSourceSmallImage!!.setTint(Color.BLUE)
+                    dataSourceSmallImage!!.setTint(Color.WHITE)
                     smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                         SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
                         PlainComplicationText.Builder(dataSourceContentDescription!!).build()
@@ -200,7 +200,7 @@ class WatchFaceCanvasRenderer(
             if (Build.VERSION.SDK_INT >= 28) {
                 if (dataSourceSmallImage!!.type == SmallImageType.ICON.ordinal) {
                     Log.d(tag,"SmallImageType.ICON")
-                    dataSourceSmallImage!!.setTint(Color.BLUE)
+                    dataSourceSmallImage!!.setTint(Color.WHITE)
                     smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                         SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
                         PlainComplicationText.Builder("Content description not provided by DataSource").build()
