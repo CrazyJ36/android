@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.res.Resources
+import android.graphics.BlendMode
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -49,6 +50,7 @@ class WatchFaceCanvasRenderer(
     private var complication: ComplicationSlot? = null
     private var complicationWireData: ComplicationData? = null
     private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
+    private var shortTextComplicationData: ShortTextComplicationData? = null
     private var smallImageComplicationDataBuilder: SmallImageComplicationData.Builder? = null
     private var dataSourceDataSource: ComponentName? = null
     private var dataSourceTapAction: PendingIntent? = null
@@ -113,6 +115,7 @@ class WatchFaceCanvasRenderer(
             }
         }
         complication!!.render(canvas, zonedDateTime, renderParameters)
+
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
             paint.setARGB(255, 255, 255, 255)
@@ -159,17 +162,15 @@ class WatchFaceCanvasRenderer(
             }
             if (dataSourceIcon != null) { // setting this to blue and using smallimage.builder works properly on emulator
                 Log.d(tag, "Setting icon")
-                shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                    MonochromaticImage.Builder(
-                        dataSourceIcon!!
+                shortTextComplicationDataBuilder!!.setSmallImage(
+                    SmallImage.Builder(
+                        MonochromaticImage.Builder(dataSourceIcon!!).build().image.setTint(Color.BLUE),
+                        SmallImageType.ICON
                     ).build()
                 )
+                shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
             }
-            val shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
-            if (shortTextComplicationData.monochromaticImage != null) {
-                shortTextComplicationData.monochromaticImage!!.image.setTint(Color.BLUE)
-            } else Log.d(tag, "monochromatic image is null")
-            complication!!.renderer.loadData(shortTextComplicationData, false)
+            complication!!.renderer.loadData(shortTextComplicationData!!, true)
         }
     }
     @SuppressLint("RestrictedApi")
