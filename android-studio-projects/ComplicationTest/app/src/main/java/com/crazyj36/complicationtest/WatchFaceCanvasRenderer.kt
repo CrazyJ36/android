@@ -3,10 +3,12 @@ package com.crazyj36.complicationtest
 import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.ComponentName
+import android.content.Context
 import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.PorterDuff
 import android.graphics.Rect
 import android.graphics.drawable.Icon
 import android.os.Build
@@ -31,6 +33,7 @@ import java.time.LocalDateTime
 import java.time.ZonedDateTime
 
 class WatchFaceCanvasRenderer(
+    val context: Context,
     surfaceHolder: SurfaceHolder,
     watchState: WatchState,
     var complicationSlotsManager: ComplicationSlotsManager,
@@ -49,6 +52,7 @@ class WatchFaceCanvasRenderer(
     private var complication: ComplicationSlot? = null
     private var complicationWireData: ComplicationData? = null
     private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
+    private var shortTextComplicationData: ShortTextComplicationData? = null
     private var smallImageComplicationDataBuilder: SmallImageComplicationData.Builder? = null
     private var dataSourceDataSource: ComponentName? = null
     private var dataSourceTapAction: PendingIntent? = null
@@ -88,6 +92,7 @@ class WatchFaceCanvasRenderer(
         complication = complicationSlotsManager.complicationSlots[0]
         complicationWireData = complication!!.complicationData.value.asWireComplicationData()
         shortTextComplicationDataBuilder = null
+        shortTextComplicationData = null
         smallImageComplicationDataBuilder = null
         dataSourceDataSource = null
         dataSourceTapAction = null
@@ -159,13 +164,18 @@ class WatchFaceCanvasRenderer(
             }
             if (dataSourceIcon != null) { // setting this to blue and using smallImage.builder here works properly on emulator
                 Log.d(tag, "Setting icon")
-                val dataSourceIconColored = dataSourceIcon!!.setTint(Color.BLUE)
-                val monochromaticImageBuilder = MonochromaticImage.Builder(dataSourceIconColored)
-                    shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                    monochromaticImageBuilder.build()
+                val monochromaticImage = MonochromaticImage.Builder(dataSourceIcon!!)
+                monochromaticImage.apply { build().image.setTint(Color.BLUE) }
+                shortTextComplicationDataBuilder!!.setMonochromaticImage(
+                    monochromaticImage.build()
                 )
             }
-            complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build(), false)
+            shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
+            if (shortTextComplicationData!!.monochromaticImage != null)
+                shortTextComplicationData!!.monochromaticImage!!.image
+                    .setTint(Color.BLUE)
+                    .setTintMode(PorterDuff.Mode.SRC_IN)
+            complication!!.renderer.loadData(shortTextComplicationData!!, false)
         }
     }
     @SuppressLint("RestrictedApi")
