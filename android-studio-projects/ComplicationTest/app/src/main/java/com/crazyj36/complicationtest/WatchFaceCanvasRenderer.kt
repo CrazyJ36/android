@@ -4,13 +4,10 @@ import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.res.Resources
-import android.graphics.BlendMode
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.Icon
-import android.os.Build
 import android.support.wearable.complications.ComplicationData
 import android.util.Log
 import android.view.SurfaceHolder
@@ -29,6 +26,7 @@ import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.complications.data.SmallImageType
 import androidx.wear.watchface.complications.data.toApiComplicationData
 import androidx.wear.watchface.complications.data.toTypedApiComplicationData
+import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
@@ -177,7 +175,6 @@ class WatchFaceCanvasRenderer(
                 )
             }
             shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
-            shortTextComplicationData!!.monochromaticImage.apply { this!!.image.apply { setTint(Color.BLUE) } }
             complication!!.renderer.loadData(shortTextComplicationData!!, false)
         }
     }

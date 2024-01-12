@@ -1,5 +1,7 @@
 package com.crazyj36.complicationtest
 
+import android.graphics.Color
+import android.graphics.ColorFilter
 import android.graphics.RectF
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
@@ -39,10 +41,10 @@ class MyWatchFaceService : WatchFaceService() {
             this@MyWatchFaceService,
             R.drawable.complication_drawable
         )
-
+        complicationDrawable!!.activeStyle.iconColor = Color.BLUE
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
-                complicationDrawable!!,
+                complicationDrawable,
                 watchState,
                 listener
             )
