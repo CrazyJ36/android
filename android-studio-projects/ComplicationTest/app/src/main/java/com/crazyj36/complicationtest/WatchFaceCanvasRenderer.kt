@@ -2,32 +2,16 @@ package com.crazyj36.complicationtest
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.ColorStateList
-import android.content.res.Resources
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Rect
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.Icon
-import android.support.wearable.complications.ComplicationData
-import android.util.Log
 import android.view.SurfaceHolder
-import androidx.core.graphics.drawable.DrawableCompat
-import androidx.core.graphics.drawable.toBitmapOrNull
-import androidx.core.graphics.drawable.toIcon
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
-import androidx.wear.watchface.complications.data.PlainComplicationText
-import androidx.wear.watchface.complications.data.SmallImage
-import androidx.wear.watchface.complications.data.SmallImageComplicationData
-import androidx.wear.watchface.complications.data.SmallImageType
 import androidx.wear.watchface.style.CurrentUserStyleRepository
-import java.time.LocalDateTime
 import java.time.ZonedDateTime
 
 class WatchFaceCanvasRenderer(
-    val context: Context,
     surfaceHolder: SurfaceHolder,
     watchState: WatchState,
     var complicationSlotsManager: ComplicationSlotsManager,
@@ -41,8 +25,8 @@ class WatchFaceCanvasRenderer(
     interactiveDrawModeUpdateDelayMillis = 16L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
-    private val tag = "COMPLICATION_TEST"
-    /*private var zonedDateTime: ZonedDateTime? = null
+    /*private val tag = "COMPLICATION_TEST"
+    private var zonedDateTime: ZonedDateTime? = null
     private var complication: ComplicationSlot? = null
     private var complicationWireData: ComplicationData? = null
     private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
@@ -80,7 +64,8 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        val complication = complicationSlotsManager.complicationSlots[0]
+        complicationSlotsManager.complicationSlots[0]!!.render(canvas, zonedDateTime, renderParameters)
+        /*val complication = complicationSlotsManager.complicationSlots[0]
         val complicationWireData = complication!!.complicationData.value.asWireComplicationData()
 
         if (complicationWireData.type == ComplicationData.TYPE_SMALL_IMAGE && complicationWireData.hasSmallImage()) {
@@ -115,14 +100,14 @@ class WatchFaceCanvasRenderer(
                 }
 
                 ComplicationData.IMAGE_STYLE_PHOTO -> {
-                    Log.d(tag, "smallImage type image")
+                    Log.d(tag, "smallImage type photo")
                 }
             }
         } else {
             Log.d(tag, "Complication type is not SMALL_IMAGE, changing nothing")
         }
-
         complication.render(canvas, zonedDateTime, renderParameters)
+        */
         //renderer(canvas, zonedDateTime, renderParameters)
     }
     /*@SuppressLint("RestrictedApi")
