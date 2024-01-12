@@ -27,6 +27,8 @@ import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
 import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.complications.data.SmallImageType
+import androidx.wear.watchface.complications.data.toApiComplicationData
+import androidx.wear.watchface.complications.data.toTypedApiComplicationData
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
@@ -121,6 +123,7 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "Unknown complication type, rendering default.")
             }
         }
+
         complication!!.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
@@ -172,26 +175,34 @@ class WatchFaceCanvasRenderer(
                 shortTextComplicationDataBuilder!!.setMonochromaticImage(
                     MonochromaticImage.Builder(dataSourceIcon!!).build()
                 )
-            } else Log.d(tag, "dataSourceIcon is null after hasIcon")
+            }
             shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
-            if (dataSourceIcon != null && Build.VERSION.SDK_INT >= 29) shortTextComplicationData!!.monochromaticImage!!.image.setTint(Color.BLUE).setTintBlendMode(BlendMode.SRC_IN)
+            shortTextComplicationData!!.monochromaticImage.apply { this!!.image.apply { setTint(Color.BLUE) } }
             complication!!.renderer.loadData(shortTextComplicationData!!, false)
-
-            if (dataSourceIcon != null && Build.VERSION.SDK_INT >= 29) shortTextComplicationData!!.monochromaticImage!!.image.setTint(Color.BLUE).setTintBlendMode(BlendMode.SRC_IN)
         }
     }
     @SuppressLint("RestrictedApi")
     private fun setSmallImageComplicationData() {
         Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE")
-        if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
+        if (dataSourceBurnInProtectionSmallImage != null && dataSourceContentDescription != null) {
+            Log.d(tag, "Setting burnInProtectionSmallImage")
+            smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
+                SmallImage.Builder(dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON).build(),
+                PlainComplicationText.Builder(dataSourceContentDescription!!).build()
+            )
+            // if complicationWireData.IMAGE_STYLE_ICON/PHOTO
+        } else if (dataSourceBurnInProtectionSmallImage != null) {
+            Log.d(tag, "Setting burnInProtectionSmallImage")
+            smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
+                SmallImage.Builder(dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON).build(),
+                PlainComplicationText.Builder("Content description not provided by DataSource").build()
+            )
+        } else if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting smallImage")
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                 SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
                 PlainComplicationText.Builder(dataSourceContentDescription!!).build()
             )
-            smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
-            if (Build.VERSION.SDK_INT >= 29) smallImageComplicationData!!.smallImage.image
-                .setTint(Color.BLUE).setTintBlendMode(BlendMode.SRC_IN)
         } else if (dataSourceSmallImage != null) {
             Log.d(tag, "Setting smallImage")
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
@@ -199,28 +210,6 @@ class WatchFaceCanvasRenderer(
                 PlainComplicationText.Builder("Content description not provided by DataSource")
                     .build()
             )
-            smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
-            if (Build.VERSION.SDK_INT >= 29) smallImageComplicationData!!.smallImage.image
-                .setTint(Color.BLUE).setTintBlendMode(BlendMode.SRC_IN)
-        }
-        if (dataSourceBurnInProtectionSmallImage != null && dataSourceContentDescription != null) {
-            Log.d(tag, "Setting burnInProtectionSmallImage")
-            smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                SmallImage.Builder(dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON).build(),
-                PlainComplicationText.Builder(dataSourceContentDescription!!).build()
-            )
-            smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
-            if (Build.VERSION.SDK_INT >= 29) smallImageComplicationData!!.smallImage.image
-                .setTint(Color.BLUE).setTintBlendMode(BlendMode.SRC_IN)
-        } else if (dataSourceBurnInProtectionSmallImage != null) {
-            Log.d(tag, "Setting burnInProtectionSmallImage")
-            smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                SmallImage.Builder(dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON).build(),
-                PlainComplicationText.Builder("Content description not provided by DataSource").build()
-            )
-            smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
-            if (Build.VERSION.SDK_INT >= 29) smallImageComplicationData!!.smallImage.image
-                .setTint(Color.BLUE).setTintBlendMode(BlendMode.SRC_IN)
         }
         if (smallImageComplicationDataBuilder != null) {
             if (dataSourceDataSource != null) {
@@ -231,9 +220,8 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "Setting tapAction")
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
+            smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
             complication!!.renderer.loadData(smallImageComplicationData!!, false)
-            if (Build.VERSION.SDK_INT >= 29) smallImageComplicationData!!.smallImage.image
-                .setTint(Color.BLUE).setTintBlendMode(BlendMode.SRC_IN)
         }
     }
 
