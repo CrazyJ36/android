@@ -1,13 +1,33 @@
 package com.crazyj36.complicationtest
 
 import android.annotation.SuppressLint
+import android.app.PendingIntent
+import android.content.ComponentName
+import android.content.res.Resources
 import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.Rect
+import android.graphics.drawable.Icon
+import android.support.wearable.complications.ComplicationData
+import android.util.Log
 import android.view.SurfaceHolder
+import androidx.wear.protolayout.expression.DynamicBuilders
+import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
+import androidx.wear.watchface.DrawMode
+import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
+import androidx.wear.watchface.complications.data.MonochromaticImage
+import androidx.wear.watchface.complications.data.PlainComplicationText
+import androidx.wear.watchface.complications.data.ShortTextComplicationData
+import androidx.wear.watchface.complications.data.SmallImage
+import androidx.wear.watchface.complications.data.SmallImageComplicationData
+import androidx.wear.watchface.complications.data.SmallImageType
+import androidx.wear.watchface.complications.data.toApiComplicationData
 import androidx.wear.watchface.style.CurrentUserStyleRepository
+import java.time.LocalDateTime
 import java.time.ZonedDateTime
 
 class WatchFaceCanvasRenderer(
@@ -24,7 +44,7 @@ class WatchFaceCanvasRenderer(
     interactiveDrawModeUpdateDelayMillis = 16L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
-    /*private val tag = "COMPLICATION_TEST"
+    private val tag = "COMPLICATION_TEST"
     private var zonedDateTime: ZonedDateTime? = null
     private var complication: ComplicationSlot? = null
     private var complicationWireData: ComplicationData? = null
@@ -43,7 +63,7 @@ class WatchFaceCanvasRenderer(
     private var dataSourceBurnInProtectionSmallImage: Icon? = null
     private var dataSourceLargeImage: Icon? = null
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
-    private val paint = Paint()*/
+    private val paint = Paint()
 
     @SuppressLint("RestrictedApi")
     override fun renderHighlightLayer(
@@ -61,16 +81,6 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        complicationSlotsManager.complicationSlots[0]!!.render(canvas, zonedDateTime, renderParameters)
-
-        // Galaxy Watch 4 and androidx.wear.watchface 1.2.0 problems:
-        // Commented code doesn't fully work as intended because some ComplicationData.IMAGE_STYLE... can be confused.
-        // Not having app:iconColor in complication_drawable.xml is preventing the Samsung Galaxy Watch 4s
-        // 'Consumed' complication from being tinted, but when I use only app:iconColor in xml(not in programmatic constructor
-        // in MyWatchFaceService) nothing tints on Galaxy Watch 4. Setting ComplicationDrawable iconColor in MyWatchFaceService
-        // is the only way to tint icons, though the 'Consumed' complication which is ComplicationData.IMAGE_STYLE_ICON is still
-        // not tinted. Using imageColorFilter tints actual photo complications, but not IMAGE_STYLE_ICON.
-
         /*val complication = complicationSlotsManager.complicationSlots[0]
         val complicationWireData = complication!!.complicationData.value.asWireComplicationData()
         if (complicationWireData.type == ComplicationData.TYPE_SMALL_IMAGE && complicationWireData.hasSmallImage()) {
@@ -110,11 +120,11 @@ class WatchFaceCanvasRenderer(
         } else {
             Log.d(tag, "Complication type is not SMALL_IMAGE, changing nothing")
         }
-        complication.render(canvas, zonedDateTime, renderParameters)
-        */
-        //renderer(canvas, zonedDateTime, renderParameters)
+        complication.renderer.loadData(complicationWireData.toApiComplicationData(), false)
+        complication.render(canvas, zonedDateTime, renderParameters)*/
+        renderer(canvas, zonedDateTime, renderParameters)
     }
-    /*@SuppressLint("RestrictedApi")
+    @SuppressLint("RestrictedApi")
     private fun renderer(canvas: Canvas, zonedDateTime: ZonedDateTime, renderParameters: RenderParameters) {
         this.zonedDateTime = zonedDateTime
         complication = null
@@ -306,7 +316,7 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "hasRangedDynamicValues")
             dataSourceDynamicValues = complicationWireData!!.rangedDynamicValue
         }
-    }*/
+    }
     class MySharedAssets : SharedAssets {
         override fun onDestroy() {
         }
