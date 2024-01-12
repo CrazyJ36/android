@@ -30,8 +30,7 @@ class MyWatchFaceService : WatchFaceService() {
         val complicationId = 0
         val supportedTypes = listOf(
             ComplicationType.SHORT_TEXT,
-            ComplicationType.SMALL_IMAGE,
-            ComplicationType.MONOCHROMATIC_IMAGE
+            ComplicationType.SMALL_IMAGE
         )
         val bounds = ComplicationSlotBounds(
             RectF(0.35f, 0.35f, 0.65f, 0.65f)
@@ -46,8 +45,6 @@ class MyWatchFaceService : WatchFaceService() {
                 textColor = Color.WHITE
                 titleColor = Color.WHITE
                 iconColor = Color.RED
-                rangedValuePrimaryColor = Color.WHITE
-                rangedValueSecondaryColor = Color.DKGRAY
             }
         }
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->

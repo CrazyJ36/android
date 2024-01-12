@@ -62,9 +62,9 @@ class WatchFaceCanvasRenderer(
     private var dataSourceIcon: Icon? = null
     private var dataSourceSmallImage: Icon? = null
     private val colorMatrix = floatArrayOf(
-        255f, 0f, 0f, 0f, 255f,
-        0f, -1f, 0f, 0f, 255f,
-        0f, 0f, -1f, 0f, 255f,
+        1f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
         0f, 0f, 0f, 1f, 0f
     )
     private var coloredIcon: Icon? = null
@@ -236,13 +236,6 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "Setting tapAction")
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
-
-
-            /*if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
-                                Log.d(tag, "SmallImage type is icon, coloring icons.")
-                                smallImageComplicationData!!.smallImage.image.setTint(Color.RED)
-                                    .setTintBlendMode(BlendMode.LUMINOSITY)
-            }*/
 
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
             complication!!.renderer.loadData(smallImageComplicationData!!, false)
