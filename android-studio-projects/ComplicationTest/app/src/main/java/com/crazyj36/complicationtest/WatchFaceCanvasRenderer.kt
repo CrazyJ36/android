@@ -66,6 +66,7 @@ class WatchFaceCanvasRenderer(
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
     private val paint = Paint()
 
+    @RequiresApi(Build.VERSION_CODES.P)
     @SuppressLint("RestrictedApi")
     override fun renderHighlightLayer(
         canvas: Canvas,
@@ -73,6 +74,7 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
+        renderer(canvas, zonedDateTime, renderParameters)
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
