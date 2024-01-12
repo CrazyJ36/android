@@ -49,7 +49,6 @@ class WatchFaceCanvasRenderer(
     private var complication: ComplicationSlot? = null
     private var complicationWireData: ComplicationData? = null
     private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
-    private var shortTextComplicationData: ShortTextComplicationData? = null
     private var smallImageComplicationDataBuilder: SmallImageComplicationData.Builder? = null
     private var smallImageComplicationData: SmallImageComplicationData? = null
     private var dataSourceDataSource: ComponentName? = null
@@ -93,7 +92,6 @@ class WatchFaceCanvasRenderer(
         complication = complicationSlotsManager.complicationSlots[0]
         complicationWireData = complication!!.complicationData.value.asWireComplicationData()
         shortTextComplicationDataBuilder = null
-        shortTextComplicationData = null
         smallImageComplicationDataBuilder = null
         smallImageComplicationData = null
         dataSourceDataSource = null
@@ -173,8 +171,7 @@ class WatchFaceCanvasRenderer(
                     MonochromaticImage.Builder(dataSourceIcon!!).build()
                 )
             }
-            shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
-            complication!!.renderer.loadData(shortTextComplicationData!!, false)
+            complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build(), false)
         }
     }
     @SuppressLint("RestrictedApi")
@@ -261,8 +258,8 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "Setting tapAction")
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
-            smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
 
+            smallImageComplicationData = smallImageComplicationDataBuilder!!d.build()
             if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
                 Log.d(tag, "SmallImage type is icon, coloring icons.")
                 smallImageComplicationData!!.smallImage.image.setTint(Color.BLUE)
