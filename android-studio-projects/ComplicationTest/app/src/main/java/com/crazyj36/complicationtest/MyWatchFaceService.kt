@@ -1,6 +1,9 @@
 package com.crazyj36.complicationtest
 
 import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.graphics.RectF
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
@@ -42,7 +45,7 @@ class MyWatchFaceService : WatchFaceService() {
             activeStyle.apply {
                 textColor = Color.WHITE
                 titleColor = Color.WHITE
-                iconColor = Color.WHITE
+                iconColor = Color.RED
                 rangedValuePrimaryColor = Color.WHITE
                 rangedValueSecondaryColor = Color.DKGRAY
             }
@@ -76,6 +79,7 @@ class MyWatchFaceService : WatchFaceService() {
         currentUserStyleRepository: CurrentUserStyleRepository
     ): WatchFace {
         val renderer = WatchFaceCanvasRenderer(
+            context = applicationContext,
             surfaceHolder = surfaceHolder,
             watchState = watchState,
             complicationSlotsManager = complicationSlotsManager,
