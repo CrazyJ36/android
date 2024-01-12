@@ -1,8 +1,16 @@
 package com.crazyj36.complicationtest
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
 import android.graphics.Color
 import android.graphics.ColorFilter
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.graphics.RectF
+import android.support.wearable.complications.ComplicationData
+import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
@@ -22,6 +30,7 @@ import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class MyWatchFaceService : WatchFaceService() {
 
+    @SuppressLint("RestrictedApi")
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
@@ -37,11 +46,14 @@ class MyWatchFaceService : WatchFaceService() {
             SystemDataSources.DATA_SOURCE_STEP_COUNT,
             ComplicationType.SHORT_TEXT
         )
-        val complicationDrawable = ComplicationDrawable.getDrawable(
-            this@MyWatchFaceService,
-            R.drawable.complication_drawable
-        )
-        complicationDrawable!!.activeStyle.iconColor = Color.BLUE
+        val complicationDrawable = ComplicationDrawable().apply {
+            setContext(applicationContext)
+            activeStyle.apply {
+                textColor = Color.WHITE
+                titleColor = Color.WHITE
+                iconColor = Color.BLUE
+            }
+        }
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
                 complicationDrawable,
@@ -71,6 +83,7 @@ class MyWatchFaceService : WatchFaceService() {
         currentUserStyleRepository: CurrentUserStyleRepository
     ): WatchFace {
         val renderer = WatchFaceCanvasRenderer(
+            context = applicationContext,
             surfaceHolder = surfaceHolder,
             watchState = watchState,
             complicationSlotsManager = complicationSlotsManager,
