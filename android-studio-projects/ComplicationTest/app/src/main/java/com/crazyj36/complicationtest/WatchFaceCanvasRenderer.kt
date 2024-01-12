@@ -184,6 +184,7 @@ class WatchFaceCanvasRenderer(
         Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE")
         if (dataSourceBurnInProtectionSmallImage != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting burnInProtectionSmallImage")
+            Log.d(tag, "Setting contentDescription")
             if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
                 Log.d(tag, "smallImage type icon")
                 dataSourceBurnInProtectionSmallImage!!.setTint(Color.BLUE)
@@ -203,6 +204,7 @@ class WatchFaceCanvasRenderer(
         } else if (dataSourceBurnInProtectionSmallImage != null) {
             Log.d(tag, "Setting burnInProtectionSmallImage")
             if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
+                Log.d(tag, "smallImage type icon")
                 dataSourceBurnInProtectionSmallImage!!.setTint(Color.BLUE)
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON)
@@ -211,6 +213,7 @@ class WatchFaceCanvasRenderer(
                         .build()
                 )
             } else if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_PHOTO) {
+                Log.d(tag, "smallImage type photo")
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(dataSourceBurnInProtectionSmallImage!!, SmallImageType.PHOTO)
                         .build(),
@@ -218,15 +221,19 @@ class WatchFaceCanvasRenderer(
                         .build()
                 )
             }
-        } else if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
+        }
+        if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting smallImage")
+            Log.d(tag, "Setting contentDescription")
             if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
+                Log.d(tag, "smallImage type icon")
                 dataSourceSmallImage!!.setTint(Color.BLUE)
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
                     PlainComplicationText.Builder(dataSourceContentDescription!!).build()
                 )
             } else if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_PHOTO) {
+                Log.d(tag, "smallImage type photo")
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.PHOTO).build(),
                     PlainComplicationText.Builder(dataSourceContentDescription!!).build()
@@ -235,6 +242,7 @@ class WatchFaceCanvasRenderer(
         } else if (dataSourceSmallImage != null) {
             Log.d(tag, "Setting smallImage")
             if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
+                Log.d(tag, "smallImage type icon")
                 dataSourceSmallImage!!.setTint(Color.BLUE)
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
@@ -242,6 +250,7 @@ class WatchFaceCanvasRenderer(
                         .build()
                 )
             } else if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_PHOTO) {
+                Log.d(tag, "smallImage type photo")
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.PHOTO).build(),
                     PlainComplicationText.Builder("Content description not provided by DataSource")
