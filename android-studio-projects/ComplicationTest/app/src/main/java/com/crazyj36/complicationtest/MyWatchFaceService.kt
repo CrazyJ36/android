@@ -2,8 +2,6 @@ package com.crazyj36.complicationtest
 
 import android.annotation.SuppressLint
 import android.graphics.Color
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.graphics.RectF
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
@@ -46,7 +44,8 @@ class MyWatchFaceService : WatchFaceService() {
                 textColor = Color.WHITE
                 titleColor = Color.WHITE
                 iconColor = Color.BLUE
-                imageColorFilter = PorterDuffColorFilter(Color.BLUE, PorterDuff.Mode.SRC_ATOP)
+                rangedValuePrimaryColor = Color.WHITE
+                rangedValueSecondaryColor = Color.DKGRAY
             }
         }
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->

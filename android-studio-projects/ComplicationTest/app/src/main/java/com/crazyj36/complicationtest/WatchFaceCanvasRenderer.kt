@@ -1,7 +1,6 @@
 package com.crazyj36.complicationtest
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.view.SurfaceHolder
@@ -53,8 +52,6 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        //renderer(canvas, zonedDateTime, renderParameters)
-        complicationSlotsManager.complicationSlots[0]!!.render(canvas, zonedDateTime, renderParameters)
     }
 
     @SuppressLint("RestrictedApi")
@@ -65,13 +62,20 @@ class WatchFaceCanvasRenderer(
         sharedAssets: MySharedAssets
     ) {
         complicationSlotsManager.complicationSlots[0]!!.render(canvas, zonedDateTime, renderParameters)
+
+        // Galaxy Watch 4 and androidx.wear.watchface 1.2.0 problems:
+        // Commented code doesn't fully work as intended because some ComplicationData.IMAGE_STYLE... can be confused.
+        // Not having app:iconColor in complication_drawable.xml is preventing the Samsung Galaxy Watch 4s
+        // 'Consumed' complication from being tinted, but when I use only app:iconColor in xml(not in programmatic constructor
+        // in MyWatchFaceService) nothing tints on Galaxy Watch 4. Setting ComplicationDrawable iconColor in MyWatchFaceService
+        // is the only way to tint icons, though the 'Consumed' complication which is ComplicationData.IMAGE_STYLE_ICON is still
+        // not tinted. Using imageColorFilter tints actual photo complications, but not IMAGE_STYLE_ICON.
+
         /*val complication = complicationSlotsManager.complicationSlots[0]
         val complicationWireData = complication!!.complicationData.value.asWireComplicationData()
-
         if (complicationWireData.type == ComplicationData.TYPE_SMALL_IMAGE && complicationWireData.hasSmallImage()) {
             Log.d(tag,"ComplicationType is SmallImage")
             when (complication.complicationData.value.asWireComplicationData().smallImageStyle) {
-
                 ComplicationData.IMAGE_STYLE_ICON -> {
                     Log.d(tag, "smallImage type icon")
                     complicationWireData.smallImage!!.setTint(Color.BLUE)
