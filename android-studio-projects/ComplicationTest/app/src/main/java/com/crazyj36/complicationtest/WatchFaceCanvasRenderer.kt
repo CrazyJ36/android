@@ -4,9 +4,7 @@ import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.res.Resources
-import android.graphics.BlendMode
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.Icon
@@ -57,9 +55,7 @@ class WatchFaceCanvasRenderer(
     private var dataSourceContentDescription: CharSequence? = null
     private var dataSourceTitle: CharSequence? = null
     private var dataSourceIcon: Icon? = null
-    private var dataSourceBurnInProtectionIcon: Icon? = null
     private var dataSourceSmallImage: Icon? = null
-    private var dataSourceBurnInProtectionSmallImage: Icon? = null
     private var dataSourceLargeImage: Icon? = null
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
     private val paint = Paint()
@@ -100,9 +96,7 @@ class WatchFaceCanvasRenderer(
         dataSourceContentDescription = null
         dataSourceTitle = null
         dataSourceIcon = null
-        dataSourceBurnInProtectionIcon = null
         dataSourceSmallImage = null
-        dataSourceBurnInProtectionSmallImage = null
         dataSourceLargeImage = null
         dataSourceDynamicValues = null
 
@@ -177,44 +171,6 @@ class WatchFaceCanvasRenderer(
     @SuppressLint("RestrictedApi")
     private fun setSmallImageComplicationData() {
         Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE")
-        if (dataSourceBurnInProtectionSmallImage != null && dataSourceContentDescription != null) {
-            Log.d(tag, "Setting burnInProtectionSmallImage")
-            Log.d(tag, "Setting contentDescription")
-            if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
-                Log.d(tag, "smallImage type icon")
-                smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                    SmallImage.Builder(dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON)
-                        .build(),
-                    PlainComplicationText.Builder(dataSourceContentDescription!!).build()
-                )
-            } else if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_PHOTO) {
-                Log.d(tag, "smallImage type photo")
-                smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                    SmallImage.Builder(dataSourceBurnInProtectionSmallImage!!, SmallImageType.PHOTO)
-                        .build(),
-                    PlainComplicationText.Builder(dataSourceContentDescription!!).build()
-                )
-            }
-        } else if (dataSourceBurnInProtectionSmallImage != null) {
-            Log.d(tag, "Setting burnInProtectionSmallImage")
-            if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
-                Log.d(tag, "smallImage type icon")
-                smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                    SmallImage.Builder(dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON)
-                        .build(),
-                    PlainComplicationText.Builder("Content description not provided by DataSource")
-                        .build()
-                )
-            } else if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_PHOTO) {
-                Log.d(tag, "smallImage type photo")
-                smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                    SmallImage.Builder(dataSourceBurnInProtectionSmallImage!!, SmallImageType.PHOTO)
-                        .build(),
-                    PlainComplicationText.Builder("Content description not provided by DataSource")
-                        .build()
-                )
-            }
-        }
         if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting smallImage")
             Log.d(tag, "Setting contentDescription")
@@ -259,12 +215,12 @@ class WatchFaceCanvasRenderer(
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
 
-            smallImageComplicationData = smallImageComplicationDataBuilder!!d.build()
-            if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
+            smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
+            /*if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
                 Log.d(tag, "SmallImage type is icon, coloring icons.")
-                smallImageComplicationData!!.smallImage.image.setTint(Color.BLUE)
+                smallImageComplicationData!!.smallImage.image.setTint(Color.WHITE)
                     .setTintBlendMode(BlendMode.LUMINOSITY)
-            }
+            }*/
 
             complication!!.renderer.loadData(smallImageComplicationData!!, false)
         }
@@ -305,17 +261,9 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "hasIcon")
             dataSourceIcon = complicationWireData!!.icon
         }
-        if (complicationWireData!!.hasBurnInProtectionIcon()) {
-            Log.d(tag, "hasBurnInProtectionIcon")
-            dataSourceBurnInProtectionIcon = complicationWireData!!.burnInProtectionIcon
-        }
         if (complicationWireData!!.hasSmallImage()) {
             Log.d(tag, "hasSmallImage")
             dataSourceSmallImage = complicationWireData!!.smallImage
-        }
-        if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
-            Log.d(tag, "hasBurnInProtectionSmallImage")
-            dataSourceBurnInProtectionSmallImage = complicationWireData!!.burnInProtectionSmallImage
         }
         if (complicationWireData!!.hasLargeImage()) {
             Log.d(tag, "hasLargeImage")

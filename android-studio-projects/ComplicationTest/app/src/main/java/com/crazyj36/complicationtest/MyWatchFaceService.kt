@@ -44,7 +44,7 @@ class MyWatchFaceService : WatchFaceService() {
             activeStyle.apply {
                 textColor = Color.WHITE
                 titleColor = Color.WHITE
-                iconColor = Color.BLUE
+                iconColor = Color.WHITE
                 rangedValuePrimaryColor = Color.WHITE
                 rangedValueSecondaryColor = Color.DKGRAY
             }
