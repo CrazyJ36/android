@@ -29,7 +29,8 @@ class MyWatchFaceService : WatchFaceService() {
         val complicationId = 0
         val supportedTypes = listOf(
             ComplicationType.SHORT_TEXT,
-            ComplicationType.SMALL_IMAGE
+            ComplicationType.SMALL_IMAGE,
+            ComplicationType.MONOCHROMATIC_IMAGE
         )
         val bounds = ComplicationSlotBounds(
             RectF(0.35f, 0.35f, 0.65f, 0.65f)
