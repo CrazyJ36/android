@@ -113,10 +113,10 @@ class WatchFaceCanvasRenderer(
         getDataSourceInfo(zonedDateTime)
 
         when (complicationWireData!!.type) {
-            ComplicationData.TYPE_SHORT_TEXT -> {
+            ComplicationData.Companion.TYPE_SHORT_TEXT -> {
                 setShortTextComplicationData()
             }
-            ComplicationData.TYPE_SMALL_IMAGE -> {
+            ComplicationData.Companion.TYPE_SMALL_IMAGE -> {
                 setSmallImageComplicationData()
             }
             else -> {
@@ -175,7 +175,7 @@ class WatchFaceCanvasRenderer(
                     MonochromaticImage.Builder(dataSourceIcon!!).build()
                 )
             }
-            complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build(), false)
+            complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build(), true)
         }
     }
     @SuppressLint("RestrictedApi")
@@ -184,19 +184,20 @@ class WatchFaceCanvasRenderer(
         if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting smallImage")
             Log.d(tag, "Setting contentDescription")
-            if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
+            if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 Log.d(tag, "smallImage type icon")
                 dataSourceSmallImage!!.setTint(Color.RED)
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(
-                        dataSourceSmallImage!!.loadDrawable(context)!!.mutate().apply {
+                        dataSourceSmallImage!!.loadDrawable(context)!!.apply {
+                            setTint(Color.RED)
                             colorFilter = ColorMatrixColorFilter(colorMatrix)
                         }.toBitmap().toIcon(),
                         SmallImageType.ICON
                     ).build(),
                     PlainComplicationText.Builder(dataSourceContentDescription!!).build()
                 )
-            } else if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_PHOTO) {
+            } else if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_PHOTO) {
                 Log.d(tag, "smallImage type photo")
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.PHOTO).build(),
@@ -205,12 +206,13 @@ class WatchFaceCanvasRenderer(
             }
         } else if (dataSourceSmallImage != null) {
             Log.d(tag, "Setting smallImage")
-            if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
+            if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 Log.d(tag, "smallImage type icon")
                 dataSourceSmallImage!!.setTint(Color.RED)
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(
-                        dataSourceSmallImage!!.loadDrawable(context)!!.mutate().apply {
+                        dataSourceSmallImage!!.loadDrawable(context)!!.apply {
+                            setTint(Color.RED)
                             colorFilter = ColorMatrixColorFilter(colorMatrix)
                         }.toBitmap().toIcon(),
                         SmallImageType.ICON
@@ -219,7 +221,7 @@ class WatchFaceCanvasRenderer(
                         "Content description not provided by DataSource"
                     ).build()
                 )
-            } else if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_PHOTO) {
+            } else if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_PHOTO) {
                 Log.d(tag, "smallImage type photo")
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.PHOTO).build(),
@@ -240,8 +242,12 @@ class WatchFaceCanvasRenderer(
             }
 
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
-            //smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
-            complication!!.renderer.loadData(smallImageComplicationData!!, false)
+
+            Log.d("COMPLICATION_TEST2", "Info: " + complication!!.complicationData.value.dataSource.toString())
+            //smallImageComplicationData!!.smallImage.image.setTint(Color.RED)
+            smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter  = ColorMatrixColorFilter(colorMatrix)
+
+            complication!!.renderer.loadData(smallImageComplicationData!!, true)
         }
     }
 
