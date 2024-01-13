@@ -43,6 +43,7 @@ class MyWatchFaceService : WatchFaceService() {
                 textColor = Color.WHITE
                 titleColor = Color.WHITE
                 iconColor = Color.RED
+                setTint(Color.RED)
             }
         }
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
