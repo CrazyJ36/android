@@ -194,7 +194,6 @@ class WatchFaceCanvasRenderer(
                         dataSourceSmallImage!!.loadDrawable(context)?.apply {
                             mutate()
                             colorFilter = ColorMatrixColorFilter(colorMatrix)
-                            setTint(Color.RED)
                         }!!.toBitmap().toIcon(),
                         SmallImageType.ICON
                     ).build(),
@@ -214,9 +213,7 @@ class WatchFaceCanvasRenderer(
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(
                         dataSourceSmallImage!!.loadDrawable(context)?.apply {
-                            mutate()
                             colorFilter = ColorMatrixColorFilter(colorMatrix)
-                            setTint(Color.RED)
                         }!!.toBitmap().toIcon(),
                         SmallImageType.ICON
                     ).build(),
@@ -244,6 +241,12 @@ class WatchFaceCanvasRenderer(
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
+
+            smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
+                colorFilter = ColorMatrixColorFilter(colorMatrix)
+                setTint(Color.RED)
+            }
+
             complication!!.renderer.loadData(smallImageComplicationData!!, false)
         }
     }
