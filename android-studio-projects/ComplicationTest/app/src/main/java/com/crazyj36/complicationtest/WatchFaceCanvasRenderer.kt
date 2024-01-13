@@ -81,7 +81,50 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        renderer(canvas, zonedDateTime, renderParameters)
+        this.zonedDateTime = zonedDateTime
+        complication = null
+        complicationWireData = null
+        complication = complicationSlotsManager.complicationSlots[0]
+        complicationWireData = complication!!.complicationData.value.asWireComplicationData()
+        shortTextComplicationDataBuilder = null
+        smallImageComplicationDataBuilder = null
+        smallImageComplicationData = null
+        dataSourceDataSource = null
+        dataSourceTapAction = null
+        dataSourceText = null
+        dataSourceContentDescription = null
+        dataSourceTitle = null
+        dataSourceIcon = null
+        dataSourceSmallImage = null
+        dataSourceLargeImage = null
+        dataSourceDynamicValues = null
+
+        getDataSourceInfo()
+
+        when (complicationWireData!!.type) {
+            ComplicationData.Companion.TYPE_SHORT_TEXT -> {
+                setShortTextComplicationData()
+            }
+            ComplicationData.Companion.TYPE_SMALL_IMAGE -> {
+                setSmallImageComplicationData()
+            }
+            else -> {
+                Log.d(tag, "Unknown complication type, rendering default.")
+            }
+        }
+        complication!!.render(canvas, zonedDateTime, renderParameters)
+        if (renderParameters.drawMode == DrawMode.AMBIENT) {
+            Log.d(tag, "Ambient")
+            paint.setARGB(255, 255, 255, 255)
+            paint.textAlign = Paint.Align.CENTER
+            paint.textSize = 14f
+            canvas.drawText(
+                "Ambient",
+                canvas.width / 2f,
+                canvas.height - (canvas.height / 7).toFloat(),
+                paint
+            )
+        }
     }
 
 
@@ -92,11 +135,6 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        renderer(canvas, zonedDateTime, renderParameters)
-    }
-
-    @SuppressLint("RestrictedApi")
-    private fun renderer(canvas: Canvas, zonedDateTime: ZonedDateTime, renderParameters: RenderParameters) {
         this.zonedDateTime = zonedDateTime
         complication = null
         complicationWireData = null
@@ -201,7 +239,7 @@ class WatchFaceCanvasRenderer(
                     ).build(),
                     PlainComplicationText.Builder(dataSourceContentDescription!!).build()
                 )
-            } else if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_PHOTO) {
+            } else if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_PHOTO) {
                 Log.d(tag, "smallImage type photo")
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.PHOTO).build(),
@@ -210,7 +248,7 @@ class WatchFaceCanvasRenderer(
             }
         } else if (dataSourceSmallImage != null) {
             Log.d(tag, "Setting smallImage")
-            if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
+            if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 Log.d(tag, "smallImage type icon")
                 dataSourceSmallImage!!.setTint(Color.RED)
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
@@ -224,7 +262,7 @@ class WatchFaceCanvasRenderer(
                         "Content description not provided by DataSource"
                     ).build()
                 )
-            } else if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_PHOTO) {
+            } else if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_PHOTO) {
                 Log.d(tag, "smallImage type photo")
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.PHOTO).build(),
