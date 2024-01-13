@@ -245,7 +245,7 @@ class WatchFaceCanvasRenderer(
 
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
 
-            Log.d(tag, "Image type: " + smallImageComplicationData!!.smallImage.image.type)
+            Log.d(tag, "Image type: " + smallImageComplicationData!!.smallImage.type)
 
             complication!!.renderer.loadData(smallImageComplicationData!!, false)
         }
