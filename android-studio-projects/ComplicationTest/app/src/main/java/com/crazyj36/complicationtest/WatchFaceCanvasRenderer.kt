@@ -10,7 +10,6 @@ import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.graphics.Rect
-import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
 import android.util.Log
@@ -24,8 +23,6 @@ import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
-import androidx.wear.watchface.complications.data.ComplicationDisplayPolicies
-import androidx.wear.watchface.complications.data.ComplicationDisplayPolicy
 import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
@@ -71,8 +68,6 @@ class WatchFaceCanvasRenderer(
         0f, 0f, 0f, 0f, 0f,
         0f, 0f, 0f, 1f, 0f
     )
-    private var coloredIcon: Icon? = null
-    private var drawable: Drawable? = null
     private var dataSourceLargeImage: Icon? = null
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
     private val paint = Paint()
@@ -115,8 +110,6 @@ class WatchFaceCanvasRenderer(
         dataSourceTitle = null
         dataSourceIcon = null
         dataSourceSmallImage = null
-        drawable = null
-        coloredIcon = null
         dataSourceLargeImage = null
         dataSourceDynamicValues = null
 
@@ -196,11 +189,14 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "Setting contentDescription")
             if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 Log.d(tag, "smallImage type icon")
-                drawable = dataSourceSmallImage!!.loadDrawable(context)
-                drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
-                coloredIcon = drawable!!.toBitmap().toIcon()
+                dataSourceSmallImage!!.setTint(Color.RED)
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                    SmallImage.Builder(coloredIcon!!, SmallImageType.ICON).build(),
+                    SmallImage.Builder(
+                        dataSourceSmallImage!!.loadDrawable(context)?.apply {
+                            colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        }!!.toBitmap().toIcon(),
+                        SmallImageType.ICON
+                    ).build(),
                     PlainComplicationText.Builder(dataSourceContentDescription!!).build()
                 )
             } else if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_PHOTO) {
@@ -214,20 +210,25 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "Setting smallImage")
             if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
                 Log.d(tag, "smallImage type icon")
-                drawable = dataSourceSmallImage!!.loadDrawable(context)
-                drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
-                coloredIcon = drawable!!.toBitmap().toIcon()
+                dataSourceSmallImage!!.setTint(Color.RED)
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                    SmallImage.Builder(coloredIcon!!, SmallImageType.ICON).build(),
-                    PlainComplicationText.Builder("Content description not provided by DataSource")
-                        .build()
+                    SmallImage.Builder(
+                        dataSourceSmallImage!!.loadDrawable(context)?.apply {
+                            colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        }!!.toBitmap().toIcon(),
+                        SmallImageType.ICON
+                    ).build(),
+                    PlainComplicationText.Builder(
+                        "Content description not provided by DataSource"
+                    ).build()
                 )
             } else if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_PHOTO) {
                 Log.d(tag, "smallImage type photo")
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.PHOTO).build(),
-                    PlainComplicationText.Builder("Content description not provided by DataSource")
-                        .build()
+                    PlainComplicationText.Builder(
+                        "Content description not provided by DataSource"
+                    ).build()
                 )
             }
         }
@@ -240,21 +241,6 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "Setting tapAction")
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
-
-
-            /*val icon = smallImageComplicationData!!.smallImage.image
-            val drawable = icon.loadDrawable(context)
-            drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
-            val newIcon = drawable.toBitmap().toIcon()
-            smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                SmallImage.Builder(newIcon, SmallImageType.ICON).build(), PlainComplicationText.Builder("").build()
-            )
-
-
-            smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter = ColorMatrixColorFilter(colorMatrix)*/
-
-            //WORKS for images not getting tinted, but fully tinted: smallImageComplicationData!!.smallImage.image.setTint(Color.RED)
-
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
             complication!!.renderer.loadData(smallImageComplicationData!!, false)
         }
