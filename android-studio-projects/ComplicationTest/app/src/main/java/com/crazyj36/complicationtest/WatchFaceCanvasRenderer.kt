@@ -181,7 +181,7 @@ class WatchFaceCanvasRenderer(
                     MonochromaticImage.Builder(dataSourceIcon!!).build()
                 )
             }
-            complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build(), false)
+            complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build(), true)
         }
     }
     @SuppressLint("RestrictedApi")
@@ -245,9 +245,9 @@ class WatchFaceCanvasRenderer(
 
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
 
-            Log.d(tag, "Image type: " + smallImageComplicationData!!.smallImage.type)
+            Log.d("COMPLICATION_TEST2", "Image info: " + smallImageComplicationData!!.smallImage.image)
 
-            complication!!.renderer.loadData(smallImageComplicationData!!, false)
+            complication!!.renderer.loadData(smallImageComplicationData!!, true)
         }
     }
 
