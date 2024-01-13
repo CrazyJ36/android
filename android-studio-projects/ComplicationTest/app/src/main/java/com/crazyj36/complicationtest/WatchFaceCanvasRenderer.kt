@@ -191,10 +191,8 @@ class WatchFaceCanvasRenderer(
         if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting smallImage")
             Log.d(tag, "Setting contentDescription")
-            if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON &&
-                coloredIcon != null) {
+            if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 Log.d(tag, "smallImage type icon")
-                Log.d(tag, "Using coloredIcon")
                 drawable = dataSourceSmallImage!!.loadDrawable(context)
                 drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
                 coloredIcon = drawable!!.toBitmap().toIcon()
@@ -211,10 +209,8 @@ class WatchFaceCanvasRenderer(
             }
         } else if (dataSourceSmallImage != null) {
             Log.d(tag, "Setting smallImage")
-            if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON &&
-                coloredIcon != null) {
+            if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
                 Log.d(tag, "smallImage type icon")
-                Log.d(tag, "Using coloredIcon")
                 drawable = dataSourceSmallImage!!.loadDrawable(context)
                 drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
                 coloredIcon = drawable!!.toBitmap().toIcon()
