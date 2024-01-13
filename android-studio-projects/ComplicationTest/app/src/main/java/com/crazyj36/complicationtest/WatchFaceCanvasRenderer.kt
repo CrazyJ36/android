@@ -9,6 +9,8 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
@@ -72,10 +74,10 @@ class WatchFaceCanvasRenderer(
         0f, 0f, 0f, 1f, 0f
     )*/
     private val colorMatrix = floatArrayOf(
-        1f, 0f, 0f, 0f, 0f,
-        0f, 0f, 0f, 0f, 0f,
-        0f, 0f, 0f, 0f, 0f,
-        1f, 0f, 0f, 1f, 0f
+        1f, 0f, 0f, 0f, 100f,
+        0f, 0f, 0f, 0f, 100f,
+        0f, 0f, 0f, 0f, 100f,
+        0f, 0f, 0f, 1f, 0f
     )
     private var dataSourceLargeImage: Icon? = null
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
@@ -222,7 +224,7 @@ class WatchFaceCanvasRenderer(
                 //dataSourceSmallImage!!.setTint(Color.RED)
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(
-                        dataSourceSmallImage!!//!!.loadDrawable(context)!!.apply {
+                        dataSourceSmallImage!!//.loadDrawable(context)!!.apply {
                             //setTint(Color.RED)
                             //colorFilter = ColorMatrixColorFilter(colorMatrix)
                         //}.toBitmap().toIcon(),
