@@ -45,6 +45,14 @@ class MyWatchFaceService : WatchFaceService() {
                 textColor = Color.WHITE
                 titleColor = Color.WHITE
                 iconColor = Color.RED
+                imageColorFilter = ColorMatrixColorFilter(
+                    floatArrayOf(
+                        1f, 0f, 0f, 0f, 0f,
+                        0f, 0f, 0f, 0f, 0f,
+                        0f, 0f, 0f, 0f, 0f,
+                        0f, 0f, 0f, 1f, 0f
+                    )
+                )
             }
         }
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->

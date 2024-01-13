@@ -185,12 +185,12 @@ class WatchFaceCanvasRenderer(
     @SuppressLint("RestrictedApi")
     private fun setSmallImageComplicationData() {
         Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE")
-        if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
+        /*if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
             Log.d(tag, "Getting coloredIcon")
             val drawable = dataSourceSmallImage!!.loadDrawable(context)
             drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
             coloredIcon = drawable.toBitmap().toIcon()
-        }
+        }*/
 
         if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting smallImage")
@@ -200,7 +200,7 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "smallImage type icon")
                 Log.d(tag, "Setting coloredIcon")
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                    SmallImage.Builder(coloredIcon!!, SmallImageType.ICON).build(),
+                    SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
                     PlainComplicationText.Builder(dataSourceContentDescription!!).build()
                 )
             } else if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_PHOTO) {
@@ -217,7 +217,7 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "smallImage type icon")
                 Log.d(tag, "Setting coloredIcon")
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                    SmallImage.Builder(coloredIcon!!, SmallImageType.ICON).build(),
+                    SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
                     PlainComplicationText.Builder("Content description not provided by DataSource")
                         .build()
                 )
