@@ -29,6 +29,9 @@ import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
 import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.complications.data.SmallImageType
+import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
+import androidx.wear.watchface.complications.rendering.ComplicationDrawable
+import androidx.wear.watchface.complications.rendering.ComplicationStyle
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
@@ -122,6 +125,14 @@ class WatchFaceCanvasRenderer(
             else -> {
                 Log.d(tag, "Unknown complication type, rendering default.")
             }
+        }
+
+        ComplicationDrawable.getDrawable(context, smallImageComplicationData!!.smallImage.image.resId)?.apply {
+            activeStyle.run {
+                iconColor = Color.RED
+            }
+            (complication!!.renderer as CanvasComplicationDrawable)
+                .drawable = this
         }
 
         complication!!.render(canvas, zonedDateTime, renderParameters)
@@ -240,12 +251,7 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "Setting tapAction")
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
-
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
-
-            Log.d("COMPLICATION_TEST2", "Info: " + complication!!.complicationData.value.dataSource.toString())
-            //smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter  = ColorMatrixColorFilter(colorMatrix)
-
             complication!!.renderer.loadData(smallImageComplicationData!!, true)
         }
     }
