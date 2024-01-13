@@ -65,11 +65,17 @@ class WatchFaceCanvasRenderer(
     private var dataSourceTitle: CharSequence? = null
     private var dataSourceIcon: Icon? = null
     private var dataSourceSmallImage: Icon? = null
-     private val colorMatrix = floatArrayOf(
+    /*private val colorMatrix = floatArrayOf( // backup red
         1f, 0f, 0f, 0f, 0f,
         0f, 0f, 0f, 0f, 0f,
         0f, 0f, 0f, 0f, 0f,
         0f, 0f, 0f, 1f, 0f
+    )*/
+    private val colorMatrix = floatArrayOf(
+        1f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        1f, 0f, 0f, 1f, 0f
     )
     private var dataSourceLargeImage: Icon? = null
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
@@ -249,7 +255,6 @@ class WatchFaceCanvasRenderer(
 
 
             if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
-                //smallImageComplicationData!!.smallImage.image.setTint(Color.RED)
                 smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter =
                     ColorMatrixColorFilter(colorMatrix)
             }
