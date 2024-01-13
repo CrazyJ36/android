@@ -7,8 +7,11 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.ColorFilter
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.graphics.Rect
 import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
@@ -191,11 +194,9 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "smallImage type icon")
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(
-                        dataSourceSmallImage!!.loadDrawable(context)?.apply {
-                            mutate()
-                            setTint(Color.RED)
+                        dataSourceSmallImage!!.loadDrawable(context)!!.apply {
                             colorFilter = ColorMatrixColorFilter(colorMatrix)
-                        }!!.toBitmap().toIcon(),
+                        }.toBitmap().toIcon(),
                         SmallImageType.ICON
                     ).build(),
                     PlainComplicationText.Builder(dataSourceContentDescription!!).build()
@@ -213,11 +214,9 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "smallImage type icon")
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(
-                        dataSourceSmallImage!!.loadDrawable(context)?.apply {
-                            mutate()
-                            setTint(Color.RED)
+                        dataSourceSmallImage!!.loadDrawable(context)!!.apply {
                             colorFilter = ColorMatrixColorFilter(colorMatrix)
-                        }!!.toBitmap().toIcon(),
+                        }.toBitmap().toIcon(),
                         SmallImageType.ICON
                     ).build(),
                     PlainComplicationText.Builder(
@@ -245,6 +244,9 @@ class WatchFaceCanvasRenderer(
             }
 
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
+
+            Log.d(tag, "Image type: " + smallImageComplicationData!!.smallImage.image.type)
+
             complication!!.renderer.loadData(smallImageComplicationData!!, false)
         }
     }
