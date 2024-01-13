@@ -186,11 +186,10 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "Setting contentDescription")
             if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 Log.d(tag, "smallImage type icon")
-                //dataSourceSmallImage!!.setTint(Color.RED)
+                dataSourceSmallImage!!.setTint(Color.RED)
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(
                         dataSourceSmallImage!!.loadDrawable(context)!!.apply {
-                            setTint(Color.RED)
                             colorFilter = ColorMatrixColorFilter(colorMatrix)
                         }.toBitmap().toIcon(),
                         SmallImageType.ICON
@@ -208,11 +207,10 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "Setting smallImage")
             if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 Log.d(tag, "smallImage type icon")
-                //dataSourceSmallImage!!.setTint(Color.RED)
+                dataSourceSmallImage!!.setTint(Color.RED)
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(
                         dataSourceSmallImage!!.loadDrawable(context)!!.apply {
-                            setTint(Color.RED)
                             colorFilter = ColorMatrixColorFilter(colorMatrix)
                         }.toBitmap().toIcon(),
                         SmallImageType.ICON
@@ -242,8 +240,10 @@ class WatchFaceCanvasRenderer(
             }
 
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
-            smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter  = ColorMatrixColorFilter(colorMatrix)
-
+            smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
+                setTint(Color.RED)
+                colorFilter = ColorMatrixColorFilter(colorMatrix)
+            }.toBitmap().toIcon()
             complication!!.renderer.loadData(smallImageComplicationData!!, false)
         }
     }
