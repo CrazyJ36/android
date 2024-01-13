@@ -114,11 +114,10 @@ class WatchFaceCanvasRenderer(
 
         when (complicationWireData!!.type) {
             ComplicationData.Companion.TYPE_SHORT_TEXT -> {
-                complication!!.renderer.loadData(setShortTextComplicationData(), false)
+                setShortTextComplicationData()
             }
             ComplicationData.Companion.TYPE_SMALL_IMAGE -> {
-                dataSourceSmallImage!!.setTint(Color.RED)
-                complication!!.renderer.loadData(setSmallImageComplicationData(), false)
+                setSmallImageComplicationData()
             }
             else -> {
                 Log.d(tag, "Unknown complication type, rendering default.")
@@ -140,7 +139,7 @@ class WatchFaceCanvasRenderer(
         }
     }
     @SuppressLint("RestrictedApi")
-    private fun setShortTextComplicationData(): ShortTextComplicationData {
+    private fun setShortTextComplicationData() {
         Log.d(tag, "Complication is ComplicationType.SHORT_TEXT")
         if (dataSourceText != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting text")
@@ -176,12 +175,11 @@ class WatchFaceCanvasRenderer(
                     MonochromaticImage.Builder(dataSourceIcon!!).build()
                 )
             }
-
+            complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build(), false)
         }
-        return shortTextComplicationDataBuilder!!.build()
     }
     @SuppressLint("RestrictedApi")
-    private fun setSmallImageComplicationData(): SmallImageComplicationData {
+    private fun setSmallImageComplicationData() {
         Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE")
         if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting smallImage")
@@ -242,12 +240,10 @@ class WatchFaceCanvasRenderer(
             }
 
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
-
-            Log.d("COMPLICATION_TEST2", "Info: " + complication!!.complicationData.value.dataSource.toString())
             smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter  = ColorMatrixColorFilter(colorMatrix)
 
+            complication!!.renderer.loadData(smallImageComplicationData!!, false)
         }
-        return smallImageComplicationData!!
     }
 
     @SuppressLint("RestrictedApi")
