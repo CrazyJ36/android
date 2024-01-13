@@ -24,6 +24,8 @@ import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
+import androidx.wear.watchface.complications.data.ComplicationDisplayPolicies
+import androidx.wear.watchface.complications.data.ComplicationDisplayPolicy
 import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
@@ -239,8 +241,19 @@ class WatchFaceCanvasRenderer(
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
 
+
+            val icon = smallImageComplicationData!!.smallImage.image
+            val drawable = icon.loadDrawable(context)
+            drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
+            val newIcon = drawable.toBitmap().toIcon()
+            smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
+                SmallImage.Builder(newIcon, SmallImageType.ICON).build(), PlainComplicationText.Builder("").build()
+            )
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
-            smallImageComplicationData!!.smallImage.image.setTint(Color.RED)
+
+            smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
+
+            //WORKS for images not getting tinted, but fully tinted: smallImageComplicationData!!.smallImage.image.setTint(Color.RED)
             complication!!.renderer.loadData(smallImageComplicationData!!, false)
         }
     }
