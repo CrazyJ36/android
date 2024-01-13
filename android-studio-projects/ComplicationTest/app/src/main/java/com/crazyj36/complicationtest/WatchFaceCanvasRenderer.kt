@@ -93,11 +93,11 @@ class WatchFaceCanvasRenderer(
 
     @SuppressLint("RestrictedApi")
     private fun renderer(canvas: Canvas, zonedDateTime: ZonedDateTime, renderParameters: RenderParameters) {
-        /*complication = null
-        complicationWireData = null*/
+        complication = null
+        complicationWireData = null
         complication = complicationSlotsManager.complicationSlots[0]
         complicationWireData = complication!!.complicationData.value.asWireComplicationData()
-        /*shortTextComplicationDataBuilder = null
+        shortTextComplicationDataBuilder = null
         smallImageComplicationDataBuilder = null
         smallImageComplicationData = null
         dataSourceDataSource = null
@@ -108,7 +108,7 @@ class WatchFaceCanvasRenderer(
         dataSourceIcon = null
         dataSourceSmallImage = null
         dataSourceLargeImage = null
-        dataSourceDynamicValues = null*/
+        dataSourceDynamicValues = null
 
         getDataSourceInfo(zonedDateTime)
 
