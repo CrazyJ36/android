@@ -45,7 +45,7 @@ class WatchFaceCanvasRenderer(
     currentUserStyleRepository = currentUserStyleRepository,
     watchState = watchState,
     canvasType = canvasType,
-    interactiveDrawModeUpdateDelayMillis = 1000, // 16L
+    interactiveDrawModeUpdateDelayMillis = 16L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
     private val tag = "COMPLICATION_TEST"
@@ -243,7 +243,7 @@ class WatchFaceCanvasRenderer(
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
 
             Log.d("COMPLICATION_TEST2", "Info: " + complication!!.complicationData.value.dataSource.toString())
-            //smallImageComplicationData!!.smallImage.image.setTint(Color.RED) // REMOVE
+            smallImageComplicationData!!.smallImage.image.setTint(Color.RED) // REMOVE
             smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter  = ColorMatrixColorFilter(colorMatrix)
 
         }
