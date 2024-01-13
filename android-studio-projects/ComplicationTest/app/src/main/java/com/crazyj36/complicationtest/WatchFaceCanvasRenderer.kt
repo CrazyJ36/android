@@ -243,8 +243,7 @@ class WatchFaceCanvasRenderer(
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
 
             Log.d("COMPLICATION_TEST2", "Info: " + complication!!.complicationData.value.dataSource.toString())
-            smallImageComplicationData!!.smallImage.image.setTint(Color.RED) // REMOVE
-            smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter  = ColorMatrixColorFilter(colorMatrix)
+            //smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter  = ColorMatrixColorFilter(colorMatrix)
 
         }
         return smallImageComplicationData!!
