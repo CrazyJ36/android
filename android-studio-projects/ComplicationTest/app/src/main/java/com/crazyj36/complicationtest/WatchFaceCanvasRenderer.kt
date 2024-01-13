@@ -249,7 +249,7 @@ class WatchFaceCanvasRenderer(
 
 
             if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
-                smallImageComplicationData!!.smallImage.image.setTint(Color.RED)
+                //smallImageComplicationData!!.smallImage.image.setTint(Color.RED)
                 smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter =
                     ColorMatrixColorFilter(colorMatrix)
             }
