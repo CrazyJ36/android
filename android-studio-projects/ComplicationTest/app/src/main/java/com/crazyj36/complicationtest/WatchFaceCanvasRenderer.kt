@@ -117,6 +117,7 @@ class WatchFaceCanvasRenderer(
                 complication!!.renderer.loadData(setShortTextComplicationData(), false)
             }
             ComplicationData.Companion.TYPE_SMALL_IMAGE -> {
+                dataSourceSmallImage!!.setTint(Color.RED)
                 complication!!.renderer.loadData(setSmallImageComplicationData(), false)
             }
             else -> {
@@ -243,7 +244,7 @@ class WatchFaceCanvasRenderer(
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
 
             Log.d("COMPLICATION_TEST2", "Info: " + complication!!.complicationData.value.dataSource.toString())
-            //smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter  = ColorMatrixColorFilter(colorMatrix)
+            smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter  = ColorMatrixColorFilter(colorMatrix)
 
         }
         return smallImageComplicationData!!
