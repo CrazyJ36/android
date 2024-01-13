@@ -7,11 +7,8 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
-import android.graphics.ColorFilter
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.graphics.Rect
 import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
@@ -195,6 +192,7 @@ class WatchFaceCanvasRenderer(
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(
                         dataSourceSmallImage!!.loadDrawable(context)!!.apply {
+                            setTint(Color.RED)
                             colorFilter = ColorMatrixColorFilter(colorMatrix)
                         }.toBitmap().toIcon(),
                         SmallImageType.ICON
@@ -215,6 +213,7 @@ class WatchFaceCanvasRenderer(
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(
                         dataSourceSmallImage!!.loadDrawable(context)!!.apply {
+                            setTint(Color.RED)
                             colorFilter = ColorMatrixColorFilter(colorMatrix)
                         }.toBitmap().toIcon(),
                         SmallImageType.ICON
@@ -245,7 +244,9 @@ class WatchFaceCanvasRenderer(
 
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
 
-            Log.d("COMPLICATION_TEST2", "Image info: " + smallImageComplicationData!!.smallImage.image)
+            Log.d("COMPLICATION_TEST2", "Image info: " + smallImageComplicationData!!.smallImage)
+            smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter  = ColorMatrixColorFilter(colorMatrix)
+
 
             complication!!.renderer.loadData(smallImageComplicationData!!, true)
         }
