@@ -189,12 +189,12 @@ class WatchFaceCanvasRenderer(
         if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting smallImage")
             Log.d(tag, "Setting contentDescription")
+            dataSourceSmallImage!!.setTint(Color.RED)
             if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 Log.d(tag, "smallImage type icon")
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(
-                        dataSourceSmallImage!!.loadDrawable(context)!!.mutate().apply {
-                            setTint(Color.RED)
+                        dataSourceSmallImage!!.loadDrawable(context)!!.apply {
                             colorFilter = ColorMatrixColorFilter(colorMatrix)
                         }.toBitmap().toIcon(),
                         SmallImageType.ICON
@@ -212,10 +212,10 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "Setting smallImage")
             if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
                 Log.d(tag, "smallImage type icon")
+                dataSourceSmallImage!!.setTint(Color.RED)
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(
-                        dataSourceSmallImage!!.loadDrawable(context)!!.mutate().apply {
-                            setTint(Color.RED)
+                        dataSourceSmallImage!!.loadDrawable(context)!!.apply {
                             colorFilter = ColorMatrixColorFilter(colorMatrix)
                         }.toBitmap().toIcon(),
                         SmallImageType.ICON
@@ -245,6 +245,10 @@ class WatchFaceCanvasRenderer(
             }
 
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
+
+            Log.d("COMPLICATION_TEST2", "Info: " + complication!!.complicationData.value.dataSource.toString())
+            smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter  = ColorMatrixColorFilter(colorMatrix)
+
             complication!!.renderer.loadData(smallImageComplicationData!!, true)
         }
     }
