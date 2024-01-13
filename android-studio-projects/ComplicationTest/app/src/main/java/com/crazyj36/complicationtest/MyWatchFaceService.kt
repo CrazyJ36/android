@@ -31,7 +31,7 @@ class MyWatchFaceService : WatchFaceService() {
             ComplicationType.SMALL_IMAGE
         )
         val bounds = ComplicationSlotBounds(
-            RectF(0.25f, 0.45f, 0.55f, 0.55f)
+            RectF(0.35f, 0.35f, 0.65f, 0.65f)
         )
         val defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
             SystemDataSources.DATA_SOURCE_STEP_COUNT,
