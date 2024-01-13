@@ -9,6 +9,7 @@ import android.graphics.Canvas
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.graphics.Rect
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
 import android.util.Log
@@ -68,6 +69,7 @@ class WatchFaceCanvasRenderer(
         0f, 0f, 0f, 1f, 0f
     )
     private var coloredIcon: Icon? = null
+    private var drawable: Drawable? = null
     private var dataSourceLargeImage: Icon? = null
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
     private val paint = Paint()
@@ -110,6 +112,7 @@ class WatchFaceCanvasRenderer(
         dataSourceTitle = null
         dataSourceIcon = null
         dataSourceSmallImage = null
+        drawable = null
         coloredIcon = null
         dataSourceLargeImage = null
         dataSourceDynamicValues = null
@@ -185,17 +188,16 @@ class WatchFaceCanvasRenderer(
     @SuppressLint("RestrictedApi")
     private fun setSmallImageComplicationData() {
         Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE")
-        Log.d(tag, "Getting coloredIcon")
-        val drawable = dataSourceSmallImage!!.loadDrawable(context)
-        drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
-        coloredIcon = drawable.toBitmap().toIcon()
-
         if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting smallImage")
             Log.d(tag, "Setting contentDescription")
-            if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
+            if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON &&
+                coloredIcon != null) {
                 Log.d(tag, "smallImage type icon")
-                Log.d(tag, "Setting coloredIcon")
+                Log.d(tag, "Using coloredIcon")
+                drawable = dataSourceSmallImage!!.loadDrawable(context)
+                drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
+                coloredIcon = drawable!!.toBitmap().toIcon()
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(coloredIcon!!, SmallImageType.ICON).build(),
                     PlainComplicationText.Builder(dataSourceContentDescription!!).build()
@@ -209,9 +211,13 @@ class WatchFaceCanvasRenderer(
             }
         } else if (dataSourceSmallImage != null) {
             Log.d(tag, "Setting smallImage")
-            if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
+            if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON &&
+                coloredIcon != null) {
                 Log.d(tag, "smallImage type icon")
-                Log.d(tag, "Setting coloredIcon")
+                Log.d(tag, "Using coloredIcon")
+                drawable = dataSourceSmallImage!!.loadDrawable(context)
+                drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
+                coloredIcon = drawable!!.toBitmap().toIcon()
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(coloredIcon!!, SmallImageType.ICON).build(),
                     PlainComplicationText.Builder("Content description not provided by DataSource")
