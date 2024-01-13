@@ -242,18 +242,20 @@ class WatchFaceCanvasRenderer(
             }
 
 
-            val icon = smallImageComplicationData!!.smallImage.image
+            /*val icon = smallImageComplicationData!!.smallImage.image
             val drawable = icon.loadDrawable(context)
             drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
             val newIcon = drawable.toBitmap().toIcon()
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                 SmallImage.Builder(newIcon, SmallImageType.ICON).build(), PlainComplicationText.Builder("").build()
             )
-            smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
 
-            smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
+
+            smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter = ColorMatrixColorFilter(colorMatrix)*/
 
             //WORKS for images not getting tinted, but fully tinted: smallImageComplicationData!!.smallImage.image.setTint(Color.RED)
+
+            smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
             complication!!.renderer.loadData(smallImageComplicationData!!, false)
         }
     }
