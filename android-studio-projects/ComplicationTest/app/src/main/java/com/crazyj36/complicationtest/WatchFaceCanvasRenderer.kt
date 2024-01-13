@@ -29,9 +29,7 @@ import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
 import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.complications.data.SmallImageType
-import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
-import kotlinx.coroutines.flow.StateFlow
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
 
@@ -47,11 +45,10 @@ class WatchFaceCanvasRenderer(
     currentUserStyleRepository = currentUserStyleRepository,
     watchState = watchState,
     canvasType = canvasType,
-    interactiveDrawModeUpdateDelayMillis = 16L,
+    interactiveDrawModeUpdateDelayMillis = 1000, // 16L
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
     private val tag = "COMPLICATION_TEST"
-    private var zonedDateTime: ZonedDateTime? = null
     private var complication: ComplicationSlot? = null
     private var complicationWireData: ComplicationData? = null
     private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
@@ -81,52 +78,8 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        this.zonedDateTime = zonedDateTime
-        complication = null
-        complicationWireData = null
-        complication = complicationSlotsManager.complicationSlots[0]
-        complicationWireData = complication!!.complicationData.value.asWireComplicationData()
-        shortTextComplicationDataBuilder = null
-        smallImageComplicationDataBuilder = null
-        smallImageComplicationData = null
-        dataSourceDataSource = null
-        dataSourceTapAction = null
-        dataSourceText = null
-        dataSourceContentDescription = null
-        dataSourceTitle = null
-        dataSourceIcon = null
-        dataSourceSmallImage = null
-        dataSourceLargeImage = null
-        dataSourceDynamicValues = null
-
-        getDataSourceInfo()
-
-        when (complicationWireData!!.type) {
-            ComplicationData.Companion.TYPE_SHORT_TEXT -> {
-                setShortTextComplicationData()
-            }
-            ComplicationData.Companion.TYPE_SMALL_IMAGE -> {
-                setSmallImageComplicationData()
-            }
-            else -> {
-                Log.d(tag, "Unknown complication type, rendering default.")
-            }
-        }
-        complication!!.render(canvas, zonedDateTime, renderParameters)
-        if (renderParameters.drawMode == DrawMode.AMBIENT) {
-            Log.d(tag, "Ambient")
-            paint.setARGB(255, 255, 255, 255)
-            paint.textAlign = Paint.Align.CENTER
-            paint.textSize = 14f
-            canvas.drawText(
-                "Ambient",
-                canvas.width / 2f,
-                canvas.height - (canvas.height / 7).toFloat(),
-                paint
-            )
-        }
+       renderer(canvas, zonedDateTime, renderParameters)
     }
-
 
     @SuppressLint("RestrictedApi")
     override fun render(
@@ -135,12 +88,16 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        this.zonedDateTime = zonedDateTime
-        complication = null
-        complicationWireData = null
+        renderer(canvas, zonedDateTime, renderParameters)
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun renderer(canvas: Canvas, zonedDateTime: ZonedDateTime, renderParameters: RenderParameters) {
+        /*complication = null
+        complicationWireData = null*/
         complication = complicationSlotsManager.complicationSlots[0]
         complicationWireData = complication!!.complicationData.value.asWireComplicationData()
-        shortTextComplicationDataBuilder = null
+        /*shortTextComplicationDataBuilder = null
         smallImageComplicationDataBuilder = null
         smallImageComplicationData = null
         dataSourceDataSource = null
@@ -151,21 +108,22 @@ class WatchFaceCanvasRenderer(
         dataSourceIcon = null
         dataSourceSmallImage = null
         dataSourceLargeImage = null
-        dataSourceDynamicValues = null
+        dataSourceDynamicValues = null*/
 
-        getDataSourceInfo()
+        getDataSourceInfo(zonedDateTime)
 
         when (complicationWireData!!.type) {
             ComplicationData.Companion.TYPE_SHORT_TEXT -> {
-                setShortTextComplicationData()
+                complication!!.renderer.loadData(setShortTextComplicationData(), false)
             }
             ComplicationData.Companion.TYPE_SMALL_IMAGE -> {
-                setSmallImageComplicationData()
+                complication!!.renderer.loadData(setSmallImageComplicationData(), false)
             }
             else -> {
                 Log.d(tag, "Unknown complication type, rendering default.")
             }
         }
+
         complication!!.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
@@ -180,9 +138,8 @@ class WatchFaceCanvasRenderer(
             )
         }
     }
-
     @SuppressLint("RestrictedApi")
-    private fun setShortTextComplicationData() {
+    private fun setShortTextComplicationData(): ShortTextComplicationData {
         Log.d(tag, "Complication is ComplicationType.SHORT_TEXT")
         if (dataSourceText != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting text")
@@ -218,11 +175,12 @@ class WatchFaceCanvasRenderer(
                     MonochromaticImage.Builder(dataSourceIcon!!).build()
                 )
             }
-            complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build(), true)
+
         }
+        return shortTextComplicationDataBuilder!!.build()
     }
     @SuppressLint("RestrictedApi")
-    private fun setSmallImageComplicationData() {
+    private fun setSmallImageComplicationData(): SmallImageComplicationData {
         Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE")
         if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting smallImage")
@@ -285,14 +243,15 @@ class WatchFaceCanvasRenderer(
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
 
             Log.d("COMPLICATION_TEST2", "Info: " + complication!!.complicationData.value.dataSource.toString())
+            //smallImageComplicationData!!.smallImage.image.setTint(Color.RED) // REMOVE
             smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter  = ColorMatrixColorFilter(colorMatrix)
 
-            complication!!.renderer.loadData(smallImageComplicationData!!, true)
         }
+        return smallImageComplicationData!!
     }
 
     @SuppressLint("RestrictedApi")
-    private fun getDataSourceInfo() {
+    private fun getDataSourceInfo(zonedDateTime: ZonedDateTime) {
         if (complicationWireData!!.dataSource != null) {
             Log.d(tag, "hasDataSource")
             dataSourceDataSource = complication!!.complicationData.value.dataSource
@@ -305,21 +264,21 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "hasShortText")
             dataSourceText = complicationWireData!!.shortText!!.getTextAt(
                 Resources.getSystem(),
-                LocalDateTime.now().atZone(zonedDateTime!!.zone).toInstant().toEpochMilli()
+                LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
             )
         }
         if (complicationWireData!!.hasContentDescription()) {
             Log.d(tag, "hasContentDescription")
             dataSourceContentDescription = complicationWireData!!.contentDescription!!.getTextAt(
                 Resources.getSystem(),
-                LocalDateTime.now().atZone(zonedDateTime!!.zone).toInstant().toEpochMilli()
+                LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
             )
         }
         if (complicationWireData!!.hasShortTitle()) {
             Log.d(tag, "hasShortTitle")
             dataSourceTitle = complicationWireData!!.shortTitle!!.getTextAt(
                 Resources.getSystem(),
-                LocalDateTime.now().atZone(zonedDateTime!!.zone).toInstant().toEpochMilli()
+                LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
             )
         }
         if (complicationWireData!!.hasIcon()) {
