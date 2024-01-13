@@ -194,6 +194,7 @@ class WatchFaceCanvasRenderer(
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(
                         dataSourceSmallImage!!.loadDrawable(context)!!.mutate().apply {
+                            setTint(Color.RED)
                             colorFilter = ColorMatrixColorFilter(colorMatrix)
                         }.toBitmap().toIcon(),
                         SmallImageType.ICON
@@ -214,6 +215,7 @@ class WatchFaceCanvasRenderer(
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(
                         dataSourceSmallImage!!.loadDrawable(context)!!.mutate().apply {
+                            setTint(Color.RED)
                             colorFilter = ColorMatrixColorFilter(colorMatrix)
                         }.toBitmap().toIcon(),
                         SmallImageType.ICON
