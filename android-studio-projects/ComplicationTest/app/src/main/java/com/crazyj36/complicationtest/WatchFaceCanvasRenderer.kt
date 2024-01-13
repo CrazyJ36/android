@@ -127,15 +127,8 @@ class WatchFaceCanvasRenderer(
             }
         }
 
-        ComplicationDrawable.getDrawable(context, smallImageComplicationData!!.smallImage.image.resId)?.apply {
-            activeStyle.run {
-                iconColor = Color.RED
-            }
-            (complication!!.renderer as CanvasComplicationDrawable)
-                .drawable = this
-        }
-
         complication!!.render(canvas, zonedDateTime, renderParameters)
+
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
             paint.setARGB(255, 255, 255, 255)
@@ -197,11 +190,11 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "Setting contentDescription")
             if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 Log.d(tag, "smallImage type icon")
-                dataSourceSmallImage!!.setTint(Color.RED)
+                //dataSourceSmallImage!!.setTint(Color.RED)
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(
                         dataSourceSmallImage!!.loadDrawable(context)!!.apply {
-                            setTint(Color.RED)
+                            //setTint(Color.RED)
                             colorFilter = ColorMatrixColorFilter(colorMatrix)
                         }.toBitmap().toIcon(),
                         SmallImageType.ICON
@@ -219,11 +212,11 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "Setting smallImage")
             if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 Log.d(tag, "smallImage type icon")
-                dataSourceSmallImage!!.setTint(Color.RED)
+                //dataSourceSmallImage!!.setTint(Color.RED)
                 smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                     SmallImage.Builder(
                         dataSourceSmallImage!!.loadDrawable(context)!!.apply {
-                            setTint(Color.RED)
+                            //setTint(Color.RED)
                             colorFilter = ColorMatrixColorFilter(colorMatrix)
                         }.toBitmap().toIcon(),
                         SmallImageType.ICON
