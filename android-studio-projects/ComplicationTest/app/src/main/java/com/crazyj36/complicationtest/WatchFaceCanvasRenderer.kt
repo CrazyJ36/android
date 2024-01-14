@@ -11,9 +11,11 @@ import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.graphics.Rect
+import android.graphics.RectF
 import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
 import android.util.Log
+import android.util.SparseArray
 import android.view.SurfaceHolder
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.watchface.ComplicationSlot
@@ -22,12 +24,14 @@ import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
+import androidx.wear.watchface.complications.ComplicationSlotBounds
 import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
 import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.complications.data.SmallImageType
+import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
@@ -125,12 +129,52 @@ class WatchFaceCanvasRenderer(
         when (complicationWireData!!.type) {
             ComplicationData.Companion.TYPE_SHORT_TEXT -> {
                 Log.d(tag, "Loading custom ShortTextComplicationData")
-                complication!!.renderer.loadData(setShortTextComplicationData(), false)
+                //complication!!.renderer.loadData(setShortTextComplicationData(), false)
+                val complicationDrawable = ComplicationDrawable(context)
+                complicationDrawable.apply {
+                    bounds =
+                        Rect(
+                            (canvas.width / 2) - (canvas.width / 8),
+                            (canvas.height / 2) - (canvas.height / 8),
+                            (canvas.width / 2) + (canvas.width / 8),
+                            (canvas.height / 2) + (canvas.height / 8)
+                        )
+                    activeStyle.apply {
+                        iconColor = Color.RED
+                        textColor = Color.WHITE
+                        titleColor = Color.WHITE
+                    }
+                }
+                complicationDrawable.setComplicationData(setShortTextComplicationData(), false)
+                complication!!.renderer.loadData(complicationDrawable.complicationData, false)
+
+                complicationDrawable.draw(canvas)
             }
 
             ComplicationData.Companion.TYPE_SMALL_IMAGE -> {
                 Log.d(tag, "Loading custom SmallImageComplicationData")
-                complication!!.renderer.loadData(setSmallImageComplicationData(), false)
+                //complication!!.renderer.loadData(setSmallImageComplicationData(), false)
+
+                val complicationDrawable = ComplicationDrawable(context)
+                complicationDrawable.apply {
+                    bounds =
+                        Rect(
+                            (canvas.width / 2) - (canvas.width / 8),
+                            (canvas.height / 2) - (canvas.height / 8),
+                            (canvas.width / 2) + (canvas.width / 8),
+                            (canvas.height / 2) + (canvas.height / 8)
+                        )
+                    activeStyle.apply {
+                        iconColor = Color.RED
+                        textColor = Color.WHITE
+                        titleColor = Color.WHITE
+                    }
+                }
+                complicationDrawable.setComplicationData(setSmallImageComplicationData(), false)
+                complication!!.renderer.loadData(complicationDrawable.complicationData, false)
+
+                complicationDrawable.draw(canvas)
+
             }
 
             else -> {
@@ -138,7 +182,7 @@ class WatchFaceCanvasRenderer(
             }
         }
 
-        complication!!.render(canvas, zonedDateTime, renderParameters)
+        //complication!!.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
             paint.setARGB(255, 255, 255, 255)
