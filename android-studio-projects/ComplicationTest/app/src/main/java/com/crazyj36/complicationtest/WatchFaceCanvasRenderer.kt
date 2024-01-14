@@ -71,9 +71,9 @@ class WatchFaceCanvasRenderer(
         0f, 0f, 0f, 1f, 0f
     )*/
     private val colorMatrix = floatArrayOf( // cooler red
-        1f, 0f, 0f, 0f, 50f,
-        0f, 0f, 0f, 0f, 50f,
-        0f, 0f, 0f, 0f, 50f,
+        1f, 0f, 0f, 0f, 255f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
         0f, 0f, 0f, 1f, 0f
     )
     private var dataSourceLargeImage: Icon? = null
@@ -124,7 +124,7 @@ class WatchFaceCanvasRenderer(
         dataSourceLargeImage = null
         dataSourceDynamicValues = null
 
-        getDataSourceInfo(zonedDateTime)
+        /*getDataSourceInfo(zonedDateTime)
         when (complicationWireData!!.type) {
             ComplicationData.Companion.TYPE_SHORT_TEXT -> {
                 complication!!.renderer.loadData(setShortTextComplicationData(), true)
@@ -137,7 +137,7 @@ class WatchFaceCanvasRenderer(
             else -> {
                 Log.d(tag, "Unknown complication type, rendering default.")
             }
-        }
+        }*/
 
         complication!!.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
