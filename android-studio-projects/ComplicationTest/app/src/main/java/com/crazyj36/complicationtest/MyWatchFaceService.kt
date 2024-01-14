@@ -1,5 +1,6 @@
 package com.crazyj36.complicationtest
 
+import android.graphics.BlendMode
 import android.graphics.Color
 import android.graphics.RectF
 import android.view.SurfaceHolder
@@ -37,10 +38,14 @@ class MyWatchFaceService : WatchFaceService() {
             ComplicationType.SHORT_TEXT
         )
         val complicationDrawable = ComplicationDrawable(applicationContext).apply {
+            setTint(Color.RED)
+            setTintBlendMode(BlendMode.COLOR)
             activeStyle.apply {
                 textColor = Color.WHITE
                 titleColor = Color.WHITE
                 iconColor = Color.RED
+                setTint(Color.RED)
+                setTintBlendMode(BlendMode.COLOR)
             }
         }
 
