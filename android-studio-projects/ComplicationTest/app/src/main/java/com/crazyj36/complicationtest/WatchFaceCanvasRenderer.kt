@@ -69,7 +69,7 @@ class WatchFaceCanvasRenderer(
         0f, 0f, 0f, 1f, 0f
     )*/
     private val colorMatrix = floatArrayOf( // cooler red
-        1f, 0f, 0f, 0f, 255f,
+        1f, 0f, 0f, 0f, 50f,
         0f, 0f, 0f, 0f, 0f,
         0f, 0f, 0f, 0f, 0f,
         0f, 0f, 0f, 1f, 0f
