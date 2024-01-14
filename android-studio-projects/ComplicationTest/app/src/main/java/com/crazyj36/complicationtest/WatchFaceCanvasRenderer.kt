@@ -179,7 +179,7 @@ class WatchFaceCanvasRenderer(
                         colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
                         setTintBlendMode(BlendMode.COLOR_BURN)
                         setTint(Color.RED)
-                    }
+                    }.invalidateSelf()
                 }
                 complicationDrawable.draw(canvas)
 
