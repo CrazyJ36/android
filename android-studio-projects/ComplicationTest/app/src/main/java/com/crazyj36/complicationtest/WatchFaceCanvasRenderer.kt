@@ -238,14 +238,16 @@ class WatchFaceCanvasRenderer(
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
-            if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
+            if (complicationWireData!!.smallImage!!.type ==
+                ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
 
-                smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
-                    colorFilter = ColorMatrixColorFilter(colorMatrix)
-                    setTint(Color.RED)
-                    setTintBlendMode(BlendMode.COLOR_BURN)
-                }
+                smallImageComplicationData!!.smallImage.image
+                    .loadDrawable(context)!!.mutate().apply {
+                        colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        setTint(Color.RED)
+                        setTintBlendMode(BlendMode.COLOR_BURN)
+                    }
             }
         }
         return if (smallImageComplicationData != null) {

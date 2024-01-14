@@ -2,6 +2,7 @@ package com.crazyj36.complicationtest
 
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
