@@ -281,7 +281,7 @@ class WatchFaceCanvasRenderer(
                     colorFilter = ColorMatrixColorFilter(colorMatrix)
                     setTintBlendMode(BlendMode.COLOR_BURN)
                     setTint(Color.RED)
-                }
+                }.invalidateSelf()
 
             }
         }

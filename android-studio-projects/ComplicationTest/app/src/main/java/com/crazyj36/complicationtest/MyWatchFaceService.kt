@@ -3,7 +3,6 @@ package com.crazyj36.complicationtest
 import android.graphics.Color
 import android.graphics.RectF
 import android.view.SurfaceHolder
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
