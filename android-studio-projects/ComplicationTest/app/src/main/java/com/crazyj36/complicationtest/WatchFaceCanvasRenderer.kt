@@ -172,8 +172,7 @@ class WatchFaceCanvasRenderer(
                         textColor = Color.WHITE
                         titleColor = Color.WHITE
                     }
-                }
-                complicationDrawable.setComplicationData(complication!!.complicationData.value, false)
+
                 complicationDrawable.complicationData.asWireComplicationData().smallImage!!.apply {
                     loadDrawable(context)!!.apply {
                         colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
@@ -181,6 +180,8 @@ class WatchFaceCanvasRenderer(
                         setTint(Color.RED)
                     }
                 }
+              
+                complicationDrawable.setComplicationData(complication!!.complicationData.value, false)
                 complicationDrawable.draw(canvas)*/
 
             }
@@ -203,7 +204,6 @@ class WatchFaceCanvasRenderer(
                 paint
             )
         }
-        //invalidate()
     }
 
     @SuppressLint("RestrictedApi")
@@ -297,7 +297,7 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
 
                 smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
-                    //colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
+                    colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
                     setTintBlendMode(BlendMode.COLOR_BURN)
                     setTint(Color.RED)
                 }
