@@ -11,6 +11,7 @@ import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.graphics.Rect
 import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
@@ -51,7 +52,7 @@ class WatchFaceCanvasRenderer(
     private val tag = "COMPLICATION_TEST"
     private var complication: ComplicationSlot? = null
     private var complicationWireData: ComplicationData? = null
-    /*private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
+    private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
     private var shortTextComplicationData: ShortTextComplicationData? = null
     private var smallImageComplicationDataBuilder: SmallImageComplicationData.Builder? = null
     private var smallImageComplicationData: SmallImageComplicationData? = null
@@ -61,7 +62,7 @@ class WatchFaceCanvasRenderer(
     private var dataSourceContentDescription: CharSequence? = null
     private var dataSourceTitle: CharSequence? = null
     private var dataSourceIcon: Icon? = null
-    private var dataSourceSmallImage: Icon? = null*/
+    private var dataSourceSmallImage: Icon? = null
 
     /*private val colorMatrix = floatArrayOf( // red
         1f, 0f, 0f, 0f, 0f,
@@ -69,14 +70,14 @@ class WatchFaceCanvasRenderer(
         0f, 0f, 0f, 0f, 0f,
         0f, 0f, 0f, 1f, 0f
     )*/
-    /*private val colorMatrix = floatArrayOf( // cooler red
+    private val colorMatrix = floatArrayOf( // cooler red
         1f, 0f, 0f, 0f, 50f,
         0f, 0f, 0f, 0f, 50f,
         0f, 0f, 0f, 0f, 50f,
         0f, 0f, 0f, 1f, 0f
     )
     private var dataSourceLargeImage: Icon? = null
-    private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null*/
+    private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
     private val paint = Paint()
 
     @SuppressLint("RestrictedApi")
@@ -105,11 +106,11 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         renderParameters: RenderParameters
     ) {
-        /*complication = null
-        complicationWireData = null*/
+        complication = null
+        complicationWireData = null
         complication = complicationSlotsManager.complicationSlots[0]
         complicationWireData = complication!!.complicationData.value.asWireComplicationData()
-        /*shortTextComplicationDataBuilder = null
+        shortTextComplicationDataBuilder = null
         shortTextComplicationData = null
         smallImageComplicationDataBuilder = null
         smallImageComplicationData = null
@@ -121,9 +122,9 @@ class WatchFaceCanvasRenderer(
         dataSourceIcon = null
         dataSourceSmallImage = null
         dataSourceLargeImage = null
-        dataSourceDynamicValues = null*/
+        dataSourceDynamicValues = null
 
-        /*getDataSourceInfo(zonedDateTime)
+        getDataSourceInfo(zonedDateTime)
         when (complicationWireData!!.type) {
             ComplicationData.Companion.TYPE_SHORT_TEXT -> {
                 complication!!.renderer.loadData(setShortTextComplicationData(), true)
@@ -135,16 +136,6 @@ class WatchFaceCanvasRenderer(
 
             else -> {
                 Log.d(tag, "Unknown complication type, rendering default.")
-            }
-        }*/
-
-        if (complicationWireData!!.hasSmallImage() &&
-            complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
-            complicationWireData!!.smallImage!!.apply {
-                loadDrawable(context)!!.apply {
-                    setTint(Color.RED)
-                    setTintBlendMode(BlendMode.COLOR)
-                }
             }
         }
 
@@ -163,7 +154,7 @@ class WatchFaceCanvasRenderer(
         }
     }
 
-    /*@SuppressLint("RestrictedApi")
+    @SuppressLint("RestrictedApi")
     private fun setShortTextComplicationData(): ShortTextComplicationData {
         Log.d(tag, "Complication is ComplicationType.SHORT_TEXT.")
         if (dataSourceText != null && dataSourceContentDescription != null) {
@@ -252,15 +243,16 @@ class WatchFaceCanvasRenderer(
             if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
 
-                // REMOVE
                 smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
-                    setTint(Color.RED)
-                    setTintBlendMode(BlendMode.COLOR_BURN)
-                }
+                    /* Setting colorfilter overrides tint. */
 
-                // KEEP
-                /*smallImageComplicationData!!.smallImage.image
-                    .loadDrawable(context)!!.colorFilter = ColorMatrixColorFilter(colorMatrix)*/
+                    colorFilter = ColorMatrixColorFilter(colorMatrix)
+
+                    setTint(Color.RED)
+
+                    setTintBlendMode(BlendMode.COLOR)
+
+                }
             }
         }
         return if (smallImageComplicationData != null) {
@@ -328,7 +320,7 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "hasRangedDynamicValues")
             dataSourceDynamicValues = complicationWireData!!.rangedDynamicValue
         }
-    }*/
+    }
 
     class MySharedAssets : SharedAssets {
         override fun onDestroy() {
