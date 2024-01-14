@@ -3,6 +3,7 @@ package com.crazyj36.complicationtest
 import android.annotation.SuppressLint
 import android.graphics.BlendMode
 import android.graphics.Color
+import android.graphics.ColorMatrixColorFilter
 import android.graphics.RectF
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
@@ -22,7 +23,6 @@ import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class MyWatchFaceService : WatchFaceService() {
-
     @SuppressLint("RestrictedApi")
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
@@ -45,6 +45,18 @@ class MyWatchFaceService : WatchFaceService() {
                 titleColor = Color.WHITE
                 iconColor = Color.RED
             }
+        }
+        complicationDrawable.current.apply{
+            colorFilter = ColorMatrixColorFilter(
+                floatArrayOf(
+                    1f, 0f, 0f, 0f, 50f,
+                    0f, 0f, 0f, 0f, 50f,
+                    0f, 0f, 0f, 0f, 50f,
+                    0f, 0f, 0f, 1f, 0f
+                )
+            )
+            setTint(Color.RED)
+            setTintBlendMode(BlendMode.COLOR_BURN)
         }
 
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
