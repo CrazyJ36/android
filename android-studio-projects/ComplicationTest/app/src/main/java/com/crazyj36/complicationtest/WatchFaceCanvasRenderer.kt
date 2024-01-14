@@ -28,6 +28,7 @@ import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
 import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.complications.data.SmallImageType
+import androidx.wear.watchface.complications.rendering.ComplicationStyle
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
@@ -137,6 +138,7 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "Unknown complication type, rendering default.")
             }
         }
+
         complication!!.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
@@ -244,11 +246,10 @@ class WatchFaceCanvasRenderer(
 
                 smallImageComplicationData!!.smallImage.image
                     .loadDrawable(context)!!.apply {
-                        //colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
-                        setTint(Color.RED)
-                        setTintBlendMode(BlendMode.COLOR)
+                        colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
+                        //setTint(Color.RED)
+                        //setTintBlendMode(BlendMode.COLOR)
                     }
-
             }
         }
         return if (smallImageComplicationData != null) {
