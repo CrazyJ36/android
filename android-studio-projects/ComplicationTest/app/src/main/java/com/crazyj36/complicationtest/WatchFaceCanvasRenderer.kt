@@ -47,6 +47,7 @@ class WatchFaceCanvasRenderer(
     interactiveDrawModeUpdateDelayMillis = 16L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
+
     private val tag = "COMPLICATION_TEST"
     private var complication: ComplicationSlot? = null
     private var complicationWireData: ComplicationData? = null
@@ -136,7 +137,6 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "Unknown complication type, rendering default.")
             }
         }
-
         complication!!.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
@@ -244,10 +244,11 @@ class WatchFaceCanvasRenderer(
 
                 smallImageComplicationData!!.smallImage.image
                     .loadDrawable(context)!!.apply {
-                        colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
+                        //colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
                         setTint(Color.RED)
                         setTintBlendMode(BlendMode.COLOR)
                     }
+
             }
         }
         return if (smallImageComplicationData != null) {
