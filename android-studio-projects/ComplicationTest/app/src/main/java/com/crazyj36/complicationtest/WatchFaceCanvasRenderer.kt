@@ -17,6 +17,7 @@ import android.support.wearable.complications.ComplicationData
 import android.util.Log
 import android.util.SparseArray
 import android.view.SurfaceHolder
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
@@ -276,10 +277,8 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
 
                 smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
-                    colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
-                    setTintBlendMode(BlendMode.COLOR_BURN)
-                    setTint(Color.RED)
-                }.invalidateSelf()
+                    DrawableCompat.wrap(this).setTint(Color.RED)
+                }
 
             }
         }
