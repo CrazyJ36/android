@@ -82,7 +82,7 @@ class MyWatchFaceService : WatchFaceService() {
             watchState = watchState,
             complicationSlotsManager = complicationSlotsManager,
             currentUserStyleRepository = currentUserStyleRepository,
-            canvasType = CanvasType.SOFTWARE
+            canvasType = CanvasType.HARDWARE
         )
         return WatchFace(
             watchFaceType = WatchFaceType.ANALOG,
