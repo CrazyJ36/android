@@ -69,9 +69,9 @@ class WatchFaceCanvasRenderer(
         0f, 0f, 0f, 1f, 0f
     )*/
     private val colorMatrix = floatArrayOf( // cooler red
-        1f, 0f, 0f, 0f, 50f,
-        0f, 0f, 0f, 0f, 100f,
-        0f, 0f, 0f, 0f, 100f,
+        -1f, 0f, 0f, 0f, 255f,
+        0f, -1f, 0f, 0f, 50f,
+        0f, 0f, -1f, 0f, 50f,
         0f, 0f, 0f, 1f, 0f
     )
     private var dataSourceLargeImage: Icon? = null
@@ -244,9 +244,9 @@ class WatchFaceCanvasRenderer(
 
                 smallImageComplicationData!!.smallImage.image
                     .loadDrawable(context)!!.apply {
-                        colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
                         setTint(Color.RED)
-                        setTintBlendMode(BlendMode.COLOR_BURN)
+                        setTintBlendMode(BlendMode.COLOR)
                     }
             }
         }
