@@ -179,7 +179,7 @@ class WatchFaceCanvasRenderer(
                         colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
                         setTintBlendMode(BlendMode.COLOR_BURN)
                         setTint(Color.RED)
-                    }.invalidateSelf()
+                    }
                 }
                 complicationDrawable.draw(canvas)*/
 
@@ -203,7 +203,7 @@ class WatchFaceCanvasRenderer(
                 paint
             )
         }
-        invalidate()
+        //invalidate()
     }
 
     @SuppressLint("RestrictedApi")
@@ -300,7 +300,6 @@ class WatchFaceCanvasRenderer(
                     //colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
                     setTintBlendMode(BlendMode.COLOR_BURN)
                     setTint(Color.RED)
-                    invalidateSelf()
                 }
 
             }
