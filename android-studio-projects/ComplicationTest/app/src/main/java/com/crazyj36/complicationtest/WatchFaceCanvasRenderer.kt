@@ -70,15 +70,14 @@ class WatchFaceCanvasRenderer(
     )*/
     private val colorMatrix = floatArrayOf( // cooler red
         1f, 0f, 0f, 0f, 50f,
-        0f, 0f, 0f, 0f, 50f,
-        0f, 0f, 0f, 0f, 50f,
+        0f, 0f, 0f, 0f, 100f,
+        0f, 0f, 0f, 0f, 100f,
         0f, 0f, 0f, 1f, 0f
     )
     private var dataSourceLargeImage: Icon? = null
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
     private val paint = Paint()
 
-    @SuppressLint("RestrictedApi")
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
@@ -88,7 +87,6 @@ class WatchFaceCanvasRenderer(
         renderer(canvas, zonedDateTime, renderParameters)
     }
 
-    @SuppressLint("RestrictedApi")
     override fun render(
         canvas: Canvas,
         bounds: Rect,
@@ -125,10 +123,12 @@ class WatchFaceCanvasRenderer(
         getDataSourceInfo(zonedDateTime)
         when (complicationWireData!!.type) {
             ComplicationData.Companion.TYPE_SHORT_TEXT -> {
+                Log.d(tag, "Loading custom ShortTextComplicationData")
                 complication!!.renderer.loadData(setShortTextComplicationData(), true)
             }
 
             ComplicationData.Companion.TYPE_SMALL_IMAGE -> {
+                Log.d(tag, "Loading custom SmallImageComplicationData")
                 complication!!.renderer.loadData(setSmallImageComplicationData(), true)
             }
 
@@ -243,7 +243,7 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
 
                 smallImageComplicationData!!.smallImage.image
-                    .loadDrawable(context)!!.mutate().apply {
+                    .loadDrawable(context)!!.apply {
                         colorFilter = ColorMatrixColorFilter(colorMatrix)
                         setTint(Color.RED)
                         setTintBlendMode(BlendMode.COLOR_BURN)
