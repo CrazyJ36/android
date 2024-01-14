@@ -5,7 +5,9 @@ import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.BlendMode
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.graphics.Rect
@@ -237,8 +239,16 @@ class WatchFaceCanvasRenderer(
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
             if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
-                smallImageComplicationData!!.smallImage.image
-                    .loadDrawable(context)!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
+
+                // REMOVE
+                smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
+                    setTint(Color.RED)
+                    setTintBlendMode(BlendMode.COLOR)
+                }
+
+                // KEEP
+                /*smallImageComplicationData!!.smallImage.image
+                    .loadDrawable(context)!!.colorFilter = ColorMatrixColorFilter(colorMatrix)*/
             }
         }
         return if (smallImageComplicationData != null) {
