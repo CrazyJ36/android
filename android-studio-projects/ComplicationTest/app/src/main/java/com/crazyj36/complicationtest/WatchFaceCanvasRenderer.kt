@@ -251,12 +251,13 @@ class WatchFaceCanvasRenderer(
                 ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
 
-                val drawable = complicationWireData!!.smallImage!!.loadDrawable(context)!!
+                val drawable: Drawable = complicationWireData!!.smallImage!!.loadDrawable(context)!!
+                val wrappedDrawable = DrawableCompat.wrap(drawable)
 
-                drawable.apply {
+                wrappedDrawable.apply {
                     colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
-                     DrawableCompat.setTint(drawable, Color.RED)
-                    //setTint(Color.RED)
+                    //DrawableCompat.setTint(wrappedDrawable, Color.RED)
+                    DrawableCompat.setTint(wrappedDrawable, Color.RED)
                     setTintBlendMode(BlendMode.COLOR)
                 }
 
