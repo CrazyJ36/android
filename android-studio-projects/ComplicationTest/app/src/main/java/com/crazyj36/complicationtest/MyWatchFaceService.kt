@@ -3,6 +3,7 @@ package com.crazyj36.complicationtest
 import android.graphics.Color
 import android.graphics.RectF
 import android.view.SurfaceHolder
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
 import androidx.wear.watchface.ComplicationSlot
@@ -40,15 +41,11 @@ class MyWatchFaceService : WatchFaceService() {
             activeStyle.apply {
                 textColor = Color.WHITE
                 titleColor = Color.WHITE
-                backgroundColor = Color.TRANSPARENT
-                backgroundDrawable = null
                 iconColor = Color.RED
             }
             ambientStyle.apply {
                 textColor = Color.WHITE
                 titleColor = Color.WHITE
-                backgroundColor = Color.TRANSPARENT
-                backgroundDrawable = null
                 iconColor = Color.RED
             }
         }

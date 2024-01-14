@@ -133,25 +133,6 @@ class WatchFaceCanvasRenderer(
             ComplicationData.Companion.TYPE_SHORT_TEXT -> {
                 Log.d(tag, "Loading custom ShortTextComplicationData")
                 complication!!.renderer.loadData(setShortTextComplicationData(), false)
-                /*val complicationDrawable = ComplicationDrawable(context)
-                complicationDrawable.apply {
-                    bounds =
-                        Rect(
-                            (canvas.width / 2) - (canvas.width / 7),
-                            (canvas.height / 2) - (canvas.height / 7),
-                            (canvas.width / 2) + (canvas.width / 7),
-                            (canvas.height / 2) + (canvas.height / 7)
-                        )
-                    activeStyle.apply {
-                        iconColor = Color.RED
-                        textColor = Color.WHITE
-                        titleColor = Color.WHITE
-                    }
-                }
-                complicationDrawable.setComplicationData(complication!!.complicationData.value, false)
-                //complication!!.renderer.loadData(complicationDrawable.complicationData, false)
-
-                complicationDrawable.draw(canvas)*/
             }
 
             ComplicationData.Companion.TYPE_SMALL_IMAGE -> {
@@ -172,7 +153,6 @@ class WatchFaceCanvasRenderer(
                         textColor = Color.WHITE
                         titleColor = Color.WHITE
                     }
-
                 complicationDrawable.complicationData.asWireComplicationData().smallImage!!.apply {
                     loadDrawable(context)!!.apply {
                         colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
@@ -180,7 +160,6 @@ class WatchFaceCanvasRenderer(
                         setTint(Color.RED)
                     }
                 }
-              
                 complicationDrawable.setComplicationData(complication!!.complicationData.value, false)
                 complicationDrawable.draw(canvas)*/
 
