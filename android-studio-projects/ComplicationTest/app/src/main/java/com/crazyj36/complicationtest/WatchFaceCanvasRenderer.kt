@@ -10,6 +10,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
+import android.graphics.PorterDuff
 import android.graphics.Rect
 import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
@@ -142,7 +143,7 @@ class WatchFaceCanvasRenderer(
             complicationWireData!!.smallImage!!.apply {
                 loadDrawable(context)!!.apply {
                     setTint(Color.RED)
-                    setTintBlendMode(BlendMode.COLOR_BURN)
+                    setTintBlendMode(BlendMode.COLOR)
                 }
             }
         }
