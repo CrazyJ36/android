@@ -6,19 +6,13 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.graphics.Rect
-import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
 import android.util.Log
 import android.view.SurfaceHolder
-import androidx.core.graphics.drawable.toBitmap
-import androidx.core.graphics.drawable.toIcon
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
@@ -32,9 +26,6 @@ import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
 import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.complications.data.SmallImageType
-import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
-import androidx.wear.watchface.complications.rendering.ComplicationDrawable
-import androidx.wear.watchface.complications.rendering.ComplicationStyle
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
@@ -58,6 +49,7 @@ class WatchFaceCanvasRenderer(
     private var complication: ComplicationSlot? = null
     private var complicationWireData: ComplicationData? = null
     private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
+    private var shortTextComplicationData: ShortTextComplicationData? = null
     private var smallImageComplicationDataBuilder: SmallImageComplicationData.Builder? = null
     private var smallImageComplicationData: SmallImageComplicationData? = null
     private var dataSourceDataSource: ComponentName? = null
@@ -67,6 +59,7 @@ class WatchFaceCanvasRenderer(
     private var dataSourceTitle: CharSequence? = null
     private var dataSourceIcon: Icon? = null
     private var dataSourceSmallImage: Icon? = null
+
     /*private val colorMatrix = floatArrayOf( // backup red
         1f, 0f, 0f, 0f, 0f,
         0f, 0f, 0f, 0f, 0f,
@@ -90,7 +83,7 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-       renderer(canvas, zonedDateTime, renderParameters)
+        renderer(canvas, zonedDateTime, renderParameters)
     }
 
     @SuppressLint("RestrictedApi")
@@ -104,12 +97,17 @@ class WatchFaceCanvasRenderer(
     }
 
     @SuppressLint("RestrictedApi")
-    private fun renderer(canvas: Canvas, zonedDateTime: ZonedDateTime, renderParameters: RenderParameters) {
+    private fun renderer(
+        canvas: Canvas,
+        zonedDateTime: ZonedDateTime,
+        renderParameters: RenderParameters
+    ) {
         complication = null
         complicationWireData = null
         complication = complicationSlotsManager.complicationSlots[0]
         complicationWireData = complication!!.complicationData.value.asWireComplicationData()
         shortTextComplicationDataBuilder = null
+        shortTextComplicationData = null
         smallImageComplicationDataBuilder = null
         smallImageComplicationData = null
         dataSourceDataSource = null
@@ -123,21 +121,20 @@ class WatchFaceCanvasRenderer(
         dataSourceDynamicValues = null
 
         getDataSourceInfo(zonedDateTime)
-
         when (complicationWireData!!.type) {
             ComplicationData.Companion.TYPE_SHORT_TEXT -> {
-                setShortTextComplicationData()
+                complication!!.renderer.loadData(setShortTextComplicationData(), true)
             }
+
             ComplicationData.Companion.TYPE_SMALL_IMAGE -> {
-                setSmallImageComplicationData()
+                complication!!.renderer.loadData(setSmallImageComplicationData(), true)
             }
+
             else -> {
                 Log.d(tag, "Unknown complication type, rendering default.")
             }
         }
-
         complication!!.render(canvas, zonedDateTime, renderParameters)
-
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
             paint.setARGB(255, 255, 255, 255)
@@ -151,117 +148,114 @@ class WatchFaceCanvasRenderer(
             )
         }
     }
+
     @SuppressLint("RestrictedApi")
-    private fun setShortTextComplicationData() {
-        Log.d(tag, "Complication is ComplicationType.SHORT_TEXT")
+    private fun setShortTextComplicationData(): ShortTextComplicationData {
+        Log.d(tag, "Complication is ComplicationType.SHORT_TEXT.")
         if (dataSourceText != null && dataSourceContentDescription != null) {
-            Log.d(tag, "Setting text")
+            Log.d(tag, "Setting dataSourceText.")
+            Log.d(tag, "Setting dataSourceContentDescription.")
             shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
                 PlainComplicationText.Builder(dataSourceText!!).build(),
                 PlainComplicationText.Builder(dataSourceContentDescription!!).build()
             )
         } else if (dataSourceText != null) {
-            Log.d(tag, "Setting text")
+            Log.d(tag, "Setting dataSourceText, no dataSourceContentDescription.")
             shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
                 PlainComplicationText.Builder(dataSourceText!!).build(),
-                PlainComplicationText.Builder("Content description not supplied by DataSource.").build()
+                PlainComplicationText.Builder("Content description not supplied by DataSource.")
+                    .build()
             )
         }
         if (shortTextComplicationDataBuilder != null) {
             if (dataSourceDataSource != null) {
-                Log.d(tag, "Setting dataSource")
+                Log.d(tag, "Setting dataSourceDataSource.")
                 shortTextComplicationDataBuilder!!.setDataSource(dataSourceDataSource)
             }
             if (dataSourceTapAction != null) {
-                Log.d(tag, "Setting tapAction")
+                Log.d(tag, "Setting dataSourceTapAction.")
                 shortTextComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
             if (dataSourceTitle != null) {
-                Log.d(tag, "Setting title")
+                Log.d(tag, "Setting dataSourceTitle.")
                 shortTextComplicationDataBuilder!!.setTitle(
                     PlainComplicationText.Builder(dataSourceTitle!!).build()
                 )
             }
             if (dataSourceIcon != null) {
-                Log.d(tag, "Setting icon")
+                Log.d(tag, "Setting dataSourceIcon.")
                 shortTextComplicationDataBuilder!!.setMonochromaticImage(
                     MonochromaticImage.Builder(dataSourceIcon!!).build()
                 )
             }
-            complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build(), true)
+            shortTextComplicationData = shortTextComplicationDataBuilder!!.build()
+        }
+        return if (shortTextComplicationData != null) {
+            Log.d(tag, "Custom shortTextComplicationData creation complete.")
+            shortTextComplicationData!!
+        } else {
+            Log.d(tag, "dataSourceText was null, loading placeholder...")
+            ShortTextComplicationData.Builder(
+                PlainComplicationText.Builder("No data").build(),
+                PlainComplicationText.Builder("No data.").build()
+            ).build()
         }
     }
+
     @SuppressLint("RestrictedApi")
-    private fun setSmallImageComplicationData() {
-        Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE")
+    private fun setSmallImageComplicationData(): SmallImageComplicationData {
+        Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE.")
         if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
-            Log.d(tag, "Setting smallImage")
-            Log.d(tag, "Setting contentDescription")
-            if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
-                Log.d(tag, "smallImage type icon")
-                //dataSourceSmallImage!!.setTint(Color.RED)
-                smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                    SmallImage.Builder(
-                        dataSourceSmallImage!!//.loadDrawable(context)!!.apply {
-                            //setTint(Color.RED)
-                            //colorFilter = ColorMatrixColorFilter(colorMatrix)
-                        //}.toBitmap().toIcon(),
-                        ,SmallImageType.ICON
-                    ).build(),
-                    PlainComplicationText.Builder(dataSourceContentDescription!!).build()
-                )
-            } else if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_PHOTO) {
-                Log.d(tag, "smallImage type photo")
-                smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                    SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.PHOTO).build(),
-                    PlainComplicationText.Builder(dataSourceContentDescription!!).build()
-                )
-            }
+            Log.d(tag, "Setting dataSourceSmallImage.")
+            Log.d(tag, "Setting dataSourceContentDescription.")
+            smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
+                SmallImage.Builder(
+                    dataSourceSmallImage!!, SmallImageType.ICON
+                ).build(),
+                PlainComplicationText.Builder(dataSourceContentDescription!!).build()
+            )
         } else if (dataSourceSmallImage != null) {
-            Log.d(tag, "Setting smallImage")
-            if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
-                Log.d(tag, "smallImage type icon")
-                //dataSourceSmallImage!!.setTint(Color.RED)
-                smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                    SmallImage.Builder(
-                        dataSourceSmallImage!!//.loadDrawable(context)!!.apply {
-                            //setTint(Color.RED)
-                            //colorFilter = ColorMatrixColorFilter(colorMatrix)
-                        //}.toBitmap().toIcon(),
-                        ,SmallImageType.ICON
-                    ).build(),
-                    PlainComplicationText.Builder(
-                        "Content description not provided by DataSource"
-                    ).build()
-                )
-            } else if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_PHOTO) {
-                Log.d(tag, "smallImage type photo")
-                smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                    SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.PHOTO).build(),
-                    PlainComplicationText.Builder(
-                        "Content description not provided by DataSource"
-                    ).build()
-                )
-            }
+            Log.d(tag, "Setting dataSourceSmallImage, no dataSourceContentDescription.")
+            smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
+                SmallImage.Builder(
+                    dataSourceSmallImage!!, SmallImageType.ICON
+                ).build(),
+                PlainComplicationText.Builder(
+                    "Content description not provided by DataSource."
+                ).build()
+            )
         }
         if (smallImageComplicationDataBuilder != null) {
             if (dataSourceDataSource != null) {
-                Log.d(tag, "Setting dataSource")
-                smallImageComplicationDataBuilder!!. setDataSource(dataSourceDataSource)
+                Log.d(tag, "Setting dataSourceDataSource.")
+                smallImageComplicationDataBuilder!!.setDataSource(dataSourceDataSource)
             }
             if (dataSourceTapAction != null) {
-                Log.d(tag, "Setting tapAction")
+                Log.d(tag, "Setting dataSourceTapAction.")
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
-
-
             if (complicationWireData!!.smallImage!!.type == ComplicationData.Companion.IMAGE_STYLE_ICON) {
-                smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.colorFilter =
+                Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
+                smallImageComplicationData!!.smallImage.image
+                    .loadDrawable(context)!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
+            }
+        }
+        return if (smallImageComplicationData != null) {
+            Log.d(tag, "Custom smallImageComplicationData creation complete.")
+            smallImageComplicationData!!
+        } else {
+            Log.d(tag, "dataSourceSmallImage was null, loading placeholder...")
+            SmallImageComplicationData.Builder(
+                SmallImage.Builder(
+                    Icon.createWithResource(context, R.drawable.small_image_placeholder),
+                    SmallImageType.ICON
+                ).build(),
+                PlainComplicationText.Builder("No data.").build()
+            ).build().apply {
+                smallImage.image.loadDrawable(context)!!.colorFilter =
                     ColorMatrixColorFilter(colorMatrix)
             }
-
-            complication!!.renderer.loadData(smallImageComplicationData!!, true)
         }
     }
 
@@ -313,6 +307,7 @@ class WatchFaceCanvasRenderer(
             dataSourceDynamicValues = complicationWireData!!.rangedDynamicValue
         }
     }
+
     class MySharedAssets : SharedAssets {
         override fun onDestroy() {
         }
