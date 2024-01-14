@@ -10,8 +10,6 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.graphics.Rect
 import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
@@ -124,7 +122,7 @@ class WatchFaceCanvasRenderer(
         dataSourceLargeImage = null
         dataSourceDynamicValues = null
 
-        /*getDataSourceInfo(zonedDateTime)
+        getDataSourceInfo(zonedDateTime)
         when (complicationWireData!!.type) {
             ComplicationData.Companion.TYPE_SHORT_TEXT -> {
                 complication!!.renderer.loadData(setShortTextComplicationData(), true)
@@ -137,7 +135,7 @@ class WatchFaceCanvasRenderer(
             else -> {
                 Log.d(tag, "Unknown complication type, rendering default.")
             }
-        }*/
+        }
 
         complication!!.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
@@ -244,14 +242,9 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
 
                 smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
-                    /* Setting colorfilter overrides tint. */
-
                     colorFilter = ColorMatrixColorFilter(colorMatrix)
-
                     setTint(Color.RED)
-
                     setTintBlendMode(BlendMode.COLOR)
-
                 }
             }
         }
