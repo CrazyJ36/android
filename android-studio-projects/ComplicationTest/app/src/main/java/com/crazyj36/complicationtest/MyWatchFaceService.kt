@@ -46,19 +46,6 @@ class MyWatchFaceService : WatchFaceService() {
                 iconColor = Color.RED
             }
         }
-        complicationDrawable.current.apply{
-            colorFilter = ColorMatrixColorFilter(
-                floatArrayOf(
-                    1f, 0f, 0f, 0f, 50f,
-                    0f, 0f, 0f, 0f, 50f,
-                    0f, 0f, 0f, 0f, 50f,
-                    0f, 0f, 0f, 1f, 0f
-                )
-            )
-            setTint(Color.RED)
-            setTintBlendMode(BlendMode.COLOR_BURN)
-        }
-
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
                 complicationDrawable,
