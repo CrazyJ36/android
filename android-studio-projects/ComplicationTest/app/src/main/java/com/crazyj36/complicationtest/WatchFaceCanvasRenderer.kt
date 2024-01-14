@@ -246,7 +246,7 @@ class WatchFaceCanvasRenderer(
                 smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
                     /* Setting colorfilter overrides tint. */
 
-                    //colorFilter = ColorMatrixColorFilter(colorMatrix)
+                    colorFilter = ColorMatrixColorFilter(colorMatrix)
 
                     setTint(Color.RED)
 
