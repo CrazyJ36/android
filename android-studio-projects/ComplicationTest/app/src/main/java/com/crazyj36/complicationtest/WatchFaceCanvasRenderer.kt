@@ -11,13 +11,10 @@ import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.graphics.Rect
-import android.graphics.RectF
 import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
 import android.util.Log
-import android.util.SparseArray
 import android.view.SurfaceHolder
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
@@ -32,10 +29,9 @@ import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
 import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.complications.data.SmallImageType
+import androidx.wear.watchface.complications.data.toApiComplicationData
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
-import androidx.wear.watchface.complications.rendering.ComplicationDrawable.Companion.getDrawable
-import androidx.wear.watchface.complications.rendering.ComplicationStyle
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
@@ -133,14 +129,14 @@ class WatchFaceCanvasRenderer(
         when (complicationWireData!!.type) {
             ComplicationData.Companion.TYPE_SHORT_TEXT -> {
                 Log.d(tag, "Loading custom ShortTextComplicationData")
-                complication!!.renderer.loadData(setShortTextComplicationData(), false)
+                //complication!!.renderer.loadData(setShortTextComplicationData(), false)
             }
 
             ComplicationData.Companion.TYPE_SMALL_IMAGE -> {
                 Log.d(tag, "Loading custom SmallImageComplicationData")
-                complication!!.renderer.loadData(setSmallImageComplicationData(), false)
+                //complication!!.renderer.loadData(setSmallImageComplicationData(), false)
 
-                /*val complicationDrawable = ComplicationDrawable(context)
+                val complicationDrawable = ComplicationDrawable(context)
                 complicationDrawable.apply {
                     bounds =
                         Rect(
@@ -154,24 +150,22 @@ class WatchFaceCanvasRenderer(
                         textColor = Color.WHITE
                         titleColor = Color.WHITE
                     }
-                complicationDrawable.complicationData.asWireComplicationData().smallImage!!.apply {
-                    loadDrawable(context)!!.apply {
-                        colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
-                        setTintBlendMode(BlendMode.COLOR_BURN)
-                        setTint(Color.RED)
-                    }
                 }
-                complicationDrawable.setComplicationData(complication!!.complicationData.value, false)
-                complicationDrawable.draw(canvas)*/
-
+                complication!!.complicationData.value.asWireComplicationData().smallImage!!.loadDrawable(context)!!.apply {
+                    colorFilter = ColorMatrixColorFilter(colorMatrix)
+                    setTintBlendMode(BlendMode.COLOR_BURN)
+                    setTint(Color.RED)
+                }
+                complicationDrawable.setComplicationData(
+                    complication!!.complicationData.value, false)
+                complicationDrawable.draw(canvas)
             }
-
             else -> {
                 Log.d(tag, "Unknown complication type, rendering default.")
             }
         }
 
-        complication!!.render(canvas, zonedDateTime, renderParameters)
+        //complication!!.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
             paint.setARGB(255, 255, 255, 255)
