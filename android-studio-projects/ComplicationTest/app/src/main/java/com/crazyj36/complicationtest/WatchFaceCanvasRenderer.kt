@@ -243,8 +243,8 @@ class WatchFaceCanvasRenderer(
 
                 smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
                     colorFilter = ColorMatrixColorFilter(colorMatrix)
-                    setTint(Color.RED)
-                    setTintBlendMode(BlendMode.COLOR)
+                    //setTint(Color.RED)
+                    //setTintBlendMode(BlendMode.COLOR)
                 }
             }
         }
