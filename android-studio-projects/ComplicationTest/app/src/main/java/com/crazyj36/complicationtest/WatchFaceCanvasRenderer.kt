@@ -10,6 +10,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
+import android.graphics.PorterDuff
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
@@ -18,6 +19,7 @@ import android.util.Log
 import android.view.SurfaceHolder
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.watchface.ComplicationSlot
@@ -249,17 +251,15 @@ class WatchFaceCanvasRenderer(
                 ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
 
-                /*smallImageComplicationData!!.smallImage.image
-                    .loadDrawable(context)!!.apply {
-                        colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
-                        setTint(Color.RED)
-                        setTintBlendMode(BlendMode.COLOR)
-                    }*/
-                val drawable = DrawableCompat.wrap(
-                    AppCompatResources.getDrawable(context,
-                        smallImageComplicationData!!.smallImage.image.resId)!!
-                )
-                DrawableCompat.setTint(drawable, Color.RED)
+                val drawable = complicationWireData!!.smallImage!!.loadDrawable(context)!!
+
+                drawable.apply {
+                    colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
+                     DrawableCompat.setTint(drawable, Color.RED)
+                    //setTint(Color.RED)
+                    setTintBlendMode(BlendMode.COLOR)
+                }
+
             }
         }
         return if (smallImageComplicationData != null) {
