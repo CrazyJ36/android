@@ -184,6 +184,7 @@ class WatchFaceCanvasRenderer(
                 paint
             )
         }
+        invalidate()
     }
 
     @SuppressLint("RestrictedApi")
