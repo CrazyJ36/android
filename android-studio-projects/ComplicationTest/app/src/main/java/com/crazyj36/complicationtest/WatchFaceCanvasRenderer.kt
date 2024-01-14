@@ -132,15 +132,15 @@ class WatchFaceCanvasRenderer(
         when (complicationWireData!!.type) {
             ComplicationData.Companion.TYPE_SHORT_TEXT -> {
                 Log.d(tag, "Loading custom ShortTextComplicationData")
-                //complication!!.renderer.loadData(setShortTextComplicationData(), false)
-                val complicationDrawable = ComplicationDrawable(context)
+                complication!!.renderer.loadData(setShortTextComplicationData(), false)
+                /*val complicationDrawable = ComplicationDrawable(context)
                 complicationDrawable.apply {
                     bounds =
                         Rect(
-                            (canvas.width / 2) - (canvas.width / 8),
-                            (canvas.height / 2) - (canvas.height / 8),
-                            (canvas.width / 2) + (canvas.width / 8),
-                            (canvas.height / 2) + (canvas.height / 8)
+                            (canvas.width / 2) - (canvas.width / 7),
+                            (canvas.height / 2) - (canvas.height / 7),
+                            (canvas.width / 2) + (canvas.width / 7),
+                            (canvas.height / 2) + (canvas.height / 7)
                         )
                     activeStyle.apply {
                         iconColor = Color.RED
@@ -151,14 +151,14 @@ class WatchFaceCanvasRenderer(
                 complicationDrawable.setComplicationData(complication!!.complicationData.value, false)
                 //complication!!.renderer.loadData(complicationDrawable.complicationData, false)
 
-                complicationDrawable.draw(canvas)
+                complicationDrawable.draw(canvas)*/
             }
 
             ComplicationData.Companion.TYPE_SMALL_IMAGE -> {
                 Log.d(tag, "Loading custom SmallImageComplicationData")
-                //complication!!.renderer.loadData(setSmallImageComplicationData(), false)
+                complication!!.renderer.loadData(setSmallImageComplicationData(), false)
 
-                val complicationDrawable = ComplicationDrawable(context)
+                /*val complicationDrawable = ComplicationDrawable(context)
                 complicationDrawable.apply {
                     bounds =
                         Rect(
@@ -181,7 +181,7 @@ class WatchFaceCanvasRenderer(
                         setTint(Color.RED)
                     }.invalidateSelf()
                 }
-                complicationDrawable.draw(canvas)
+                complicationDrawable.draw(canvas)*/
 
             }
 
@@ -190,7 +190,7 @@ class WatchFaceCanvasRenderer(
             }
         }
 
-        //complication!!.render(canvas, zonedDateTime, renderParameters)
+        complication!!.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
             paint.setARGB(255, 255, 255, 255)
@@ -296,11 +296,11 @@ class WatchFaceCanvasRenderer(
                 ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
 
-                /*smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
+                smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
                     colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
                     setTintBlendMode(BlendMode.COLOR_BURN)
                     setTint(Color.RED)
-                }*/
+                }.invalidateSelf()
 
             }
         }
