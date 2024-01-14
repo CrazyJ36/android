@@ -31,7 +31,10 @@ import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
 import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.complications.data.SmallImageType
+import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
+import androidx.wear.watchface.complications.rendering.ComplicationDrawable.Companion.getDrawable
+import androidx.wear.watchface.complications.rendering.ComplicationStyle
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
@@ -145,8 +148,8 @@ class WatchFaceCanvasRenderer(
                         titleColor = Color.WHITE
                     }
                 }
-                complicationDrawable.setComplicationData(setShortTextComplicationData(), false)
-                complication!!.renderer.loadData(complicationDrawable.complicationData, false)
+                complicationDrawable.setComplicationData(complication!!.complicationData.value, false)
+                //complication!!.renderer.loadData(complicationDrawable.complicationData, false)
 
                 complicationDrawable.draw(canvas)
             }
@@ -159,10 +162,10 @@ class WatchFaceCanvasRenderer(
                 complicationDrawable.apply {
                     bounds =
                         Rect(
-                            (canvas.width / 2) - (canvas.width / 8),
-                            (canvas.height / 2) - (canvas.height / 8),
-                            (canvas.width / 2) + (canvas.width / 8),
-                            (canvas.height / 2) + (canvas.height / 8)
+                            (canvas.width / 2) - (canvas.width / 7),
+                            (canvas.height / 2) - (canvas.height / 7),
+                            (canvas.width / 2) + (canvas.width / 7),
+                            (canvas.height / 2) + (canvas.height / 7)
                         )
                     activeStyle.apply {
                         iconColor = Color.RED
@@ -170,9 +173,14 @@ class WatchFaceCanvasRenderer(
                         titleColor = Color.WHITE
                     }
                 }
-                complicationDrawable.setComplicationData(setSmallImageComplicationData(), false)
-                complication!!.renderer.loadData(complicationDrawable.complicationData, false)
-
+                complicationDrawable.setComplicationData(complication!!.complicationData.value, false)
+                complicationDrawable.complicationData.asWireComplicationData().smallImage!!.apply {
+                    loadDrawable(context)!!.apply {
+                        colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
+                        setTintBlendMode(BlendMode.COLOR_BURN)
+                        setTint(Color.RED)
+                    }
+                }
                 complicationDrawable.draw(canvas)
 
             }
@@ -288,11 +296,11 @@ class WatchFaceCanvasRenderer(
                 ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
 
-                smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
+                /*smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
                     colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
                     setTintBlendMode(BlendMode.COLOR_BURN)
                     setTint(Color.RED)
-                }
+                }*/
 
             }
         }
