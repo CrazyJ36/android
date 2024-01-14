@@ -87,6 +87,7 @@ class WatchFaceCanvasRenderer(
         sharedAssets: MySharedAssets
     ) {
         renderer(canvas, zonedDateTime, renderParameters)
+        invalidate()
     }
 
     override fun render(
@@ -152,6 +153,7 @@ class WatchFaceCanvasRenderer(
                 paint
             )
         }
+        invalidate()
     }
 
     @SuppressLint("RestrictedApi")
@@ -247,8 +249,8 @@ class WatchFaceCanvasRenderer(
                 smallImageComplicationData!!.smallImage.image
                     .loadDrawable(context)!!.apply {
                         colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
-                        //setTint(Color.RED)
-                        //setTintBlendMode(BlendMode.COLOR)
+                        setTint(Color.RED)
+                        setTintBlendMode(BlendMode.COLOR)
                     }
             }
         }
