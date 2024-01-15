@@ -272,15 +272,12 @@ class WatchFaceCanvasRenderer(
                     setTintBlendMode(BlendMode.COLOR_BURN)
                     setTint(Color.RED)
                     invalidateSelf()
-                }.toBitmap().toIcon().apply {
-                    setTintBlendMode(BlendMode.COLOR_BURN)
-                    setTint(Color.RED)
                 }
-                /*smallImageComplicationData!!.smallImage.image.apply {
+                smallImageComplicationData!!.smallImage.image.apply {
                     //colorFilter = ColorMatrixColorFilter(colorMatrix)
                     setTintBlendMode(BlendMode.COLOR_BURN)
                     setTint(Color.RED)
-                }*/
+                }
 
                 if (smallImageComplicationData!!.smallImage.ambientImage != null) {
                     smallImageComplicationData!!.smallImage.ambientImage!!.loadDrawable(context)!!.apply {
@@ -288,15 +285,12 @@ class WatchFaceCanvasRenderer(
                         setTintBlendMode(BlendMode.COLOR_BURN)
                         setTint(Color.RED)
                         invalidateSelf()
-                    }.toBitmap().toIcon().apply {
-                        setTintBlendMode(BlendMode.COLOR_BURN)
-                        setTint(Color.RED)
                     }
-                    /*smallImageComplicationData!!.smallImage.ambientImage!!.apply {
+                    smallImageComplicationData!!.smallImage.ambientImage!!.apply {
                         //colorFilter = ColorMatrixColorFilter(colorMatrix)
                         setTintBlendMode(BlendMode.COLOR_BURN)
                         setTint(Color.RED)
-                    }*/
+                    }
                 }
 
             } else {
