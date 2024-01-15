@@ -278,7 +278,7 @@ class WatchFaceCanvasRenderer(
         }
     }
 
-    @SuppressLint("RestrictedApi")
+    @SuppressLint("RestrictedApi") // applying attributes here works.
     private fun getDataSourceInfo(zonedDateTime: ZonedDateTime) {
         if (complicationWireData!!.dataSource != null &&
             complicationWireData!!.dataSource != complication!!.complicationData.value.dataSource
