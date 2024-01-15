@@ -249,8 +249,20 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
 
                 smallImageComplicationData!!.smallImage.image.apply {
-                    Log.d(tag, "Loaded drawable for coloring")
+                    Log.d(tag, "Loaded icon for coloring")
                     //colorFilter = ColorMatrixColorFilter(colorMatrix)
+                    setTintBlendMode(BlendMode.COLOR_BURN)
+                    setTint(Color.RED)
+                }
+                smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
+                    setTintBlendMode(BlendMode.COLOR_BURN)
+                    setTint(Color.RED)
+                }
+                smallImageComplicationData!!.smallImage.ambientImage!!.apply {
+                    setTintBlendMode(BlendMode.COLOR_BURN)
+                    setTint(Color.RED)
+                }
+                smallImageComplicationData!!.smallImage.ambientImage!!.loadDrawable(context)!!.apply {
                     setTintBlendMode(BlendMode.COLOR_BURN)
                     setTint(Color.RED)
                 }
