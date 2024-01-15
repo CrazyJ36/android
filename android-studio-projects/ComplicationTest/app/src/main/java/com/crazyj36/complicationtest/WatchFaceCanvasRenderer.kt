@@ -47,7 +47,7 @@ class WatchFaceCanvasRenderer(
     currentUserStyleRepository = currentUserStyleRepository,
     watchState = watchState,
     canvasType = canvasType,
-    interactiveDrawModeUpdateDelayMillis = 16L,
+    interactiveDrawModeUpdateDelayMillis = 1000L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
 
@@ -353,7 +353,8 @@ class WatchFaceCanvasRenderer(
 
     @SuppressLint("RestrictedApi")
     private fun getDataSourceInfo(zonedDateTime: ZonedDateTime) {
-        if (complicationWireData!!.dataSource != null) {
+        if (complicationWireData!!.dataSource != null &&
+            complicationWireData!!.dataSource != complication!!.complicationData.value.dataSource) {
             Log.d(tag, "hasDataSource")
             dataSourceDataSource = complication!!.complicationData.value.dataSource
         }
@@ -388,11 +389,27 @@ class WatchFaceCanvasRenderer(
         }
         if (complicationWireData!!.hasSmallImage()) {
             Log.d(tag, "hasSmallImage")
-            dataSourceSmallImage = complicationWireData!!.smallImage!!.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR_BURN)
+            dataSourceSmallImage = complicationWireData!!.smallImage!!
+            dataSourceSmallImage!!
+                .apply {
+                    loadDrawable(context)!!.apply {
+                        colorFilter = ColorMatrixColorFilter(colorMatrix)
+                    }.toBitmap().toIcon()
+                }
+                .setTint(Color.RED)
+                .setTintBlendMode(BlendMode.COLOR_BURN)
         }
         if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
             Log.d(tag, "hasBurnInProtectionSmallImage")
-            dataSourceBurnInProtectionSmallImage = complicationWireData!!.burnInProtectionSmallImage!!.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR_BURN)
+            dataSourceBurnInProtectionSmallImage = complicationWireData!!.burnInProtectionSmallImage!!
+            dataSourceBurnInProtectionSmallImage!!
+                .apply {
+                    loadDrawable(context)!!.apply {
+                        colorFilter = ColorMatrixColorFilter(colorMatrix)
+                    }.toBitmap().toIcon()
+                }
+                .setTint(Color.RED)
+                .setTintBlendMode(BlendMode.COLOR_BURN)
         }
         if (complicationWireData!!.hasLargeImage()) {
             Log.d(tag, "hasLargeImage")
