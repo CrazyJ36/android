@@ -122,16 +122,16 @@ class WatchFaceCanvasRenderer(
         dataSourceDynamicValues = null
 
         getDataSourceInfo(zonedDateTime)
-        when (complication!!.complicationData.value.type) {
+        /*when (complication!!.complicationData.value.type) {
             ComplicationType.SHORT_TEXT -> {
-                Log.d(tag, "Loading custom ShortTextComplicationData")
+                Log.d(tag, "Complication is ComplicationType.SHORT_TEXT, loading custom ShortTextComplicationData")
                 complication!!.renderer.loadData(
                     setShortTextComplicationData(), false
                 )
             }
 
             ComplicationType.SMALL_IMAGE -> {
-                Log.d(tag, "Loading custom SmallImageComplicationData")
+                Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE, loading custom SmallImageComplicationData")
                 complication!!.renderer.loadData(
                     setSmallImageComplicationData(), false
                 )
@@ -140,7 +140,7 @@ class WatchFaceCanvasRenderer(
             else -> {
                 Log.d(tag, "Unknown complication type, not customizing.")
             }
-        }
+        }*/
 
         complication!!.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
@@ -159,7 +159,6 @@ class WatchFaceCanvasRenderer(
 
     @SuppressLint("RestrictedApi")
     private fun setShortTextComplicationData(): ShortTextComplicationData {
-        Log.d(tag, "Complication is ComplicationType.SHORT_TEXT.")
         if (dataSourceText != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting dataSourceText and dataSourceContentDescription.")
             shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
@@ -211,7 +210,6 @@ class WatchFaceCanvasRenderer(
 
     @SuppressLint("RestrictedApi")
     private fun setSmallImageComplicationData(): SmallImageComplicationData {
-        Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE.")
         if (dataSourceBurnInProtectionSmallImage != null && dataSourceContentDescription != null) {
             Log.d(
                 tag,
