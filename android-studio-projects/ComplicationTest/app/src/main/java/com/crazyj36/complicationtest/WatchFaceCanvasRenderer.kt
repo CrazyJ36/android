@@ -133,9 +133,6 @@ class WatchFaceCanvasRenderer(
                 complication!!.renderer.loadData(
                     setShortTextComplicationData(), false
                 )
-                complication!!.renderer.render(
-                    canvas, bounds, zonedDateTime, renderParameters, 0
-                )
             }
 
             ComplicationType.SMALL_IMAGE -> {
@@ -143,17 +140,14 @@ class WatchFaceCanvasRenderer(
                 complication!!.renderer.loadData(
                     setSmallImageComplicationData(), false
                 )
-                complication!!.renderer.render(
-                    canvas, bounds, zonedDateTime, renderParameters, 0
-                )
             }
 
             else -> {
                 Log.d(tag, "Unknown complication type, not customizing.")
-                complication!!.render(canvas, zonedDateTime, renderParameters)
             }
         }
 
+        complication!!.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
             paint.setARGB(255, 255, 255, 255)
@@ -331,6 +325,7 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "hasSmallImage")
             dataSourceSmallImage = complicationWireData!!.smallImage!!
             if (dataSourceSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
+                Log.d(tag, "ComplicationType is IMAGE_STYLE_ICON")
                 dataSourceSmallImage!!.apply {
                     loadDrawable(context)!!.apply {
                         colorFilter = ColorMatrixColorFilter(colorMatrix)
