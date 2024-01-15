@@ -9,6 +9,7 @@ import android.graphics.BlendMode
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
+import android.graphics.DrawFilter
 import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.Icon
@@ -122,10 +123,10 @@ class WatchFaceCanvasRenderer(
         dataSourceLargeImage = null
         dataSourceDynamicValues = null
 
-        canvas.save()
-
         getDataSourceInfo(zonedDateTime)
 
+        canvas.drawFilter = DrawFilter()
+        canvas.save()
         when (complication!!.complicationData.value.type) {
             ComplicationType.SHORT_TEXT -> {
                 Log.d(tag, "Loading custom ShortTextComplicationData")
@@ -142,6 +143,8 @@ class WatchFaceCanvasRenderer(
             }
         }
 
+        canvas.restore()
+
         complication!!.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
@@ -155,7 +158,6 @@ class WatchFaceCanvasRenderer(
                 paint
             )
         }
-        canvas.restore()
     }
 
     @SuppressLint("RestrictedApi")
@@ -250,7 +252,7 @@ class WatchFaceCanvasRenderer(
             ) {
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
 
-                smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
+                smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.run {
                     colorFilter = ColorMatrixColorFilter(colorMatrix)
                     setTintBlendMode(BlendMode.COLOR_BURN)
                     setTint(Color.RED)
