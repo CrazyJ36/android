@@ -22,6 +22,7 @@ import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
+import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
@@ -122,13 +123,14 @@ class WatchFaceCanvasRenderer(
         dataSourceDynamicValues = null
 
         getDataSourceInfo(zonedDateTime)
-        when (complicationWireData!!.type) {
-            ComplicationData.Companion.TYPE_SHORT_TEXT -> {
+
+        when (complication!!.complicationData.value.type) {
+            ComplicationType.SHORT_TEXT -> {
                 Log.d(tag, "Loading custom ShortTextComplicationData")
                 complication!!.renderer.loadData(setShortTextComplicationData(), false)
             }
 
-            ComplicationData.Companion.TYPE_SMALL_IMAGE -> {
+            ComplicationType.SMALL_IMAGE -> {
                 Log.d(tag, "Loading custom SmallImageComplicationData")
                 complication!!.renderer.loadData(setSmallImageComplicationData(), false)
             }
@@ -239,7 +241,7 @@ class WatchFaceCanvasRenderer(
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
-            if (complicationWireData!!.smallImage!!.type ==
+            if (smallImageComplicationData!!.smallImage.image.type ==
                 ComplicationData.Companion.IMAGE_STYLE_ICON
             ) {
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
@@ -250,6 +252,8 @@ class WatchFaceCanvasRenderer(
                     setTint(Color.RED)
                 }
 
+            } else {
+                Log.d(tag, "dataSourceSmallImage is type PHOTO, not coloring...")
             }
         }
         return if (smallImageComplicationData != null) {
