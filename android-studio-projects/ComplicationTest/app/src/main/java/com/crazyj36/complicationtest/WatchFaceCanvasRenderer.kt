@@ -390,26 +390,30 @@ class WatchFaceCanvasRenderer(
         if (complicationWireData!!.hasSmallImage()) {
             Log.d(tag, "hasSmallImage")
             dataSourceSmallImage = complicationWireData!!.smallImage!!
-            dataSourceSmallImage!!
-                .apply {
-                    loadDrawable(context)!!.apply {
-                        colorFilter = ColorMatrixColorFilter(colorMatrix)
-                    }.toBitmap().toIcon()
-                }
-                .setTint(Color.RED)
-                .setTintBlendMode(BlendMode.COLOR_BURN)
+            if (dataSourceSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
+                dataSourceSmallImage!!
+                    .apply {
+                        loadDrawable(context)!!.apply {
+                            colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        }.toBitmap().toIcon()
+                    }
+                    .setTint(Color.RED)
+                    .setTintBlendMode(BlendMode.COLOR_BURN)
+            }
         }
         if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
             Log.d(tag, "hasBurnInProtectionSmallImage")
             dataSourceBurnInProtectionSmallImage = complicationWireData!!.burnInProtectionSmallImage!!
-            dataSourceBurnInProtectionSmallImage!!
-                .apply {
-                    loadDrawable(context)!!.apply {
-                        colorFilter = ColorMatrixColorFilter(colorMatrix)
-                    }.toBitmap().toIcon()
-                }
-                .setTint(Color.RED)
-                .setTintBlendMode(BlendMode.COLOR_BURN)
+            if (dataSourceBurnInProtectionSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
+                dataSourceBurnInProtectionSmallImage!!
+                    .apply {
+                        loadDrawable(context)!!.apply {
+                            colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        }.toBitmap().toIcon()
+                    }
+                    .setTint(Color.RED)
+                    .setTintBlendMode(BlendMode.COLOR_BURN)
+            }
         }
         if (complicationWireData!!.hasLargeImage()) {
             Log.d(tag, "hasLargeImage")
