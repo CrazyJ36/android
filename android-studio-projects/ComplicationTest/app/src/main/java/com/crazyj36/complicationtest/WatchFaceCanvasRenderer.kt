@@ -68,9 +68,9 @@ class WatchFaceCanvasRenderer(
     private var dataSourceBurnInProtectionSmallImage: Icon? = null
 
     private val colorMatrix = floatArrayOf(
-        -1f, 0f, 0f, 0f, 255f,
-        0f, 0f, 0f, 0f, 50f,
-        0f, 0f, 0f, 0f, 50f,
+        1f, 0f, 0f, 0f, 255f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
         0f, 0f, 0f, 1f, 0f
     )
     private var dataSourceLargeImage: Icon? = null
