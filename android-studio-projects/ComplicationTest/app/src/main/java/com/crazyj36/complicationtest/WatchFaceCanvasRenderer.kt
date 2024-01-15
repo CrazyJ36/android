@@ -8,6 +8,7 @@ import android.content.res.Resources
 import android.graphics.BlendMode
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.graphics.Rect
@@ -67,12 +68,7 @@ class WatchFaceCanvasRenderer(
     private var dataSourceSmallImage: Icon? = null
     private var dataSourceBurnInProtectionSmallImage: Icon? = null
 
-    private val colorMatrix = floatArrayOf(
-        0.33f, 0.33f, 0.33f, 0f, 0f,
-        0f, 0f, 0f, 0f, 0f,
-        0f, 0f, 0f, 0f, 0f,
-        0f, 0f, 0f, 1f, 0f
-    )
+
     private var dataSourceLargeImage: Icon? = null
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
     private val paint = Paint()
@@ -322,6 +318,24 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "ComplicationType is IMAGE_STYLE_ICON")
                 dataSourceSmallImage!!.apply {
                     loadDrawable(context)!!.apply {
+                        val red = floatArrayOf(
+                            0.33f, 0.33f, 0.33f, 0f, 0f,
+                            0f, 0f, 0f, 0f, 0f,
+                            0f, 0f, 0f, 0f, 0f,
+                            0f, 0f, 0f, 1f, 0f
+                        )
+                        val white = floatArrayOf(
+                            1f, 1f, 1f, 0f, 0f,
+                            1f, 1f, 1f, 0f, 0f,
+                            1f, 1f, 1f, 0f, 0f,
+                            0f, 0f, 0f, 1f, 0f
+                        )
+                        val colorMatrixRed = ColorMatrix()
+                        val colorMatrixWhite = ColorMatrix()
+                        colorMatrixRed.set(red)
+                        colorMatrixWhite.set(white)
+                        val colorMatrix = ColorMatrix()
+                        colorMatrix.setConcat(colorMatrixRed, colorMatrixWhite)
                         colorFilter = ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
                 }.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR)
@@ -334,7 +348,7 @@ class WatchFaceCanvasRenderer(
             if (dataSourceBurnInProtectionSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
                 dataSourceBurnInProtectionSmallImage!!.apply {
                     loadDrawable(context)!!.apply {
-                        colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        //colorFilter = ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
                 }.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR)
             }
