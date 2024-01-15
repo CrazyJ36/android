@@ -126,7 +126,7 @@ class WatchFaceCanvasRenderer(
             (canvas.width / 2) + (canvas.width / 7),
             (canvas.height / 2) + (canvas.height / 7)
         )
-        /*getDataSourceInfo(zonedDateTime)
+        getDataSourceInfo(zonedDateTime)
         when (complication!!.complicationData.value.type) {
             ComplicationType.SHORT_TEXT -> {
                 Log.d(tag, "Loading custom ShortTextComplicationData")
@@ -137,15 +137,15 @@ class WatchFaceCanvasRenderer(
 
             ComplicationType.SMALL_IMAGE -> {
                 Log.d(tag, "Loading custom SmallImageComplicationData")
-                complication!!.renderer.loadData(
+                /*complication!!.renderer.loadData(
                     setSmallImageComplicationData(), false
-                )
+                )*/
             }
 
             else -> {
                 Log.d(tag, "Unknown complication type, not customizing.")
             }
-        }*/
+        }
 
         complication!!.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
