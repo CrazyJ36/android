@@ -125,25 +125,15 @@ class WatchFaceCanvasRenderer(
         dataSourceDynamicValues = null
 
         getDataSourceInfo(zonedDateTime)
-        val centerBounds = Rect(
-            (canvas.width / 2) - (canvas.width / 7),
-            (canvas.height / 2) - (canvas.height / 7),
-            (canvas.width / 2) + (canvas.width / 7),
-            (canvas.height / 2) + (canvas.height / 7)
-        )
         when (complication!!.complicationData.value.type) {
             ComplicationType.SHORT_TEXT -> {
                 Log.d(tag, "Loading custom ShortTextComplicationData")
-                complication!!.renderer.loadData(setShortTextComplicationData(), true)
-                complication!!.renderer.render(canvas, centerBounds, zonedDateTime, renderParameters, 0)
+                complication!!.renderer.loadData(setShortTextComplicationData(), false)
             }
 
             ComplicationType.SMALL_IMAGE -> {
                 Log.d(tag, "Loading custom SmallImageComplicationData")
-                complication!!.renderer.loadData(setSmallImageComplicationData(), true)
-                complication!!.renderer.render(canvas, centerBounds, zonedDateTime, renderParameters, 0)
-                //complication!!.render(canvas, zonedDateTime, renderParameters)
-
+                complication!!.renderer.loadData(setSmallImageComplicationData(), false)
             }
 
             else -> {
@@ -151,7 +141,7 @@ class WatchFaceCanvasRenderer(
             }
         }
 
-        //complication!!.render(canvas, zonedDateTime, renderParameters)
+        complication!!.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
             paint.setARGB(255, 255, 255, 255)

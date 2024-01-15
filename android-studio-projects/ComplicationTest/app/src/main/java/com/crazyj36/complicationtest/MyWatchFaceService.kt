@@ -43,14 +43,14 @@ class MyWatchFaceService : WatchFaceService() {
             activeStyle.apply {
                 textColor = Color.WHITE
                 titleColor = Color.WHITE
-                iconColor = Color.RED
+                //iconColor = Color.RED
                 backgroundDrawable = null
                 backgroundColor = Color.TRANSPARENT
             }
             ambientStyle.apply {
                 textColor = Color.WHITE
                 titleColor = Color.WHITE
-                iconColor = Color.RED
+                //iconColor = Color.RED
                 backgroundDrawable = null
                 backgroundColor = Color.TRANSPARENT
             }
