@@ -241,6 +241,7 @@ class WatchFaceCanvasRenderer(
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
+
             if (smallImageComplicationData!!.smallImage.image.type ==
                 ComplicationData.Companion.IMAGE_STYLE_ICON
             ) {
@@ -248,8 +249,8 @@ class WatchFaceCanvasRenderer(
 
                 smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
                     colorFilter = ColorMatrixColorFilter(colorMatrix)
-                    //setTintBlendMode(BlendMode.COLOR_BURN)
-                    //setTint(Color.RED)
+                    setTintBlendMode(BlendMode.COLOR_BURN)
+                    setTint(Color.RED)
                 }
 
             } else {
@@ -270,8 +271,8 @@ class WatchFaceCanvasRenderer(
             ).build().apply {
                 smallImage.image.loadDrawable(context)!!.apply {
                     colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
-                    //setTintBlendMode(BlendMode.COLOR_BURN)
-                    //setTint(Color.RED)
+                    setTintBlendMode(BlendMode.COLOR_BURN)
+                    setTint(Color.RED)
                 }
             }
         }
