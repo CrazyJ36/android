@@ -25,6 +25,7 @@ class MyWatchFaceService : WatchFaceService() {
     ): ComplicationSlotsManager {
         val complicationId = 0
         val supportedTypes = listOf(
+            ComplicationType.NOT_CONFIGURED,
             ComplicationType.EMPTY,
             ComplicationType.SHORT_TEXT,
             ComplicationType.SMALL_IMAGE
