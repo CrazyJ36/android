@@ -122,7 +122,7 @@ class WatchFaceCanvasRenderer(
         dataSourceDynamicValues = null
 
         getDataSourceInfo(zonedDateTime)
-        /*when (complication!!.complicationData.value.type) {
+        when (complication!!.complicationData.value.type) {
             ComplicationType.SHORT_TEXT -> {
                 Log.d(tag, "Complication is ComplicationType.SHORT_TEXT, loading custom ShortTextComplicationData")
                 complication!!.renderer.loadData(
@@ -140,7 +140,7 @@ class WatchFaceCanvasRenderer(
             else -> {
                 Log.d(tag, "Unknown complication type, not customizing.")
             }
-        }*/
+        }
 
         complication!!.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
@@ -277,35 +277,24 @@ class WatchFaceCanvasRenderer(
 
     @SuppressLint("RestrictedApi") // applying attributes here works and renders in time.
     private fun getDataSourceInfo(zonedDateTime: ZonedDateTime) {
-        if (complicationWireData!!.dataSource != null &&
-            dataSourceDataSource != complication!!.complicationData.value.dataSource
-        ) {
+        if (complicationWireData!!.dataSource != null) {
             Log.d(tag, "hasDataSource")
             dataSourceDataSource = complication!!.complicationData.value.dataSource
         }
 
-        if (complicationWireData!!.hasTapAction() &&
-            dataSourceTapAction != complication!!.complicationData.value.tapAction) {
+        if (complicationWireData!!.hasTapAction()) {
             Log.d(tag, "hasTapAction")
             dataSourceTapAction = complication!!.complicationData.value.tapAction
         }
 
-        if (complicationWireData!!.hasShortText() &&
-            dataSourceText != complicationWireData!!.shortText!!.getTextAt(
-                Resources.getSystem(),
-                LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
-            )) {
+        if (complicationWireData!!.hasShortText()) {
             Log.d(tag, "hasShortText")
             dataSourceText = complicationWireData!!.shortText!!.getTextAt(
                 Resources.getSystem(),
                 LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
             )
         }
-        if (complicationWireData!!.hasContentDescription() &&
-            dataSourceContentDescription != complicationWireData!!.contentDescription!!.getTextAt(
-                Resources.getSystem(),
-                LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
-            )) {
+        if (complicationWireData!!.hasContentDescription()) {
             Log.d(tag, "hasContentDescription")
             dataSourceContentDescription = complicationWireData!!.contentDescription!!.getTextAt(
                 Resources.getSystem(),
@@ -313,11 +302,7 @@ class WatchFaceCanvasRenderer(
             )
         }
 
-        if (complicationWireData!!.hasShortTitle() &&
-            dataSourceTitle != complicationWireData!!.shortTitle!!.getTextAt(
-                Resources.getSystem(),
-                LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
-            )) {
+        if (complicationWireData!!.hasShortTitle()) {
             Log.d(tag, "hasShortTitle")
             dataSourceTitle = complicationWireData!!.shortTitle!!.getTextAt(
                 Resources.getSystem(),
@@ -325,14 +310,12 @@ class WatchFaceCanvasRenderer(
             )
         }
 
-        if (complicationWireData!!.hasIcon() &&
-            dataSourceIcon != complicationWireData!!.icon) {
+        if (complicationWireData!!.hasIcon()) {
             Log.d(tag, "hasIcon")
             dataSourceIcon = complicationWireData!!.icon!!
         }
 
-        if (complicationWireData!!.hasSmallImage() &&
-            dataSourceSmallImage != complicationWireData!!.smallImage) {
+        if (complicationWireData!!.hasSmallImage()) {
             Log.d(tag, "hasSmallImage")
             dataSourceSmallImage = complicationWireData!!.smallImage!!
             if (dataSourceSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
@@ -347,8 +330,7 @@ class WatchFaceCanvasRenderer(
             }
         }
 
-        if (complicationWireData!!.hasBurnInProtectionSmallImage() &&
-            dataSourceBurnInProtectionSmallImage != complicationWireData!!.burnInProtectionSmallImage) {
+        if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
             Log.d(tag, "hasBurnInProtectionSmallImage")
             dataSourceBurnInProtectionSmallImage =
                 complicationWireData!!.burnInProtectionSmallImage!!
@@ -364,14 +346,12 @@ class WatchFaceCanvasRenderer(
             }
         }
 
-        if (complicationWireData!!.hasLargeImage() &&
-            dataSourceLargeImage != complicationWireData!!.largeImage) {
+        if (complicationWireData!!.hasLargeImage()) {
             Log.d(tag, "hasLargeImage")
             dataSourceLargeImage = complicationWireData!!.largeImage
         }
 
-        if (complicationWireData!!.hasRangedDynamicValue() &&
-            dataSourceDynamicValues != complicationWireData!!.rangedDynamicValue) {
+        if (complicationWireData!!.hasRangedDynamicValue()) {
             Log.d(tag, "hasRangedDynamicValues")
             dataSourceDynamicValues = complicationWireData!!.rangedDynamicValue
         }
