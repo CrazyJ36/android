@@ -1,5 +1,6 @@
 package com.crazyj36.complicationtest
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.RectF
 import android.view.SurfaceHolder
@@ -20,6 +21,7 @@ import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 
 class MyWatchFaceService : WatchFaceService() {
+    @SuppressLint("RestrictedApi")
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
