@@ -15,6 +15,8 @@ import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
 import android.util.Log
 import android.view.SurfaceHolder
+import androidx.core.graphics.drawable.toBitmap
+import androidx.core.graphics.drawable.toIcon
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
@@ -265,26 +267,29 @@ class WatchFaceCanvasRenderer(
             ) {
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
                 //Log.d(tag, "Icon type: " + smallImageComplicationData!!.smallImage.image.type)
-                if (smallImageComplicationData!!.smallImage.image.loadDrawable(context) != null) {
-                    smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
-                        setTintBlendMode(BlendMode.COLOR_BURN)
-                        setTint(Color.RED)
-                    }
-                } else {
-                    smallImageComplicationData!!.smallImage.image.apply {
-                        setTintBlendMode(BlendMode.COLOR_BURN)
-                        setTint(Color.RED)
-                    }
+                smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
+                    colorFilter = ColorMatrixColorFilter(colorMatrix)
+                    setTintBlendMode(BlendMode.COLOR_BURN)
+                    setTint(Color.RED)
+                }.toBitmap().toIcon()
+                smallImageComplicationData!!.smallImage.image.apply {
+                    //colorFilter = ColorMatrixColorFilter(colorMatrix)
+                    setTintBlendMode(BlendMode.COLOR_BURN)
+                    setTint(Color.RED)
                 }
 
-                /*smallImageComplicationData!!.smallImage.ambientImage!!.apply {
-                    setTintBlendMode(BlendMode.COLOR_BURN)
-                    setTint(Color.RED)
+                if (smallImageComplicationData!!.smallImage.ambientImage != null) {
+                    smallImageComplicationData!!.smallImage.ambientImage!!.apply {
+                        //colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        setTintBlendMode(BlendMode.COLOR_BURN)
+                        setTint(Color.RED)
+                    }
+                    smallImageComplicationData!!.smallImage.ambientImage!!.loadDrawable(context)!!.apply {
+                            colorFilter = ColorMatrixColorFilter(colorMatrix)
+                            setTintBlendMode(BlendMode.COLOR_BURN)
+                            setTint(Color.RED)
+                        }.toBitmap().toIcon()
                 }
-                smallImageComplicationData!!.smallImage.ambientImage!!.loadDrawable(context)!!.apply {
-                    setTintBlendMode(BlendMode.COLOR_BURN)
-                    setTint(Color.RED)
-                } */
 
             } else {
                 Log.d(tag, "dataSourceSmallImage is type PHOTO, not coloring...")
