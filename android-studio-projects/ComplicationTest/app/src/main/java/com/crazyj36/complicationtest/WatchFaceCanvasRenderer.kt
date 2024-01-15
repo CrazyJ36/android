@@ -22,16 +22,12 @@ import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
-import androidx.wear.watchface.complications.ComplicationSlotBounds
 import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
 import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.complications.data.SmallImageType
-import androidx.wear.watchface.complications.data.toApiComplicationData
-import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
-import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
@@ -125,40 +121,24 @@ class WatchFaceCanvasRenderer(
         dataSourceLargeImage = null
         dataSourceDynamicValues = null
 
-        //getDataSourceInfo(zonedDateTime)
+        getDataSourceInfo(zonedDateTime)
         when (complicationWireData!!.type) {
             ComplicationData.Companion.TYPE_SHORT_TEXT -> {
                 Log.d(tag, "Loading custom ShortTextComplicationData")
-                //complication!!.renderer.loadData(setShortTextComplicationData(), false)
-                complication!!.render(canvas, zonedDateTime, renderParameters)
+                complication!!.renderer.loadData(setShortTextComplicationData(), false)
             }
 
             ComplicationData.Companion.TYPE_SMALL_IMAGE -> {
                 Log.d(tag, "Loading custom SmallImageComplicationData")
-                //complication!!.renderer.loadData(setSmallImageComplicationData(), false)
-
-                val wireComplicationData = complication!!.complicationData.value.asWireComplicationData()
-                wireComplicationData.smallImage!!.loadDrawable(context)!!.apply {
-                    colorFilter = ColorMatrixColorFilter(colorMatrix)
-                    setTintBlendMode(BlendMode.COLOR_BURN)
-                    setTint(Color.RED)
-                }
-                val complicationDrawable = ComplicationDrawable(context)
-                complicationDrawable.setComplicationData(wireComplicationData.toApiComplicationData(), false)
-                complicationDrawable.bounds = Rect(
-                    (canvas.width / 2) - (canvas.width / 8),
-                    (canvas.height / 2) - (canvas.height / 8),
-                    (canvas.width / 2) + (canvas.width / 8),
-                    (canvas.height / 2) + (canvas.height / 8)
-                )
-                complicationDrawable.draw(canvas)
+                complication!!.renderer.loadData(setSmallImageComplicationData(), false)
             }
+
             else -> {
                 Log.d(tag, "Unknown complication type, rendering default.")
             }
         }
 
-        //complication!!.render(canvas, zonedDateTime, renderParameters)
+        complication!!.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
             paint.setARGB(255, 255, 255, 255)
@@ -260,11 +240,12 @@ class WatchFaceCanvasRenderer(
             }
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
             if (complicationWireData!!.smallImage!!.type ==
-                ComplicationData.Companion.IMAGE_STYLE_ICON) {
+                ComplicationData.Companion.IMAGE_STYLE_ICON
+            ) {
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
 
                 smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
-                    colorFilter = ColorMatrixColorFilter(colorMatrix)
+                    //colorFilter = ColorMatrixColorFilter(colorMatrix)
                     setTintBlendMode(BlendMode.COLOR_BURN)
                     setTint(Color.RED)
                 }
@@ -284,7 +265,7 @@ class WatchFaceCanvasRenderer(
                 PlainComplicationText.Builder("No data.").build()
             ).build().apply {
                 smallImage.image.loadDrawable(context)!!.apply {
-                    colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
+                    //colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
                     setTintBlendMode(BlendMode.COLOR_BURN)
                     setTint(Color.RED)
                 }
