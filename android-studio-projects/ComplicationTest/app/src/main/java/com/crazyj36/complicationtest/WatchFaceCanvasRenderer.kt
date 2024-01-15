@@ -120,12 +120,21 @@ class WatchFaceCanvasRenderer(
         dataSourceLargeImage = null
         dataSourceDynamicValues = null
 
+        val bounds = Rect(
+            (canvas.width / 2) - (canvas.width / 7),
+            (canvas.height / 2) - (canvas.height / 7),
+            (canvas.width / 2) + (canvas.width / 7),
+            (canvas.height / 2) + (canvas.height / 7)
+        )
         getDataSourceInfo(zonedDateTime)
         when (complication!!.complicationData.value.type) {
             ComplicationType.SHORT_TEXT -> {
                 Log.d(tag, "Loading custom ShortTextComplicationData")
                 complication!!.renderer.loadData(
                     setShortTextComplicationData(), false
+                )
+                complication!!.renderer.render(
+                    canvas, bounds, zonedDateTime, renderParameters, 0
                 )
             }
 
@@ -134,14 +143,17 @@ class WatchFaceCanvasRenderer(
                 complication!!.renderer.loadData(
                     setSmallImageComplicationData(), false
                 )
+                complication!!.renderer.render(
+                    canvas, bounds, zonedDateTime, renderParameters, 0
+                )
             }
 
             else -> {
                 Log.d(tag, "Unknown complication type, not customizing.")
+                complication!!.render(canvas, zonedDateTime, renderParameters)
             }
         }
 
-        complication!!.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
             paint.setARGB(255, 255, 255, 255)
