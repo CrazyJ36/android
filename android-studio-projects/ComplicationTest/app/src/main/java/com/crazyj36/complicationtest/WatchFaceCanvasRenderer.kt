@@ -125,39 +125,32 @@ class WatchFaceCanvasRenderer(
         dataSourceLargeImage = null
         dataSourceDynamicValues = null
 
-        getDataSourceInfo(zonedDateTime)
+        //getDataSourceInfo(zonedDateTime)
         when (complicationWireData!!.type) {
             ComplicationData.Companion.TYPE_SHORT_TEXT -> {
                 Log.d(tag, "Loading custom ShortTextComplicationData")
                 //complication!!.renderer.loadData(setShortTextComplicationData(), false)
+                complication!!.render(canvas, zonedDateTime, renderParameters)
             }
 
             ComplicationData.Companion.TYPE_SMALL_IMAGE -> {
                 Log.d(tag, "Loading custom SmallImageComplicationData")
                 //complication!!.renderer.loadData(setSmallImageComplicationData(), false)
 
-                val complicationDrawable = ComplicationDrawable(context)
-                complicationDrawable.apply {
-                    bounds =
-                        Rect(
-                            (canvas.width / 2) - (canvas.width / 7),
-                            (canvas.height / 2) - (canvas.height / 7),
-                            (canvas.width / 2) + (canvas.width / 7),
-                            (canvas.height / 2) + (canvas.height / 7)
-                        )
-                    activeStyle.apply {
-                        iconColor = Color.RED
-                        textColor = Color.WHITE
-                        titleColor = Color.WHITE
-                    }
-                }
-                complication!!.complicationData.value.asWireComplicationData().smallImage!!.loadDrawable(context)!!.apply {
+                val wireComplicationData = complication!!.complicationData.value.asWireComplicationData()
+                wireComplicationData.smallImage!!.loadDrawable(context)!!.apply {
                     colorFilter = ColorMatrixColorFilter(colorMatrix)
                     setTintBlendMode(BlendMode.COLOR_BURN)
                     setTint(Color.RED)
                 }
-                complicationDrawable.setComplicationData(
-                    complication!!.complicationData.value, false)
+                val complicationDrawable = ComplicationDrawable(context)
+                complicationDrawable.setComplicationData(wireComplicationData.toApiComplicationData(), false)
+                complicationDrawable.bounds = Rect(
+                    (canvas.width / 2) - (canvas.width / 8),
+                    (canvas.height / 2) - (canvas.height / 8),
+                    (canvas.width / 2) + (canvas.width / 8),
+                    (canvas.height / 2) + (canvas.height / 8)
+                )
                 complicationDrawable.draw(canvas)
             }
             else -> {
