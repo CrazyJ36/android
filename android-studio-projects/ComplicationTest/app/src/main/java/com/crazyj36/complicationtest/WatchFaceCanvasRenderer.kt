@@ -307,14 +307,27 @@ class WatchFaceCanvasRenderer(
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
-            smallImageComplicationData!!.smallImage.image.apply{
-                setTint(Color.RED)
-                setTintBlendMode(BlendMode.COLOR_BURN)
-                loadDrawable(context)!!.apply {
-                    colorFilter = ColorMatrixColorFilter(colorMatrix)
+            smallImageComplicationData!!.smallImage.apply{
+                image.apply{
                     setTint(Color.RED)
                     setTintBlendMode(BlendMode.COLOR_BURN)
-                }.toBitmap().toIcon()
+                    loadDrawable(context)!!.apply {
+                        colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        setTint(Color.RED)
+                        setTintBlendMode(BlendMode.COLOR_BURN)
+                    }.toBitmap().toIcon()
+                }
+                if (ambientImage != null) {
+                    ambientImage!!.apply {
+                        setTint(Color.RED)
+                        setTintBlendMode(BlendMode.COLOR_BURN)
+                        loadDrawable(context)!!.apply {
+                            colorFilter = ColorMatrixColorFilter(colorMatrix)
+                            setTint(Color.RED)
+                            setTintBlendMode(BlendMode.COLOR_BURN)
+                        }
+                    }
+                }
             }
         }
         return if (smallImageComplicationData != null) {
