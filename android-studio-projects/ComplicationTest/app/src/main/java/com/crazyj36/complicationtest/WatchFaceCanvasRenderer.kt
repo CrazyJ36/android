@@ -86,7 +86,7 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        //renderer(canvas, zonedDateTime, renderParameters)
+        renderer(canvas, zonedDateTime, renderParameters)
     }
 
     override fun render(
@@ -122,6 +122,8 @@ class WatchFaceCanvasRenderer(
         dataSourceLargeImage = null
         dataSourceDynamicValues = null
 
+        canvas.save()
+
         getDataSourceInfo(zonedDateTime)
 
         when (complication!!.complicationData.value.type) {
@@ -153,6 +155,7 @@ class WatchFaceCanvasRenderer(
                 paint
             )
         }
+        canvas.restore()
     }
 
     @SuppressLint("RestrictedApi")
