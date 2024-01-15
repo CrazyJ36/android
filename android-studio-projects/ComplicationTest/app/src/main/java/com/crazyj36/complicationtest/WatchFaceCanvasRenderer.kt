@@ -271,24 +271,32 @@ class WatchFaceCanvasRenderer(
                     colorFilter = ColorMatrixColorFilter(colorMatrix)
                     setTintBlendMode(BlendMode.COLOR_BURN)
                     setTint(Color.RED)
-                }.toBitmap().toIcon()
-                smallImageComplicationData!!.smallImage.image.apply {
-                    //colorFilter = ColorMatrixColorFilter(colorMatrix)
+                    invalidateSelf()
+                }.toBitmap().toIcon().apply {
                     setTintBlendMode(BlendMode.COLOR_BURN)
                     setTint(Color.RED)
                 }
+                /*smallImageComplicationData!!.smallImage.image.apply {
+                    //colorFilter = ColorMatrixColorFilter(colorMatrix)
+                    setTintBlendMode(BlendMode.COLOR_BURN)
+                    setTint(Color.RED)
+                }*/
 
                 if (smallImageComplicationData!!.smallImage.ambientImage != null) {
-                    smallImageComplicationData!!.smallImage.ambientImage!!.apply {
-                        //colorFilter = ColorMatrixColorFilter(colorMatrix)
+                    smallImageComplicationData!!.smallImage.ambientImage!!.loadDrawable(context)!!.apply {
+                        colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        setTintBlendMode(BlendMode.COLOR_BURN)
+                        setTint(Color.RED)
+                        invalidateSelf()
+                    }.toBitmap().toIcon().apply {
                         setTintBlendMode(BlendMode.COLOR_BURN)
                         setTint(Color.RED)
                     }
-                    smallImageComplicationData!!.smallImage.ambientImage!!.loadDrawable(context)!!.apply {
-                            colorFilter = ColorMatrixColorFilter(colorMatrix)
-                            setTintBlendMode(BlendMode.COLOR_BURN)
-                            setTint(Color.RED)
-                        }.toBitmap().toIcon()
+                    /*smallImageComplicationData!!.smallImage.ambientImage!!.apply {
+                        //colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        setTintBlendMode(BlendMode.COLOR_BURN)
+                        setTint(Color.RED)
+                    }*/
                 }
 
             } else {
