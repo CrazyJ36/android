@@ -12,6 +12,7 @@ import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.Icon
+import android.icu.util.LocaleData
 import android.support.wearable.complications.ComplicationData
 import android.util.Log
 import android.view.SurfaceHolder
@@ -231,25 +232,23 @@ class WatchFaceCanvasRenderer(
                 SmallImage.Builder(
                     dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON
                 ).build(),
-                PlainComplicationText.Builder("Content description not provided by DataSource.")
-                    .build()
+                PlainComplicationText.Builder(
+                    "Content description not provided by DataSource."
+                ).build()
             )
         } else if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting dataSourceSmallImage and dataSourceContentDescription.")
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                SmallImage.Builder(
-                    dataSourceSmallImage!!, SmallImageType.ICON
-                ).build(),
+                SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
                 PlainComplicationText.Builder(dataSourceContentDescription!!).build()
             )
         } else if (dataSourceSmallImage != null) {
             Log.d(tag, "Setting dataSourceSmallImage, no dataSourceContentDescription.")
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                SmallImage.Builder(
-                    dataSourceSmallImage!!, SmallImageType.ICON
-                ).build(),
-                PlainComplicationText.Builder("Content description not provided by DataSource")
-                    .build()
+                SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
+                PlainComplicationText.Builder(
+                    "Content description not provided by DataSource"
+                ).build()
             )
         }
         if (smallImageComplicationDataBuilder != null) {
@@ -278,71 +277,103 @@ class WatchFaceCanvasRenderer(
         }
     }
 
-    @SuppressLint("RestrictedApi") // applying attributes here works.
+    @SuppressLint("RestrictedApi") // applying attributes here works and renders in time.
     private fun getDataSourceInfo(zonedDateTime: ZonedDateTime) {
         if (complicationWireData!!.dataSource != null &&
-            complicationWireData!!.dataSource != complication!!.complicationData.value.dataSource
+            dataSourceDataSource != complication!!.complicationData.value.dataSource
         ) {
             Log.d(tag, "hasDataSource")
             dataSourceDataSource = complication!!.complicationData.value.dataSource
         }
-        if (complicationWireData!!.hasTapAction()) {
+
+        if (complicationWireData!!.hasTapAction() &&
+            dataSourceTapAction != complication!!.complicationData.value.tapAction) {
             Log.d(tag, "hasTapAction")
             dataSourceTapAction = complication!!.complicationData.value.tapAction
         }
-        if (complicationWireData!!.hasShortText()) {
+
+        if (complicationWireData!!.hasShortText() &&
+            dataSourceText != complicationWireData!!.shortText!!.getTextAt(
+                Resources.getSystem(),
+                LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
+            )) {
             Log.d(tag, "hasShortText")
             dataSourceText = complicationWireData!!.shortText!!.getTextAt(
                 Resources.getSystem(),
                 LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
             )
         }
-        if (complicationWireData!!.hasContentDescription()) {
+        if (complicationWireData!!.hasContentDescription() &&
+            dataSourceContentDescription != complicationWireData!!.contentDescription!!.getTextAt(
+                Resources.getSystem(),
+                LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
+            )) {
             Log.d(tag, "hasContentDescription")
             dataSourceContentDescription = complicationWireData!!.contentDescription!!.getTextAt(
                 Resources.getSystem(),
                 LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
             )
         }
-        if (complicationWireData!!.hasShortTitle()) {
+
+        if (complicationWireData!!.hasShortTitle() &&
+            dataSourceTitle != complicationWireData!!.shortTitle!!.getTextAt(
+                Resources.getSystem(),
+                LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
+            )) {
             Log.d(tag, "hasShortTitle")
             dataSourceTitle = complicationWireData!!.shortTitle!!.getTextAt(
                 Resources.getSystem(),
                 LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
             )
         }
-        if (complicationWireData!!.hasIcon()) {
+
+        if (complicationWireData!!.hasIcon() &&
+            dataSourceIcon != complicationWireData!!.icon) {
             Log.d(tag, "hasIcon")
             dataSourceIcon = complicationWireData!!.icon!!
         }
-        if (complicationWireData!!.hasSmallImage()) {
+
+        if (complicationWireData!!.hasSmallImage() &&
+            dataSourceSmallImage != complicationWireData!!.smallImage) {
             Log.d(tag, "hasSmallImage")
             dataSourceSmallImage = complicationWireData!!.smallImage!!
             if (dataSourceSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
+                Log.d(tag, "dataSourceSmallImage is ComplicationType.IMAGE_STYLE_ICON")
                 dataSourceSmallImage!!.apply {
                     loadDrawable(context)!!.apply {
                         colorFilter = ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
                 }.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR_BURN)
+            } else if (dataSourceSmallImage!!.type == ComplicationData.IMAGE_STYLE_PHOTO){
+                Log.d(tag, "dataSourceSmallImage is ComplicationType.IMAGE_STYLE_PHOTO")
             }
         }
-        if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
+
+        if (complicationWireData!!.hasBurnInProtectionSmallImage() &&
+            dataSourceBurnInProtectionSmallImage != complicationWireData!!.burnInProtectionSmallImage) {
             Log.d(tag, "hasBurnInProtectionSmallImage")
             dataSourceBurnInProtectionSmallImage =
                 complicationWireData!!.burnInProtectionSmallImage!!
             if (dataSourceBurnInProtectionSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
+                Log.d(tag, "dataSourceSmallImage is ComplicationType.IMAGE_STYLE_ICON")
                 dataSourceBurnInProtectionSmallImage!!.apply {
                     loadDrawable(context)!!.apply {
                         colorFilter = ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
                 }.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR_BURN)
+            } else if (dataSourceBurnInProtectionSmallImage!!.type == ComplicationData.IMAGE_STYLE_PHOTO){
+                Log.d(tag, "dataSourceSmallImage is ComplicationType.IMAGE_STYLE_PHOTO")
             }
         }
-        if (complicationWireData!!.hasLargeImage()) {
+
+        if (complicationWireData!!.hasLargeImage() &&
+            dataSourceLargeImage != complicationWireData!!.largeImage) {
             Log.d(tag, "hasLargeImage")
             dataSourceLargeImage = complicationWireData!!.largeImage
         }
-        if (complicationWireData!!.hasRangedDynamicValue()) {
+
+        if (complicationWireData!!.hasRangedDynamicValue() &&
+            dataSourceDynamicValues != complicationWireData!!.rangedDynamicValue) {
             Log.d(tag, "hasRangedDynamicValues")
             dataSourceDynamicValues = complicationWireData!!.rangedDynamicValue
         }
