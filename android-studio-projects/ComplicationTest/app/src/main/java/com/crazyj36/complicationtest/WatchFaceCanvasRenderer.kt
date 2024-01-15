@@ -122,6 +122,7 @@ class WatchFaceCanvasRenderer(
         dataSourceTitle = null
         dataSourceIcon = null
         dataSourceSmallImage = null
+        dataSourceBurnInProtectionSmallImage = null
         dataSourceLargeImage = null
         dataSourceDynamicValues = null
 
@@ -213,7 +214,21 @@ class WatchFaceCanvasRenderer(
     @SuppressLint("RestrictedApi")
     private fun setSmallImageComplicationData(): SmallImageComplicationData {
         Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE.")
-        if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
+        if (dataSourceBurnInProtectionSmallImage != null && dataSourceContentDescription != null) {
+            smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
+                SmallImage.Builder(
+                    dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON,
+                ).build(),
+                PlainComplicationText.Builder(dataSourceContentDescription!!).build()
+            )
+        } else if (dataSourceBurnInProtectionSmallImage != null) {
+            smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
+                SmallImage.Builder(
+                    dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON,
+                ).build(),
+                PlainComplicationText.Builder("Content description not provided by DataSource").build()
+            )
+        } else if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting dataSourceSmallImage.")
             Log.d(tag, "Setting dataSourceContentDescription.")
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
@@ -231,14 +246,6 @@ class WatchFaceCanvasRenderer(
                 PlainComplicationText.Builder(
                     "Content description not provided by DataSource."
                 ).build()
-            )
-        }
-        if (dataSourceBurnInProtectionSmallImage != null) {
-            smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                SmallImage.Builder(
-                    dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON,
-                ).build(),
-                PlainComplicationText.Builder("test").build()
             )
         }
         if (smallImageComplicationDataBuilder != null) {
