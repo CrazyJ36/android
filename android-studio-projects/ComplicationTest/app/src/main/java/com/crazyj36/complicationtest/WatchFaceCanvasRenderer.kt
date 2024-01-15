@@ -137,9 +137,9 @@ class WatchFaceCanvasRenderer(
 
             ComplicationType.SMALL_IMAGE -> {
                 Log.d(tag, "Loading custom SmallImageComplicationData")
-                /*complication!!.renderer.loadData(
-                    setSmallImageComplicationData(), false
-                )*/
+                complication!!.renderer.loadData(
+                    setSmallImageComplicationData(), true
+                )
             }
 
             else -> {
