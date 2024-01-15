@@ -12,7 +12,6 @@ import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.Icon
-import android.icu.util.LocaleData
 import android.support.wearable.complications.ComplicationData
 import android.util.Log
 import android.view.SurfaceHolder
@@ -124,14 +123,14 @@ class WatchFaceCanvasRenderer(
         getDataSourceInfo(zonedDateTime)
         when (complication!!.complicationData.value.type) {
             ComplicationType.SHORT_TEXT -> {
-                Log.d(tag, "Complication is ComplicationType.SHORT_TEXT, loading custom ShortTextComplicationData")
+                Log.d(tag, "Loading custom ShortTextComplicationData")
                 complication!!.renderer.loadData(
                     setShortTextComplicationData(), false
                 )
             }
 
             ComplicationType.SMALL_IMAGE -> {
-                Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE, loading custom SmallImageComplicationData")
+                Log.d(tag, "Loading custom SmallImageComplicationData")
                 complication!!.renderer.loadData(
                     setSmallImageComplicationData(), false
                 )
@@ -159,6 +158,7 @@ class WatchFaceCanvasRenderer(
 
     @SuppressLint("RestrictedApi")
     private fun setShortTextComplicationData(): ShortTextComplicationData {
+        Log.d(tag, "Complication is ComplicationType.SHORT_TEXT.")
         if (dataSourceText != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting dataSourceText and dataSourceContentDescription.")
             shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
@@ -210,6 +210,7 @@ class WatchFaceCanvasRenderer(
 
     @SuppressLint("RestrictedApi")
     private fun setSmallImageComplicationData(): SmallImageComplicationData {
+        Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE.")
         if (dataSourceBurnInProtectionSmallImage != null && dataSourceContentDescription != null) {
             Log.d(
                 tag,
@@ -230,23 +231,25 @@ class WatchFaceCanvasRenderer(
                 SmallImage.Builder(
                     dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON
                 ).build(),
-                PlainComplicationText.Builder(
-                    "Content description not provided by DataSource."
-                ).build()
+                PlainComplicationText.Builder("Content description not provided by DataSource.")
+                    .build()
             )
         } else if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting dataSourceSmallImage and dataSourceContentDescription.")
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
+                SmallImage.Builder(
+                    dataSourceSmallImage!!, SmallImageType.ICON
+                ).build(),
                 PlainComplicationText.Builder(dataSourceContentDescription!!).build()
             )
         } else if (dataSourceSmallImage != null) {
             Log.d(tag, "Setting dataSourceSmallImage, no dataSourceContentDescription.")
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
-                SmallImage.Builder(dataSourceSmallImage!!, SmallImageType.ICON).build(),
-                PlainComplicationText.Builder(
-                    "Content description not provided by DataSource"
-                ).build()
+                SmallImage.Builder(
+                    dataSourceSmallImage!!, SmallImageType.ICON
+                ).build(),
+                PlainComplicationText.Builder("Content description not provided by DataSource")
+                    .build()
             )
         }
         if (smallImageComplicationDataBuilder != null) {
@@ -275,18 +278,18 @@ class WatchFaceCanvasRenderer(
         }
     }
 
-    @SuppressLint("RestrictedApi") // applying attributes here works and renders in time.
+    @SuppressLint("RestrictedApi") // applying attributes here works.
     private fun getDataSourceInfo(zonedDateTime: ZonedDateTime) {
-        if (complicationWireData!!.dataSource != null) {
+        if (complicationWireData!!.dataSource != null &&
+            complicationWireData!!.dataSource != complication!!.complicationData.value.dataSource
+        ) {
             Log.d(tag, "hasDataSource")
             dataSourceDataSource = complication!!.complicationData.value.dataSource
         }
-
         if (complicationWireData!!.hasTapAction()) {
             Log.d(tag, "hasTapAction")
             dataSourceTapAction = complication!!.complicationData.value.tapAction
         }
-
         if (complicationWireData!!.hasShortText()) {
             Log.d(tag, "hasShortText")
             dataSourceText = complicationWireData!!.shortText!!.getTextAt(
@@ -301,7 +304,6 @@ class WatchFaceCanvasRenderer(
                 LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
             )
         }
-
         if (complicationWireData!!.hasShortTitle()) {
             Log.d(tag, "hasShortTitle")
             dataSourceTitle = complicationWireData!!.shortTitle!!.getTextAt(
@@ -309,48 +311,37 @@ class WatchFaceCanvasRenderer(
                 LocalDateTime.now().atZone(zonedDateTime.zone).toInstant().toEpochMilli()
             )
         }
-
         if (complicationWireData!!.hasIcon()) {
             Log.d(tag, "hasIcon")
             dataSourceIcon = complicationWireData!!.icon!!
         }
-
         if (complicationWireData!!.hasSmallImage()) {
             Log.d(tag, "hasSmallImage")
             dataSourceSmallImage = complicationWireData!!.smallImage!!
             if (dataSourceSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
-                Log.d(tag, "dataSourceSmallImage is ComplicationType.IMAGE_STYLE_ICON")
                 dataSourceSmallImage!!.apply {
                     loadDrawable(context)!!.apply {
                         colorFilter = ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
                 }.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR_BURN)
-            } else if (dataSourceSmallImage!!.type == ComplicationData.IMAGE_STYLE_PHOTO){
-                Log.d(tag, "dataSourceSmallImage is ComplicationType.IMAGE_STYLE_PHOTO")
             }
         }
-
         if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
             Log.d(tag, "hasBurnInProtectionSmallImage")
             dataSourceBurnInProtectionSmallImage =
                 complicationWireData!!.burnInProtectionSmallImage!!
             if (dataSourceBurnInProtectionSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
-                Log.d(tag, "dataSourceSmallImage is ComplicationType.IMAGE_STYLE_ICON")
                 dataSourceBurnInProtectionSmallImage!!.apply {
                     loadDrawable(context)!!.apply {
                         colorFilter = ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
                 }.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR_BURN)
-            } else if (dataSourceBurnInProtectionSmallImage!!.type == ComplicationData.IMAGE_STYLE_PHOTO){
-                Log.d(tag, "dataSourceSmallImage is ComplicationType.IMAGE_STYLE_PHOTO")
             }
         }
-
         if (complicationWireData!!.hasLargeImage()) {
             Log.d(tag, "hasLargeImage")
             dataSourceLargeImage = complicationWireData!!.largeImage
         }
-
         if (complicationWireData!!.hasRangedDynamicValue()) {
             Log.d(tag, "hasRangedDynamicValues")
             dataSourceDynamicValues = complicationWireData!!.rangedDynamicValue
