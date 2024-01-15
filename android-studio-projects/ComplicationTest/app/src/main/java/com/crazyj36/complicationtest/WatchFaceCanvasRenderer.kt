@@ -229,7 +229,7 @@ class WatchFaceCanvasRenderer(
                                 colorFilter = ColorMatrixColorFilter(colorMatrix)
                                 setTint(Color.RED)
                                 setTintBlendMode(BlendMode.COLOR_BURN)
-                            }
+                            }.toBitmap().toIcon()
                         }
                     }, SmallImageType.ICON
                 ).build(),
@@ -249,7 +249,7 @@ class WatchFaceCanvasRenderer(
                                 colorFilter = ColorMatrixColorFilter(colorMatrix)
                                 setTint(Color.RED)
                                 setTintBlendMode(BlendMode.COLOR_BURN)
-                            }
+                            }.toBitmap().toIcon()
                         }
                     }, SmallImageType.ICON
                 ).build(),
@@ -270,7 +270,7 @@ class WatchFaceCanvasRenderer(
                                 colorFilter = ColorMatrixColorFilter(colorMatrix)
                                 setTint(Color.RED)
                                 setTintBlendMode(BlendMode.COLOR_BURN)
-                            }
+                            }.toBitmap().toIcon()
                         }
                     }, SmallImageType.ICON
                 ).build(),
@@ -290,7 +290,7 @@ class WatchFaceCanvasRenderer(
                                 colorFilter = ColorMatrixColorFilter(colorMatrix)
                                 setTint(Color.RED)
                                 setTintBlendMode(BlendMode.COLOR_BURN)
-                            }
+                            }.toBitmap().toIcon()
                         }
                     }, SmallImageType.ICON
                 ).build(),
@@ -314,7 +314,7 @@ class WatchFaceCanvasRenderer(
                     colorFilter = ColorMatrixColorFilter(colorMatrix)
                     setTint(Color.RED)
                     setTintBlendMode(BlendMode.COLOR_BURN)
-                }
+                }.toBitmap().toIcon()
             }
         }
         return if (smallImageComplicationData != null) {
