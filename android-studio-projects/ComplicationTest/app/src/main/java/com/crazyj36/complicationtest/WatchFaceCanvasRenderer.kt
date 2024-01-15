@@ -9,7 +9,6 @@ import android.graphics.BlendMode
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
-import android.graphics.DrawFilter
 import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.Icon
@@ -30,7 +29,6 @@ import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
 import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.complications.data.SmallImageType
-import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
@@ -215,6 +213,8 @@ class WatchFaceCanvasRenderer(
     private fun setSmallImageComplicationData(): SmallImageComplicationData {
         Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE.")
         if (dataSourceBurnInProtectionSmallImage != null && dataSourceContentDescription != null) {
+            Log.d(tag, "Setting dataSourceBurnInProtectionSmallImage.")
+            Log.d(tag, "Setting contentDescription.")
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                 SmallImage.Builder(
                     dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON,
@@ -222,11 +222,12 @@ class WatchFaceCanvasRenderer(
                 PlainComplicationText.Builder(dataSourceContentDescription!!).build()
             )
         } else if (dataSourceBurnInProtectionSmallImage != null) {
+            Log.d(tag, "Setting dataSourceBurnInProtectionSmallImage, no dataSourceContentDescription.")
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                 SmallImage.Builder(
                     dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON,
                 ).build(),
-                PlainComplicationText.Builder("Content description not provided by DataSource").build()
+                PlainComplicationText.Builder("Content description not provided by DataSource.").build()
             )
         } else if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting dataSourceSmallImage.")
@@ -263,27 +264,27 @@ class WatchFaceCanvasRenderer(
                 ComplicationData.Companion.IMAGE_STYLE_ICON
             ) {
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
-                Log.d(tag, "Icon type: " + smallImageComplicationData!!.smallImage.image.type)
-                smallImageComplicationData!!.smallImage.image.apply {
-                    setTintBlendMode(BlendMode.COLOR_BURN)
-                    setTint(Color.RED)
-                }
-                smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
-                    setTintBlendMode(BlendMode.COLOR_BURN)
-                    setTint(Color.RED)
-                }
-                if (smallImageComplicationData!!.smallImage.ambientImage != null) {
-                    smallImageComplicationData!!.smallImage.ambientImage!!.apply {
+                //Log.d(tag, "Icon type: " + smallImageComplicationData!!.smallImage.image.type)
+                if (smallImageComplicationData!!.smallImage.image.loadDrawable(context) != null) {
+                    smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
                         setTintBlendMode(BlendMode.COLOR_BURN)
                         setTint(Color.RED)
                     }
-                    smallImageComplicationData!!.smallImage.ambientImage!!.loadDrawable(context)!!
-                        .apply {
-                            setTintBlendMode(BlendMode.COLOR_BURN)
-                            setTint(Color.RED)
-                        }
+                } else {
+                    smallImageComplicationData!!.smallImage.image.apply {
+                        setTintBlendMode(BlendMode.COLOR_BURN)
+                        setTint(Color.RED)
+                    }
                 }
 
+                /*smallImageComplicationData!!.smallImage.ambientImage!!.apply {
+                    setTintBlendMode(BlendMode.COLOR_BURN)
+                    setTint(Color.RED)
+                }
+                smallImageComplicationData!!.smallImage.ambientImage!!.loadDrawable(context)!!.apply {
+                    setTintBlendMode(BlendMode.COLOR_BURN)
+                    setTint(Color.RED)
+                } */
 
             } else {
                 Log.d(tag, "dataSourceSmallImage is type PHOTO, not coloring...")
