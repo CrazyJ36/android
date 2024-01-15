@@ -385,7 +385,7 @@ class WatchFaceCanvasRenderer(
         }
         if (complicationWireData!!.hasIcon()) {
             Log.d(tag, "hasIcon")
-            dataSourceIcon = complicationWireData!!.icon!!.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR_BURN)
+            dataSourceIcon = complicationWireData!!.icon!!
         }
         if (complicationWireData!!.hasSmallImage()) {
             Log.d(tag, "hasSmallImage")

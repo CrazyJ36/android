@@ -43,12 +43,12 @@ class MyWatchFaceService : WatchFaceService() {
             activeStyle.apply {
                 textColor = Color.WHITE
                 titleColor = Color.WHITE
-                //iconColor = Color.RED
+                iconColor = Color.RED
             }
             ambientStyle.apply {
                 textColor = Color.WHITE
                 titleColor = Color.WHITE
-                //iconColor = Color.RED
+                iconColor = Color.RED
             }
         }
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
