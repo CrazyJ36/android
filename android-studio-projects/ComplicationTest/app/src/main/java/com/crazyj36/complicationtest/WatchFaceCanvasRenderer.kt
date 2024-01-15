@@ -220,7 +220,14 @@ class WatchFaceCanvasRenderer(
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                 SmallImage.Builder(
                     dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON,
-                ).build(),
+                ).build().apply {
+                    if (image.type == ComplicationData.IMAGE_STYLE_ICON) {
+                        image.apply {
+                            setTint(Color.RED)
+                            setTintBlendMode(BlendMode.COLOR_BURN)
+                        }
+                    }
+                },
                 PlainComplicationText.Builder(dataSourceContentDescription!!).build()
             )
         } else if (dataSourceBurnInProtectionSmallImage != null) {
@@ -228,7 +235,14 @@ class WatchFaceCanvasRenderer(
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                 SmallImage.Builder(
                     dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON,
-                ).build(),
+                ).build().apply {
+                    if (image.type == ComplicationData.IMAGE_STYLE_ICON) {
+                        image.apply {
+                            setTint(Color.RED)
+                            setTintBlendMode(BlendMode.COLOR_BURN)
+                        }
+                    }
+                },
                 PlainComplicationText.Builder("Content description not provided by DataSource.").build()
             )
         } else if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
@@ -236,19 +250,65 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "Setting dataSourceContentDescription.")
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                 SmallImage.Builder(
-                    dataSourceSmallImage!!, SmallImageType.ICON
-                ).build(),
+                    dataSourceSmallImage!!.apply {
+                        if (type == ComplicationData.IMAGE_STYLE_ICON) {
+                            apply {
+                                setTint(Color.RED)
+                                setTintBlendMode(BlendMode.COLOR_BURN)
+                            }
+                            loadDrawable(context)!!.apply {
+                                colorFilter = ColorMatrixColorFilter(colorMatrix)
+                                setTint(Color.RED)
+                                setTintBlendMode(BlendMode.COLOR_BURN)
+                            }.toBitmap().toIcon()
+                        }
+                    }, SmallImageType.ICON
+                ).build().apply {
+                    if (image.type == ComplicationData.IMAGE_STYLE_ICON) {
+                        image.apply {
+                            setTint(Color.RED)
+                            setTintBlendMode(BlendMode.COLOR_BURN)
+                        }
+                        image.loadDrawable(context)!!.apply {
+                            colorFilter = ColorMatrixColorFilter(colorMatrix)
+                            setTint(Color.RED)
+                            setTintBlendMode(BlendMode.COLOR_BURN)
+                        }.toBitmap().toIcon()
+                    }
+                },
                 PlainComplicationText.Builder(dataSourceContentDescription!!).build()
             )
         } else if (dataSourceSmallImage != null) {
             Log.d(tag, "Setting dataSourceSmallImage, no dataSourceContentDescription.")
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                 SmallImage.Builder(
-                    dataSourceSmallImage!!, SmallImageType.ICON
-                ).build(),
-                PlainComplicationText.Builder(
-                    "Content description not provided by DataSource."
-                ).build()
+                    dataSourceSmallImage!!.apply {
+                        if (type == ComplicationData.IMAGE_STYLE_ICON) {
+                            apply {
+                                setTint(Color.RED)
+                                setTintBlendMode(BlendMode.COLOR_BURN)
+                            }
+                            loadDrawable(context)!!.apply {
+                                colorFilter = ColorMatrixColorFilter(colorMatrix)
+                                setTint(Color.RED)
+                                setTintBlendMode(BlendMode.COLOR_BURN)
+                            }.toBitmap().toIcon()
+                        }
+                    }, SmallImageType.ICON
+                ).build().apply {
+                    if (image.type == ComplicationData.IMAGE_STYLE_ICON) {
+                        image.apply {
+                            setTint(Color.RED)
+                            setTintBlendMode(BlendMode.COLOR_BURN)
+                        }
+                        image.loadDrawable(context)!!.apply {
+                            colorFilter = ColorMatrixColorFilter(colorMatrix)
+                            setTint(Color.RED)
+                            setTintBlendMode(BlendMode.COLOR_BURN)
+                        }.toBitmap().toIcon()
+                    }
+                },
+                PlainComplicationText.Builder("Content description not provided by DataSource").build()
             )
         }
         if (smallImageComplicationDataBuilder != null) {
@@ -262,40 +322,40 @@ class WatchFaceCanvasRenderer(
             }
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
 
-            if (smallImageComplicationData!!.smallImage.image.type ==
+            /*if (smallImageComplicationData!!.smallImage.image.type ==
                 ComplicationData.Companion.IMAGE_STYLE_ICON
             ) {
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
                 //Log.d(tag, "Icon type: " + smallImageComplicationData!!.smallImage.image.type)
                 smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.apply {
                     colorFilter = ColorMatrixColorFilter(colorMatrix)
-                    setTintBlendMode(BlendMode.COLOR_BURN)
+                    setTintBlendMode(BlendMode.COLOR)
                     setTint(Color.RED)
                     invalidateSelf()
                 }
                 smallImageComplicationData!!.smallImage.image.apply {
                     //colorFilter = ColorMatrixColorFilter(colorMatrix)
-                    setTintBlendMode(BlendMode.COLOR_BURN)
+                    setTintBlendMode(BlendMode.COLOR)
                     setTint(Color.RED)
                 }
 
                 if (smallImageComplicationData!!.smallImage.ambientImage != null) {
                     smallImageComplicationData!!.smallImage.ambientImage!!.loadDrawable(context)!!.apply {
                         colorFilter = ColorMatrixColorFilter(colorMatrix)
-                        setTintBlendMode(BlendMode.COLOR_BURN)
+                        setTintBlendMode(BlendMode.COLOR)
                         setTint(Color.RED)
                         invalidateSelf()
                     }
                     smallImageComplicationData!!.smallImage.ambientImage!!.apply {
                         //colorFilter = ColorMatrixColorFilter(colorMatrix)
-                        setTintBlendMode(BlendMode.COLOR_BURN)
+                        setTintBlendMode(BlendMode.COLOR)
                         setTint(Color.RED)
                     }
                 }
 
             } else {
                 Log.d(tag, "dataSourceSmallImage is type PHOTO, not coloring...")
-            }
+            }*/
         }
         return if (smallImageComplicationData != null) {
             Log.d(tag, "Custom smallImageComplicationData creation complete.")
@@ -310,9 +370,8 @@ class WatchFaceCanvasRenderer(
                 PlainComplicationText.Builder("No data.").build()
             ).build().apply {
                 smallImage.image.loadDrawable(context)!!.apply {
-                    Log.d(tag, "Loaded drawable for coloring")
                     colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
-                    setTintBlendMode(BlendMode.COLOR_BURN)
+                    setTintBlendMode(BlendMode.COLOR)
                     setTint(Color.RED)
                 }
             }
