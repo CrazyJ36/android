@@ -219,7 +219,7 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "Setting contentDescription.")
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                 SmallImage.Builder(
-                    dataSourceBurnInProtectionSmallImage!!.apply {
+                    dataSourceBurnInProtectionSmallImage!!/*.apply {
                         if (type == ComplicationData.IMAGE_STYLE_ICON) {
                             apply {
                                 setTint(Color.RED)
@@ -231,7 +231,7 @@ class WatchFaceCanvasRenderer(
                                 setTintBlendMode(BlendMode.COLOR_BURN)
                             }.toBitmap().toIcon()
                         }
-                    }, SmallImageType.ICON
+                    }*/, SmallImageType.ICON
                 ).build(),
                 PlainComplicationText.Builder(dataSourceContentDescription!!).build()
             )
@@ -239,7 +239,7 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "Setting dataSourceBurnInProtectionSmallImage, no dataSourceContentDescription.")
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                 SmallImage.Builder(
-                    dataSourceBurnInProtectionSmallImage!!.apply {
+                    dataSourceBurnInProtectionSmallImage!!/*.apply {
                         if (type == ComplicationData.IMAGE_STYLE_ICON) {
                             apply {
                                 setTint(Color.RED)
@@ -251,7 +251,7 @@ class WatchFaceCanvasRenderer(
                                 setTintBlendMode(BlendMode.COLOR_BURN)
                             }.toBitmap().toIcon()
                         }
-                    }, SmallImageType.ICON
+                    }*/, SmallImageType.ICON
                 ).build(),
                 PlainComplicationText.Builder("Content description not provided by DataSource.").build()
             )
@@ -260,7 +260,7 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "Setting dataSourceContentDescription.")
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                 SmallImage.Builder(
-                    dataSourceSmallImage!!.apply {
+                    dataSourceSmallImage!!/*.apply {
                         if (type == ComplicationData.IMAGE_STYLE_ICON) {
                             apply {
                                 setTint(Color.RED)
@@ -272,7 +272,7 @@ class WatchFaceCanvasRenderer(
                                 setTintBlendMode(BlendMode.COLOR_BURN)
                             }.toBitmap().toIcon()
                         }
-                    }, SmallImageType.ICON
+                    }*/, SmallImageType.ICON
                 ).build(),
                 PlainComplicationText.Builder(dataSourceContentDescription!!).build()
             )
@@ -280,7 +280,7 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "Setting dataSourceSmallImage, no dataSourceContentDescription.")
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                 SmallImage.Builder(
-                    dataSourceSmallImage!!.apply {
+                    dataSourceSmallImage!!/*.apply {
                         if (type == ComplicationData.IMAGE_STYLE_ICON) {
                             apply {
                                 setTint(Color.RED)
@@ -292,7 +292,7 @@ class WatchFaceCanvasRenderer(
                                 setTintBlendMode(BlendMode.COLOR_BURN)
                             }.toBitmap().toIcon()
                         }
-                    }, SmallImageType.ICON
+                    }*/, SmallImageType.ICON
                 ).build(),
                 PlainComplicationText.Builder("Content description not provided by DataSource").build()
             )
@@ -307,7 +307,7 @@ class WatchFaceCanvasRenderer(
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
-            smallImageComplicationData!!.smallImage.apply{
+            /*smallImageComplicationData!!.smallImage.apply{
                 image.apply{
                     setTint(Color.RED)
                     setTintBlendMode(BlendMode.COLOR_BURN)
@@ -328,7 +328,7 @@ class WatchFaceCanvasRenderer(
                         }
                     }
                 }
-            }
+            }*/
         }
         return if (smallImageComplicationData != null) {
             Log.d(tag, "Custom smallImageComplicationData creation complete.")
@@ -341,13 +341,13 @@ class WatchFaceCanvasRenderer(
                     SmallImageType.ICON
                 ).build(),
                 PlainComplicationText.Builder("No data.").build()
-            ).build().apply {
+            ).build()/*.apply {
                 smallImage.image.loadDrawable(context)!!.apply {
                     colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
                     setTintBlendMode(BlendMode.COLOR)
                     setTint(Color.RED)
                 }
-            }
+            }*/
         }
     }
 
@@ -384,15 +384,15 @@ class WatchFaceCanvasRenderer(
         }
         if (complicationWireData!!.hasIcon()) {
             Log.d(tag, "hasIcon")
-            dataSourceIcon = complicationWireData!!.icon
+            dataSourceIcon = complicationWireData!!.icon!!.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR_BURN)
         }
         if (complicationWireData!!.hasSmallImage()) {
             Log.d(tag, "hasSmallImage")
-            dataSourceSmallImage = complicationWireData!!.smallImage
+            dataSourceSmallImage = complicationWireData!!.smallImage!!.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR_BURN)
         }
         if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
             Log.d(tag, "hasBurnInProtectionSmallImage")
-            dataSourceBurnInProtectionSmallImage = complicationWireData!!.burnInProtectionSmallImage
+            dataSourceBurnInProtectionSmallImage = complicationWireData!!.burnInProtectionSmallImage!!.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR_BURN)
         }
         if (complicationWireData!!.hasLargeImage()) {
             Log.d(tag, "hasLargeImage")
