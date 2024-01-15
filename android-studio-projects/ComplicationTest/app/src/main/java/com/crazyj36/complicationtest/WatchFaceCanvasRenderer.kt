@@ -71,8 +71,8 @@ class WatchFaceCanvasRenderer(
     private val paint = Paint()
     private val colorMatrix = floatArrayOf(
         1f, 1f, 1f, 0f, 255f,
-        0.20f, 0.20f, 0.20f, 0f, 100f,
-        0.20f, 0.20f, 0.20f, 0f, 100f,
+        0.20f, 0.20f, 0.20f, 0f, 0f,
+        0.20f, 0.20f, 0.20f, 0f, 0f,
         0f, 0f, 0f, 1f, 0f
     )
     override fun renderHighlightLayer(
