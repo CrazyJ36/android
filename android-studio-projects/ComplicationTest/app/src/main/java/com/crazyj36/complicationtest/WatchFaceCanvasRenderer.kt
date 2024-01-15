@@ -86,7 +86,7 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        renderer(canvas, zonedDateTime, renderParameters)
+        //renderer(canvas, zonedDateTime, renderParameters)
     }
 
     override fun render(
@@ -136,7 +136,7 @@ class WatchFaceCanvasRenderer(
             }
 
             else -> {
-                Log.d(tag, "Unknown complication type, rendering default.")
+                Log.d(tag, "Unknown complication type, not customizing.")
             }
         }
 
