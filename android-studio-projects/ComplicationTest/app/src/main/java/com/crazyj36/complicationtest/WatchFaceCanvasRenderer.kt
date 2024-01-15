@@ -134,15 +134,13 @@ class WatchFaceCanvasRenderer(
         when (complication!!.complicationData.value.type) {
             ComplicationType.SHORT_TEXT -> {
                 Log.d(tag, "Loading custom ShortTextComplicationData")
-                complication!!.renderer.loadData(setShortTextComplicationData(), false)
-                complication!!.renderer.getData()
+                complication!!.renderer.loadData(setShortTextComplicationData(), true)
                 complication!!.renderer.render(canvas, centerBounds, zonedDateTime, renderParameters, 0)
             }
 
             ComplicationType.SMALL_IMAGE -> {
                 Log.d(tag, "Loading custom SmallImageComplicationData")
-                complication!!.renderer.loadData(setSmallImageComplicationData(), false)
-                complication!!.renderer.getData()
+                complication!!.renderer.loadData(setSmallImageComplicationData(), true)
                 complication!!.renderer.render(canvas, centerBounds, zonedDateTime, renderParameters, 0)
                 //complication!!.render(canvas, zonedDateTime, renderParameters)
 
@@ -261,7 +259,7 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
 
                 smallImageComplicationData!!.smallImage.image.loadDrawable(context)!!.run {
-                    //colorFilter = ColorMatrixColorFilter(colorMatrix)
+                    colorFilter = ColorMatrixColorFilter(colorMatrix)
                     setTintBlendMode(BlendMode.COLOR_BURN)
                     setTint(Color.RED)
                 }
@@ -283,7 +281,7 @@ class WatchFaceCanvasRenderer(
                 PlainComplicationText.Builder("No data.").build()
             ).build().apply {
                 smallImage.image.loadDrawable(context)!!.apply {
-                    //colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
+                    colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
                     setTintBlendMode(BlendMode.COLOR_BURN)
                     setTint(Color.RED)
                 }
