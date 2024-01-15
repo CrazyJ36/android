@@ -335,7 +335,7 @@ class WatchFaceCanvasRenderer(
                         colorMatrixRed.set(red)
                         colorMatrixWhite.set(white)
                         val colorMatrix = ColorMatrix()
-                        colorMatrix.setConcat(colorMatrixRed, colorMatrixWhite)
+                        colorMatrix.setConcat(colorMatrixWhite, colorMatrixRed)
                         colorFilter = ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
                 }.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR)
