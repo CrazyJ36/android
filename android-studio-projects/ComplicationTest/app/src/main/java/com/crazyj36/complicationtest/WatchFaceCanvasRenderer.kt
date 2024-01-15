@@ -67,13 +67,7 @@ class WatchFaceCanvasRenderer(
     private var dataSourceSmallImage: Icon? = null
     private var dataSourceBurnInProtectionSmallImage: Icon? = null
 
-    /*private val colorMatrix = floatArrayOf( // backup red
-        1f, 0f, 0f, 0f, 0f,
-        0f, 0f, 0f, 0f, 0f,
-        0f, 0f, 0f, 0f, 0f,
-        0f, 0f, 0f, 1f, 0f
-    )*/
-    private val colorMatrix = floatArrayOf( // cooler red
+    private val colorMatrix = floatArrayOf(
         -1f, 0f, 0f, 0f, 255f,
         0f, -1f, 0f, 0f, 50f,
         0f, 0f, -1f, 0f, 50f,
@@ -130,12 +124,16 @@ class WatchFaceCanvasRenderer(
         when (complication!!.complicationData.value.type) {
             ComplicationType.SHORT_TEXT -> {
                 Log.d(tag, "Loading custom ShortTextComplicationData")
-                complication!!.renderer.loadData(setShortTextComplicationData(), false)
+                complication!!.renderer.loadData(
+                    setShortTextComplicationData(), false
+                )
             }
 
             ComplicationType.SMALL_IMAGE -> {
                 Log.d(tag, "Loading custom SmallImageComplicationData")
-                complication!!.renderer.loadData(setSmallImageComplicationData(), false)
+                complication!!.renderer.loadData(
+                    setSmallImageComplicationData(), false
+                )
             }
 
             else -> {
@@ -162,8 +160,7 @@ class WatchFaceCanvasRenderer(
     private fun setShortTextComplicationData(): ShortTextComplicationData {
         Log.d(tag, "Complication is ComplicationType.SHORT_TEXT.")
         if (dataSourceText != null && dataSourceContentDescription != null) {
-            Log.d(tag, "Setting dataSourceText.")
-            Log.d(tag, "Setting dataSourceContentDescription.")
+            Log.d(tag, "Setting dataSourceText and dataSourceContentDescription.")
             shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
                 PlainComplicationText.Builder(dataSourceText!!).build(),
                 PlainComplicationText.Builder(dataSourceContentDescription!!).build()
@@ -215,64 +212,33 @@ class WatchFaceCanvasRenderer(
     private fun setSmallImageComplicationData(): SmallImageComplicationData {
         Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE.")
         if (dataSourceBurnInProtectionSmallImage != null && dataSourceContentDescription != null) {
-            Log.d(tag, "Setting dataSourceBurnInProtectionSmallImage.")
-            Log.d(tag, "Setting contentDescription.")
+            Log.d(
+                tag,
+                "Setting dataSourceBurnInProtectionSmallImage and dataSourceContentDescription."
+            )
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                 SmallImage.Builder(
-                    dataSourceBurnInProtectionSmallImage!!/*.apply {
-                        if (type == ComplicationData.IMAGE_STYLE_ICON) {
-                            apply {
-                                setTint(Color.RED)
-                                setTintBlendMode(BlendMode.COLOR_BURN)
-                            }
-                            loadDrawable(context)!!.apply {
-                                colorFilter = ColorMatrixColorFilter(colorMatrix)
-                                setTint(Color.RED)
-                                setTintBlendMode(BlendMode.COLOR_BURN)
-                            }.toBitmap().toIcon()
-                        }
-                    }*/, SmallImageType.ICON
+                    dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON
                 ).build(),
                 PlainComplicationText.Builder(dataSourceContentDescription!!).build()
             )
         } else if (dataSourceBurnInProtectionSmallImage != null) {
-            Log.d(tag, "Setting dataSourceBurnInProtectionSmallImage, no dataSourceContentDescription.")
+            Log.d(
+                tag,
+                "Setting dataSourceBurnInProtectionSmallImage, no dataSourceContentDescription."
+            )
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                 SmallImage.Builder(
-                    dataSourceBurnInProtectionSmallImage!!/*.apply {
-                        if (type == ComplicationData.IMAGE_STYLE_ICON) {
-                            apply {
-                                setTint(Color.RED)
-                                setTintBlendMode(BlendMode.COLOR_BURN)
-                            }
-                            loadDrawable(context)!!.apply {
-                                colorFilter = ColorMatrixColorFilter(colorMatrix)
-                                setTint(Color.RED)
-                                setTintBlendMode(BlendMode.COLOR_BURN)
-                            }.toBitmap().toIcon()
-                        }
-                    }*/, SmallImageType.ICON
+                    dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON
                 ).build(),
-                PlainComplicationText.Builder("Content description not provided by DataSource.").build()
+                PlainComplicationText.Builder("Content description not provided by DataSource.")
+                    .build()
             )
         } else if (dataSourceSmallImage != null && dataSourceContentDescription != null) {
-            Log.d(tag, "Setting dataSourceSmallImage.")
-            Log.d(tag, "Setting dataSourceContentDescription.")
+            Log.d(tag, "Setting dataSourceSmallImage and dataSourceContentDescription.")
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                 SmallImage.Builder(
-                    dataSourceSmallImage!!/*.apply {
-                        if (type == ComplicationData.IMAGE_STYLE_ICON) {
-                            apply {
-                                setTint(Color.RED)
-                                setTintBlendMode(BlendMode.COLOR_BURN)
-                            }
-                            loadDrawable(context)!!.apply {
-                                colorFilter = ColorMatrixColorFilter(colorMatrix)
-                                setTint(Color.RED)
-                                setTintBlendMode(BlendMode.COLOR_BURN)
-                            }.toBitmap().toIcon()
-                        }
-                    }*/, SmallImageType.ICON
+                    dataSourceSmallImage!!, SmallImageType.ICON
                 ).build(),
                 PlainComplicationText.Builder(dataSourceContentDescription!!).build()
             )
@@ -280,21 +246,10 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "Setting dataSourceSmallImage, no dataSourceContentDescription.")
             smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
                 SmallImage.Builder(
-                    dataSourceSmallImage!!/*.apply {
-                        if (type == ComplicationData.IMAGE_STYLE_ICON) {
-                            apply {
-                                setTint(Color.RED)
-                                setTintBlendMode(BlendMode.COLOR_BURN)
-                            }
-                            loadDrawable(context)!!.apply {
-                                colorFilter = ColorMatrixColorFilter(colorMatrix)
-                                setTint(Color.RED)
-                                setTintBlendMode(BlendMode.COLOR_BURN)
-                            }.toBitmap().toIcon()
-                        }
-                    }*/, SmallImageType.ICON
+                    dataSourceSmallImage!!, SmallImageType.ICON
                 ).build(),
-                PlainComplicationText.Builder("Content description not provided by DataSource").build()
+                PlainComplicationText.Builder("Content description not provided by DataSource")
+                    .build()
             )
         }
         if (smallImageComplicationDataBuilder != null) {
@@ -307,28 +262,6 @@ class WatchFaceCanvasRenderer(
                 smallImageComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
             }
             smallImageComplicationData = smallImageComplicationDataBuilder!!.build()
-            /*smallImageComplicationData!!.smallImage.apply{
-                image.apply{
-                    setTint(Color.RED)
-                    setTintBlendMode(BlendMode.COLOR_BURN)
-                    loadDrawable(context)!!.apply {
-                        colorFilter = ColorMatrixColorFilter(colorMatrix)
-                        setTint(Color.RED)
-                        setTintBlendMode(BlendMode.COLOR_BURN)
-                    }.toBitmap().toIcon()
-                }
-                if (ambientImage != null) {
-                    ambientImage!!.apply {
-                        setTint(Color.RED)
-                        setTintBlendMode(BlendMode.COLOR_BURN)
-                        loadDrawable(context)!!.apply {
-                            colorFilter = ColorMatrixColorFilter(colorMatrix)
-                            setTint(Color.RED)
-                            setTintBlendMode(BlendMode.COLOR_BURN)
-                        }
-                    }
-                }
-            }*/
         }
         return if (smallImageComplicationData != null) {
             Log.d(tag, "Custom smallImageComplicationData creation complete.")
@@ -341,20 +274,15 @@ class WatchFaceCanvasRenderer(
                     SmallImageType.ICON
                 ).build(),
                 PlainComplicationText.Builder("No data.").build()
-            ).build()/*.apply {
-                smallImage.image.loadDrawable(context)!!.apply {
-                    colorFilter = ColorMatrixColorFilter(colorMatrix) // must come first.
-                    setTintBlendMode(BlendMode.COLOR)
-                    setTint(Color.RED)
-                }
-            }*/
+            ).build()
         }
     }
 
     @SuppressLint("RestrictedApi")
     private fun getDataSourceInfo(zonedDateTime: ZonedDateTime) {
         if (complicationWireData!!.dataSource != null &&
-            complicationWireData!!.dataSource != complication!!.complicationData.value.dataSource) {
+            complicationWireData!!.dataSource != complication!!.complicationData.value.dataSource
+        ) {
             Log.d(tag, "hasDataSource")
             dataSourceDataSource = complication!!.complicationData.value.dataSource
         }
@@ -391,28 +319,23 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "hasSmallImage")
             dataSourceSmallImage = complicationWireData!!.smallImage!!
             if (dataSourceSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
-                dataSourceSmallImage!!
-                    .apply {
-                        loadDrawable(context)!!.apply {
-                            colorFilter = ColorMatrixColorFilter(colorMatrix)
-                        }.toBitmap().toIcon()
-                    }
-                    .setTint(Color.RED)
-                    .setTintBlendMode(BlendMode.COLOR_BURN)
+                dataSourceSmallImage!!.apply {
+                    loadDrawable(context)!!.apply {
+                        colorFilter = ColorMatrixColorFilter(colorMatrix)
+                    }.toBitmap().toIcon()
+                }.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR_BURN)
             }
         }
         if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
             Log.d(tag, "hasBurnInProtectionSmallImage")
-            dataSourceBurnInProtectionSmallImage = complicationWireData!!.burnInProtectionSmallImage!!
+            dataSourceBurnInProtectionSmallImage =
+                complicationWireData!!.burnInProtectionSmallImage!!
             if (dataSourceBurnInProtectionSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
-                dataSourceBurnInProtectionSmallImage!!
-                    .apply {
-                        loadDrawable(context)!!.apply {
-                            colorFilter = ColorMatrixColorFilter(colorMatrix)
-                        }.toBitmap().toIcon()
-                    }
-                    .setTint(Color.RED)
-                    .setTintBlendMode(BlendMode.COLOR_BURN)
+                dataSourceBurnInProtectionSmallImage!!.apply {
+                    loadDrawable(context)!!.apply {
+                        colorFilter = ColorMatrixColorFilter(colorMatrix)
+                    }.toBitmap().toIcon()
+                }.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR_BURN)
             }
         }
         if (complicationWireData!!.hasLargeImage()) {
