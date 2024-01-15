@@ -74,9 +74,9 @@ class WatchFaceCanvasRenderer(
         0f, 0f, 0f, 1f, 0f
     )*/
     private val colorMatrix = floatArrayOf(
-        1f, 0f, 0f, 0f, 200f,
-        0f, -1f, 0f, 0f, 200f,
-        0f, 0f, -1f, 0f, 200f,
+        -1f, 0f, 0f, 0f, 255f,
+        0f, -1f, 0f, 0f, 255f,
+        0f, 0f, -1f, 0f, 255f,
         0f, 0f, 0f, 1f, 0f
     )
     private var dataSourceLargeImage: Icon? = null
@@ -327,9 +327,9 @@ class WatchFaceCanvasRenderer(
             if (dataSourceSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
                 Log.d(tag, "ComplicationType is IMAGE_STYLE_ICON")
                 dataSourceSmallImage!!.apply {
-                    loadDrawable(context)!!/*.apply {
+                    loadDrawable(context)!!.apply {
                         colorFilter = ColorMatrixColorFilter(colorMatrix)
-                    }.toBitmap().toIcon()*/
+                    }.toBitmap().toIcon()
                 }.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR)
             }
         }
@@ -339,9 +339,9 @@ class WatchFaceCanvasRenderer(
                 complicationWireData!!.burnInProtectionSmallImage!!
             if (dataSourceBurnInProtectionSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
                 dataSourceBurnInProtectionSmallImage!!.apply {
-                    loadDrawable(context)!!/*.apply {
+                    loadDrawable(context)!!.apply {
                         colorFilter = ColorMatrixColorFilter(colorMatrix)
-                    }.toBitmap().toIcon()*/
+                    }.toBitmap().toIcon()
                 }.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR)
             }
         }
