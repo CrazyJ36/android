@@ -65,6 +65,7 @@ class WatchFaceCanvasRenderer(
     private var dataSourceTitle: CharSequence? = null
     private var dataSourceIcon: Icon? = null
     private var dataSourceSmallImage: Icon? = null
+    private var dataSourceBurnInProtectionSmallImage: Icon? = null
 
     /*private val colorMatrix = floatArrayOf( // backup red
         1f, 0f, 0f, 0f, 0f,
@@ -232,6 +233,14 @@ class WatchFaceCanvasRenderer(
                 ).build()
             )
         }
+        if (dataSourceBurnInProtectionSmallImage != null) {
+            smallImageComplicationDataBuilder = SmallImageComplicationData.Builder(
+                SmallImage.Builder(
+                    dataSourceBurnInProtectionSmallImage!!, SmallImageType.ICON,
+                ).build(),
+                PlainComplicationText.Builder("test").build()
+            )
+        }
         if (smallImageComplicationDataBuilder != null) {
             if (dataSourceDataSource != null) {
                 Log.d(tag, "Setting dataSourceDataSource.")
@@ -248,9 +257,7 @@ class WatchFaceCanvasRenderer(
             ) {
                 Log.d(tag, "dataSourceSmallImage is type ICON, coloring...")
                 Log.d(tag, "Icon type: " + smallImageComplicationData!!.smallImage.image.type)
-                
                 smallImageComplicationData!!.smallImage.image.apply {
-                    Log.d(tag, "Loaded icon for coloring")
                     setTintBlendMode(BlendMode.COLOR_BURN)
                     setTint(Color.RED)
                 }
@@ -258,15 +265,16 @@ class WatchFaceCanvasRenderer(
                     setTintBlendMode(BlendMode.COLOR_BURN)
                     setTint(Color.RED)
                 }
-                if (renderParameters.drawMode == DrawMode.AMBIENT) {
+                if (smallImageComplicationData!!.smallImage.ambientImage != null) {
                     smallImageComplicationData!!.smallImage.ambientImage!!.apply {
                         setTintBlendMode(BlendMode.COLOR_BURN)
                         setTint(Color.RED)
                     }
-                    smallImageComplicationData!!.smallImage.ambientImage!!.loadDrawable(context)!!.apply {
-                        setTintBlendMode(BlendMode.COLOR_BURN)
-                        setTint(Color.RED)
-                    }
+                    smallImageComplicationData!!.smallImage.ambientImage!!.loadDrawable(context)!!
+                        .apply {
+                            setTintBlendMode(BlendMode.COLOR_BURN)
+                            setTint(Color.RED)
+                        }
                 }
 
 
@@ -334,6 +342,10 @@ class WatchFaceCanvasRenderer(
         if (complicationWireData!!.hasSmallImage()) {
             Log.d(tag, "hasSmallImage")
             dataSourceSmallImage = complicationWireData!!.smallImage
+        }
+        if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
+            Log.d(tag, "hasBurnInProtectionSmallImage")
+            dataSourceBurnInProtectionSmallImage = complicationWireData!!.burnInProtectionSmallImage
         }
         if (complicationWireData!!.hasLargeImage()) {
             Log.d(tag, "hasLargeImage")
