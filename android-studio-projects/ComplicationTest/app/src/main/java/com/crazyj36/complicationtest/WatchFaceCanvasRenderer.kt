@@ -11,7 +11,11 @@ import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.graphics.Rect
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
+import android.graphics.drawable.Icon.OnDrawableLoadedListener
+import android.os.Handler
+import android.os.Looper
 import android.support.wearable.complications.ComplicationData
 import android.util.Log
 import android.view.SurfaceHolder
@@ -49,7 +53,7 @@ class WatchFaceCanvasRenderer(
     canvasType = canvasType,
     interactiveDrawModeUpdateDelayMillis = 1000L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
-) {
+), OnDrawableLoadedListener {
 
     private val tag = "COMPLICATION_TEST"
     private var complication: ComplicationSlot? = null
@@ -70,10 +74,10 @@ class WatchFaceCanvasRenderer(
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
     private val paint = Paint()
     private val colorMatrix = floatArrayOf(
-        1f, 0f, 0f, 0f, 0f,
-        1f, 1f, 0f, 0f, 0f,
-        1f, 0f, 1f, 0f, 0f,
-        -0.30f, 0f, 0f, 1f, 0f
+        1f, 1f, 1f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        0f, 0f, 0f, 0f, 0f,
+        -0.50f, 0f, 0f, 1f, 0f
     )
     override fun renderHighlightLayer(
         canvas: Canvas,
@@ -126,14 +130,21 @@ class WatchFaceCanvasRenderer(
                     setShortTextComplicationData(), false
                 )
             }
-
             ComplicationType.SMALL_IMAGE -> {
-                Log.d(tag, "Loading custom SmallImageComplicationData")
-                complication!!.renderer.loadData(
-                    setSmallImageComplicationData(), false
-                )
+                if (complicationWireData!!.hasSmallImage()) {
+                    Log.d(tag, "SmallImageStyle: " + complicationWireData!!.smallImageStyle)
+                    if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
+                        Log.d(tag, "smallImageType is IMAGE_STYLE_ICON")
+                        complicationWireData!!.smallImage!!.loadDrawableAsync(
+                            context,
+                            this,
+                            Handler(Looper.getMainLooper())
+                        )
+                    } else if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_PHOTO) {
+                        dataSourceSmallImage = complicationWireData!!.smallImage
+                    }
+                }
             }
-
             else -> {
                 Log.d(tag, "Unknown complication type, not customizing.")
             }
@@ -276,7 +287,8 @@ class WatchFaceCanvasRenderer(
         }
     }
 
-    @SuppressLint("RestrictedApi") // applying attributes here works.
+    @SuppressLint("RestrictedApi") // applying drawable attributes here works.
+    // smallImage setting is taken care of in renderer()
     private fun getDataSourceInfo(zonedDateTime: ZonedDateTime) {
         if (complicationWireData!!.dataSource != null &&
             complicationWireData!!.dataSource != complication!!.complicationData.value.dataSource
@@ -313,21 +325,7 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "hasIcon")
             dataSourceIcon = complicationWireData!!.icon!!
         }
-        if (complicationWireData!!.hasSmallImage()) {
-            Log.d(tag, "hasSmallImage")
-            dataSourceSmallImage = complicationWireData!!.smallImage!!
-            if (dataSourceSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
-                Log.d(tag, "ComplicationType is IMAGE_STYLE_ICON")
-                val mColorFilter = ColorMatrixColorFilter(colorMatrix)
-                val drawable = dataSourceSmallImage!!.loadDrawable(context)
-                drawable!!.colorFilter = mColorFilter
-                drawable.setTintBlendMode(BlendMode.MODULATE)
-                drawable.setTint(Color.RED)
-                dataSourceSmallImage = drawable.toBitmap().toIcon()
-                //dataSourceSmallImage!!.setTintBlendMode(BlendMode.MODULATE)
-                //dataSourceSmallImage!!.setTint(Color.RED)
-            }
-        }
+
         if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
             Log.d(tag, "hasBurnInProtectionSmallImage")
             dataSourceBurnInProtectionSmallImage =
@@ -349,6 +347,17 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "hasRangedDynamicValues")
             dataSourceDynamicValues = complicationWireData!!.rangedDynamicValue
         }
+    }
+
+    override fun onDrawableLoaded(d: Drawable?) {
+        val mColorFilter = ColorMatrixColorFilter(colorMatrix)
+        //d!!.colorFilter = mColorFilter
+        d!!.setTintBlendMode(BlendMode.MODULATE)
+        d.setTint(Color.RED)
+        dataSourceSmallImage = d.toBitmap().toIcon()
+        complication!!.renderer.loadData(
+            setSmallImageComplicationData(), false
+        )
     }
 
     class MySharedAssets : SharedAssets {
