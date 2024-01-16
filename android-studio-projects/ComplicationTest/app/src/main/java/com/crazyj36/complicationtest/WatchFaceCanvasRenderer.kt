@@ -72,7 +72,7 @@ class WatchFaceCanvasRenderer(
         1f, 0f, 0f, 0f, 100f, // remove red for later setTint()
         1f, 1f, 0f, 0f, 100f,
         1f, 0f, 1f, 0f, 100f,
-        0f, 0f, 0f, 1f, 0f
+        1f, 0f, 0f, 1f, 0f
     )
     override fun renderHighlightLayer(
         canvas: Canvas,
