@@ -6,6 +6,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
@@ -321,9 +322,9 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "ComplicationType is IMAGE_STYLE_ICON")
                 dataSourceSmallImage!!.apply {
                     loadDrawable(context)!!.apply {
-                        colorFilter = null //ColorMatrixColorFilter(colorMatrix)
+                        colorFilter = BlendModeColorFilter(Color.RED, BlendMode.COLOR) //ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
-                }.setTintMode(PorterDuff.Mode.DST_ATOP).setTint(Color.RED)//.setTintBlendMode(BlendMode.COLOR)
+                }//.setTintBlendMode(BlendMode.COLOR).setTint(Color.RED)
             }
         }
         if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
@@ -333,9 +334,9 @@ class WatchFaceCanvasRenderer(
             if (dataSourceBurnInProtectionSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
                 dataSourceBurnInProtectionSmallImage!!.apply {
                     loadDrawable(context)!!.apply {
-                        colorFilter = null //ColorMatrixColorFilter(colorMatrix)
+                        colorFilter = BlendModeColorFilter(Color.RED, BlendMode.COLOR)//ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
-                }.setTintMode(PorterDuff.Mode.DST_ATOP).setTint(Color.RED)//.setTintBlendMode(BlendMode.COLOR)
+                }//.setTintBlendMode(BlendMode.COLOR).setTint(Color.RED)
             }
         }
         if (complicationWireData!!.hasLargeImage()) {
