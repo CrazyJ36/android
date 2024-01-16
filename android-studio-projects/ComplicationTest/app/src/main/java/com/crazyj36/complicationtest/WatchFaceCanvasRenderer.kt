@@ -324,7 +324,7 @@ class WatchFaceCanvasRenderer(
                     loadDrawable(context)!!.apply {
                         colorFilter = ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
-                }.setTintBlendMode(BlendMode.MODULATE).setTint(Color.RED)
+                }.setTint(Color.RED).setTintBlendMode(BlendMode.MODULATE)
             }
         }
         if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
@@ -336,7 +336,7 @@ class WatchFaceCanvasRenderer(
                     loadDrawable(context)!!.apply {
                         colorFilter = ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
-                }.setTintBlendMode(BlendMode.MODULATE).setTint(Color.RED)
+                }.setTint(Color.RED).setTintBlendMode(BlendMode.MODULATE)
             }
         }
         if (complicationWireData!!.hasLargeImage()) {
