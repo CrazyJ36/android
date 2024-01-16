@@ -10,7 +10,6 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
-import android.graphics.PorterDuff
 import android.graphics.Rect
 import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
@@ -70,9 +69,9 @@ class WatchFaceCanvasRenderer(
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
     private val paint = Paint()
     private val colorMatrix = floatArrayOf(
-        -1f, 0f, 0f, 0f, 200f,
-        0f, 1f, 0f, 0f, 200f,
-        0f, 0f, 1f, 0f, 200f,
+        -1f, 0f, 0f, 0f, 0f,
+        0f, 1f, 0f, 0f, 0f,
+        0f, 0f, 1f, 0f, 0f,
         0f, 0f, 0f, 1f, 0f
     )
     override fun renderHighlightLayer(
