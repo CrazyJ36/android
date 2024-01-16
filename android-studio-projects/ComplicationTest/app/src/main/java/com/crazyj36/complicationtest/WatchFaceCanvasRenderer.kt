@@ -319,7 +319,7 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "dataSourceSMallImage.type: " + dataSourceSmallImage!!.type)  //IMAGE_STYLE_ICON constant is 2
 
             val colorMatrix = floatArrayOf(
-                1f, 0f, 0f, 0f, 100f,
+                1f, 1f, 1f, 0f, 100f,
                 0f, 0f, 0f, 0f, 0f,
                 0f, 0f, 0f, 0f, 0f,
                 0f, 0f, 0f, 1f, 0f
