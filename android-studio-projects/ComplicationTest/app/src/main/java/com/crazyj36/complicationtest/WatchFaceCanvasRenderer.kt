@@ -73,7 +73,7 @@ class WatchFaceCanvasRenderer(
         1f, 1f, -0.40f, 0f, 0f,
         1f, 0f, -0.40f, 0f, 0f,
         1f, 0f, -0.40f, 0f, 0f,
-        0f, 0f, 0f, 1f, 150f
+        0f, 0f, 0f, 1f, 0f
     )
     override fun renderHighlightLayer(
         canvas: Canvas,
