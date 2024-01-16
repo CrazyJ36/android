@@ -10,6 +10,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
+import android.graphics.PorterDuff
 import android.graphics.Rect
 import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
@@ -320,10 +321,9 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "ComplicationType is IMAGE_STYLE_ICON")
                 dataSourceSmallImage!!.apply {
                     loadDrawable(context)!!.apply {
-                        colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        //colorFilter = ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
-                }
-                dataSourceSmallImage!!.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR)
+                }.setTint(Color.RED).setTintMode(PorterDuff.Mode.SRC_IN)//.setTintBlendMode(BlendMode.COLOR)
             }
         }
         if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
@@ -333,10 +333,9 @@ class WatchFaceCanvasRenderer(
             if (dataSourceBurnInProtectionSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
                 dataSourceBurnInProtectionSmallImage!!.apply {
                     loadDrawable(context)!!.apply {
-                        colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        //colorFilter = ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
-                }
-                dataSourceBurnInProtectionSmallImage!!.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR)
+                }.setTint(Color.RED).setTintMode(PorterDuff.Mode.SRC_IN)//.setTintBlendMode(BlendMode.COLOR)
             }
         }
         if (complicationWireData!!.hasLargeImage()) {
