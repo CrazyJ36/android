@@ -321,9 +321,9 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "ComplicationType is IMAGE_STYLE_ICON")
                 dataSourceSmallImage!!.apply {
                     loadDrawable(context)!!.apply {
-                        //colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        colorFilter = null //ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
-                }.setTintMode(PorterDuff.Mode.DST).setTint(Color.RED)//.setTintBlendMode(BlendMode.COLOR)
+                }.setTintMode(PorterDuff.Mode.DST_ATOP).setTint(Color.RED)//.setTintBlendMode(BlendMode.COLOR)
             }
         }
         if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
@@ -333,9 +333,9 @@ class WatchFaceCanvasRenderer(
             if (dataSourceBurnInProtectionSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
                 dataSourceBurnInProtectionSmallImage!!.apply {
                     loadDrawable(context)!!.apply {
-                        //colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        colorFilter = null //ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
-                }.setTintMode(PorterDuff.Mode.DST).setTint(Color.RED)//.setTintBlendMode(BlendMode.COLOR)
+                }.setTintMode(PorterDuff.Mode.DST_ATOP).setTint(Color.RED)//.setTintBlendMode(BlendMode.COLOR)
             }
         }
         if (complicationWireData!!.hasLargeImage()) {
