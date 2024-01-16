@@ -329,7 +329,7 @@ class WatchFaceCanvasRenderer(
                 drawable!!.colorFilter = mColorFilter
                 val newIcon = Icon.createWithBitmap(drawable.toBitmap())
                 dataSourceSmallImage = newIcon
-                dataSourceSmallImage!!.setTintBlendMode(BlendMode.COLOR_BURN)
+                dataSourceSmallImage!!.setTintBlendMode(BlendMode.COLOR)
                 dataSourceSmallImage!!.setTint(Color.RED)
             }
         }
@@ -343,7 +343,7 @@ class WatchFaceCanvasRenderer(
                 drawable!!.colorFilter = mColorFilter
                 val newIcon = Icon.createWithBitmap(drawable.toBitmap())
                 dataSourceBurnInProtectionSmallImage = newIcon
-                dataSourceBurnInProtectionSmallImage!!.setTintBlendMode(BlendMode.COLOR_BURN)
+                dataSourceBurnInProtectionSmallImage!!.setTintBlendMode(BlendMode.COLOR)
                 dataSourceBurnInProtectionSmallImage!!.setTint(Color.RED)
             }
         }
