@@ -55,10 +55,9 @@ class WatchFaceCanvasRenderer(
 ), OnDrawableLoadedListener {
 
     private val tag = "COMPLICATION_TEST"
-    private var canvas: Canvas? = null
-    private var zonedDateTime: ZonedDateTime? = null
     private var complication: ComplicationSlot? = null
     private var complicationWireData: ComplicationData? = null
+    private var timeToRender: Boolean? = null
     private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
     private var shortTextComplicationData: ShortTextComplicationData? = null
     private var smallImageComplicationDataBuilder: SmallImageComplicationData.Builder? = null
@@ -104,8 +103,6 @@ class WatchFaceCanvasRenderer(
         canvas: Canvas,
         zonedDateTime: ZonedDateTime
     ) {
-        if (this.canvas == null) this.canvas = canvas
-        if (this.zonedDateTime == null) this.zonedDateTime = zonedDateTime
         complication = null
         complicationWireData = null
         complication = complicationSlotsManager.complicationSlots[0]
@@ -126,6 +123,7 @@ class WatchFaceCanvasRenderer(
         dataSourceDynamicValues = null
 
         getDataSourceInfo(zonedDateTime)
+
         when (complication!!.complicationData.value.type) {
             ComplicationType.SHORT_TEXT -> {
                 Log.d(tag, "Loading custom ShortTextComplicationData")
@@ -144,14 +142,18 @@ class WatchFaceCanvasRenderer(
                             this,
                             Handler(Looper.getMainLooper())
                         )
+                        if (timeToRender != null && timeToRender!!) complication!!.render(canvas, zonedDateTime, renderParameters)
+                        timeToRender = false
                     } else if (complicationWireData!!.smallImage!!.type == ComplicationData.IMAGE_STYLE_PHOTO) {
                         Log.d(tag, "smallImageType is IMAGE_STYLE_PHOTO.")
                         dataSourceSmallImage = complicationWireData!!.smallImage
                     }
+                    complication!!.render(canvas, zonedDateTime, renderParameters)
                 }
             }
             else -> {
                 Log.d(tag, "Unknown complication type, not customizing.")
+                complication!!.render(canvas, zonedDateTime, renderParameters)
             }
         }
 
@@ -294,9 +296,7 @@ class WatchFaceCanvasRenderer(
     @SuppressLint("RestrictedApi") // applying drawable attributes here works.
     // smallImage setting is taken care of in renderer()
     private fun getDataSourceInfo(zonedDateTime: ZonedDateTime) {
-        if (complicationWireData!!.dataSource != null &&
-            complicationWireData!!.dataSource != complication!!.complicationData.value.dataSource
-        ) {
+        if (complicationWireData!!.dataSource != null) {
             Log.d(tag, "hasDataSource")
             dataSourceDataSource = complication!!.complicationData.value.dataSource
         }
@@ -330,7 +330,7 @@ class WatchFaceCanvasRenderer(
             dataSourceIcon = complicationWireData!!.icon!!
         }
 
-        if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
+        /*if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
             Log.d(tag, "hasBurnInProtectionSmallImage")
             dataSourceBurnInProtectionSmallImage =
                 complicationWireData!!.burnInProtectionSmallImage!!
@@ -342,7 +342,7 @@ class WatchFaceCanvasRenderer(
                 dataSourceBurnInProtectionSmallImage!!.setTintBlendMode(BlendMode.MODULATE)
                 dataSourceBurnInProtectionSmallImage!!.setTint(Color.RED)
             }
-        }
+        }*/
         if (complicationWireData!!.hasLargeImage()) {
             Log.d(tag, "hasLargeImage")
             dataSourceLargeImage = complicationWireData!!.largeImage
@@ -354,15 +354,16 @@ class WatchFaceCanvasRenderer(
     }
 
     override fun onDrawableLoaded(d: Drawable?) {
+        Log.d(tag, "drawable loaded.")
         //val mColorFilter = ColorMatrixColorFilter(colorMatrix)
         //d!!.colorFilter = mColorFilter
         d!!.setTintBlendMode(BlendMode.MODULATE)
         d.setTint(Color.RED)
         dataSourceSmallImage = d.toBitmap().toIcon()
         complication!!.renderer.loadData(
-            setSmallImageComplicationData(), true
+            setSmallImageComplicationData(), false
         )
-        complication!!.render(this.canvas!!, this.zonedDateTime!!, renderParameters)
+        timeToRender = true
     }
 
     class MySharedAssets : SharedAssets {
