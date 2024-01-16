@@ -69,10 +69,10 @@ class WatchFaceCanvasRenderer(
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
     private val paint = Paint()
     private val colorMatrix = floatArrayOf(
-        1f, 0f, 0f, 0f, 130f, // remove red for later setTint()
+        0.50f, 0f, 0f, 0f, 100f, // remove red for later setTint()
         0f, 1f, 0f, 0f, 100f,
         0f, 0f, 1f, 0f, 100f,
-        -0.20f, 0f, 0f, 1f, 0f
+        0f, 0f, 0f, 1f, 0f
     )
     override fun renderHighlightLayer(
         canvas: Canvas,
@@ -329,7 +329,7 @@ class WatchFaceCanvasRenderer(
                 drawable!!.colorFilter = mColorFilter
                 val newIcon = Icon.createWithBitmap(drawable.toBitmap())
                 dataSourceSmallImage = newIcon
-                dataSourceSmallImage!!.setTintBlendMode(BlendMode.MODULATE)
+                dataSourceSmallImage!!.setTintBlendMode(BlendMode.COLOR_BURN)
                 dataSourceSmallImage!!.setTint(Color.RED)
             }
         }
@@ -343,7 +343,7 @@ class WatchFaceCanvasRenderer(
                 drawable!!.colorFilter = mColorFilter
                 val newIcon = Icon.createWithBitmap(drawable.toBitmap())
                 dataSourceBurnInProtectionSmallImage = newIcon
-                dataSourceBurnInProtectionSmallImage!!.setTintBlendMode(BlendMode.MODULATE)
+                dataSourceBurnInProtectionSmallImage!!.setTintBlendMode(BlendMode.COLOR_BURN)
                 dataSourceBurnInProtectionSmallImage!!.setTint(Color.RED)
             }
         }
