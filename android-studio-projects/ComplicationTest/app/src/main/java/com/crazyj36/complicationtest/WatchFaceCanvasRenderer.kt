@@ -360,6 +360,8 @@ class WatchFaceCanvasRenderer(
         d!!.setTintBlendMode(BlendMode.MODULATE)
         d.setTint(Color.RED)
         dataSourceSmallImage = d.toBitmap().toIcon()
+        dataSourceSmallImage!!.setTintBlendMode(BlendMode.MODULATE)
+        dataSourceSmallImage!!.setTint(Color.RED)
         complication!!.renderer.loadData(
             setSmallImageComplicationData(), false
         )
