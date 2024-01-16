@@ -6,6 +6,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
@@ -140,7 +141,7 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "Ambient")
             paint.setARGB(255, 255, 255, 255)
             paint.textAlign = Paint.Align.CENTER
-            paint.textSize = 14f
+            paint.textSize = 18f
             canvas.drawText(
                 "Ambient",
                 canvas.width / 2f,
@@ -314,10 +315,11 @@ class WatchFaceCanvasRenderer(
             dataSourceSmallImage = complicationWireData!!.smallImage!!
             Log.d(tag, "smallImageStyle: " + complicationWireData!!.smallImageStyle.toString())
             Log.d(tag, "dataSourceSMallImage.type: " + dataSourceSmallImage!!.type)  //IMAGE_STYLE_ICON constant is 2
+
             val colorMatrix = floatArrayOf(
-                1f, 0f, 0f, 0f, 100f,
-                0f, 0f, 0f, 0f, 0f,
-                0f, 0f, 0f, 0f, 0f,
+                1f, -1f, -1f, 0f, 255f,
+                -1f, 1f, 1f, 0f, 0f,
+                -1f, 1f, 1f, 0f, 0f,
                 0f, 0f, 0f, 1f, 0f
             )
 
@@ -329,7 +331,7 @@ class WatchFaceCanvasRenderer(
                 val newIcon = Icon.createWithBitmap(drawable.toBitmap())
                 dataSourceSmallImage = newIcon
                 newIcon.setTintBlendMode(BlendMode.MODULATE)
-                newIcon.setTint(Color.argb(0.70f, 1f, 0f, 0f))
+                newIcon.setTint(Color.argb(1f, 1f, 0f, 0f))
             }
         }
         if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
