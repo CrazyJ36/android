@@ -320,8 +320,7 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "ComplicationType is IMAGE_STYLE_ICON")
                 dataSourceSmallImage!!.apply {
                     loadDrawable(context)!!.apply {
-                        //clearColorFilter()
-                        //colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        colorFilter = ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
                 }.setTint(Color.RED).setTintBlendMode(BlendMode.MODULATE)
             }
@@ -333,8 +332,7 @@ class WatchFaceCanvasRenderer(
             if (dataSourceBurnInProtectionSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
                 dataSourceBurnInProtectionSmallImage!!.apply {
                     loadDrawable(context)!!.apply {
-                        //clearColorFilter()
-                        //colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        colorFilter = ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
                 }.setTint(Color.RED).setTintBlendMode(BlendMode.MODULATE)
             }
