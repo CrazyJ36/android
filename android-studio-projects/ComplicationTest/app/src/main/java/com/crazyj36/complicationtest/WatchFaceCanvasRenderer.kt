@@ -318,11 +318,17 @@ class WatchFaceCanvasRenderer(
             dataSourceSmallImage = complicationWireData!!.smallImage!!
             if (dataSourceSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
                 Log.d(tag, "ComplicationType is IMAGE_STYLE_ICON")
-                dataSourceSmallImage!!.apply {
+                val mColorFilter = ColorMatrixColorFilter(colorMatrix)
+                val drawable = dataSourceSmallImage!!.loadDrawable(context)
+                drawable!!.apply { colorFilter = mColorFilter }
+                dataSourceSmallImage = drawable.toBitmap().toIcon()
+                /*dataSourceSmallImage!!.apply {
                     loadDrawable(context)!!.apply {
-                        colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        colorFilter = mColorFilter
                     }.toBitmap().toIcon()
-                }.setTint(Color.RED).setTintBlendMode(BlendMode.MODULATE)
+                }*/
+                dataSourceSmallImage!!.setTint(Color.RED)
+                dataSourceSmallImage!!.setTintBlendMode(BlendMode.MODULATE)
             }
         }
         if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
@@ -330,11 +336,17 @@ class WatchFaceCanvasRenderer(
             dataSourceBurnInProtectionSmallImage =
                 complicationWireData!!.burnInProtectionSmallImage!!
             if (dataSourceBurnInProtectionSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
-                dataSourceBurnInProtectionSmallImage!!.apply {
+                val mColorFilter = ColorMatrixColorFilter(colorMatrix)
+                val drawable = dataSourceBurnInProtectionSmallImage!!.loadDrawable(context)
+                drawable!!.apply { colorFilter = mColorFilter }
+                dataSourceBurnInProtectionSmallImage = drawable.toBitmap().toIcon()
+                /*dataSourceBurnInProtectionSmallImage!!.apply {
                     loadDrawable(context)!!.apply {
-                        colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        colorFilter = mColorFilter
                     }.toBitmap().toIcon()
-                }.setTint(Color.RED).setTintBlendMode(BlendMode.MODULATE)
+                }*/
+                dataSourceBurnInProtectionSmallImage!!.setTint(Color.RED)
+                dataSourceBurnInProtectionSmallImage!!.setTintBlendMode(BlendMode.MODULATE)
             }
         }
         if (complicationWireData!!.hasLargeImage()) {
