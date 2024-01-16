@@ -70,9 +70,9 @@ class WatchFaceCanvasRenderer(
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
     private val paint = Paint()
     private val colorMatrix = floatArrayOf(
-        1f, 1f, 1f, 0f, 0f,
-        1f, 1f, 1f, 0f, 0f,
-        1f, 1f, 1f, 0f, 0f,
+        1f, 0f, 0f, 0f, 0f,
+        0f, 1f, 0f, 0f, 0f,
+        0f, 0f, 1f, 0f, 0f,
         0f, 0f, 0f, 1f, 0f
     )
     override fun renderHighlightLayer(
@@ -322,7 +322,8 @@ class WatchFaceCanvasRenderer(
                     loadDrawable(context)!!.apply {
                         colorFilter = ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
-                }.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR)
+                }
+                dataSourceSmallImage!!.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR)
             }
         }
         if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
@@ -334,7 +335,8 @@ class WatchFaceCanvasRenderer(
                     loadDrawable(context)!!.apply {
                         colorFilter = ColorMatrixColorFilter(colorMatrix)
                     }.toBitmap().toIcon()
-                }.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR)
+                }
+                dataSourceBurnInProtectionSmallImage!!.setTint(Color.RED).setTintBlendMode(BlendMode.COLOR)
             }
         }
         if (complicationWireData!!.hasLargeImage()) {
