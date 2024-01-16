@@ -312,29 +312,23 @@ class WatchFaceCanvasRenderer(
         if (complicationWireData!!.hasSmallImage()) {
             Log.d(tag, "hasSmallImage")
             dataSourceSmallImage = complicationWireData!!.smallImage!!
-
-
-
             Log.d(tag, "smallImageStyle: " + complicationWireData!!.smallImageStyle.toString())
             Log.d(tag, "dataSourceSMallImage.type: " + dataSourceSmallImage!!.type)  //IMAGE_STYLE_ICON constant is 2
-
             val colorMatrix = floatArrayOf(
-                1f, 1f, 1f, 0f, 100f,
-                0f, 0f, 0f, 0f, 0f,
-                0f, 0f, 0f, 0f, 0f,
-                0f, 0f, 0f, 1f, 0f
+                -1f, 1f, -0.45f, 0f, 255f,
+                0f, 0f, 0f, 0f, 20f,
+                0f, 0f, 0f, 0f, 20f,
+                0f, 0f, 0f, 0.70f, 0f
             )
 
             if (dataSourceSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
                 Log.d(tag, "ComplicationType is IMAGE_STYLE_ICON")
-                //val mColorFilter = PorterDuffColorFilter(Color.argb(1f, 1f, 1f, 1f), PorterDuff.Mode.MULTIPLY)
                 val mColorFilter = ColorMatrixColorFilter(colorMatrix)
                 val drawable = dataSourceSmallImage!!.loadDrawable(context)
                 drawable!!.colorFilter = mColorFilter
                 val newIcon = Icon.createWithBitmap(drawable.toBitmap())
                 dataSourceSmallImage = newIcon
-                //newIcon.setTintMode(PorterDuff.Mode.MULTIPLY)
-                //newIcon.setTint(Color.RED)
+                newIcon.setTint(Color.argb(0.70f, 1f, 0f, 0f))
             }
         }
         if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
