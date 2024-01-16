@@ -6,12 +6,10 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.BlendMode
-import android.graphics.BlendModeColorFilter
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
-import android.graphics.PorterDuff
 import android.graphics.Rect
 import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
@@ -75,7 +73,7 @@ class WatchFaceCanvasRenderer(
         1f, 0f, 0f, 0f, 0f,
         0f, 1f, 0f, 0f, 0f,
         0f, 0f, 1f, 0f, 0f,
-        0f, 0f, 0f, 1f, 0f
+        -1f, 1f, 1f, 1f, 0f
     )
     override fun renderHighlightLayer(
         canvas: Canvas,
