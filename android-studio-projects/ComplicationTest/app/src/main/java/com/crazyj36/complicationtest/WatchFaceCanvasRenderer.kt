@@ -69,10 +69,10 @@ class WatchFaceCanvasRenderer(
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
     private val paint = Paint()
     private val colorMatrix = floatArrayOf(
-        0.30f, 0f, 0f, 0f, 150f, // remove red for later setTint()
-        0f, 1f, 0f, 0f, 150f,
-        0f, 0f, 1f, 0f, 150f,
-        0f, 0f, 0f, 1f, 0f
+        1f, 0f, 0f, 0f, 150f, // remove red for later setTint()
+        1f, 1f, 0f, 0f, 150f,
+        1f, 0f, 1f, 0f, 150f,
+        -0.30f, 0f, 0f, 1f, 0f
     )
     override fun renderHighlightLayer(
         canvas: Canvas,
