@@ -69,12 +69,7 @@ class WatchFaceCanvasRenderer(
     private var dataSourceLargeImage: Icon? = null
     private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
     private val paint = Paint()
-    private val colorMatrix = floatArrayOf(
-        1f, 0f, 0f, 0f, 0f,
-        1f, 1f, 0f, 0f, 0f,
-        1f, 0f, 1f, 0f, 0f,
-        -0.30f, 0f, 0f, 1f, 0f
-    )
+
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
@@ -315,18 +310,24 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "hasSmallImage")
             dataSourceSmallImage = complicationWireData!!.smallImage!!
             if (dataSourceSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
+                val colorMatrix = floatArrayOf(
+                    1f, 0f, 0f, 0f, 0f,
+                    0f, 1f, 0f, 0f, -255f,
+                    0f, 0f, 1f, 0f, -255f,
+                    0f, 0f, 0f, 1f, 0f
+                )
                 Log.d(tag, "ComplicationType is IMAGE_STYLE_ICON")
-                //val mColorFilter = ColorMatrixColorFilter(colorMatrix)
+                val mColorFilter = ColorMatrixColorFilter(colorMatrix)
                 val drawable = dataSourceSmallImage!!.loadDrawable(context)
-                drawable!!.setTintBlendMode(BlendMode.MODULATE)
-                drawable.setTint(Color.argb(1f, 1f, 0f, 0f))
-                //drawable!!.colorFilter = mColorFilter
+                drawable!!.colorFilter = mColorFilter
+                //drawable!!.setTintBlendMode(BlendMode.MODULATE)
+                //drawable.setTint(Color.RED)
                 dataSourceSmallImage = drawable.toBitmap().toIcon()
-                dataSourceSmallImage!!.setTintBlendMode(BlendMode.MODULATE)
-                dataSourceSmallImage!!.setTint(Color.argb(1f, 1f,  0f, 0f))
+                //dataSourceSmallImage!!.setTintBlendMode(BlendMode.MODULATE)
+                //dataSourceSmallImage!!.setTint(Color.RED)
             }
         }
-        if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
+        /*if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
             Log.d(tag, "hasBurnInProtectionSmallImage")
             dataSourceBurnInProtectionSmallImage =
                 complicationWireData!!.burnInProtectionSmallImage!!
@@ -338,7 +339,7 @@ class WatchFaceCanvasRenderer(
                 dataSourceBurnInProtectionSmallImage!!.setTintBlendMode(BlendMode.MODULATE)
                 dataSourceBurnInProtectionSmallImage!!.setTint(Color.RED)
             }
-        }
+        }*/
         if (complicationWireData!!.hasLargeImage()) {
             Log.d(tag, "hasLargeImage")
             dataSourceLargeImage = complicationWireData!!.largeImage
