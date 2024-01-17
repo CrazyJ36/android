@@ -19,6 +19,7 @@ import android.util.Log
 import android.view.SurfaceHolder
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.drawable.toIcon
+import androidx.core.graphics.withClip
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
@@ -35,6 +36,21 @@ import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.complications.data.SmallImageType
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterIsInstance
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
 
@@ -55,7 +71,8 @@ class WatchFaceCanvasRenderer(
 ) {
 
     private val tag = "COMPLICATION_TEST"
-    private var complication: ComplicationSlot? = null
+
+    /*private var complication: ComplicationSlot? = null
     private var complicationWireData: ComplicationData? = null
     private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
     private var shortTextComplicationData: ShortTextComplicationData? = null
@@ -71,7 +88,7 @@ class WatchFaceCanvasRenderer(
     private var dataSourceSmallImage: Icon? = null
     private var dataSourceBurnInProtectionSmallImage: Icon? = null
     private var dataSourceLargeImage: Icon? = null
-    private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null
+    private var dataSourceDynamicValues: DynamicBuilders.DynamicFloat? = null*/
     private val paint = Paint()
 
     override fun renderHighlightLayer(
@@ -92,17 +109,17 @@ class WatchFaceCanvasRenderer(
         renderer(canvas, zonedDateTime, renderParameters)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @SuppressLint("RestrictedApi")
     private fun renderer(
         canvas: Canvas,
         zonedDateTime: ZonedDateTime,
         renderParameters: RenderParameters
     ) {
-        drawable = null
+        /*drawable = null
         complication = null
         complicationWireData = null
         complication = complicationSlotsManager.complicationSlots[0]
-        complicationWireData = complication!!.complicationData.value.asWireComplicationData()
         shortTextComplicationDataBuilder = null
         shortTextComplicationData = null
         smallImageComplicationDataBuilder = null
@@ -117,38 +134,58 @@ class WatchFaceCanvasRenderer(
         dataSourceBurnInProtectionSmallImage = null
         dataSourceLargeImage = null
         dataSourceDynamicValues = null
+        */
 
-        getDataSourceInfo(zonedDateTime)
-        when (complication!!.complicationData.value.type) {
-            ComplicationType.SHORT_TEXT -> {
-                Log.d(tag, "Loading custom ShortTextComplicationData")
-                complication!!.renderer.loadData(
-                    setShortTextComplicationData(), false
+        if (complicationSlotsManager.complicationSlots[0]!!.complicationData.value.type == ComplicationType.SMALL_IMAGE) {
+            val complicationWireData =
+                complicationSlotsManager.complicationSlots[0]!!.complicationData.value.asWireComplicationData()
+
+            /*val complicationData = complicationSlotsManager.complicationSlots[0]!!
+                .complicationData
+
+
+
+            val stateFlow = complicationData.stateIn(CoroutineScope(Dispatchers.Main),
+                    SharingStarted.Eagerly, null)
+
+            MainScope().launch {
+                Log.d(tag, "StateFLowFirst: " + stateFlow.first())
+            }*/
+
+
+
+
+            if (complicationWireData.hasSmallImage() &&
+                complicationWireData.smallImage!!.type == ComplicationData.IMAGE_STYLE_ICON
+            ) {
+                Log.d(tag, "SmallImageStyle: " + complicationWireData.smallImageStyle)
+                val colorMatrix = floatArrayOf(
+                    1f, 0f, 0f, 0f, 50f,
+                    1f, 0f, 0f, 0f, 50f,
+                    1f, 0f, 0f, 0f, 50f,
+                    0f, 0f, 0f, 1f, 0f
                 )
-                complication!!.render(canvas, zonedDateTime, renderParameters)
+                val drawable = complicationWireData.smallImage!!.loadDrawable(context)
+                drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
+                drawable.bounds =
+                    Rect( // same percentages as in MyWatchFaceService.
+                        (canvas.width * 0.35).toInt(),
+                        (canvas.height * 0.35).toInt(),
+                        (canvas.width * 0.65).toInt(),
+                        (canvas.height * 0.65).toInt()
+                    )
+                drawable.draw(canvas)
             }
-
-            ComplicationType.SMALL_IMAGE -> {
-                Log.d(tag, "Loading custom SmallImageComplicationData")
-                if (drawable != null) {
-                    drawable!!.bounds =
-                        Rect(
-                            (canvas.width / 2) - (canvas.width / 9),
-                            (canvas.height / 2) - (canvas.height / 9),
-                            (canvas.width / 2) + (canvas.width / 9),
-                            (canvas.height / 2) + (canvas.height / 9)
-                        )
-                    drawable!!.draw(canvas)
-                }
-            }
-
-            else -> {
-                Log.d(tag, "Unknown complication type, not customizing.")
-                complication!!.render(canvas, zonedDateTime, renderParameters)
-            }
+        } else {
+            complicationSlotsManager.complicationSlots[0]!!.render(
+                canvas,
+                zonedDateTime,
+                renderParameters
+            )
         }
+
+
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
-            Log.d(tag, "Ambient")
             paint.setARGB(255, 255, 255, 255)
             paint.textAlign = Paint.Align.CENTER
             paint.textSize = 14f
@@ -161,7 +198,7 @@ class WatchFaceCanvasRenderer(
         }
     }
 
-    @SuppressLint("RestrictedApi")
+    /*@SuppressLint("RestrictedApi")
     private fun setShortTextComplicationData(): ShortTextComplicationData {
         Log.d(tag, "Complication is ComplicationType.SHORT_TEXT.")
         if (dataSourceText != null && dataSourceContentDescription != null) {
@@ -211,9 +248,9 @@ class WatchFaceCanvasRenderer(
                 PlainComplicationText.Builder("No data.").build()
             ).build()
         }
-    }
+    }*/
 
-    @SuppressLint("RestrictedApi")
+    /*@SuppressLint("RestrictedApi")
     private fun setSmallImageComplicationData(): SmallImageComplicationData {
         Log.d(tag, "Complication is ComplicationType.SMALL_IMAGE.")
         if (dataSourceBurnInProtectionSmallImage != null && dataSourceContentDescription != null) {
@@ -281,9 +318,9 @@ class WatchFaceCanvasRenderer(
                 PlainComplicationText.Builder("No data.").build()
             ).build()
         }
-    }
+    }*/
 
-    @SuppressLint("RestrictedApi") // applying attributes here works.
+    /*@SuppressLint("RestrictedApi") // applying attributes here works.
     private fun getDataSourceInfo(zonedDateTime: ZonedDateTime) {
         if (complicationWireData!!.dataSource != null) {
             Log.d(tag, "hasDataSource")
@@ -355,7 +392,7 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "hasRangedDynamicValues")
             dataSourceDynamicValues = complicationWireData!!.rangedDynamicValue
         }
-    }
+    }*/
 
     class MySharedAssets : SharedAssets {
         override fun onDestroy() {
