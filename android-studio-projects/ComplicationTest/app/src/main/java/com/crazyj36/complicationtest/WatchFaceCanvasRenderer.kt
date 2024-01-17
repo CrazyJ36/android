@@ -11,6 +11,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
+import android.graphics.PorterDuff
 import android.graphics.Rect
 import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
@@ -325,7 +326,7 @@ class WatchFaceCanvasRenderer(
                 drawable.setTintBlendMode(BlendMode.MODULATE)
                 drawable.setTint(Color.RED)
                 val icon = drawable.toBitmap().toIcon()
-                icon.setTintBlendMode(BlendMode.LIGHTEN)
+                icon.setTintMode(PorterDuff.Mode.DST_ATOP)
                 icon.setTint(Color.RED)
                 dataSourceSmallImage = icon
             }
