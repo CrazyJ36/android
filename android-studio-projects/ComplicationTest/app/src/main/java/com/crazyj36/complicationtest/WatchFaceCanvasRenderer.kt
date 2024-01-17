@@ -74,7 +74,14 @@ class WatchFaceCanvasRenderer(
             complicationWireData!!.hasSmallImage()) {
 
             if (complicationWireData!!.smallImageStyle == ComplicationData.IMAGE_STYLE_ICON) {
+                colorMatrix = floatArrayOf(
+                    1f, 0f, 0f, 0f, 0f,
+                    1f, 0f, 0f, 0f, 0f,
+                    1f, 0f, 0f, 0f, 0f,
+                    0f, 0f, 0f, 1f, 0f
+                )
                 drawable = complicationWireData!!.smallImage!!.loadDrawable(context)
+                drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix!!)
                 drawable!!.setTintMode(PorterDuff.Mode.MULTIPLY)
                 drawable!!.setTint(Color.WHITE)
                 drawable!!.bounds =
