@@ -66,6 +66,7 @@ class WatchFaceCanvasRenderer(
     private var dataSourceText: CharSequence? = null
     private var dataSourceContentDescription: CharSequence? = null
     private var dataSourceTitle: CharSequence? = null
+    private var drawable: Drawable? = null
     private var dataSourceIcon: Icon? = null
     private var dataSourceSmallImage: Icon? = null
     private var dataSourceBurnInProtectionSmallImage: Icon? = null
@@ -97,6 +98,7 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         renderParameters: RenderParameters
     ) {
+        drawable = null
         complication = null
         complicationWireData = null
         complication = complicationSlotsManager.complicationSlots[0]
@@ -128,18 +130,16 @@ class WatchFaceCanvasRenderer(
 
             ComplicationType.SMALL_IMAGE -> {
                 Log.d(tag, "Loading custom SmallImageComplicationData")
-                val complicationDrawable = ComplicationDrawable(context)
-                complicationDrawable.setComplicationData(
-                    setSmallImageComplicationData(), false
-                )
-                complicationDrawable.bounds = Rect(
-                    (canvas.width / 2) - (canvas.width / 10),
-                    (canvas.height / 2) - (canvas.height / 10),
-                    (canvas.width / 2) + (canvas.width / 10),
-                    (canvas.height / 2) + (canvas.height / 10)
-                )
-                complicationDrawable.draw(canvas)
-                //dataSourceSmallImage!!.loadDrawable(context)!!.draw(canvas)
+                if (drawable != null) {
+                    drawable!!.bounds =
+                        Rect(
+                            (canvas.width / 2) - (canvas.width / 9),
+                            (canvas.height / 2) - (canvas.height / 9),
+                            (canvas.width / 2) + (canvas.width / 9),
+                            (canvas.height / 2) + (canvas.height / 9)
+                        )
+                    drawable!!.draw(canvas)
+                }
             }
 
             else -> {
@@ -147,8 +147,6 @@ class WatchFaceCanvasRenderer(
                 complication!!.render(canvas, zonedDateTime, renderParameters)
             }
         }
-
-        //complication!!.render(canvas, zonedDateTime, renderParameters)
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
             paint.setARGB(255, 255, 255, 255)
@@ -324,22 +322,16 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "hasSmallImage")
             dataSourceSmallImage = complicationWireData!!.smallImage!!
             if (dataSourceSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
+                Log.d(tag, "ComplicationType is IMAGE_STYLE_ICON")
+                Log.d(tag, "SmallImageStyle: " + complicationWireData!!.smallImageStyle)
                 val colorMatrix = floatArrayOf(
                     1f, 0f, 0f, 0f, 50f,
                     1f, 0f, 0f, 0f, 50f,
                     1f, 0f, 0f, 0f, 50f,
                     0f, 0f, 0f, 1f, 0f
                 )
-                Log.d(tag, "ComplicationType is IMAGE_STYLE_ICON")
-                Log.d(tag, "SmallImageStyle: " + complicationWireData!!.smallImageStyle)
-                val drawable = dataSourceSmallImage!!.loadDrawable(context)
+                drawable = complicationWireData!!.smallImage!!.loadDrawable(context)
                 drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
-                dataSourceSmallImage = Icon.createWithBitmap(drawable.toBitmap())
-
-                //val icon = drawable.toBitmap().toIcon()
-                //icon.setTint(Color.WHITE)
-                //icon.setTintMode(PorterDuff.Mode.MULTIPLY)
-                //dataSourceSmallImage = icon
             }
         }
         /*if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
