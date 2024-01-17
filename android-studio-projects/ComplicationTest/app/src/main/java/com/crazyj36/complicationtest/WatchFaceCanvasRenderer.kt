@@ -326,7 +326,7 @@ class WatchFaceCanvasRenderer(
                 val bitmap = drawable.toBitmap()
                 val icon = Icon.createWithBitmap(bitmap)
                 icon.setTintBlendMode(BlendMode.SRC_IN)
-                //icon.setTint(Color.argb(1f, 1f, 1f, 1f))
+                icon.setTint(Color.argb(1f, 1f, 1f, 1f))
                 dataSourceSmallImage = icon
             }
         }
