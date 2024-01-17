@@ -322,9 +322,9 @@ class WatchFaceCanvasRenderer(
                 val mColorFilter = ColorMatrixColorFilter(colorMatrix)
                 val drawable = dataSourceSmallImage!!.loadDrawable(context)
                 //drawable!!.clearColorFilter()
-                drawable!!.colorFilter = mColorFilter
-                //drawable!!.setTintBlendMode(BlendMode.MODULATE)
-                //drawable.setTint(Color.RED)
+                //drawable!!.colorFilter = mColorFilter
+                drawable!!.setTintBlendMode(BlendMode.MODULATE)
+                drawable.setTint(Color.RED)
                 val icon = drawable.toBitmap().toIcon()
                 icon.setTintBlendMode(BlendMode.SRC_IN)
                 icon.setTint(Color.RED)
