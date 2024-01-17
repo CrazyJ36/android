@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.BlendMode
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
@@ -320,11 +321,9 @@ class WatchFaceCanvasRenderer(
                 val drawable = dataSourceSmallImage!!.loadDrawable(context)
                 val mColorFilter = ColorMatrixColorFilter(colorMatrix)
                 drawable!!.colorFilter = mColorFilter
-                drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
-                drawable.setTint(Color.WHITE)
                 val bitmap = drawable.toBitmap()
                 val icon = Icon.createWithBitmap(bitmap)
-                icon.setTintMode(PorterDuff.Mode.MULTIPLY)
+                icon.setTintBlendMode(BlendMode.MODULATE)
                 icon.setTint(Color.WHITE)
                 dataSourceSmallImage = icon
             }
