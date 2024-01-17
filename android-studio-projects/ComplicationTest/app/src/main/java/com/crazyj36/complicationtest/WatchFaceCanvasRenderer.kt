@@ -325,9 +325,10 @@ class WatchFaceCanvasRenderer(
                 drawable.setTintBlendMode(BlendMode.MODULATE)
                 drawable.setTint(Color.RED)
                 val icon = drawable.toBitmap().toIcon()
-                icon.setTintBlendMode(BlendMode.LIGHTEN)
-                icon.setTint(Color.argb(255, 255, 0,0))
-                dataSourceSmallImage = icon
+                val croppedIcon = icon.setTintBlendMode(BlendMode.MODULATE)
+                croppedIcon.setTint(Color.WHITE)
+                val finalIcon = croppedIcon.setTint(Color.RED)
+                dataSourceSmallImage = finalIcon
             }
         }
         /*if (complicationWireData!!.hasBurnInProtectionSmallImage()) {
