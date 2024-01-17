@@ -131,6 +131,7 @@ class WatchFaceCanvasRenderer(
             ComplicationType.SMALL_IMAGE -> {
                 Log.d(tag, "Loading custom SmallImageComplicationData")
                 if (drawable != null) {
+                    val complicationDrawable
                     drawable!!.setBounds(
                         (canvas.width / 2) - (canvas.width / 10),
                         (canvas.height / 2) - (canvas.height / 10),
@@ -138,7 +139,7 @@ class WatchFaceCanvasRenderer(
                         (canvas.height / 2) + (canvas.height / 10)
                     )
                     drawable!!.draw(canvas)
-                    invalidate()
+                    //invalidate()
                 }
 
                 /*complication!!.renderer.loadData(
@@ -328,9 +329,9 @@ class WatchFaceCanvasRenderer(
             dataSourceSmallImage = complicationWireData!!.smallImage!!
             if (dataSourceSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
                 val colorMatrix = floatArrayOf(
-                    1f, 0f, 0f, 0f, 150f,
-                    1f, 0f, 0f, 0f, 150f,
-                    1f, 0f, 0f, 0f, 150f,
+                    1f, 0f, 0f, 0f, 50f,
+                    1f, 0f, 0f, 0f, 50f,
+                    1f, 0f, 0f, 0f, 50f,
                     0f, 0f, 0f, 1f, 0f
                 )
                 Log.d(tag, "ComplicationType is IMAGE_STYLE_ICON")
