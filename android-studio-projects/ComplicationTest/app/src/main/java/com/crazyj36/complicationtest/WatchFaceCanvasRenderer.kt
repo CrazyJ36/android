@@ -323,7 +323,7 @@ class WatchFaceCanvasRenderer(
                 drawable!!.colorFilter = mColorFilter
                 val bitmap = drawable.toBitmap()
                 val icon = Icon.createWithBitmap(bitmap)
-                icon.setTintBlendMode(BlendMode.MODULATE)
+                icon.setTintMode(PorterDuff.Mode.MULTIPLY)
                 icon.setTint(Color.WHITE)
                 dataSourceSmallImage = icon
             }
