@@ -5,8 +5,6 @@ import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.res.Resources
-import android.graphics.BlendMode
-import android.graphics.BlendModeColorFilter
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
@@ -18,7 +16,6 @@ import android.support.wearable.complications.ComplicationData
 import android.util.Log
 import android.view.SurfaceHolder
 import androidx.core.graphics.drawable.toBitmap
-import androidx.core.graphics.drawable.toIcon
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
@@ -326,7 +323,7 @@ class WatchFaceCanvasRenderer(
                 val bitmap = drawable.toBitmap()
                 val icon = Icon.createWithBitmap(bitmap)
                 icon.setTintMode(PorterDuff.Mode.MULTIPLY)
-                icon.setTint(Color.argb(1f, 1f, 1f, 1f))
+                icon.setTint(Color.WHITE)
                 dataSourceSmallImage = icon
             }
         }
