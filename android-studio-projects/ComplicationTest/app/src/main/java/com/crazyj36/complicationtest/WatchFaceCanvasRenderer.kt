@@ -327,8 +327,8 @@ class WatchFaceCanvasRenderer(
                 //drawable.setTint(Color.RED)
                 val icon = drawable!!.toBitmap().toIcon()
                 icon.setTintMode(PorterDuff.Mode.SRC_IN)
-                icon.setTintBlendMode(BlendMode.MULTIPLY) // BlendMode src_in with setTint(red) works for 'consumed'.
-                icon.setTint(Color.RED)
+                //icon.setTintBlendMode(BlendMode.SRC) // BlendMode src_in with setTint(red) works for 'consumed'.
+                icon.setTint(Color.argb(0.5f, 1f, 0f, 0f))
                 dataSourceSmallImage = icon
             }
         }
