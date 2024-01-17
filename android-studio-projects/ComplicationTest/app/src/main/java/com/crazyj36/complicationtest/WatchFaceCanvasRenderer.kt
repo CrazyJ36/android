@@ -125,18 +125,20 @@ class WatchFaceCanvasRenderer(
                 complication!!.renderer.loadData(
                     setShortTextComplicationData(), false
                 )
+                complication!!.render(canvas, zonedDateTime, renderParameters)
             }
 
             ComplicationType.SMALL_IMAGE -> {
                 Log.d(tag, "Loading custom SmallImageComplicationData")
                 if (drawable != null) {
                     drawable!!.setBounds(
-                        (canvas.width / 2) - (canvas.width / 8),
-                        (canvas.height / 2) - (canvas.height / 8),
-                        (canvas.width / 2) + (canvas.width / 8),
-                        (canvas.height / 2) + (canvas.height / 8)
+                        (canvas.width / 2) - (canvas.width / 10),
+                        (canvas.height / 2) - (canvas.height / 10),
+                        (canvas.width / 2) + (canvas.width / 10),
+                        (canvas.height / 2) + (canvas.height / 10)
                     )
                     drawable!!.draw(canvas)
+                    invalidate()
                 }
 
                 /*complication!!.renderer.loadData(
