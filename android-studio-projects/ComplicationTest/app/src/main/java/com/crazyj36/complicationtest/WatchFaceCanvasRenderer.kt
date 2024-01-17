@@ -328,9 +328,9 @@ class WatchFaceCanvasRenderer(
             dataSourceSmallImage = complicationWireData!!.smallImage!!
             if (dataSourceSmallImage!!.type == ComplicationData.IMAGE_STYLE_ICON) {
                 val colorMatrix = floatArrayOf(
-                    1f, 1f, 1f, 0f, 150f,
-                    1f, 1f, 1f, 0f, 150f,
-                    1f, 1f, 1f, 0f, 150f,
+                    1f, 0f, 0f, 0f, 150f,
+                    1f, 0f, 0f, 0f, 150f,
+                    1f, 0f, 0f, 0f, 150f,
                     0f, 0f, 0f, 1f, 0f
                 )
                 Log.d(tag, "ComplicationType is IMAGE_STYLE_ICON")
