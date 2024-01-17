@@ -17,6 +17,7 @@ import android.support.wearable.complications.ComplicationData
 import android.util.Log
 import android.view.SurfaceHolder
 import androidx.core.graphics.drawable.toBitmap
+import androidx.core.graphics.drawable.toIcon
 import androidx.wear.protolayout.expression.DynamicBuilders
 import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
@@ -320,10 +321,9 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "SmallImageStyle: " + complicationWireData!!.smallImageStyle)
                 val drawable = dataSourceSmallImage!!.loadDrawable(context)
                 drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
-                val bitmap = drawable.toBitmap()
-                val icon = Icon.createWithBitmap(bitmap)
-                icon.setTintMode(PorterDuff.Mode.MULTIPLY)
+                val icon = drawable.toBitmap().toIcon()
                 icon.setTint(Color.WHITE)
+                icon.setTintMode(PorterDuff.Mode.MULTIPLY)
                 dataSourceSmallImage = icon
             }
         }
