@@ -322,16 +322,13 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "SmallImageStyle: " + complicationWireData!!.smallImageStyle)
                 val mColorFilter = ColorMatrixColorFilter(colorMatrix)
                 val drawable = dataSourceSmallImage!!.loadDrawable(context)
-                //drawable!!.clearColorFilter()
                 //drawable!!.colorFilter = mColorFilter
-                //drawable!!.setTintBlendMode(BlendMode.MODULATE)
-                drawable!!.setTintMode(PorterDuff.Mode.SRC_IN)
-                drawable.setTint(Color.argb(0.5f, 1f, 0f, 0f))
+                drawable!!.setTintBlendMode(BlendMode.PLUS)
+                drawable.setTint(Color.RED)
                 val icon = drawable.toBitmap().toIcon()
-                //icon.setTintMode(PorterDuff.Mode.SRC_IN)
-                icon.setTintMode(PorterDuff.Mode.SRC_IN)
-                //icon.setTintBlendMode(BlendMode.MULTIPLY) // BlendMode src_in with setTint(red) works for 'consumed'.
-                icon.setTint(Color.argb(0.5f, 1f, 0f, 0f))
+                // BlendMode src_in with setTint(red) brightens 'consumed', washes out assistant.
+                icon.setTintBlendMode(BlendMode.PLUS)
+                icon.setTint(Color.RED)
                 dataSourceSmallImage = icon
             }
         }
