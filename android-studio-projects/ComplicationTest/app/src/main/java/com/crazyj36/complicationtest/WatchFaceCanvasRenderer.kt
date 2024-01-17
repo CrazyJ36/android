@@ -75,9 +75,9 @@ class WatchFaceCanvasRenderer(
 
             if (complicationWireData!!.smallImageStyle == ComplicationData.IMAGE_STYLE_ICON) {
                 colorMatrix = floatArrayOf(
-                    1f, 0f, 0f, 0f, 0f,
-                    1f, 0f, 0f, 0f, 0f,
-                    1f, 0f, 0f, 0f, 0f,
+                    1f, 1f, 1f, 0f, 50f,
+                    1f, 1f, 1f, 0f, 50f,
+                    1f, 1f, 1f, 0f, 50f,
                     0f, 0f, 0f, 1f, 0f
                 )
                 drawable = complicationWireData!!.smallImage!!.loadDrawable(context)
@@ -86,10 +86,10 @@ class WatchFaceCanvasRenderer(
                 drawable!!.setTint(Color.WHITE)
                 drawable!!.bounds =
                     Rect(
-                        (canvas.width * 0.35).toInt(),
-                        (canvas.height * 0.35).toInt(),
-                        (canvas.width * 0.65).toInt(),
-                        (canvas.height * 0.65).toInt()
+                        (canvas.width * 0.40).toInt(),
+                        (canvas.height * 0.40).toInt(),
+                        (canvas.width * 0.60).toInt(),
+                        (canvas.height * 0.60).toInt()
                     )
                 drawable!!.draw(canvas)
             } else if (complicationWireData!!.smallImageStyle == ComplicationData.IMAGE_STYLE_PHOTO) {
