@@ -319,13 +319,10 @@ class WatchFaceCanvasRenderer(
                 Log.d(tag, "ComplicationType is IMAGE_STYLE_ICON")
                 Log.d(tag, "SmallImageStyle: " + complicationWireData!!.smallImageStyle)
                 val drawable = dataSourceSmallImage!!.loadDrawable(context)
-                val mColorFilter = ColorMatrixColorFilter(colorMatrix)
-                drawable!!.colorFilter = mColorFilter
-                drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
-                drawable.setTint(Color.WHITE)
+                drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
                 val bitmap = drawable.toBitmap()
                 val icon = Icon.createWithBitmap(bitmap)
-                icon.setTintBlendMode(BlendMode.MODULATE)
+                icon.setTintMode(PorterDuff.Mode.MULTIPLY)
                 icon.setTint(Color.WHITE)
                 dataSourceSmallImage = icon
             }
