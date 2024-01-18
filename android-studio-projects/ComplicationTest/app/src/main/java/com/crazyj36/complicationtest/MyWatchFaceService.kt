@@ -2,6 +2,7 @@ package com.crazyj36.complicationtest
 
 import android.graphics.Color
 import android.graphics.RectF
+import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.CanvasType
@@ -14,15 +15,22 @@ import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.complications.ComplicationSlotBounds
 import androidx.wear.watchface.complications.DefaultComplicationDataSourcePolicy
 import androidx.wear.watchface.complications.SystemDataSources
+import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.toCollection
+import kotlinx.coroutines.launch
 
 class MyWatchFaceService : WatchFaceService() {
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
+        val tag = "COMPLICATION_TEST"
         val complicationId = 0
         val supportedTypes = listOf(
             ComplicationType.NOT_CONFIGURED,
@@ -63,6 +71,7 @@ class MyWatchFaceService : WatchFaceService() {
             defaultDataSourcePolicy = defaultDataSourcePolicy,
             bounds = bounds
         )
+
         return ComplicationSlotsManager(
             listOf(
                 complicationSlotBuilder.build()
