@@ -1,6 +1,5 @@
 package com.crazyj36.complicationtest
 
-import android.animation.StateListAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
@@ -11,47 +10,13 @@ import android.graphics.PorterDuff
 import android.graphics.Rect
 import android.util.Log
 import android.view.SurfaceHolder
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.fragment.app.Fragment
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
-import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
-import androidx.wear.watchface.complications.data.SmallImage
-import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.style.CurrentUserStyleRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.FlowCollector
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.forEach
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapLatest
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.take
-import kotlinx.coroutines.flow.toCollection
-import kotlinx.coroutines.flow.toList
-import kotlinx.coroutines.flow.toSet
-import kotlinx.coroutines.job
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import java.time.ZonedDateTime
 
 class WatchFaceCanvasRenderer(
@@ -95,7 +60,6 @@ class WatchFaceCanvasRenderer(
         renderer(canvas, zonedDateTime, renderParameters)
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
     @SuppressLint("RestrictedApi")
     private fun renderer(
         canvas: Canvas,
@@ -103,21 +67,10 @@ class WatchFaceCanvasRenderer(
         renderParameters: RenderParameters
     ) {
         val complication = complicationSlotsManager.complicationSlots[0]
-        val complicationWireData = complication!!.complicationData.value.asWireComplicationData()
-        //Log.d(tag, complication!!.complicationData.value.toString())
+        val complicationData = complication!!.complicationData
+        val complicationWireData = complicationData.value.asWireComplicationData()
 
-
-        GlobalScope.launch {
-            Log.d(tag, "globalScope running")
-            val collection: MutableCollection<ComplicationData> = mutableListOf()
-            complicationSlotsManager.complicationSlots[0]!!.complicationData.toCollection(collection)
-            collection.forEach {
-                Log.d(tag, "NUANCE: $it")
-            }
-        }
-
-
-
+        Log.d(tag, complication.complicationData.value.toString())
 
         if (complication.complicationData.value.type == ComplicationType.SMALL_IMAGE &&
             complicationWireData.hasSmallImage()) {
