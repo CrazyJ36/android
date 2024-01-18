@@ -15,6 +15,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.fragment.app.Fragment
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
@@ -26,6 +27,7 @@ import androidx.wear.watchface.complications.data.SmallImage
 import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
@@ -93,6 +95,7 @@ class WatchFaceCanvasRenderer(
         renderer(canvas, zonedDateTime, renderParameters)
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     @SuppressLint("RestrictedApi")
     private fun renderer(
         canvas: Canvas,
@@ -103,13 +106,17 @@ class WatchFaceCanvasRenderer(
         val complicationWireData = complication!!.complicationData.value.asWireComplicationData()
         //Log.d(tag, complication!!.complicationData.value.toString())
 
-        MainScope().launch {
+
+        GlobalScope.launch {
+            Log.d(tag, "globalScope running")
             val collection: MutableCollection<ComplicationData> = mutableListOf()
             complicationSlotsManager.complicationSlots[0]!!.complicationData.toCollection(collection)
             collection.forEach {
                 Log.d(tag, "NUANCE: $it")
             }
         }
+
+
 
 
         if (complication.complicationData.value.type == ComplicationType.SMALL_IMAGE &&
