@@ -78,17 +78,6 @@ class WatchFaceCanvasRenderer(
         if (complication.complicationData.value.type == ComplicationType.SMALL_IMAGE &&
             complicationWireData.hasSmallImage()) {
 
-
-            val smallImageComplicationDataClass: Class<out ComplicationData> = complicationData.value::class.java
-            val smallImageField = smallImageComplicationDataClass.getDeclaredField("smallImage")
-            smallImageField.isAccessible = true
-            val smallImageTypeField = smallImageField.type.declaredFields[2]
-            smallImageTypeField.isAccessible = true
-            val test = smallImageTypeField.get(SmallImage.PLACEHOLDER)
-            Log.d(tag, test!!.toString())
-
-
-
             if (complicationWireData.smallImageStyle == android.support.wearable.complications.ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 val drawable = complicationWireData.smallImage!!.loadDrawable(context)
                 drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
