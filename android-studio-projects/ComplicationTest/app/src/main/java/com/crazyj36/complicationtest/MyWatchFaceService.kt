@@ -63,7 +63,6 @@ class MyWatchFaceService : WatchFaceService() {
             defaultDataSourcePolicy = defaultDataSourcePolicy,
             bounds = bounds
         )
-
         return ComplicationSlotsManager(
             listOf(
                 complicationSlotBuilder.build()
