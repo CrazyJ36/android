@@ -37,7 +37,18 @@ class MyWatchFaceService : WatchFaceService() {
             SystemDataSources.DATA_SOURCE_STEP_COUNT,
             ComplicationType.SHORT_TEXT
         )
-        val complicationDrawable = ComplicationDrawable(this@MyWatchFaceService)
+        val complicationDrawable = ComplicationDrawable(this@MyWatchFaceService).apply {
+            activeStyle.apply {
+                textColor = Color.WHITE
+                titleColor = Color.WHITE
+                iconColor = Color.WHITE
+            }
+            ambientStyle.apply {
+                textColor = Color.WHITE
+                titleColor = Color.WHITE
+                iconColor = Color.WHITE
+            }
+        }
         val canvasComplicationFactory = CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
                 complicationDrawable,

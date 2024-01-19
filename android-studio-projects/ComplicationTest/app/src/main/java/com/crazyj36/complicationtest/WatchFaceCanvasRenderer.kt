@@ -11,11 +11,9 @@ import android.graphics.Rect
 import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
-import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.complications.data.ComplicationType
-import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.ZonedDateTime
 
@@ -48,66 +46,40 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        //renderer(canvas, zonedDateTime, renderParameters)
+
     }
 
+    @SuppressLint("RestrictedApi")
     override fun render(
         canvas: Canvas,
         bounds: Rect,
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        renderer(canvas, zonedDateTime, renderParameters)
-    }
-
-    @SuppressLint("RestrictedApi")
-    private fun renderer(
-        canvas: Canvas,
-        zonedDateTime: ZonedDateTime,
-        renderParameters: RenderParameters
-    ) {
         val complication = complicationSlotsManager.complicationSlots[0]
         val complicationData = complication!!.complicationData
         val complicationWireData = complicationData.value.asWireComplicationData()
-        val drawableBounds = Rect(
-            (canvas.width * 0.40).toInt(),
-            (canvas.height * 0.40).toInt(),
-            (canvas.width * 0.60).toInt(),
-            (canvas.height * 0.60).toInt()
-        )
-        fun normalDraw() {
-            val complicationDrawable =  ComplicationDrawable(context)
-            complicationDrawable.setComplicationData(complication.complicationData.value, false)
-            complicationDrawable.bounds = drawableBounds
-            complicationDrawable.apply {
-                activeStyle.apply {
-                    iconColor = Color.WHITE
-                    textColor = Color.WHITE
-                    titleColor = Color.WHITE
-                }
-                ambientStyle.apply {
-                    iconColor = Color.WHITE
-                    textColor = Color.WHITE
-                    titleColor = Color.WHITE
-                }
-            }
-            complicationDrawable.draw(canvas)
-        }
 
         if (complication.complicationData.value.type == ComplicationType.SMALL_IMAGE &&
             complicationWireData.hasSmallImage()) {
+
             if (complicationWireData.smallImageStyle == android.support.wearable.complications.ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 val drawable = complicationWireData.smallImage!!.loadDrawable(context)
                 drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
                 drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
                 drawable.setTint(Color.WHITE)
-                drawable.bounds = drawableBounds
+                drawable.bounds = Rect(
+                    (canvas.width * 0.40).toInt(),
+                    (canvas.height * 0.40).toInt(),
+                    (canvas.width * 0.60).toInt(),
+                    (canvas.height * 0.60).toInt()
+                )
                 drawable.draw(canvas)
             } else if (complicationWireData.smallImageStyle == android.support.wearable.complications.ComplicationData.IMAGE_STYLE_PHOTO) {
-                normalDraw()
+                complication.render(canvas, zonedDateTime, renderParameters)
             }
         } else {
-           normalDraw()
+            complication.render(canvas, zonedDateTime, renderParameters)
         }
 
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
