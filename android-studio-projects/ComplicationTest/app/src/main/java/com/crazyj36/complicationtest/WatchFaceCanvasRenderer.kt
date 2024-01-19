@@ -15,6 +15,7 @@ import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
+import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.ZonedDateTime
@@ -70,7 +71,29 @@ class WatchFaceCanvasRenderer(
         val complicationData = complication!!.complicationData
         val complicationWireData = complicationData.value.asWireComplicationData()
 
-        Log.d(tag, complication.complicationData.value.toString())
+        //Log.d(tag, complication.complicationData.value.toString())
+
+        val theClass: Class<out ComplicationData> = complication.complicationData.value::class.java
+        val fields = theClass.declaredFields
+        var count = 0
+        fields.forEach {
+            try {
+                it.isAccessible = true
+                val value = it.get(complicationData.value)
+                count += 1
+                Log.d(tag, "Field: " + count + " = " + value!!.toString())
+            } catch (illegalAccessException: IllegalAccessException) {
+                Log.d(tag, "Field $it is private.")
+            }
+        }
+
+        /*var count = 0
+        fields.forEach {
+            count += 1
+            Log.d(tag, "Field: " + count + " " + it.toGenericString())
+        }
+        //val icon: Icon = newComplicationData.getDeclaredField("smallImage")
+*/
 
         if (complication.complicationData.value.type == ComplicationType.SMALL_IMAGE &&
             complicationWireData.hasSmallImage()) {
