@@ -74,48 +74,21 @@ class WatchFaceCanvasRenderer(
         val complicationData = complication!!.complicationData
         val complicationWireData = complicationData.value.asWireComplicationData()
 
-        val smallImageComplicationDataClass: Class<out ComplicationData> = complicationData.value::class.java
-        val smallImageField = smallImageComplicationDataClass.getDeclaredField("smallImage")
-        smallImageField.isAccessible = true
-        val smallImageTypeField = smallImageField.type.declaredFields[2]
-        smallImageTypeField.isAccessible = true
-        val test = smallImageTypeField.get(SmallImage.PLACEHOLDER)
-        Log.d(tag, test!!.toString())
-
-
-
-        /*val smallImageTypeField = fieldsOfSmallImageField[2].type.declaredFields
-        var count = -1
-        smallImageTypeField.forEach {
-            it.isAccessible = true
-            count += 1
-            Log.d(tag, "smallImageTypeField: " + it.get(smallImageTypeField))
-        }*/
-
-
-        /*var count = -1
-        fieldsOfField.forEach {
-            count += 1
-            it.isAccessible = true
-            Log.d(tag, "Field $count is $it")
-        }*/
-
-
-        /*val fields = smallImageComplicationDataClass.declaredFields
-        var count = -1
-        fields.forEach {
-            try {
-                it.isAccessible = true
-                val value = it.get(complicationData.value)
-                count += 1
-                Log.d(tag, "Field: " + count + " = " + value!!.toString())
-            } catch (illegalAccessException: IllegalAccessException) {
-                Log.d(tag, "Field $it is private.")
-            }
-        }*/
 
         if (complication.complicationData.value.type == ComplicationType.SMALL_IMAGE &&
             complicationWireData.hasSmallImage()) {
+
+
+            val smallImageComplicationDataClass: Class<out ComplicationData> = complicationData.value::class.java
+            val smallImageField = smallImageComplicationDataClass.getDeclaredField("smallImage")
+            smallImageField.isAccessible = true
+            val smallImageTypeField = smallImageField.type.declaredFields[2]
+            smallImageTypeField.isAccessible = true
+            val test = smallImageTypeField.get(SmallImage.PLACEHOLDER)
+            Log.d(tag, test!!.toString())
+
+
+
             if (complicationWireData.smallImageStyle == android.support.wearable.complications.ComplicationData.Companion.IMAGE_STYLE_ICON) {
                 val drawable = complicationWireData.smallImage!!.loadDrawable(context)
                 drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
