@@ -48,7 +48,7 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        renderer(canvas, zonedDateTime, renderParameters)
+        //renderer(canvas, zonedDateTime, renderParameters)
     }
 
     override fun render(
@@ -69,28 +69,13 @@ class WatchFaceCanvasRenderer(
         val complication = complicationSlotsManager.complicationSlots[0]
         val complicationData = complication!!.complicationData
         val complicationWireData = complicationData.value.asWireComplicationData()
-
         val drawableBounds = Rect(
             (canvas.width * 0.40).toInt(),
             (canvas.height * 0.40).toInt(),
             (canvas.width * 0.60).toInt(),
             (canvas.height * 0.60).toInt()
         )
-
-        if (complication.complicationData.value.type == ComplicationType.SMALL_IMAGE &&
-            complicationWireData.hasSmallImage()) {
-
-            if (complicationWireData.smallImageStyle == android.support.wearable.complications.ComplicationData.Companion.IMAGE_STYLE_ICON) {
-                val drawable = complicationWireData.smallImage!!.loadDrawable(context)
-                //drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
-                //drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
-                //drawable.setTint(Color.WHITE)
-                drawable!!.bounds = drawableBounds
-                drawable.draw(canvas)
-            } else if (complicationWireData.smallImageStyle == android.support.wearable.complications.ComplicationData.IMAGE_STYLE_PHOTO) {
-                complication.render(canvas, zonedDateTime, renderParameters)
-            }
-        } else {
+        fun normalDraw() {
             val complicationDrawable =  ComplicationDrawable(context)
             complicationDrawable.setComplicationData(complication.complicationData.value, false)
             complicationDrawable.bounds = drawableBounds
@@ -107,7 +92,22 @@ class WatchFaceCanvasRenderer(
                 }
             }
             complicationDrawable.draw(canvas)
+        }
 
+        if (complication.complicationData.value.type == ComplicationType.SMALL_IMAGE &&
+            complicationWireData.hasSmallImage()) {
+            if (complicationWireData.smallImageStyle == android.support.wearable.complications.ComplicationData.Companion.IMAGE_STYLE_ICON) {
+                val drawable = complicationWireData.smallImage!!.loadDrawable(context)
+                drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
+                drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
+                drawable.setTint(Color.WHITE)
+                drawable.bounds = drawableBounds
+                drawable.draw(canvas)
+            } else if (complicationWireData.smallImageStyle == android.support.wearable.complications.ComplicationData.IMAGE_STYLE_PHOTO) {
+                normalDraw()
+            }
+        } else {
+           normalDraw()
         }
 
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
