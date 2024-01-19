@@ -17,6 +17,9 @@ import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
+import androidx.wear.watchface.complications.data.SmallImage
+import androidx.wear.watchface.complications.data.SmallImageComplicationData
+import androidx.wear.watchface.complications.data.SmallImageType
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.ZonedDateTime
 
@@ -71,11 +74,35 @@ class WatchFaceCanvasRenderer(
         val complicationData = complication!!.complicationData
         val complicationWireData = complicationData.value.asWireComplicationData()
 
-        //Log.d(tag, complication.complicationData.value.toString())
+        val smallImageComplicationDataClass: Class<out ComplicationData> = complicationData.value::class.java
+        val smallImageField = smallImageComplicationDataClass.getDeclaredField("smallImage")
+        smallImageField.isAccessible = true
+        val smallImageTypeField = smallImageField.type.declaredFields[2]
+        smallImageTypeField.isAccessible = true
+        val test = smallImageTypeField.get(SmallImage.PLACEHOLDER)
+        Log.d(tag, test!!.toString())
 
-        val theClass: Class<out ComplicationData> = complication.complicationData.value::class.java
-        val fields = theClass.declaredFields
-        var count = 0
+
+
+        /*val smallImageTypeField = fieldsOfSmallImageField[2].type.declaredFields
+        var count = -1
+        smallImageTypeField.forEach {
+            it.isAccessible = true
+            count += 1
+            Log.d(tag, "smallImageTypeField: " + it.get(smallImageTypeField))
+        }*/
+
+
+        /*var count = -1
+        fieldsOfField.forEach {
+            count += 1
+            it.isAccessible = true
+            Log.d(tag, "Field $count is $it")
+        }*/
+
+
+        /*val fields = smallImageComplicationDataClass.declaredFields
+        var count = -1
         fields.forEach {
             try {
                 it.isAccessible = true
@@ -85,15 +112,7 @@ class WatchFaceCanvasRenderer(
             } catch (illegalAccessException: IllegalAccessException) {
                 Log.d(tag, "Field $it is private.")
             }
-        }
-
-        /*var count = 0
-        fields.forEach {
-            count += 1
-            Log.d(tag, "Field: " + count + " " + it.toGenericString())
-        }
-        //val icon: Icon = newComplicationData.getDeclaredField("smallImage")
-*/
+        }*/
 
         if (complication.complicationData.value.type == ComplicationType.SMALL_IMAGE &&
             complicationWireData.hasSmallImage()) {
@@ -114,6 +133,7 @@ class WatchFaceCanvasRenderer(
                 complication.render(canvas, zonedDateTime, renderParameters)
             }
         } else {
+            Log.d(tag, "ComplicationType is not SmallImage, not customizing.")
             complication.render(
                 canvas,
                 zonedDateTime,
