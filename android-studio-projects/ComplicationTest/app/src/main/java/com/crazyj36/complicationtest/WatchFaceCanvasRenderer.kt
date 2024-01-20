@@ -15,6 +15,11 @@ import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
 import android.util.Log
 import android.view.SurfaceHolder
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
@@ -26,6 +31,18 @@ import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.style.CurrentUserStyleRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectIndexed
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.toCollection
+import kotlinx.coroutines.flow.toSet
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
 
@@ -67,6 +84,8 @@ class WatchFaceCanvasRenderer(
         0.4f, 0.4f, 0.4f, 0f, 0f,
         0f, 0f, 0f, 1f, 0f
     )
+    private var scope = MainScope()
+
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
@@ -111,7 +130,25 @@ class WatchFaceCanvasRenderer(
             }
 
             ComplicationType.SMALL_IMAGE -> {
-                if (complicationWireData!!.smallImageStyle == ComplicationData.IMAGE_STYLE_ICON) {
+
+                /*
+                SmallImageComplicationData(
+                smallImage=SmallImage(image=Icon(typ=RESOURCE pkg=com.android.vending id=0x7f110004), type=ICON, ambientImage=null),
+                contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}),
+                tapActionLostDueToSerialization=false,
+                tapAction=PendingIntent{990ab2e: android.os.BinderProxy@a5516cf},
+                validTimeRange=TimeRange(REDACTED),
+                dataSource=ComponentInfo{com.google.android.wearable.sysui/com.google.android.clockwork.sysui.experiences.complications.providers.LauncherProviderService},
+                persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null)
+                 */
+                val data = complication!!.complicationData.value.toString()
+                val stringAfterType = data.split("type=")
+                val stringBeforeComma = stringAfterType[1].split(",")[0]
+                Log.d(tag, stringBeforeComma)
+
+
+
+                if (stringBeforeComma.equals("ICON")) {
                     val drawable = complicationWireData!!.smallImage!!.loadDrawable(context)
                     drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
                     drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
@@ -123,7 +160,7 @@ class WatchFaceCanvasRenderer(
                         (canvas.height * 0.60).toInt()
                     )
                     drawable.draw(canvas)
-                } else {
+                } else if (stringBeforeComma.equals("PHOTO")){
                     complication!!.render(canvas, zonedDateTime, renderParameters)
                 }
             }
