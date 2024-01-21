@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.res.Resources
+import android.content.res.Resources.NotFoundException
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
@@ -15,11 +16,8 @@ import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
 import android.util.Log
 import android.view.SurfaceHolder
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.toDrawable
 import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
@@ -31,20 +29,10 @@ import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.style.CurrentUserStyleRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collectIndexed
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.toCollection
-import kotlinx.coroutines.flow.toSet
-import kotlinx.coroutines.launch
+import com.google.android.gms.common.util.Hex
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
+import java.util.Locale
 
 class WatchFaceCanvasRenderer(
     private val context: Context,
@@ -84,7 +72,6 @@ class WatchFaceCanvasRenderer(
         0.4f, 0.4f, 0.4f, 0f, 0f,
         0f, 0f, 0f, 1f, 0f
     )
-    private var scope = MainScope()
 
     override fun renderHighlightLayer(
         canvas: Canvas,
@@ -94,6 +81,7 @@ class WatchFaceCanvasRenderer(
     ) {
     }
 
+    @OptIn(ExperimentalStdlibApi::class)
     @SuppressLint("RestrictedApi")
     override fun render(
         canvas: Canvas,
@@ -130,22 +118,38 @@ class WatchFaceCanvasRenderer(
             }
 
             ComplicationType.SMALL_IMAGE -> {
+                /*
+             SmallImageComplicationData(
+             smallImage=SmallImage(image=Icon(typ=RESOURCE pkg=com.android.vending id=0x7f110004), type=ICON, ambientImage=null),
+             contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}),
+             tapActionLostDueToSerialization=false,
+             tapAction=PendingIntent{990ab2e: android.os.BinderProxy@a5516cf},
+             validTimeRange=TimeRange(REDACTED),
+             dataSource=ComponentInfo{com.google.android.wearable.sysui/com.google.android.clockwork.sysui.experiences.complications.providers.LauncherProviderService},
+             persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null)
+              */
                 val data = complication!!.complicationData.value.toString()
-                val stringAfterType = data.split("type=")[1]
-                val stringBeforeComma = stringAfterType.split(",")[0]
-                Log.d(tag, "SmallImageType: $stringBeforeComma")
+                val imageType = data.split("type=")[1].split(",")[0]
+                val imagePkg = data.split("pkg=")[1].split(" id=")[0]
+                var imageId = data.split("id=")[1].split(")")[0]
+                val resourcesForPackage = context.packageManager.getResourcesForApplication(imagePkg)
 
-                val stringAfterPkg = data.split("pkg=")[1]
-                val stringBeforeId = stringAfterPkg.split("id=")[0]
-                Log.d(tag, "pkg: $stringBeforeId")
-
-                val stringAfterId = data.split("id=")[1]
-                val stringBeforeParenthesis = stringAfterId.split(")")[0]
-                Log.d(tag, "imageId: $stringBeforeParenthesis")
+                if (imageType == "ICON") {
+                    var drawable = complicationWireData!!.smallImage!!.loadDrawable(context)
 
 
-                if (stringBeforeComma == "ICON") {
-                    val drawable = complicationWireData!!.smallImage!!.loadDrawable(context)
+                    val decodedImageId = Integer.decode(imageId)
+
+                    val resourceName = "$imagePkg:mipmap/" + resourcesForPackage.getResourceName(decodedImageId)
+                    Log.d(tag, "resourceName: " + resourceName)
+
+                    val imageIdentifier: Int = resourcesForPackage
+                        .getIdentifier(resourceName, "mipmap", imagePkg)
+                    Log.d(tag, "imageIdentifier: " + imageIdentifier)
+
+
+                    drawable = ResourcesCompat.getDrawable(context.resources, imageIdentifier, null)
+
                     drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
                     drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
                     drawable.setTint(Color.WHITE)
@@ -156,7 +160,7 @@ class WatchFaceCanvasRenderer(
                         (canvas.height * 0.60).toInt()
                     )
                     drawable.draw(canvas)
-                } else if (stringBeforeComma == "PHOTO"){
+                } else if (imageType == "PHOTO"){
                     complication!!.render(canvas, zonedDateTime, renderParameters)
                 }
             }
