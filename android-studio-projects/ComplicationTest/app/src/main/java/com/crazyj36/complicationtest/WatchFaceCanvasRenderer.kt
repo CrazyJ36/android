@@ -130,25 +130,21 @@ class WatchFaceCanvasRenderer(
             }
 
             ComplicationType.SMALL_IMAGE -> {
-
-                /*
-                SmallImageComplicationData(
-                smallImage=SmallImage(image=Icon(typ=RESOURCE pkg=com.android.vending id=0x7f110004), type=ICON, ambientImage=null),
-                contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}),
-                tapActionLostDueToSerialization=false,
-                tapAction=PendingIntent{990ab2e: android.os.BinderProxy@a5516cf},
-                validTimeRange=TimeRange(REDACTED),
-                dataSource=ComponentInfo{com.google.android.wearable.sysui/com.google.android.clockwork.sysui.experiences.complications.providers.LauncherProviderService},
-                persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null)
-                 */
                 val data = complication!!.complicationData.value.toString()
-                val stringAfterType = data.split("type=")
-                val stringBeforeComma = stringAfterType[1].split(",")[0]
-                Log.d(tag, stringBeforeComma)
+                val stringAfterType = data.split("type=")[1]
+                val stringBeforeComma = stringAfterType.split(",")[0]
+                Log.d(tag, "SmallImageType: $stringBeforeComma")
+
+                val stringAfterPkg = data.split("pkg=")[1]
+                val stringBeforeId = stringAfterPkg.split("id=")[0]
+                Log.d(tag, "pkg: $stringBeforeId")
+
+                val stringAfterId = data.split("id=")[1]
+                val stringBeforeParenthesis = stringAfterId.split(")")[0]
+                Log.d(tag, "imageId: $stringBeforeParenthesis")
 
 
-
-                if (stringBeforeComma.equals("ICON")) {
+                if (stringBeforeComma == "ICON") {
                     val drawable = complicationWireData!!.smallImage!!.loadDrawable(context)
                     drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
                     drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
@@ -160,7 +156,7 @@ class WatchFaceCanvasRenderer(
                         (canvas.height * 0.60).toInt()
                     )
                     drawable.draw(canvas)
-                } else if (stringBeforeComma.equals("PHOTO")){
+                } else if (stringBeforeComma == "PHOTO"){
                     complication!!.render(canvas, zonedDateTime, renderParameters)
                 }
             }
