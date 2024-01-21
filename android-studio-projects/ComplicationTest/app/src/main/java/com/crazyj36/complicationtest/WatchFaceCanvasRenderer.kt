@@ -117,25 +117,31 @@ class WatchFaceCanvasRenderer(
             ComplicationType.SMALL_IMAGE -> {
                 val data = complication!!.complicationData.value.toString()
                 val imageType = data.split("type=")[1].split(",")[0].trim()
+                Log.d(tag, "imageType: $imageType")
 
                 if (imageType == "ICON") {
                     //var drawable = complicationWireData!!.smallImage!!.loadDrawable(context)
 
                     val imagePkg = data.split("pkg=")[1].split(" id=")[0].trim()
+                    Log.d(tag, "imagePkg: $imagePkg")
                     val resourcesForPackage = context.packageManager.getResourcesForApplication(imagePkg)
                     val imageId = data.split("id=")[1].split(")")[0].trim()
-                    val decodedImageId = Integer.decode(imageId)
-                    val resourceName = resourcesForPackage.getResourceName(decodedImageId).split("/").last().trim()
-
-                    var imageIdentifier: Int = resourcesForPackage.getIdentifier(resourceName, "mipmap", imagePkg)
+                    Log.d(tag, "imageHexId: $imageId")
+                    val imageDecodedId = Integer.decode(imageId)
+                    Log.d(tag, "decodedImageId: $imageDecodedId")
+                    val imageResourceName = resourcesForPackage.getResourceName(imageDecodedId).split("/").last().trim()
+                    Log.d(tag, "resourceName: $imageResourceName")
+                    var imageIdentifier: Int = resourcesForPackage.getIdentifier(imageResourceName, "mipmap", imagePkg)
                     if (imageIdentifier == 0) {
                         Log.d(tag, "Mipmap drawable was invalid, trying drawable resources.")
-                        imageIdentifier = resourcesForPackage.getIdentifier(resourceName, "drawable", imagePkg)
+                        imageIdentifier = resourcesForPackage.getIdentifier(imageResourceName, "drawable", imagePkg)
                     }
+                    Log.d(tag, "imageIdentifier: $imageIdentifier")
 
                     val drawable: Drawable?
                     try {
                         drawable = ResourcesCompat.getDrawable(resourcesForPackage, imageIdentifier, null)
+                        Log.d(tag, "imageIdentifier drawable loaded, coloring.")
                         drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
                         drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
                         drawable.setTint(Color.WHITE)
