@@ -121,11 +121,12 @@ class WatchFaceCanvasRenderer(
                 if (imageType == "ICON") {
                     val drawable: Drawable?
                     //drawable = complicationWireData!!.smallImage!!.loadDrawable(context)
-
                     val imagePkg = data.split("pkg=")[1].split(" id=")[0].trim()
-                    val resourcesForPackage = context.packageManager.getResourcesForApplication(imagePkg)
                     val imageId = data.split("id=")[1].split(")")[0].trim()
-                    drawable = ResourcesCompat.getDrawable(resourcesForPackage, Integer.decode(imageId), null)
+                    drawable = ResourcesCompat.getDrawable(context.packageManager.getResourcesForApplication(imagePkg),
+                        Integer.decode(imageId),
+                        null
+                    )
                     drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
                     drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
                     drawable.setTint(Color.WHITE)
