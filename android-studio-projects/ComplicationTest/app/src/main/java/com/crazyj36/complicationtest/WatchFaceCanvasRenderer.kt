@@ -12,12 +12,12 @@ import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.Rect
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
 import android.util.Log
 import android.view.SurfaceHolder
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.graphics.drawable.toDrawable
 import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
@@ -29,10 +29,8 @@ import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.style.CurrentUserStyleRepository
-import com.google.android.gms.common.util.Hex
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
-import java.util.Locale
 
 class WatchFaceCanvasRenderer(
     private val context: Context,
@@ -81,8 +79,7 @@ class WatchFaceCanvasRenderer(
     ) {
     }
 
-    @OptIn(ExperimentalStdlibApi::class)
-    @SuppressLint("RestrictedApi")
+    @SuppressLint("RestrictedApi", "DiscouragedApi")
     override fun render(
         canvas: Canvas,
         bounds: Rect,
@@ -118,48 +115,41 @@ class WatchFaceCanvasRenderer(
             }
 
             ComplicationType.SMALL_IMAGE -> {
-                /*
-             SmallImageComplicationData(
-             smallImage=SmallImage(image=Icon(typ=RESOURCE pkg=com.android.vending id=0x7f110004), type=ICON, ambientImage=null),
-             contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}),
-             tapActionLostDueToSerialization=false,
-             tapAction=PendingIntent{990ab2e: android.os.BinderProxy@a5516cf},
-             validTimeRange=TimeRange(REDACTED),
-             dataSource=ComponentInfo{com.google.android.wearable.sysui/com.google.android.clockwork.sysui.experiences.complications.providers.LauncherProviderService},
-             persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null)
-              */
                 val data = complication!!.complicationData.value.toString()
-                val imageType = data.split("type=")[1].split(",")[0]
-                val imagePkg = data.split("pkg=")[1].split(" id=")[0]
-                var imageId = data.split("id=")[1].split(")")[0]
-                val resourcesForPackage = context.packageManager.getResourcesForApplication(imagePkg)
+                val imageType = data.split("type=")[1].split(",")[0].trim()
 
                 if (imageType == "ICON") {
-                    var drawable = complicationWireData!!.smallImage!!.loadDrawable(context)
+                    //var drawable = complicationWireData!!.smallImage!!.loadDrawable(context)
 
-
+                    val imagePkg = data.split("pkg=")[1].split(" id=")[0].trim()
+                    val resourcesForPackage = context.packageManager.getResourcesForApplication(imagePkg)
+                    val imageId = data.split("id=")[1].split(")")[0].trim()
                     val decodedImageId = Integer.decode(imageId)
+                    val resourceName = resourcesForPackage.getResourceName(decodedImageId).split("/").last().trim()
 
-                    val resourceName = "$imagePkg:mipmap/" + resourcesForPackage.getResourceName(decodedImageId)
-                    Log.d(tag, "resourceName: " + resourceName)
+                    var imageIdentifier: Int = resourcesForPackage.getIdentifier(resourceName, "mipmap", imagePkg)
+                    if (imageIdentifier == 0) {
+                        Log.d(tag, "Mipmap drawable was invalid, trying drawable resources.")
+                        imageIdentifier = resourcesForPackage.getIdentifier(resourceName, "drawable", imagePkg)
+                    }
 
-                    val imageIdentifier: Int = resourcesForPackage
-                        .getIdentifier(resourceName, "mipmap", imagePkg)
-                    Log.d(tag, "imageIdentifier: " + imageIdentifier)
+                    val drawable: Drawable?
+                    try {
+                        drawable = ResourcesCompat.getDrawable(resourcesForPackage, imageIdentifier, null)
+                        drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
+                        drawable.setTint(Color.WHITE)
+                        drawable.bounds = Rect(
+                            (canvas.width * 0.40).toInt(),
+                            (canvas.height * 0.40).toInt(),
+                            (canvas.width * 0.60).toInt(),
+                            (canvas.height * 0.60).toInt()
+                        )
+                        drawable.draw(canvas)
 
-
-                    drawable = ResourcesCompat.getDrawable(context.resources, imageIdentifier, null)
-
-                    drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
-                    drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
-                    drawable.setTint(Color.WHITE)
-                    drawable.bounds = Rect(
-                        (canvas.width * 0.40).toInt(),
-                        (canvas.height * 0.40).toInt(),
-                        (canvas.width * 0.60).toInt(),
-                        (canvas.height * 0.60).toInt()
-                    )
-                    drawable.draw(canvas)
+                    } catch (notFoundException: NotFoundException) {
+                        Log.d(tag, "Image not loaded:\n${notFoundException.localizedMessage}" )
+                    }
                 } else if (imageType == "PHOTO"){
                     complication!!.render(canvas, zonedDateTime, renderParameters)
                 }
