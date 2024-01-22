@@ -95,10 +95,10 @@ class WatchFaceCanvasRenderer(
                 shortTextComplicationData =
                     complication!!.complicationData.value as ShortTextComplicationData
                 if (shortTextComplicationData!!.smallImage != null) {
-                    shortTextComplicationData!!.smallImage!!.image.setTint(Color.WHITE)
+                    shortTextComplicationData!!.smallImage?.image!!.setTint(Color.WHITE)
                 }
-                if (shortTextComplicationData!!.smallImage!!.ambientImage != null) {
-                    shortTextComplicationData!!.smallImage!!.ambientImage!!.setTint(Color.WHITE)
+                if (shortTextComplicationData!!.smallImage?.ambientImage != null) {
+                    shortTextComplicationData!!.smallImage?.ambientImage!!.setTint(Color.WHITE)
                 }
                 /*getShortTextComplicationDataFields()
                 if (dataSourceText != null && dataSourceContentDescription != null) {
