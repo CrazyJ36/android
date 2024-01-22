@@ -126,6 +126,10 @@ class WatchFaceCanvasRenderer(
                     Log.d(tag, "Unsupported complication type")
                 }
             }
+        } else {
+            if (complication!!.complicationData.value.hasPlaceholderFields()) {
+                complication!!.render(canvas, zonedDateTime, renderParameters)
+            }
         }
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
