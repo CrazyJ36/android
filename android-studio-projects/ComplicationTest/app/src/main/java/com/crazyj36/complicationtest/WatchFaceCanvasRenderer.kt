@@ -63,6 +63,7 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
+        Log.d(tag, "rendering")
         complication = complicationSlotsManager.complicationSlots[0]
         val complicationType = complication!!.complicationData.value.type
         if (complicationType != ComplicationType.EMPTY) {
