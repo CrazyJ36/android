@@ -65,6 +65,8 @@ class WatchFaceCanvasRenderer(
     ) {
         complication = complicationSlotsManager.complicationSlots[0]
         val data = complication!!.complicationData.value.toString()
+        Log.d(tag, data)
+        Log.d(tag, "ComplicationType: " + complication!!.complicationData.value.type.toString())
         when (complication!!.complicationData.value.type) {
             ComplicationType.SHORT_TEXT -> {
                 val imagePkg = data.split("pkg=")[1].split(" id=")[0]
@@ -105,6 +107,9 @@ class WatchFaceCanvasRenderer(
                     complication!!.render(canvas, zonedDateTime, renderParameters)
                 }
             }
+            ComplicationType.EMPTY -> {
+
+            }
 
             else -> {
                 Log.d(tag, "Unknown complication type, not customizing.")
@@ -124,7 +129,6 @@ class WatchFaceCanvasRenderer(
                 paint
             )
         }
-        invalidate()
     }
 
     class MySharedAssets : SharedAssets {
