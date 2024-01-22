@@ -118,15 +118,17 @@ class WatchFaceCanvasRenderer(
                 com.google.android.clockwork.sysui.experiences.complications.providers.BatteryProviderService},
                 persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null)
                  */
-                shortTextComplicationData = complication!!.complicationData.value as ShortTextComplicationData
-                /*val imagePkg = data.split("pkg=")[1].split(" id=")[0]
+                val imagePkg = data.split("pkg=")[1].split(" id=")[0]
                 val imageId = data.split("id=")[1].split(")")[0]
-                val icon = Icon.createWithResource(imagePkg, Integer.decode(imageId))
-                val monochromaticImage: MonochromaticImage = MonochromaticImage.Builder(
+                shortTextComplicationData = complication!!.complicationData.value as ShortTextComplicationData
+                shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
+                    shortTextComplicationData!!.text,
+                    shortTextComplicationData!!.contentDescription!!
+                ).setMonochromaticImage(MonochromaticImage.Builder(
                     Icon.createWithResource(imagePkg, Integer.decode(imageId))
-                ).build()*/
-                shortTextComplicationData!!.monochromaticImage!!.image.setTint(Color.WHITE).setTintBlendMode(
-                    BlendMode.MODULATE)
+                ).build()
+                )
+                complication!!.renderer.loadData(shortTextComplicationDataBuilder!!.build(), false)
                 complication!!.render(canvas, zonedDateTime, renderParameters)
             }
 
