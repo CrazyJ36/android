@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.BlendMode
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
@@ -124,7 +125,8 @@ class WatchFaceCanvasRenderer(
                 val monochromaticImage: MonochromaticImage = MonochromaticImage.Builder(
                     Icon.createWithResource(imagePkg, Integer.decode(imageId))
                 ).build()*/
-                shortTextComplicationData!!.monochromaticImage!!.image.setTint(Color.WHITE)
+                shortTextComplicationData!!.monochromaticImage!!.image.setTint(Color.WHITE).setTintBlendMode(
+                    BlendMode.MODULATE)
                 complication!!.render(canvas, zonedDateTime, renderParameters)
             }
 
