@@ -1,5 +1,6 @@
 package com.crazyj36.complicationtest
 
+import android.app.PendingIntent
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -16,9 +17,13 @@ import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
+import androidx.wear.watchface.complications.data.ComplicationText
 import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.data.MonochromaticImage
+import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
+import androidx.wear.watchface.complications.data.SmallImage
+import androidx.wear.watchface.complications.data.SmallImageType
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.ZonedDateTime
 
@@ -34,13 +39,20 @@ class WatchFaceCanvasRenderer(
     currentUserStyleRepository = currentUserStyleRepository,
     watchState = watchState,
     canvasType = canvasType,
-    interactiveDrawModeUpdateDelayMillis = 16L,
+    interactiveDrawModeUpdateDelayMillis = 1000L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
     private val tag = "COMPLICATION_TEST"
     private var complication: ComplicationSlot? = null
     private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
     private var shortTextComplicationData: ShortTextComplicationData? = null
+    private var dataSourceText: ComplicationText? = null
+    private var dataSourceContentDescription: ComplicationText? = null
+    private var dataSourceTitle: ComplicationText? = null
+    private var dataSourceSmallImage: SmallImage? = null
+    private var dataSourceMonochromaticImage: MonochromaticImage? = null
+    private var dataSourceAmbientImage: Icon? = null
+    private var dataSourceTapAction: PendingIntent? = null
     private val paint = Paint()
     private var colorMatrix = floatArrayOf(
         0.4f, 0.4f, 0.4f, 0f, 0f,
@@ -63,6 +75,14 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
+        dataSourceText = null
+        dataSourceContentDescription = null
+        dataSourceTitle = null
+        dataSourceSmallImage = null
+        dataSourceMonochromaticImage = null
+        dataSourceAmbientImage = null
+        dataSourceTapAction = null
+
         canvas.drawColor(Color.BLACK)
         complication = complicationSlotsManager.complicationSlots[0]
         val complicationType = complication!!.complicationData.value.type
@@ -70,27 +90,64 @@ class WatchFaceCanvasRenderer(
         Log.d(tag, data)
         when (complicationType) {
             ComplicationType.SHORT_TEXT -> {
-                try {
+                shortTextComplicationData =
+                    complication!!.complicationData.value as ShortTextComplicationData
+                getShortTextComplicationDataFields()
+                if (dataSourceText != null && dataSourceContentDescription != null) {
+                    shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
+                        dataSourceText!!,
+                        dataSourceContentDescription!!
+                    )
+                } else if (dataSourceText != null) {
+                    shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
+                        dataSourceText!!,
+                        PlainComplicationText.Builder(
+                            "Content description not provided by DataSource"
+                        ).build()
+                    )
+                }
+                if (dataSourceTitle != null) {
+                    shortTextComplicationDataBuilder!!.setTitle(dataSourceTitle)
+                }
+                if (dataSourceMonochromaticImage != null) {
                     val imagePkg = data.split("pkg=")[1].split(" id=")[0]
                     val imageId = data.split("id=")[1].split(")")[0]
-                    shortTextComplicationData =
-                        complication!!.complicationData.value as ShortTextComplicationData
-                    shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
-                        shortTextComplicationData!!.text,
-                        shortTextComplicationData!!.contentDescription!!
-                    ).setMonochromaticImage(
+                    shortTextComplicationDataBuilder!!.setMonochromaticImage(
                         MonochromaticImage.Builder(
                             Icon.createWithResource(imagePkg, Integer.decode(imageId))
                         ).build()
-                    ).setTapAction(shortTextComplicationData!!.tapAction)
-                    complication!!.renderer.loadData(
-                        shortTextComplicationDataBuilder!!.build(),
-                        false
                     )
-                    complication!!.render(canvas, zonedDateTime, renderParameters)
-                } catch (exception: Exception) {
-                    Log.d(tag, "complicationData inaccurate.\n" + exception.localizedMessage)
                 }
+                if (dataSourceSmallImage != null) {
+                    val imagePkg = data.split("pkg=")[1].split(" id=")[0]
+                    val imageId = data.split("id=")[1].split(")")[0]
+                    shortTextComplicationDataBuilder!!.setSmallImage(
+                        SmallImage.Builder(
+                            Icon.createWithResource(
+                                imagePkg, Integer.decode(imageId)
+                            ),
+                            SmallImageType.ICON
+                        ).build()
+                    )
+                }
+                if (dataSourceAmbientImage != null) {
+                    if (renderParameters.drawMode == DrawMode.AMBIENT) {
+                        shortTextComplicationDataBuilder!!.setSmallImage(
+                            SmallImage.Builder(
+                                dataSourceAmbientImage!!,
+                                SmallImageType.ICON
+                            ).build()
+                        )
+                    }
+                }
+                if (dataSourceTapAction != null) {
+                    shortTextComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
+                }
+                complication!!.renderer.loadData(
+                    shortTextComplicationDataBuilder!!.build(),
+                    false
+                )
+                complication!!.render(canvas, zonedDateTime, renderParameters)
             }
 
             ComplicationType.SMALL_IMAGE -> {
@@ -150,6 +207,27 @@ class WatchFaceCanvasRenderer(
                 canvas.height - (canvas.height / 7).toFloat(),
                 paint
             )
+        }
+    }
+    private fun getShortTextComplicationDataFields() {
+        dataSourceText  = shortTextComplicationData!!.text
+        if (shortTextComplicationData!!.contentDescription != null) {
+            dataSourceContentDescription = shortTextComplicationData!!.contentDescription
+        }
+        if (shortTextComplicationData!!.title != null) {
+            dataSourceTitle = shortTextComplicationData!!.title
+        }
+        if (shortTextComplicationData!!.smallImage != null) {
+            dataSourceSmallImage = shortTextComplicationData!!.smallImage
+        }
+        if (shortTextComplicationData!!.monochromaticImage != null) {
+            dataSourceMonochromaticImage = shortTextComplicationData!!.monochromaticImage
+        }
+        if (shortTextComplicationData!!.smallImage!!.ambientImage != null) {
+            dataSourceAmbientImage = shortTextComplicationData!!.smallImage!!.ambientImage!!
+        }
+        if (shortTextComplicationData!!.tapAction != null) {
+            dataSourceTapAction = shortTextComplicationData!!.tapAction
         }
     }
 
