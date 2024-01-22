@@ -1,6 +1,5 @@
 package com.crazyj36.complicationtest
 
-import android.app.PendingIntent
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -8,7 +7,6 @@ import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.Rect
-import android.graphics.drawable.Icon
 import android.util.Log
 import android.view.SurfaceHolder
 import androidx.core.content.res.ResourcesCompat
@@ -17,9 +15,7 @@ import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
-import androidx.wear.watchface.complications.data.ComplicationText
 import androidx.wear.watchface.complications.data.ComplicationType
-import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
@@ -43,24 +39,8 @@ class WatchFaceCanvasRenderer(
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
     private val tag = "COMPLICATION_TEST"
-    private var data: String? = null
     private var complication: ComplicationSlot? = null
-    private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
-    private var shortTextComplicationData: ShortTextComplicationData? = null
-    private var dataSourceText: ComplicationText? = null
-    private var dataSourceContentDescription: ComplicationText? = null
-    private var dataSourceTitle: ComplicationText? = null
-    private var dataSourceSmallImage: SmallImage? = null
-    private var dataSourceMonochromaticImage: MonochromaticImage? = null
-    private var dataSourceAmbientImage: Icon? = null
-    private var dataSourceTapAction: PendingIntent? = null
     private val paint = Paint()
-    private var colorMatrix = floatArrayOf(
-        0.4f, 0.4f, 0.4f, 0f, 0f,
-        0.4f, 0.4f, 0.4f, 0f, 0f,
-        0.4f, 0.4f, 0.4f, 0f, 0f,
-        0f, 0f, 0f, 1f, 0f
-    )
 
     override fun renderHighlightLayer(
         canvas: Canvas,
@@ -76,102 +56,94 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        data = null
-        dataSourceText = null
-        dataSourceContentDescription = null
-        dataSourceTitle = null
-        dataSourceSmallImage = null
-        dataSourceMonochromaticImage = null
-        dataSourceAmbientImage = null
-        dataSourceTapAction = null
-
         canvas.drawColor(Color.BLACK)
         complication = complicationSlotsManager.complicationSlots[0]
-        val complicationType = complication!!.complicationData.value.type
-        data = complication!!.complicationData.value.toString()
-        Log.d(tag, data!!)
-        when (complicationType) {
+        Log.d(tag, complication!!.complicationData.value.toString())
+
+        when (complication!!.complicationData.value.type) {
             ComplicationType.SHORT_TEXT -> {
-                shortTextComplicationData =
-                    complication!!.complicationData.value as ShortTextComplicationData
-                if (shortTextComplicationData!!.smallImage != null) {
-                    shortTextComplicationData!!.smallImage?.image?.setTint(Color.WHITE)
+                val dataSource = complication!!.complicationData.value as ShortTextComplicationData
+                val newDataBuilder: ShortTextComplicationData.Builder =
+                    if (dataSource.contentDescription != null) {
+                        ShortTextComplicationData.Builder(
+                            dataSource.text,
+                            dataSource.contentDescription!!
+                        )
+                    } else {
+                        ShortTextComplicationData.Builder(
+                            dataSource.text,
+                            PlainComplicationText.Builder(
+                                "Content description not provided by complication DataSource."
+                            ).build()
+                        )
+                    }
+                if (dataSource.title != null) {
+                    newDataBuilder.setTitle(dataSource.title)
                 }
-                if (shortTextComplicationData!!.smallImage?.ambientImage != null) {
-                    shortTextComplicationData!!.smallImage?.ambientImage?.setTint(Color.WHITE)
-                }
-                /*getShortTextComplicationDataFields()
-                if (dataSourceText != null && dataSourceContentDescription != null) {
-                    shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
-                        dataSourceText!!,
-                        dataSourceContentDescription!!
-                    )
-                } else if (dataSourceText != null) {
-                    shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
-                        dataSourceText!!,
-                        PlainComplicationText.Builder(
-                            "Content description not provided by DataSource"
-                        ).build()
-                    )
-                }
-                if (dataSourceTitle != null) {
-                    shortTextComplicationDataBuilder!!.setTitle(dataSourceTitle)
-                }
-                if (dataSourceMonochromaticImage != null) {
-                    shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                        dataSourceMonochromaticImage
+                if (dataSource.monochromaticImage != null) {
+                    newDataBuilder.setMonochromaticImage(
+                        dataSource.monochromaticImage
                     )
                 } else {
-                    if (dataSourceSmallImage != null) {
-                        shortTextComplicationDataBuilder!!.setSmallImage(dataSourceSmallImage)
-                    }
-                    if (dataSourceAmbientImage != null) {
-                        if (renderParameters.drawMode == DrawMode.AMBIENT) {
-                            shortTextComplicationDataBuilder!!.setSmallImage(
-                                SmallImage.Builder(
-                                    dataSourceAmbientImage!!,
-                                    SmallImageType.ICON
-                                ).build()
-                            )
-                        }
+                    if (renderParameters.drawMode == DrawMode.AMBIENT &&
+                        dataSource.smallImage?.ambientImage != null
+                    ) {
+                        Log.d(tag, "Using ambientImage.")
+                        newDataBuilder.setSmallImage(
+                            SmallImage.Builder(
+                                dataSource.smallImage?.ambientImage!!.setTint(Color.WHITE),
+                                SmallImageType.ICON
+                            ).build()
+                        )
+                    } else if (dataSource.smallImage != null) {
+                        newDataBuilder.setSmallImage(
+                            SmallImage.Builder(
+                                dataSource.smallImage?.image!!.setTint(Color.WHITE),
+                                SmallImageType.ICON
+                            ).build()
+                        )
                     }
                 }
-                if (dataSourceTapAction != null) {
-                    shortTextComplicationDataBuilder!!.setTapAction(dataSourceTapAction)
+                if (dataSource.tapAction != null) {
+                    newDataBuilder.setTapAction(dataSource.tapAction)
                 }
                 complication!!.renderer.loadData(
-                    shortTextComplicationDataBuilder!!.build(),
+                    newDataBuilder.build(),
                     false
-                )*/
+                )
                 complication!!.render(canvas, zonedDateTime, renderParameters)
             }
 
             ComplicationType.SMALL_IMAGE -> {
-                try {
-                    val imageType = data!!.split("type=")[1].split(",")[0]
-                    if (imageType == "ICON") {
-                        val imagePkg = data!!.split("pkg=")[1].split(" id=")[0]
-                        val imageId = data!!.split("id=")[1].split(")")[0]
-                        val drawable = ResourcesCompat.getDrawable(
-                            context.packageManager.getResourcesForApplication(imagePkg),
-                            Integer.decode(imageId),
-                            null
+                val data = complication!!.complicationData.value.toString()
+                val imageType = data.split("type=")[1].split(",")[0]
+                if (imageType == "ICON") {
+                    val imagePkg = data.split("pkg=")[1].split(" id=")[0]
+                    val imageId = data.split("id=")[1].split(")")[0]
+                    val drawable = ResourcesCompat.getDrawable(
+                        context.packageManager.getResourcesForApplication(imagePkg),
+                        Integer.decode(imageId),
+                        null
+                    )
+                    drawable!!.colorFilter = ColorMatrixColorFilter(
+                        floatArrayOf(
+                            0.4f, 0.4f, 0.4f, 0f, 0f,
+                            0.4f, 0.4f, 0.4f, 0f, 0f,
+                            0.4f, 0.4f, 0.4f, 0f, 0f,
+                            0f, 0f, 0f, 1f, 0f
                         )
-                        drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
-                        drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
-                        drawable.setTint(Color.WHITE)
-                        drawable.bounds = Rect(
-                            (canvas.width * 0.40).toInt(),
-                            (canvas.height * 0.40).toInt(),
-                            (canvas.width * 0.60).toInt(),
-                            (canvas.height * 0.60).toInt()
-                        )
-                        drawable.draw(canvas)
-                    } else if (imageType == "PHOTO") {
-                        complication!!.render(canvas, zonedDateTime, renderParameters)
-                    }
-                } catch (exception: Exception) {
-                    Log.d(tag, "complicationData inaccurate:\n" + exception.localizedMessage)
+                    )
+                    drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
+                    drawable.setTint(Color.WHITE)
+                    drawable.bounds = Rect(
+                        (canvas.width * 0.40).toInt(),
+                        (canvas.height * 0.40).toInt(),
+                        (canvas.width * 0.60).toInt(),
+                        (canvas.height * 0.60).toInt()
+                    )
+                    drawable.draw(canvas)
+                } else if (imageType == "PHOTO") {
+                    complication!!.render(canvas, zonedDateTime, renderParameters)
                 }
             }
 
@@ -203,32 +175,6 @@ class WatchFaceCanvasRenderer(
                 canvas.height - (canvas.height / 7).toFloat(),
                 paint
             )
-        }
-    }
-    private fun getShortTextComplicationDataFields() {
-        dataSourceText = shortTextComplicationData!!.text
-        if (shortTextComplicationData!!.contentDescription != null) {
-            dataSourceContentDescription = shortTextComplicationData!!.contentDescription
-        }
-        if (shortTextComplicationData!!.title != null) {
-            dataSourceTitle = shortTextComplicationData!!.title
-        }
-        if (shortTextComplicationData!!.smallImage != null) {
-            dataSourceSmallImage = shortTextComplicationData!!.smallImage
-            dataSourceSmallImage!!.image.setTint(Color.WHITE)
-        }
-        if (shortTextComplicationData!!.smallImage?.ambientImage != null) {
-            Log.d(tag, "has ambientImage")
-            dataSourceAmbientImage = shortTextComplicationData!!.smallImage!!.ambientImage
-            dataSourceAmbientImage!!.setTint(Color.WHITE)
-        } else {
-            Log.d(tag, "no ambientImage")
-        }
-        if (shortTextComplicationData!!.monochromaticImage != null) {
-            dataSourceMonochromaticImage = shortTextComplicationData!!.monochromaticImage
-        }
-        if (shortTextComplicationData!!.tapAction != null) {
-            dataSourceTapAction = shortTextComplicationData!!.tapAction
         }
     }
 
