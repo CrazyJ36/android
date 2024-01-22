@@ -34,7 +34,7 @@ class WatchFaceCanvasRenderer(
     currentUserStyleRepository = currentUserStyleRepository,
     watchState = watchState,
     canvasType = canvasType,
-    interactiveDrawModeUpdateDelayMillis = 1000L,
+    interactiveDrawModeUpdateDelayMillis = 16L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
     private val tag = "COMPLICATION_TEST"
@@ -82,10 +82,10 @@ class WatchFaceCanvasRenderer(
             }
 
             ComplicationType.SMALL_IMAGE -> {
-                val imageType = data.split("type=")[1].split(",")[0].trim()
+                val imageType = data.split("type=")[1].split(",")[0]
                 if (imageType == "ICON") {
-                    val imagePkg = data.split("pkg=")[1].split(" id=")[0].trim()
-                    val imageId = data.split("id=")[1].split(")")[0].trim()
+                    val imagePkg = data.split("pkg=")[1].split(" id=")[0]
+                    val imageId = data.split("id=")[1].split(")")[0]
                     val drawable = ResourcesCompat.getDrawable(
                         context.packageManager.getResourcesForApplication(imagePkg),
                         Integer.decode(imageId),
