@@ -94,7 +94,13 @@ class WatchFaceCanvasRenderer(
             ComplicationType.SHORT_TEXT -> {
                 shortTextComplicationData =
                     complication!!.complicationData.value as ShortTextComplicationData
-                getShortTextComplicationDataFields()
+                if (shortTextComplicationData!!.smallImage != null) {
+                    shortTextComplicationData!!.smallImage!!.image.setTint(Color.WHITE)
+                }
+                if (shortTextComplicationData!!.smallImage!!.ambientImage != null) {
+                    shortTextComplicationData!!.smallImage!!.ambientImage!!.setTint(Color.WHITE)
+                }
+                /*getShortTextComplicationDataFields()
                 if (dataSourceText != null && dataSourceContentDescription != null) {
                     shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
                         dataSourceText!!,
@@ -136,7 +142,7 @@ class WatchFaceCanvasRenderer(
                 complication!!.renderer.loadData(
                     shortTextComplicationDataBuilder!!.build(),
                     false
-                )
+                )*/
                 complication!!.render(canvas, zonedDateTime, renderParameters)
             }
 
