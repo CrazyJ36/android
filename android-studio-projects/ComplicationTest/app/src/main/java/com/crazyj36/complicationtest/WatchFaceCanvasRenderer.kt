@@ -65,12 +65,12 @@ class WatchFaceCanvasRenderer(
     ) {
         canvas.drawColor(Color.BLACK)
         complication = complicationSlotsManager.complicationSlots[0]
-        if (!complication!!.complicationData.value.hasPlaceholderFields()) {
-            val complicationType = complication!!.complicationData.value.type
-            val data = complication!!.complicationData.value.toString()
-            Log.d(tag, data)
-            when (complicationType) {
-                ComplicationType.SHORT_TEXT -> {
+        val complicationType = complication!!.complicationData.value.type
+        val data = complication!!.complicationData.value.toString()
+        Log.d(tag, data)
+        when (complicationType) {
+            ComplicationType.SHORT_TEXT -> {
+                try {
                     val imagePkg = data.split("pkg=")[1].split(" id=")[0]
                     val imageId = data.split("id=")[1].split(")")[0]
                     shortTextComplicationData =
@@ -88,9 +88,13 @@ class WatchFaceCanvasRenderer(
                         false
                     )
                     complication!!.render(canvas, zonedDateTime, renderParameters)
+                } catch (exception: Exception) {
+                    Log.d(tag, "complicationData inaccurate.\n" + exception.localizedMessage)
                 }
+            }
 
-                ComplicationType.SMALL_IMAGE -> {
+            ComplicationType.SMALL_IMAGE -> {
+                try {
                     val imageType = data.split("type=")[1].split(",")[0]
                     if (imageType == "ICON") {
                         val imagePkg = data.split("pkg=")[1].split(" id=")[0]
@@ -113,27 +117,28 @@ class WatchFaceCanvasRenderer(
                     } else if (imageType == "PHOTO") {
                         complication!!.render(canvas, zonedDateTime, renderParameters)
                     }
-                }
-
-                ComplicationType.EMPTY -> {
-                    // canvas.drawColor(Color.BLACK) at first in render() takes care of this.
-                }
-
-                ComplicationType.NO_DATA -> {
-                    complication!!.render(canvas, zonedDateTime, renderParameters)
-                }
-
-                ComplicationType.NOT_CONFIGURED -> {
-                    complication!!.render(canvas, zonedDateTime, renderParameters)
-                }
-
-                else -> {
-                    Log.d(tag, "Unsupported complication type")
+                } catch (exception: Exception) {
+                    Log.d(tag, "complicationData inaccurate:\n" + exception.localizedMessage)
                 }
             }
-        } else {
-            Log.d(tag, "PLACEHOLDER active, complicationData not ready yet.")
+
+            ComplicationType.EMPTY -> {
+                // canvas.drawColor(Color.BLACK) at first in render() takes care of this.
+            }
+
+            ComplicationType.NO_DATA -> {
+                complication!!.render(canvas, zonedDateTime, renderParameters)
+            }
+
+            ComplicationType.NOT_CONFIGURED -> {
+                complication!!.render(canvas, zonedDateTime, renderParameters)
+            }
+
+            else -> {
+                Log.d(tag, "Unsupported complication type")
+            }
         }
+
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
             paint.setARGB(255, 255, 255, 255)
