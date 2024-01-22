@@ -43,6 +43,7 @@ class WatchFaceCanvasRenderer(
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
     private val tag = "COMPLICATION_TEST"
+    private var data: String? = null
     private var complication: ComplicationSlot? = null
     private var shortTextComplicationDataBuilder: ShortTextComplicationData.Builder? = null
     private var shortTextComplicationData: ShortTextComplicationData? = null
@@ -75,6 +76,7 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
+        data = null
         dataSourceText = null
         dataSourceContentDescription = null
         dataSourceTitle = null
@@ -86,8 +88,8 @@ class WatchFaceCanvasRenderer(
         canvas.drawColor(Color.BLACK)
         complication = complicationSlotsManager.complicationSlots[0]
         val complicationType = complication!!.complicationData.value.type
-        val data = complication!!.complicationData.value.toString()
-        Log.d(tag, data)
+        data = complication!!.complicationData.value.toString()
+        Log.d(tag, data!!)
         when (complicationType) {
             ComplicationType.SHORT_TEXT -> {
                 shortTextComplicationData =
@@ -110,34 +112,22 @@ class WatchFaceCanvasRenderer(
                     shortTextComplicationDataBuilder!!.setTitle(dataSourceTitle)
                 }
                 if (dataSourceMonochromaticImage != null) {
-                    val imagePkg = data.split("pkg=")[1].split(" id=")[0]
-                    val imageId = data.split("id=")[1].split(")")[0]
                     shortTextComplicationDataBuilder!!.setMonochromaticImage(
-                        MonochromaticImage.Builder(
-                            Icon.createWithResource(imagePkg, Integer.decode(imageId))
-                        ).build()
+                        dataSourceMonochromaticImage
                     )
-                }
-                if (dataSourceSmallImage != null) {
-                    val imagePkg = data.split("pkg=")[1].split(" id=")[0]
-                    val imageId = data.split("id=")[1].split(")")[0]
-                    shortTextComplicationDataBuilder!!.setSmallImage(
-                        SmallImage.Builder(
-                            Icon.createWithResource(
-                                imagePkg, Integer.decode(imageId)
-                            ),
-                            SmallImageType.ICON
-                        ).build()
-                    )
-                }
-                if (dataSourceAmbientImage != null) {
-                    if (renderParameters.drawMode == DrawMode.AMBIENT) {
-                        shortTextComplicationDataBuilder!!.setSmallImage(
-                            SmallImage.Builder(
-                                dataSourceAmbientImage!!,
-                                SmallImageType.ICON
-                            ).build()
-                        )
+                } else {
+                    if (dataSourceSmallImage != null) {
+                        shortTextComplicationDataBuilder!!.setSmallImage(dataSourceSmallImage)
+                    }
+                    if (dataSourceAmbientImage != null) {
+                        if (renderParameters.drawMode == DrawMode.AMBIENT) {
+                            shortTextComplicationDataBuilder!!.setSmallImage(
+                                SmallImage.Builder(
+                                    dataSourceAmbientImage!!,
+                                    SmallImageType.ICON
+                                ).build()
+                            )
+                        }
                     }
                 }
                 if (dataSourceTapAction != null) {
@@ -152,10 +142,10 @@ class WatchFaceCanvasRenderer(
 
             ComplicationType.SMALL_IMAGE -> {
                 try {
-                    val imageType = data.split("type=")[1].split(",")[0]
+                    val imageType = data!!.split("type=")[1].split(",")[0]
                     if (imageType == "ICON") {
-                        val imagePkg = data.split("pkg=")[1].split(" id=")[0]
-                        val imageId = data.split("id=")[1].split(")")[0]
+                        val imagePkg = data!!.split("pkg=")[1].split(" id=")[0]
+                        val imageId = data!!.split("id=")[1].split(")")[0]
                         val drawable = ResourcesCompat.getDrawable(
                             context.packageManager.getResourcesForApplication(imagePkg),
                             Integer.decode(imageId),
@@ -210,7 +200,7 @@ class WatchFaceCanvasRenderer(
         }
     }
     private fun getShortTextComplicationDataFields() {
-        dataSourceText  = shortTextComplicationData!!.text
+        dataSourceText = shortTextComplicationData!!.text
         if (shortTextComplicationData!!.contentDescription != null) {
             dataSourceContentDescription = shortTextComplicationData!!.contentDescription
         }
@@ -219,15 +209,17 @@ class WatchFaceCanvasRenderer(
         }
         if (shortTextComplicationData!!.smallImage != null) {
             dataSourceSmallImage = shortTextComplicationData!!.smallImage
-        }
-        if (shortTextComplicationData!!.monochromaticImage != null) {
-            dataSourceMonochromaticImage = shortTextComplicationData!!.monochromaticImage
+            dataSourceSmallImage!!.image.setTint(Color.WHITE)
         }
         if (shortTextComplicationData!!.smallImage?.ambientImage != null) {
             Log.d(tag, "has ambientImage")
-            dataSourceAmbientImage = shortTextComplicationData!!.smallImage!!.ambientImage!!
+            dataSourceAmbientImage = shortTextComplicationData!!.smallImage!!.ambientImage
+            dataSourceAmbientImage!!.setTint(Color.WHITE)
         } else {
             Log.d(tag, "no ambientImage")
+        }
+        if (shortTextComplicationData!!.monochromaticImage != null) {
+            dataSourceMonochromaticImage = shortTextComplicationData!!.monochromaticImage
         }
         if (shortTextComplicationData!!.tapAction != null) {
             dataSourceTapAction = shortTextComplicationData!!.tapAction
