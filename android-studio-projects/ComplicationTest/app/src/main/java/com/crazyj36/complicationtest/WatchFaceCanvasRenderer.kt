@@ -34,7 +34,7 @@ class WatchFaceCanvasRenderer(
     currentUserStyleRepository = currentUserStyleRepository,
     watchState = watchState,
     canvasType = canvasType,
-    interactiveDrawModeUpdateDelayMillis = 1000L,
+    interactiveDrawModeUpdateDelayMillis = 16L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
     private val tag = "COMPLICATION_TEST"
@@ -91,31 +91,27 @@ class WatchFaceCanvasRenderer(
                 }
 
                 ComplicationType.SMALL_IMAGE -> {
-                    try {
-                        val imageType = data.split("type=")[1].split(",")[0]
-                        if (imageType == "ICON") {
-                            val imagePkg = data.split("pkg=")[1].split(" id=")[0]
-                            val imageId = data.split("id=")[1].split(")")[0]
-                            val drawable = ResourcesCompat.getDrawable(
-                                context.packageManager.getResourcesForApplication(imagePkg),
-                                Integer.decode(imageId),
-                                null
-                            )
-                            drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
-                            drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
-                            drawable.setTint(Color.WHITE)
-                            drawable.bounds = Rect(
-                                (canvas.width * 0.40).toInt(),
-                                (canvas.height * 0.40).toInt(),
-                                (canvas.width * 0.60).toInt(),
-                                (canvas.height * 0.60).toInt()
-                            )
-                            drawable.draw(canvas)
-                        } else if (imageType == "PHOTO") {
-                            complication!!.render(canvas, zonedDateTime, renderParameters)
-                        }
-                    } catch (exception: Exception) {
-                        Log.d(tag, "Data not ready yet.\n" + exception.localizedMessage)
+                    val imageType = data.split("type=")[1].split(",")[0]
+                    if (imageType == "ICON") {
+                        val imagePkg = data.split("pkg=")[1].split(" id=")[0]
+                        val imageId = data.split("id=")[1].split(")")[0]
+                        val drawable = ResourcesCompat.getDrawable(
+                            context.packageManager.getResourcesForApplication(imagePkg),
+                            Integer.decode(imageId),
+                            null
+                        )
+                        drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
+                        drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
+                        drawable.setTint(Color.WHITE)
+                        drawable.bounds = Rect(
+                            (canvas.width * 0.40).toInt(),
+                            (canvas.height * 0.40).toInt(),
+                            (canvas.width * 0.60).toInt(),
+                            (canvas.height * 0.60).toInt()
+                        )
+                        drawable.draw(canvas)
+                    } else if (imageType == "PHOTO") {
+                        complication!!.render(canvas, zonedDateTime, renderParameters)
                     }
                 }
 
@@ -135,6 +131,8 @@ class WatchFaceCanvasRenderer(
                     Log.d(tag, "Unsupported complication type")
                 }
             }
+        } else {
+            Log.d(tag, "PLACEHOLDER active, complicationData not ready yet.")
         }
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
