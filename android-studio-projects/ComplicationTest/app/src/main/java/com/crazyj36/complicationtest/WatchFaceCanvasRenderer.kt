@@ -110,9 +110,14 @@ class WatchFaceCanvasRenderer(
             ComplicationType.EMPTY -> {
 
             }
+            ComplicationType.NO_DATA -> {
 
+            }
+            ComplicationType.NOT_CONFIGURED -> {
+
+            }
             else -> {
-                Log.d(tag, "Unknown complication type, not customizing.")
+                Log.d(tag, "Unsupported complication type. Attempting to render.")
                 complication!!.render(canvas, zonedDateTime, renderParameters)
             }
         }
