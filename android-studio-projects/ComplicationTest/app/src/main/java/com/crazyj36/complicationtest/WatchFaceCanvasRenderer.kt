@@ -124,6 +124,7 @@ class WatchFaceCanvasRenderer(
                 paint
             )
         }
+        invalidate()
     }
 
     class MySharedAssets : SharedAssets {
