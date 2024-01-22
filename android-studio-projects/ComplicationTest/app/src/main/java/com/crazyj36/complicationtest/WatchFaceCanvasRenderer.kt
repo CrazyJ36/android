@@ -11,7 +11,6 @@ import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.Rect
-import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.support.wearable.complications.ComplicationData
 import android.util.Log
@@ -60,7 +59,6 @@ class WatchFaceCanvasRenderer(
     private var dataSourceContentDescription: CharSequence? = null
     private var dataSourceTitle: CharSequence? = null
     private var dataSourceIcon: Icon? = null
-    private var dataSourceSmallImage: Icon? = null
     private var dataSourceBurnInProtectionSmallImage: Icon? = null
     private val paint = Paint()
     private var colorMatrix = floatArrayOf(
@@ -99,31 +97,44 @@ class WatchFaceCanvasRenderer(
         dataSourceContentDescription = null
         dataSourceTitle = null
         dataSourceIcon = null
-        dataSourceSmallImage = null
         dataSourceBurnInProtectionSmallImage = null
 
-        getDataSourceInfo(zonedDateTime)
+        val data = complication!!.complicationData.value.toString()
+        Log.d(tag, data)
 
+        //getDataSourceInfo(zonedDateTime)
         when (complication!!.complicationData.value.type) {
             ComplicationType.SHORT_TEXT -> {
-                Log.d(tag, "Loading custom ShortTextComplicationData")
-                complication!!.renderer.loadData(
-                    setShortTextComplicationData(), false
-                )
+                /*ShortTextComplicationData(text=ComplicationText{
+                mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null},
+                title=null, monochromaticImage=MonochromaticImage(
+                image=Icon(typ=RESOURCE pkg=com.google.android.wearable.sysui id=0x7f08025a),
+                ambientImage=Icon(typ=RESOURCE pkg=com.google.android.wearable.sysui id=0x7f08011a)),
+                smallImage=null, contentDescription=ComplicationText{mSurroundingText=REDACTED,
+                mTimeDependentText=null, mDynamicText=null}, tapActionLostDueToSerialization=false,
+                tapAction=PendingIntent{af660ce: android.os.BinderProxy@e02b051}, validTimeRange=TimeRange(REDACTED),
+                dataSource=ComponentInfo{com.google.android.wearable.sysui/
+                com.google.android.clockwork.sysui.experiences.complications.providers.BatteryProviderService},
+                persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null)
+                 */
+                shortTextComplicationData = complication!!.complicationData.value as ShortTextComplicationData
+                /*val imagePkg = data.split("pkg=")[1].split(" id=")[0]
+                val imageId = data.split("id=")[1].split(")")[0]
+                val icon = Icon.createWithResource(imagePkg, Integer.decode(imageId))
+                val monochromaticImage: MonochromaticImage = MonochromaticImage.Builder(
+                    Icon.createWithResource(imagePkg, Integer.decode(imageId))
+                ).build()*/
+                shortTextComplicationData!!.monochromaticImage!!.image.setTint(Color.WHITE)
                 complication!!.render(canvas, zonedDateTime, renderParameters)
             }
 
             ComplicationType.SMALL_IMAGE -> {
-                val data = complication!!.complicationData.value.toString()
                 val imageType = data.split("type=")[1].split(",")[0].trim()
-                Log.d(tag, "imageType: $imageType")
-
                 if (imageType == "ICON") {
-                    val drawable: Drawable?
-                    //drawable = complicationWireData!!.smallImage!!.loadDrawable(context)
                     val imagePkg = data.split("pkg=")[1].split(" id=")[0].trim()
                     val imageId = data.split("id=")[1].split(")")[0].trim()
-                    drawable = ResourcesCompat.getDrawable(context.packageManager.getResourcesForApplication(imagePkg),
+                    val drawable = ResourcesCompat.getDrawable(
+                        context.packageManager.getResourcesForApplication(imagePkg),
                         Integer.decode(imageId),
                         null
                     )
@@ -162,9 +173,11 @@ class WatchFaceCanvasRenderer(
         }
     }
 
-    @SuppressLint("RestrictedApi")
+    /*@SuppressLint("RestrictedApi")
     private fun setShortTextComplicationData(): ShortTextComplicationData {
-        Log.d(tag, "Complication is ComplicationType.SHORT_TEXT.")
+
+
+
         if (dataSourceText != null && dataSourceContentDescription != null) {
             Log.d(tag, "Setting dataSourceText and dataSourceContentDescription.")
             shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
@@ -249,7 +262,7 @@ class WatchFaceCanvasRenderer(
             Log.d(tag, "hasIcon")
             dataSourceIcon = complicationWireData!!.icon!!
         }
-    }
+    }*/
 
     class MySharedAssets : SharedAssets {
         override fun onDestroy() {
