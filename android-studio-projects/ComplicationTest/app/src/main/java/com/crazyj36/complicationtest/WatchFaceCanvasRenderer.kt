@@ -63,71 +63,69 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        Log.d(tag, "rendering")
+        canvas.drawColor(Color.BLACK)
         complication = complicationSlotsManager.complicationSlots[0]
         val complicationType = complication!!.complicationData.value.type
-        Log.d(tag, "ComplicationType: $complicationType")
-        if (complicationType != ComplicationType.EMPTY) {
-            val data = complication!!.complicationData.value.toString()
-            Log.d(tag, data)
-            when (complicationType) {
-                ComplicationType.SHORT_TEXT -> {
+        val data = complication!!.complicationData.value.toString()
+        Log.d(tag, data)
+        when (complicationType) {
+            ComplicationType.SHORT_TEXT -> {
+                val imagePkg = data.split("pkg=")[1].split(" id=")[0]
+                val imageId = data.split("id=")[1].split(")")[0]
+                shortTextComplicationData =
+                    complication!!.complicationData.value as ShortTextComplicationData
+                shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
+                    shortTextComplicationData!!.text,
+                    shortTextComplicationData!!.contentDescription!!
+                ).setMonochromaticImage(
+                    MonochromaticImage.Builder(
+                        Icon.createWithResource(imagePkg, Integer.decode(imageId))
+                    ).build()
+                ).setTapAction(shortTextComplicationData!!.tapAction)
+                complication!!.renderer.loadData(
+                    shortTextComplicationDataBuilder!!.build(),
+                    false
+                )
+                complication!!.render(canvas, zonedDateTime, renderParameters)
+            }
+
+            ComplicationType.SMALL_IMAGE -> {
+                val imageType = data.split("type=")[1].split(",")[0]
+                if (imageType == "ICON") {
                     val imagePkg = data.split("pkg=")[1].split(" id=")[0]
                     val imageId = data.split("id=")[1].split(")")[0]
-                    shortTextComplicationData =
-                        complication!!.complicationData.value as ShortTextComplicationData
-                    shortTextComplicationDataBuilder = ShortTextComplicationData.Builder(
-                        shortTextComplicationData!!.text,
-                        shortTextComplicationData!!.contentDescription!!
-                    ).setMonochromaticImage(
-                        MonochromaticImage.Builder(
-                            Icon.createWithResource(imagePkg, Integer.decode(imageId))
-                        ).build()
-                    ).setTapAction(shortTextComplicationData!!.tapAction)
-                    complication!!.renderer.loadData(
-                        shortTextComplicationDataBuilder!!.build(),
-                        false
+                    val drawable = ResourcesCompat.getDrawable(
+                        context.packageManager.getResourcesForApplication(imagePkg),
+                        Integer.decode(imageId),
+                        null
                     )
+                    drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
+                    drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
+                    drawable.setTint(Color.WHITE)
+                    drawable.bounds = Rect(
+                        (canvas.width * 0.40).toInt(),
+                        (canvas.height * 0.40).toInt(),
+                        (canvas.width * 0.60).toInt(),
+                        (canvas.height * 0.60).toInt()
+                    )
+                    drawable.draw(canvas)
+                } else if (imageType == "PHOTO") {
                     complication!!.render(canvas, zonedDateTime, renderParameters)
-                }
-
-                ComplicationType.SMALL_IMAGE -> {
-                    val imageType = data.split("type=")[1].split(",")[0]
-                    if (imageType == "ICON") {
-                        val imagePkg = data.split("pkg=")[1].split(" id=")[0]
-                        val imageId = data.split("id=")[1].split(")")[0]
-                        val drawable = ResourcesCompat.getDrawable(
-                            context.packageManager.getResourcesForApplication(imagePkg),
-                            Integer.decode(imageId),
-                            null
-                        )
-                        drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
-                        drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
-                        drawable.setTint(Color.WHITE)
-                        drawable.bounds = Rect(
-                            (canvas.width * 0.40).toInt(),
-                            (canvas.height * 0.40).toInt(),
-                            (canvas.width * 0.60).toInt(),
-                            (canvas.height * 0.60).toInt()
-                        )
-                        drawable.draw(canvas)
-                    } else if (imageType == "PHOTO") {
-                        complication!!.render(canvas, zonedDateTime, renderParameters)
-                    }
-                }
-                ComplicationType.NO_DATA -> {
-                    complication!!.render(canvas, zonedDateTime, renderParameters)
-                }
-
-                ComplicationType.NOT_CONFIGURED -> {
-                    complication!!.render(canvas, zonedDateTime, renderParameters)
-                }
-                else -> {
-                    Log.d(tag, "Unsupported complication type")
                 }
             }
-        } else {
-            canvas.drawColor(Color.BLACK)
+            ComplicationType.EMPTY -> {
+                // canvas.drawColor(Color.BLACK) at first in render() takes care of this.
+            }
+            ComplicationType.NO_DATA -> {
+                complication!!.render(canvas, zonedDateTime, renderParameters)
+            }
+
+            ComplicationType.NOT_CONFIGURED -> {
+                complication!!.render(canvas, zonedDateTime, renderParameters)
+            }
+            else -> {
+                Log.d(tag, "Unsupported complication type")
+            }
         }
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
