@@ -223,8 +223,11 @@ class WatchFaceCanvasRenderer(
         if (shortTextComplicationData!!.monochromaticImage != null) {
             dataSourceMonochromaticImage = shortTextComplicationData!!.monochromaticImage
         }
-        if (shortTextComplicationData!!.smallImage!!.ambientImage != null) {
+        if (shortTextComplicationData!!.smallImage?.ambientImage != null) {
+            Log.d(tag, "has ambientImage")
             dataSourceAmbientImage = shortTextComplicationData!!.smallImage!!.ambientImage!!
+        } else {
+            Log.d(tag, "no ambientImage")
         }
         if (shortTextComplicationData!!.tapAction != null) {
             dataSourceTapAction = shortTextComplicationData!!.tapAction
