@@ -66,10 +66,10 @@ class WatchFaceCanvasRenderer(
         Log.d(tag, "rendering")
         complication = complicationSlotsManager.complicationSlots[0]
         val complicationType = complication!!.complicationData.value.type
+        Log.d(tag, "ComplicationType: $complicationType")
         if (complicationType != ComplicationType.EMPTY) {
             val data = complication!!.complicationData.value.toString()
             Log.d(tag, data)
-            Log.d(tag, "ComplicationType: " + complication!!.complicationData.value.type.toString())
             when (complicationType) {
                 ComplicationType.SHORT_TEXT -> {
                     val imagePkg = data.split("pkg=")[1].split(" id=")[0]
@@ -127,9 +127,7 @@ class WatchFaceCanvasRenderer(
                 }
             }
         } else {
-            if (complication!!.complicationData.value.hasPlaceholderFields()) {
-                complication!!.render(canvas, zonedDateTime, renderParameters)
-            }
+            canvas.drawColor(Color.BLACK)
         }
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
