@@ -60,6 +60,7 @@ class WatchFaceCanvasRenderer(
     ) {
         canvas.drawColor(Color.BLACK)
         complication = complicationSlotsManager.complicationSlots[0]
+        Log.d(tag, complication!!.complicationData.value.toString())
 
         when (complication!!.complicationData.value.type) {
             ComplicationType.SHORT_TEXT -> {
@@ -118,10 +119,11 @@ class WatchFaceCanvasRenderer(
             ComplicationType.SMALL_IMAGE -> {
                 val dataSource = complication!!.complicationData.value as SmallImageComplicationData
                 if (dataSource.smallImage.type == SmallImageType.ICON) {
-                    
+
                     val drawable = if (renderParameters.drawMode == DrawMode.AMBIENT &&
                         dataSource.smallImage.ambientImage != null
                     ) {
+                        Log.d(tag, "Using amnbientImage.")
                         dataSource.smallImage.ambientImage!!.loadDrawable(context)
                     } else {
                         dataSource.smallImage.image.loadDrawable(context)
