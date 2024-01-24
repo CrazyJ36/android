@@ -97,7 +97,7 @@ class WatchFaceCanvasRenderer(
                                 SmallImageType.ICON
                             ).build()
                         )
-                    } else if (dataSource.smallImage != null) {
+                    } else {
                         newDataBuilder.setSmallImage(
                             SmallImage.Builder(
                                 dataSource.smallImage?.image!!.setTint(Color.WHITE),
@@ -123,7 +123,7 @@ class WatchFaceCanvasRenderer(
                     val drawable = if (renderParameters.drawMode == DrawMode.AMBIENT &&
                         dataSource.smallImage.ambientImage != null
                     ) {
-                        Log.d(tag, "Using amnbientImage.")
+                        Log.d(tag, "Using ambientImage.")
                         dataSource.smallImage.ambientImage!!.loadDrawable(context)
                     } else {
                         dataSource.smallImage.image.loadDrawable(context)
@@ -139,27 +139,27 @@ class WatchFaceCanvasRenderer(
                     drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
                     drawable.setTint(Color.WHITE)
 
-                    val newDataBuilder: SmallImageComplicationData =
+                    val newDataBuilder: SmallImageComplicationData.Builder =
                         if (dataSource.contentDescription != null) {
                             SmallImageComplicationData.Builder(
                                 SmallImage.Builder(
-                                    Icon.createWithBitmap(drawable.toBitmap()),
+                                    Icon.createWithBitmap(drawable.current.toBitmap()),
                                     SmallImageType.ICON
                                 ).build(),
                                 dataSource.contentDescription!!
-                            ).build()
+                            )
                         } else {
                             SmallImageComplicationData.Builder(
                                 SmallImage.Builder(
-                                    Icon.createWithBitmap(drawable.toBitmap()),
+                                    Icon.createWithBitmap(drawable.current.toBitmap()),
                                     SmallImageType.ICON
                                 ).build(),
                                 PlainComplicationText.Builder(
                                     "Content description not provided by DataSource."
                                 ).build()
-                            ).build()
+                            )
                         }
-                    complication!!.renderer.loadData(newDataBuilder, false)
+                    complication!!.renderer.loadData(newDataBuilder.build(), false)
                     complication!!.render(canvas, zonedDateTime, renderParameters)
                 } else if (dataSource.smallImage.type == SmallImageType.PHOTO) {
                     complication!!.render(canvas, zonedDateTime, renderParameters)
