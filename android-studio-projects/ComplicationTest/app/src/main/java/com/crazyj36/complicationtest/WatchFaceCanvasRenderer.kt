@@ -7,6 +7,7 @@ import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.Rect
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.util.Log
 import android.view.SurfaceHolder
@@ -120,22 +121,22 @@ class WatchFaceCanvasRenderer(
                 val dataSource = complication!!.complicationData.value as SmallImageComplicationData
                 if (dataSource.smallImage.type == SmallImageType.ICON) {
 
-                    val drawable = if (renderParameters.drawMode == DrawMode.AMBIENT &&
+                    val drawable: Icon = if (renderParameters.drawMode == DrawMode.AMBIENT &&
                         dataSource.smallImage.ambientImage != null
                     ) {
                         Log.d(tag, "Using ambientImage.")
-                        dataSource.smallImage.ambientImage!!.loadDrawable(context)
+                        dataSource.smallImage.ambientImage!!
                     } else {
-                        dataSource.smallImage.image.loadDrawable(context)
+                        dataSource.smallImage.image
                     }
-                    drawable!!.colorFilter = ColorMatrixColorFilter(
+                    /*drawable!!.colorFilter = ColorMatrixColorFilter(
                         floatArrayOf(
                             0.4f, 0.4f, 0.4f, 0f, 0f,
                             0.4f, 0.4f, 0.4f, 0f, 0f,
                             0.4f, 0.4f, 0.4f, 0f, 0f,
                             0f, 0f, 0f, 1f, 0f
                         )
-                    )
+                    )*/
                     drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
                     drawable.setTint(Color.WHITE)
 
@@ -143,7 +144,7 @@ class WatchFaceCanvasRenderer(
                         if (dataSource.contentDescription != null) {
                             SmallImageComplicationData.Builder(
                                 SmallImage.Builder(
-                                    Icon.createWithBitmap(drawable.current.toBitmap()),
+                                    drawable,
                                     SmallImageType.ICON
                                 ).build(),
                                 dataSource.contentDescription!!
@@ -151,7 +152,7 @@ class WatchFaceCanvasRenderer(
                         } else {
                             SmallImageComplicationData.Builder(
                                 SmallImage.Builder(
-                                    Icon.createWithBitmap(drawable.current.toBitmap()),
+                                    drawable,
                                     SmallImageType.ICON
                                 ).build(),
                                 PlainComplicationText.Builder(
