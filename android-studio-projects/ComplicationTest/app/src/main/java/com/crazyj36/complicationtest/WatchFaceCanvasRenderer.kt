@@ -138,8 +138,8 @@ class WatchFaceCanvasRenderer(
                     drawable.bounds = Rect(
                         (canvas.width * 0.45).toInt(),
                         (canvas.height * 0.45).toInt(),
-                        (canvas.width * 0.65).toInt(),
-                        (canvas.height * 0.65).toInt()
+                        (canvas.width * 0.55).toInt(),
+                        (canvas.height * 0.55).toInt()
                     )
                     drawable.draw(canvas)
                 } else if (dataSource.smallImage.type == SmallImageType.PHOTO) {
