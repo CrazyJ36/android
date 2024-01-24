@@ -7,9 +7,10 @@ import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.Rect
+import android.graphics.drawable.Icon
 import android.util.Log
 import android.view.SurfaceHolder
-import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
@@ -19,6 +20,7 @@ import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
+import androidx.wear.watchface.complications.data.SmallImageComplicationData
 import androidx.wear.watchface.complications.data.SmallImageType
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.time.ZonedDateTime
@@ -58,7 +60,6 @@ class WatchFaceCanvasRenderer(
     ) {
         canvas.drawColor(Color.BLACK)
         complication = complicationSlotsManager.complicationSlots[0]
-        Log.d(tag, complication!!.complicationData.value.toString())
 
         when (complication!!.complicationData.value.type) {
             ComplicationType.SHORT_TEXT -> {
@@ -115,7 +116,54 @@ class WatchFaceCanvasRenderer(
             }
 
             ComplicationType.SMALL_IMAGE -> {
-                val data = complication!!.complicationData.value.toString()
+                val dataSource = complication!!.complicationData.value as SmallImageComplicationData
+                if (dataSource.smallImage.type == SmallImageType.ICON) {
+                    
+                    val drawable = if (renderParameters.drawMode == DrawMode.AMBIENT &&
+                        dataSource.smallImage.ambientImage != null
+                    ) {
+                        dataSource.smallImage.ambientImage!!.loadDrawable(context)
+                    } else {
+                        dataSource.smallImage.image.loadDrawable(context)
+                    }
+                    drawable!!.colorFilter = ColorMatrixColorFilter(
+                        floatArrayOf(
+                            0.4f, 0.4f, 0.4f, 0f, 0f,
+                            0.4f, 0.4f, 0.4f, 0f, 0f,
+                            0.4f, 0.4f, 0.4f, 0f, 0f,
+                            0f, 0f, 0f, 1f, 0f
+                        )
+                    )
+                    drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
+                    drawable.setTint(Color.WHITE)
+
+                    val newDataBuilder: SmallImageComplicationData =
+                        if (dataSource.contentDescription != null) {
+                            SmallImageComplicationData.Builder(
+                                SmallImage.Builder(
+                                    Icon.createWithBitmap(drawable.toBitmap()),
+                                    SmallImageType.ICON
+                                ).build(),
+                                dataSource.contentDescription!!
+                            ).build()
+                        } else {
+                            SmallImageComplicationData.Builder(
+                                SmallImage.Builder(
+                                    Icon.createWithBitmap(drawable.toBitmap()),
+                                    SmallImageType.ICON
+                                ).build(),
+                                PlainComplicationText.Builder(
+                                    "Content description not provided by DataSource."
+                                ).build()
+                            ).build()
+                        }
+                    complication!!.renderer.loadData(newDataBuilder, false)
+                    complication!!.render(canvas, zonedDateTime, renderParameters)
+                } else if (dataSource.smallImage.type == SmallImageType.PHOTO) {
+                    complication!!.render(canvas, zonedDateTime, renderParameters)
+                }
+
+                /*val data = complication!!.complicationData.value.toString()
                 val imageType = data.split("type=")[1].split(",")[0]
                 if (imageType == "ICON") {
                     val imagePkg = data.split("pkg=")[1].split(" id=")[0]
@@ -141,10 +189,7 @@ class WatchFaceCanvasRenderer(
                         (canvas.width * 0.60).toInt(),
                         (canvas.height * 0.60).toInt()
                     )
-                    drawable.draw(canvas)
-                } else if (imageType == "PHOTO") {
-                    complication!!.render(canvas, zonedDateTime, renderParameters)
-                }
+                    drawable.draw(canvas)*/
             }
 
             ComplicationType.EMPTY -> {
