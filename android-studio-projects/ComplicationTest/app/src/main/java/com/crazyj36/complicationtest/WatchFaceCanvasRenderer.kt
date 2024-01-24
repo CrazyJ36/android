@@ -8,10 +8,8 @@ import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.Icon
 import android.util.Log
 import android.view.SurfaceHolder
-import androidx.core.graphics.drawable.toBitmap
 import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
@@ -98,7 +96,7 @@ class WatchFaceCanvasRenderer(
                                 SmallImageType.ICON
                             ).build()
                         )
-                    } else {
+                    } else if (dataSource.smallImage?.image != null) {
                         newDataBuilder.setSmallImage(
                             SmallImage.Builder(
                                 dataSource.smallImage?.image!!.setTint(Color.WHITE),
@@ -138,43 +136,15 @@ class WatchFaceCanvasRenderer(
                     drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
                     drawable.setTint(Color.WHITE)
                     drawable.bounds = Rect(
-                        (canvas.width * 0.40).toInt(),
-                        (canvas.height * 0.40).toInt(),
-                        (canvas.width * 0.60).toInt(),
-                        (canvas.height * 0.60).toInt()
+                        (canvas.width * 0.45).toInt(),
+                        (canvas.height * 0.45).toInt(),
+                        (canvas.width * 0.65).toInt(),
+                        (canvas.height * 0.65).toInt()
                     )
                     drawable.draw(canvas)
                 } else if (dataSource.smallImage.type == SmallImageType.PHOTO) {
                     complication!!.render(canvas, zonedDateTime, renderParameters)
                 }
-
-                /*val data = complication!!.complicationData.value.toString()
-                val imageType = data.split("type=")[1].split(",")[0]
-                if (imageType == "ICON") {
-                    val imagePkg = data.split("pkg=")[1].split(" id=")[0]
-                    val imageId = data.split("id=")[1].split(")")[0]
-                    val drawable = ResourcesCompat.getDrawable(
-                        context.packageManager.getResourcesForApplication(imagePkg),
-                        Integer.decode(imageId),
-                        null
-                    )
-                    drawable!!.colorFilter = ColorMatrixColorFilter(
-                        floatArrayOf(
-                            0.4f, 0.4f, 0.4f, 0f, 0f,
-                            0.4f, 0.4f, 0.4f, 0f, 0f,
-                            0.4f, 0.4f, 0.4f, 0f, 0f,
-                            0f, 0f, 0f, 1f, 0f
-                        )
-                    )
-                    drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
-                    drawable.setTint(Color.WHITE)
-                    drawable.bounds = Rect(
-                        (canvas.width * 0.40).toInt(),
-                        (canvas.height * 0.40).toInt(),
-                        (canvas.width * 0.60).toInt(),
-                        (canvas.height * 0.60).toInt()
-                    )
-                    drawable.draw(canvas)*/
             }
 
             ComplicationType.EMPTY -> {
@@ -196,9 +166,9 @@ class WatchFaceCanvasRenderer(
 
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
             Log.d(tag, "Ambient")
-            paint.setARGB(255, 255, 255, 255)
+            paint.color = Color.WHITE
             paint.textAlign = Paint.Align.CENTER
-            paint.textSize = 14f
+            paint.textSize = 24f
             canvas.drawText(
                 "Ambient",
                 canvas.width / 2f,
