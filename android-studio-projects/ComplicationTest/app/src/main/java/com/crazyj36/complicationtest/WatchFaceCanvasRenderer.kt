@@ -120,48 +120,30 @@ class WatchFaceCanvasRenderer(
             ComplicationType.SMALL_IMAGE -> {
                 val dataSource = complication!!.complicationData.value as SmallImageComplicationData
                 if (dataSource.smallImage.type == SmallImageType.ICON) {
-
-                    val drawable: Icon = if (renderParameters.drawMode == DrawMode.AMBIENT &&
+                    val drawable: Drawable? = if (renderParameters.drawMode == DrawMode.AMBIENT &&
                         dataSource.smallImage.ambientImage != null
                     ) {
-                        Log.d(tag, "Using ambientImage.")
-                        dataSource.smallImage.ambientImage!!
+                        dataSource.smallImage.ambientImage!!.loadDrawable(context)
                     } else {
-                        dataSource.smallImage.image
+                        dataSource.smallImage.image.loadDrawable(context)
                     }
-                    /*drawable!!.colorFilter = ColorMatrixColorFilter(
+                    drawable!!.colorFilter = ColorMatrixColorFilter(
                         floatArrayOf(
                             0.4f, 0.4f, 0.4f, 0f, 0f,
                             0.4f, 0.4f, 0.4f, 0f, 0f,
                             0.4f, 0.4f, 0.4f, 0f, 0f,
                             0f, 0f, 0f, 1f, 0f
                         )
-                    )*/
+                    )
                     drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
                     drawable.setTint(Color.WHITE)
-
-                    val newDataBuilder: SmallImageComplicationData.Builder =
-                        if (dataSource.contentDescription != null) {
-                            SmallImageComplicationData.Builder(
-                                SmallImage.Builder(
-                                    drawable,
-                                    SmallImageType.ICON
-                                ).build(),
-                                dataSource.contentDescription!!
-                            )
-                        } else {
-                            SmallImageComplicationData.Builder(
-                                SmallImage.Builder(
-                                    drawable,
-                                    SmallImageType.ICON
-                                ).build(),
-                                PlainComplicationText.Builder(
-                                    "Content description not provided by DataSource."
-                                ).build()
-                            )
-                        }
-                    complication!!.renderer.loadData(newDataBuilder.build(), false)
-                    complication!!.render(canvas, zonedDateTime, renderParameters)
+                    drawable.bounds = Rect(
+                        (canvas.width * 0.40).toInt(),
+                        (canvas.height * 0.40).toInt(),
+                        (canvas.width * 0.60).toInt(),
+                        (canvas.height * 0.60).toInt()
+                    )
+                    drawable.draw(canvas)
                 } else if (dataSource.smallImage.type == SmallImageType.PHOTO) {
                     complication!!.render(canvas, zonedDateTime, renderParameters)
                 }
