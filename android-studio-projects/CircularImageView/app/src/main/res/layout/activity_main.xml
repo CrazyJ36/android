@@ -5,16 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--These app: attributes with @styles/... or in java like this app is.-->
-    <!--app:shapeAppearanceOverlay="@style/CircularShapeModel"
-    app:strokeWidth="4dp"
-    app:strokeColor="@android:color/holo_blue_dark"-->
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/shapeableImageView"
         android:layout_width="128dp"
         android:layout_height="128dp"
         android:layout_centerInParent="true"
-        android:padding="4dp"
+        app:shapeAppearanceOverlay="@style/CircularShapeModel"
         android:src="@drawable/photo"
         android:contentDescription="@string/photoContentDescription"/>
 </RelativeLayout>
