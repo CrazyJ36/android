@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Flashing Button</string>
+    <string name="buttonText">Btn</string>
+    <string name="toastText">Clicked</string>
+</resources>
