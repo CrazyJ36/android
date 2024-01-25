@@ -1,18 +1,13 @@
 package com.crazyj36.flashingbutton
 
-import android.content.res.ColorStateList
-import android.graphics.Color
 import com.google.android.material.button.MaterialButton
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Timer
 import java.util.TimerTask
 
 class MainActivity : AppCompatActivity() {
-    private val tag = "FLASHING_BUTTON"
     var button: MaterialButton? = null
     var pulseDirection = true
     var buttonStrokeWidth = 1
@@ -47,7 +42,7 @@ class MainActivity : AppCompatActivity() {
                 if (count == 0) pulseDirection = true
             }
             button!!.strokeWidth = buttonStrokeWidth
-            runOnUiThread() {
+            runOnUiThread {
                 button!!.textSize = buttonTextSize
             }
         }
