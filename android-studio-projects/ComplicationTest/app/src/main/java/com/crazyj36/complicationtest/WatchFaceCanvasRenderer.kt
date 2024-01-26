@@ -57,10 +57,11 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        canvas.drawColor(Color.BLACK)
+        //canvas.drawColor(Color.BLACK)
         complication = complicationSlotsManager.complicationSlots[0]
+        complication!!.render(canvas, zonedDateTime, renderParameters)
 
-        when (complication!!.complicationData.value.type) {
+        /*when (complication!!.complicationData.value.type) {
             ComplicationType.SHORT_TEXT -> {
                 val dataSource = complication!!.complicationData.value as ShortTextComplicationData
                 val newDataBuilder: ShortTextComplicationData.Builder =
@@ -174,7 +175,7 @@ class WatchFaceCanvasRenderer(
                 canvas.height - (canvas.height / 7).toFloat(),
                 paint
             )
-        }
+        }*/
     }
 
     class MySharedAssets : SharedAssets {
