@@ -11,7 +11,7 @@ class ComplicationDataSourceService: SuspendingComplicationDataSourceService() {
     override suspend fun onComplicationRequest(request: ComplicationRequest): ComplicationData? {
         return LongTextComplicationData.Builder(
             text = PlainComplicationText.Builder(
-                "This complication text will only show \"this\"when rendering."
+                "This \uD83D\uDE00 complication text will only show \"this\" when rendering."
             ).build(),
             contentDescription = PlainComplicationText.Builder(
                 "Example text."
