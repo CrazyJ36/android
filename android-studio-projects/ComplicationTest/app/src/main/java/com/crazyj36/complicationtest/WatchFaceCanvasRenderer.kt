@@ -1,5 +1,7 @@
 package com.crazyj36.complicationtest
 
+import android.animation.StateListAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -7,21 +9,49 @@ import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.Rect
-import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.SurfaceHolder
-import androidx.wear.watchface.ComplicationSlot
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.fragment.app.Fragment
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
+import androidx.wear.watchface.RenderParameters
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
+import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
-import androidx.wear.watchface.complications.data.PlainComplicationText
-import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.data.SmallImage
 import androidx.wear.watchface.complications.data.SmallImageComplicationData
-import androidx.wear.watchface.complications.data.SmallImageType
 import androidx.wear.watchface.style.CurrentUserStyleRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.FlowCollector
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.forEach
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.take
+import kotlinx.coroutines.flow.toCollection
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.flow.toSet
+import kotlinx.coroutines.job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import java.time.ZonedDateTime
 
 class WatchFaceCanvasRenderer(
@@ -36,12 +66,16 @@ class WatchFaceCanvasRenderer(
     currentUserStyleRepository = currentUserStyleRepository,
     watchState = watchState,
     canvasType = canvasType,
-    interactiveDrawModeUpdateDelayMillis = 16L,
+    interactiveDrawModeUpdateDelayMillis = 1000L,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
     private val tag = "COMPLICATION_TEST"
-    private var complication: ComplicationSlot? = null
-    private val paint = Paint()
+    private var colorMatrix = floatArrayOf(
+        0.4f, 0.4f, 0.4f, 0f, 0f,
+        0.4f, 0.4f, 0.4f, 0f, 0f,
+        0.4f, 0.4f, 0.4f, 0f, 0f,
+        0f, 0f, 0f, 1f, 0f
+    )
 
     override fun renderHighlightLayer(
         canvas: Canvas,
@@ -49,6 +83,7 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
+        renderer(canvas, zonedDateTime, renderParameters)
     }
 
     override fun render(
@@ -57,117 +92,64 @@ class WatchFaceCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MySharedAssets
     ) {
-        canvas.drawColor(Color.BLACK)
-        complication = complicationSlotsManager.complicationSlots[0]
+        renderer(canvas, zonedDateTime, renderParameters)
+    }
 
-        when (complication!!.complicationData.value.type) {
-            ComplicationType.SHORT_TEXT -> {
-                val dataSource = complication!!.complicationData.value as ShortTextComplicationData
-                val newDataBuilder: ShortTextComplicationData.Builder =
-                    if (dataSource.contentDescription != null) {
-                        ShortTextComplicationData.Builder(
-                            dataSource.text,
-                            dataSource.contentDescription!!
-                        )
-                    } else {
-                        ShortTextComplicationData.Builder(
-                            dataSource.text,
-                            PlainComplicationText.Builder(
-                                "Content description not provided by complication DataSource."
-                            ).build()
-                        )
-                    }
-                if (dataSource.title != null) {
-                    newDataBuilder.setTitle(dataSource.title)
-                }
-                if (dataSource.monochromaticImage != null) {
-                    newDataBuilder.setMonochromaticImage(
-                        dataSource.monochromaticImage
-                    )
-                } else {
-                    if (renderParameters.drawMode == DrawMode.AMBIENT &&
-                        dataSource.smallImage?.ambientImage != null
-                    ) {
-                        Log.d(tag, "Using ambientImage.")
-                        newDataBuilder.setSmallImage(
-                            SmallImage.Builder(
-                                dataSource.smallImage?.ambientImage!!.setTint(Color.WHITE),
-                                SmallImageType.ICON
-                            ).build()
-                        )
-                    } else if (dataSource.smallImage?.image != null) {
-                        newDataBuilder.setSmallImage(
-                            SmallImage.Builder(
-                                dataSource.smallImage?.image!!.setTint(Color.WHITE),
-                                SmallImageType.ICON
-                            ).build()
-                        )
-                    }
-                }
-                if (dataSource.tapAction != null) {
-                    newDataBuilder.setTapAction(dataSource.tapAction)
-                }
-                complication!!.renderer.loadData(
-                    newDataBuilder.build(),
-                    false
-                )
-                complication!!.render(canvas, zonedDateTime, renderParameters)
-            }
+    @OptIn(DelicateCoroutinesApi::class)
+    @SuppressLint("RestrictedApi")
+    private fun renderer(
+        canvas: Canvas,
+        zonedDateTime: ZonedDateTime,
+        renderParameters: RenderParameters
+    ) {
+        val complication = complicationSlotsManager.complicationSlots[0]
+        val complicationWireData = complication!!.complicationData.value.asWireComplicationData()
+        //Log.d(tag, complication!!.complicationData.value.toString())
 
-            ComplicationType.SMALL_IMAGE -> {
-                val dataSource = complication!!.complicationData.value as SmallImageComplicationData
-                if (dataSource.smallImage.type == SmallImageType.ICON) {
-                    val drawable: Drawable? = if (renderParameters.drawMode == DrawMode.AMBIENT &&
-                        dataSource.smallImage.ambientImage != null
-                    ) {
-                        Log.d(tag, "Using ambientImage.")
-                        dataSource.smallImage.ambientImage!!.loadDrawable(context)
-                    } else {
-                        dataSource.smallImage.image.loadDrawable(context)
-                    }
-                    drawable!!.colorFilter = ColorMatrixColorFilter(
-                        floatArrayOf(
-                            0.4f, 0.4f, 0.4f, 0f, 0f,
-                            0.4f, 0.4f, 0.4f, 0f, 0f,
-                            0.4f, 0.4f, 0.4f, 0f, 0f,
-                            0f, 0f, 0f, 1f, 0f
-                        )
-                    )
-                    drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
-                    drawable.setTint(Color.WHITE)
-                    drawable.bounds = Rect(
-                        (canvas.width * 0.45).toInt(),
-                        (canvas.height * 0.45).toInt(),
-                        (canvas.width * 0.55).toInt(),
-                        (canvas.height * 0.55).toInt()
-                    )
-                    drawable.draw(canvas)
-                } else if (dataSource.smallImage.type == SmallImageType.PHOTO) {
-                    complication!!.render(canvas, zonedDateTime, renderParameters)
-                }
-            }
 
-            ComplicationType.EMPTY -> {
-                // canvas.drawColor(Color.BLACK) at first in render() takes care of this.
-            }
-
-            ComplicationType.NO_DATA -> {
-                complication!!.render(canvas, zonedDateTime, renderParameters)
-            }
-
-            ComplicationType.NOT_CONFIGURED -> {
-                complication!!.render(canvas, zonedDateTime, renderParameters)
-            }
-
-            else -> {
-                Log.d(tag, "Unsupported complication type")
+        GlobalScope.launch {
+            Log.d(tag, "globalScope running")
+            val collection: MutableCollection<ComplicationData> = mutableListOf()
+            complicationSlotsManager.complicationSlots[0]!!.complicationData.toCollection(collection)
+            collection.forEach {
+                Log.d(tag, "NUANCE: $it")
             }
         }
 
+
+
+
+        if (complication.complicationData.value.type == ComplicationType.SMALL_IMAGE &&
+            complicationWireData.hasSmallImage()) {
+            if (complicationWireData.smallImageStyle == android.support.wearable.complications.ComplicationData.Companion.IMAGE_STYLE_ICON) {
+                val drawable = complicationWireData.smallImage!!.loadDrawable(context)
+                drawable!!.colorFilter = ColorMatrixColorFilter(colorMatrix)
+                drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
+                drawable.setTint(Color.WHITE)
+                drawable.bounds =
+                    Rect(
+                        (canvas.width * 0.40).toInt(),
+                        (canvas.height * 0.40).toInt(),
+                        (canvas.width * 0.60).toInt(),
+                        (canvas.height * 0.60).toInt()
+                    )
+                drawable.draw(canvas)
+            } else if (complicationWireData.smallImageStyle == android.support.wearable.complications.ComplicationData.IMAGE_STYLE_PHOTO) {
+                complication.render(canvas, zonedDateTime, renderParameters)
+            }
+        } else {
+            complication.render(
+                canvas,
+                zonedDateTime,
+                renderParameters
+            )
+        }
+
         if (renderParameters.drawMode == DrawMode.AMBIENT) {
-            paint.color = Color.WHITE
+            val paint = Paint()
+            paint.setARGB(255, 255, 255, 255)
             paint.textAlign = Paint.Align.CENTER
-            paint.textSize = 18f
+            paint.textSize = 14f
             canvas.drawText(
                 "Ambient",
                 canvas.width / 2f,

@@ -36,7 +36,7 @@ class ComplicationTapBroadcastReceiver : BroadcastReceiver() {
     inner class MyTimerTask : TimerTask() {
         override fun run() {
             isTimerTaskAlive = true
-            if (CustomComplicationDataSourceService.counter < 10) {
+            if (CustomComplicationDataSourceService.counter < 20) {
                 Log.d("CRAZYJ36", "timer running")
                 CustomComplicationDataSourceService.counter++
                 complicationDataSourceUpdateRequester.requestUpdateAll()

@@ -15,7 +15,7 @@ class CustomComplicationDataSourceService: SuspendingComplicationDataSourceServi
     override fun getPreviewData(type: ComplicationType): ComplicationData {
         return ShortTextComplicationData.Builder(
             text = PlainComplicationText.Builder(
-                counter.toString()
+                "0"
             ).build(),
             contentDescription = PlainComplicationText.Builder(
                 getString(R.string.shortTextComplicationContentDescription)
